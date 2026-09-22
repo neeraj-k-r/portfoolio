@@ -84,6 +84,14 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <div><label class="flabel">LinkedIn URL</label><input id="inLinkedin" placeholder="https://linkedin.com/in/you"></div>
         <div class="full"><label class="flabel">Location</label><input id="inLoc" placeholder="Kerala, India"></div>
         <div class="full"><label class="flabel">Skills (comma separated)</label><input id="inSkills" placeholder="React, JavaScript, Node.js, Python"></div>
+        <div class="full"><label class="flabel">Pick a base template *</label>
+          <div class="tpl-grid" id="tplGrid">
+            <label class="tpl-card selected"><input type="radio" name="tpl" value="midnight" checked><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight Wow</b><span>Dark + neon • Dev/AI</span></div></label>
+            <label class="tpl-card"><input type="radio" name="tpl" value="minimal"><div class="tpl-preview minimal">📄</div><div class="tpl-meta"><b>Minimal Clean</b><span>Light • ATS friendly</span></div></label>
+            <label class="tpl-card"><input type="radio" name="tpl" value="terminal"><div class="tpl-preview terminal">>_</div><div class="tpl-meta"><b>Terminal Hacker</b><span>Mono • Backend/OSS</span></div></label>
+            <label class="tpl-card"><input type="radio" name="tpl" value="creative"><div class="tpl-preview creative">🎨</div><div class="tpl-meta"><b>Creative Pop</b><span>Gradient • Frontend</span></div></label>
+          </div>
+        </div>
         <div class="full"><label class="flabel">Top project title</label><input id="inP1t" placeholder="My best build"></div>
         <div class="full"><label class="flabel">Top project description</label><input id="inP1d" placeholder="What it does + result"></div>
         <div class="full"><label class="flabel">Top project link</label><input id="inP1u" placeholder="https://github.com/you/project"></div>
@@ -141,6 +149,9 @@ if(document.getElementById('builderForm')){
     const v=(e.target.value||'yourname').toLowerCase()||'yourname';
     $('livePrev').textContent=v; $('claimHint').textContent=v+'.portfoolio.me';
   });
+  document.querySelectorAll('.tpl-card').forEach(c=>c.addEventListener('click',()=>{
+    document.querySelectorAll('.tpl-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');
+  }));
   $('builderForm').addEventListener('submit',async e=>{
     e.preventDefault();
     const username=$('inUser').value.toLowerCase().trim().replace(/[^a-z0-9-]+/g,'');
@@ -151,11 +162,13 @@ if(document.getElementById('builderForm')){
     try{const all=JSON.parse(localStorage.getItem('portfoolio_users_v1')||'{}');taken=!!all[username];}catch{}
     if(!taken){try{const r=await fetch('profiles/'+encodeURIComponent(username)+'.json');if(r.ok)taken=true;}catch{}}
     if(taken) return toast('❌ Taken — try '+username+'-dev or '+username+'1');
+    const template=(document.querySelector('input[name=tpl]:checked')||{}).value||'midnight';
     const profile={
       username, name:$('inName').value.trim(), title:$('inTitle').value.trim(),
       tagline:$('inTag').value.trim(), email:$('inEmail').value.trim(),
       phone:$('inPhone').value.trim(), location:$('inLoc').value.trim(),
       github:$('inGithub').value.trim(), linkedin:$('inLinkedin').value.trim(),
+      template,
       skills:$('inSkills').value.split(',').map(s=>s.trim()).filter(Boolean).slice(0,12),
       projects:($('inP1t').value.trim()?[{title:$('inP1t').value.trim(),desc:$('inP1d').value.trim()||'My flagship build.',url:$('inP1u').value.trim()||'#',emoji:'🚀',stars:'Live',tags:($('inSkills').value.split(',').map(s=>s.trim()).filter(Boolean).slice(0,3))}]:[]),
       available:true, createdAt:new Date().toISOString()
