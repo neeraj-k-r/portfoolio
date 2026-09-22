@@ -1,0 +1,51 @@
+/* portfoolio.me — base templates. Selected via body[data-template] + profile.template */
+/* Picker cards (landing) */
+.tpl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.tpl-card{border:2px solid var(--stroke);border-radius:16px;overflow:hidden;cursor:pointer;background:rgba(255,255,255,.04);transition:.2s}
+.tpl-card:hover{transform:translateY(-3px)}
+.tpl-card input{display:none}
+.tpl-card.selected{border-color:#22d3ee;box-shadow:0 0 0 3px rgba(34,211,238,.3)}
+.tpl-preview{height:86px;display:grid;place-items:center;font-size:34px;font-weight:800}
+.tpl-preview.midnight{background:radial-gradient(300px 120px at 30% 20%,rgba(108,108,245,.6),transparent),#141b3a;color:#fff}
+.tpl-preview.minimal{background:#f8fafc;color:#0f172a;border-bottom:1px solid #e2e8f0}
+.tpl-preview.terminal{background:#04140a;color:#4ade80;font-family:monospace}
+.tpl-preview.creative{background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee);color:#fff}
+.tpl-meta{padding:10px 12px}
+.tpl-meta b{font-size:14px;display:block}
+.tpl-meta span{font-size:12px;color:var(--muted)}
+@media(max-width:900px){.tpl-grid{grid-template-columns:1fr 1fr}}
+
+/* ---- Template: minimal (light, ATS-friendly) ---- */
+body[data-template="minimal"]{background:#f8fafc;color:#0f172a}
+body[data-template="minimal"] .bg-fx,body[data-template="minimal"] .grid-overlay{display:none}
+body[data-template="minimal"] nav{background:rgba(255,255,255,.9);border-color:#e2e8f0}
+body[data-template="minimal"] .nav-links a,body[data-template="minimal"] .logo{color:#0f172a}
+body[data-template="minimal"] .card,body[data-template="minimal"] .stat,body[data-template="minimal"] .proj,body[data-template="minimal"] .dir-card{background:#fff;border-color:#e2e8f0;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+body[data-template="minimal"] .card p,body[data-template="minimal"] .sub,body[data-template="minimal"] p.lead,body[data-template="minimal"] .hero-meta{color:#475569}
+body[data-template="minimal"] h1,body[data-template="minimal"] h2,body[data-template="minimal"] h3{color:#0f172a;letter-spacing:-.5px}
+body[data-template="minimal"] .grad{background:linear-gradient(90deg,#4f46e5,#0ea5e9);-webkit-background-clip:text;background-clip:text;color:transparent}
+body[data-template="minimal"] .btn-ghost{background:#fff;border-color:#cbd5e1;color:#0f172a}
+body[data-template="minimal"] input,body[data-template="minimal"] textarea{background:#fff;border-color:#cbd5e1;color:#0f172a}
+body[data-template="minimal"] .badge{background:#eef2ff;border-color:#c7d2fe;color:#3730a3}
+body[data-template="minimal"] .tags span{background:#f1f5f9;border-color:#e2e8f0;color:#334155}
+body[data-template="minimal"] footer{color:#64748b}
+
+/* ---- Template: terminal (hacker) ---- */
+body[data-template="terminal"]{background:#030b06;color:#d1fae5;font-family:'JetBrains Mono',monospace}
+body[data-template="terminal"] .bg-fx{background:radial-gradient(600px 400px at 50% 0%,rgba(74,222,128,.12),transparent),#030b06}
+body[data-template="terminal"] .grid-overlay{opacity:.15}
+body[data-template="terminal"] nav{background:rgba(3,11,6,.9);border-color:#14532d}
+body[data-template="terminal"] .card,body[data-template="terminal"] .stat,body[data-template="terminal"] .proj{background:rgba(6,40,20,.6);border-color:#166534}
+body[data-template="terminal"] h1,body[data-template="terminal"] h2,body[data-template="terminal"] h3{font-family:'JetBrains Mono',monospace;color:#ecfdf5}
+body[data-template="terminal"] .grad{background:none;color:#4ade80;-webkit-text-fill-color:#4ade80}
+body[data-template="terminal"] .btn-primary{background:#16a34a;box-shadow:0 10px 30px rgba(22,163,74,.4)}
+body[data-template="terminal"] .btn-ghost{background:transparent;border-color:#166534;color:#bbf7d0}
+body[data-template="terminal"] .badge,body[data-template="terminal"] .tags span{background:rgba(22,163,74,.15);border-color:#166534;color:#86efac}
+body[data-template="terminal"] input,body[data-template="terminal"] textarea{background:#02120a;border-color:#166534;color:#d1fae5}
+
+/* ---- Template: creative (playful gradient) ---- */
+body[data-template="creative"] .bg-fx{background:radial-gradient(700px 400px at 15% 10%,rgba(244,114,182,.35),transparent 60%),radial-gradient(700px 400px at 85% 20%,rgba(139,92,246,.4),transparent 60%),radial-gradient(600px 500px at 50% 100%,rgba(34,211,238,.25),transparent 60%),#0b0620}
+body[data-template="creative"] .btn-primary{background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee)}
+body[data-template="creative"] .proj-top{font-size:64px}
+body[data-template="creative"] .card,body[data-template="creative"] .proj{border-color:rgba(244,114,182,.35)}
+body[data-template="creative"] .card:hover,body[data-template="creative"] .proj:hover{border-color:#f472b6}
