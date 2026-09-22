@@ -19,6 +19,10 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 .success.show{display:block}
 .success a{color:#d9f99d;font-weight:800;word-break:break-all}
 .dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.gh-repo{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:12px;padding:10px 12px;font-size:13px;cursor:pointer}
+.gh-repo input{margin-top:4px;width:auto;flex-shrink:0}
+.gh-repo b{display:block;font-size:13.5px}.gh-repo small{color:var(--muted)}
+.gh-repo .stars{margin-left:auto;font-size:11.5px;font-weight:800;color:#22d3ee;white-space:nowrap}
 .dir-card{background:var(--card);border:1px solid var(--stroke);border-radius:18px;padding:20px;transition:.25s}
 .dir-card:hover{transform:translateY(-5px);border-color:rgba(108,108,245,.55)}
 .dir-card h3{font-size:18px}.dir-card p{color:var(--muted);font-size:13.5px;margin:6px 0 12px}
@@ -92,6 +96,18 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <label class="tpl-card"><input type="radio" name="tpl" value="creative"><div class="tpl-preview creative">🎨</div><div class="tpl-meta"><b>Creative Pop</b><span>Gradient • Frontend</span></div></label>
           </div>
         </div>
+        <div class="full"><label class="flabel">GitHub repos to display (optional)</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input id="inGhUser" placeholder="github username — e.g. neeraj-k-r" style="flex:1;min-width:180px">
+            <button type="button" class="btn btn-ghost btn-sm" id="ghLoadBtn"><i class="fa-brands fa-github"></i> Load repos</button>
+          </div>
+          <p class="mono" id="ghStatus" style="font-size:12px;color:var(--muted);margin-top:8px">Tick the repos you want on your portfolio. Forks start unticked.</p>
+          <div id="ghRepoList" style="display:grid;gap:8px;margin-top:8px;max-height:260px;overflow:auto"></div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button type="button" class="btn btn-ghost btn-sm" id="ghAll">Select all</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="ghNone">Clear</button>
+          </div>
+        </div>
         <div class="full"><label class="flabel">Top project title</label><input id="inP1t" placeholder="My best build"></div>
         <div class="full"><label class="flabel">Top project description</label><input id="inP1d" placeholder="What it does + result"></div>
         <div class="full"><label class="flabel">Top project link</label><input id="inP1u" placeholder="https://github.com/you/project"></div>
@@ -152,6 +168,39 @@ if(document.getElementById('builderForm')){
   document.querySelectorAll('.tpl-card').forEach(c=>c.addEventListener('click',()=>{
     document.querySelectorAll('.tpl-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');
   }));
+  // ---- GitHub repo picker ----
+  let ghRepos = [];
+  const ghList = $('ghRepoList'), ghStatus = $('ghStatus');
+  function paintGhList() {
+    ghList.innerHTML = ghRepos.map((r, i) => {
+      const p = repoToProject(r);
+      return `<label class="gh-repo"><input type="checkbox" data-i="${i}" ${!r.fork ? 'checked' : ''}>
+        <span><b>${p.title}</b><small>${(r.description || 'No description').slice(0, 90)}${r.fork ? ' • fork' : ''}</small></span>
+        <span class="stars">${p.stars}</span></label>`;
+    }).join('');
+    const n = ghList.querySelectorAll('input:checked').length;
+    ghStatus.textContent = ghRepos.length ? `${ghRepos.length} repos loaded • ${n} selected` : 'Tick the repos you want on your portfolio. Forks start unticked.';
+  }
+  ghList.addEventListener('change', paintGhStatusOnly);
+  function paintGhStatusOnly() {
+    const n = ghList.querySelectorAll('input:checked').length;
+    ghStatus.textContent = `${ghRepos.length} repos loaded • ${n} selected`;
+  }
+  $('ghAll').onclick = () => { ghList.querySelectorAll('input').forEach(c => c.checked = true); paintGhStatusOnly(); };
+  $('ghNone').onclick = () => { ghList.querySelectorAll('input').forEach(c => c.checked = false); paintGhStatusOnly(); };
+  $('ghLoadBtn').onclick = async () => {
+    let u = $('inGhUser').value.trim().replace(/^@/, '');
+    if (!u) { const m = ($('inGithub').value || '').match(/github\.com\/([A-Za-z0-9-]+)/); if (m) { u = m[1]; $('inGhUser').value = u; } }
+    if (!u) return toast('❌ Type your GitHub username first');
+    ghStatus.textContent = 'Loading repos…'; ghList.innerHTML = '';
+    try {
+      ghRepos = await fetchGitHubRepos(u);
+      if (!ghRepos.length) { ghStatus.textContent = 'No public repos found.'; return; }
+      paintGhList(); toast(`✅ ${ghRepos.length} repos loaded`);
+    } catch (e) {
+      ghStatus.textContent = e.message === 'not-found' ? 'User not found on GitHub.' : e.message === 'rate-limited' ? 'GitHub rate limit — try again in a minute.' : 'Could not load repos.';
+    }
+  };
   $('builderForm').addEventListener('submit',async e=>{
     e.preventDefault();
     const username=$('inUser').value.toLowerCase().trim().replace(/[^a-z0-9-]+/g,'');
@@ -163,15 +212,17 @@ if(document.getElementById('builderForm')){
     if(!taken){try{const r=await fetch('profiles/'+encodeURIComponent(username)+'.json');if(r.ok)taken=true;}catch{}}
     if(taken) return toast('❌ Taken — try '+username+'-dev or '+username+'1');
     const template=(document.querySelector('input[name=tpl]:checked')||{}).value||'midnight';
-    const profile={
-      username, name:$('inName').value.trim(), title:$('inTitle').value.trim(),
-      tagline:$('inTag').value.trim(), email:$('inEmail').value.trim(),
-      phone:$('inPhone').value.trim(), location:$('inLoc').value.trim(),
-      github:$('inGithub').value.trim(), linkedin:$('inLinkedin').value.trim(),
+    const manual = $('inP1t').value.trim() ? [{ title: $('inP1t').value.trim(), desc: $('inP1d').value.trim() || 'My flagship build.', url: $('inP1u').value.trim() || '#', stars: 'Featured', tags: ($('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 3)) }] : [];
+    const picked = [...ghList.querySelectorAll('input:checked')].map(c => repoToProject(ghRepos[+c.dataset.i])).filter(p => !manual.some(m => m.url === p.url));
+    const profile = {
+      username, name: $('inName').value.trim(), title: $('inTitle').value.trim(),
+      tagline: $('inTag').value.trim(), email: $('inEmail').value.trim(),
+      phone: $('inPhone').value.trim(), location: $('inLoc').value.trim(),
+      github: $('inGithub').value.trim(), linkedin: $('inLinkedin').value.trim(),
       template,
-      skills:$('inSkills').value.split(',').map(s=>s.trim()).filter(Boolean).slice(0,12),
-      projects:($('inP1t').value.trim()?[{title:$('inP1t').value.trim(),desc:$('inP1d').value.trim()||'My flagship build.',url:$('inP1u').value.trim()||'#',emoji:'🚀',stars:'Live',tags:($('inSkills').value.split(',').map(s=>s.trim()).filter(Boolean).slice(0,3))}]:[]),
-      available:true, createdAt:new Date().toISOString()
+      skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
+      projects: [...manual, ...picked],
+      available: true, createdAt: new Date().toISOString()
     };
     const all2=JSON.parse(localStorage.getItem('portfoolio_users_v1')||'{}');all2[username]=profile;
     localStorage.setItem('portfoolio_users_v1',JSON.stringify(all2));
