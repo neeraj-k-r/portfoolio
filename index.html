@@ -171,6 +171,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <h3>✏️ Editing <span class="mono" id="edWho" style="color:#22d3ee"></span></h3>
         <button class="btn btn-ghost btn-sm" id="dashLogoutBtn">Lock</button>
       </div>
+      <p class="mono" id="edStatusLine" style="font-size:12px;margin-top:6px"></p>
       <div class="form-grid" style="margin-top:12px">
         <div><label class="flabel">Full name *</label><input id="edName"></div>
         <div><label class="flabel">Headline title *</label><input id="edTitle"></div>
@@ -298,6 +299,11 @@ if(document.getElementById('builderForm')){
     try{const all=JSON.parse(localStorage.getItem('portfoolio_users_v1')||'{}');taken=!!all[username];}catch{}
     if(!taken){try{const r=await fetch('profiles/'+encodeURIComponent(username)+'.json');if(r.ok)taken=true;}catch{}}
     if(taken) return toast('❌ Taken — try '+username+'-dev or '+username+'1');
+    let cloudUser = null;
+    if (cloudEnabled()) {
+      try { cloudUser = (await cloud().auth.getUser()).data.user; } catch {}
+      if (!cloudUser) return toast('🔐 Log in with email in the Dashboard first — requests need an owner');
+    }
     const template=(document.querySelector('input[name=tpl]:checked')||{}).value||'midnight';
     const editKey=makeKey();
     const manual = $('inP1t').value.trim() ? [{ title: $('inP1t').value.trim(), desc: $('inP1d').value.trim() || 'My flagship build.', url: $('inP1u').value.trim() || '#', stars: 'Featured', tags: ($('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 3)) }] : [];
@@ -314,14 +320,17 @@ if(document.getElementById('builderForm')){
     };
     const all2=JSON.parse(localStorage.getItem('portfoolio_users_v1')||'{}');all2[username]=profile;
     localStorage.setItem('portfoolio_users_v1',JSON.stringify(all2));
-    try {
-      if (cloudEnabled() && (await cloud().auth.getUser()).data.user) await cloudSaveProfile(profile);
-    } catch (e) { /* local copy saved; cloud retry happens on dashboard save */ }
+    if (cloudUser) {
+      try { await cloudSaveProfile(profile); }
+      catch (e) { return toast('❌ Submit failed: ' + e.message); }
+    }
     localStorage.setItem('portfoolio_session_v1',username);
     const sub=`https://${username}.portfoolio.me`, path=`${location.origin}/?u=${encodeURIComponent(username)}`;
     $('successBox').classList.add('show');
-    $('successBox').innerHTML=`🎉 <b>Done!</b> Your portfolio is live:<br><br>🔑 <b>Edit key — screenshot this, it unlocks your dashboard:</b><div class="keybox">${editKey}</div>🌐 Subdomain (after wildcard DNS): <a href="${sub}" target="_blank">${sub}</a><br>⚡ Works right now: <a href="${path}">${path}</a><br><br><a class="btn btn-primary btn-sm" style="color:#fff" href="${path}">View my portfolio →</a> <a class="btn btn-ghost btn-sm" href="#dashboard">Open dashboard →</a>`;
-    toast('✅ Created '+username+'.portfoolio.me'); renderDir(); openEditor(profile);
+    $('successBox').innerHTML = cloudUser
+      ? `📝 <b>Request received!</b> Your site is <b>pending admin approval</b> — you can keep editing it in the dashboard meanwhile.<div class="keybox" style="font-size:14px;letter-spacing:1px">STATUS: PENDING REVIEW</div>Preview (goes public on approval): <a href="${path}">${path}</a><br><br><a class="btn btn-ghost btn-sm" href="#dashboard">Open dashboard →</a>`
+      : `🎉 <b>Done!</b> Your portfolio is live:<br><br>🔑 <b>Edit key — screenshot this, it unlocks your dashboard:</b><div class="keybox">${editKey}</div>🌐 Subdomain (after wildcard DNS): <a href="${sub}" target="_blank">${sub}</a><br>⚡ Works right now: <a href="${path}">${path}</a><br><br><a class="btn btn-primary btn-sm" style="color:#fff" href="${path}">View my portfolio →</a> <a class="btn btn-ghost btn-sm" href="#dashboard">Open dashboard →</a>`;
+    toast(cloudUser ? '📝 Submitted for approval' : '✅ Created '+username+'.portfoolio.me'); renderDir(); editingCloud = !!cloudUser; openEditor(profile);
   });
   // ---- Dashboard: login (subdomain + edit key), edit, save, share ----
   function makeKey() {
@@ -352,6 +361,11 @@ if(document.getElementById('builderForm')){
     editing = JSON.parse(JSON.stringify(p));
     $('loginCard').style.display = 'none'; $('editorCard').style.display = '';
     $('edWho').textContent = '@' + p.username;
+    const st = editingCloud ? (p.status || 'pending') : 'local';
+    $('edStatusLine').textContent = st === 'approved' ? '● LIVE — your subdomain is active'
+      : st === 'rejected' ? '● REJECTED — edit and resubmit, or pick a new name'
+      : st === 'pending' ? '● PENDING REVIEW — visible publicly after admin approval'
+      : '● LOCAL DRAFT — this-browser only until cloud is connected';
     $('edName').value = p.name || ''; $('edTitle').value = p.title || ''; $('edTag').value = p.tagline || '';
     $('edEmail').value = p.email || ''; $('edPhone').value = p.phone || '';
     $('edGithub').value = p.github || ''; $('edLinkedin').value = p.linkedin || '';

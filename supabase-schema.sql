@@ -47,6 +47,10 @@ create policy "owner update pending" on profiles
 drop policy if exists "owner delete" on profiles;
 create policy "owner delete" on profiles
   for delete using (auth.uid() = user_id and status = 'pending');
+drop policy if exists "owner update approved" on profiles;
+create policy "owner update approved" on profiles
+  for update using (auth.uid() = user_id and status = 'approved')
+  with check (auth.uid() = user_id and status = 'approved');
 drop policy if exists "admin all" on profiles;
 create policy "admin all" on profiles
   for all using (is_admin()) with check (is_admin());
