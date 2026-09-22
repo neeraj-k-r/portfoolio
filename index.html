@@ -379,6 +379,35 @@ if(document.getElementById('builderForm')){
     localStorage.setItem('portfoolio_users_v1', JSON.stringify(all));
     paintShare(editing); renderDir(); toast('✅ Saved — site updated instantly');
   };
+  // editor: add repos from GitHub
+  let edGhRepos = [];
+  $('edGhLoad').onclick = async () => {
+    if (!editing) return;
+    let u = $('edGhUser').value.trim().replace(/^@/, '');
+    if (!u) { const m = ($('edGithub').value || '').match(/github\.com\/([A-Za-z0-9-]+)/); if (m) { u = m[1]; $('edGhUser').value = u; } }
+    if (!u) return toast('❌ Type a GitHub username');
+    $('edGhList').innerHTML = '<p style="color:var(--muted);font-size:13px">Loading…</p>';
+    try {
+      edGhRepos = await fetchGitHubRepos(u);
+      const have = new Set(editing.projects.map(p => p.url));
+      $('edGhList').innerHTML = edGhRepos.map((r, i) => {
+        const p = repoToProject(r), owned = have.has(p.url);
+        return `<label class="gh-repo"><input type="checkbox" data-i="${i}" ${owned ? 'disabled' : (!r.fork ? 'checked' : '')}>
+          <span><b>${p.title}</b><small>${owned ? 'already on your site' : (r.description || 'No description').slice(0, 80)}</small></span>
+          <span class="stars">${p.stars}</span></label>`;
+      }).join('') || '<p style="color:var(--muted)">No repos.</p>';
+    } catch (e) { $('edGhList').innerHTML = '<p style="color:var(--muted)">Could not load repos.</p>'; }
+  };
+  $('edGhAdd').onclick = () => {
+    if (!editing) return;
+    const have = new Set(editing.projects.map(p => p.url));
+    let n = 0;
+    [...$('edGhList').querySelectorAll('input:checked:not(:disabled)')].forEach(c => {
+      const p = repoToProject(edGhRepos[+c.dataset.i]);
+      if (!have.has(p.url)) { editing.projects.push(p); have.add(p.url); n++; }
+    });
+    paintProjRows(); toast(n ? `✅ Added ${n} repo${n > 1 ? 's' : ''} — hit Save` : 'Nothing new ticked');
+  };
   // resume session
   try {
     const s = localStorage.getItem('portfoolio_session_v1'), p = s && localProfile(s);
