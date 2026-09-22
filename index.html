@@ -49,7 +49,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <nav>
   <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>username.portfoolio.me</small></span></a>
   <div class="nav-links" id="navLinks">
-    <a href="#create">Create</a><a href="#directory">Live sites</a><a href="#dashboard">Dashboard</a><a href="#auth">Log in</a><a href="#how">How it works</a>
+    <a href="#create">Create</a><a href="#directory">Live sites</a><a href="#dashboard">Dashboard</a><a href="#auth">Log in</a>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
     <a class="btn btn-ghost btn-sm" href="#auth">Log in</a>
@@ -271,20 +271,6 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <div id="adminQueue" style="display:grid;gap:10px;margin-top:12px"></div>
       </div>
     </div>
-</section>
-
-<section id="how" class="wrap">
-  <span class="eyebrow">● How it works</span>
-  <h2 class="title">From name → <span class="grad">subdomain</span> in 3 steps</h2>
-  <div class="hire" style="margin-top:22px">
-    <div class="card step"><b class="n">1</b><div><h3>Claim a name</h3><p>Pick <span class="mono">yourname</span>. We validate uniqueness + reserved words in real time.</p></div></div>
-    <div class="card step"><b class="n">2</b><div><h3>Add details</h3><p>Name, title, skills, links, one star project. Stored as <span class="mono">profiles/yourname.json</span> (v1: browser, v2: Supabase).</p></div></div>
-    <div class="card step"><b class="n">3</b><div><h3>Share subdomain</h3><p>Instant: <span class="mono">portfoolio.me/?u=yourname</span>. With wildcard DNS: <span class="mono">yourname.portfoolio.me</span> forever.</p></div></div>
-  </div>
-  <div class="card" style="margin-top:14px">
-    <h3>🔧 Owner setup: enable true subdomains (one time)</h3>
-    <p class="mono" style="font-size:13px;background:rgba(0,0,0,.4);border:1px solid var(--stroke);border-radius:12px;padding:14px;margin:10px 0">Namecheap → Advanced DNS:<br>A &nbsp;&nbsp;&nbsp; @ &nbsp; 75.2.60.5<br>CNAME www &nbsp; your-site.netlify.app<br>CNAME * &nbsp;&nbsp; your-site.netlify.app &nbsp; ← wildcard (needs Netlify Pro for alias *.portfoolio.me)<br><br>Recommended free path: Cloudflare (free wildcard) + Worker in worker.js</p>
-  </div>
 </section>
 
 <footer><div class="wrap foot"><div>© 2026 <b style="color:#fff">portfoolio.me</b> • made for developers who ship</div>
