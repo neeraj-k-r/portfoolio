@@ -28,6 +28,9 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 .proj-row{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:12px;padding:9px 12px;font-size:13.5px;margin-bottom:8px}
 .proj-row b{flex:1}
 .proj-row button{background:rgba(244,114,182,.15);border:1px solid rgba(244,114,182,.4);color:#f9a8d4;border-radius:9px;padding:5px 10px;font-size:12px;font-weight:800;cursor:pointer}
+.auth-tabs{display:flex;gap:8px;margin:14px 0}
+.auth-tab{flex:1;padding:11px;border-radius:12px;border:1px solid var(--stroke);background:rgba(255,255,255,.04);font-weight:800;font-size:14px;cursor:pointer;color:var(--muted);text-align:center}
+.auth-tab.active{background:#fff;color:#0b1226;border-color:#fff}
 .dir-card{background:var(--card);border:1px solid var(--stroke);border-radius:18px;padding:20px;transition:.25s}
 .dir-card:hover{transform:translateY(-5px);border-color:rgba(108,108,245,.55)}
 .dir-card h3{font-size:18px}.dir-card p{color:var(--muted);font-size:13.5px;margin:6px 0 12px}
@@ -46,25 +49,26 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <nav>
   <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>username.portfoolio.me</small></span></a>
   <div class="nav-links" id="navLinks">
-    <a href="#create">Create</a><a href="#directory">Live sites</a><a href="#dashboard">Dashboard</a><a href="#how">How it works</a>
+    <a href="#create">Create</a><a href="#directory">Live sites</a><a href="#dashboard">Dashboard</a><a href="#auth">Log in</a><a href="#how">How it works</a>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
-    <a class="btn btn-ghost btn-sm" href="/?u=neerajkr">Live demo</a>
-    <a class="btn btn-primary btn-sm" href="#create"><i class="fa-solid fa-bolt"></i> Get yours free</a>
+    <a class="btn btn-ghost btn-sm" href="#auth">Log in</a>
+    <a class="btn btn-primary btn-sm" href="#auth" data-tab="signup"><i class="fa-solid fa-bolt"></i> Sign up free</a>
   </div>
 </nav>
 
 <header class="hero wrap">
   <div class="hero-grid">
     <div>
-      <div class="pill"><span class="dot"></span> Free • 60 seconds • No code</div>
-      <h1>Your name.<br><span class="grad">yourname.portfoolio.me</span></h1>
-      <p class="sub">Drop your name + details, get a wow recruiter-ready portfolio on your own subdomain. Same design that got Neeraj noticed — now open to everyone.</p>
+      <div class="pill"><span class="dot"></span> Free portfolio hosting for developers</div>
+      <h1>Your work deserves<br>its own <span class="grad">address.</span></h1>
+      <p class="sub">Sign up with email, pick a name, get <b style="color:#fff">yourname.portfoolio.me</b> — a recruiter-ready portfolio with 4 themes and GitHub import. Approved sites go live in minutes.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#create">Claim my subdomain <i class="fa-solid fa-arrow-right"></i></a>
+        <a class="btn btn-primary" href="#auth" data-tab="signup">Sign up free <i class="fa-solid fa-arrow-right"></i></a>
+        <a class="btn btn-ghost" href="#auth" data-tab="login">Log in</a>
         <a class="btn btn-ghost" href="/?u=neerajkr">See live example</a>
       </div>
-      <div class="hero-meta mono" style="font-size:13px">neerajkr.portfoolio.me &nbsp;•&nbsp; demo.portfoolio.me &nbsp;•&nbsp; you.portfoolio.me</div>
+      <div class="hero-meta mono" style="font-size:13px">Free subdomain &nbsp;•&nbsp; 4 themes &nbsp;•&nbsp; GitHub import &nbsp;•&nbsp; No code</div>
     </div>
     <div class="visual"><div class="avatar-card"><div class="avatar-inner" style="text-align:left">
       <p class="mono" style="font-size:12px;color:#22d3ee">$ claim your subdomain</p>
@@ -75,6 +79,39 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
     </div></div></div>
   </div>
 </header>
+
+<section id="auth" class="wrap" style="padding-top:10px">
+  <div class="two" style="grid-template-columns:.9fr 1.1fr;align-items:start">
+    <div>
+      <span class="eyebrow">● Get started</span>
+      <h2 class="title">Log in or <span class="grad">sign up</span></h2>
+      <p class="lead">One email, one code — no passwords to remember. New here? Sign up, then claim your subdomain. Returning? Log in to open your dashboard.</p>
+      <div class="hl-list">
+        <div class="hl"><i class="fa-solid fa-envelope"></i><div><b>Email code login:</b> 6-digit OTP, works on any device.</div></div>
+        <div class="hl"><i class="fa-solid fa-shield-halved"></i><div><b>Reviewed publishing:</b> every site is admin-approved before it goes live.</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabSignup" type="button">Sign up</button>
+        <button class="auth-tab" id="tabLogin" type="button">Log in</button>
+      </div>
+      <div id="authCloudOff" style="display:none">
+        <p>Cloud login activates once the owner connects Supabase — meanwhile create instantly, no account needed:</p>
+        <a class="btn btn-primary" href="#create" style="margin-top:10px">Create my portfolio →</a>
+      </div>
+      <div id="authCloudOn">
+        <div><label class="flabel">Email</label><input id="authEmail" type="email" placeholder="you@gmail.com"></div>
+        <button class="btn btn-primary" id="authSendBtn" style="margin-top:10px;width:100%;justify-content:center"><i class="fa-solid fa-paper-plane"></i> <span id="authSendLabel">Send signup code</span></button>
+        <div id="authOtpRow" style="display:none;gap:8px;margin-top:10px">
+          <input id="authOtp" inputmode="numeric" placeholder="6-digit code" class="mono" style="flex:1">
+          <button class="btn btn-primary btn-sm" id="authVerifyBtn" style="align-self:center">Verify</button>
+        </div>
+        <p class="mono" id="authMsg" style="font-size:12.5px;color:var(--muted);margin-top:10px"></p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="create" class="wrap" style="padding-top:20px">
   <span class="eyebrow">● Create yours</span>
