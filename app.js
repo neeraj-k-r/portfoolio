@@ -76,6 +76,27 @@ function projIcon(pr) {
   if (/game|monopoly|play|fun/.test(t)) return SVG.game;
   return SVG.code;
 }
+// ---- GitHub import: fetch public repos, normalize to portfolio projects ----
+async function fetchGitHubRepos(username, count = 100) {
+  const u = String(username || '').trim().replace(/^@/, '');
+  if (!/^[A-Za-z0-9-]{1,39}$/.test(u)) throw new Error('bad-username');
+  const r = await fetch(`https://api.github.com/users/${encodeURIComponent(u)}/repos?per_page=${count}&sort=updated`, {
+    headers: { Accept: 'application/vnd.github+json' },
+  });
+  if (r.status === 404) throw new Error('not-found');
+  if (r.status === 403) throw new Error('rate-limited');
+  if (!r.ok) throw new Error('fetch-failed');
+  return await r.json();
+}
+function repoToProject(r) {
+  const stars = r.stargazers_count > 0 ? `★ ${r.stargazers_count}` : 'Repo';
+  const extra = r.forks_count > 0 ? ` · ${r.forks_count} fork${r.forks_count > 1 ? 's' : ''}` : '';
+  const tags = [r.language, r.fork ? 'Fork' : null].filter(Boolean);
+  return {
+    title: r.name, desc: r.description || 'GitHub repository — click through to explore the code.',
+    url: r.html_url, stars: stars + extra, tags,
+  };
+}
 // ---- Renderer: same wow theme, data-driven ----
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
