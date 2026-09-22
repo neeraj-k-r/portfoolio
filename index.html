@@ -23,6 +23,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 .gh-repo input{margin-top:4px;width:auto;flex-shrink:0}
 .gh-repo b{display:block;font-size:13.5px}.gh-repo small{color:var(--muted)}
 .gh-repo .stars{margin-left:auto;font-size:11.5px;font-weight:800;color:#22d3ee;white-space:nowrap}
+.keybox{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;letter-spacing:2px;background:rgba(0,0,0,.45);border:1px dashed rgba(163,230,53,.6);color:#d9f99d;border-radius:12px;padding:12px 16px;text-align:center;margin:10px 0}
+.share-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.proj-row{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:12px;padding:9px 12px;font-size:13.5px;margin-bottom:8px}
+.proj-row b{flex:1}
+.proj-row button{background:rgba(244,114,182,.15);border:1px solid rgba(244,114,182,.4);color:#f9a8d4;border-radius:9px;padding:5px 10px;font-size:12px;font-weight:800;cursor:pointer}
 .dir-card{background:var(--card);border:1px solid var(--stroke);border-radius:18px;padding:20px;transition:.25s}
 .dir-card:hover{transform:translateY(-5px);border-color:rgba(108,108,245,.55)}
 .dir-card h3{font-size:18px}.dir-card p{color:var(--muted);font-size:13.5px;margin:6px 0 12px}
@@ -41,7 +46,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <nav>
   <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>username.portfoolio.me</small></span></a>
   <div class="nav-links" id="navLinks">
-    <a href="#create">Create</a><a href="#directory">Live sites</a><a href="#how">How it works</a>
+    <a href="#create">Create</a><a href="#directory">Live sites</a><a href="#dashboard">Dashboard</a><a href="#how">How it works</a>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
     <a class="btn btn-ghost btn-sm" href="/?u=neerajkr">Live demo</a>
@@ -131,6 +136,72 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   <span class="eyebrow">● Live sites</span>
   <h2 class="title">Already <span class="grad">on portfoolio</span></h2>
   <div class="dir-grid" id="dirGrid"></div>
+</section>
+
+<section id="dashboard" class="wrap">
+  <span class="eyebrow">● Dashboard</span>
+  <h2 class="title">Edit <span class="grad">your portfolio</span></h2>
+  <p class="lead">Log in with your subdomain + edit key, update anything, save — your site refreshes instantly. Then share it everywhere.</p>
+  <div class="two" style="margin-top:22px">
+    <div class="card" id="loginCard">
+      <h3>🔐 Log in</h3>
+      <p>Your <b style="color:#fff">edit key</b> was shown once when you created your site. Lost it? It's stored in the browser you used to create it.</p>
+      <div style="display:grid;gap:10px;margin-top:12px">
+        <div><label class="flabel">Subdomain</label><input id="dashUser" placeholder="neerajkr"></div>
+        <div><label class="flabel">Edit key</label><input id="dashKey" placeholder="XXXX-XXXX-XXXX" class="mono"></div>
+        <button class="btn btn-primary" id="dashLoginBtn"><i class="fa-solid fa-right-to-bracket"></i> Unlock my dashboard</button>
+      </div>
+    </div>
+    <div class="card" id="editorCard" style="display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+        <h3>✏️ Editing <span class="mono" id="edWho" style="color:#22d3ee"></span></h3>
+        <button class="btn btn-ghost btn-sm" id="dashLogoutBtn">Lock</button>
+      </div>
+      <div class="form-grid" style="margin-top:12px">
+        <div><label class="flabel">Full name *</label><input id="edName"></div>
+        <div><label class="flabel">Headline title *</label><input id="edTitle"></div>
+        <div class="full"><label class="flabel">Tagline</label><input id="edTag"></div>
+        <div><label class="flabel">Email *</label><input id="edEmail" type="email"></div>
+        <div><label class="flabel">Phone</label><input id="edPhone"></div>
+        <div><label class="flabel">GitHub URL</label><input id="edGithub"></div>
+        <div><label class="flabel">LinkedIn URL</label><input id="edLinkedin"></div>
+        <div class="full"><label class="flabel">Location</label><input id="edLoc"></div>
+        <div class="full"><label class="flabel">Skills (comma separated)</label><input id="edSkills"></div>
+        <div class="full"><label class="flabel">Template</label>
+          <div class="tpl-grid" id="edTplGrid" style="grid-template-columns:repeat(4,1fr)">
+            <label class="tpl-card"><input type="radio" name="edtpl" value="midnight"><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight</b></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="minimal"><div class="tpl-preview minimal">📄</div><div class="tpl-meta"><b>Minimal</b></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="terminal"><div class="tpl-preview terminal">>_</div><div class="tpl-meta"><b>Terminal</b></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="creative"><div class="tpl-preview creative">🎨</div><div class="tpl-meta"><b>Creative</b></div></label>
+          </div>
+        </div>
+        <div class="full"><label class="flabel">Projects on your site</label><div id="edProjList"></div></div>
+        <div class="full"><label class="flabel">Add from GitHub</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <input id="edGhUser" placeholder="github username" style="flex:1;min-width:160px">
+            <button type="button" class="btn btn-ghost btn-sm" id="edGhLoad">Load</button>
+          </div>
+          <div id="edGhList" style="display:grid;gap:8px;margin-top:8px;max-height:220px;overflow:auto"></div>
+          <button type="button" class="btn btn-ghost btn-sm" id="edGhAdd" style="margin-top:8px">+ Add ticked repos</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+        <button class="btn btn-primary" id="edSaveBtn"><i class="fa-solid fa-floppy-disk"></i> Save changes</button>
+        <a class="btn btn-ghost" id="edPreviewBtn" target="_blank">Preview →</a>
+      </div>
+      <div class="card" style="margin-top:14px;background:rgba(163,230,53,.06);border-color:rgba(163,230,53,.3)">
+        <h3>📣 Share your site</h3>
+        <p class="mono" id="shareSub" style="font-size:13px;color:#d9f99d;word-break:break-all"></p>
+        <p class="mono" id="sharePath" style="font-size:12px;color:var(--muted);word-break:break-all"></p>
+        <div class="share-row">
+          <button class="btn btn-ghost btn-sm" id="shareCopy"><i class="fa-solid fa-copy"></i> Copy link</button>
+          <button class="btn btn-ghost btn-sm" id="shareWA"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+          <button class="btn btn-ghost btn-sm" id="shareLI"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
+          <button class="btn btn-ghost btn-sm" id="shareX"><i class="fa-brands fa-x-twitter"></i> Post</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="how" class="wrap">
