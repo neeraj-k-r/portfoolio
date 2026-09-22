@@ -283,6 +283,7 @@ if(document.getElementById('builderForm')){
     if(!taken){try{const r=await fetch('profiles/'+encodeURIComponent(username)+'.json');if(r.ok)taken=true;}catch{}}
     if(taken) return toast('❌ Taken — try '+username+'-dev or '+username+'1');
     const template=(document.querySelector('input[name=tpl]:checked')||{}).value||'midnight';
+    const editKey=makeKey();
     const manual = $('inP1t').value.trim() ? [{ title: $('inP1t').value.trim(), desc: $('inP1d').value.trim() || 'My flagship build.', url: $('inP1u').value.trim() || '#', stars: 'Featured', tags: ($('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 3)) }] : [];
     const picked = [...ghList.querySelectorAll('input:checked')].map(c => repoToProject(ghRepos[+c.dataset.i])).filter(p => !manual.some(m => m.url === p.url));
     const profile = {
@@ -290,18 +291,99 @@ if(document.getElementById('builderForm')){
       tagline: $('inTag').value.trim(), email: $('inEmail').value.trim(),
       phone: $('inPhone').value.trim(), location: $('inLoc').value.trim(),
       github: $('inGithub').value.trim(), linkedin: $('inLinkedin').value.trim(),
-      template,
+      template, editKey,
       skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       projects: [...manual, ...picked],
       available: true, createdAt: new Date().toISOString()
     };
     const all2=JSON.parse(localStorage.getItem('portfoolio_users_v1')||'{}');all2[username]=profile;
     localStorage.setItem('portfoolio_users_v1',JSON.stringify(all2));
+    localStorage.setItem('portfoolio_session_v1',username);
     const sub=`https://${username}.portfoolio.me`, path=`${location.origin}/?u=${encodeURIComponent(username)}`;
     $('successBox').classList.add('show');
-    $('successBox').innerHTML=`🎉 <b>Done!</b> Your portfolio is live:<br><br>🌐 Subdomain (after wildcard DNS): <a href="${sub}" target="_blank">${sub}</a><br>⚡ Works right now: <a href="${path}">${path}</a><br><br><a class="btn btn-primary btn-sm" style="color:#fff" href="${path}">View my portfolio →</a>`;
-    toast('✅ Created '+username+'.portfoolio.me'); renderDir();
+    $('successBox').innerHTML=`🎉 <b>Done!</b> Your portfolio is live:<br><br>🔑 <b>Edit key — screenshot this, it unlocks your dashboard:</b><div class="keybox">${editKey}</div>🌐 Subdomain (after wildcard DNS): <a href="${sub}" target="_blank">${sub}</a><br>⚡ Works right now: <a href="${path}">${path}</a><br><br><a class="btn btn-primary btn-sm" style="color:#fff" href="${path}">View my portfolio →</a> <a class="btn btn-ghost btn-sm" href="#dashboard">Open dashboard →</a>`;
+    toast('✅ Created '+username+'.portfoolio.me'); renderDir(); openEditor(profile);
   });
+  // ---- Dashboard: login (subdomain + edit key), edit, save, share ----
+  function makeKey() {
+    const a = new Uint8Array(6); crypto.getRandomValues(a);
+    return [...a].map(b => 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'[b % 32]).join('').replace(/(.{4})(?=.)/g, '$1-');
+  }
+  function localProfile(u) {
+    try { return JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}')[String(u || '').toLowerCase()] || null; } catch { return null; }
+  }
+  let editing = null;
+  function paintProjRows() {
+    $('edProjList').innerHTML = (editing.projects || []).map((p, i) =>
+      `<div class="proj-row"><b>${p.title}</b><small style="color:var(--muted)">${(p.stars || '')}</small><button data-rm="${i}">Remove</button></div>`).join('')
+      || '<p style="color:var(--muted);font-size:13px">No projects yet — add from GitHub below.</p>';
+    $('edProjList').querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { editing.projects.splice(+b.dataset.rm, 1); paintProjRows(); });
+  }
+  function paintShare(p) {
+    const sub = `https://${p.username}.portfoolio.me`, path = `${location.origin}/?u=${encodeURIComponent(p.username)}`;
+    $('shareSub').textContent = sub; $('sharePath').textContent = 'works today: ' + path;
+    $('edPreviewBtn').href = path;
+    const text = encodeURIComponent(`Check out my portfolio: ${p.name} — ${p.title}`);
+    $('shareCopy').onclick = () => navigator.clipboard.writeText(sub).then(() => toast('✅ Link copied!')).catch(() => toast(sub));
+    $('shareWA').onclick = () => open(`https://wa.me/?text=${text}%20${encodeURIComponent(sub)}`, '_blank');
+    $('shareLI').onclick = () => open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sub)}`, '_blank');
+    $('shareX').onclick = () => open(`https://x.com/intent/post?text=${text}&url=${encodeURIComponent(sub)}`, '_blank');
+  }
+  function openEditor(p) {
+    editing = JSON.parse(JSON.stringify(p));
+    $('loginCard').style.display = 'none'; $('editorCard').style.display = '';
+    $('edWho').textContent = '@' + p.username;
+    $('edName').value = p.name || ''; $('edTitle').value = p.title || ''; $('edTag').value = p.tagline || '';
+    $('edEmail').value = p.email || ''; $('edPhone').value = p.phone || '';
+    $('edGithub').value = p.github || ''; $('edLinkedin').value = p.linkedin || '';
+    $('edLoc').value = p.location || ''; $('edSkills').value = (p.skills || []).join(', ');
+    document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
+      const on = c.querySelector('input').value === (p.template || 'midnight');
+      c.classList.toggle('selected', on); c.querySelector('input').checked = on;
+    });
+    paintProjRows(); paintShare(editing);
+    document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
+  }
+  function lockEditor() {
+    editing = null; localStorage.removeItem('portfoolio_session_v1');
+    $('editorCard').style.display = 'none'; $('loginCard').style.display = '';
+  }
+  $('dashLoginBtn').onclick = async () => {
+    const u = $('dashUser').value.toLowerCase().trim(), k = $('dashKey').value.trim().toUpperCase();
+    if (!u || !k) return toast('❌ Enter subdomain + edit key');
+    const p = localProfile(u);
+    if (!p) {
+      try { const r = await fetch('profiles/' + encodeURIComponent(u) + '.json'); if (r.ok) return toast('🔒 Showcase site — create your own to get an edit key'); } catch {}
+      return toast('❌ No site found for ' + u);
+    }
+    if (p.editKey !== k) return toast('❌ Wrong edit key');
+    localStorage.setItem('portfoolio_session_v1', u);
+    openEditor(p); toast('✅ Welcome back, ' + p.name.split(' ')[0]);
+  };
+  $('dashLogoutBtn').onclick = () => { lockEditor(); toast('🔒 Locked'); };
+  document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('#edTplGrid .tpl-card').forEach(x => x.classList.remove('selected')); c.classList.add('selected');
+  }));
+  $('edSaveBtn').onclick = () => {
+    if (!editing) return;
+    if (!$('edName').value.trim() || !$('edTitle').value.trim() || !$('edEmail').value.trim()) return toast('❌ Name, title + email required');
+    Object.assign(editing, {
+      name: $('edName').value.trim(), title: $('edTitle').value.trim(), tagline: $('edTag').value.trim(),
+      email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
+      github: $('edGithub').value.trim(), linkedin: $('edLinkedin').value.trim(), location: $('edLoc').value.trim(),
+      template: (document.querySelector('input[name=edtpl]:checked') || {}).value || 'midnight',
+      skills: $('edSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
+      updatedAt: new Date().toISOString(),
+    });
+    const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}'); all[editing.username] = editing;
+    localStorage.setItem('portfoolio_users_v1', JSON.stringify(all));
+    paintShare(editing); renderDir(); toast('✅ Saved — site updated instantly');
+  };
+  // resume session
+  try {
+    const s = localStorage.getItem('portfoolio_session_v1'), p = s && localProfile(s);
+    if (p) openEditor(p);
+  } catch {}
   async function renderDir(){
     const seeds=[
       {username:'neerajkr',name:'Neeraj K R',title:'Full-Stack Developer & AI Engineer • 🌌 Midnight'},
