@@ -182,8 +182,11 @@ if(document.getElementById('builderForm')){
   });
   async function renderDir(){
     const seeds=[
-      {username:'neerajkr',name:'Neeraj K R',title:'Full-Stack Developer & AI Engineer'},
-      {username:'demo',name:'Demo User',title:'Aspiring Software Engineer'}
+      {username:'neerajkr',name:'Neeraj K R',title:'Full-Stack Developer & AI Engineer • 🌌 Midnight'},
+      {username:'priya',name:'Priya Nair',title:'Aspiring SDE Intern • 📄 Minimal'},
+      {username:'arjun',name:'Arjun Dev',title:'Backend Developer • 💻 Terminal'},
+      {username:'zoe',name:'Zoe Mathew',title:'Creative Frontend Dev • 🎨 Creative'},
+      {username:'demo',name:'Demo User',title:'Aspiring Software Engineer • 📄 Minimal'}
     ];
     let customs=[]; try{customs=Object.values(JSON.parse(localStorage.getItem('portfoolio_users_v1')||'{}'));}catch{}
     const all=[...customs,...seeds.filter(s=>!customs.find(c=>c.username===s.username))];

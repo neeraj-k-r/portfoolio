@@ -20,5 +20,9 @@ Import `neeraj-k-r/portfoolio`, branch `main`, build command empty, publish `.`.
 ## True subdomains (one-time owner step)
 Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`, `CNAME * → <site>.netlify.app` (needs Netlify Pro alias). Free path: Cloudflare + `worker.js`.
 
-## Stack
-HTML • CSS • JS • Netlify • Cloudflare Workers • (v2: Supabase)
+## Templates (pick 1 in builder, stored as `template`)
+- 🌌 `midnight` — dark + neon wow (default) → `?u=neerajkr`
+- 📄 `minimal` — light, recruiter/ATS clean → `?u=priya`, `?u=demo`
+- 💻 `terminal` — hacker mono green → `?u=arjun`
+- 🎨 `creative` — gradient playful → `?u=zoe`
+- Files: `templates.css` (themes) + `templates.js` (renderers) hooked in `app.js`.
