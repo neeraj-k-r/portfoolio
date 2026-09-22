@@ -26,6 +26,11 @@ Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`,
 3. Supabase → SQL Editor → run `supabase-schema.sql`
 4. Auth → Providers → Email ON. Users log in via dashboard with email OTP code — works on any device, profiles stored in Postgres, public portfolios readable everywhere.
 
+## Admin approval flow (subdomain given only after approval)
+1. Supabase → Authentication → Add user → create `portfoolio.me@gmail.com` with your admin password (tick auto-confirm). The password lives ONLY in Supabase — never in code.
+2. SQL Editor → run `supabase-schema.sql` (re-run safe), then run the `insert into admins ...` line at the bottom of that file.
+3. Flow: visitor logs in with email OTP → submits site request (saved `pending`, invisible publicly) → admin logs into dashboard → approves → `username.portfoolio.me` goes live. Rejected/deleted requests free the name.
+
 ## Templates (pick 1 in builder, stored as `template`)
 - 🌌 `midnight` — dark + neon wow (default) → `?u=neerajkr`
 - 📄 `minimal` — light, recruiter/ATS clean → `?u=priya`, `?u=demo`
