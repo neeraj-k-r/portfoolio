@@ -24,7 +24,7 @@ Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`,
 1. Create project at supabase.com → copy **Project URL** + **anon key**
 2. Paste them into `supabase-config.js` (2 constants at top), commit + push
 3. Supabase → SQL Editor → run `supabase-schema.sql`
-4. Auth → Providers → Email ON. Users log in via dashboard with email OTP code — works on any device, profiles stored in Postgres, public portfolios readable everywhere.
+4. Auth → Providers → Email ON (turn Confirm email OFF for instant login — admin approval already moderates signups). Users sign up / log in with email + password; profiles in Postgres; public portfolios readable everywhere.
 
 ## Admin approval flow (subdomain given only after approval)
 1. Supabase → Authentication → Add user → create `portfoolio.me@gmail.com` with your admin password (tick auto-confirm). The password lives ONLY in Supabase — never in code.

@@ -87,7 +87,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <h2 class="title">Log in or <span class="grad">sign up</span></h2>
       <p class="lead">One email, one code — no passwords to remember. New here? Sign up, then claim your subdomain. Returning? Log in to open your dashboard.</p>
       <div class="hl-list">
-        <div class="hl"><i class="fa-solid fa-envelope"></i><div><b>Email code login:</b> 6-digit OTP, works on any device.</div></div>
+        <div class="hl"><i class="fa-solid fa-envelope"></i><div><b>Email + password:</b> one account, works on any device.</div></div>
         <div class="hl"><i class="fa-solid fa-shield-halved"></i><div><b>Reviewed publishing:</b> every site is admin-approved before it goes live.</div></div>
       </div>
     </div>
@@ -180,14 +180,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
     <div class="card" id="loginCard">
       <h3>🔐 Log in</h3>
       <div id="emailLoginBox">
-        <p>Log in with <b style="color:#fff">email</b> — we send a 6-digit code. Works on any device.</p>
+        <p>Log in with <b style="color:#fff">email + password</b>. Works on any device.</p>
         <div style="display:grid;gap:10px;margin-top:12px">
           <div><label class="flabel">Email</label><input id="loginEmail" type="email" placeholder="you@gmail.com"></div>
-          <button class="btn btn-primary" id="otpSendBtn"><i class="fa-solid fa-envelope"></i> Send login code</button>
-          <div id="otpRow" style="display:none;gap:10px">
-            <div style="flex:1"><label class="flabel">6-digit code</label><input id="loginOtp" inputmode="numeric" placeholder="123456" class="mono"></div>
-            <button class="btn btn-primary" id="otpVerifyBtn" style="align-self:end">Verify</button>
-          </div>
+          <div><label class="flabel">Password</label><input id="loginPass" type="password" placeholder="••••••••"></div>
+          <button class="btn btn-primary" id="dashEmailBtn"><i class="fa-solid fa-right-to-bracket"></i> Log in</button>
         </div>
         <p class="mono" id="cloudNote" style="font-size:12px;color:var(--muted);margin-top:10px"></p>
       </div>
@@ -436,29 +433,22 @@ if(document.getElementById('builderForm')){
     document.querySelectorAll('#edTplGrid .tpl-card').forEach(x => x.classList.remove('selected')); c.classList.add('selected');
   }));
   // ---- Email OTP login (Supabase cloud) ----
-  let editingCloud = false, pendingEmail = '';
+  let editingCloud = false;
   if (!cloudEnabled()) $('cloudNote').textContent = 'Cloud login activates once the owner connects Supabase (see README) — edit-key login works regardless.';
-  $('otpSendBtn').onclick = async () => {
+  $('dashEmailBtn').onclick = async () => {
     if (!cloudEnabled()) return toast('❌ Cloud not connected yet — use edit-key login below');
-    const email = $('loginEmail').value.trim();
-    if (!/.+@.+\..+/.test(email)) return toast('❌ Enter a valid email');
-    pendingEmail = email;
-    const { error } = await cloud().auth.signInWithOtp({ email });
-    if (error) return toast('❌ ' + error.message);
-    $('otpRow').style.display = 'flex'; toast('📧 Code sent — check inbox');
-  };
-  $('otpVerifyBtn').onclick = async () => {
-    const token = $('loginOtp').value.trim();
-    if (token.length < 6) return toast('❌ Enter the 6-digit code');
-    const { error } = await cloud().auth.verifyOtp({ email: pendingEmail, token, type: 'email' });
-    if (error) return toast('❌ ' + error.message);
-    const p = await cloudMyProfile();
-    if (p) { editingCloud = true; openEditor({ ...p, username: p.username }); toast('✅ Logged in as ' + p.username); }
-    else {
-      $('inEmail').value = pendingEmail;
-      location.hash = '#create';
-      toast('👋 New here — claim your subdomain (email prefilled)');
-    }
+    const email = $('loginEmail').value.trim(), pass = $('loginPass').value;
+    if (!/.+@.+\..+/.test(email) || !pass) return toast('❌ Enter email + password');
+    try {
+      await cloudSignIn(email, pass);
+      const p = await cloudMyProfile();
+      if (p) { editingCloud = true; openEditor({ ...p, username: p.username }); toast('✅ Logged in as ' + p.username); }
+      else {
+        $('inEmail').value = email;
+        location.hash = '#create';
+        toast('👋 New here — claim your subdomain (email prefilled)');
+      }
+    } catch (e) { toast('❌ ' + e.message); }
   };
   $('edSaveBtn').onclick = async () => {
     if (!editing) return;
