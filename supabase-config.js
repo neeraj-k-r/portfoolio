@@ -32,6 +32,18 @@ async function cloudSaveProfile(p) {
   if (error) throw error;
   return row;
 }
+async function cloudSignUp(email, password) {
+  const sb = cloud(); if (!sb) throw new Error('cloud-off');
+  const { data, error } = await sb.auth.signUp({ email, password });
+  if (error) throw error;
+  return data; // data.session is null when email confirmation is ON — user must click inbox link, then log in
+}
+async function cloudSignIn(email, password) {
+  const sb = cloud(); if (!sb) throw new Error('cloud-off');
+  const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  if (error) throw error;
+  return data;
+}
 async function cloudMyProfile() {
   const sb = cloud(); if (!sb) return null;
   const { data: { user } } = await sb.auth.getUser();
