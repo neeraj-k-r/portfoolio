@@ -56,6 +56,26 @@ function portfolioPathURL(username) {
   return `${location.origin}/?u=${encodeURIComponent(username)}`;
 }
 
+// ---- Project cover icons (inline SVG — crisp at every size, zero font risk) ----
+const SVG = {
+  campus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 9l10 5 10-5-10-5Z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 9v5"/></svg>',
+  bot: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="9" width="14" height="10" rx="2"/><path d="M12 9V6"/><circle cx="12" cy="4.5" r="1.2"/><circle cx="9.5" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="13.5" r="1" fill="currentColor" stroke="none"/><path d="M9.5 16.5h5"/></svg>',
+  chart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 20v-6M11 20V6M17 20v-9"/><path d="M3 20h18"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5C7 16.5 3 13.2 3 9.3 3 6.4 5.2 4.5 7.7 4.5c1.7 0 3.3.9 4.3 2.4 1-1.5 2.6-2.4 4.3-2.4 2.5 0 4.7 1.9 4.7 4.8 0 3.9-4 7.2-9 11.2Z"/></svg>',
+  chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a7.5 7.5 0 0 1-7.5 7.5H11l-4.5 3v-3.5A7.5 7.5 0 1 1 21 11.5Z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01"/></svg>',
+  game: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="11" rx="5"/><path d="M7.5 11v3.5M5.8 12.7h3.4"/><circle cx="15.8" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="17.8" cy="14" r="1" fill="currentColor" stroke="none"/></svg>',
+  code: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m8 8-5 4 5 4M16 8l5 4-5 4"/></svg>',
+};
+function projIcon(pr) {
+  const t = (((pr.title || '') + ' ' + (pr.tags || []).join(' '))).toLowerCase();
+  if (/campus|college|student|school/.test(t)) return SVG.campus;
+  if (/ai|interview|bot|agent|robot/.test(t)) return SVG.bot;
+  if (/dash|lead|analy|chart|crm|sales/.test(t)) return SVG.chart;
+  if (/health|med|fit/.test(t)) return SVG.heart;
+  if (/whatsapp|chat|support|message/.test(t)) return SVG.chat;
+  if (/game|monopoly|play|fun/.test(t)) return SVG.game;
+  return SVG.code;
+}
 // ---- Renderer: same wow theme, data-driven ----
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -69,12 +89,12 @@ function renderPortfolio(p) {
   document.title = `${p.name} — ${p.title} | portfoolio.me`;
   const app = document.getElementById('app');
   const skills = (p.skills || []).map(s => `<span class="badge">✦ ${esc(s)}</span>`).join('');
-  const projects = (p.projects || []).map(pr => `
+  const projects = (p.projects || []).map((pr, i) => `
     <article class="proj">
-      <div class="proj-top p2"><span>${esc(pr.emoji || '🚀')}</span><div class="stars">${esc(pr.stars || 'Live')}</div></div>
+      <div class="proj-top p${(i % 6) + 1}"><div class="proj-art">${projIcon(pr)}</div><div class="stars">${esc(pr.stars || 'Live')}</div></div>
       <div class="proj-body"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
       <div class="tags">${(pr.tags || []).map(t => `<span>${esc(t)}</span>`).join('')}</div>
-      <div class="proj-actions"><a class="primary" href="${esc(pr.url)}" target="_blank" rel="noopener">Code <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+      <div class="proj-actions"><a class="primary" href="${esc(pr.url)}" target="_blank" rel="noopener">View code <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
       </div>
     </article>`).join('');
   app.innerHTML = `
