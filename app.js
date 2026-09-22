@@ -36,7 +36,14 @@ function getRequestedUser() {
 
 async function loadProfile(username) {
   const u = username.toLowerCase();
-  // 1. localStorage (user-created)
+  // 1. cloud (Supabase) — live on every device, when owner connects it
+  try {
+    if (typeof cloudEnabled === 'function' && cloudEnabled()) {
+      const c = await cloudGetProfile(u);
+      if (c) return c;
+    }
+  } catch {}
+  // 2. localStorage (user-created, this browser)
   const local = store.get(u);
   if (local) return local;
   // 2. seed JSON files

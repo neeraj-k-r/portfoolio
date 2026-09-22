@@ -314,6 +314,9 @@ if(document.getElementById('builderForm')){
     };
     const all2=JSON.parse(localStorage.getItem('portfoolio_users_v1')||'{}');all2[username]=profile;
     localStorage.setItem('portfoolio_users_v1',JSON.stringify(all2));
+    try {
+      if (cloudEnabled() && (await cloud().auth.getUser()).data.user) await cloudSaveProfile(profile);
+    } catch (e) { /* local copy saved; cloud retry happens on dashboard save */ }
     localStorage.setItem('portfoolio_session_v1',username);
     const sub=`https://${username}.portfoolio.me`, path=`${location.origin}/?u=${encodeURIComponent(username)}`;
     $('successBox').classList.add('show');
