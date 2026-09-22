@@ -20,6 +20,12 @@ Import `neeraj-k-r/portfoolio`, branch `main`, build command empty, publish `.`.
 ## True subdomains (one-time owner step)
 Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`, `CNAME * → <site>.netlify.app` (needs Netlify Pro alias). Free path: Cloudflare + `worker.js`.
 
+## Email login (Supabase, free — 5 min owner setup)
+1. Create project at supabase.com → copy **Project URL** + **anon key**
+2. Paste them into `supabase-config.js` (2 constants at top), commit + push
+3. Supabase → SQL Editor → run `supabase-schema.sql`
+4. Auth → Providers → Email ON. Users log in via dashboard with email OTP code — works on any device, profiles stored in Postgres, public portfolios readable everywhere.
+
 ## Templates (pick 1 in builder, stored as `template`)
 - 🌌 `midnight` — dark + neon wow (default) → `?u=neerajkr`
 - 📄 `minimal` — light, recruiter/ATS clean → `?u=priya`, `?u=demo`
