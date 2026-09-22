@@ -564,6 +564,44 @@ if(document.getElementById('builderForm')){
       if (p) openEditor(p);
     } catch {}
   })();
+  // ---- Landing auth: signup / login tabs + email OTP ----
+  let authMode = 'signup', authEmail = '';
+  function setAuthMode(m) {
+    authMode = m;
+    $('tabSignup').classList.toggle('active', m === 'signup');
+    $('tabLogin').classList.toggle('active', m === 'login');
+    $('authSendLabel').textContent = m === 'signup' ? 'Send signup code' : 'Send login code';
+    $('authMsg').textContent = m === 'signup' ? 'New account? Verify the code, then claim your subdomain below.' : 'Welcome back — verify the code to open your dashboard.';
+  }
+  $('tabSignup').onclick = () => setAuthMode('signup');
+  $('tabLogin').onclick = () => setAuthMode('login');
+  document.querySelectorAll('[data-tab]').forEach(a => a.addEventListener('click', () => setAuthMode(a.dataset.tab)));
+  if (!cloudEnabled()) { $('authCloudOn').style.display = 'none'; $('authCloudOff').style.display = ''; }
+  else setAuthMode('signup');
+  $('authSendBtn').onclick = async () => {
+    if (!cloudEnabled()) return;
+    const email = $('authEmail').value.trim();
+    if (!/.+@.+\..+/.test(email)) return toast('❌ Enter a valid email');
+    authEmail = email;
+    const { error } = await cloud().auth.signInWithOtp({ email });
+    if (error) { $('authMsg').textContent = error.message; return; }
+    $('authOtpRow').style.display = 'flex'; $('authMsg').textContent = 'Code sent to ' + email + ' — check inbox (and spam).';
+  };
+  $('authVerifyBtn').onclick = async () => {
+    const token = $('authOtp').value.trim();
+    if (token.length < 6) return toast('❌ Enter the 6-digit code');
+    const { error } = await cloud().auth.verifyOtp({ email: authEmail, token, type: 'email' });
+    if (error) { $('authMsg').textContent = error.message; return; }
+    const p = await cloudMyProfile();
+    if (p) {
+      editingCloud = true; openEditor({ ...p });
+      toast(authMode === 'signup' ? '✅ Account found — welcome back' : '✅ Logged in');
+    } else {
+      $('inEmail').value = authEmail;
+      location.hash = '#create';
+      toast('✅ Account ready — now claim your subdomain');
+    }
+  };
   async function renderDir(){
     const seeds=[
       {username:'neerajkr',name:'Neeraj K R',title:'Full-Stack Developer & AI Engineer • 🌌 Midnight'},
