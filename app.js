@@ -61,6 +61,11 @@ function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 function renderPortfolio(p) {
+  const tpl = String(p.template || 'midnight').toLowerCase();
+  if (tpl !== 'midnight' && window.PortfoolioTemplates && window.PortfoolioTemplates[tpl]) {
+    window.PortfoolioTemplates[tpl](p); return;
+  }
+  document.body.dataset.template = '';
   document.title = `${p.name} — ${p.title} | portfoolio.me`;
   const app = document.getElementById('app');
   const skills = (p.skills || []).map(s => `<span class="badge">✦ ${esc(s)}</span>`).join('');
