@@ -1,0 +1,14 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/u/*"
+  to = "/?u=:splat"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/profiles/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=300"
