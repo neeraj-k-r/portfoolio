@@ -145,12 +145,26 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   <div class="two" style="margin-top:22px">
     <div class="card" id="loginCard">
       <h3>🔐 Log in</h3>
-      <p>Your <b style="color:#fff">edit key</b> was shown once when you created your site. Lost it? It's stored in the browser you used to create it.</p>
-      <div style="display:grid;gap:10px;margin-top:12px">
-        <div><label class="flabel">Subdomain</label><input id="dashUser" placeholder="neerajkr"></div>
-        <div><label class="flabel">Edit key</label><input id="dashKey" placeholder="XXXX-XXXX-XXXX" class="mono"></div>
-        <button class="btn btn-primary" id="dashLoginBtn"><i class="fa-solid fa-right-to-bracket"></i> Unlock my dashboard</button>
+      <div id="emailLoginBox">
+        <p>Log in with <b style="color:#fff">email</b> — we send a 6-digit code. Works on any device.</p>
+        <div style="display:grid;gap:10px;margin-top:12px">
+          <div><label class="flabel">Email</label><input id="loginEmail" type="email" placeholder="you@gmail.com"></div>
+          <button class="btn btn-primary" id="otpSendBtn"><i class="fa-solid fa-envelope"></i> Send login code</button>
+          <div id="otpRow" style="display:none;gap:10px">
+            <div style="flex:1"><label class="flabel">6-digit code</label><input id="loginOtp" inputmode="numeric" placeholder="123456" class="mono"></div>
+            <button class="btn btn-primary" id="otpVerifyBtn" style="align-self:end">Verify</button>
+          </div>
+        </div>
+        <p class="mono" id="cloudNote" style="font-size:12px;color:var(--muted);margin-top:10px"></p>
       </div>
+      <details style="margin-top:14px">
+        <summary style="cursor:pointer;font-weight:800;font-size:13.5px;color:var(--muted)">Or use subdomain + edit key (this browser)</summary>
+        <div style="display:grid;gap:10px;margin-top:12px">
+          <div><label class="flabel">Subdomain</label><input id="dashUser" placeholder="neerajkr"></div>
+          <div><label class="flabel">Edit key</label><input id="dashKey" placeholder="XXXX-XXXX-XXXX" class="mono"></div>
+          <button class="btn btn-ghost" id="dashLoginBtn"><i class="fa-solid fa-right-to-bracket"></i> Unlock with key</button>
+        </div>
+      </details>
     </div>
     <div class="card" id="editorCard" style="display:none">
       <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
@@ -223,6 +237,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 </div>
 
 <div id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
 <script src="app.js"></script>
 <script src="templates.js"></script>
 <script>
@@ -345,7 +361,8 @@ if(document.getElementById('builderForm')){
     document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
   }
   function lockEditor() {
-    editing = null; localStorage.removeItem('portfoolio_session_v1');
+    editing = null; editingCloud = false; localStorage.removeItem('portfoolio_session_v1');
+    if (cloudEnabled()) cloud().auth.signOut();
     $('editorCard').style.display = 'none'; $('loginCard').style.display = '';
   }
   $('dashLoginBtn').onclick = async () => {
@@ -364,7 +381,32 @@ if(document.getElementById('builderForm')){
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => c.addEventListener('click', () => {
     document.querySelectorAll('#edTplGrid .tpl-card').forEach(x => x.classList.remove('selected')); c.classList.add('selected');
   }));
-  $('edSaveBtn').onclick = () => {
+  // ---- Email OTP login (Supabase cloud) ----
+  let editingCloud = false, pendingEmail = '';
+  if (!cloudEnabled()) $('cloudNote').textContent = 'Cloud login activates once the owner connects Supabase (see README) — edit-key login works regardless.';
+  $('otpSendBtn').onclick = async () => {
+    if (!cloudEnabled()) return toast('❌ Cloud not connected yet — use edit-key login below');
+    const email = $('loginEmail').value.trim();
+    if (!/.+@.+\..+/.test(email)) return toast('❌ Enter a valid email');
+    pendingEmail = email;
+    const { error } = await cloud().auth.signInWithOtp({ email });
+    if (error) return toast('❌ ' + error.message);
+    $('otpRow').style.display = 'flex'; toast('📧 Code sent — check inbox');
+  };
+  $('otpVerifyBtn').onclick = async () => {
+    const token = $('loginOtp').value.trim();
+    if (token.length < 6) return toast('❌ Enter the 6-digit code');
+    const { error } = await cloud().auth.verifyOtp({ email: pendingEmail, token, type: 'email' });
+    if (error) return toast('❌ ' + error.message);
+    const p = await cloudMyProfile();
+    if (p) { editingCloud = true; openEditor({ ...p, username: p.username }); toast('✅ Logged in as ' + p.username); }
+    else {
+      $('inEmail').value = pendingEmail;
+      location.hash = '#create';
+      toast('👋 New here — claim your subdomain (email prefilled)');
+    }
+  };
+  $('edSaveBtn').onclick = async () => {
     if (!editing) return;
     if (!$('edName').value.trim() || !$('edTitle').value.trim() || !$('edEmail').value.trim()) return toast('❌ Name, title + email required');
     Object.assign(editing, {
@@ -377,7 +419,11 @@ if(document.getElementById('builderForm')){
     });
     const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}'); all[editing.username] = editing;
     localStorage.setItem('portfoolio_users_v1', JSON.stringify(all));
-    paintShare(editing); renderDir(); toast('✅ Saved — site updated instantly');
+    if (editingCloud && cloudEnabled()) {
+      try { await cloudSaveProfile(editing); toast('✅ Saved to cloud — live on every device'); }
+      catch (e) { toast('⚠️ Saved locally, cloud failed: ' + e.message); }
+    } else toast('✅ Saved — site updated instantly');
+    paintShare(editing); renderDir();
   };
   // editor: add repos from GitHub
   let edGhRepos = [];
@@ -408,11 +454,17 @@ if(document.getElementById('builderForm')){
     });
     paintProjRows(); toast(n ? `✅ Added ${n} repo${n > 1 ? 's' : ''} — hit Save` : 'Nothing new ticked');
   };
-  // resume session
-  try {
-    const s = localStorage.getItem('portfoolio_session_v1'), p = s && localProfile(s);
-    if (p) openEditor(p);
-  } catch {}
+  // resume session (cloud first, then this-browser key)
+  (async () => {
+    try {
+      if (cloudEnabled()) {
+        const p = await cloudMyProfile();
+        if (p) { editingCloud = true; openEditor({ ...p }); return; }
+      }
+      const s = localStorage.getItem('portfoolio_session_v1'), p = s && localProfile(s);
+      if (p) openEditor(p);
+    } catch {}
+  })();
   async function renderDir(){
     const seeds=[
       {username:'neerajkr',name:'Neeraj K R',title:'Full-Stack Developer & AI Engineer • 🌌 Midnight'},
