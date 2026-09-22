@@ -217,6 +217,23 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       </div>
     </div>
   </div>
+    <div class="card" id="adminCard" style="margin-top:16px">
+      <h3>🛡️ Admin — approvals</h3>
+      <p>Only approved sites go live. Log in with the admin email + password.</p>
+      <div id="adminLoginBox" style="display:grid;gap:10px;margin-top:12px;max-width:520px">
+        <div><label class="flabel">Admin email</label><input id="adminEmail" type="email" placeholder="portfoolio.me@gmail.com"></div>
+        <div><label class="flabel">Password</label><input id="adminPass" type="password" placeholder="••••••••"></div>
+        <button class="btn btn-primary" id="adminLoginBtn"><i class="fa-solid fa-shield-halved"></i> Log in as admin</button>
+      </div>
+      <div id="adminQueueBox" style="display:none">
+        <div style="display:flex;gap:10px;align-items:center;margin-top:6px;flex-wrap:wrap">
+          <p class="mono" id="adminCount" style="font-size:13px"></p>
+          <button class="btn btn-ghost btn-sm" id="adminRefresh">Refresh</button>
+          <button class="btn btn-ghost btn-sm" id="adminLogout">Log out</button>
+        </div>
+        <div id="adminQueue" style="display:grid;gap:10px;margin-top:12px"></div>
+      </div>
+    </div>
 </section>
 
 <section id="how" class="wrap">
@@ -471,10 +488,38 @@ if(document.getElementById('builderForm')){
     });
     paintProjRows(); toast(n ? `✅ Added ${n} repo${n > 1 ? 's' : ''} — hit Save` : 'Nothing new ticked');
   };
-  // resume session (cloud first, then this-browser key)
+  // ---- Admin: password login + approve / reject queue ----
+  async function loadQueue() {
+    try {
+      const q = await cloudPending();
+      $('adminCount').textContent = q.length ? `${q.length} pending request${q.length > 1 ? 's' : ''}` : 'Queue empty — nothing waiting.';
+      $('adminQueue').innerHTML = q.map(r => `
+        <div class="proj-row"><b>@${r.username} — ${r.name}</b><small style="color:var(--muted)">${r.email}</small>
+        <a class="btn btn-ghost btn-sm" href="/?u=${encodeURIComponent(r.username)}" target="_blank">Preview</a>
+        <button data-ok="${r.username}" style="background:rgba(163,230,53,.15);border-color:rgba(163,230,53,.4);color:#bef264">Approve</button>
+        <button data-no="${r.username}">Reject</button></div>`).join('');
+      $('adminQueue').querySelectorAll('[data-ok]').forEach(b => b.onclick = async () => { await cloudSetStatus(b.dataset.ok, 'approved'); toast('✅ @' + b.dataset.ok + ' is live'); loadQueue(); });
+      $('adminQueue').querySelectorAll('[data-no]').forEach(b => b.onclick = async () => { await cloudSetStatus(b.dataset.no, 'rejected'); toast('🚫 @' + b.dataset.no + ' rejected'); loadQueue(); });
+    } catch (e) { $('adminCount').textContent = 'Could not load queue: ' + e.message; }
+  }
+  function showQueue() { $('adminLoginBox').style.display = 'none'; $('adminQueueBox').style.display = ''; loadQueue(); }
+  $('adminLoginBtn').onclick = async () => {
+    if (!cloudEnabled()) return toast('❌ Connect Supabase first (see README)');
+    const { error } = await cloud().auth.signInWithPassword({ email: $('adminEmail').value.trim(), password: $('adminPass').value });
+    if (error) return toast('❌ ' + error.message);
+    if (!(await cloudIsAdmin())) { await cloud().auth.signOut(); return toast('❌ Not an admin account'); }
+    $('adminPass').value = ''; showQueue(); toast('🛡️ Admin mode');
+  };
+  $('adminRefresh').onclick = loadQueue;
+  $('adminLogout').onclick = async () => {
+    if (cloudEnabled()) await cloud().auth.signOut();
+    $('adminQueueBox').style.display = 'none'; $('adminLoginBox').style.display = '';
+  };
+  // resume session (admin, cloud user, then this-browser key)
   (async () => {
     try {
       if (cloudEnabled()) {
+        if (await cloudIsAdmin()) { showQueue(); }
         const p = await cloudMyProfile();
         if (p) { editingCloud = true; openEditor({ ...p }); return; }
       }
