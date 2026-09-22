@@ -69,16 +69,17 @@ function renderTerminal(p) {
 
 function renderCreative(p) {
   document.body.dataset.template = 'creative';
-  document.title = `${p.name} ✨ ${p.title} | portfoolio.me`;
-  const skills = (p.skills || []).map((s) => `<span class="badge">✨ ${tplEsc(s)}</span>`).join('');
-  const projects = (p.projects || []).map((pr) => `
-    <article class="proj"><div class="proj-top"><span style="font-size:64px">${tplEsc(pr.emoji || '🎨')}</span></div>
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const icon = (typeof projIcon === 'function') ? projIcon : (pr) => `<span style="font-size:56px">${tplEsc(pr.emoji || '*')}</span>`;
+  const skills = (p.skills || []).map((s) => `<span class="badge">${tplEsc(s)}</span>`).join('');
+  const projects = (p.projects || []).map((pr, i) => `
+    <article class="proj"><div class="proj-top p${(i % 6) + 1}"><div class="proj-art">${icon(pr)}</div></div>
     <div class="proj-body"><h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
     <div class="tags">${(pr.tags || []).map((t) => `<span>${tplEsc(t)}</span>`).join('')}</div>
     <div class="proj-actions"><a class="primary" href="${tplEsc(pr.url)}" target="_blank">Explore →</a></div></div></article>`).join('');
   document.getElementById('app').innerHTML = `${tplNav(p)}
   <header class="hero wrap"><div style="text-align:center;padding:40px 0 10px">
-    <div style="font-size:72px">${tplEsc((p.projects?.[0]?.emoji) || '🎨')}</div>
+    <div style="width:96px;height:96px;border-radius:28px;margin:0 auto;display:grid;place-items:center;font-size:44px;font-weight:800;color:#fff;background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee);box-shadow:0 18px 44px rgba(139,92,246,.45)">${tplEsc((p.name || '?').trim().charAt(0).toUpperCase())}</div>
     <h1 style="font-size:clamp(40px,7vw,76px)">${tplEsc(p.name)}</h1>
     <p class="sub" style="margin:10px auto;max-width:600px">${tplEsc(p.title)} • ${tplEsc(p.tagline || '')}</p>
     <div class="badges" style="justify-content:center">${skills}</div>
