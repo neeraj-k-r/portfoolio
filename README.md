@@ -17,6 +17,13 @@ Open `index.html`, or `python -m http.server` then visit `http://localhost:8000/
 ## Deploy (Netlify Git)
 Import `neeraj-k-r/portfoolio`, branch `main`, build command empty, publish `.`. Then add custom domain `portfoolio.me`.
 
+## True subdomains — free path (Cloudflare, one time)
+1. Cloudflare → Add site `portfoolio.me` (free) → copy its 2 nameservers.
+2. Namecheap → Domain → Nameservers → Custom DNS → paste Cloudflare's nameservers.
+3. Cloudflare → DNS: `A @ → 75.2.60.5` (DNS-only/grey), `CNAME www → <site>.netlify.app` (DNS-only), `CNAME * → portfoolio.me` (Proxied/orange — required for the worker route).
+4. Deploy worker: `npx wrangler login && npx wrangler deploy` from repo root (uses `wrangler.toml`, route `*.portfoolio.me/*`). Worker reads approved profiles from Supabase + falls back to seed JSON; unknown names redirect to `portfoolio.me/?claim=name`.
+5. SSL: Cloudflare SSL/TLS mode **Full** (not Strict — Netlify's cert covers apex+www; subdomains are served by the worker with Cloudflare's edge cert).
+
 ## True subdomains (one-time owner step)
 Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`, `CNAME * → <site>.netlify.app` (needs Netlify Pro alias). Free path: Cloudflare + `worker.js`.
 

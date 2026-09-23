@@ -1,0 +1,8 @@
+name = "portfoolio-wildcard"
+main = "worker.js"
+compatibility_date = "2026-09-01"
+
+# Serve every subdomain: *.portfoolio.me/*
+[[routes]]
+pattern = "*.portfoolio.me/*"
+zone_name = "portfoolio.me"
