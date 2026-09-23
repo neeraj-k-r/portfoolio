@@ -1,6 +1,8 @@
 /* portfoolio.me — cloud backend (Supabase). Paste your project values below to go live. */
 const PORTFOOLIO_SUPABASE_URL = 'https://oorcivmymcokbjiawkig.supabase.co';
 const PORTFOOLIO_SUPABASE_ANON_KEY = 'sb_publishable_u3HhZlncnGcg_UBT4G3N-Q_3uE5Qh63';
+// Superadmin: this email can approve users from the site's admin panel. No Supabase emails needed.
+const PORTFOOLIO_SUPERADMIN_EMAIL = 'portfoolio.me@gmail.com';
 
 let _cloud = null;
 function cloudEnabled() {
@@ -55,6 +57,7 @@ async function cloudIsAdmin() {
   const sb = cloud(); if (!sb) return false;
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return false;
+  if ((user.email || '').toLowerCase() === PORTFOOLIO_SUPERADMIN_EMAIL) return true;
   const { data } = await sb.from('admins').select('user_id').eq('user_id', user.id).maybeSingle();
   return !!data;
 }
