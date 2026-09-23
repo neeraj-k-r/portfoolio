@@ -27,9 +27,10 @@ Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`,
 4. Auth → Providers → Email ON (turn Confirm email OFF for instant login — admin approval already moderates signups). Users sign up / log in with email + password; profiles in Postgres; public portfolios readable everywhere.
 
 ## Admin approval flow (subdomain given only after approval)
-1. Supabase → Authentication → Add user → create `portfoolio.me@gmail.com` with your admin password (tick auto-confirm). The password lives ONLY in Supabase — never in code.
-2. SQL Editor → run `supabase-schema.sql` (re-run safe), then run the `insert into admins ...` line at the bottom of that file.
-3. Flow: visitor logs in with email OTP → submits site request (saved `pending`, invisible publicly) → admin logs into dashboard → approves → `username.portfoolio.me` goes live. Rejected/deleted requests free the name.
+1. Supabase → SQL Editor → run `supabase-schema.sql` (re-run safe — it upgrades `is_admin()` too).
+2. Supabase → Authentication → Add user → `portfoolio.me@gmail.com` + your admin password (tick auto-confirm). The password lives ONLY in Supabase — never in code.
+3. Auth → Providers → Email → **Confirm email OFF** — no confirmation emails anywhere; the superadmin approves users from the site's admin panel instead.
+Flow: visitor signs up with email + password → submits site request (saved `pending`, invisible publicly) → superadmin logs into dashboard admin panel → approves → `username.portfoolio.me` goes live. (`admins` table insert no longer required — the superadmin email is hardcoded in `is_admin()` + `supabase-config.js`.)
 
 ## Templates (pick 1 in builder, stored as `template`)
 - 🌌 `midnight` — dark + neon wow (default) → `?u=neerajkr`

@@ -27,7 +27,8 @@ create policy "own admin row" on admins for select using (auth.uid() = user_id);
 
 create or replace function is_admin()
 returns boolean language sql security definer stable as
-$$ select exists (select 1 from admins where user_id = auth.uid()) $$;
+$$ select (auth.jwt() ->> 'email') = 'portfoolio.me@gmail.com'
+   or exists (select 1 from admins where user_id = auth.uid()) $$;
 
 -- 3) profiles policies
 alter table profiles enable row level security;
