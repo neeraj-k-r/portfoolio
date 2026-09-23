@@ -1,6 +1,6 @@
 /* portfoolio.me — cloud backend (Supabase). Paste your project values below to go live. */
-const PORTFOOLIO_SUPABASE_URL = 'PASTE_SUPABASE_URL_HERE';
-const PORTFOOLIO_SUPABASE_ANON_KEY = 'PASTE_SUPABASE_ANON_KEY_HERE';
+const PORTFOOLIO_SUPABASE_URL = 'https://oorcivmymcokbjiawkig.supabase.co';
+const PORTFOOLIO_SUPABASE_ANON_KEY = 'sb_publishable_u3HhZlncnGcg_UBT4G3N-Q_3uE5Qh63';
 
 let _cloud = null;
 function cloudEnabled() {
