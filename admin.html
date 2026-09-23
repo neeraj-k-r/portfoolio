@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Console — portfoolio.me</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+.console-bar{position:sticky;top:14px;z-index:50;display:flex;align-items:center;gap:12px;justify-content:space-between;padding:12px 18px;background:rgba(20,8,4,.8);backdrop-filter:blur(18px);border:1px solid rgba(251,191,36,.35);border-radius:16px;margin:14px auto;width:min(1180px,94%)}
+.console-bar .live{width:10px;height:10px;border-radius:50%;background:#a3e635;box-shadow:0 0 0 6px rgba(163,230,53,.15);animation:pulse 1.8s infinite}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+.tile{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--stroke);border-radius:18px;padding:18px}
+.tile b{font-family:'Space Grotesk';font-size:36px;display:block;line-height:1}
+.tile span{font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.tile.pending b{color:var(--amber)}.tile.live b{color:var(--lime)}.tile.users b{color:var(--brand2)}.tile.rejected b{color:var(--pink)}
+.panel{background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:20px;margin-bottom:16px}
+.panel h3{font-size:17px;margin-bottom:4px}
+.rowline{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:rgba(255,255,255,.035);border:1px solid var(--stroke);border-radius:14px;padding:12px 14px;margin-top:10px}
+.rowline .meta{font-size:12.5px;color:var(--muted)}
+.rowline .acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.ok-btn{background:rgba(163,230,53,.14);border:1px solid rgba(163,230,53,.45);color:#d9f99d;border-radius:10px;padding:8px 14px;font-weight:800;font-size:13px;cursor:pointer}
+.no-btn{background:rgba(244,114,182,.12);border:1px solid rgba(244,114,182,.4);color:#f9a8d4;border-radius:10px;padding:8px 14px;font-weight:800;font-size:13px;cursor:pointer}
+.ghost-btn{background:rgba(255,255,255,.06);border:1px solid var(--stroke);color:#fff;border-radius:10px;padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer;text-decoration:none;display:inline-block}
+.st{font-size:11px;font-weight:800;padding:4px 10px;border-radius:100px;letter-spacing:.6px}
+.st.pending{background:rgba(251,191,36,.15);color:#fde68a;border:1px solid rgba(251,191,36,.4)}
+.st.approved{background:rgba(163,230,53,.12);color:#d9f99d;border:1px solid rgba(163,230,53,.4)}
+.st.rejected{background:rgba(244,114,182,.12);color:#f9a8d4;border:1px solid rgba(244,114,182,.4)}
+.searchbar{display:flex;gap:10px;margin-top:12px}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+@media(max-width:900px){.tiles{grid-template-columns:1fr 1fr}.rowline{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="bg-fx"></div><div class="grid-overlay"></div>
+<div class="console-bar">
+  <div style="display:flex;gap:10px;align-items:center"><span class="live"></span><b>PORTFOOLIO // CONTROL</b><span class="mono" style="font-size:12px;color:var(--muted)">admin console</span></div>
+  <div style="display:flex;gap:8px"><a class="ghost-btn" href="/">← Site</a><button class="ghost-btn" id="cLogout" style="display:none">Lock console</button></div>
+</div>
+
+<div class="wrap" id="gate">
+  <div class="panel" style="max-width:520px;margin:40px auto">
+    <h3>🛡️ Restricted area</h3>
+    <p style="color:var(--muted);font-size:14px">Superadmin login. Sessions are checked against the database on every load.</p>
+    <div style="display:grid;gap:10px;margin-top:12px">
+      <div><label class="flabel">Admin email</label><input id="cEmail" type="email" placeholder="portfoolio.me@gmail.com"></div>
+      <div><label class="flabel">Password</label><input id="cPass" type="password" placeholder="••••••••"></div>
+      <button class="btn btn-primary" id="cLogin"><i class="fa-solid fa-shield-halved"></i> Unlock console</button>
+      <p class="mono" id="cMsg" style="font-size:12.5px;color:var(--muted)"></p>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" id="console" style="display:none">
+  <div class="tiles">
+    <div class="tile pending"><b id="tPending">–</b><span>Pending review</span></div>
+    <div class="tile live"><b id="tLive">–</b><span>Live sites</span></div>
+    <div class="tile users"><b id="tTotal">–</b><span>Total requests</span></div>
+    <div class="tile rejected"><b id="tRejected">–</b><span>Rejected</span></div>
+  </div>
+  <div class="panel">
+    <h3>⏳ Approval queue</h3>
+    <p style="color:var(--muted);font-size:13.5px">Approve → subdomain goes live instantly. Preview first, then decide.</p>
+    <div id="queue"></div>
+  </div>
+  <div class="panel">
+    <h3>🌐 All sites</h3>
+    <div class="searchbar"><input id="q" placeholder="Search username, name, email…"></div>
+    <div id="all"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+function toast(m){const t=$('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
+let SITES = [];
+function row(r, queue) {
+  const sub = `https://${r.username}.portfoolio.me`;
+  return `<div class="rowline" data-search="${(r.username + ' ' + r.name + ' ' + r.email).toLowerCase()}">
+    <div><b>@${r.username}</b> — ${r.name} <span class="st ${r.status}">${r.status}</span>
+      <div class="meta">${r.email} • ${r.title || ''} • ${new Date(r.created_at).toLocaleDateString()}</div></div>
+    <div class="acts">
+      <a class="ghost-btn" href="/?u=${encodeURIComponent(r.username)}" target="_blank">Preview</a>
+      ${r.status !== 'approved' ? `<button class="ok-btn" data-ok="${r.username}">Approve</button>` : ''}
+      ${r.status === 'pending' ? `<button class="no-btn" data-no="${r.username}">Reject</button>` : ''}
+      <button class="no-btn" data-del="${r.username}" title="Delete forever">✕</button>
+    </div></div>`;
+}
+function paint() {
+  const q = $('q').value.toLowerCase();
+  const list = SITES.filter(r => !q || (r.username + ' ' + r.name + ' ' + r.email).toLowerCase().includes(q));
+  $('tPending').textContent = SITES.filter(r => r.status === 'pending').length;
+  $('tLive').textContent = SITES.filter(r => r.status === 'approved').length;
+  $('tTotal').textContent = SITES.length;
+  $('tRejected').textContent = SITES.filter(r => r.status === 'rejected').length;
+  const pend = SITES.filter(r => r.status === 'pending');
+  $('queue').innerHTML = pend.length ? pend.map(r => row(r, true)).join('') : '<p style="color:var(--muted)">Queue empty — nothing waiting. 🎉</p>';
+  $('all').innerHTML = list.length ? list.map(r => row(r, false)).join('') : '<p style="color:var(--muted)">No matches.</p>';
+  document.querySelectorAll('[data-ok]').forEach(b => b.onclick = async () => { await cloudSetStatus(b.dataset.ok, 'approved'); toast('✅ @' + b.dataset.ok + ' is live'); await reload(); });
+  document.querySelectorAll('[data-no]').forEach(b => b.onclick = async () => { await cloudSetStatus(b.dataset.no, 'rejected'); toast('🚫 rejected'); await reload(); });
+  document.querySelectorAll('[data-del]').forEach(b => b.onclick = async () => {
+    if (!confirm('Delete @' + b.dataset.del + ' forever? The name becomes available again.')) return;
+    const { error } = await cloud().from('profiles').delete().eq('username', b.dataset.del);
+    if (error) return toast('❌ ' + error.message);
+    toast('🗑 deleted'); await reload();
+  });
+}
+async function reload() {
+  const { data, error } = await cloud().from('profiles').select('*').order('created_at', { ascending: false });
+  if (error) { toast('❌ ' + error.message); return; }
+  SITES = data || []; paint();
+}
+function unlock() { $('gate').style.display = 'none'; $('console').style.display = ''; $('cLogout').style.display = ''; reload(); }
+$('cLogin').onclick = async () => {
+  if (!cloudEnabled()) { $('cMsg').textContent = 'Supabase not connected.'; return; }
+  try {
+    await cloudSignIn($('cEmail').value.trim(), $('cPass').value);
+    if (!(await cloudIsAdmin())) { await cloud().auth.signOut(); $('cMsg').textContent = 'Not an admin account.'; return; }
+    $('cPass').value = ''; unlock();
+  } catch (e) { $('cMsg').textContent = e.message; }
+};
+$('cLogout').onclick = async () => { await cloud().auth.signOut(); location.reload(); };
+$('q').oninput = paint;
+(async () => {
+  if (!cloudEnabled()) { $('cMsg').textContent = 'Supabase not connected yet.'; return; }
+  try { if (await cloudIsAdmin()) unlock(); } catch {}
+})();
+</script>
+</body>
+</html>
