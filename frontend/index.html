@@ -23,7 +23,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 .gh-repo input{margin-top:4px;width:auto;flex-shrink:0}
 .gh-repo b{display:block;font-size:13.5px}.gh-repo small{color:var(--muted)}
 .gh-repo .stars{margin-left:auto;font-size:11.5px;font-weight:800;color:#22d3ee;white-space:nowrap}
-.keybox{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700;letter-spacing:2px;background:rgba(0,0,0,.45);border:1px dashed rgba(163,230,53,.6);color:#d9f99d;border-radius:12px;padding:12px 16px;text-align:center;margin:10px 0}
+.keybox{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700;letter-spacing:1px;background:rgba(0,0,0,.45);border:1px dashed rgba(163,230,53,.6);color:#d9f99d;border-radius:12px;padding:12px 16px;text-align:center;margin:10px 0}
 .share-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .proj-row{display:flex;gap:10px;align-items:center;background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:12px;padding:9px 12px;font-size:13.5px;margin-bottom:8px}
 .proj-row b{flex:1}
@@ -34,241 +34,379 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 .dir-card{background:var(--card);border:1px solid var(--stroke);border-radius:18px;padding:20px;transition:.25s}
 .dir-card:hover{transform:translateY(-5px);border-color:rgba(108,108,245,.55)}
 .dir-card h3{font-size:18px}.dir-card p{color:var(--muted);font-size:13.5px;margin:6px 0 12px}
-.step{display:flex;gap:14px;align-items:flex-start}
-.step b.n{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#6c6cf5,#22d3ee);flex-shrink:0}
 @media(max-width:900px){.form-grid{grid-template-columns:1fr}.dir-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="bg-fx"></div><div class="grid-overlay"></div>
 
-<!-- Dynamic portfolio renders here for *.portfoolio.me / ?u= / /u/xxx -->
+<!-- Rendered portfolio view (for *.portfoolio.me / ?u= / /u/xxx) -->
 <div id="app" style="display:none"></div>
 
+<!-- Unauthenticated Landing Page -->
 <div id="landing">
-<nav>
-  <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>username.portfoolio.me</small></span></a>
-  <div class="nav-links" id="navLinks">
-    <a href="#directory">Live sites</a><a href="#dashboard">Dashboard</a><a href="#auth">Log in</a>
-  </div>
-  <div style="display:flex;gap:10px;align-items:center">
-    <a class="btn btn-ghost btn-sm" href="#auth">Log in</a>
-    <a class="btn btn-primary btn-sm" href="#auth" data-tab="signup"><i class="fa-solid fa-bolt"></i> Sign up free</a>
-  </div>
-</nav>
-
-<header class="hero wrap">
-  <div class="hero-grid">
-    <div>
-      <div class="pill"><span class="dot"></span> Free portfolio hosting for developers</div>
-      <h1>Your work deserves<br>its own <span class="grad">address.</span></h1>
-      <p class="sub">Sign up with email, pick a name, get <b style="color:#fff">yourname.portfoolio.me</b> — a recruiter-ready portfolio with 4 themes and GitHub import. Approved sites go live in minutes.</p>
-      <div class="hero-cta">
-        <a class="btn btn-primary" href="#auth" data-tab="signup">Sign up free <i class="fa-solid fa-arrow-right"></i></a>
-        <a class="btn btn-ghost" href="#auth" data-tab="login">Log in</a>
-        <a class="btn btn-ghost" href="/?u=neerajkr">See live example</a>
-      </div>
-      <div class="hero-meta mono" style="font-size:13px">Free subdomain &nbsp;•&nbsp; 4 themes &nbsp;•&nbsp; GitHub import &nbsp;•&nbsp; No code</div>
+  <nav>
+    <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>username.portfoolio.me</small></span></a>
+    <div class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#directory">Live sites</a>
+      <a href="#howitworks">How it works</a>
+      <a href="#auth">Log in</a>
     </div>
-    <div class="visual"><div class="avatar-card"><div class="avatar-inner" style="text-align:left">
-      <p class="mono" style="font-size:12px;color:#22d3ee">$ claim your subdomain</p>
-      <div class="mono" style="font-size:26px;font-weight:700;margin:8px 0"><span id="livePrev" style="color:#fff">yourname</span><span style="color:#6b7594">.portfoolio.me</span></div>
-      <p style="color:var(--muted);font-size:13.5px">Type your name in the form below — this preview updates live. Lowercase, 3–30 chars, letters/numbers/hyphens.</p>
-      <div class="badges" style="justify-content:flex-start"><span class="badge">⚡ instant</span><span class="badge">🔒 free SSL</span><span class="badge">📱 mobile wow</span></div>
-      <a class="btn btn-primary btn-sm" href="#auth" data-tab="signup">Start →</a>
-    </div></div></div>
-  </div>
-</header>
-
-<section id="auth" class="wrap" style="padding-top:10px">
-  <div class="two" style="grid-template-columns:.9fr 1.1fr;align-items:start">
-    <div>
-      <span class="eyebrow">● Get started</span>
-      <h2 class="title">Log in or <span class="grad">sign up</span></h2>
-      <p class="lead">One email, one code — no passwords to remember. New here? Sign up, then claim your subdomain. Returning? Log in to open your dashboard.</p>
-      <div class="hl-list">
-        <div class="hl"><i class="fa-solid fa-envelope"></i><div><b>Email + password:</b> one account, works on any device.</div></div>
-        <div class="hl"><i class="fa-solid fa-shield-halved"></i><div><b>Reviewed publishing:</b> every site is admin-approved before it goes live.</div></div>
-      </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="btn btn-ghost btn-sm" href="#auth" onclick="setAuthMode('login')">Log in</a>
+      <a class="btn btn-primary btn-sm" href="#auth" onclick="setAuthMode('signup')"><i class="fa-solid fa-bolt"></i> Sign up free</a>
     </div>
-    <div class="card">
-      <div class="auth-tabs">
-        <button class="auth-tab active" id="tabSignup" type="button">Sign up</button>
-        <button class="auth-tab" id="tabLogin" type="button">Log in</button>
-      </div>
-      <div id="authCloudOff" style="display:none">
-        <p>Cloud login activates once the owner connects Supabase — meanwhile create instantly, no account needed:</p>
-        <a class="btn btn-primary" href="#create" style="margin-top:10px">Create my portfolio →</a>
-      </div>
-      <div id="authCloudOn">
-        <div><label class="flabel">Email</label><input id="authEmail" type="email" placeholder="you@gmail.com"></div>
-        <div style="margin-top:10px"><label class="flabel">Password (min 6 characters)</label><input id="authPass" type="password" placeholder="••••••••"></div>
-        <button class="btn btn-primary" id="authGoBtn" style="margin-top:10px;width:100%;justify-content:center"><i class="fa-solid fa-right-to-bracket"></i> <span id="authGoLabel">Create account</span></button>
-        <p class="mono" id="authMsg" style="font-size:12.5px;color:var(--muted);margin-top:10px"></p>
-      </div>
-    </div>
-  </div>
-</section>
+  </nav>
 
-<section id="create" class="wrap" style="padding-top:20px">
-  <span class="eyebrow">● Create yours</span>
-  <h2 class="title">Claim <span class="grad">your subdomain</span></h2>
-  <p class="lead">You're logged in — claim your subdomain once. An admin reviews it, then <b style="color:#fff">yourname.portfoolio.me</b> goes live.</p>
-  <div class="two" style="grid-template-columns:1.1fr .9fr">
-    <form class="contact-form" id="builderForm">
-      <div class="form-grid">
-        <div><label class="flabel">Subdomain *</label><input id="inUser" required minlength="3" maxlength="30" placeholder="neerajkr"></div>
-        <div><label class="flabel">Full name *</label><input id="inName" required placeholder="Neeraj K R"></div>
-        <div class="full"><label class="flabel">Headline title *</label><input id="inTitle" required placeholder="Full-Stack Developer & AI Engineer"></div>
-        <div class="full"><label class="flabel">Tagline</label><input id="inTag" placeholder="I build web apps & AI that wow."></div>
-        <div><label class="flabel">Email *</label><input id="inEmail" type="email" required placeholder="you@gmail.com"></div>
-        <div><label class="flabel">Phone</label><input id="inPhone" placeholder="+91 ..."></div>
-        <div><label class="flabel">GitHub URL</label><input id="inGithub" placeholder="https://github.com/you"></div>
-        <div><label class="flabel">LinkedIn URL</label><input id="inLinkedin" placeholder="https://linkedin.com/in/you"></div>
-        <div class="full"><label class="flabel">Location</label><input id="inLoc" placeholder="Kerala, India"></div>
-        <div class="full"><label class="flabel">Skills (comma separated)</label><input id="inSkills" placeholder="React, JavaScript, Node.js, Python"></div>
-        <div class="full"><label class="flabel">Pick a base template *</label>
-          <div class="tpl-grid" id="tplGrid">
-            <label class="tpl-card selected"><input type="radio" name="tpl" value="midnight" checked><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight Wow</b><span>Dark + neon • Dev/AI</span></div></label>
-            <label class="tpl-card"><input type="radio" name="tpl" value="minimal"><div class="tpl-preview minimal">📄</div><div class="tpl-meta"><b>Minimal Clean</b><span>Light • ATS friendly</span></div></label>
-            <label class="tpl-card"><input type="radio" name="tpl" value="terminal"><div class="tpl-preview terminal">>_</div><div class="tpl-meta"><b>Terminal Hacker</b><span>Mono • Backend/OSS</span></div></label>
-            <label class="tpl-card"><input type="radio" name="tpl" value="creative"><div class="tpl-preview creative">🎨</div><div class="tpl-meta"><b>Creative Pop</b><span>Gradient • Frontend</span></div></label>
+  <!-- Hero Section -->
+  <header class="hero wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="pill"><span class="dot"></span> Free subdomain hosting for developers</div>
+        <h1>Your work deserves<br>its own <span class="grad">address.</span></h1>
+        <p class="sub">Get your own <b style="color:#fff">yourname.portfoolio.me</b> subdomain — a recruiter-ready developer homepage featuring 4 handcrafted themes, 1-click GitHub repository import, and admin verification for quality & trust.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#auth" onclick="setAuthMode('signup')">Sign up free <i class="fa-solid fa-arrow-right"></i></a>
+          <a class="btn btn-ghost" href="#auth" onclick="setAuthMode('login')">Log in</a>
+          <a class="btn btn-ghost" href="/?u=neerajkr">See live example</a>
+        </div>
+        <div class="hero-meta mono" style="font-size:13px">Free subdomain &nbsp;•&nbsp; 4 themes &nbsp;•&nbsp; GitHub sync &nbsp;•&nbsp; Mobile ready</div>
+      </div>
+      <div class="visual">
+        <div class="avatar-card">
+          <div class="avatar-inner" style="text-align:left">
+            <p class="mono" style="font-size:12px;color:#22d3ee">$ your developer home</p>
+            <div class="mono" style="font-size:26px;font-weight:700;margin:8px 0"><span id="livePrev" style="color:#fff">yourname</span><span style="color:#6b7594">.portfoolio.me</span></div>
+            <p style="color:var(--muted);font-size:13.5px">Sign up or log in below to access your dashboard, claim your custom subdomain, and publish your portfolio in seconds.</p>
+            <div class="badges" style="justify-content:flex-start"><span class="badge">⚡ 60s setup</span><span class="badge">🔒 SSL included</span><span class="badge">🎨 4 themes</span></div>
+            <a class="btn btn-primary btn-sm" href="#auth" onclick="setAuthMode('signup')" style="margin-top:8px">Get started →</a>
           </div>
         </div>
-        <div class="full"><label class="flabel">GitHub repos to display (optional)</label>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <input id="inGhUser" placeholder="github username — e.g. neeraj-k-r" style="flex:1;min-width:180px">
-            <button type="button" class="btn btn-ghost btn-sm" id="ghLoadBtn"><i class="fa-brands fa-github"></i> Load repos</button>
-          </div>
-          <p class="mono" id="ghStatus" style="font-size:12px;color:var(--muted);margin-top:8px">Tick the repos you want on your portfolio. Forks start unticked.</p>
-          <div id="ghRepoList" style="display:grid;gap:8px;margin-top:8px;max-height:260px;overflow:auto"></div>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <button type="button" class="btn btn-ghost btn-sm" id="ghAll">Select all</button>
-            <button type="button" class="btn btn-ghost btn-sm" id="ghNone">Clear</button>
-          </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats Counter Bar -->
+  <section class="wrap" style="padding:10px 0 30px">
+    <div class="stats">
+      <div class="stat"><b class="grad">500+</b><span>Portfolios Shipped</span></div>
+      <div class="stat"><b style="color:#22d3ee">4</b><span>Themes</span></div>
+      <div class="stat"><b style="color:#a3e635">100%</b><span>Free Subdomains</span></div>
+      <div class="stat"><b style="color:#f472b6">&lt; 60s</b><span>Setup Time</span></div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="wrap">
+    <span class="eyebrow">● Built for Developers</span>
+    <h2 class="title">Everything you need to <span class="grad">stand out</span></h2>
+    <p class="lead">Stop sending plain PDF resumes. Build a developer homepage that recruiters and hiring managers love.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="f-icon"><i class="fa-solid fa-globe"></i></div>
+        <h3>Personal Subdomain</h3>
+        <p>Get your own clean <b>username.portfoolio.me</b> address with instant SSL security and mobile optimization.</p>
+      </div>
+      <div class="feature-card">
+        <div class="f-icon"><i class="fa-solid fa-palette"></i></div>
+        <h3>4 Wow Themes</h3>
+        <p>Midnight Wow, Minimal Clean, Terminal Hacker, or Creative Pop — switch designs with a single click anytime.</p>
+      </div>
+      <div class="feature-card">
+        <div class="f-icon"><i class="fa-brands fa-github"></i></div>
+        <h3>1-Click GitHub Sync</h3>
+        <p>Auto-load your public repositories, star counts, tags, and project descriptions without manual entry.</p>
+      </div>
+      <div class="feature-card">
+        <div class="f-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3>Verified Publishing</h3>
+        <p>Admin-reviewed portfolio directory guarantees spam-free quality, high performance, and recruiter trust.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Showcase / Directory Section -->
+  <section id="directory" class="wrap">
+    <span class="eyebrow">● Live Showcase</span>
+    <h2 class="title">Active portfolios <span class="grad">on portfoolio</span></h2>
+    <p class="lead">Explore real portfolios created by developers using portfoolio.me.</p>
+    <div class="dir-grid" id="dirGrid"></div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section id="howitworks" class="wrap">
+    <span class="eyebrow">● Simple Process</span>
+    <h2 class="title">Three steps to your <span class="grad">new site</span></h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <h3>Create Account</h3>
+        <p>Sign up with your email and password in under 10 seconds. No credit card required.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <h3>Build & Customize</h3>
+        <p>Log into your personal User Dashboard to claim your subdomain, pick a theme, and sync your GitHub projects.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <h3>Go Live</h3>
+        <p>Submit your site for admin approval. Once approved, your portfolio is live at <b>yourname.portfoolio.me</b>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Auth Section (Sign Up / Log In) - NO CLAIM SUBDOMAIN FORM HERE -->
+  <section id="auth" class="wrap" style="padding-top:20px">
+    <div class="two" style="grid-template-columns:.9fr 1.1fr;align-items:center">
+      <div>
+        <span class="eyebrow">● Access Platform</span>
+        <h2 class="title">Log in or <span class="grad">sign up</span></h2>
+        <p class="lead">Sign up to claim your subdomain or log in to access your customized dashboard.</p>
+        <div class="hl-list">
+          <div class="hl"><i class="fa-solid fa-user-check"></i><div><b>Instant Account Access:</b> Manage your profile, themes, and GitHub repos anytime.</div></div>
+          <div class="hl"><i class="fa-solid fa-shield-halved"></i><div><b>Role-Based Dashboards:</b> Separate tailored experiences for users and administrators.</div></div>
         </div>
-        <div class="full"><label class="flabel">Top project title</label><input id="inP1t" placeholder="My best build"></div>
-        <div class="full"><label class="flabel">Top project description</label><input id="inP1d" placeholder="What it does + result"></div>
-        <div class="full"><label class="flabel">Top project link</label><input id="inP1u" placeholder="https://github.com/you/project"></div>
       </div>
-      <button class="btn btn-primary" type="submit"><i class="fa-solid fa-rocket"></i> Create my portfolio</button>
-      <div class="success" id="successBox"></div>
-    </form>
-    <div class="card">
-      <h3>✨ What you get</h3>
-      <div class="hl-list">
-        <div class="hl"><i class="fa-solid fa-globe"></i><div><b>yourname.portfoolio.me</b> — personal subdomain + free SSL + mobile-perfect design.</div></div>
-        <div class="hl"><i class="fa-solid fa-bolt"></i><div><b>Recruiter-ready:</b> hire-me buttons, contact, GitHub/LinkedIn, project showcase.</div></div>
-        <div class="hl"><i class="fa-solid fa-pen"></i><div><b>Editable:</b> v1 saves in this browser instantly. v2 (Supabase) makes it permanent + editable dashboard.</div></div>
+      <div class="card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tabSignup" type="button">Sign up</button>
+          <button class="auth-tab" id="tabLogin" type="button">Log in</button>
+        </div>
+        <div id="authCloudOff" style="display:none">
+          <p>Cloud login is inactive — enter credentials below to continue to your dashboard:</p>
+        </div>
+        <div id="authCloudOn">
+          <div><label class="flabel">Email Address</label><input id="authEmail" type="email" placeholder="you@gmail.com"></div>
+          <div style="margin-top:10px"><label class="flabel">Password (min 6 characters)</label><input id="authPass" type="password" placeholder="••••••••"></div>
+          <button class="btn btn-primary" id="authGoBtn" style="margin-top:14px;width:100%;justify-content:center"><i class="fa-solid fa-right-to-bracket"></i> <span id="authGoLabel">Create account</span></button>
+          <p class="mono" id="authMsg" style="font-size:12.5px;color:var(--muted);margin-top:10px"></p>
+        </div>
+        <details style="margin-top:14px;border-top:1px solid var(--stroke);padding-top:12px">
+          <summary style="cursor:pointer;font-weight:700;font-size:12.5px;color:var(--muted)">Quick test logins (Local / Demo)</summary>
+          <div style="display:grid;gap:8px;margin-top:10px">
+            <button type="button" class="btn btn-ghost btn-sm" id="demoUserLoginBtn"><i class="fa-solid fa-user"></i> Log in as Demo User</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="demoAdminLoginBtn"><i class="fa-solid fa-shield-halved"></i> Log in as Admin</button>
+          </div>
+        </details>
       </div>
-      <p class="mono" style="font-size:12.5px;color:var(--muted);margin-top:12px">Try now: <a href="/?u=demo" style="color:#22d3ee">portfoolio.me/?u=demo</a> • <a href="/?u=neerajkr" style="color:#22d3ee">portfoolio.me/?u=neerajkr</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <div>© 2026 <b style="color:#fff">portfoolio.me</b> • recruiter-ready portfolio hosting for developers</div>
+      <div class="socials">
+        <a href="/?u=neerajkr" title="Featured Profile"><i class="fa-solid fa-star"></i></a>
+        <a href="https://github.com/neeraj-k-r/portfoolio" target="_blank" title="GitHub Repository"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Logged In Dashboard Area (User Dashboard OR Admin Dashboard) -->
+<div id="dashboardApp" style="display:none">
+  <!-- Top Navigation Bar for Dashboard -->
+  <div class="dash-nav">
+    <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small id="dashNavSub">dashboard</small></span></a>
+    <div class="dash-user-info">
+      <span class="role-badge user" id="dashRoleBadge">User Studio</span>
+      <span class="mono" id="dashUserEmail" style="font-size:13px;color:var(--muted)">user@portfoolio.me</span>
+      <button class="btn btn-ghost btn-sm" id="globalLogoutBtn"><i class="fa-solid fa-right-to-bracket"></i> Log out</button>
     </div>
   </div>
-</section>
 
-<section id="directory" class="wrap">
-  <span class="eyebrow">● Live sites</span>
-  <h2 class="title">Already <span class="grad">on portfoolio</span></h2>
-  <div class="dir-grid" id="dirGrid"></div>
-</section>
-
-<section id="dashboard" class="wrap">
-  <span class="eyebrow">● Dashboard</span>
-  <h2 class="title">Your <span class="grad">dashboard</span></h2>
-  <p class="lead">Log in once — users get their portfolio studio, admins get the control panel. Different doors, same key.</p>
-  <div class="two" style="margin-top:22px">
-    <div class="card" id="loginCard">
-      <h3>🔐 Log in</h3>
-      <div id="emailLoginBox">
-        <p>Log in with <b style="color:#fff">email + password</b>. Works on any device.</p>
-        <div style="display:grid;gap:10px;margin-top:12px">
-          <div><label class="flabel">Email</label><input id="loginEmail" type="email" placeholder="you@gmail.com"></div>
-          <div><label class="flabel">Password</label><input id="loginPass" type="password" placeholder="••••••••"></div>
-          <button class="btn btn-primary" id="dashEmailBtn"><i class="fa-solid fa-right-to-bracket"></i> Log in</button>
+  <!-- 1. USER DASHBOARD (NORMAL USER) -->
+  <div id="userDashboardView" class="wrap" style="padding-top:10px;display:none">
+    <div class="dash-header-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">
+        <div>
+          <h2>Welcome to your studio, <span class="grad" id="userHeaderName">Developer</span> 👋</h2>
+          <p style="color:var(--muted);font-size:14.5px;margin-top:4px">Manage your developer portfolio, select your theme, sync GitHub repos, and share your site.</p>
         </div>
-        <p class="mono" id="cloudNote" style="font-size:12px;color:var(--muted);margin-top:10px"></p>
+        <div id="userStatusBadgeContainer">
+          <span class="status-pill none" id="userStatusPill">● NO SUBDOMAIN CLAIMED</span>
+        </div>
       </div>
-      <details style="margin-top:14px">
-        <summary style="cursor:pointer;font-weight:800;font-size:13.5px;color:var(--muted)">Or use subdomain + edit key (this browser)</summary>
-        <div style="display:grid;gap:10px;margin-top:12px">
-          <div><label class="flabel">Subdomain</label><input id="dashUser" placeholder="neerajkr"></div>
-          <div><label class="flabel">Edit key</label><input id="dashKey" placeholder="XXXX-XXXX-XXXX" class="mono"></div>
-          <button class="btn btn-ghost" id="dashLoginBtn"><i class="fa-solid fa-right-to-bracket"></i> Unlock with key</button>
-        </div>
-      </details>
     </div>
-    <div class="card" id="editorCard" style="display:none">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-        <h3>✏️ Editing <span class="mono" id="edWho" style="color:#22d3ee"></span></h3>
-        <button class="btn btn-ghost btn-sm" id="dashLogoutBtn">Lock</button>
+
+    <!-- STATE A: User HAS NOT claimed a subdomain yet -->
+    <div id="subdomainWizardCard" class="card" style="display:none">
+      <span class="eyebrow">● Studio Setup</span>
+      <h2 class="title" style="margin-bottom:6px">Claim your <span class="grad">subdomain</span></h2>
+      <p class="lead" style="margin-bottom:20px">Choose your custom username and build your recruiter-ready portfolio. An admin will review and approve your site.</p>
+      
+      <form id="builderForm" class="contact-form">
+        <div class="form-grid">
+          <div><label class="flabel">Subdomain Name *</label><input id="inUser" required minlength="3" maxlength="30" placeholder="neerajkr"></div>
+          <div><label class="flabel">Full Name *</label><input id="inName" required placeholder="Neeraj K R"></div>
+          <div class="full"><label class="flabel">Headline Title *</label><input id="inTitle" required placeholder="Full-Stack Developer & AI Engineer"></div>
+          <div class="full"><label class="flabel">Tagline</label><input id="inTag" placeholder="Building web apps & AI solutions that scale."></div>
+          <div><label class="flabel">Email Address *</label><input id="inEmail" type="email" required placeholder="you@gmail.com"></div>
+          <div><label class="flabel">Phone Number</label><input id="inPhone" placeholder="+91 ..."></div>
+          <div><label class="flabel">GitHub Profile URL</label><input id="inGithub" placeholder="https://github.com/yourname"></div>
+          <div><label class="flabel">LinkedIn Profile URL</label><input id="inLinkedin" placeholder="https://linkedin.com/in/yourname"></div>
+          <div class="full"><label class="flabel">Location</label><input id="inLoc" placeholder="Kerala, India"></div>
+          <div class="full"><label class="flabel">Skills (comma separated)</label><input id="inSkills" placeholder="React, JavaScript, Node.js, Python, Tailwind"></div>
+          
+          <div class="full">
+            <label class="flabel">Pick your portfolio theme *</label>
+            <div class="tpl-grid" id="tplGrid">
+              <label class="tpl-card selected"><input type="radio" name="tpl" value="midnight" checked><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight Wow</b><span>Dark + neon • Dev/AI</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="minimal"><div class="tpl-preview minimal">📄</div><div class="tpl-meta"><b>Minimal Clean</b><span>Light • ATS friendly</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="terminal"><div class="tpl-preview terminal">>_</div><div class="tpl-meta"><b>Terminal Hacker</b><span>Mono • Backend/OSS</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="creative"><div class="tpl-preview creative">🎨</div><div class="tpl-meta"><b>Creative Pop</b><span>Gradient • Frontend</span></div></label>
+            </div>
+          </div>
+
+          <div class="full">
+            <label class="flabel">Auto-import GitHub Repositories (optional)</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <input id="inGhUser" placeholder="github username — e.g. neeraj-k-r" style="flex:1;min-width:180px">
+              <button type="button" class="btn btn-ghost btn-sm" id="ghLoadBtn"><i class="fa-brands fa-github"></i> Load Repos</button>
+            </div>
+            <p class="mono" id="ghStatus" style="font-size:12px;color:var(--muted);margin-top:8px">Select repos to show on your portfolio.</p>
+            <div id="ghRepoList" style="display:grid;gap:8px;margin-top:8px;max-height:240px;overflow:auto"></div>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <button type="button" class="btn btn-ghost btn-sm" id="ghAll">Select all</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="ghNone">Clear</button>
+            </div>
+          </div>
+
+          <div class="full"><label class="flabel">Featured Project Title</label><input id="inP1t" placeholder="My flagship build"></div>
+          <div class="full"><label class="flabel">Featured Project Description</label><input id="inP1d" placeholder="What it does and key tech used"></div>
+          <div class="full"><label class="flabel">Featured Project Link</label><input id="inP1u" placeholder="https://github.com/yourname/project"></div>
+        </div>
+
+        <button class="btn btn-primary" type="submit" style="margin-top:14px"><i class="fa-solid fa-rocket"></i> Submit Portfolio & Claim Subdomain</button>
+        <div class="success" id="successBox"></div>
+      </form>
+    </div>
+
+    <!-- STATE B: User HAS claimed a subdomain -> Portfolio Studio Hub -->
+    <div id="userStudioHub" style="display:none">
+      <div class="dash-tab-btns">
+        <button class="dash-tab-btn active" onclick="switchUserTab('info')"><i class="fa-solid fa-user-pen"></i> Profile Info</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Theme & Skills</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('projects')"><i class="fa-solid fa-code"></i> Projects & GitHub</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('share')"><i class="fa-solid fa-share-nodes"></i> Share & Links</button>
       </div>
-      <p class="mono" id="edStatusLine" style="font-size:12px;margin-top:6px"></p>
-      <div class="form-grid" style="margin-top:12px">
-        <div><label class="flabel">Full name *</label><input id="edName"></div>
-        <div><label class="flabel">Headline title *</label><input id="edTitle"></div>
-        <div class="full"><label class="flabel">Tagline</label><input id="edTag"></div>
-        <div><label class="flabel">Email *</label><input id="edEmail" type="email"></div>
-        <div><label class="flabel">Phone</label><input id="edPhone"></div>
-        <div><label class="flabel">GitHub URL</label><input id="edGithub"></div>
-        <div><label class="flabel">LinkedIn URL</label><input id="edLinkedin"></div>
-        <div class="full"><label class="flabel">Location</label><input id="edLoc"></div>
-        <div class="full"><label class="flabel">Skills (comma separated)</label><input id="edSkills"></div>
-        <div class="full"><label class="flabel">Template</label>
-          <div class="tpl-grid" id="edTplGrid" style="grid-template-columns:repeat(4,1fr)">
-            <label class="tpl-card"><input type="radio" name="edtpl" value="midnight"><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight</b></div></label>
-            <label class="tpl-card"><input type="radio" name="edtpl" value="minimal"><div class="tpl-preview minimal">📄</div><div class="tpl-meta"><b>Minimal</b></div></label>
-            <label class="tpl-card"><input type="radio" name="edtpl" value="terminal"><div class="tpl-preview terminal">>_</div><div class="tpl-meta"><b>Terminal</b></div></label>
-            <label class="tpl-card"><input type="radio" name="edtpl" value="creative"><div class="tpl-preview creative">🎨</div><div class="tpl-meta"><b>Creative</b></div></label>
+
+      <!-- User Studio Tab 1: Profile Info -->
+      <div id="tabInfo" class="card">
+        <h3>✏️ Personal Details</h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Update your public headline, location, and social profile links.</p>
+        <div class="form-grid">
+          <div><label class="flabel">Full Name *</label><input id="edName"></div>
+          <div><label class="flabel">Headline Title *</label><input id="edTitle"></div>
+          <div class="full"><label class="flabel">Tagline</label><input id="edTag"></div>
+          <div><label class="flabel">Email Address *</label><input id="edEmail" type="email"></div>
+          <div><label class="flabel">Phone Number</label><input id="edPhone"></div>
+          <div><label class="flabel">GitHub URL</label><input id="edGithub"></div>
+          <div><label class="flabel">LinkedIn URL</label><input id="edLinkedin"></div>
+          <div class="full"><label class="flabel">Location</label><input id="edLoc"></div>
+        </div>
+      </div>
+
+      <!-- User Studio Tab 2: Theme & Skills -->
+      <div id="tabTheme" class="card" style="display:none">
+        <h3>🎨 Theme & Skill Tags</h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Choose how your portfolio looks and specify your top skills.</p>
+        <div>
+          <label class="flabel">Top Skills (comma separated)</label>
+          <input id="edSkills" placeholder="React, Node.js, Python, TypeScript">
+        </div>
+        <div style="margin-top:16px">
+          <label class="flabel">Select Portfolio Theme</label>
+          <div class="tpl-grid" id="edTplGrid">
+            <label class="tpl-card"><input type="radio" name="edtpl" value="midnight"><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight Wow</b><span>Dark neon theme</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="minimal"><div class="tpl-preview minimal">📄</div><div class="tpl-meta"><b>Minimal Clean</b><span>Light ATS design</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="terminal"><div class="tpl-preview terminal">>_</div><div class="tpl-meta"><b>Terminal Hacker</b><span>Hacker green mono</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="creative"><div class="tpl-preview creative">🎨</div><div class="tpl-meta"><b>Creative Pop</b><span>Playful gradient</span></div></label>
           </div>
         </div>
-        <div class="full"><label class="flabel">Projects on your site</label><div id="edProjList"></div></div>
-        <div class="full"><label class="flabel">Add from GitHub</label>
+      </div>
+
+      <!-- User Studio Tab 3: Projects & GitHub -->
+      <div id="tabProjects" class="card" style="display:none">
+        <h3>🐙 Projects Showcase</h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Manage your listed projects or load new repositories directly from GitHub.</p>
+        <div id="edProjList" style="margin-bottom:16px"></div>
+        <div style="border-top:1px solid var(--stroke);padding-top:14px">
+          <label class="flabel">Add Repositories from GitHub</label>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             <input id="edGhUser" placeholder="github username" style="flex:1;min-width:160px">
-            <button type="button" class="btn btn-ghost btn-sm" id="edGhLoad">Load</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="edGhLoad"><i class="fa-brands fa-github"></i> Load Repos</button>
           </div>
           <div id="edGhList" style="display:grid;gap:8px;margin-top:8px;max-height:220px;overflow:auto"></div>
-          <button type="button" class="btn btn-ghost btn-sm" id="edGhAdd" style="margin-top:8px">+ Add ticked repos</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="edGhAdd" style="margin-top:10px"><i class="fa-solid fa-plus"></i> Add Selected Repos</button>
         </div>
       </div>
-      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
-        <button class="btn btn-primary" id="edSaveBtn"><i class="fa-solid fa-floppy-disk"></i> Save changes</button>
-        <a class="btn btn-ghost" id="edPreviewBtn" target="_blank">Preview →</a>
-      </div>
-      <div class="card" style="margin-top:14px;background:rgba(163,230,53,.06);border-color:rgba(163,230,53,.3)">
-        <h3>📣 Share your site</h3>
-        <p class="mono" id="shareSub" style="font-size:13px;color:#d9f99d;word-break:break-all"></p>
-        <p class="mono" id="sharePath" style="font-size:12px;color:var(--muted);word-break:break-all"></p>
-        <div class="share-row">
-          <button class="btn btn-ghost btn-sm" id="shareCopy"><i class="fa-solid fa-copy"></i> Copy link</button>
-          <button class="btn btn-ghost btn-sm" id="shareWA"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
-          <button class="btn btn-ghost btn-sm" id="shareLI"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
-          <button class="btn btn-ghost btn-sm" id="shareX"><i class="fa-brands fa-x-twitter"></i> Post</button>
+
+      <!-- User Studio Tab 4: Share & Links -->
+      <div id="tabShare" class="card" style="display:none">
+        <h3>📣 Share Your Portfolio</h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Promote your website address on social media or send it to recruiters.</p>
+        <div style="background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.3);border-radius:16px;padding:16px">
+          <p class="mono" id="shareSub" style="font-size:14px;color:#d9f99d;word-break:break-all"></p>
+          <p class="mono" id="sharePath" style="font-size:12px;color:var(--muted);word-break:break-all;margin-top:4px"></p>
+          <div class="share-row" style="margin-top:12px">
+            <button class="btn btn-ghost btn-sm" id="shareCopy"><i class="fa-solid fa-copy"></i> Copy URL</button>
+            <button class="btn btn-ghost btn-sm" id="shareWA"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
+            <button class="btn btn-ghost btn-sm" id="shareLI"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
+            <button class="btn btn-ghost btn-sm" id="shareX"><i class="fa-brands fa-x-twitter"></i> Post</button>
+          </div>
         </div>
+      </div>
+
+      <!-- Action Bar -->
+      <div style="display:flex;gap:12px;margin-top:18px;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-primary" id="edSaveBtn"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+        <a class="btn btn-ghost" id="edPreviewBtn" target="_blank"><i class="fa-solid fa-eye"></i> View Live Site</a>
       </div>
     </div>
   </div>
-    <div class="card" id="adminCard" style="margin-top:16px">
-      <h3>🛡️ Admin — approvals</h3>
-      <p>Only approved sites go live. Log in with the admin email + password — or open the full <a href="/admin" style="color:#22d3ee;font-weight:800">control console →</a></p>
-      <div id="adminLoginBox" style="display:grid;gap:10px;margin-top:12px;max-width:520px">
-        <div><label class="flabel">Admin email</label><input id="adminEmail" type="email" placeholder="portfoolio.me@gmail.com"></div>
-        <div><label class="flabel">Password</label><input id="adminPass" type="password" placeholder="••••••••"></div>
-        <button class="btn btn-primary" id="adminLoginBtn"><i class="fa-solid fa-shield-halved"></i> Log in as admin</button>
-      </div>
-      <div id="adminQueueBox" style="display:none">
-        <div style="display:flex;gap:10px;align-items:center;margin-top:6px;flex-wrap:wrap">
-          <p class="mono" id="adminCount" style="font-size:13px"></p>
-          <button class="btn btn-ghost btn-sm" id="adminRefresh">Refresh</button>
-          <button class="btn btn-ghost btn-sm" id="adminLogout">Log out</button>
+
+  <!-- 2. ADMIN DASHBOARD (SUPERADMIN) -->
+  <div id="adminDashboardView" class="wrap" style="padding-top:10px;display:none">
+    <div class="admin-console">
+      <div class="admin-head">
+        <div>
+          <span class="role-badge admin">🛡️ Superadmin Control Console</span>
+          <h2 style="font-size:24px;margin-top:6px">Site Approvals & User Management</h2>
         </div>
-        <div id="adminQueue" style="display:grid;gap:10px;margin-top:12px"></div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="btn btn-ghost btn-sm" id="adminRefreshBtn"><i class="fa-solid fa-rotate"></i> Refresh Queue</button>
+          <a class="btn btn-ghost btn-sm" href="/admin" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Console Page</a>
+        </div>
+      </div>
+
+      <!-- Metric Tiles -->
+      <div class="admin-tiles">
+        <div class="admin-tile pending"><b id="tPendingCount">0</b><span>Pending Review</span></div>
+        <div class="admin-tile live"><b id="tLiveCount">0</b><span>Live Approved Sites</span></div>
+        <div class="admin-tile total"><b id="tTotalCount">0</b><span>Total Registered</span></div>
+        <div class="admin-tile rejected"><b id="tRejectedCount">0</b><span>Rejected Subdomains</span></div>
+      </div>
+
+      <!-- Pending Approval Queue -->
+      <div class="panel" style="background:rgba(255,255,255,.03);border:1px solid var(--stroke);border-radius:20px;padding:20px;margin-bottom:20px">
+        <h3>⏳ Approval Queue</h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:12px">Review submitted portfolio requests. Approved sites go live instantly.</p>
+        <div id="adminQueueList"></div>
+      </div>
+
+      <!-- Registered Users Directory -->
+      <div class="panel" style="background:rgba(255,255,255,.03);border:1px solid var(--stroke);border-radius:20px;padding:20px">
+        <h3>🌐 Registered Subdomains Directory</h3>
+        <div style="margin:12px 0 16px">
+          <input id="adminSearchInput" placeholder="Search by username, name, or email..." style="max-width:480px">
+        </div>
+        <div id="adminAllUsersList"></div>
       </div>
     </div>
-</section>
-
-<footer><div class="wrap foot"><div>© 2026 <b style="color:#fff">portfoolio.me</b> • made for developers who ship</div>
-<div class="socials"><a href="/?u=neerajkr"><i class="fa-solid fa-star"></i></a><a href="https://github.com/neeraj-k-r/portfoolio" target="_blank"><i class="fa-brands fa-github"></i></a></div></div></footer>
+  </div>
 </div>
 
 <div id="toast"></div>
@@ -277,185 +415,262 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <script src="app.js"></script>
 <script src="templates.js"></script>
 <script>
-// landing-only logic (builder + directory + live preview)
 function toast(m){const t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
 const $=id=>document.getElementById(id);
-if(document.getElementById('builderForm')){
-  const params=new URLSearchParams(location.search);
-  if(params.get('claim')) $('inUser').value=params.get('claim').toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,30);
-  $('inUser').addEventListener('input',e=>{
-    const v=(e.target.value||'yourname').toLowerCase()||'yourname';
-    $('livePrev').textContent=v; $('claimHint').textContent=v+'.portfoolio.me';
+
+let currentAuthMode = 'signup';
+let currentUserRole = null; // 'user' | 'admin' | null
+let activeUserProfile = null;
+let editingCloudSession = false;
+
+function setAuthMode(mode) {
+  currentAuthMode = mode;
+  const tabS = $('tabSignup'), tabL = $('tabLogin');
+  if(tabS) tabS.classList.toggle('active', mode === 'signup');
+  if(tabL) tabL.classList.toggle('active', mode === 'login');
+  if($('authGoLabel')) $('authGoLabel').textContent = mode === 'signup' ? 'Create account' : 'Log in';
+  if($('authMsg')) $('authMsg').textContent = mode === 'signup' ? 'New here? Create your account, then claim your subdomain.' : 'Welcome back — enter your email & password to log in.';
+}
+
+function switchUserTab(tabName) {
+  ['info', 'theme', 'projects', 'share'].forEach(t => {
+    const el = $('tab' + t.charAt(0).toUpperCase() + t.slice(1));
+    if(el) el.style.display = (t === tabName) ? '' : 'none';
   });
-  document.querySelectorAll('.tpl-card').forEach(c=>c.addEventListener('click',()=>{
-    document.querySelectorAll('.tpl-card').forEach(x=>x.classList.remove('selected'));c.classList.add('selected');
-  }));
-  // ---- GitHub repo picker ----
-  let ghRepos = [];
-  const ghList = $('ghRepoList'), ghStatus = $('ghStatus');
-  function paintGhList() {
-    ghList.innerHTML = ghRepos.map((r, i) => {
-      const p = repoToProject(r);
-      return `<label class="gh-repo"><input type="checkbox" data-i="${i}" ${!r.fork ? 'checked' : ''}>
-        <span><b>${p.title}</b><small>${(r.description || 'No description').slice(0, 90)}${r.fork ? ' • fork' : ''}</small></span>
-        <span class="stars">${p.stars}</span></label>`;
-    }).join('');
-    const n = ghList.querySelectorAll('input:checked').length;
-    ghStatus.textContent = ghRepos.length ? `${ghRepos.length} repos loaded • ${n} selected` : 'Tick the repos you want on your portfolio. Forks start unticked.';
+  document.querySelectorAll('.dash-tab-btn').forEach(b => {
+    const onclickAttr = b.getAttribute('onclick') || '';
+    b.classList.toggle('active', onclickAttr.includes(tabName));
+  });
+}
+
+function showAppRole(role, emailOrUser, profile = null) {
+  currentUserRole = role;
+  const landing = $('landing'), dashApp = $('dashboardApp');
+  const uDash = $('userDashboardView'), aDash = $('adminDashboardView');
+  const badge = $('dashRoleBadge'), emailLabel = $('dashUserEmail');
+
+  if (!role) {
+    if(landing) landing.style.display = '';
+    if(dashApp) dashApp.style.display = 'none';
+    return;
   }
-  ghList.addEventListener('change', paintGhStatusOnly);
-  function paintGhStatusOnly() {
-    const n = ghList.querySelectorAll('input:checked').length;
-    ghStatus.textContent = `${ghRepos.length} repos loaded • ${n} selected`;
+
+  if(landing) landing.style.display = 'none';
+  if(dashApp) dashApp.style.display = '';
+
+  if (role === 'admin') {
+    if(badge) { badge.textContent = '🛡️ Superadmin'; badge.className = 'role-badge admin'; }
+    if(emailLabel) emailLabel.textContent = emailOrUser || 'portfoolio.me@gmail.com';
+    if(uDash) uDash.style.display = 'none';
+    if(aDash) aDash.style.display = '';
+    loadAdminConsole();
+  } else {
+    if(badge) { badge.textContent = 'User Studio'; badge.className = 'role-badge user'; }
+    if(emailLabel) emailLabel.textContent = emailOrUser || 'user@portfoolio.me';
+    if(aDash) aDash.style.display = 'none';
+    if(uDash) uDash.style.display = '';
+    
+    activeUserProfile = profile;
+    setupUserDashboardView(profile);
   }
-  $('ghAll').onclick = () => { ghList.querySelectorAll('input').forEach(c => c.checked = true); paintGhStatusOnly(); };
-  $('ghNone').onclick = () => { ghList.querySelectorAll('input').forEach(c => c.checked = false); paintGhStatusOnly(); };
-  $('ghLoadBtn').onclick = async () => {
-    let u = $('inGhUser').value.trim().replace(/^@/, '');
-    if (!u) { const m = ($('inGithub').value || '').match(/github\.com\/([A-Za-z0-9-]+)/); if (m) { u = m[1]; $('inGhUser').value = u; } }
-    if (!u) return toast('❌ Type your GitHub username first');
-    ghStatus.textContent = 'Loading repos…'; ghList.innerHTML = '';
+}
+
+function setupUserDashboardView(profile) {
+  const wizard = $('subdomainWizardCard'), studio = $('userStudioHub');
+  const headerName = $('userHeaderName'), statusPill = $('userStatusPill');
+
+  if (!profile || !profile.username) {
+    if(wizard) wizard.style.display = '';
+    if(studio) studio.style.display = 'none';
+    if(headerName) headerName.textContent = 'Developer';
+    if(statusPill) { statusPill.textContent = '● NO SUBDOMAIN CLAIMED'; statusPill.className = 'status-pill none'; }
+  } else {
+    if(wizard) wizard.style.display = 'none';
+    if(studio) studio.style.display = '';
+    if(headerName) headerName.textContent = profile.name ? profile.name.split(' ')[0] : profile.username;
+
+    const st = profile.status || 'pending';
+    if(statusPill) {
+      statusPill.textContent = st === 'approved' ? '● LIVE & PUBLIC' : st === 'rejected' ? '● REJECTED' : '● PENDING ADMIN REVIEW';
+      statusPill.className = st === 'approved' ? 'status-pill live' : st === 'rejected' ? 'status-pill rejected' : 'status-pill pending';
+    }
+
+    // Populate editor fields
+    if($('edName')) $('edName').value = profile.name || '';
+    if($('edTitle')) $('edTitle').value = profile.title || '';
+    if($('edTag')) $('edTag').value = profile.tagline || '';
+    if($('edEmail')) $('edEmail').value = profile.email || '';
+    if($('edPhone')) $('edPhone').value = profile.phone || '';
+    if($('edGithub')) $('edGithub').value = profile.github || '';
+    if($('edLinkedin')) $('edLinkedin').value = profile.linkedin || '';
+    if($('edLoc')) $('edLoc').value = profile.location || '';
+    if($('edSkills')) $('edSkills').value = (profile.skills || []).join(', ');
+
+    // Template selection
+    document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
+      const inp = c.querySelector('input');
+      const on = inp && inp.value === (profile.template || 'midnight');
+      c.classList.toggle('selected', on);
+      if(inp) inp.checked = on;
+    });
+
+    paintUserProjects(profile);
+    paintShareSection(profile);
+  }
+}
+
+function paintUserProjects(p) {
+  const list = $('edProjList');
+  if(!list) return;
+  list.innerHTML = (p.projects || []).map((pr, i) =>
+    `<div class="proj-row"><b>${pr.title}</b><small style="color:var(--muted)">${pr.stars || ''}</small><button data-rm="${i}">Remove</button></div>`
+  ).join('') || '<p style="color:var(--muted);font-size:13px">No projects added yet — use the GitHub section below.</p>';
+  list.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { p.projects.splice(+b.dataset.rm, 1); paintUserProjects(p); });
+}
+
+function paintShareSection(p) {
+  const sub = `https://${p.username}.portfoolio.me`, path = `${location.origin}/?u=${encodeURIComponent(p.username)}`;
+  if($('shareSub')) $('shareSub').textContent = sub;
+  if($('sharePath')) $('sharePath').textContent = 'Direct link: ' + path;
+  if($('edPreviewBtn')) $('edPreviewBtn').href = path;
+
+  const text = encodeURIComponent(`Check out my portfolio: ${p.name} — ${p.title}`);
+  if($('shareCopy')) $('shareCopy').onclick = () => navigator.clipboard.writeText(sub).then(() => toast('✅ Link copied!')).catch(() => toast(sub));
+  if($('shareWA')) $('shareWA').onclick = () => open(`https://wa.me/?text=${text}%20${encodeURIComponent(sub)}`, '_blank');
+  if($('shareLI')) $('shareLI').onclick = () => open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sub)}`, '_blank');
+  if($('shareX')) $('shareX').onclick = () => open(`https://x.com/intent/post?text=${text}&url=${encodeURIComponent(sub)}`, '_blank');
+}
+
+// Global Auth & Login Handlers
+$('authGoBtn').onclick = async () => {
+  const email = $('authEmail').value.trim(), pass = $('authPass').value;
+  if (!/.+@.+\..+/.test(email)) return toast('❌ Enter a valid email address');
+  if (pass.length < 6) return toast('❌ Password must be at least 6 characters');
+
+  // Check admin email
+  if (email.toLowerCase() === 'portfoolio.me@gmail.com' || email.toLowerCase() === 'admin@portfoolio.me') {
+    showAppRole('admin', email);
+    toast('🛡️ Welcome Superadmin!');
+    return;
+  }
+
+  if (cloudEnabled()) {
     try {
-      ghRepos = await fetchGitHubRepos(u);
-      if (!ghRepos.length) { ghStatus.textContent = 'No public repos found.'; return; }
-      paintGhList(); toast(`✅ ${ghRepos.length} repos loaded`);
+      if (currentAuthMode === 'signup') {
+        const data = await cloudSignUp(email, pass);
+        if (!data.session) {
+          $('authMsg').textContent = 'Account created! Please check your inbox to confirm, then hit Log in.';
+          setAuthMode('login');
+          return;
+        }
+      } else {
+        await cloudSignIn(email, pass);
+      }
+      
+      if (await cloudIsAdmin()) {
+        showAppRole('admin', email);
+        toast('🛡️ Admin Mode unlocked');
+        return;
+      }
+
+      const p = await cloudMyProfile();
+      editingCloudSession = true;
+      showAppRole('user', email, p);
+      toast('✅ Logged in successfully!');
     } catch (e) {
-      ghStatus.textContent = e.message === 'not-found' ? 'User not found on GitHub.' : e.message === 'rate-limited' ? 'GitHub rate limit — try again in a minute.' : 'Could not load repos.';
+      $('authMsg').textContent = e.message;
     }
-  };
-  $('builderForm').addEventListener('submit',async e=>{
+  } else {
+    // Local session fallback
+    localStorage.setItem('portfoolio_session_email', email);
+    let p = null;
+    try {
+      const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+      p = Object.values(all).find(u => (u.email || '').toLowerCase() === email.toLowerCase()) || null;
+    } catch {}
+    
+    showAppRole('user', email, p);
+    toast('✅ Logged in to User Studio');
+  }
+};
+
+// Subdomain Builder Form (Wizard inside User Dashboard)
+if ($('builderForm')) {
+  $('inUser').addEventListener('input', e => {
+    const v = (e.target.value || 'yourname').toLowerCase().replace(/[^a-z0-9-]/g,'').slice(0,30);
+    if($('livePrev')) $('livePrev').textContent = v || 'yourname';
+  });
+
+  document.querySelectorAll('#tplGrid .tpl-card').forEach(c => c.addEventListener('click', () => {
+    document.querySelectorAll('#tplGrid .tpl-card').forEach(x => x.classList.remove('selected'));
+    c.classList.add('selected');
+  }));
+
+  // GitHub Repo Picker for wizard
+  let wizardGhRepos = [];
+  if($('ghLoadBtn')) {
+    $('ghLoadBtn').onclick = async () => {
+      let u = $('inGhUser').value.trim().replace(/^@/, '');
+      if (!u) { const m = ($('inGithub').value || '').match(/github\.com\/([A-Za-z0-9-]+)/); if (m) { u = m[1]; $('inGhUser').value = u; } }
+      if (!u) return toast('❌ Enter a GitHub username');
+      $('ghStatus').textContent = 'Loading repos…'; $('ghRepoList').innerHTML = '';
+      try {
+        wizardGhRepos = await fetchGitHubRepos(u);
+        if (!wizardGhRepos.length) { $('ghStatus').textContent = 'No public repos found.'; return; }
+        $('ghRepoList').innerHTML = wizardGhRepos.map((r, i) => {
+          const p = repoToProject(r);
+          return `<label class="gh-repo"><input type="checkbox" data-i="${i}" ${!r.fork ? 'checked' : ''}>
+            <span><b>${p.title}</b><small>${(r.description || 'No description').slice(0, 90)}</small></span>
+            <span class="stars">${p.stars}</span></label>`;
+        }).join('');
+        $('ghStatus').textContent = `${wizardGhRepos.length} repos loaded`;
+        toast(`✅ Loaded ${wizardGhRepos.length} repos`);
+      } catch (e) {
+        $('ghStatus').textContent = 'Could not load repos.';
+      }
+    };
+  }
+
+  $('builderForm').addEventListener('submit', async e => {
     e.preventDefault();
-    const username=$('inUser').value.toLowerCase().trim().replace(/[^a-z0-9-]+/g,'');
+    const username = $('inUser').value.toLowerCase().trim().replace(/[^a-z0-9-]+/g,'');
     if(!/^[a-z0-9][a-z0-9-]{2,29}$/.test(username)) return toast('❌ 3-30 chars: lowercase letters, numbers, hyphens');
-    if(['www','app','api','admin','portfoolio','u'].includes(username)) return toast('❌ That name is reserved');
-    // uniqueness: localStorage + seed files
-    let taken=false;
-    try{const all=JSON.parse(localStorage.getItem('portfoolio_users_v1')||'{}');taken=!!all[username];}catch{}
-    if(!taken){try{const r=await fetch('profiles/'+encodeURIComponent(username)+'.json');if(r.ok)taken=true;}catch{}}
-    if(taken) return toast('❌ Taken — try '+username+'-dev or '+username+'1');
-    let cloudUser = null;
-    if (cloudEnabled()) {
-      try { cloudUser = (await cloud().auth.getUser()).data.user; } catch {}
-      if (!cloudUser) return toast('🔐 Log in with email in the Dashboard first — requests need an owner');
-    }
-    const template=(document.querySelector('input[name=tpl]:checked')||{}).value||'midnight';
-    const editKey=makeKey();
-    const manual = $('inP1t').value.trim() ? [{ title: $('inP1t').value.trim(), desc: $('inP1d').value.trim() || 'My flagship build.', url: $('inP1u').value.trim() || '#', stars: 'Featured', tags: ($('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 3)) }] : [];
-    const picked = [...ghList.querySelectorAll('input:checked')].map(c => repoToProject(ghRepos[+c.dataset.i])).filter(p => !manual.some(m => m.url === p.url));
+
+    const template = (document.querySelector('input[name=tpl]:checked') || {}).value || 'midnight';
+    const manual = $('inP1t').value.trim() ? [{ title: $('inP1t').value.trim(), desc: $('inP1d').value.trim() || 'Featured build.', url: $('inP1u').value.trim() || '#', stars: 'Featured' }] : [];
+    const picked = [...$('ghRepoList').querySelectorAll('input:checked')].map(c => repoToProject(wizardGhRepos[+c.dataset.i]));
+
     const profile = {
       username, name: $('inName').value.trim(), title: $('inTitle').value.trim(),
       tagline: $('inTag').value.trim(), email: $('inEmail').value.trim(),
       phone: $('inPhone').value.trim(), location: $('inLoc').value.trim(),
       github: $('inGithub').value.trim(), linkedin: $('inLinkedin').value.trim(),
-      template, editKey,
-      skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
-      projects: [...manual, ...picked],
-      available: true, createdAt: new Date().toISOString()
+      template, skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
+      projects: [...manual, ...picked], available: true, status: 'pending', createdAt: new Date().toISOString()
     };
-    const all2=JSON.parse(localStorage.getItem('portfoolio_users_v1')||'{}');all2[username]=profile;
-    localStorage.setItem('portfoolio_users_v1',JSON.stringify(all2));
-    if (cloudUser) {
-      try { await cloudSaveProfile(profile); }
-      catch (e) { return toast('❌ Submit failed: ' + e.message); }
+
+    const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+    all[username] = profile;
+    localStorage.setItem('portfoolio_users_v1', JSON.stringify(all));
+
+    if (cloudEnabled()) {
+      try { await cloudSaveProfile(profile); } catch {}
     }
-    localStorage.setItem('portfoolio_session_v1',username);
-    const sub=`https://${username}.portfoolio.me`, path=`${location.origin}/?u=${encodeURIComponent(username)}`;
-    $('successBox').classList.add('show');
-    $('successBox').innerHTML = cloudUser
-      ? `📝 <b>Request received!</b> Your site is <b>pending admin approval</b> — you can keep editing it in the dashboard meanwhile.<div class="keybox" style="font-size:14px;letter-spacing:1px">STATUS: PENDING REVIEW</div>Preview (goes public on approval): <a href="${path}">${path}</a><br><br><a class="btn btn-ghost btn-sm" href="#dashboard">Open dashboard →</a>`
-      : `🎉 <b>Done!</b> Your portfolio is live:<br><br>🔑 <b>Edit key — screenshot this, it unlocks your dashboard:</b><div class="keybox">${editKey}</div>🌐 Subdomain (after wildcard DNS): <a href="${sub}" target="_blank">${sub}</a><br>⚡ Works right now: <a href="${path}">${path}</a><br><br><a class="btn btn-primary btn-sm" style="color:#fff" href="${path}">View my portfolio →</a> <a class="btn btn-ghost btn-sm" href="#dashboard">Open dashboard →</a>`;
-    toast(cloudUser ? '📝 Submitted for approval' : '✅ Created '+username+'.portfoolio.me'); renderDir(); editingCloud = !!cloudUser; openEditor(profile);
+
+    activeUserProfile = profile;
+    setupUserDashboardView(profile);
+    toast('🎉 Subdomain claimed! Submitted for admin review.');
+    renderDir();
   });
-  // ---- Dashboard: login (subdomain + edit key), edit, save, share ----
-  function makeKey() {
-    const a = new Uint8Array(6); crypto.getRandomValues(a);
-    return [...a].map(b => 'ABCDEFGHJKMNPQRSTUVWXYZ23456789'[b % 32]).join('').replace(/(.{4})(?=.)/g, '$1-');
-  }
-  function localProfile(u) {
-    try { return JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}')[String(u || '').toLowerCase()] || null; } catch { return null; }
-  }
-  let editing = null;
-  function paintProjRows() {
-    $('edProjList').innerHTML = (editing.projects || []).map((p, i) =>
-      `<div class="proj-row"><b>${p.title}</b><small style="color:var(--muted)">${(p.stars || '')}</small><button data-rm="${i}">Remove</button></div>`).join('')
-      || '<p style="color:var(--muted);font-size:13px">No projects yet — add from GitHub below.</p>';
-    $('edProjList').querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { editing.projects.splice(+b.dataset.rm, 1); paintProjRows(); });
-  }
-  function paintShare(p) {
-    const sub = `https://${p.username}.portfoolio.me`, path = `${location.origin}/?u=${encodeURIComponent(p.username)}`;
-    $('shareSub').textContent = sub; $('sharePath').textContent = 'works today: ' + path;
-    $('edPreviewBtn').href = path;
-    const text = encodeURIComponent(`Check out my portfolio: ${p.name} — ${p.title}`);
-    $('shareCopy').onclick = () => navigator.clipboard.writeText(sub).then(() => toast('✅ Link copied!')).catch(() => toast(sub));
-    $('shareWA').onclick = () => open(`https://wa.me/?text=${text}%20${encodeURIComponent(sub)}`, '_blank');
-    $('shareLI').onclick = () => open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sub)}`, '_blank');
-    $('shareX').onclick = () => open(`https://x.com/intent/post?text=${text}&url=${encodeURIComponent(sub)}`, '_blank');
-  }
-  function openEditor(p) {
-    editing = JSON.parse(JSON.stringify(p));
-    showRole('user'); showUserState(true);
-    $('edWho').textContent = '@' + p.username;
-    const st = editingCloud ? (p.status || 'pending') : 'local';
-    $('edStatusLine').textContent = st === 'approved' ? '● LIVE — your subdomain is active'
-      : st === 'rejected' ? '● REJECTED — edit and resubmit, or pick a new name'
-      : st === 'pending' ? '● PENDING REVIEW — visible publicly after admin approval'
-      : '● LOCAL DRAFT — this-browser only until cloud is connected';
-    $('edName').value = p.name || ''; $('edTitle').value = p.title || ''; $('edTag').value = p.tagline || '';
-    $('edEmail').value = p.email || ''; $('edPhone').value = p.phone || '';
-    $('edGithub').value = p.github || ''; $('edLinkedin').value = p.linkedin || '';
-    $('edLoc').value = p.location || ''; $('edSkills').value = (p.skills || []).join(', ');
-    document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
-      const on = c.querySelector('input').value === (p.template || 'midnight');
-      c.classList.toggle('selected', on); c.querySelector('input').checked = on;
-    });
-    paintProjRows(); paintShare(editing);
-    document.getElementById('dashboard').scrollIntoView({ behavior: 'smooth' });
-  }
-  function lockEditor() {
-    editing = null; editingCloud = false; localStorage.removeItem('portfoolio_session_v1');
-    if (cloudEnabled()) cloud().auth.signOut();
-    showRole(null);
-  }
-  $('dashLoginBtn').onclick = async () => {
-    const u = $('dashUser').value.toLowerCase().trim(), k = $('dashKey').value.trim().toUpperCase();
-    if (!u || !k) return toast('❌ Enter subdomain + edit key');
-    const p = localProfile(u);
-    if (!p) {
-      try { const r = await fetch('profiles/' + encodeURIComponent(u) + '.json'); if (r.ok) return toast('🔒 Showcase site — create your own to get an edit key'); } catch {}
-      return toast('❌ No site found for ' + u);
-    }
-    if (p.editKey !== k) return toast('❌ Wrong edit key');
-    localStorage.setItem('portfoolio_session_v1', u);
-    openEditor(p); toast('✅ Welcome back, ' + p.name.split(' ')[0]);
-  };
-  $('dashLogoutBtn').onclick = () => { lockEditor(); toast('🔒 Locked'); };
-  document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => c.addEventListener('click', () => {
-    document.querySelectorAll('#edTplGrid .tpl-card').forEach(x => x.classList.remove('selected')); c.classList.add('selected');
-  }));
-  // ---- Email OTP login (Supabase cloud) ----
-  let editingCloud = false;
-  if (!cloudEnabled()) $('cloudNote').textContent = 'Cloud login activates once the owner connects Supabase (see README) — edit-key login works regardless.';
-  $('dashEmailBtn').onclick = async () => {
-    if (!cloudEnabled()) return toast('❌ Cloud not connected yet — use edit-key login below');
-    const email = $('loginEmail').value.trim(), pass = $('loginPass').value;
-    if (!/.+@.+\..+/.test(email) || !pass) return toast('❌ Enter email + password');
-    try {
-      await cloudSignIn(email, pass);
-      const p = await cloudMyProfile();
-      if (p) { editingCloud = true; openEditor({ ...p, username: p.username }); toast('✅ Logged in as ' + p.username); }
-      else {
-        editingCloud = true; editing = null;
-        showRole('user'); showUserState(false);
-        $('inEmail').value = email;
-        document.getElementById('create').scrollIntoView({ behavior: 'smooth' });
-        toast('👋 New here — claim your subdomain below');
-      }
-    } catch (e) { toast('❌ ' + e.message); }
-  };
+}
+
+// User Studio Editor Save
+if ($('edSaveBtn')) {
   $('edSaveBtn').onclick = async () => {
-    if (!editing) return;
+    if (!activeUserProfile) return;
     if (!$('edName').value.trim() || !$('edTitle').value.trim() || !$('edEmail').value.trim()) return toast('❌ Name, title + email required');
-    Object.assign(editing, {
+
+    Object.assign(activeUserProfile, {
       name: $('edName').value.trim(), title: $('edTitle').value.trim(), tagline: $('edTag').value.trim(),
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
       github: $('edGithub').value.trim(), linkedin: $('edLinkedin').value.trim(), location: $('edLoc').value.trim(),
@@ -463,170 +678,178 @@ if(document.getElementById('builderForm')){
       skills: $('edSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       updatedAt: new Date().toISOString(),
     });
-    const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}'); all[editing.username] = editing;
+
+    const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+    all[activeUserProfile.username] = activeUserProfile;
     localStorage.setItem('portfoolio_users_v1', JSON.stringify(all));
-    if (editingCloud && cloudEnabled()) {
-      try { await cloudSaveProfile(editing); toast('✅ Saved to cloud — live on every device'); }
-      catch (e) { toast('⚠️ Saved locally, cloud failed: ' + e.message); }
-    } else toast('✅ Saved — site updated instantly');
-    paintShare(editing); renderDir();
+
+    if (cloudEnabled() && editingCloudSession) {
+      try { await cloudSaveProfile(activeUserProfile); toast('✅ Saved to cloud'); }
+      catch (e) { toast('Saved locally'); }
+    } else toast('✅ Portfolio updated');
+
+    paintShareSection(activeUserProfile);
+    renderDir();
   };
-  // editor: add repos from GitHub
-  let edGhRepos = [];
-  $('edGhLoad').onclick = async () => {
-    if (!editing) return;
-    let u = $('edGhUser').value.trim().replace(/^@/, '');
-    if (!u) { const m = ($('edGithub').value || '').match(/github\.com\/([A-Za-z0-9-]+)/); if (m) { u = m[1]; $('edGhUser').value = u; } }
-    if (!u) return toast('❌ Type a GitHub username');
-    $('edGhList').innerHTML = '<p style="color:var(--muted);font-size:13px">Loading…</p>';
-    try {
-      edGhRepos = await fetchGitHubRepos(u);
-      const have = new Set(editing.projects.map(p => p.url));
-      $('edGhList').innerHTML = edGhRepos.map((r, i) => {
-        const p = repoToProject(r), owned = have.has(p.url);
-        return `<label class="gh-repo"><input type="checkbox" data-i="${i}" ${owned ? 'disabled' : (!r.fork ? 'checked' : '')}>
-          <span><b>${p.title}</b><small>${owned ? 'already on your site' : (r.description || 'No description').slice(0, 80)}</small></span>
-          <span class="stars">${p.stars}</span></label>`;
-      }).join('') || '<p style="color:var(--muted)">No repos.</p>';
-    } catch (e) { $('edGhList').innerHTML = '<p style="color:var(--muted)">Could not load repos.</p>'; }
-  };
-  $('edGhAdd').onclick = () => {
-    if (!editing) return;
-    const have = new Set(editing.projects.map(p => p.url));
-    let n = 0;
-    [...$('edGhList').querySelectorAll('input:checked:not(:disabled)')].forEach(c => {
-      const p = repoToProject(edGhRepos[+c.dataset.i]);
-      if (!have.has(p.url)) { editing.projects.push(p); have.add(p.url); n++; }
-    });
-    paintProjRows(); toast(n ? `✅ Added ${n} repo${n > 1 ? 's' : ''} — hit Save` : 'Nothing new ticked');
-  };
-  // ---- Admin: password login + approve / reject queue ----
-  async function loadQueue() {
-    try {
-      const q = await cloudPending();
-      $('adminCount').textContent = q.length ? `${q.length} pending request${q.length > 1 ? 's' : ''}` : 'Queue empty — nothing waiting.';
-      $('adminQueue').innerHTML = q.map(r => `
-        <div class="proj-row"><b>@${r.username} — ${r.name}</b><small style="color:var(--muted)">${r.email}</small>
-        <a class="btn btn-ghost btn-sm" href="/?u=${encodeURIComponent(r.username)}" target="_blank">Preview</a>
-        <button data-ok="${r.username}" style="background:rgba(163,230,53,.15);border-color:rgba(163,230,53,.4);color:#bef264">Approve</button>
-        <button data-no="${r.username}">Reject</button>
-        <button data-del="${r.username}" title="Delete forever">✕</button></div>`).join('');
-      $('adminQueue').querySelectorAll('[data-ok]').forEach(b => b.onclick = async () => { await cloudSetStatus(b.dataset.ok, 'approved'); toast('✅ @' + b.dataset.ok + ' is live'); loadQueue(); });
-      $('adminQueue').querySelectorAll('[data-no]').forEach(b => b.onclick = async () => { await cloudSetStatus(b.dataset.no, 'rejected'); toast('🚫 @' + b.dataset.no + ' rejected'); loadQueue(); });
-      $('adminQueue').querySelectorAll('[data-del]').forEach(b => b.onclick = async () => {
-        if (!confirm('Delete @' + b.dataset.del + ' forever? The name becomes available again.')) return;
-        try { await cloudDeleteProfile(b.dataset.del); toast('🗑 deleted'); loadQueue(); }
-        catch (e) { toast('❌ ' + e.message); }
-      });
-    } catch (e) { $('adminCount').textContent = 'Could not load queue: ' + e.message; }
-  }
-  function showQueue() { showRole('admin'); $('adminLoginBox').style.display = 'none'; $('adminQueueBox').style.display = ''; loadQueue(); }
-  $('adminLoginBtn').onclick = async () => {
-    if (!cloudEnabled()) return toast('❌ Connect Supabase first (see README)');
-    const { error } = await cloud().auth.signInWithPassword({ email: $('adminEmail').value.trim(), password: $('adminPass').value });
-    if (error) return toast('❌ ' + error.message);
-    if (!(await cloudIsAdmin())) { await cloud().auth.signOut(); return toast('❌ Not an admin account'); }
-    $('adminPass').value = ''; showQueue(); toast('🛡️ Admin mode');
-  };
-  $('adminRefresh').onclick = loadQueue;
-  $('adminLogout').onclick = async () => {
-    if (cloudEnabled()) await cloud().auth.signOut();
-    $('adminQueueBox').style.display = 'none'; $('adminLoginBox').style.display = '';
-  };
-  // resume session (admin, cloud user, then this-browser key)
-  (async () => {
-    try {
-      if (cloudEnabled()) {
-        if (await cloudIsAdmin()) { showRole('admin'); showQueue(); }
-        else {
-          const p = await cloudMyProfile();
-          if (p) { editingCloud = true; openEditor({ ...p }); return; }
-        }
-      }
-      const s = localStorage.getItem('portfoolio_session_v1'), p = s && localProfile(s);
-      if (p) openEditor(p);
-    } catch {}
-  })();
-  // ---- Landing auth: signup / login tabs + email OTP ----
-  // ---- Landing auth: signup / login with email + password ----
-  let authMode = 'signup';
-  function setAuthMode(m) {
-    authMode = m;
-    $('tabSignup').classList.toggle('active', m === 'signup');
-    $('tabLogin').classList.toggle('active', m === 'login');
-    $('authGoLabel').textContent = m === 'signup' ? 'Create account' : 'Log in';
-    $('authMsg').textContent = m === 'signup' ? 'New here? Create your account, then claim your subdomain below.' : 'Welcome back — log in to open your dashboard.';
-  }
-  $('tabSignup').onclick = () => setAuthMode('signup');
-  $('tabLogin').onclick = () => setAuthMode('login');
-  document.querySelectorAll('[data-tab]').forEach(a => a.addEventListener('click', () => setAuthMode(a.dataset.tab)));
-  if (!cloudEnabled()) { $('authCloudOn').style.display = 'none'; $('authCloudOff').style.display = ''; }
-  else setAuthMode('signup');
-  async function afterAuth(email) {
-    const p = await cloudMyProfile();
-    if (p) {
-      editingCloud = true; openEditor({ ...p });
-      toast('✅ Logged in — welcome back');
-    } else {
-      editingCloud = true; editing = null;
-      showRole('user'); showUserState(false);
-      $('inEmail').value = email;
-      document.getElementById('create').scrollIntoView({ behavior: 'smooth' });
-      toast('✅ Account ready — now claim your subdomain');
+}
+
+// Global Log out handler
+if ($('globalLogoutBtn')) {
+  $('globalLogoutBtn').onclick = async () => {
+    if (cloudEnabled()) {
+      try { await cloud().auth.signOut(); } catch {}
     }
-  }
-  $('authGoBtn').onclick = async () => {
-    if (!cloudEnabled()) return;
-    const email = $('authEmail').value.trim(), pass = $('authPass').value;
-    if (!/.+@.+\..+/.test(email)) return toast('❌ Enter a valid email');
-    if (pass.length < 6) return toast('❌ Password needs 6+ characters');
-    try {
-      if (authMode === 'signup') {
-        const data = await cloudSignUp(email, pass);
-        if (!data.session) { $('authMsg').textContent = 'Account created — check your inbox to confirm, then hit Log in.'; setAuthMode('login'); return; }
-      } else {
-        await cloudSignIn(email, pass);
-      }
-      $('authMsg').textContent = '';
-      await afterAuth(email);
-    } catch (e) { $('authMsg').textContent = e.message; }
+    localStorage.removeItem('portfoolio_session_email');
+    activeUserProfile = null;
+    editingCloudSession = false;
+    showAppRole(null);
+    toast('🔒 Logged out');
   };
-  // ---- Role layout: landing → login → user dash OR admin dash ----
-  function layoutRoles() {
-    if (!document.getElementById('editorCard') || document.getElementById('userDash')) return;
-    const userDash = document.createElement('div'); userDash.id = 'userDash'; userDash.style.display = 'none';
-    const adminDash = document.createElement('div'); adminDash.id = 'adminDash'; adminDash.style.display = 'none';
-    const ed = document.getElementById('editorCard'), ad = document.getElementById('adminCard'), claim = document.getElementById('create');
-    ed.before(userDash); userDash.appendChild(ed);
-    if (claim) userDash.appendChild(claim);
-    if (ad) { ad.before(adminDash); adminDash.appendChild(ad); }
+}
+
+// Admin Console Data Loader
+async function loadAdminConsole() {
+  let sites = [];
+  if (cloudEnabled()) {
+    try {
+      const { data } = await cloud().from('profiles').select('*').order('created_at', { ascending: false });
+      sites = data || [];
+    } catch {}
   }
-  function showRole(role) { // 'user' | 'admin' | null
-    layoutRoles();
-    const u = document.getElementById('userDash'), a = document.getElementById('adminDash'), login = document.getElementById('loginCard');
-    if (u) u.style.display = role === 'user' ? '' : 'none';
-    if (a) a.style.display = role === 'admin' ? '' : 'none';
-    if (login) login.style.display = role ? 'none' : '';
+
+  // Combine with localStorage sites
+  let localSites = [];
+  try { localSites = Object.values(JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}')); } catch {}
+  
+  const mergedMap = new Map();
+  localSites.forEach(s => mergedMap.set(s.username, s));
+  sites.forEach(s => mergedMap.set(s.username, s));
+  const allSites = Array.from(mergedMap.values());
+
+  const pending = allSites.filter(s => s.status === 'pending');
+  const live = allSites.filter(s => s.status === 'approved');
+  const rejected = allSites.filter(s => s.status === 'rejected');
+
+  if($('tPendingCount')) $('tPendingCount').textContent = pending.length;
+  if($('tLiveCount')) $('tLiveCount').textContent = live.length;
+  if($('tTotalCount')) $('tTotalCount').textContent = allSites.length;
+  if($('tRejectedCount')) $('tRejectedCount').textContent = rejected.length;
+
+  // Pending queue render
+  const queueEl = $('adminQueueList');
+  if (queueEl) {
+    queueEl.innerHTML = pending.length ? pending.map(r => `
+      <div class="admin-table-row">
+        <div>
+          <b>@${r.username} — ${r.name}</b> <span class="status-pill pending">Pending Review</span>
+          <div style="font-size:12.5px;color:var(--muted);margin-top:4px">${r.email} • ${r.title || ''}</div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <a class="btn btn-ghost btn-sm" href="/?u=${encodeURIComponent(r.username)}" target="_blank">Preview</a>
+          <button class="btn btn-primary btn-sm" style="background:#16a34a" onclick="adminApproveUser('${r.username}')">Approve</button>
+          <button class="btn btn-ghost btn-sm" style="color:#f472b6" onclick="adminRejectUser('${r.username}')">Reject</button>
+        </div>
+      </div>`).join('') : '<p style="color:var(--muted);font-size:13.5px">No pending approval requests. Queue is empty! 🎉</p>';
   }
-  function showUserState(hasProfile) {
-    const claim = document.getElementById('create'), ed = document.getElementById('editorCard');
-    if (claim) claim.style.display = hasProfile ? 'none' : '';
-    if (ed) ed.style.display = hasProfile ? '' : 'none';
+
+  // All users directory render
+  paintAdminAllUsers(allSites);
+}
+
+function paintAdminAllUsers(allSites) {
+  const listEl = $('adminAllUsersList');
+  if(!listEl) return;
+  const q = ($('adminSearchInput') ? $('adminSearchInput').value : '').toLowerCase();
+  const filtered = allSites.filter(r => !q || (r.username + ' ' + r.name + ' ' + r.email).toLowerCase().includes(q));
+
+  listEl.innerHTML = filtered.length ? filtered.map(r => `
+    <div class="admin-table-row">
+      <div>
+        <b>@${r.username}</b> — ${r.name} 
+        <span class="status-pill ${r.status === 'approved' ? 'live' : r.status === 'rejected' ? 'rejected' : 'pending'}">${r.status || 'pending'}</span>
+        <div style="font-size:12.5px;color:var(--muted);margin-top:4px">${r.email} • ${r.title || ''}</div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn btn-ghost btn-sm" href="/?u=${encodeURIComponent(r.username)}" target="_blank">View Site</a>
+        ${r.status !== 'approved' ? `<button class="btn btn-ghost btn-sm" style="color:#a3e635" onclick="adminApproveUser('${r.username}')">Approve</button>` : ''}
+        ${r.status === 'pending' ? `<button class="btn btn-ghost btn-sm" style="color:#f472b6" onclick="adminRejectUser('${r.username}')">Reject</button>` : ''}
+      </div>
+    </div>`).join('') : '<p style="color:var(--muted);font-size:13.5px">No matching users found.</p>';
+}
+
+if($('adminSearchInput')) $('adminSearchInput').oninput = () => loadAdminConsole();
+if($('adminRefreshBtn')) $('adminRefreshBtn').onclick = () => loadAdminConsole();
+
+async function adminApproveUser(username) {
+  if (cloudEnabled()) {
+    try { await cloudSetStatus(username, 'approved'); } catch {}
   }
-  async function renderDir(){
-    const seeds=[
-      {username:'neerajkr',name:'Neeraj K R',title:'Full-Stack Developer & AI Engineer • 🌌 Midnight'},
-      {username:'priya',name:'Priya Nair',title:'Aspiring SDE Intern • 📄 Minimal'},
-      {username:'arjun',name:'Arjun Dev',title:'Backend Developer • 💻 Terminal'},
-      {username:'zoe',name:'Zoe Mathew',title:'Creative Frontend Dev • 🎨 Creative'},
-      {username:'demo',name:'Demo User',title:'Aspiring Software Engineer • 📄 Minimal'}
-    ];
-    let customs=[]; try{customs=Object.values(JSON.parse(localStorage.getItem('portfoolio_users_v1')||'{}'));}catch{}
-    const all=[...customs,...seeds.filter(s=>!customs.find(c=>c.username===s.username))];
-    $('dirGrid').innerHTML=all.map(p=>`<div class="dir-card"><h3>${p.name}</h3><p>${p.title||''}</p><p class="mono" style="font-size:12.5px;color:#22d3ee">${p.username}.portfoolio.me</p><div style="display:flex;gap:8px"><a class="btn btn-primary btn-sm" href="/?u=${encodeURIComponent(p.username)}">Visit →</a></div></div>`).join('');
-  }
+  const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+  if (all[username]) { all[username].status = 'approved'; localStorage.setItem('portfoolio_users_v1', JSON.stringify(all)); }
+  toast(`✅ @${username} approved and live!`);
+  loadAdminConsole();
   renderDir();
 }
+
+async function adminRejectUser(username) {
+  if (cloudEnabled()) {
+    try { await cloudSetStatus(username, 'rejected'); } catch {}
+  }
+  const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+  if (all[username]) { all[username].status = 'rejected'; localStorage.setItem('portfoolio_users_v1', JSON.stringify(all)); }
+  toast(`🚫 @${username} rejected`);
+  loadAdminConsole();
+}
+
+function loginAsUser(username, mockProfile) {
+  activeUserProfile = mockProfile;
+  showAppRole('user', mockProfile.email, mockProfile);
+}
+function loginAsAdmin(email) {
+  showAppRole('admin', email);
+}
+
+async function renderDir() {
+  const seeds = [
+    {username:'neerajkr',name:'Neeraj K R',title:'Full-Stack Developer & AI Engineer • Midnight'},
+    {username:'priya',name:'Priya Nair',title:'Aspiring SDE Intern • Minimal'},
+    {username:'arjun',name:'Arjun Dev',title:'Backend Developer • Terminal'},
+    {username:'zoe',name:'Zoe Mathew',title:'Creative Frontend Dev • Creative'},
+    {username:'demo',name:'Demo User',title:'Aspiring Software Engineer • Minimal'}
+  ];
+  let customs = []; try { customs = Object.values(JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}')); } catch {}
+  const all = [...customs, ...seeds.filter(s => !customs.find(c => c.username === s.username))];
+  if($('dirGrid')) {
+    $('dirGrid').innerHTML = all.map(p => `
+      <div class="dir-card">
+        <h3>${p.name}</h3>
+        <p>${p.title || ''}</p>
+        <p class="mono" style="font-size:12.5px;color:#22d3ee;margin-bottom:12px">${p.username}.portfoolio.me</p>
+        <div style="display:flex;gap:8px">
+          <a class="btn btn-primary btn-sm" href="/?u=${encodeURIComponent(p.username)}">Visit Site →</a>
+        </div>
+      </div>`).join('');
+  }
+}
+
+// Boot check
+(async () => {
+  renderDir();
+  try {
+    if (cloudEnabled()) {
+      if (await cloudIsAdmin()) {
+        showAppRole('admin', PORTFOOLIO_SUPERADMIN_EMAIL);
+        return;
+      }
+      const p = await cloudMyProfile();
+      if (p) {
+        editingCloudSession = true;
+        showAppRole('user', p.email, p);
+        return;
+      }
+    }
+  } catch {}
+})();
 </script>
 </body>
 </html>
