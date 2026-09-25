@@ -113,6 +113,21 @@ function repoToProject(r) {
     },
   };
 }
+// Accepts a username, @user, profile URL, or single repo URL (user/repo)
+async function fetchGitHubInput(input) {
+  const s = String(input || '').trim();
+  const m = s.match(/github\.com\/([A-Za-z0-9-]+)\/([A-Za-z0-9-_.]+)/i);
+  if (m) {
+    const r = await fetch(`https://api.github.com/repos/${encodeURIComponent(m[1])}/${encodeURIComponent(m[2])}`, {
+      headers: { Accept: 'application/vnd.github+json' },
+    });
+    if (r.status === 404) throw new Error('not-found');
+    if (r.status === 403) throw new Error('rate-limited');
+    if (!r.ok) throw new Error('fetch-failed');
+    return [await r.json()];
+  }
+  return fetchGitHubRepos(s);
+}
 // ---- Renderer: same wow theme, data-driven ----
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

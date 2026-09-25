@@ -788,6 +788,44 @@ if ($('edSaveBtn')) {
   };
 }
 
+// Editor: load repos (username or repo URL) + add selected
+let edGhRepos = [];
+function ghErrText(e) {
+  return e.message === 'not-found' ? 'Not found — check the username or repo URL.' :
+    e.message === 'rate-limited' ? 'GitHub rate limit hit (60/hr) — wait a few minutes and retry.' :
+    e instanceof TypeError ? 'Network blocked — check internet/ad-blocker, then retry.' :
+    'Could not load repos.';
+}
+if ($('edGhLoad')) $('edGhLoad').onclick = async () => {
+  if (!activeUserProfile) return toast('❌ Log in first');
+  const input = $('edGhUser').value.trim();
+  if (!input) return toast('❌ Type a GitHub username or paste a repo URL');
+  $('edGhList').innerHTML = '<p style="color:var(--muted);font-size:13px">Loading…</p>';
+  try {
+    edGhRepos = await fetchGitHubInput(input);
+    if (!edGhRepos.length) { $('edGhList').innerHTML = '<p style="color:var(--muted)">No public repos found.</p>'; return; }
+    const have = new Set((activeUserProfile.projects || []).map(p => p.url));
+    $('edGhList').innerHTML = edGhRepos.map((r, i) => {
+      const p = repoToProject(r), owned = have.has(p.url);
+      return `<label class="gh-repo"><input type="checkbox" data-i="${i}" ${owned ? 'disabled' : (!r.fork ? 'checked' : '')}>
+        <span><b>${p.title}</b><small>${owned ? 'already on your site' : (r.description || 'No description').slice(0, 80)}</small></span>
+        <span class="stars">${p.stars}</span></label>`;
+    }).join('');
+    toast(`✅ Loaded ${edGhRepos.length} repositor${edGhRepos.length > 1 ? 'ies' : 'y'}`);
+  } catch (e) { $('edGhList').innerHTML = `<p style="color:var(--muted)">${ghErrText(e)}</p>`; }
+};
+if ($('edGhAdd')) $('edGhAdd').onclick = () => {
+  if (!activeUserProfile) return toast('❌ Log in first');
+  const have = new Set((activeUserProfile.projects || []).map(p => p.url));
+  let n = 0;
+  [...$('edGhList').querySelectorAll('input:checked:not(:disabled)')].forEach(c => {
+    const p = repoToProject(edGhRepos[+c.dataset.i]);
+    if (!have.has(p.url)) { activeUserProfile.projects.push(p); have.add(p.url); n++; }
+  });
+  paintUserProjects(activeUserProfile); paintProof();
+  toast(n ? `✅ Added ${n} — hit Save Changes to publish` : 'Nothing new ticked');
+};
+
 // Global Log out handler
 if ($('globalLogoutBtn')) {
   $('globalLogoutBtn').onclick = async () => {
