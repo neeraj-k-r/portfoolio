@@ -33,7 +33,12 @@ Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`,
 3. Supabase → SQL Editor → run `supabase-schema.sql`
 4. Auth → Providers → Email ON (turn Confirm email OFF for instant login — admin approval already moderates signups). Users sign up / log in with email + password; profiles in Postgres; public portfolios readable everywhere.
 
-## Admin approval flow (subdomain given only after approval)
+## Flow (landing → login → role dashboard)
+- Landing describes the site + login/signup only (no public claim form).
+- After login: admins land on the **admin dashboard** (approval queue + `/admin` console); everyone else lands on the **user dashboard** (claim form if new → editor + share once they have a site).
+- Claim form lives inside the user dash and requires login; admin approval publishes the subdomain.
+
+## Admin approval setup
 1. Supabase → SQL Editor → run `supabase-schema.sql` (re-run safe — it upgrades `is_admin()` too).
 2. Supabase → Authentication → Add user → `portfoolio.me@gmail.com` + your admin password (tick auto-confirm). The password lives ONLY in Supabase — never in code.
 3. Auth → Providers → Email → **Confirm email OFF** — no confirmation emails anywhere; the superadmin approves users from the site's admin panel instead.
