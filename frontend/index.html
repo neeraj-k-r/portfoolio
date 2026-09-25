@@ -834,6 +834,7 @@ async function loadAdminConsole() {
           <a class="btn btn-ghost btn-sm" href="/?u=${encodeURIComponent(r.username)}" target="_blank">Preview</a>
           <button class="btn btn-primary btn-sm" style="background:#16a34a" onclick="adminApproveUser('${r.username}')">Approve</button>
           <button class="btn btn-ghost btn-sm" style="color:#f472b6" onclick="adminRejectUser('${r.username}')">Reject</button>
+          <button class="btn btn-ghost btn-sm" onclick="adminDeleteUser('${r.username}')" title="Delete forever">✕</button>
         </div>
       </div>`).join('') : '<p style="color:var(--muted);font-size:13.5px">No pending approval requests. Queue is empty! 🎉</p>';
   }
@@ -859,6 +860,7 @@ function paintAdminAllUsers(allSites) {
         <a class="btn btn-ghost btn-sm" href="/?u=${encodeURIComponent(r.username)}" target="_blank">View Site</a>
         ${r.status !== 'approved' ? `<button class="btn btn-ghost btn-sm" style="color:#a3e635" onclick="adminApproveUser('${r.username}')">Approve</button>` : ''}
         ${r.status === 'pending' ? `<button class="btn btn-ghost btn-sm" style="color:#f472b6" onclick="adminRejectUser('${r.username}')">Reject</button>` : ''}
+        <button class="btn btn-ghost btn-sm" onclick="adminDeleteUser('${r.username}')" title="Delete forever">✕</button>
       </div>
     </div>`).join('') : '<p style="color:var(--muted);font-size:13.5px">No matching users found.</p>';
 }
@@ -885,6 +887,18 @@ async function adminRejectUser(username) {
   if (all[username]) { all[username].status = 'rejected'; localStorage.setItem('portfoolio_users_v1', JSON.stringify(all)); }
   toast(`🚫 @${username} rejected`);
   loadAdminConsole();
+}
+
+async function adminDeleteUser(username) {
+  if (!confirm('Delete @' + username + ' forever? The subdomain becomes available again.')) return;
+  if (cloudEnabled()) {
+    try { await cloudDeleteProfile(username); } catch (e) { toast('❌ ' + e.message); return; }
+  }
+  const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+  if (all[username]) { delete all[username]; localStorage.setItem('portfoolio_users_v1', JSON.stringify(all)); }
+  toast(`🗑 @${username} deleted`);
+  loadAdminConsole();
+  renderDir();
 }
 
 function loginAsUser(username, mockProfile) {
