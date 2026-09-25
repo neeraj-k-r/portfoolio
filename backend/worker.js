@@ -98,6 +98,31 @@ function page(p) {
   <a class="btn btn-primary" href="${ORIGIN}/">Create mine</a></div></section>${foot(p)}</body></html>`;
 }
 
+function techsOf(pr) {
+  const out = [], seen = new Set();
+  (pr.technologies || []).concat(pr.tags || []).forEach((t) => {
+    const k = String(t || '').trim().toLowerCase();
+    if (k && k !== 'fork' && !seen.has(k)) { seen.add(k); out.push(String(t).trim()); }
+  });
+  return out;
+}
+function pageSkill(p, skillName) {
+  const key = String(skillName).toLowerCase();
+  const list = (p.projects || []).filter((pr) => techsOf(pr).some((t) => t.toLowerCase() === key));
+  const gh = list.filter((pr) => pr.repo).length, live = list.filter((pr) => pr.demoUrl).length;
+  const tpl = (p.template || 'midnight').toLowerCase();
+  const bodyAttr = tpl === 'midnight' ? '' : ` data-template="${tpl}"`;
+  const rows = list.map((pr) => `
+    <article class="proj"><div class="proj-body"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
+    <div class="proj-actions"><a class="primary" href="${esc(pr.url)}">View project</a></div></div></article>`).join('');
+  return `<!DOCTYPE html><html lang="en">${head(p)}<body${bodyAttr}><div class="bg-fx"></div>${nav(p)}
+  <section class="wrap" style="padding:140px 0 20px"><span class="eyebrow">● Skill evidence</span>
+  <h1 style="font-size:clamp(38px,6vw,60px)">${esc(skillName)}</h1>
+  <p class="lead">Used in <b style="color:#fff">${list.length} project${list.length === 1 ? '' : 's'}</b> · GitHub repositories: <b style="color:#fff">${gh}</b> · Live: <b style="color:#fff">${live}</b></p>
+  <div class="proj-grid" style="margin-top:22px">${rows || '<p>No evidence yet — connect a project to show this skill in use.</p>'}</div>
+  <p style="margin-top:16px"><a class="btn btn-ghost btn-sm" href="/">← ${esc(p.name)}</a></p></section>${foot(p)}</body></html>`;
+}
+
 export default {
   async fetch(req) {
     const url = new URL(req.url);
@@ -110,7 +135,9 @@ export default {
     }
     const p = await getProfile(sub);
     if (!p) return Response.redirect(`${ORIGIN}/?claim=${encodeURIComponent(sub)}`, 302);
-    return new Response(page(p), {
+    const m = url.pathname.match(/^\/skills\/([^/]+)\/?$/);
+    const html = m ? pageSkill(p, decodeURIComponent(m[1])) : page(p);
+    return new Response(html, {
       headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300' },
     });
   },

@@ -49,6 +49,13 @@ Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`,
 3. Auth → Providers → Email → **Confirm email OFF** — no confirmation emails anywhere; the superadmin approves users from the site's admin panel instead.
 Flow: visitor signs up with email + password → submits site request (saved `pending`, invisible publicly) → superadmin logs into dashboard admin panel → approves → `username.portfoolio.me` goes live. (`admins` table insert no longer required — the superadmin email is hardcoded in `is_admin()` + `backend/supabase-config.js`.)
 
+## Proof of Work (skill evidence, not just claims)
+- Data model: NO new tables. Skills stay `profiles.skills[]`; each project optionally carries `technologies[]`, `repo{fullName,language,stars,updatedAt,topics}` (presence = retrieved from GitHub), `demoUrl`. Skill↔Project is **derived** by `frontend/evidence.js` (shared pure functions) — manage info once.
+- Labels: "GitHub Verified" strictly means "repository retrieved from GitHub", never a skill endorsement (tooltip on the badge says so).
+- Public: skills render as evidence cards (counts + links) unless profile sets `skillsDisplay:'simple'`; skill pages at `?u=x&skill=y` and `username.portfoolio.me/skills/y`; project cards link tech → skill pages and show repo/demo badges only when the data exists.
+- Dashboard: Proof of Work tab (counts + actionable suggestions) in the user studio.
+- Tests: `node frontend/evidence.test.mjs` (repo has no test runner; dependency-free asserts). Existing portfolios without any new fields keep working (empty states everywhere, GitHub optional).
+
 ## Templates (pick 1 in builder, stored as `template`)
 - 🌌 `midnight` — dark + neon wow (default) → `?u=neerajkr`
 - 📄 `minimal` — light, recruiter/ATS clean → `?u=priya`, `?u=demo`
