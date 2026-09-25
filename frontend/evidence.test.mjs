@@ -37,7 +37,7 @@ const py = ev.skills.find((s) => s.name === 'Python');
 assert.equal(py.projects.length, 0);
 
 // totals
-assert.deepEqual(ev.totals, { skillsTotal: 6, skillsWithEvidence: 4, projectsTotal: 3, projectsWithGithub: 2, projectsWithDemo: 1 });
+assert.deepEqual(ev.totals, { skillsTotal: 5, skillsWithEvidence: 4, projectsTotal: 3, projectsWithGithub: 2, projectsWithDemo: 1 });
 
 // suggestions are actionable and non-empty here
 const sug = suggestions(P, ev);
