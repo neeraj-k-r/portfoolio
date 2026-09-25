@@ -532,12 +532,17 @@ function setupUserDashboardView(profile) {
     if($('edLoc')) $('edLoc').value = profile.location || '';
     if($('edSkills')) $('edSkills').value = (profile.skills || []).join(', ');
 
-    // Template selection
+    // Template selection (paint saved choice; clicks update highlight + radio)
     document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
       const inp = c.querySelector('input');
       const on = inp && inp.value === (profile.template || 'midnight');
       c.classList.toggle('selected', on);
       if(inp) inp.checked = on;
+      c.onclick = () => {
+        document.querySelectorAll('#edTplGrid .tpl-card').forEach(x => x.classList.remove('selected'));
+        c.classList.add('selected');
+        if (inp) inp.checked = true;
+      };
     });
 
     paintUserProjects(profile);
