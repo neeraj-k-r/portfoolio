@@ -294,6 +294,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <button class="dash-tab-btn active" onclick="switchUserTab('info')"><i class="fa-solid fa-user-pen"></i> Profile Info</button>
         <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Theme & Skills</button>
         <button class="dash-tab-btn" onclick="switchUserTab('projects')"><i class="fa-solid fa-code"></i> Projects & GitHub</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('proof')"><i class="fa-solid fa-award"></i> Proof of Work</button>
         <button class="dash-tab-btn" onclick="switchUserTab('share')"><i class="fa-solid fa-share-nodes"></i> Share & Links</button>
       </div>
 
@@ -345,6 +346,25 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           </div>
           <div id="edGhList" style="display:grid;gap:8px;margin-top:8px;max-height:220px;overflow:auto"></div>
           <button type="button" class="btn btn-ghost btn-sm" id="edGhAdd" style="margin-top:10px"><i class="fa-solid fa-plus"></i> Add Selected Repos</button>
+        </div>
+      </div>
+
+      <!-- User Studio Tab: Proof of Work -->
+      <div id="tabProof" class="card" style="display:none">
+        <h3>🏆 Proof of Work</h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Completeness checklist — not a judgment. Evidence comes only from your projects and GitHub data.</p>
+        <div id="proofBody"></div>
+        <div style="margin-top:14px;border-top:1px solid var(--stroke);padding-top:14px">
+          <label class="flabel">Public skills display</label>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="skillsDisplay" value="evidence"> <span><b>Evidence cards</b> <small>counts + links</small></span></label>
+            <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="skillsDisplay" value="simple"> <span><b>Simple list</b> <small>badges only</small></span></label>
+          </div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px">
+          <button class="btn btn-ghost btn-sm" onclick="switchUserTab('theme')">Manage skills</button>
+          <button class="btn btn-ghost btn-sm" onclick="switchUserTab('projects')">Manage evidence</button>
+          <a class="btn btn-ghost btn-sm" id="proofPreviewBtn" target="_blank">View public profile</a>
         </div>
       </div>
 
@@ -438,7 +458,7 @@ function setAuthMode(mode) {
 }
 
 function switchUserTab(tabName) {
-  ['info', 'theme', 'projects', 'share'].forEach(t => {
+  ['info', 'theme', 'projects', 'proof', 'share'].forEach(t => {
     const el = $('tab' + t.charAt(0).toUpperCase() + t.slice(1));
     if(el) el.style.display = (t === tabName) ? '' : 'none';
   });
@@ -521,6 +541,7 @@ function setupUserDashboardView(profile) {
 
     paintUserProjects(profile);
     paintShareSection(profile);
+    paintProof();
   }
 }
 
@@ -528,6 +549,22 @@ let projEditOpen = -1;
 function techChipsHTML(pr) {
   const techs = (window.PortfoolioEvidence ? PortfoolioEvidence.projectTechs(pr) : (pr.technologies || []));
   return techs.map(t => `<span class="badge" style="font-size:11px">✦ ${t}</span>`).join('');
+}
+function paintProof() {
+  const body = $('proofBody');
+  if (!body || !window.PortfoolioEvidence) return;
+  const p = activeUserProfile || { projects: [], skills: [] };
+  const ev = PortfoolioEvidence.buildEvidence(p);
+  const t = ev.totals, sug = PortfoolioEvidence.suggestions(p, ev);
+  const row = (label, v) => `<div class="proj-row"><b>${label}</b><span class="badge">${v}</span></div>`;
+  body.innerHTML =
+    row('Skills with evidence', `${t.skillsWithEvidence}/${t.skillsTotal}`) +
+    row('Projects with GitHub', `${t.projectsWithGithub}/${t.projectsTotal}`) +
+    row('Projects with live demos', `${t.projectsWithDemo}/${t.projectsTotal}`) +
+    (sug.length ? `<div style="margin-top:10px">${sug.map(s => `<p style="font-size:13px;color:var(--muted)">→ ${s}</p>`).join('')}</div>`
+                : '<p style="font-size:13px;color:#d9f99d;margin-top:10px">All complete — every skill and project is backed by evidence. 🎉</p>');
+  document.querySelectorAll('input[name=skillsDisplay]').forEach(r => { r.checked = r.value === (p.skillsDisplay || 'evidence'); });
+  if ($('proofPreviewBtn') && p.username) $('proofPreviewBtn').href = `/?u=${encodeURIComponent(p.username)}`;
 }
 function paintUserProjects(p) {
   const list = $('edProjList');
@@ -722,6 +759,7 @@ if ($('edSaveBtn')) {
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
       github: $('edGithub').value.trim(), linkedin: $('edLinkedin').value.trim(), location: $('edLoc').value.trim(),
       template: (document.querySelector('input[name=edtpl]:checked') || {}).value || 'midnight',
+      skillsDisplay: (document.querySelector('input[name=skillsDisplay]:checked') || {}).value || 'evidence',
       skills: $('edSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       updatedAt: new Date().toISOString(),
     });
@@ -736,6 +774,7 @@ if ($('edSaveBtn')) {
     } else toast('✅ Portfolio updated');
 
     paintShareSection(activeUserProfile);
+    paintProof();
     renderDir();
   };
 }
