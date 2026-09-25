@@ -102,6 +102,13 @@ function repoToProject(r) {
   return {
     title: r.name, desc: r.description || 'GitHub repository — click through to explore the code.',
     url: r.html_url, stars: stars + extra, tags,
+    // proof-of-work: carried GitHub evidence (presence of `repo` = retrieved from GitHub)
+    technologies: [r.language].filter(Boolean),
+    demoUrl: r.homepage || '',
+    repo: {
+      fullName: r.full_name, language: r.language, stars: r.stargazers_count,
+      updatedAt: r.pushed_at || r.updated_at, topics: (r.topics || []).slice(0, 5),
+    },
   };
 }
 // ---- Renderer: same wow theme, data-driven ----
