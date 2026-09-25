@@ -399,6 +399,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <div>
           <span class="role-badge admin">🛡️ Superadmin Control Console</span>
           <h2 style="font-size:24px;margin-top:6px">Site Approvals & User Management</h2>
+          <p class="mono" id="adminDiagLine" style="font-size:12px;color:var(--muted);margin-top:4px"></p>
         </div>
         <div style="display:flex;gap:10px;align-items:center">
           <button class="btn btn-ghost btn-sm" id="adminRefreshBtn"><i class="fa-solid fa-rotate"></i> Refresh Queue</button>
@@ -799,12 +800,21 @@ if ($('globalLogoutBtn')) {
 
 // Admin Console Data Loader
 async function loadAdminConsole() {
-  let sites = [];
+  let sites = [], cloudErr = '';
   if (cloudEnabled()) {
     try {
-      const { data } = await cloud().from('profiles').select('*').order('created_at', { ascending: false });
+      const { data, error } = await cloud().from('profiles').select('*').order('created_at', { ascending: false });
+      if (error) throw error;
       sites = data || [];
-    } catch {}
+    } catch (e) { cloudErr = e.message || String(e); }
+  }
+  if ($('adminDiagLine')) {
+    cloud().auth.getUser().then(({ data }) => {
+      const em = (data.user && data.user.email) || '?';
+      cloudIsAdmin().then(ok => {
+        $('adminDiagLine').textContent = `signed in as ${em} • admin check: ${ok ? 'PASS' : 'FAIL (re-run supabase-schema.sql)'} • cloud rows: ${sites.length}${cloudErr ? ' • DB error: ' + cloudErr : ''}`;
+      });
+    }).catch(() => {});
   }
 
   // Combine with localStorage sites
