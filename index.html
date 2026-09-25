@@ -444,9 +444,11 @@ if(document.getElementById('builderForm')){
       const p = await cloudMyProfile();
       if (p) { editingCloud = true; openEditor({ ...p, username: p.username }); toast('✅ Logged in as ' + p.username); }
       else {
+        editingCloud = true; editing = null;
+        showRole('user'); showUserState(false);
         $('inEmail').value = email;
-        location.hash = '#create';
-        toast('👋 New here — claim your subdomain (email prefilled)');
+        document.getElementById('create').scrollIntoView({ behavior: 'smooth' });
+        toast('👋 New here — claim your subdomain below');
       }
     } catch (e) { toast('❌ ' + e.message); }
   };
@@ -518,7 +520,7 @@ if(document.getElementById('builderForm')){
       });
     } catch (e) { $('adminCount').textContent = 'Could not load queue: ' + e.message; }
   }
-  function showQueue() { $('adminLoginBox').style.display = 'none'; $('adminQueueBox').style.display = ''; loadQueue(); }
+  function showQueue() { showRole('admin'); $('adminLoginBox').style.display = 'none'; $('adminQueueBox').style.display = ''; loadQueue(); }
   $('adminLoginBtn').onclick = async () => {
     if (!cloudEnabled()) return toast('❌ Connect Supabase first (see README)');
     const { error } = await cloud().auth.signInWithPassword({ email: $('adminEmail').value.trim(), password: $('adminPass').value });
@@ -535,9 +537,11 @@ if(document.getElementById('builderForm')){
   (async () => {
     try {
       if (cloudEnabled()) {
-        if (await cloudIsAdmin()) { showQueue(); }
-        const p = await cloudMyProfile();
-        if (p) { editingCloud = true; openEditor({ ...p }); return; }
+        if (await cloudIsAdmin()) { showRole('admin'); showQueue(); }
+        else {
+          const p = await cloudMyProfile();
+          if (p) { editingCloud = true; openEditor({ ...p }); return; }
+        }
       }
       const s = localStorage.getItem('portfoolio_session_v1'), p = s && localProfile(s);
       if (p) openEditor(p);
@@ -564,8 +568,10 @@ if(document.getElementById('builderForm')){
       editingCloud = true; openEditor({ ...p });
       toast('✅ Logged in — welcome back');
     } else {
+      editingCloud = true; editing = null;
+      showRole('user'); showUserState(false);
       $('inEmail').value = email;
-      location.hash = '#create';
+      document.getElementById('create').scrollIntoView({ behavior: 'smooth' });
       toast('✅ Account ready — now claim your subdomain');
     }
   }
