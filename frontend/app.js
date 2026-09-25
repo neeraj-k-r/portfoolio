@@ -123,15 +123,33 @@ function renderPortfolio(p) {
   document.body.dataset.template = '';
   document.title = `${p.name} — ${p.title} | portfoolio.me`;
   const app = document.getElementById('app');
-  const skills = (p.skills || []).map(s => `<span class="badge">✦ ${esc(s)}</span>`).join('');
-  const projects = (p.projects || []).map((pr, i) => `
+  const EV = window.PortfoolioEvidence || null;
+  const ev = EV ? EV.buildEvidence(p) : null;
+  const showEvidenceCards = ev && p.skillsDisplay !== 'simple' && ev.totals.skillsWithEvidence > 0;
+  const skillUrl = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(s.toLowerCase())}`;
+  const skillsBadges = `<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">${(p.skills || []).map(s => `<span class="badge">✦ ${esc(s)}</span>`).join('') || '<p style="color:var(--muted)">No skills listed yet — add some from the dashboard.</p>'}</div>`;
+  const skills = showEvidenceCards
+    ? `<div class="proj-grid" style="grid-template-columns:repeat(3,1fr);margin-top:14px">${ev.skills.filter(s => s.projects.length).map(s => `
+        <a class="card" style="display:block;padding:18px" href="${skillUrl(s.name)}">
+          <h3 style="font-size:17px">${esc(s.name)}</h3>
+          <p style="color:var(--muted);font-size:13px;margin:4px 0 0">${s.projects.length} project${s.projects.length > 1 ? 's' : ''}${s.repoCount ? ` · ${s.repoCount} repositor${s.repoCount > 1 ? 'ies' : 'y'}` : ''}</p>
+          <span style="color:#22d3ee;font-size:13px;font-weight:800">View evidence →</span>
+        </a>`).join('')}</div>${skillsBadges}`
+    : skillsBadges;
+  const projects = (p.projects || []).map((pr, i) => {
+    const techs = EV ? EV.projectTechs(pr) : (pr.technologies || pr.tags || []);
+    const ghBadge = pr.repo ? `<span class="badge" style="font-size:11px" title="Repository retrieved from GitHub — not a skill endorsement">✓ GitHub Verified</span>` : '';
+    const liveBadge = pr.demoUrl ? `<a class="badge" style="font-size:11px" href="${esc(pr.demoUrl)}" target="_blank" rel="noopener">↗ Live Demo</a>` : '';
+    return `
     <article class="proj">
       <div class="proj-top p${(i % 6) + 1}"><div class="proj-art">${projIcon(pr)}</div><div class="stars">${esc(pr.stars || 'Live')}</div></div>
       <div class="proj-body"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
-      <div class="tags">${(pr.tags || []).map(t => `<span>${esc(t)}</span>`).join('')}</div>
-      <div class="proj-actions"><a class="primary" href="${esc(pr.url)}" target="_blank" rel="noopener">View code <i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+      ${techs.length ? `<div class="tags">${techs.map(t => `<a href="${skillUrl(t)}" style="text-decoration:none"><span>${esc(t)}</span></a>`).join('')}</div>` : ''}
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:2px">${ghBadge}${liveBadge}
+      ${pr.repo ? `<small style="color:var(--muted);font-size:11.5px">${esc(pr.repo.fullName || '')}${pr.repo.updatedAt ? ` • updated ${esc(String(pr.repo.updatedAt).slice(0, 7))}` : ''}</small>` : ''}</div>
+      <div class="proj-actions"><a class="primary" href="${esc(pr.url)}" target="_blank" rel="noopener">View code <i class="fa-solid fa-arrow-up-right-from-square"></i></a>${pr.demoUrl ? `<a href="${esc(pr.demoUrl)}" target="_blank" rel="noopener">Demo</a>` : ''}</div>
       </div>
-    </article>`).join('');
+    </article>`; }).join('');
   app.innerHTML = `
   <nav>
     <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
@@ -160,10 +178,15 @@ function renderPortfolio(p) {
       <div class="visual"><div class="avatar-card"><div class="avatar-inner">
         <div style="width:120px;height:120px;border-radius:50%;margin:0 auto;display:grid;place-items:center;font-size:52px;background:linear-gradient(135deg,#6c6cf5,#22d3ee)">${esc((p.name || '?').trim().charAt(0).toUpperCase())}</div>
         <h3>${esc(p.name)}</h3><p class="mono">@${esc(p.username)} • portfoolio.me</p>
-        <div class="badges">${skills}</div>
+        <div class="badges">${skillsBadges}</div>
       </div></div></div>
     </div>
   </header>
+  <section class="wrap" style="padding-top:10px">
+    <span class="eyebrow">● Skills</span>
+    <h2 class="title">Don't list it. <span class="grad">Prove it.</span></h2>
+    ${skills}
+  </section>
   <section class="wrap" style="padding-top:10px">
     <span class="eyebrow">● Projects</span>
     <h2 class="title">Work that <span class="grad">speaks</span></h2>
@@ -195,6 +218,44 @@ function renderNotFound(username) {
   </section>`;
 }
 
+// username.portfoolio.me/skills/<skill> equivalent: ?u=<user>&skill=<skill>
+function renderSkillPage(p, skillName) {
+  const EV = window.PortfoolioEvidence;
+  const app = document.getElementById('app');
+  const back = `?u=${encodeURIComponent(p.username)}`;
+  if (!EV) { renderPortfolio(p); return; }
+  const ev = EV.buildEvidence(p);
+  const s = ev.skills.find((x) => x.name.toLowerCase() === String(skillName).toLowerCase());
+  document.title = `${skillName} — ${p.name} | portfoolio.me`;
+  if (!s) {
+    app.innerHTML = `<nav><a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a></nav>
+    <section class="wrap" style="padding:160px 0;text-align:center"><h2 class="title">No evidence for <span class="grad">${esc(skillName)}</span> yet</h2>
+    <p class="lead" style="margin:0 auto 20px">Connect a project to show how ${esc(p.name.split(' ')[0])} uses this skill.</p>
+    <a class="btn btn-ghost" href="${back}">← Back to ${esc(p.name)}</a></section>`;
+    window.scrollTo(0, 0); return;
+  }
+  app.innerHTML = `
+  <nav><a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
+  <a class="btn btn-ghost btn-sm" href="${back}">← ${esc(p.name)}</a></nav>
+  <section class="wrap" style="padding:140px 0 20px">
+    <span class="eyebrow">● Skill evidence</span>
+    <h1 style="font-size:clamp(38px,6vw,60px)">${esc(s.name)}</h1>
+    <p class="lead">Used in <b style="color:#fff">${s.projects.length} project${s.projects.length > 1 ? 's' : ''}</b></p>
+    <div class="proj-grid" style="margin-top:22px">${s.projects.map((e) => {
+      const pr = (p.projects || []).find((x) => x.title === e.title) || {};
+      const techs = EV.projectTechs(pr);
+      return `<article class="proj"><div class="proj-body"><h3>${esc(e.title)}</h3>
+        ${techs.length ? `<div class="tags">${techs.map(t => `<a href="?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(t.toLowerCase())}" style="text-decoration:none"><span>${esc(t)}</span></a>`).join('')}</div>` : ''}
+        <div class="proj-actions"><a class="primary" href="${esc(e.url)}" target="_blank" rel="noopener">View project</a></div>
+      </div></article>`; }).join('')}</div>
+  </section>
+  <section class="wrap"><div class="card"><h3>Evidence</h3>
+    <p style="color:var(--muted)">GitHub repositories: <b style="color:#fff">${s.repoCount}</b> · Live projects: <b style="color:#fff">${s.liveCount}</b> · Last used: <b style="color:#fff">${s.lastUsed || '—'}</b></p>
+    <p style="color:var(--muted);font-size:12.5px">Labels mean: "GitHub Verified" = repository retrieved from GitHub. It is not an endorsement of skill level.</p>
+  </div></section>`;
+  window.scrollTo(0, 0);
+}
+
 // ---- Boot ----
 document.addEventListener('DOMContentLoaded', async () => {
   const requested = getRequestedUser();
@@ -202,5 +263,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('landing').style.display = 'none';
   document.getElementById('app').style.display = '';
   const p = await loadProfile(requested);
-  if (p) renderPortfolio(p); else renderNotFound(requested);
+  if (!p) { renderNotFound(requested); return; }
+  const skill = new URLSearchParams(location.search).get('skill');
+  if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
 });
