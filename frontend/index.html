@@ -184,10 +184,9 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <p class="mono" id="authMsg" style="font-size:12.5px;color:var(--muted);margin-top:10px"></p>
         </div>
         <details style="margin-top:14px;border-top:1px solid var(--stroke);padding-top:12px">
-          <summary style="cursor:pointer;font-weight:700;font-size:12.5px;color:var(--muted)">Quick test logins (Local / Demo)</summary>
+          <summary style="cursor:pointer;font-weight:700;font-size:12.5px;color:var(--muted)">Explore a demo portfolio (no login)</summary>
           <div style="display:grid;gap:8px;margin-top:10px">
-            <button type="button" class="btn btn-ghost btn-sm" id="demoUserLoginBtn"><i class="fa-solid fa-user"></i> Log in as Demo User</button>
-            <button type="button" class="btn btn-ghost btn-sm" id="demoAdminLoginBtn"><i class="fa-solid fa-shield-halved"></i> Log in as Admin</button>
+            <a class="btn btn-ghost btn-sm" href="/?u=demo"><i class="fa-solid fa-user"></i> View demo portfolio</a>
           </div>
         </details>
       </div>
@@ -547,13 +546,8 @@ $('authGoBtn').onclick = async () => {
   if (!/.+@.+\..+/.test(email)) return toast('❌ Enter a valid email address');
   if (pass.length < 6) return toast('❌ Password must be at least 6 characters');
 
-  // Check admin email
-  if (email.toLowerCase() === 'portfoolio.me@gmail.com' || email.toLowerCase() === 'admin@portfoolio.me') {
-    showAppRole('admin', email);
-    toast('🛡️ Welcome Superadmin!');
-    return;
-  }
-
+  // NOTE: no email-only admin shortcut here by design — admin UI requires a
+  // password-verified session plus cloudIsAdmin(). See boot check below.
   if (cloudEnabled()) {
     try {
       if (currentAuthMode === 'signup') {
