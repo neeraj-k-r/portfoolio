@@ -276,6 +276,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div class="full"><label class="flabel">Featured Project Title</label><input id="inP1t" placeholder="My flagship build"></div>
           <div class="full"><label class="flabel">Featured Project Description</label><input id="inP1d" placeholder="What it does and key tech used"></div>
           <div class="full"><label class="flabel">Featured Project Link</label><input id="inP1u" placeholder="https://github.com/yourname/project"></div>
+          <div class="full"><label class="flabel">Featured Project Technologies (becomes skill evidence)</label>
+            <div id="inP1techGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"></div>
+            <input id="inP1techCustom" placeholder="Other tech, comma separated" style="margin-top:8px">
+          </div>
+          <div class="full"><label class="flabel">Featured Project Live Demo URL (optional)</label><input id="inP1demo" placeholder="https://myapp.vercel.app"></div>
         </div>
 
         <button class="btn btn-primary" type="submit" style="margin-top:14px"><i class="fa-solid fa-rocket"></i> Submit Portfolio & Claim Subdomain</button>
@@ -412,6 +417,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../backend/supabase-config.js"></script>
 <script src="app.js"></script>
+<script src="evidence.js"></script>
 <script src="templates.js"></script>
 <script>
 function toast(m){const t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
@@ -518,14 +524,43 @@ function setupUserDashboardView(profile) {
   }
 }
 
+let projEditOpen = -1;
+function techChipsHTML(pr) {
+  const techs = (window.PortfoolioEvidence ? PortfoolioEvidence.projectTechs(pr) : (pr.technologies || []));
+  return techs.map(t => `<span class="badge" style="font-size:11px">✦ ${t}</span>`).join('');
+}
 function paintUserProjects(p) {
   const list = $('edProjList');
   if(!list) return;
-  list.innerHTML = (p.projects || []).map((pr, i) =>
-    `<div class="proj-row"><b>${pr.title}</b><small style="color:var(--muted)">${pr.stars || ''}</small><button data-rm="${i}">Remove</button></div>`
-  ).join('') || '<p style="color:var(--muted);font-size:13px">No projects added yet — use the GitHub section below.</p>';
-  list.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { p.projects.splice(+b.dataset.rm, 1); paintUserProjects(p); });
+  list.innerHTML = (p.projects || []).map((pr, i) => {
+    const badges = `${pr.repo ? '<span class="badge" style="font-size:11px" title="Repository retrieved from GitHub">✓ GitHub</span>' : ''}${pr.demoUrl ? '<span class="badge" style="font-size:11px">↗ Live</span>' : ''}`;
+    const open = projEditOpen === i ? `
+      <div style="grid-column:1/-1;background:rgba(0,0,0,.25);border:1px solid var(--stroke);border-radius:12px;padding:12px;margin-top:8px">
+        <label class="flabel">Technologies (auto-feed skill evidence)</label>
+        <div id="peGrid${i}" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${techGridHTML(pr.technologies)}</div>
+        <input id="peCustom${i}" placeholder="Other tech, comma separated" value="${customTechs(pr.technologies).join(', ')}" style="margin-top:8px">
+        <label class="flabel" style="margin-top:8px">Live demo URL</label>
+        <input id="peDemo${i}" placeholder="https://…" value="${pr.demoUrl || ''}">
+      </div>` : '';
+    return `<div class="proj-row" style="display:grid;grid-template-columns:1fr;gap:6px"><div style="display:flex;gap:10px;align-items:center">
+      <b>${pr.title}</b><small style="color:var(--muted)">${pr.stars || ''}</small>
+      <span style="margin-left:auto;display:flex;gap:6px"><button data-ev="${i}">Evidence</button><button data-rm="${i}">Remove</button></span></div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${techChipsHTML(pr)}${badges}</div>${open}</div>`;
+  }).join('') || '<p style="color:var(--muted);font-size:13px">No projects added yet — use the GitHub section below.</p>';
+  list.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { p.projects.splice(+b.dataset.rm, 1); if (projEditOpen === +b.dataset.rm) projEditOpen = -1; paintUserProjects(p); });
+  list.querySelectorAll('[data-ev]').forEach(b => b.onclick = () => { projEditOpen = projEditOpen === +b.dataset.ev ? -1 : +b.dataset.ev; paintUserProjects(p); });
+  if (projEditOpen >= 0 && p.projects[projEditOpen]) {
+    const i = projEditOpen, pr = p.projects[i];
+    const grid = $('peGrid' + i);
+    if (grid) grid.querySelectorAll('input').forEach(c => c.onchange = () => {
+      pr.technologies = readTechGrid(grid, $('peCustom' + i)); refreshRowChips(p);
+    });
+    const custom = $('peCustom' + i), demo = $('peDemo' + i);
+    if (custom) custom.onchange = () => { pr.technologies = readTechGrid(grid, custom); refreshRowChips(p); };
+    if (demo) demo.onchange = () => { pr.demoUrl = demo.value.trim(); paintUserProjects(p); };
+  }
 }
+function refreshRowChips(p) { paintUserProjects(p); }
 
 function paintShareSection(p) {
   const sub = `https://${p.username}.portfoolio.me`, path = `${location.origin}/?u=${encodeURIComponent(p.username)}`;
@@ -625,13 +660,31 @@ if ($('builderForm')) {
     };
   }
 
+  // ---- Technology pickers (single source → skill evidence, §12) ----
+  function techGridHTML(selected) {
+    const sel = new Set((selected || []).map(s => String(s).toLowerCase()));
+    const list = (window.PortfoolioEvidence && PortfoolioEvidence.COMMON) || [];
+    return list.map(t => `<label class="gh-repo" style="padding:7px 10px"><input type="checkbox" value="${t}" ${sel.has(t.toLowerCase()) ? 'checked' : ''}><span><b>${t}</b></span></label>`).join('');
+  }
+  function readTechGrid(el, customEl) {
+    const out = el ? [...el.querySelectorAll('input:checked')].map(c => c.value) : [];
+    if (customEl && customEl.value.trim()) out.push(...customEl.value.split(',').map(s => s.trim()).filter(Boolean));
+    return [...new Set(out)].slice(0, 12);
+  }
+  function customTechs(all) {
+    const c = new Set(((window.PortfoolioEvidence && PortfoolioEvidence.COMMON) || []).map(s => String(s).toLowerCase()));
+    return (all || []).filter(t => !c.has(String(t).toLowerCase()));
+  }
+  if ($('inP1techGrid')) $('inP1techGrid').innerHTML = techGridHTML([]);
+
   $('builderForm').addEventListener('submit', async e => {
     e.preventDefault();
     const username = $('inUser').value.toLowerCase().trim().replace(/[^a-z0-9-]+/g,'');
     if(!/^[a-z0-9][a-z0-9-]{2,29}$/.test(username)) return toast('❌ 3-30 chars: lowercase letters, numbers, hyphens');
 
     const template = (document.querySelector('input[name=tpl]:checked') || {}).value || 'midnight';
-    const manual = $('inP1t').value.trim() ? [{ title: $('inP1t').value.trim(), desc: $('inP1d').value.trim() || 'Featured build.', url: $('inP1u').value.trim() || '#', stars: 'Featured' }] : [];
+    const manual = $('inP1t').value.trim() ? [{ title: $('inP1t').value.trim(), desc: $('inP1d').value.trim() || 'Featured build.', url: $('inP1u').value.trim() || '#', stars: 'Featured',
+      technologies: readTechGrid($('inP1techGrid'), $('inP1techCustom')), demoUrl: $('inP1demo').value.trim() }] : [];
     const picked = [...$('ghRepoList').querySelectorAll('input:checked')].map(c => repoToProject(wizardGhRepos[+c.dataset.i]));
 
     const profile = {

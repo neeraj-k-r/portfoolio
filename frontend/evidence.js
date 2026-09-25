@@ -89,5 +89,8 @@
     return out;
   }
 
-  return { norm, projectTechs, buildEvidence, suggestions, lastUsedOf };
+  // Common technology options for pickers (checkboxes); users can add custom ones.
+  const COMMON = ['React', 'Node.js', 'Express', 'TypeScript', 'JavaScript', 'Python', 'PostgreSQL', 'MongoDB', 'Tailwind', 'Next.js', 'Django', 'Flutter'];
+
+  return { norm, projectTechs, buildEvidence, suggestions, lastUsedOf, COMMON };
 });
