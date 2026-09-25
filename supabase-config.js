@@ -72,3 +72,8 @@ async function cloudSetStatus(username, status) {
   const { error } = await sb.from('profiles').update({ status }).eq('username', String(username).toLowerCase());
   if (error) throw error;
 }
+async function cloudDeleteProfile(username) {
+  const sb = cloud(); if (!sb) throw new Error('cloud-off');
+  const { error } = await sb.from('profiles').delete().eq('username', String(username).toLowerCase());
+  if (error) throw error;
+}
