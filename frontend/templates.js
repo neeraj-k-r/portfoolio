@@ -20,9 +20,11 @@ function tplNav(p) {
 }
 
 function renderMinimal(p) {
+  const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
+
   document.body.dataset.template = 'minimal';
   document.title = `${p.name} — ${p.title} | portfoolio.me`;
-  const skills = (p.skills || []).map((s) => `<span class="badge">${tplEsc(s)}</span>`).join('');
+  const skills = (p.skills || []).map((s) => `<a href="${skillLink(s)}" style="text-decoration:none"><span class="badge">${tplEsc(s)}</span></a>`).join('');
   const projects = (p.projects || []).map((pr) => `
     <div class="card"><h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
     <div class="tags">${(pr.tags || []).map((t) => `<span>${tplEsc(t)}</span>`).join('')}</div>
@@ -47,9 +49,11 @@ function renderMinimal(p) {
 }
 
 function renderTerminal(p) {
+  const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
+
   document.body.dataset.template = 'terminal';
   document.title = `${p.name} ~ $ whoami | portfoolio.me`;
-  const skills = (p.skills || []).map((s) => `<span class="badge">${tplEsc(s)}</span>`).join(' ');
+  const skills = (p.skills || []).map((s) => `<a href="${skillLink(s)}" style="text-decoration:none"><span class="badge">${tplEsc(s)}</span></a>`).join(' ');
   const projects = (p.projects || []).map((pr) => `
     <div class="card"><p class="mono" style="color:#4ade80">$ open ${tplEsc(pr.title.toLowerCase().replace(/\s+/g, '-'))}</p>
     <h3>> ${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
@@ -68,10 +72,12 @@ function renderTerminal(p) {
 }
 
 function renderCreative(p) {
+  const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
+
   document.body.dataset.template = 'creative';
   document.title = `${p.name} — ${p.title} | portfoolio.me`;
   const icon = (typeof projIcon === 'function') ? projIcon : (pr) => `<span style="font-size:56px">${tplEsc(pr.emoji || '*')}</span>`;
-  const skills = (p.skills || []).map((s) => `<span class="badge">${tplEsc(s)}</span>`).join('');
+  const skills = (p.skills || []).map((s) => `<a href="${skillLink(s)}" style="text-decoration:none"><span class="badge">${tplEsc(s)}</span></a>`).join('');
   const projects = (p.projects || []).map((pr, i) => `
     <article class="proj"><div class="proj-top p${(i % 6) + 1}"><div class="proj-art">${icon(pr)}</div></div>
     <div class="proj-body"><h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
