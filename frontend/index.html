@@ -738,7 +738,11 @@ if ($('builderForm')) {
     localStorage.setItem('portfoolio_users_v1', JSON.stringify(all));
 
     if (cloudEnabled()) {
-      try { await cloudSaveProfile(profile); } catch {}
+      try { await cloudSaveProfile(profile); }
+      catch (e) {
+        toast('⚠️ Saved on this device, but cloud submit failed: ' + (e.message || e));
+        console.error('cloudSaveProfile failed', e);
+      }
     }
 
     activeUserProfile = profile;
