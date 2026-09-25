@@ -85,7 +85,9 @@ function projIcon(pr) {
 }
 // ---- GitHub import: fetch public repos, normalize to portfolio projects ----
 async function fetchGitHubRepos(username, count = 100) {
-  const u = String(username || '').trim().replace(/^@/, '');
+  let u = String(username || '').trim().replace(/^@/, '');
+  const m = u.match(/github\.com\/([A-Za-z0-9-]+)/i);
+  if (m) u = m[1];
   if (!/^[A-Za-z0-9-]{1,39}$/.test(u)) throw new Error('bad-username');
   const r = await fetch(`https://api.github.com/users/${encodeURIComponent(u)}/repos?per_page=${count}&sort=updated`, {
     headers: { Accept: 'application/vnd.github+json' },
