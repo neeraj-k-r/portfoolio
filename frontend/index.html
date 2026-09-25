@@ -794,6 +794,7 @@ function ghErrText(e) {
   if (!e) return 'Could not load repos.';
   if (e.message === 'not-found') return 'Not found — check the username or repo URL.';
   if (e.message === 'rate-limited') return 'GitHub rate limit hit (60/hr) — wait a few minutes and retry.';
+  if (e.message === 'timeout') return 'GitHub is taking too long — check connection/VPN and retry.';
   if (e instanceof TypeError) return 'Network blocked — check internet/ad-blocker, then retry.';
   return 'Could not load repos (' + e.message + ') — send this text to support.';
 }

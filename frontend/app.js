@@ -89,7 +89,7 @@ async function fetchGitHubRepos(username, count = 100) {
   const m = u.match(/github\.com\/([A-Za-z0-9-]+)/i);
   if (m) u = m[1];
   if (!/^[A-Za-z0-9-]{1,39}$/.test(u)) throw new Error('bad-username');
-  const r = await fetch(`https://api.github.com/users/${encodeURIComponent(u)}/repos?per_page=${count}&sort=updated`, {
+  const r = await fetchWithTimeout(`https://api.github.com/users/${encodeURIComponent(u)}/repos?per_page=${count}&sort=updated`, {
     headers: { Accept: 'application/vnd.github+json' },
   });
   if (r.status === 404) throw new Error('not-found');
@@ -113,12 +113,23 @@ function repoToProject(r) {
     },
   };
 }
+// fetch with a hard timeout so slow/blocked networks fail visibly instead of hanging
+async function fetchWithTimeout(url, opts, ms = 20000) {
+  const ctrl = new AbortController();
+  const t = setTimeout(() => ctrl.abort(), ms);
+  try {
+    return await fetch(url, { ...(opts || {}), signal: ctrl.signal });
+  } catch (e) {
+    if (e && e.name === 'AbortError') throw new Error('timeout');
+    throw e;
+  } finally { clearTimeout(t); }
+}
 // Accepts a username, @user, profile URL, or single repo URL (user/repo)
 async function fetchGitHubInput(input) {
   const s = String(input || '').trim();
   const m = s.match(/github\.com\/([A-Za-z0-9-]+)\/([A-Za-z0-9-_.]+)/i);
   if (m) {
-    const r = await fetch(`https://api.github.com/repos/${encodeURIComponent(m[1])}/${encodeURIComponent(m[2])}`, {
+    const r = await fetchWithTimeout(`https://api.github.com/repos/${encodeURIComponent(m[1])}/${encodeURIComponent(m[2])}`, {
       headers: { Accept: 'application/vnd.github+json' },
     });
     if (r.status === 404) throw new Error('not-found');
