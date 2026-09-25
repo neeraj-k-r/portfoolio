@@ -507,9 +507,15 @@ if(document.getElementById('builderForm')){
         <div class="proj-row"><b>@${r.username} — ${r.name}</b><small style="color:var(--muted)">${r.email}</small>
         <a class="btn btn-ghost btn-sm" href="/?u=${encodeURIComponent(r.username)}" target="_blank">Preview</a>
         <button data-ok="${r.username}" style="background:rgba(163,230,53,.15);border-color:rgba(163,230,53,.4);color:#bef264">Approve</button>
-        <button data-no="${r.username}">Reject</button></div>`).join('');
+        <button data-no="${r.username}">Reject</button>
+        <button data-del="${r.username}" title="Delete forever">✕</button></div>`).join('');
       $('adminQueue').querySelectorAll('[data-ok]').forEach(b => b.onclick = async () => { await cloudSetStatus(b.dataset.ok, 'approved'); toast('✅ @' + b.dataset.ok + ' is live'); loadQueue(); });
       $('adminQueue').querySelectorAll('[data-no]').forEach(b => b.onclick = async () => { await cloudSetStatus(b.dataset.no, 'rejected'); toast('🚫 @' + b.dataset.no + ' rejected'); loadQueue(); });
+      $('adminQueue').querySelectorAll('[data-del]').forEach(b => b.onclick = async () => {
+        if (!confirm('Delete @' + b.dataset.del + ' forever? The name becomes available again.')) return;
+        try { await cloudDeleteProfile(b.dataset.del); toast('🗑 deleted'); loadQueue(); }
+        catch (e) { toast('❌ ' + e.message); }
+      });
     } catch (e) { $('adminCount').textContent = 'Could not load queue: ' + e.message; }
   }
   function showQueue() { $('adminLoginBox').style.display = 'none'; $('adminQueueBox').style.display = ''; loadQueue(); }
