@@ -66,6 +66,42 @@ function cards(p) {
     <div class="tags">${(pr.tags || []).map((t) => `<span>${esc(t)}</span>`).join('')}</div>
     <div class="proj-actions"><a class="primary" href="${esc(pr.url)}" target="_blank" rel="noopener">View code</a></div></div></article>`).join('');
 }
+function skillEvidence(p) {
+  // local derivation mirroring frontend/evidence.js (worker has no shared imports)
+  const map = new Map();
+  (p.projects || []).forEach((pr) => {
+    techsOf(pr).forEach((t) => {
+      const k = t.toLowerCase();
+      if (!map.has(k)) map.set(k, { name: t, n: 0, repos: 0 });
+      const e = map.get(k);
+      e.n += 1;
+      if (pr.repo) e.repos += 1;
+    });
+  });
+  return Array.from(map.values()).sort((a, b) => b.n - a.n || a.name.localeCompare(b.name));
+}
+function skillsSection(p) {
+  if (p.skillsDisplay === 'simple') {
+    return `<section class="wrap" style="padding-top:10px"><span class="eyebrow">● Skills</span>
+    <h2 class="title">What I <span class="grad">work with</span></h2>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">${(p.skills || []).map((s) => `<span class="badge">✦ ${esc(s)}</span>`).join('') || '<p>No skills listed yet.</p>'}</div></section>`;
+  }
+  const ev = skillEvidence(p);
+  if (!ev.length) {
+    return `<section class="wrap" style="padding-top:10px"><span class="eyebrow">● Skills</span>
+    <h2 class="title">Don't list it. <span class="grad">Prove it.</span></h2>
+    <p style="color:var(--muted)">No evidence yet — skills appear here once projects are tagged with technologies.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">${(p.skills || []).map((s) => `<span class="badge">✦ ${esc(s)}</span>`).join('')}</div></section>`;
+  }
+  return `<section class="wrap" style="padding-top:10px"><span class="eyebrow">● Skills</span>
+  <h2 class="title">Don't list it. <span class="grad">Prove it.</span></h2>
+  <div class="proj-grid" style="grid-template-columns:repeat(3,1fr);margin-top:14px">${ev.map((s) => `
+    <a class="card" style="display:block;padding:18px" href="/skills/${encodeURIComponent(s.name.toLowerCase())}">
+      <h3 style="font-size:17px">${esc(s.name)}</h3>
+      <p style="color:var(--muted);font-size:13px;margin:4px 0 0">${s.n} project${s.n > 1 ? 's' : ''}${s.repos ? ` · ${s.repos} repositor${s.repos > 1 ? 'ies' : 'y'}` : ''}</p>
+      <span style="color:#22d3ee;font-size:13px;font-weight:800">View evidence →</span>
+    </a>`).join('')}</div></section>`;
+}
 function page(p) {
   const tpl = (p.template || 'midnight').toLowerCase();
   const skills = (p.skills || []).map((s) => `<span class="badge">${esc(s)}</span>`).join('');
@@ -90,6 +126,7 @@ function page(p) {
          <h3>${esc(p.name)}</h3><p class="mono">@${esc(p.username)} • portfoolio.me</p><div class="badges">${skills}</div>
        </div></div></div></div></header>`;
   return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}><div class="bg-fx"></div>${nav(p)}${hero}
+  ${skillsSection(p)}
   <section class="wrap" style="padding-top:10px"><span class="eyebrow">● Projects</span>
   <h2 class="title">Work that <span class="grad">speaks</span></h2>
   <div class="proj-grid" style="margin-top:22px">${cards(p) || '<p>No projects yet.</p>'}</div></section>
