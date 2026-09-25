@@ -393,7 +393,7 @@ if(document.getElementById('builderForm')){
   }
   function openEditor(p) {
     editing = JSON.parse(JSON.stringify(p));
-    $('loginCard').style.display = 'none'; $('editorCard').style.display = '';
+    showRole('user'); showUserState(true);
     $('edWho').textContent = '@' + p.username;
     const st = editingCloud ? (p.status || 'pending') : 'local';
     $('edStatusLine').textContent = st === 'approved' ? '● LIVE — your subdomain is active'
@@ -414,7 +414,7 @@ if(document.getElementById('builderForm')){
   function lockEditor() {
     editing = null; editingCloud = false; localStorage.removeItem('portfoolio_session_v1');
     if (cloudEnabled()) cloud().auth.signOut();
-    $('editorCard').style.display = 'none'; $('loginCard').style.display = '';
+    showRole(null);
   }
   $('dashLoginBtn').onclick = async () => {
     const u = $('dashUser').value.toLowerCase().trim(), k = $('dashKey').value.trim().toUpperCase();
@@ -585,6 +585,28 @@ if(document.getElementById('builderForm')){
       await afterAuth(email);
     } catch (e) { $('authMsg').textContent = e.message; }
   };
+  // ---- Role layout: landing → login → user dash OR admin dash ----
+  function layoutRoles() {
+    if (!document.getElementById('editorCard') || document.getElementById('userDash')) return;
+    const userDash = document.createElement('div'); userDash.id = 'userDash'; userDash.style.display = 'none';
+    const adminDash = document.createElement('div'); adminDash.id = 'adminDash'; adminDash.style.display = 'none';
+    const ed = document.getElementById('editorCard'), ad = document.getElementById('adminCard'), claim = document.getElementById('create');
+    ed.before(userDash); userDash.appendChild(ed);
+    if (claim) userDash.appendChild(claim);
+    if (ad) { ad.before(adminDash); adminDash.appendChild(ad); }
+  }
+  function showRole(role) { // 'user' | 'admin' | null
+    layoutRoles();
+    const u = document.getElementById('userDash'), a = document.getElementById('adminDash'), login = document.getElementById('loginCard');
+    if (u) u.style.display = role === 'user' ? '' : 'none';
+    if (a) a.style.display = role === 'admin' ? '' : 'none';
+    if (login) login.style.display = role ? 'none' : '';
+  }
+  function showUserState(hasProfile) {
+    const claim = document.getElementById('create'), ed = document.getElementById('editorCard');
+    if (claim) claim.style.display = hasProfile ? 'none' : '';
+    if (ed) ed.style.display = hasProfile ? '' : 'none';
+  }
   async function renderDir(){
     const seeds=[
       {username:'neerajkr',name:'Neeraj K R',title:'Full-Stack Developer & AI Engineer • 🌌 Midnight'},
