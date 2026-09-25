@@ -49,7 +49,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <nav>
   <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>username.portfoolio.me</small></span></a>
   <div class="nav-links" id="navLinks">
-    <a href="#create">Create</a><a href="#directory">Live sites</a><a href="#dashboard">Dashboard</a><a href="#auth">Log in</a>
+    <a href="#directory">Live sites</a><a href="#dashboard">Dashboard</a><a href="#auth">Log in</a>
   </div>
   <div style="display:flex;gap:10px;align-items:center">
     <a class="btn btn-ghost btn-sm" href="#auth">Log in</a>
@@ -75,7 +75,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <div class="mono" style="font-size:26px;font-weight:700;margin:8px 0"><span id="livePrev" style="color:#fff">yourname</span><span style="color:#6b7594">.portfoolio.me</span></div>
       <p style="color:var(--muted);font-size:13.5px">Type your name in the form below — this preview updates live. Lowercase, 3–30 chars, letters/numbers/hyphens.</p>
       <div class="badges" style="justify-content:flex-start"><span class="badge">⚡ instant</span><span class="badge">🔒 free SSL</span><span class="badge">📱 mobile wow</span></div>
-      <a class="btn btn-primary btn-sm" href="#create">Start →</a>
+      <a class="btn btn-primary btn-sm" href="#auth" data-tab="signup">Start →</a>
     </div></div></div>
   </div>
 </header>
@@ -113,7 +113,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <section id="create" class="wrap" style="padding-top:20px">
   <span class="eyebrow">● Create yours</span>
   <h2 class="title">Claim <span class="grad">your subdomain</span></h2>
-  <p class="lead">Fill this once. Your portfolio goes live instantly at <b style="color:#fff" id="claimHint">yourname.portfoolio.me</b> (works today as <span class="mono">portfoolio.me/?u=yourname</span>, auto-upgrades to subdomain when wildcard DNS is on).</p>
+  <p class="lead">You're logged in — claim your subdomain once. An admin reviews it, then <b style="color:#fff">yourname.portfoolio.me</b> goes live.</p>
   <div class="two" style="grid-template-columns:1.1fr .9fr">
     <form class="contact-form" id="builderForm">
       <div class="form-grid">
@@ -174,8 +174,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 
 <section id="dashboard" class="wrap">
   <span class="eyebrow">● Dashboard</span>
-  <h2 class="title">Edit <span class="grad">your portfolio</span></h2>
-  <p class="lead">Log in with your subdomain + edit key, update anything, save — your site refreshes instantly. Then share it everywhere.</p>
+  <h2 class="title">Your <span class="grad">dashboard</span></h2>
+  <p class="lead">Log in once — users get their portfolio studio, admins get the control panel. Different doors, same key.</p>
   <div class="two" style="margin-top:22px">
     <div class="card" id="loginCard">
       <h3>🔐 Log in</h3>
