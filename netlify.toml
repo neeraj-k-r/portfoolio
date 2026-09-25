@@ -1,16 +1,24 @@
 [build]
+  # publish repo root: frontend/ serves the site, backend/ stays reachable for shared config
   publish = "."
 
 [[redirects]]
   from = "/u/*"
-  to = "/?u=:splat"
+  to = "/frontend/?u=:splat"
   status = 200
   force = true
 
 [[redirects]]
   from = "/admin"
-  to = "/admin.html"
+  to = "/frontend/admin.html"
   status = 200
+
+# everything else renders from frontend/; real files (e.g. /backend/*) still serve directly
+[[redirects]]
+  from = "/*"
+  to = "/frontend/:splat"
+  status = 200
+  force = false
 
 [[headers]]
   for = "/profiles/*"

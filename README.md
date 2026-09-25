@@ -4,15 +4,20 @@ Give your name + details, get a wow portfolio on **yourname.portfoolio.me**.
 
 Live: https://portfoolio.me (Netlify + Namecheap) • Demo: https://portfoolio.me/?u=neerajkr
 
+## Repo layout
+- `frontend/` — everything visitors see: landing, auth, dashboards, templates, seed profiles. (`index.html`, `admin.html`, `app.js`, `templates.js`, `style.css`, `templates.css`, `profiles/`)
+- `backend/` — server + data layer: Cloudflare Worker, wrangler config, Supabase config/helpers/schema.
+- `netlify.toml` (root) — publishes repo root and rewrites all page URLs into `frontend/`; `/backend/*` files serve directly.
+
+## Run locally
+`python -m http.server` from repo root, then open `http://localhost:8000/frontend/`.
+
 ## How it works (v1)
 - `index.html` = landing + builder form + directory
 - `app.js` router resolves user via **subdomain** (`neerajkr.portfoolio.me`), `?u=neerajkr`, `/u/neerajkr`, or `#/u/neerajkr`
 - Profiles live in `profiles/<username>.json` + browser `localStorage` (Supabase-ready for v2 permanent store)
 - `worker.js` = Cloudflare Worker for true free wildcard `*.portfoolio.me`
 - `netlify.toml` = `/u/*` rewrite + CORS for profiles
-
-## Run locally
-Open `index.html`, or `python -m http.server` then visit `http://localhost:8000/?u=demo`.
 
 ## Deploy (Netlify Git)
 Import `neeraj-k-r/portfoolio`, branch `main`, build command empty, publish `.`. Then add custom domain `portfoolio.me`.
@@ -21,7 +26,7 @@ Import `neeraj-k-r/portfoolio`, branch `main`, build command empty, publish `.`.
 1. Cloudflare → Add site `portfoolio.me` (free) → copy its 2 nameservers.
 2. Namecheap → Domain → Nameservers → Custom DNS → paste Cloudflare's nameservers.
 3. Cloudflare → DNS: `A @ → 75.2.60.5` (DNS-only/grey), `CNAME www → <site>.netlify.app` (DNS-only), `CNAME * → portfoolio.me` (Proxied/orange — required for the worker route).
-4. Deploy worker: `npx wrangler login && npx wrangler deploy` from repo root (uses `wrangler.toml`, route `*.portfoolio.me/*`). Worker reads approved profiles from Supabase + falls back to seed JSON; unknown names redirect to `portfoolio.me/?claim=name`.
+4. Deploy worker: `cd backend` then `npx wrangler login && npx wrangler deploy` (uses `backend/wrangler.toml`, route `*.portfoolio.me/*`). Worker reads approved profiles from Supabase + falls back to seed JSON; unknown names redirect to `portfoolio.me/?claim=name`.
 5. SSL: Cloudflare SSL/TLS mode **Full** (not Strict — Netlify's cert covers apex+www; subdomains are served by the worker with Cloudflare's edge cert).
 
 ## True subdomains (one-time owner step)
@@ -29,8 +34,8 @@ Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`,
 
 ## Email login (Supabase, free — 5 min owner setup)
 1. Create project at supabase.com → copy **Project URL** + **anon key**
-2. Paste them into `supabase-config.js` (2 constants at top), commit + push
-3. Supabase → SQL Editor → run `supabase-schema.sql`
+2. Paste them into `backend/supabase-config.js` (2 constants at top), commit + push
+3. Supabase → SQL Editor → run `backend/supabase-schema.sql`
 4. Auth → Providers → Email ON (turn Confirm email OFF for instant login — admin approval already moderates signups). Users sign up / log in with email + password; profiles in Postgres; public portfolios readable everywhere.
 
 ## Flow (landing → login → role dashboard)
@@ -39,10 +44,10 @@ Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`,
 - Claim form lives inside the user dash and requires login; admin approval publishes the subdomain.
 
 ## Admin approval setup
-1. Supabase → SQL Editor → run `supabase-schema.sql` (re-run safe — it upgrades `is_admin()` too).
+1. Supabase → SQL Editor → run `backend/supabase-schema.sql` (re-run safe — it upgrades `is_admin()` too).
 2. Supabase → Authentication → Add user → `portfoolio.me@gmail.com` + your admin password (tick auto-confirm). The password lives ONLY in Supabase — never in code.
 3. Auth → Providers → Email → **Confirm email OFF** — no confirmation emails anywhere; the superadmin approves users from the site's admin panel instead.
-Flow: visitor signs up with email + password → submits site request (saved `pending`, invisible publicly) → superadmin logs into dashboard admin panel → approves → `username.portfoolio.me` goes live. (`admins` table insert no longer required — the superadmin email is hardcoded in `is_admin()` + `supabase-config.js`.)
+Flow: visitor signs up with email + password → submits site request (saved `pending`, invisible publicly) → superadmin logs into dashboard admin panel → approves → `username.portfoolio.me` goes live. (`admins` table insert no longer required — the superadmin email is hardcoded in `is_admin()` + `backend/supabase-config.js`.)
 
 ## Templates (pick 1 in builder, stored as `template`)
 - 🌌 `midnight` — dark + neon wow (default) → `?u=neerajkr`
