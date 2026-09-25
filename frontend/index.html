@@ -693,7 +693,11 @@ if ($('builderForm')) {
         $('ghStatus').textContent = `${wizardGhRepos.length} repos loaded`;
         toast(`✅ Loaded ${wizardGhRepos.length} repos`);
       } catch (e) {
-        $('ghStatus').textContent = 'Could not load repos.';
+        $('ghStatus').textContent =
+          e.message === 'not-found' ? `GitHub user "${u}" not found — check spelling.` :
+          e.message === 'rate-limited' ? 'GitHub rate limit hit (60/hr) — wait a few minutes and retry.' :
+          e instanceof TypeError ? 'Network blocked — check internet/ad-blocker, then retry.' :
+          'Could not load repos.';
       }
     };
   }
