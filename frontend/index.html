@@ -791,10 +791,11 @@ if ($('edSaveBtn')) {
 // Editor: load repos (username or repo URL) + add selected
 let edGhRepos = [];
 function ghErrText(e) {
-  return e.message === 'not-found' ? 'Not found — check the username or repo URL.' :
-    e.message === 'rate-limited' ? 'GitHub rate limit hit (60/hr) — wait a few minutes and retry.' :
-    e instanceof TypeError ? 'Network blocked — check internet/ad-blocker, then retry.' :
-    'Could not load repos.';
+  if (!e) return 'Could not load repos.';
+  if (e.message === 'not-found') return 'Not found — check the username or repo URL.';
+  if (e.message === 'rate-limited') return 'GitHub rate limit hit (60/hr) — wait a few minutes and retry.';
+  if (e instanceof TypeError) return 'Network blocked — check internet/ad-blocker, then retry.';
+  return 'Could not load repos (' + e.message + ') — send this text to support.';
 }
 if ($('edGhLoad')) $('edGhLoad').onclick = async () => {
   if (!activeUserProfile) return toast('❌ Log in first');

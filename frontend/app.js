@@ -123,7 +123,7 @@ async function fetchGitHubInput(input) {
     });
     if (r.status === 404) throw new Error('not-found');
     if (r.status === 403) throw new Error('rate-limited');
-    if (!r.ok) throw new Error('fetch-failed');
+    if (!r.ok) throw new Error('github-' + r.status);
     return [await r.json()];
   }
   return fetchGitHubRepos(s);
