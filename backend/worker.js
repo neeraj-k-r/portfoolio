@@ -107,12 +107,15 @@ function page(p) {
   const skills = (p.skills || []).map((s) => `<span class="badge">${esc(s)}</span>`).join('');
   const bodyAttr = tpl === 'midnight' ? '' : ` data-template="${tpl}"`;
   const hero = tpl === 'minimal'
-    ? `<section class="wrap" style="padding:140px 0 30px"><div class="card"><h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
+    ? `<section class="wrap" style="padding:140px 0 30px"><div class="card">
+       ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:96px;height:96px;border-radius:16px;object-fit:cover;margin-bottom:10px">` : ''}
+       <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
        <h2 style="font-size:20px">${esc(p.title)}</h2><p style="margin:10px 0">${esc(p.tagline || '')}</p>
        <div class="badges" style="justify-content:flex-start">${skills}</div>
        <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Email me</a>` : ''}${p.github ? `<a class="btn btn-ghost btn-sm" href="${esc(p.github)}">GitHub</a>` : ''}${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${esc(p.linkedin)}">LinkedIn</a>` : ''}</div></div></section>`
     : tpl === 'terminal'
     ? `<section class="wrap" style="padding:140px 0 30px"><div class="card"><p class="mono">$ whoami</p>
+       ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:96px;height:96px;border-radius:12px;object-fit:cover;margin:10px 0">` : ''}
        <h1>${esc(p.name)} <span>@${esc(p.username)}</span></h1><p class="mono">${esc(p.title)}</p><p>${esc(p.tagline || '')}</p></div>
        <div class="card" style="margin-top:14px"><p class="mono">$ ls --skills</p><div style="margin-top:8px">${skills}</div></div></section>`
     : `<header class="hero wrap"><div class="hero-grid"><div>

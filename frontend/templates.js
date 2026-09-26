@@ -34,8 +34,10 @@ function renderMinimal(p) {
     <div style="margin-top:10px"><a class="btn btn-ghost btn-sm" href="${tplEsc(pr.url)}" target="_blank">View project →</a></div></div>`).join('');
   document.getElementById('app').innerHTML = `${tplNav(p)}
   <section class="wrap" style="padding:140px 0 30px"><div class="card">
-    <p class="mono" style="font-size:13px;color:#4f46e5">${tplEsc(p.location || '')} • available ${p.available ? 'now' : 'soon'}</p>
-    <h1 style="font-size:clamp(36px,5vw,56px);line-height:1.05;margin:8px 0">${tplEsc(p.name)}</h1>
+    <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:96px;height:96px;border-radius:16px;object-fit:cover">` : ''}
+    <div><p class="mono" style="font-size:13px;color:#4f46e5">${tplEsc(p.location || '')} • available ${p.available ? 'now' : 'soon'}</p>
+    <h1 style="font-size:clamp(36px,5vw,56px);line-height:1.05;margin:8px 0">${tplEsc(p.name)}</h1></div></div>
     <h2 style="font-size:20px;color:#334155">${tplEsc(p.title)}</h2>
     <p style="color:#475569;max-width:640px;margin:10px 0">${tplEsc(p.tagline || '')}</p>
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
@@ -65,6 +67,7 @@ function renderTerminal(p) {
   document.getElementById('app').innerHTML = `${tplNav(p)}
   <section class="wrap" style="padding:140px 0 30px">
     <div class="card"><p class="mono">$ whoami</p><h1>${tplEsc(p.name)} <span style="color:#4ade80">@${tplEsc(p.username)}</span></h1>
+    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:96px;height:96px;border-radius:12px;object-fit:cover;margin:10px 0;border:1px solid #166534">` : ''}
     <p class="mono" style="color:#86efac">${tplEsc(p.title)} — ${tplEsc(p.location || 'remote')}</p>
     <p style="margin-top:8px">${tplEsc(p.tagline || '')}</p>
     <p class="mono" style="margin-top:10px">$ contact --email ${tplEsc(p.email || '')} ${p.github ? `--github ${tplEsc(p.github)}` : ''}</p></div>
@@ -88,7 +91,7 @@ function renderCreative(p) {
     <div class="proj-actions"><a class="primary" href="${tplEsc(pr.url)}" target="_blank">Explore →</a></div></div></article>`).join('');
   document.getElementById('app').innerHTML = `${tplNav(p)}
   <header class="hero wrap"><div style="text-align:center;padding:40px 0 10px">
-    <div style="width:96px;height:96px;border-radius:28px;margin:0 auto;display:grid;place-items:center;font-size:44px;font-weight:800;color:#fff;background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee);box-shadow:0 18px 44px rgba(139,92,246,.45)">${tplEsc((p.name || '?').trim().charAt(0).toUpperCase())}</div>
+    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:96px;height:96px;border-radius:28px;object-fit:cover;margin:0 auto 10px;display:block">` : `<div style="width:96px;height:96px;border-radius:28px;margin:0 auto;display:grid;place-items:center;font-size:44px;font-weight:800;color:#fff;background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee);box-shadow:0 18px 44px rgba(139,92,246,.45)">${tplEsc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`}
     <h1 style="font-size:clamp(40px,7vw,76px)">${tplEsc(p.name)}</h1>
     <p class="sub" style="margin:10px auto;max-width:600px">${tplEsc(p.title)} • ${tplEsc(p.tagline || '')}</p>
     <div class="badges" style="justify-content:center">${skills}</div>
