@@ -1,8 +1,8 @@
 /* portfoolio.me — Cloudinary unsigned uploads (no secrets; preset must allow unsigned).
  * Setup: Cloudinary dashboard → Settings → Upload → Upload presets → Add (Signing Mode: Unsigned).
  * Paste the cloud name + preset below. Until then, avatar upload shows a setup notice. */
-const PORTFOOLIO_CLOUDINARY_CLOUD = 'PASTE_CLOUD_NAME_HERE';
-const PORTFOOLIO_CLOUDINARY_PRESET = 'PASTE_UNSIGNED_PRESET_HERE';
+const PORTFOOLIO_CLOUDINARY_CLOUD = 'dtzdgkimi';
+const PORTFOOLIO_CLOUDINARY_PRESET = 'naatukavala';
 
 function cloudinaryEnabled() {
   return PORTFOOLIO_CLOUDINARY_CLOUD.indexOf('PASTE_') !== 0 && PORTFOOLIO_CLOUDINARY_PRESET.indexOf('PASTE_') !== 0;
