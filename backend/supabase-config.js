@@ -13,10 +13,14 @@ function cloud() {
   if (!_cloud) _cloud = window.supabase.createClient(PORTFOOLIO_SUPABASE_URL, PORTFOOLIO_SUPABASE_ANON_KEY);
   return _cloud;
 }
+function normRow(r) {
+  if (r && typeof r.avatar_url !== 'undefined' && typeof r.avatarUrl === 'undefined') r.avatarUrl = r.avatar_url || '';
+  return r;
+}
 async function cloudGetProfile(username) {
   const sb = cloud(); if (!sb) return null;
   const { data } = await sb.from('profiles').select('*').eq('username', String(username).toLowerCase()).eq('status', 'approved').maybeSingle();
-  return data || null;
+  return normRow(data) || null;
 }
 async function cloudSaveProfile(p) {
   const sb = cloud(); if (!sb) throw new Error('cloud-off');
@@ -27,6 +31,7 @@ async function cloudSaveProfile(p) {
     user_id: user.id, username: p.username.toLowerCase(), name: p.name, title: p.title,
     tagline: p.tagline, email: p.email, phone: p.phone, location: p.location,
     github: p.github, linkedin: p.linkedin, template: p.template || 'midnight',
+    avatar_url: p.avatarUrl || '',
     skills: p.skills || [], projects: p.projects || [], available: p.available !== false,
     status: (existing && existing.status) || 'approved',
   };
@@ -51,7 +56,7 @@ async function cloudMyProfile() {
   const { data: { user } } = await sb.auth.getUser();
   if (!user) return null;
   const { data } = await sb.from('profiles').select('*').eq('user_id', user.id).maybeSingle();
-  return data || null;
+  return normRow(data) || null;
 }
 async function cloudIsAdmin() {
   const sb = cloud(); if (!sb) return false;
