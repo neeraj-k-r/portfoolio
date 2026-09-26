@@ -60,11 +60,18 @@ function foot(p) {
   <div class="socials">${p.github ? `<a href="${esc(p.github)}"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${esc(p.linkedin)}"><i class="fa-brands fa-linkedin"></i></a>` : ''}${p.email ? `<a href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
 }
 function cards(p) {
-  return (p.projects || []).map((pr, i) => `
+  return (p.projects || []).map((pr, i) => {
+    const techs = techsOf(pr);
+    const gh = pr.repo ? `<span class="badge" style="font-size:11px" title="Repository retrieved from GitHub — not a skill endorsement">✓ GitHub Verified</span>` : '';
+    const live = pr.demoUrl ? `<a class="badge" style="font-size:11px" href="${esc(pr.demoUrl)}">↗ Live Demo</a>` : '';
+    const meta = pr.repo ? `<small style="color:var(--muted);font-size:11.5px">${esc(pr.repo.fullName || '')}${pr.repo.updatedAt ? ` • updated ${esc(String(pr.repo.updatedAt).slice(0, 7))}` : ''}</small>` : '';
+    return `
     <article class="proj"><div class="proj-top p${(i % 6) + 1}"><div class="proj-art">${iconFor(pr)}</div><div class="stars">${esc(pr.stars || 'Live')}</div></div>
     <div class="proj-body"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
-    <div class="tags">${(pr.tags || []).map((t) => `<span>${esc(t)}</span>`).join('')}</div>
-    <div class="proj-actions"><a class="primary" href="${esc(pr.url)}" target="_blank" rel="noopener">View code</a></div></div></article>`).join('');
+    ${techs.length ? `<div class="tags">${techs.map((t) => `<a href="/skills/${encodeURIComponent(t.toLowerCase())}" style="text-decoration:none"><span>${esc(t)}</span></a>`).join('')}</div>` : ''}
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:2px;align-items:center">${gh}${live}${meta}</div>
+    <div class="proj-actions"><a class="primary" href="${esc(pr.url)}" target="_blank" rel="noopener">View code</a>${pr.demoUrl ? `<a href="${esc(pr.demoUrl)}" target="_blank" rel="noopener">Demo</a>` : ''}</div></div></article>`;
+  }).join('');
 }
 function skillEvidence(p) {
   // local derivation mirroring frontend/evidence.js (worker has no shared imports)
@@ -127,6 +134,7 @@ function page(p) {
        <h1 style="font-size:clamp(46px,8vw,96px);text-transform:uppercase">${esc(p.name)}</h1>
        <h2 style="font-size:clamp(20px,3vw,30px);background:#000;color:#fef08a;display:inline-block;padding:6px 14px;margin-top:10px">${esc(p.title)}</h2>
        <p class="sub" style="margin-top:12px;font-weight:600">${esc(p.tagline || '')}</p>
+       <div style="margin-top:12px">${(p.skills || []).map((s) => `<a href="/skills/${encodeURIComponent(String(s).toLowerCase())}" style="text-decoration:none"><span class="badge">★ ${esc(s)}</span></a>`).join(' ')}</div>
        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">HIRE ME</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GITHUB</a>` : ''}</div></section>`
     : tpl === 'minimal'
     ? `<section class="wrap" style="padding:140px 0 30px"><div class="card">
