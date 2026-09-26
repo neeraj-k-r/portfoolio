@@ -29,8 +29,8 @@ async function cloudSaveProfile(p) {
   const { data: existing } = await sb.from('profiles').select('status').eq('user_id', user.id).maybeSingle();
   const row = {
     user_id: user.id, username: p.username.toLowerCase(), name: p.name, title: p.title,
-    tagline: p.tagline, email: p.email, phone: p.phone, location: p.location,
-    github: p.github, linkedin: p.linkedin, template: p.template || 'midnight',
+    tagline: p.tagline, email: user.email, phone: p.phone, location: p.location,
+    github: p.github, linkedin: p.linkedin, instagram: p.instagram || '', template: p.template || 'midnight',
     avatar_url: p.avatarUrl || '',
     skills: p.skills || [], projects: p.projects || [], available: p.available !== false,
     status: (existing && existing.status) || 'approved',
