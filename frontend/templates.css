@@ -1,6 +1,6 @@
 /* portfoolio.me — base templates. Selected via body[data-template] + profile.template */
 /* Picker cards (landing) */
-.tpl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:14px 0}
+.tpl-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
 .tpl-card{border:2px solid var(--stroke);border-radius:16px;overflow:hidden;cursor:pointer;background:rgba(255,255,255,.04);transition:.2s}
 .tpl-card:hover{transform:translateY(-3px)}
 .tpl-card input{display:none}

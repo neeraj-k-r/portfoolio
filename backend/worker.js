@@ -106,7 +106,29 @@ function page(p) {
   const tpl = (p.template || 'midnight').toLowerCase();
   const skills = (p.skills || []).map((s) => `<span class="badge">${esc(s)}</span>`).join('');
   const bodyAttr = tpl === 'midnight' ? '' : ` data-template="${tpl}"`;
-  const hero = tpl === 'minimal'
+  const hero = tpl === 'aurora'
+    ? `<header class="hero wrap"><div style="text-align:center;padding:50px 0 10px">
+       ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 10px;display:block">` : ''}
+       <p class="mono" style="letter-spacing:3px;font-size:12px;opacity:.8">PORTFOLIO</p>
+       <h1 style="font-size:clamp(44px,7vw,84px)">${esc(p.name)}</h1>
+       <p class="sub" style="margin:12px auto;max-width:560px">${esc(p.title)} — ${esc(p.tagline || '')}</p>
+       <div class="hero-cta" style="justify-content:center;display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">Get in touch</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GitHub</a>` : ''}</div></div></header>`
+    : tpl === 'editorial'
+    ? `<section class="wrap" style="padding:140px 0 20px;max-width:760px">
+       ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:110px;height:110px;border-radius:50%;object-fit:cover;margin-bottom:12px">` : ''}
+       <p class="mono" style="font-size:13px">The portfolio of</p>
+       <h1 style="font-size:clamp(44px,7vw,76px)">${esc(p.name)}</h1>
+       <h2 style="font-size:22px;font-style:italic">${esc(p.title)}</h2>
+       <p style="font-size:18px;margin-top:10px">${esc(p.tagline || '')}</p></section>`
+    : tpl === 'brutalist'
+    ? `<section class="wrap" style="padding:140px 0 20px">
+       <span class="badge">● OPEN FOR WORK</span>
+       ${p.avatarUrl ? `<div style="margin-top:12px"><img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:110px;height:110px;border-radius:18px;object-fit:cover;border:3px solid #000"></div>` : ''}
+       <h1 style="font-size:clamp(46px,8vw,96px);text-transform:uppercase">${esc(p.name)}</h1>
+       <h2 style="font-size:clamp(20px,3vw,30px);background:#000;color:#fef08a;display:inline-block;padding:6px 14px;margin-top:10px">${esc(p.title)}</h2>
+       <p class="sub" style="margin-top:12px;font-weight:600">${esc(p.tagline || '')}</p>
+       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">HIRE ME</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GITHUB</a>` : ''}</div></section>`
+    : tpl === 'minimal'
     ? `<section class="wrap" style="padding:140px 0 30px"><div class="card">
        ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:96px;height:96px;border-radius:16px;object-fit:cover;margin-bottom:10px">` : ''}
        <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
