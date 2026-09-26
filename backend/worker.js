@@ -26,11 +26,14 @@ function iconFor(pr) {
 async function getProfile(sub) {
   // 1) Supabase: approved rows are publicly readable
   try {
-    const url = `${SUPABASE_URL}/rest/v1/profiles?username=eq.${encodeURIComponent(sub)}&status=eq.approved&select=username,name,title,tagline,email,phone,location,github,linkedin,template,skills,projects`;
+    const url = `${SUPABASE_URL}/rest/v1/profiles?username=eq.${encodeURIComponent(sub)}&status=eq.approved&select=username,name,title,tagline,email,phone,location,github,linkedin,template,skills,projects,avatar_url`;
     const r = await fetch(url, { headers: { apikey: SUPABASE_KEY, Accept: 'application/json' } });
     if (r.ok) {
       const rows = await r.json();
-      if (rows.length) return rows[0];
+      if (rows.length) {
+        if (rows[0].avatar_url) rows[0].avatarUrl = rows[0].avatar_url;
+        return rows[0];
+      }
     }
   } catch {}
   // 2) seed showcase files on the origin site
