@@ -57,6 +57,10 @@ Sites publish instantly; use the admin console to reject/delete spam. Existing `
 - Dashboard: Proof of Work tab (counts + actionable suggestions) in the user studio.
 - Tests: `node frontend/evidence.test.mjs` (repo has no test runner; dependency-free asserts). Existing portfolios without any new fields keep working (empty states everywhere, GitHub optional).
 
+## Identity (email permanent, socials stored + shown)
+- Email is locked to the signup account: `cloudSaveProfile` always writes `auth.users.email`, editor shows it read-only.
+- Phone, LinkedIn, Instagram (`instagram` column, `@handle` auto-normalized to URL) save from wizard + editor and render on midnight, all 6 theme renderers, and worker subdomains.
+
 ## Profile photos (Cloudinary, free)
 1. Cloudinary dashboard → Settings → Upload → Upload presets → Add new, Signing Mode **Unsigned** → copy cloud name + preset.
 2. Paste into `frontend/cloudinary-config.js`, commit + push. Users upload from Profile Info (JPG/PNG ≤5MB); URL saved on the profile and shown on all templates + worker pages.
