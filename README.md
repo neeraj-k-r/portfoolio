@@ -62,4 +62,7 @@ Sites publish instantly; use the admin console to reject/delete spam. Existing `
 - 📄 `minimal` — light, recruiter/ATS clean → `?u=priya`, `?u=demo`
 - 💻 `terminal` — hacker mono green → `?u=arjun`
 - 🎨 `creative` — gradient playful → `?u=zoe`
-- Files: `templates.css` (themes) + `templates.js` (renderers) hooked in `app.js`.
+- 🔮 `aurora` — frosted glass pastels → `?u=mira`
+- 📰 `editorial` — print serif calm → `?u=june`
+- 🧱 `brutalist` — bold blocks + shadows → `?u=leo`
+- Files: `frontend/templates.css` (themes) + `frontend/templates.js` (renderers) hooked in `app.js`.
