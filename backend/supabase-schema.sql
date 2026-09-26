@@ -10,11 +10,13 @@ create table if not exists profiles (
   available boolean default true,
   created_at timestamptz default now(), updated_at timestamptz default now()
 );
--- v2: approval workflow
-alter table profiles add column if not exists status text default 'pending'
+-- v2: status column (kept for admin moderation: approved / rejected).
+-- New sites publish instantly, so the default is now 'approved'.
+alter table profiles add column if not exists status text default 'approved'
   check (status in ('pending', 'approved', 'rejected'));
--- backfill anything from v1 days as approved
-update profiles set status = 'approved' where status is null;
+alter table profiles alter column status set default 'approved';
+-- backfill anything from approval days as approved
+update profiles set status = 'approved' where status is null or status = 'pending';
 
 -- 2) admins table (who can approve). Owner: insert your own user_id after creating the admin user.
 create table if not exists admins (
@@ -30,28 +32,26 @@ returns boolean language sql security definer stable as
 $$ select (auth.jwt() ->> 'email') = 'portfoolio.me@gmail.com'
    or exists (select 1 from admins where user_id = auth.uid()) $$;
 
--- 3) profiles policies
+-- 3) profiles policies — OPEN publishing: new sites go live instantly.
+-- Admin console remains for moderation (reject/delete spam).
 alter table profiles enable row level security;
 drop policy if exists "public read" on profiles;
 drop policy if exists "public read approved" on profiles;
-create policy "public read approved" on profiles
-  for select using (status = 'approved' or auth.uid() = user_id);
+create policy "public read" on profiles
+  for select using (true);
 drop policy if exists "owner insert" on profiles;
 drop policy if exists "request insert" on profiles;
-create policy "request insert" on profiles
-  for insert with check (auth.uid() = user_id and status = 'pending');
+create policy "owner insert" on profiles
+  for insert with check (auth.uid() = user_id);
 drop policy if exists "owner update" on profiles;
 drop policy if exists "owner update pending" on profiles;
-create policy "owner update pending" on profiles
+drop policy if exists "owner update approved" on profiles;
+create policy "owner update" on profiles
   for update using (auth.uid() = user_id)
-  with check (auth.uid() = user_id and status = 'pending');
+  with check (auth.uid() = user_id);
 drop policy if exists "owner delete" on profiles;
 create policy "owner delete" on profiles
-  for delete using (auth.uid() = user_id and status = 'pending');
-drop policy if exists "owner update approved" on profiles;
-create policy "owner update approved" on profiles
-  for update using (auth.uid() = user_id and status = 'approved')
-  with check (auth.uid() = user_id and status = 'approved');
+  for delete using (auth.uid() = user_id);
 drop policy if exists "admin all" on profiles;
 create policy "admin all" on profiles
   for all using (is_admin()) with check (is_admin());
