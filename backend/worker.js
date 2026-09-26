@@ -160,6 +160,7 @@ function page(p) {
     : tpl === 'brutalist'
     ? `<section class="wrap" style="padding:140px 0 20px">
        <span class="badge">● OPEN FOR WORK</span>
+       ${p.avatarUrl ? `<div style="margin-top:12px"><img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:110px;height:110px;border-radius:18px;object-fit:cover;border:3px solid #000;box-shadow:4px 4px 0 #000"></div>` : ''}
        ${p.avatarUrl ? `<div style="margin-top:12px"><img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:110px;height:110px;border-radius:18px;object-fit:cover;border:3px solid #000"></div>` : ''}
        <h1 style="font-size:clamp(46px,8vw,96px);text-transform:uppercase">${esc(p.name)}</h1>
        <h2 style="font-size:clamp(20px,3vw,30px);background:#000;color:#fef08a;display:inline-block;padding:6px 14px;margin-top:10px">${esc(p.title)}</h2>
