@@ -152,7 +152,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <div class="step-card">
         <div class="step-num">03</div>
         <h3>Go Live</h3>
-        <p>Submit your site for admin approval. Once approved, your portfolio is live at <b>yourname.portfoolio.me</b>.</p>
+        <p>Hit submit and your portfolio is live instantly at <b>yourname.portfoolio.me</b>.</p>
       </div>
     </div>
   </section>
@@ -234,7 +234,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
     <div id="subdomainWizardCard" class="card" style="display:none">
       <span class="eyebrow">● Studio Setup</span>
       <h2 class="title" style="margin-bottom:6px">Claim your <span class="grad">subdomain</span></h2>
-      <p class="lead" style="margin-bottom:20px">Choose your custom username and build your recruiter-ready portfolio. An admin will review and approve your site.</p>
+      <p class="lead" style="margin-bottom:20px">Choose your custom username and build your recruiter-ready portfolio. It goes live the second you submit.</p>
       
       <form id="builderForm" class="contact-form">
         <div class="form-grid">
@@ -741,7 +741,7 @@ if ($('builderForm')) {
       phone: $('inPhone').value.trim(), location: $('inLoc').value.trim(),
       github: $('inGithub').value.trim(), linkedin: $('inLinkedin').value.trim(),
       template, skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
-      projects: [...manual, ...picked], available: true, status: 'pending', createdAt: new Date().toISOString()
+      projects: [...manual, ...picked], available: true, status: 'approved', createdAt: new Date().toISOString()
     };
 
     const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
@@ -758,7 +758,7 @@ if ($('builderForm')) {
 
     activeUserProfile = profile;
     setupUserDashboardView(profile);
-    toast('🎉 Subdomain claimed! Submitted for admin review.');
+    toast('🎉 Subdomain claimed — your site is live!');
     renderDir();
   });
 }

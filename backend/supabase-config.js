@@ -28,7 +28,7 @@ async function cloudSaveProfile(p) {
     tagline: p.tagline, email: p.email, phone: p.phone, location: p.location,
     github: p.github, linkedin: p.linkedin, template: p.template || 'midnight',
     skills: p.skills || [], projects: p.projects || [], available: p.available !== false,
-    status: (existing && existing.status) || 'pending',
+    status: (existing && existing.status) || 'approved',
   };
   const { error } = await sb.from('profiles').upsert(row, { onConflict: 'user_id' });
   if (error) throw error;
