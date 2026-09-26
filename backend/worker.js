@@ -171,7 +171,7 @@ function page(p) {
        <div style="margin-top:12px">${(p.skills || []).map((s) => `<a href="/skills/${encodeURIComponent(String(s).toLowerCase())}" style="text-decoration:none"><span class="badge">★ ${esc(s)}</span></a>`).join(' ')}</div>
        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">HIRE ME</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GITHUB</a>` : ''}</div>
        </div>
-       ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:min(320px,80vw);aspect-ratio:1;object-fit:cover;border:4px solid #000;border-radius:24px;box-shadow:8px 8px 0 #000">` : ''}
+       ${p.avatarUrl ? `<div class="brut-portrait"><img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}"></div>` : ''}
        </div></section>`
     : tpl === 'minimal'
     ? `<section class="wrap" style="padding:140px 0 30px"><div class="card">

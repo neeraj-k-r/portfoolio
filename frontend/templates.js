@@ -182,7 +182,7 @@ function renderBrutalist(p) {
       ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GITHUB →</a>` : ''}
     </div>
     </div>
-    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:min(320px,80vw);aspect-ratio:1;object-fit:cover;border:4px solid #000;border-radius:24px;box-shadow:8px 8px 0 #000">` : ''}
+    ${p.avatarUrl ? `<div class="brut-portrait"><img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}"></div>` : ''}
     </div>
   </section>
   <section class="wrap"><h2 style="font-size:34px">▼ WORK</h2><div class="dir-grid" style="margin-top:14px">${projects || '<p>No projects yet.</p>'}</div></section>${tplFoot(p)}`;
