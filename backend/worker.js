@@ -59,6 +59,36 @@ function foot(p) {
   return `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b style="color:#fff">${esc(p.name)}</b> via <b style="color:#fff">portfoolio.me</b></div>
   <div class="socials">${p.github ? `<a href="${esc(p.github)}"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${esc(p.linkedin)}"><i class="fa-brands fa-linkedin"></i></a>` : ''}${p.email ? `<a href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
 }
+function projectsFor(p, tpl) {
+  // mirror frontend/templates.js per-template project styles so subdomain == trial
+  if (tpl === 'minimal') {
+    return (p.projects || []).map((pr) => `
+    <div class="card"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
+    <div class="tags">${techsOf(pr).map((t) => `<a href="/skills/${encodeURIComponent(t.toLowerCase())}" style="text-decoration:none"><span>${esc(t)}</span></a>`).join('')}</div>
+    <div style="margin-top:10px"><a class="btn btn-ghost btn-sm" href="${esc(pr.url)}">View project →</a>${pr.demoUrl ? ` <a class="btn btn-ghost btn-sm" href="${esc(pr.demoUrl)}">Demo →</a>` : ''}</div></div>`).join('');
+  }
+  if (tpl === 'terminal') {
+    return (p.projects || []).map((pr) => `
+    <div class="card"><p class="mono" style="color:#4ade80">$ open ${esc(pr.title.toLowerCase().replace(/\s+/g, '-'))}</p>
+    <h3>> ${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
+    <p class="mono" style="font-size:12.5px;color:#86efac">${techsOf(pr).map(esc).join(' • ')}</p>
+    <a class="btn btn-ghost btn-sm" href="${esc(pr.url)}">$ visit --url →</a></div>`).join('');
+  }
+  if (tpl === 'editorial') {
+    return (p.projects || []).map((pr, i) => `
+    <div class="card" style="margin-bottom:12px"><p class="mono" style="font-size:12px;opacity:.7">No. ${String(i + 1).padStart(2, '0')}</p>
+    <h3 style="font-size:24px">${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
+    <p style="font-size:13px"><i>${techsOf(pr).map(esc).join(' · ')}</i></p>
+    <p><a href="${esc(pr.url)}" style="font-weight:800">Read the story →</a>${pr.demoUrl ? ` &nbsp;·&nbsp; <a href="${esc(pr.demoUrl)}" style="font-weight:800">Live demo →</a>` : ''}</p></div>`).join('');
+  }
+  if (tpl === 'brutalist') {
+    return (p.projects || []).map((pr) => `
+    <div class="card"><h3 style="font-size:22px">■ ${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
+    <p>${techsOf(pr).map((t) => `<a href="/skills/${encodeURIComponent(t.toLowerCase())}" style="text-decoration:none"><span class="badge">${esc(t)}</span></a>`).join(' ')}</p>
+    <p><a class="btn btn-primary btn-sm" href="${esc(pr.url)}">CODE →</a> ${pr.demoUrl ? `<a class="btn btn-ghost btn-sm" href="${esc(pr.demoUrl)}">DEMO →</a>` : ''}</p></div>`).join('');
+  }
+  return cards(p);
+}
 function cards(p) {
   return (p.projects || []).map((pr, i) => {
     const techs = techsOf(pr);
@@ -158,11 +188,12 @@ function page(p) {
          ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:132px;height:132px;border-radius:50%;object-fit:cover">` : `<div style="width:120px;height:120px;border-radius:50%;margin:0 auto;display:grid;place-items:center;font-size:52px;color:#fff;background:linear-gradient(135deg,#6c6cf5,#22d3ee)">${esc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`}
          <h3>${esc(p.name)}</h3><p class="mono">@${esc(p.username)} • portfoolio.me</p><div class="badges">${skills}</div>
        </div></div></div></div></header>`;
+  const gridCls = (tpl === 'minimal' || tpl === 'terminal' || tpl === 'brutalist') ? 'dir-grid' : 'proj-grid';
   return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}><div class="bg-fx"></div>${nav(p)}${hero}
   ${skillsSection(p)}
   <section class="wrap" style="padding-top:10px"><span class="eyebrow">● Projects</span>
   <h2 class="title">Work that <span class="grad">speaks</span></h2>
-  <div class="proj-grid" style="margin-top:22px">${cards(p) || '<p>No projects yet.</p>'}</div></section>
+  <div class="${gridCls}" style="margin-top:22px">${projectsFor(p, tpl) || '<p>No projects yet.</p>'}</div></section>
   <section class="wrap"><div class="card" style="display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap">
   <div><h3>Like this portfolio?</h3><p>Claim yours free at <b>portfoolio.me</b>.</p></div>
   <a class="btn btn-primary" href="${ORIGIN}/">Create mine</a></div></section>${foot(p)}</body></html>`;
