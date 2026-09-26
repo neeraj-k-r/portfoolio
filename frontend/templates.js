@@ -114,6 +114,7 @@ function renderAurora(p) {
     <div class="proj-actions"><a class="primary" href="${tplEsc(pr.url)}" target="_blank">View →</a>${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank">Demo</a>` : ''}</div></div></article>`).join('');
   document.getElementById('app').innerHTML = `${tplNav(p)}
   <header class="hero wrap"><div style="text-align:center;padding:50px 0 10px">
+    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 10px;display:block">` : ''}
     <p class="mono" style="letter-spacing:3px;font-size:12px;opacity:.8">✦ PORTFOLIO ${new Date().getFullYear()} ✦</p>
     <h1 style="font-size:clamp(44px,7.5vw,84px);line-height:1.02">${tplEsc(p.name)}</h1>
     <p class="sub" style="margin:12px auto;max-width:560px">${tplEsc(p.title)} — ${tplEsc(p.tagline || '')}</p>
@@ -140,6 +141,7 @@ function renderEditorial(p) {
     <p><a href="${tplEsc(pr.url)}" target="_blank" style="font-weight:800">Read the story →</a>${pr.demoUrl ? ` &nbsp;·&nbsp; <a href="${tplEsc(pr.demoUrl)}" target="_blank" style="font-weight:800">Live demo →</a>` : ''}</p></div>`).join('');
   document.getElementById('app').innerHTML = `${tplNav(p)}
   <section class="wrap" style="padding:140px 0 20px;max-width:760px">
+    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:110px;height:110px;border-radius:50%;object-fit:cover;margin-bottom:12px">` : ''}
     <p class="mono" style="font-size:13px">The portfolio of</p>
     <h1 style="font-size:clamp(44px,7vw,76px);line-height:1.02">${tplEsc(p.name)}</h1>
     <h2 style="font-size:22px;font-style:italic">${tplEsc(p.title)}</h2>
@@ -166,6 +168,7 @@ function renderBrutalist(p) {
   document.getElementById('app').innerHTML = `${tplNav(p)}
   <section class="wrap" style="padding:140px 0 20px">
     <span class="badge">● OPEN FOR WORK</span>
+    ${p.avatarUrl ? `<div style="margin-top:12px"><img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:110px;height:110px;border-radius:18px;object-fit:cover;border:3px solid #000;box-shadow:4px 4px 0 #000"></div>` : ''}
     <h1 style="font-size:clamp(46px,8vw,96px);line-height:.95;text-transform:uppercase">${tplEsc(p.name)}</h1>
     <h2 style="font-size:clamp(20px,3vw,30px);background:#000;color:#fef08a;display:inline-block;padding:6px 14px;margin-top:10px">${tplEsc(p.title)}</h2>
     <p class="sub" style="margin-top:12px;max-width:600px;font-weight:600">${esc2(p.tagline)}</p>
