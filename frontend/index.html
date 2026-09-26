@@ -797,7 +797,7 @@ async function saveStudio() {
 
     if (cloudEnabled() && editingCloudSession) {
       try { await cloudSaveProfile(activeUserProfile); toast('✅ Saved to cloud'); }
-      catch (e) { toast('Saved locally'); }
+      catch (e) { toast('⚠️ Cloud save failed: ' + (e.message || e) + ' — kept locally'); console.error('cloudSave failed', e); }
     } else toast('✅ Portfolio updated');
 
     paintShareSection(activeUserProfile);
