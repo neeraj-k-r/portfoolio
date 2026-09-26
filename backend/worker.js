@@ -163,12 +163,16 @@ function page(p) {
     : tpl === 'brutalist'
     ? `<section class="wrap" style="padding:140px 0 20px">
        <span class="badge">● OPEN FOR WORK</span>
-       ${p.avatarUrl ? `<div style="margin-top:12px"><img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:110px;height:110px;border-radius:18px;object-fit:cover;border:3px solid #000;box-shadow:4px 4px 0 #000"></div>` : ''}
+       <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin-top:12px">
+       <div style="flex:1;min-width:260px;">
        <h1 style="font-size:clamp(46px,8vw,96px);text-transform:uppercase">${esc(p.name)}</h1>
        <h2 style="font-size:clamp(20px,3vw,30px);background:#000;color:#fef08a;display:inline-block;padding:6px 14px;margin-top:10px">${esc(p.title)}</h2>
        <p class="sub" style="margin-top:12px;font-weight:600">${esc(p.tagline || '')}</p>
        <div style="margin-top:12px">${(p.skills || []).map((s) => `<a href="/skills/${encodeURIComponent(String(s).toLowerCase())}" style="text-decoration:none"><span class="badge">★ ${esc(s)}</span></a>`).join(' ')}</div>
-       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">HIRE ME</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GITHUB</a>` : ''}</div></section>`
+       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">HIRE ME</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GITHUB</a>` : ''}</div>
+       </div>
+       ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:min(320px,80vw);aspect-ratio:1;object-fit:cover;border:4px solid #000;border-radius:24px;box-shadow:8px 8px 0 #000">` : ''}
+       </div></section>`
     : tpl === 'minimal'
     ? `<section class="wrap" style="padding:140px 0 30px"><div class="card">
        ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:96px;height:96px;border-radius:16px;object-fit:cover;margin-bottom:10px">` : ''}
