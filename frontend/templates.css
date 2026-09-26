@@ -10,6 +10,9 @@
 .tpl-preview.minimal{background:#f8fafc;color:#0f172a;border-bottom:1px solid #e2e8f0}
 .tpl-preview.terminal{background:#04140a;color:#4ade80;font-family:monospace}
 .tpl-preview.creative{background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee);color:#fff}
+.tpl-preview.aurora{background:linear-gradient(135deg,rgba(167,139,250,.9),rgba(103,232,249,.9)),#1e1b4b;color:#fff;backdrop-filter:blur(4px)}
+.tpl-preview.editorial{background:#faf7f2;color:#1c1917;border-bottom:3px solid #1c1917;font-family:Georgia,serif;font-style:italic}
+.tpl-preview.brutalist{background:#fef08a;color:#000;border-bottom:4px solid #000}
 .tpl-meta{padding:10px 12px}
 .tpl-meta b{font-size:14px;display:block}
 .tpl-meta span{font-size:12px;color:var(--muted)}
@@ -49,3 +52,36 @@ body[data-template="creative"] .btn-primary{background:linear-gradient(135deg,#f
 body[data-template="creative"] .proj-top{font-size:64px}
 body[data-template="creative"] .card,body[data-template="creative"] .proj{border-color:rgba(244,114,182,.35)}
 body[data-template="creative"] .card:hover,body[data-template="creative"] .proj:hover{border-color:#f472b6}
+
+/* ---- Template: aurora (glassmorphism pastel) ---- */
+body[data-template="aurora"] .bg-fx{background:radial-gradient(700px 450px at 15% 10%,rgba(167,139,250,.35),transparent 60%),radial-gradient(700px 450px at 85% 25%,rgba(103,232,249,.3),transparent 60%),radial-gradient(600px 500px at 50% 100%,rgba(249,168,212,.22),transparent 60%),#12102e}
+body[data-template="aurora"] .card,body[data-template="aurora"] .proj,body[data-template="aurora"] nav{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(18px);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+body[data-template="aurora"] .btn-primary{background:linear-gradient(135deg,#a78bfa,#67e8f9);color:#1e1b4b}
+body[data-template="aurora"] .badge{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#ede9fe}
+body[data-template="aurora"] .tags span{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#e0e7ff}
+
+/* ---- Template: editorial (serif print) ---- */
+body[data-template="editorial"]{background:#faf7f2;color:#1c1917}
+body[data-template="editorial"] .bg-fx,body[data-template="editorial"] .grid-overlay{display:none}
+body[data-template="editorial"] h1,body[data-template="editorial"] h2,body[data-template="editorial"] h3{font-family:Georgia,'Times New Roman',serif;letter-spacing:-.5px;color:#1c1917}
+body[data-template="editorial"] nav{background:rgba(250,247,242,.92);border-color:#e7e0d3;border-bottom:3px solid #1c1917}
+body[data-template="editorial"] .card,body[data-template="editorial"] .proj{background:#fff;border:1px solid #e7e0d3;border-left:5px solid #1c1917;box-shadow:0 10px 30px rgba(28,25,23,.07)}
+body[data-template="editorial"] .card p,body[data-template="editorial"] .sub,body[data-template="editorial"] p.lead{color:#57534e}
+body[data-template="editorial"] .grad{background:none;color:#b45309;-webkit-text-fill-color:#b45309}
+body[data-template="editorial"] .btn-primary{background:#1c1917;box-shadow:none}
+body[data-template="editorial"] .btn-ghost{background:transparent;border-color:#1c1917;color:#1c1917}
+body[data-template="editorial"] .badge{background:#fef3c7;border-color:#f59e0b;color:#92400e}
+body[data-template="editorial"] .tags span{background:#f5f0e8;border-color:#d6cfbf;color:#44403c}
+
+/* ---- Template: brutalist (neo-brutalism pop) ---- */
+body[data-template="brutalist"]{background:#fef9c3;color:#000}
+body[data-template="brutalist"] .bg-fx,body[data-template="brutalist"] .grid-overlay{display:none}
+body[data-template="brutalist"] nav{background:#fff;border:3px solid #000;box-shadow:5px 5px 0 #000}
+body[data-template="brutalist"] .card,body[data-template="brutalist"] .proj{background:#fff;border:3px solid #000;border-radius:14px;box-shadow:6px 6px 0 #000}
+body[data-template="brutalist"] .card p,body[data-template="brutalist"] .sub,body[data-template="brutalist"] p.lead{color:#333}
+body[data-template="brutalist"] h1,body[data-template="brutalist"] h2,body[data-template="brutalist"] h3{letter-spacing:-1px}
+body[data-template="brutalist"] .grad{background:none;color:#7c3aed;-webkit-text-fill-color:#7c3aed}
+body[data-template="brutalist"] .btn-primary{background:#a3e635;color:#000;border:3px solid #000;box-shadow:4px 4px 0 #000}
+body[data-template="brutalist"] .btn-ghost{background:#fff;border:3px solid #000;color:#000;box-shadow:4px 4px 0 #000}
+body[data-template="brutalist"] .badge{background:#f472b6;border:2px solid #000;color:#000;font-weight:800}
+body[data-template="brutalist"] .tags span{background:#67e8f9;border:2px solid #000;color:#000}
