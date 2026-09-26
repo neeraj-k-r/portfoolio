@@ -974,17 +974,17 @@ function loginAsAdmin(email) {
 }
 
 async function renderDir() {
+  // Public showcase: sample sites only. Real user sites stay private to their
+  // subdomain + direct link (admins still see everyone in the console).
   const seeds = [
     {username:'neerajkr',name:'Neeraj K R',title:'Full-Stack Developer & AI Engineer • Midnight'},
     {username:'priya',name:'Priya Nair',title:'Aspiring SDE Intern • Minimal'},
     {username:'arjun',name:'Arjun Dev',title:'Backend Developer • Terminal'},
-    {username:'zoe',name:'Zoe Mathew',title:'Creative Frontend Dev • Creative'},
+    {username:'zoe',name:'Zoe Mathew',title:'Creative Frontend Dev • 🎨 Creative'},
     {username:'demo',name:'Demo User',title:'Aspiring Software Engineer • Minimal'}
   ];
-  let customs = []; try { customs = Object.values(JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}')); } catch {}
-  const all = [...customs, ...seeds.filter(s => !customs.find(c => c.username === s.username))];
   if($('dirGrid')) {
-    $('dirGrid').innerHTML = all.map(p => `
+    $('dirGrid').innerHTML = seeds.map(p => `
       <div class="dir-card">
         <h3>${p.name}</h3>
         <p>${p.title || ''}</p>
