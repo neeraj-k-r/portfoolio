@@ -548,9 +548,10 @@ function setupUserDashboardView(profile) {
       c.onclick = () => {
         document.querySelectorAll('#edTplGrid .tpl-card').forEach(x => x.classList.remove('selected'));
         c.classList.add('selected');
-        if (inp) inp.checked = true;
+        if (inp) { inp.checked = true; previewTemplate(inp.value); }
       };
     });
+    previewTemplate(profile.template);
 
     paintUserProjects(profile);
     paintShareSection(profile);
@@ -680,9 +681,15 @@ if ($('builderForm')) {
     if($('livePrev')) $('livePrev').textContent = v || 'yourname';
   });
 
+  // Live theme preview: selecting a card restyles this page instantly (reverts on lock)
+  function previewTemplate(v) {
+    document.body.dataset.template = (v && v !== 'midnight') ? v : '';
+  }
   document.querySelectorAll('#tplGrid .tpl-card').forEach(c => c.addEventListener('click', () => {
     document.querySelectorAll('#tplGrid .tpl-card').forEach(x => x.classList.remove('selected'));
     c.classList.add('selected');
+    const inp = c.querySelector('input');
+    if (inp) previewTemplate(inp.value);
   }));
 
   // GitHub Repo Picker for wizard
@@ -849,6 +856,7 @@ if ($('globalLogoutBtn')) {
     localStorage.removeItem('portfoolio_session_email');
     activeUserProfile = null;
     editingCloudSession = false;
+    previewTemplate('midnight');
     showAppRole(null);
     toast('🔒 Logged out');
   };
