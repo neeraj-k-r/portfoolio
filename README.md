@@ -38,16 +38,17 @@ Namecheap Advanced DNS: `A @ → 75.2.60.5`, `CNAME www → <site>.netlify.app`,
 3. Supabase → SQL Editor → run `backend/supabase-schema.sql`
 4. Auth → Providers → Email ON (turn Confirm email OFF for instant login — admin approval already moderates signups). Users sign up / log in with email + password; profiles in Postgres; public portfolios readable everywhere.
 
-## Flow (landing → login → role dashboard)
+## Flow (landing → login → dashboard, instant publishing)
 - Landing describes the site + login/signup only (no public claim form).
-- After login: admins land on the **admin dashboard** (approval queue + `/admin` console); everyone else lands on the **user dashboard** (claim form if new → editor + share once they have a site).
-- Claim form lives inside the user dash and requires login; admin approval publishes the subdomain.
+- After login: admins land on the **admin dashboard** (user directory + `/admin` console); everyone else lands on the **user dashboard** (claim form if new → editor + share once they have a site).
+- Claim form lives inside the user dash and requires login; **sites go live instantly** — the admin panel remains for moderation (reject/delete spam).
+- To re-enable gated publishing, set new-row status back to `pending` in `cloudSaveProfile` + `builderForm` and restore the pending-only RLS checks (see git history).
 
-## Admin approval setup
-1. Supabase → SQL Editor → run `backend/supabase-schema.sql` (re-run safe — it upgrades `is_admin()` too).
+## Admin setup + moderation (no approval gate)
+1. Supabase → SQL Editor → run `backend/supabase-schema.sql` (re-run safe — open-publishing RLS included).
 2. Supabase → Authentication → Add user → `portfoolio.me@gmail.com` + your admin password (tick auto-confirm). The password lives ONLY in Supabase — never in code.
-3. Auth → Providers → Email → **Confirm email OFF** — no confirmation emails anywhere; the superadmin approves users from the site's admin panel instead.
-Flow: visitor signs up with email + password → submits site request (saved `pending`, invisible publicly) → superadmin logs into dashboard admin panel → approves → `username.portfoolio.me` goes live. (`admins` table insert no longer required — the superadmin email is hardcoded in `is_admin()` + `backend/supabase-config.js`.)
+3. Auth → Providers → Email → **Confirm email OFF**.
+Sites publish instantly; use the admin console to reject/delete spam. Existing `pending` rows were backfilled to `approved` by the schema.
 
 ## Proof of Work (skill evidence, not just claims)
 - Data model: NO new tables. Skills stay `profiles.skills[]`; each project optionally carries `technologies[]`, `repo{fullName,language,stars,updatedAt,topics}` (presence = retrieved from GitHub), `demoUrl`. Skill↔Project is **derived** by `frontend/evidence.js` (shared pure functions) — manage info once.
