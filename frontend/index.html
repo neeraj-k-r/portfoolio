@@ -305,6 +305,18 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <div id="tabInfo" class="card">
         <h3>✏️ Personal Details</h3>
         <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Update your public headline, location, and social profile links.</p>
+        <div style="display:flex;gap:14px;align-items:center;margin-bottom:14px;flex-wrap:wrap">
+          <img id="edAvatarImg" alt="avatar preview" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid var(--stroke);display:none">
+          <div style="flex:1;min-width:200px">
+            <label class="flabel">Profile photo</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <input id="edAvatarFile" type="file" accept="image/*" style="flex:1;min-width:160px">
+              <button type="button" class="btn btn-ghost btn-sm" id="edAvatarUp">Upload</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="edAvatarRm">Remove</button>
+            </div>
+            <p class="mono" id="edAvatarMsg" style="font-size:11.5px;color:var(--muted);margin-top:6px">JPG/PNG under 5MB. Saved with the form below.</p>
+          </div>
+        </div>
         <div class="form-grid">
           <div><label class="flabel">Full Name *</label><input id="edName"></div>
           <div><label class="flabel">Headline Title *</label><input id="edTitle"></div>
@@ -446,6 +458,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <script src="../backend/supabase-config.js"></script>
 <script src="app.js"></script>
 <script src="evidence.js"></script>
+<script src="cloudinary-config.js"></script>
 <script src="templates.js"></script>
 <script>
 function toast(m){const t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
@@ -538,6 +551,7 @@ function setupUserDashboardView(profile) {
     if($('edLinkedin')) $('edLinkedin').value = profile.linkedin || '';
     if($('edLoc')) $('edLoc').value = profile.location || '';
     if($('edSkills')) $('edSkills').value = (profile.skills || []).join(', ');
+    draftAvatar = profile.avatarUrl || ''; paintAvatarPreview();
 
     // Template selection (paint saved choice; clicks update highlight + radio)
     document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
@@ -560,6 +574,30 @@ function setupUserDashboardView(profile) {
 }
 
 let projEditOpen = -1;
+let draftAvatar = '';
+function paintAvatarPreview() {
+  const img = $('edAvatarImg');
+  if (!img) return;
+  if (draftAvatar) { img.src = draftAvatar; img.style.display = ''; }
+  else img.style.display = 'none';
+}
+if ($('edAvatarUp')) $('edAvatarUp').onclick = async () => {
+  const f = $('edAvatarFile') && $('edAvatarFile').files[0];
+  if (!f) return toast('❌ Pick an image first');
+  if (!cloudinaryEnabled()) return toast('❌ Photo uploads activate once the owner connects Cloudinary');
+  $('edAvatarMsg').textContent = 'Uploading…';
+  try {
+    draftAvatar = await uploadAvatar(f);
+    paintAvatarPreview();
+    $('edAvatarMsg').textContent = 'Uploaded — hit Save Changes to publish.';
+  } catch (e) {
+    $('edAvatarMsg').textContent = e.message === 'av-type' ? 'Only JPG/PNG images.' : e.message === 'av-size' ? 'Keep it under 5MB.' : 'Upload failed — retry.';
+  }
+};
+if ($('edAvatarRm')) $('edAvatarRm').onclick = () => {
+  draftAvatar = ''; if ($('edAvatarFile')) $('edAvatarFile').value = '';
+  paintAvatarPreview(); $('edAvatarMsg').textContent = 'Removed — hit Save Changes.';
+};
 function techChipsHTML(pr) {
   const techs = (window.PortfoolioEvidence ? PortfoolioEvidence.projectTechs(pr) : (pr.technologies || []));
   return techs.map(t => `<span class="badge" style="font-size:11px">✦ ${t}</span>`).join('');
@@ -786,6 +824,7 @@ async function saveStudio() {
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
       github: $('edGithub').value.trim(), linkedin: $('edLinkedin').value.trim(), location: $('edLoc').value.trim(),
       template: (document.querySelector('input[name=edtpl]:checked') || {}).value || 'midnight',
+      avatarUrl: draftAvatar || '',
       skillsDisplay: (document.querySelector('input[name=skillsDisplay]:checked') || {}).value || 'evidence',
       skills: $('edSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       updatedAt: new Date().toISOString(),
