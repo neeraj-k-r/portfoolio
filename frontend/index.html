@@ -242,10 +242,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div><label class="flabel">Full Name *</label><input id="inName" required placeholder="Neeraj K R"></div>
           <div class="full"><label class="flabel">Headline Title *</label><input id="inTitle" required placeholder="Full-Stack Developer & AI Engineer"></div>
           <div class="full"><label class="flabel">Tagline</label><input id="inTag" placeholder="Building web apps & AI solutions that scale."></div>
-          <div><label class="flabel">Email Address *</label><input id="inEmail" type="email" required placeholder="you@gmail.com"></div>
+          <div><label class="flabel">Email Address *</label><input id="inEmail" type="email" required placeholder="you@gmail.com" readonly title="Filled from your login — permanent"></div>
           <div><label class="flabel">Phone Number</label><input id="inPhone" placeholder="+91 ..."></div>
           <div><label class="flabel">GitHub Profile URL</label><input id="inGithub" placeholder="https://github.com/yourname"></div>
           <div><label class="flabel">LinkedIn Profile URL</label><input id="inLinkedin" placeholder="https://linkedin.com/in/yourname"></div>
+          <div><label class="flabel">Instagram Handle / URL</label><input id="inInsta" placeholder="@yourname or https://instagram.com/yourname"></div>
           <div class="full"><label class="flabel">Location</label><input id="inLoc" placeholder="Kerala, India"></div>
           <div class="full"><label class="flabel">Skills (comma separated)</label><input id="inSkills" placeholder="React, JavaScript, Node.js, Python, Tailwind"></div>
           
@@ -321,10 +322,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div><label class="flabel">Full Name *</label><input id="edName"></div>
           <div><label class="flabel">Headline Title *</label><input id="edTitle"></div>
           <div class="full"><label class="flabel">Tagline</label><input id="edTag"></div>
-          <div><label class="flabel">Email Address *</label><input id="edEmail" type="email"></div>
+          <div><label class="flabel">Email Address (login — permanent)</label><input id="edEmail" type="email" readonly title="Tied to your login and cannot be changed"></div>
           <div><label class="flabel">Phone Number</label><input id="edPhone"></div>
           <div><label class="flabel">GitHub URL</label><input id="edGithub"></div>
           <div><label class="flabel">LinkedIn URL</label><input id="edLinkedin"></div>
+          <div><label class="flabel">Instagram Handle / URL</label><input id="edInsta" placeholder="@yourname"></div>
           <div class="full"><label class="flabel">Location</label><input id="edLoc"></div>
         </div>
       </div>
@@ -518,6 +520,8 @@ function showAppRole(role, emailOrUser, profile = null) {
     
     activeUserProfile = profile;
     setupUserDashboardView(profile);
+    // lock claim email to the login account (permanent identity)
+    if (!profile && $('inEmail')) { $('inEmail').value = emailOrUser || ''; $('inEmail').readOnly = true; }
   }
 }
 
@@ -549,6 +553,7 @@ function setupUserDashboardView(profile) {
     if($('edPhone')) $('edPhone').value = profile.phone || '';
     if($('edGithub')) $('edGithub').value = profile.github || '';
     if($('edLinkedin')) $('edLinkedin').value = profile.linkedin || '';
+    if($('edInsta')) $('edInsta').value = profile.instagram || '';
     if($('edLoc')) $('edLoc').value = profile.location || '';
     if($('edSkills')) $('edSkills').value = (profile.skills || []).join(', ');
     draftAvatar = profile.avatarUrl || ''; paintAvatarPreview();
@@ -774,6 +779,14 @@ if ($('builderForm')) {
     const c = new Set(((window.PortfoolioEvidence && PortfoolioEvidence.COMMON) || []).map(s => String(s).toLowerCase()));
     return (all || []).filter(t => !c.has(String(t).toLowerCase()));
   }
+  // normalize "@handle" or bare name → full instagram URL; URLs pass through
+  function normInsta(v) {
+    v = String(v || '').trim().replace(/^@/, '');
+    if (!v) return '';
+    if (/^https?:\/\//i.test(v)) return v;
+    if (/^[A-Za-z0-9._]{1,30}$/.test(v)) return 'https://instagram.com/' + v;
+    return v;
+  }
   if ($('inP1techGrid')) $('inP1techGrid').innerHTML = techGridHTML([]);
 
   $('builderForm').addEventListener('submit', async e => {
@@ -790,7 +803,7 @@ if ($('builderForm')) {
       username, name: $('inName').value.trim(), title: $('inTitle').value.trim(),
       tagline: $('inTag').value.trim(), email: $('inEmail').value.trim(),
       phone: $('inPhone').value.trim(), location: $('inLoc').value.trim(),
-      github: $('inGithub').value.trim(), linkedin: $('inLinkedin').value.trim(),
+      github: $('inGithub').value.trim(), linkedin: $('inLinkedin').value.trim(), instagram: normInsta($('inInsta').value),
       template, skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       projects: [...manual, ...picked], available: true, status: 'approved', createdAt: new Date().toISOString()
     };
@@ -822,7 +835,7 @@ async function saveStudio() {
     Object.assign(activeUserProfile, {
       name: $('edName').value.trim(), title: $('edTitle').value.trim(), tagline: $('edTag').value.trim(),
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
-      github: $('edGithub').value.trim(), linkedin: $('edLinkedin').value.trim(), location: $('edLoc').value.trim(),
+      github: $('edGithub').value.trim(), linkedin: $('edLinkedin').value.trim(), instagram: normInsta($('edInsta').value), location: $('edLoc').value.trim(),
       template: (document.querySelector('input[name=edtpl]:checked') || {}).value || 'midnight',
       avatarUrl: draftAvatar || '',
       skillsDisplay: (document.querySelector('input[name=skillsDisplay]:checked') || {}).value || 'evidence',
