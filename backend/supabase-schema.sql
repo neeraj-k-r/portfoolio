@@ -11,6 +11,7 @@ create table if not exists profiles (
   created_at timestamptz default now(), updated_at timestamptz default now()
 );
 alter table profiles add column if not exists avatar_url text default '';
+alter table profiles add column if not exists instagram text default '';
 -- v2: status column (kept for admin moderation: approved / rejected).
 -- New sites publish instantly, so the default is now 'approved'.
 alter table profiles add column if not exists status text default 'approved'
