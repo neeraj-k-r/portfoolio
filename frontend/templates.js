@@ -200,23 +200,26 @@ function renderAfterglow(p) {
   const icon = (typeof projIcon === 'function') ? projIcon : (() => '');
   const skills = (p.skills || []).map((s) => `<a href="${skillLink(s)}" style="text-decoration:none"><span class="badge">${tplEsc(s)}</span></a>`).join('');
   const projects = (p.projects || []).map((pr, i) => `
-    <article class="proj"><div class="proj-top p${(i % 6) + 1}"><div class="proj-art">${icon(pr)}</div><div class="stars">${tplEsc(pr.stars || 'Live')}</div></div>
-    <div class="proj-body"><h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
-    <div class="tags">${((pr.technologies || pr.tags) || []).map((t) => `<span>${tplEsc(t)}</span>`).join('')}</div>
-    <div class="proj-actions"><a class="primary" href="${tplEsc(pr.url)}" target="_blank">View →</a>${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank">Demo</a>` : ''}</div></div></article>`).join('');
+    <div class="ag-row"><span class="ag-num">${String(i + 1).padStart(2, '0')}</span>
+    <div style="flex:1;min-width:220px"><h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
+    <div class="tags">${((pr.technologies || pr.tags) || []).map((t) => `<span>${tplEsc(t)}</span>`).join('')}</div></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-shrink:0"><a class="btn btn-primary btn-sm" href="${tplEsc(pr.url)}" target="_blank">View →</a>${pr.demoUrl ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(pr.demoUrl)}" target="_blank">Demo</a>` : ''}</div></div>`).join('');
   document.getElementById('app').innerHTML = `${tplNav(p)}
-  <header class="hero wrap"><div style="text-align:center;padding:56px 0 6px">
-    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:124px;height:124px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:3px solid #ffd166;box-shadow:0 0 44px rgba(255,107,107,.65)">` : ''}
-    <p class="mono" style="letter-spacing:4px;font-size:12px;color:#ffd166">— GOLDEN HOUR, SHIPPED —</p>
-    <h1 style="font-size:clamp(44px,7.5vw,88px);line-height:1">${tplEsc(p.name)}</h1>
-    <div style="width:180px;height:4px;margin:14px auto;border-radius:100px;background:linear-gradient(90deg,#ffd166,#ff6b6b,#ff4d8d)"></div>
-    <p class="sub" style="margin:0 auto;max-width:580px">${tplEsc(p.title)} — ${tplEsc(p.tagline || '')}</p>
-    <div class="badges" style="justify-content:center;margin-top:12px">${skills}</div>
-    <div class="hero-cta" style="justify-content:center;display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+  <header class="hero wrap"><div class="ag-split">
+    <div>
+    <p class="mono ag-kicker">— GOLDEN HOUR, SHIPPED —</p>
+    <h1>${tplEsc(p.name)}</h1>
+    <div class="ag-sunbar"></div>
+    <p class="sub">${tplEsc(p.title)} — ${tplEsc(p.tagline || '')}</p>
+    <div class="badges" style="justify-content:flex-start;margin-top:12px">${skills}</div>
+    <div class="hero-cta" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
       ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">Say hello</a>` : ''}
       ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}
-    </div></div></header>
-  <section class="wrap"><span class="eyebrow">● After dark, still shipping</span><div class="proj-grid" style="margin-top:16px">${projects || '<p>No projects yet.</p>'}</div></section>${tplFoot(p)}`;
+    </div></div>
+    ${p.avatarUrl ? `<div class="ag-sunring"><img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}"></div>` : '<div class="ag-sunring ag-sunring-empty"></div>'}
+  </div></header>
+  <section class="wrap"><span class="eyebrow">● After dark, still shipping</span>
+  <div style="margin-top:16px">${projects || '<p>No projects yet.</p>'}</div></section>${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
