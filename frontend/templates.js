@@ -7,6 +7,9 @@ const TEMPLATES = [
   { id: 'aurora', name: 'Aurora Glass', desc: 'Frosted glass over aurora gradients', emoji: '🔮', best: 'Designers • Full-stack' },
   { id: 'editorial', name: 'Editorial Serif', desc: 'Print-style serif, calm + credible', emoji: '📰', best: 'Writers • Consultants' },
   { id: 'brutalist', name: 'Neo-Brutalist', desc: 'Bold blocks, stickers, shadows', emoji: '🧱', best: 'Indie hackers • Memorable' },
+  { id: 'afterglow', name: 'Afterglow', desc: 'Sunset neon over plum dusk', emoji: '🌇', best: 'Original • Warm neon' },
+  { id: 'ultraviolet', name: 'Ultraviolet', desc: 'Violet haze, electric glow', emoji: '🟣', best: 'Original • Haze neon' },
+  { id: 'tidepool', name: 'Tidepool', desc: 'Bioluminescent deep-teal abyss', emoji: '🪼', best: 'Original • Abyss glow' },
 ];
 
 function tplEsc(s) {
@@ -189,5 +192,90 @@ function renderBrutalist(p) {
   window.scrollTo(0, 0);
 }
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist };
+function renderAfterglow(p) {
+  const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
+
+  document.body.dataset.template = 'afterglow';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const icon = (typeof projIcon === 'function') ? projIcon : (() => '');
+  const skills = (p.skills || []).map((s) => `<a href="${skillLink(s)}" style="text-decoration:none"><span class="badge">${tplEsc(s)}</span></a>`).join('');
+  const projects = (p.projects || []).map((pr, i) => `
+    <article class="proj"><div class="proj-top p${(i % 6) + 1}"><div class="proj-art">${icon(pr)}</div><div class="stars">${tplEsc(pr.stars || 'Live')}</div></div>
+    <div class="proj-body"><h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
+    <div class="tags">${((pr.technologies || pr.tags) || []).map((t) => `<span>${tplEsc(t)}</span>`).join('')}</div>
+    <div class="proj-actions"><a class="primary" href="${tplEsc(pr.url)}" target="_blank">View →</a>${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank">Demo</a>` : ''}</div></div></article>`).join('');
+  document.getElementById('app').innerHTML = `${tplNav(p)}
+  <header class="hero wrap"><div style="text-align:center;padding:56px 0 6px">
+    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:124px;height:124px;border-radius:50%;object-fit:cover;margin:0 auto 12px;display:block;border:3px solid #ffd166;box-shadow:0 0 44px rgba(255,107,107,.65)">` : ''}
+    <p class="mono" style="letter-spacing:4px;font-size:12px;color:#ffd166">— GOLDEN HOUR, SHIPPED —</p>
+    <h1 style="font-size:clamp(44px,7.5vw,88px);line-height:1">${tplEsc(p.name)}</h1>
+    <div style="width:180px;height:4px;margin:14px auto;border-radius:100px;background:linear-gradient(90deg,#ffd166,#ff6b6b,#ff4d8d)"></div>
+    <p class="sub" style="margin:0 auto;max-width:580px">${tplEsc(p.title)} — ${tplEsc(p.tagline || '')}</p>
+    <div class="badges" style="justify-content:center;margin-top:12px">${skills}</div>
+    <div class="hero-cta" style="justify-content:center;display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+      ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">Say hello</a>` : ''}
+      ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}
+    </div></div></header>
+  <section class="wrap"><span class="eyebrow">● After dark, still shipping</span><div class="proj-grid" style="margin-top:16px">${projects || '<p>No projects yet.</p>'}</div></section>${tplFoot(p)}`;
+  window.scrollTo(0, 0);
+}
+
+function renderUltraviolet(p) {
+  const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
+
+  document.body.dataset.template = 'ultraviolet';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const icon = (typeof projIcon === 'function') ? projIcon : (() => '');
+  const skills = (p.skills || []).map((s) => `<a href="${skillLink(s)}" style="text-decoration:none"><span class="badge">◈ ${tplEsc(s)}</span></a>`).join(' ');
+  const projects = (p.projects || []).map((pr, i) => `
+    <article class="proj"><div class="proj-top p${(i % 6) + 1}"><div class="proj-art">${icon(pr)}</div><div class="stars">${tplEsc(pr.stars || 'Live')}</div></div>
+    <div class="proj-body"><h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
+    <div class="tags">${((pr.technologies || pr.tags) || []).map((t) => `<span>${tplEsc(t)}</span>`).join('')}</div>
+    <div class="proj-actions"><a class="primary" href="${tplEsc(pr.url)}" target="_blank">Enter →</a>${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank">Demo</a>` : ''}</div></div></article>`).join('');
+  document.getElementById('app').innerHTML = `${tplNav(p)}
+  <section class="wrap" style="padding:150px 0 24px;max-width:820px">
+    <p class="mono" style="font-size:13px;color:#e0aaff">◈ signal acquired — portfolio incoming</p>
+    <h1 style="font-size:clamp(46px,7.5vw,88px);line-height:1">${tplEsc(p.name)}</h1>
+    <h2 style="font-size:22px">${tplEsc(p.title)}</h2>
+    <p style="margin-top:10px;max-width:600px">${esc2(p.tagline)}</p>
+    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:104px;height:104px;border-radius:50%;object-fit:cover;margin-top:14px;border:2px solid #e0aaff;box-shadow:0 0 34px rgba(181,23,158,.8)">` : ''}
+    <div style="margin-top:12px">${skills}</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+      ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">Transmit message</a>` : ''}
+      ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}
+    </div>
+    <div style="margin-top:26px;height:2px;background:linear-gradient(90deg,transparent,#b5179e,#4cc9f0,transparent)"></div>
+  </section>
+  <section class="wrap" style="max-width:820px"><div class="proj-grid" style="margin-top:8px">${projects || '<p>No projects yet.</p>'}</div></section>${tplFoot(p)}`;
+  window.scrollTo(0, 0);
+}
+
+function renderTidepool(p) {
+  const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
+
+  document.body.dataset.template = 'tidepool';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const icon = (typeof projIcon === 'function') ? projIcon : (() => '');
+  const skills = (p.skills || []).map((s) => `<a href="${skillLink(s)}" style="text-decoration:none"><span class="badge">◉ ${tplEsc(s)}</span></a>`).join(' ');
+  const projects = (p.projects || []).map((pr, i) => `
+    <article class="proj"><div class="proj-top p${(i % 6) + 1}"><div class="proj-art">${icon(pr)}</div><div class="stars">${tplEsc(pr.stars || 'Live')}</div></div>
+    <div class="proj-body"><h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
+    <div class="tags">${((pr.technologies || pr.tags) || []).map((t) => `<span>${tplEsc(t)}</span>`).join('')}</div>
+    <div class="proj-actions"><a class="primary" href="${tplEsc(pr.url)}" target="_blank">Dive in →</a>${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank">Demo</a>` : ''}</div></div></article>`).join('');
+  document.getElementById('app').innerHTML = `${tplNav(p)}
+  <section class="wrap" style="padding:140px 0 20px">
+    <div class="card"><p class="mono" style="color:#80ffdb">○ depth: portfolio trench · pressure: nominal</p>
+    <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:8px">
+    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:2px solid #80ffdb;box-shadow:0 0 30px rgba(46,196,182,.7)">` : ''}
+    <div><h1 style="font-size:clamp(38px,6vw,64px)">${tplEsc(p.name)}</h1>
+    <p class="mono">${esc2(p.title)} — ${tplEsc(p.location || 'remote reef')}</p></div></div>
+    <p style="margin-top:10px">${esc2(p.tagline)}</p>
+    <div style="margin-top:10px">${skills}</div>
+    <p style="margin-top:12px">${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${tplEsc(p.email)}">Send a bubble</a>` : ''} ${p.github ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}</p></div>
+  </section>
+  <section class="wrap"><h2 class="title">Catch of the <span class="grad">day</span></h2><div class="proj-grid" style="margin-top:14px">${projects || '<p>Nothing surfaced yet.</p>'}</div></section>${tplFoot(p)}`;
+  window.scrollTo(0, 0);
+}
+
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool };
 window.PortfoolioTemplateList = TEMPLATES;
