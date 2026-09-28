@@ -282,7 +282,7 @@ function renderTidepool(p) {
     <div style="margin-top:10px">${skills}</div>
     <p style="margin-top:12px">${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${tplEsc(p.email)}">Send a bubble</a>` : ''} ${p.github ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}</p></div>
   </section>
-  <section class="wrap"><h2 class="title">Catch of the <span class="grad">day</span></h2><div class="proj-grid" style="margin-top:14px">${projects || '<p>Nothing surfaced yet.</p>'}</div></section>${tplFoot(p)}`;
+  <section class="wrap"><h2 class="title">Catch of the <span class="grad">day</span></h2><div class="proj-grid tp-zig" style="margin-top:14px">${projects || '<p>Nothing surfaced yet.</p>'}</div></section>${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 

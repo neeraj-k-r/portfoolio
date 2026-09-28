@@ -152,6 +152,11 @@ body[data-template="tidepool"] .btn-ghost{background:rgba(255,203,5,.06);border-
 body[data-template="tidepool"] .badge{background:rgba(128,255,219,.08);border-color:rgba(128,255,219,.45);color:#80ffdb}
 body[data-template="tidepool"] .tags span{background:rgba(255,203,5,.08);border-color:rgba(255,203,5,.4);color:#ffdf6b}
 body[data-template="tidepool"] .eyebrow{color:#80ffdb;background:rgba(46,196,182,.12);border-color:rgba(46,196,182,.4)}
+/* ---- Tidepool layout: zigzag specimen cards ---- */
+body[data-template="tidepool"] .tp-zig article:nth-child(even){transform:translateX(28px)}
+body[data-template="tidepool"] .tp-zig article:nth-child(odd){transform:translateX(-8px)}
+body[data-template="tidepool"] .tp-zig .proj-top{border-bottom:2px dashed rgba(128,255,219,.4)}
+@media(max-width:820px){body[data-template="tidepool"] .tp-zig article:nth-child(even),body[data-template="tidepool"] .tp-zig article:nth-child(odd){transform:none}}
 
 /* ---- Afterglow layout: split hero + strip rows ---- */
 body[data-template="afterglow"] h1,body[data-template="afterglow"] h2,body[data-template="afterglow"] .btn{font-family:'Space Grotesk',sans-serif}
