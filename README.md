@@ -73,4 +73,7 @@ Sites publish instantly; use the admin console to reject/delete spam. Existing `
 - 🔮 `aurora` — frosted glass pastels → `?u=mira`
 - 📰 `editorial` — print serif calm → `?u=june`
 - 🧱 `brutalist` — bold blocks + shadows → `?u=leo`
+- 🌇 `afterglow` *fresh* — sunset neon → `?u=ember`
+- 🟣 `ultraviolet` *fresh* — violet haze neon → `?u=iris`
+- 🪼 `tidepool` *fresh* — abyss glow → `?u=kai`
 - Files: `frontend/templates.css` (themes) + `frontend/templates.js` (renderers) hooked in `app.js`.
