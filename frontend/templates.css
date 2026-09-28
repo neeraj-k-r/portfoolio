@@ -122,3 +122,18 @@ body[data-template="ultraviolet"] .btn-ghost{background:rgba(76,201,240,.07);bor
 body[data-template="ultraviolet"] .badge{background:rgba(224,170,255,.1);border-color:rgba(224,170,255,.45);color:#e0aaff}
 body[data-template="ultraviolet"] .tags span{background:rgba(255,93,162,.12);border-color:rgba(255,93,162,.45);color:#ff8fbf}
 body[data-template="ultraviolet"] .eyebrow{color:#e0aaff;background:rgba(114,9,183,.25);border-color:rgba(199,125,255,.4)}
+
+/* ---- Template: tidepool (bioluminescent abyss, original) ---- */
+body[data-template="tidepool"]{background:#01121f;color:#d8f3dc}
+body[data-template="tidepool"] .bg-fx{background:radial-gradient(760px 300px at 50% 112%,rgba(46,196,182,.4),transparent 60%),radial-gradient(640px 380px at 12% 8%,rgba(1,73,124,.7),transparent 60%),radial-gradient(640px 380px at 88% 14%,rgba(255,203,5,.12),transparent 60%),#01121f}
+body[data-template="tidepool"] .grid-overlay{opacity:.2}
+body[data-template="tidepool"] nav{background:rgba(1,33,56,.75);border-color:rgba(46,196,182,.4)}
+body[data-template="tidepool"] .card,body[data-template="tidepool"] .proj{background:linear-gradient(180deg,rgba(46,196,182,.12),rgba(1,33,56,.5));border:1px solid rgba(46,196,182,.4);box-shadow:0 18px 50px rgba(0,0,0,.5),inset 0 0 30px rgba(46,196,182,.06)}
+body[data-template="tidepool"] .card p,body[data-template="tidepool"] .sub,body[data-template="tidepool"] p.lead{color:#95d5b2}
+body[data-template="tidepool"] h1,body[data-template="tidepool"] h2,body[data-template="tidepool"] h3{color:#f0fff4;text-shadow:0 0 22px rgba(46,196,182,.6)}
+body[data-template="tidepool"] .grad{background:linear-gradient(90deg,#80ffdb,#48bfe3,#ffcb05);-webkit-background-clip:text;background-clip:text;color:transparent}
+body[data-template="tidepool"] .btn-primary{background:linear-gradient(135deg,#2ec4b6,#48bfe3);color:#012a4a;box-shadow:0 10px 30px rgba(46,196,182,.45)}
+body[data-template="tidepool"] .btn-ghost{background:rgba(255,203,5,.06);border-color:rgba(255,203,5,.45);color:#ffea9d}
+body[data-template="tidepool"] .badge{background:rgba(128,255,219,.08);border-color:rgba(128,255,219,.45);color:#80ffdb}
+body[data-template="tidepool"] .tags span{background:rgba(255,203,5,.08);border-color:rgba(255,203,5,.4);color:#ffdf6b}
+body[data-template="tidepool"] .eyebrow{color:#80ffdb;background:rgba(46,196,182,.12);border-color:rgba(46,196,182,.4)}
