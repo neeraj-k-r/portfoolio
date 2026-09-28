@@ -123,6 +123,21 @@ body[data-template="ultraviolet"] .badge{background:rgba(224,170,255,.1);border-
 body[data-template="ultraviolet"] .tags span{background:rgba(255,93,162,.12);border-color:rgba(255,93,162,.45);color:#ff8fbf}
 body[data-template="ultraviolet"] .eyebrow{color:#e0aaff;background:rgba(114,9,183,.25);border-color:rgba(199,125,255,.4)}
 
+/* ---- Ultraviolet layout: signal rail + divider rows, mono-forward ---- */
+body[data-template="ultraviolet"] h1,body[data-template="ultraviolet"] h2,body[data-template="ultraviolet"] h3{font-family:'JetBrains Mono',monospace}
+.uv-grid{display:grid;grid-template-columns:280px 1fr;gap:36px;align-items:start}
+.uv-rail{position:sticky;top:96px;border:1px solid rgba(199,125,255,.4);border-radius:18px;padding:22px;background:rgba(36,0,70,.6);box-shadow:0 0 34px rgba(114,9,183,.4)}
+.uv-rail img{width:96px;height:96px;border-radius:50%;object-fit:cover;border:2px solid #e0aaff;box-shadow:0 0 26px rgba(181,23,158,.8)}
+.uv-orb{width:96px;height:96px;border-radius:50%;display:grid;place-items:center;font-size:38px;font-weight:800;background:radial-gradient(circle at 35% 30%,#ff5da2,#7209b7);border:2px solid #e0aaff}
+.uv-rail h1{font-size:26px;margin-top:12px;line-height:1.1}
+.uv-status{font-size:12px;color:#4ade80;margin-top:6px}
+.uv-links{display:grid;gap:6px;margin-top:12px}
+.uv-links a{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#4cc9f0}
+.uv-row{display:flex;gap:14px;align-items:center;padding:16px 4px;border-bottom:1px solid rgba(199,125,255,.3)}
+.uv-row h3{font-size:18px}
+.uv-row p{font-size:14px}
+@media(max-width:820px){.uv-grid{grid-template-columns:1fr}.uv-rail{position:static}}
+
 /* ---- Template: tidepool (bioluminescent abyss, original) ---- */
 body[data-template="tidepool"]{background:#01121f;color:#d8f3dc}
 body[data-template="tidepool"] .bg-fx{background:radial-gradient(760px 300px at 50% 112%,rgba(46,196,182,.4),transparent 60%),radial-gradient(640px 380px at 12% 8%,rgba(1,73,124,.7),transparent 60%),radial-gradient(640px 380px at 88% 14%,rgba(255,203,5,.12),transparent 60%),#01121f}

@@ -230,26 +230,32 @@ function renderUltraviolet(p) {
   document.title = `${p.name} — ${p.title} | portfoolio.me`;
   const icon = (typeof projIcon === 'function') ? projIcon : (() => '');
   const skills = (p.skills || []).map((s) => `<a href="${skillLink(s)}" style="text-decoration:none"><span class="badge">◈ ${tplEsc(s)}</span></a>`).join(' ');
-  const projects = (p.projects || []).map((pr, i) => `
-    <article class="proj"><div class="proj-top p${(i % 6) + 1}"><div class="proj-art">${icon(pr)}</div><div class="stars">${tplEsc(pr.stars || 'Live')}</div></div>
-    <div class="proj-body"><h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
-    <div class="tags">${((pr.technologies || pr.tags) || []).map((t) => `<span>${tplEsc(t)}</span>`).join('')}</div>
-    <div class="proj-actions"><a class="primary" href="${tplEsc(pr.url)}" target="_blank">Enter →</a>${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank">Demo</a>` : ''}</div></div></article>`).join('');
+  const projects = (p.projects || []).map((pr) => `
+    <div class="uv-row"><div style="flex:1;min-width:200px">
+    <p class="mono" style="font-size:12px;color:#e0aaff">~/signal/${tplEsc(pr.title.toLowerCase().replace(/\s+/g, '-'))}</p>
+    <h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-shrink:0"><a href="${tplEsc(pr.url)}" target="_blank" style="font-weight:800">open →</a>${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank" style="font-weight:800">demo →</a>` : ''}</div></div>`).join('');
   document.getElementById('app').innerHTML = `${tplNav(p)}
-  <section class="wrap" style="padding:150px 0 24px;max-width:820px">
-    <p class="mono" style="font-size:13px;color:#e0aaff">◈ signal acquired — portfolio incoming</p>
-    <h1 style="font-size:clamp(46px,7.5vw,88px);line-height:1">${tplEsc(p.name)}</h1>
-    <h2 style="font-size:22px">${tplEsc(p.title)}</h2>
-    <p style="margin-top:10px;max-width:600px">${esc2(p.tagline)}</p>
-    ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:104px;height:104px;border-radius:50%;object-fit:cover;margin-top:14px;border:2px solid #e0aaff;box-shadow:0 0 34px rgba(181,23,158,.8)">` : ''}
-    <div style="margin-top:12px">${skills}</div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
-      ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">Transmit message</a>` : ''}
-      ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}
+  <section class="wrap" style="padding:140px 0 20px"><div class="uv-grid">
+    <aside class="uv-rail">
+      ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}">` : `<div class="uv-orb">${tplEsc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`}
+      <h1>${tplEsc(p.name)}</h1>
+      <p class="mono uv-status">◉ signal: strong</p>
+      <div class="uv-links">
+      ${p.email ? `<a href="mailto:${tplEsc(p.email)}">email →</a>` : ''}
+      ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank">github →</a>` : ''}
+      ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank">linkedin →</a>` : ''}
+      </div>
+    </aside>
+    <div>
+      <p class="mono" style="font-size:13px;color:#e0aaff">◈ ${tplEsc(p.title)}</p>
+      <p style="margin-top:10px;max-width:560px;font-size:19px">${esc2(p.tagline)}</p>
+      <div style="margin-top:12px">${skills}</div>
+      <div style="margin-top:26px;height:2px;background:linear-gradient(90deg,transparent,#b5179e,#4cc9f0,transparent)"></div>
+      <h2 class="mono" style="margin-top:22px;font-size:15px;color:#e0aaff">~/transmissions</h2>
+      <div style="margin-top:6px">${projects || '<p>No projects yet.</p>'}</div>
     </div>
-    <div style="margin-top:26px;height:2px;background:linear-gradient(90deg,transparent,#b5179e,#4cc9f0,transparent)"></div>
-  </section>
-  <section class="wrap" style="max-width:820px"><div class="proj-grid" style="margin-top:8px">${projects || '<p>No projects yet.</p>'}</div></section>${tplFoot(p)}`;
+  </div></section>${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
