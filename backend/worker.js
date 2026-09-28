@@ -64,6 +64,20 @@ function foot(p) {
 }
 function projectsFor(p, tpl) {
   // mirror frontend/templates.js per-template project styles so subdomain == trial
+  if (tpl === 'afterglow') {
+    return (p.projects || []).map((pr, i) => `
+    <div class="ag-row"><span class="ag-num">${String(i + 1).padStart(2, '0')}</span>
+    <div style="flex:1;min-width:220px"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
+    <div class="tags">${techsOf(pr).map((t) => `<span>${esc(t)}</span>`).join('')}</div></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-shrink:0"><a class="btn btn-primary btn-sm" href="${esc(pr.url)}">View →</a>${pr.demoUrl ? `<a class="btn btn-ghost btn-sm" href="${esc(pr.demoUrl)}">Demo</a>` : ''}</div></div>`).join('');
+  }
+  if (tpl === 'ultraviolet') {
+    return (p.projects || []).map((pr) => `
+    <div class="uv-row"><div style="flex:1;min-width:200px">
+    <p class="mono" style="font-size:12px;color:#e0aaff">~/signal/${esc(pr.title.toLowerCase().replace(/\s+/g, '-'))}</p>
+    <h3>${esc(pr.title)}</h3><p>${esc(pr.desc)}</p></div>
+    <div style="display:flex;gap:8px;align-items:center;flex-shrink:0"><a href="${esc(pr.url)}" style="font-weight:800">open →</a>${pr.demoUrl ? `<a href="${esc(pr.demoUrl)}" style="font-weight:800">demo →</a>` : ''}</div></div>`).join('');
+  }
   if (tpl === 'minimal') {
     return (p.projects || []).map((pr) => `
     <div class="card"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
@@ -146,7 +160,31 @@ function page(p) {
   const tpl = (p.template || 'midnight').toLowerCase();
   const skills = (p.skills || []).map((s) => `<span class="badge">${esc(s)}</span>`).join('');
   const bodyAttr = tpl === 'midnight' ? '' : ` data-template="${tpl}"`;
-  const hero = tpl === 'aurora'
+  const hero = tpl === 'afterglow'
+    ? `<header class="hero wrap"><div class="ag-split"><div>
+       <p class="mono ag-kicker">— GOLDEN HOUR, SHIPPED —</p>
+       <h1>${esc(p.name)}</h1><div class="ag-sunbar"></div>
+       <p class="sub">${esc(p.title)} — ${esc(p.tagline || '')}</p>
+       <div class="hero-cta" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">Say hello</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GitHub</a>` : ''}</div></div>
+       ${p.avatarUrl ? `<div class="ag-sunring"><img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}"></div>` : '<div class="ag-sunring ag-sunring-empty"></div>'}
+       </div></header>`
+    : tpl === 'ultraviolet'
+    ? `<section class="wrap" style="padding:140px 0 20px"><div class="uv-grid">
+       <aside class="uv-rail">${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}">` : `<div class="uv-orb">${esc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`}
+       <h1>${esc(p.name)}</h1><p class="mono uv-status">◉ signal: strong</p>
+       <div class="uv-links">${p.email ? `<a href="mailto:${esc(p.email)}">email →</a>` : ''}${p.github ? `<a href="${esc(p.github)}">github →</a>` : ''}</div></aside>
+       <div><p class="mono" style="font-size:13px;color:#e0aaff">◈ ${esc(p.title)}</p>
+       <p style="margin-top:10px;font-size:19px">${esc(p.tagline || '')}</p>
+       <div style="margin-top:26px;height:2px;background:linear-gradient(90deg,transparent,#b5179e,#4cc9f0,transparent)"></div></div>
+       </div></section>`
+    : tpl === 'tidepool'
+    ? `<section class="wrap" style="padding:140px 0 20px"><div class="card"><p class="mono" style="color:#80ffdb">○ depth: portfolio trench · pressure: nominal</p>
+       <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:8px">
+       ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:112px;height:112px;border-radius:50%;object-fit:cover;border:2px solid #80ffdb;box-shadow:0 0 32px rgba(46,196,182,.7);flex-shrink:0">` : ''}
+       <div style="flex:1;min-width:240px"><h1 style="font-size:clamp(38px,6vw,64px)">${esc(p.name)}</h1>
+       <p class="mono">${esc(p.title)} — ${esc(p.location || 'remote reef')}</p></div></div>
+       <p style="margin-top:10px">${esc(p.tagline || '')}</p></div></section>`
+    : tpl === 'aurora'
     ? `<header class="hero wrap"><div style="text-align:center;padding:50px 0 10px">
        ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 10px;display:block">` : ''}
        <p class="mono" style="letter-spacing:3px;font-size:12px;opacity:.8">PORTFOLIO</p>
@@ -195,7 +233,7 @@ function page(p) {
          ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:132px;height:132px;border-radius:50%;object-fit:cover">` : `<div style="width:120px;height:120px;border-radius:50%;margin:0 auto;display:grid;place-items:center;font-size:52px;color:#fff;background:linear-gradient(135deg,#6c6cf5,#22d3ee)">${esc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`}
          <h3>${esc(p.name)}</h3><p class="mono">@${esc(p.username)} • portfoolio.me</p><div class="badges">${skills}</div>
        </div></div></div></div></header>`;
-  const gridCls = (tpl === 'minimal' || tpl === 'terminal' || tpl === 'brutalist') ? 'dir-grid' : 'proj-grid';
+  const gridCls = (tpl === 'minimal' || tpl === 'terminal' || tpl === 'brutalist') ? 'dir-grid' : (tpl === 'tidepool' ? 'proj-grid tp-zig' : 'proj-grid');
   return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}><div class="bg-fx"></div>${nav(p)}${hero}
   ${skillsSection(p)}
   <section class="wrap" style="padding-top:10px"><span class="eyebrow">● Projects</span>
