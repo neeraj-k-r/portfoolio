@@ -399,6 +399,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <textarea id="liPaste" rows="4" placeholder="Paste LinkedIn profile text here… or type guided lines:&#10;Headline: Full-Stack Developer&#10;Role @ Company | Jun 2024 - Present&#10;- an achievement&#10;CUSAT | B.Tech, Computer Science | 2022 - 2026"></textarea>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
             <button type="button" class="btn btn-ghost btn-sm" id="liParseBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Parse &amp; Fill resume</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="liSampleBtn"><i class="fa-solid fa-flask"></i> Try a sample</button>
           </div>
           <p class="mono" id="liParseMsg" style="font-size:11.5px;color:var(--muted);margin-top:6px"></p>
         </div>
@@ -1121,6 +1122,31 @@ if ($('rsPrintBtn')) $('rsPrintBtn').onclick = () => {
   open((window.PortfoolioResume ? PortfoolioResume.resumeURL(activeUserProfile.username) : '/'), '_blank');
 };
 // ---- LinkedIn paste-import (resume fields; profile sections come next) ----
+if ($('liSampleBtn')) $('liSampleBtn').onclick = () => {
+  if ($('liPaste')) $('liPaste').value =
+`Headline: Full-Stack Developer
+Location: Kerala, India
+Skills: React, Node.js, Python
+
+Experience
+Frontend Intern
+Acme Technologies · Internship
+Jun 2024 - Present · 6 mos
+Kerala, India
+Built a dashboard with React that 200+ students use daily
+Cut page load time by 40% with code splitting
+
+Freelance Web Developer
+Self-employed
+Jan 2024 - May 2024
+Shipped 3 landing pages for local businesses
+
+Education
+CUSAT
+B.Tech, Computer Science
+2022 - 2026`;
+  if ($('liParseMsg')) $('liParseMsg').textContent = 'Sample loaded — hit Parse & Fill to see it work, then Save Changes to keep it.';
+};
 if ($('liParseBtn')) $('liParseBtn').onclick = () => {
   if (!activeUserProfile) return toast('❌ Log in first');
   const LI = window.PortfoolioLinkedIn;
