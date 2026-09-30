@@ -1090,7 +1090,13 @@ document.addEventListener('input', (e) => {
   if (e.target && (e.target.id === 'rsSummary')) paintResumeTab();
 });
 document.addEventListener('change', (e) => {
-  if (e.target && e.target.name === 'rstheme') paintResumeTab();
+  // Sync the click into the draft BEFORE repaint — otherwise paintResumeTab()
+  // would reset the radios to the last-saved value and instantly undo the pick
+  // (site template in `template`/`edtpl` is never touched here).
+  if (e.target && e.target.name === 'rstheme') {
+    if (activeUserProfile) draftResume().theme = e.target.value;
+    paintResumeTab();
+  }
 });
 
 // ---- Prebuilt site upload (.zip / .html → your subdomain) ----
