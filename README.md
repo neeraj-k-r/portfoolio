@@ -74,6 +74,10 @@ Sites publish instantly; use the admin console to reject/delete spam. Existing `
 - Dashboard: **Resume** tab (summary, theme radios, experience/education add/remove, live iframe preview, open/print buttons) + resume link in Share tab. Old profiles without the new fields render with empty-state hints.
 - Files: `frontend/resume.js` (normalizer + section + full doc) + `frontend/resume.css` (themes + print); worker mirrors the renderer server-side (same pattern as skill evidence). Owner setup: re-run `backend/supabase-schema.sql`, then `npx wrangler deploy`.
 
+## LinkedIn import (paste, not fetch — LinkedIn blocks auto-fetch)
+- No public LinkedIn API exists and LinkedIn blocks scraping (login wall + CORS), so there is no fetch-by-URL: user copies About + Experience + Education text from LinkedIn into Resume tab → **Parse & Fill**.
+- Parser (`frontend/linkedin-import.js`, pure + tested via `node frontend/linkedin-import.test.mjs`): labeled lines (`Headline:`/`Location:`/`Skills:`/`Role @ Company | dates`/`School | Degree | years`) anywhere in the paste, plus best-effort LinkedIn section (`Experience`/`Education`) + date-range detection. Fills resume fields (summary if empty, new roles/schools deduped) AND normal sections (empty title/tagline/location, merged skills ≤12). Everything still needs **Save Changes** to publish.
+
 ## Profile photos (Cloudinary, free)
 1. Cloudinary dashboard → Settings → Upload → Upload presets → Add new, Signing Mode **Unsigned** → copy cloud name + preset.
 2. Paste into `frontend/cloudinary-config.js`, commit + push. Users upload from Profile Info (JPG/PNG ≤5MB); URL saved on the profile and shown on all templates + worker pages.
