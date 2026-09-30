@@ -3,6 +3,12 @@
   publish = "."
 
 [[redirects]]
+  from = "/u/:user/resume"
+  to = "/frontend/?u=:user&resume=1"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/u/*"
   to = "/frontend/?u=:splat"
   status = 200

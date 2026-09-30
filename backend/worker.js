@@ -26,7 +26,7 @@ function iconFor(pr) {
 async function getProfile(sub) {
   // 1) Supabase: approved rows are publicly readable
   try {
-    const url = `${SUPABASE_URL}/rest/v1/profiles?username=eq.${encodeURIComponent(sub)}&status=eq.approved&select=username,name,title,tagline,email,phone,location,github,linkedin,instagram,template,skills,projects,avatar_url`;
+    const url = `${SUPABASE_URL}/rest/v1/profiles?username=eq.${encodeURIComponent(sub)}&status=eq.approved&select=username,name,title,tagline,email,phone,location,github,linkedin,instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume`;
     const r = await fetch(url, { headers: { apikey: SUPABASE_KEY, Accept: 'application/json' } });
     if (r.ok) {
       const rows = await r.json();
@@ -44,6 +44,40 @@ async function getProfile(sub) {
   return null;
 }
 
+// ---- Prebuilt upload hosting: proxy files from public storage bucket ----
+// Layout: portfolio-sites / sites/<username>/<path>. Relative asset URLs in the
+// user's index.html resolve against the subdomain, so every path lands here.
+const SITES_BUCKET = 'portfolio-sites';
+function siteMime(path) {
+  const ext = String(path || '').split('.').pop().toLowerCase().split('?')[0];
+  const map = { html: 'text/html;charset=UTF-8', htm: 'text/html;charset=UTF-8', css: 'text/css',
+    js: 'text/javascript', json: 'application/json', svg: 'image/svg+xml', png: 'image/png',
+    jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', webp: 'image/webp',
+    ico: 'image/x-icon', woff: 'font/woff', woff2: 'font/woff2', ttf: 'font/ttf',
+    txt: 'text/plain', mp4: 'video/mp4' };
+  return map[ext] || 'application/octet-stream';
+}
+async function serveUploadedSite(sub, pathname) {
+  let rel = decodeURIComponent(pathname || '/').replace(/^\/+/, '') || 'index.html';
+  if (rel.includes('..') || /[\0<>]/.test(rel)) return null;
+  if (rel.endsWith('/')) rel += 'index.html';
+  const tryFetch = async (key) => {
+    const r = await fetch(
+      `${SUPABASE_URL}/storage/v1/object/public/${SITES_BUCKET}/sites/${encodeURIComponent(sub)}/${key.split('/').map(encodeURIComponent).join('/')}`);
+    if (!r.ok) return null;
+    const buf = await r.arrayBuffer();
+    return new Response(buf, {
+      headers: {
+        'content-type': r.headers.get('content-type') || siteMime(key),
+        'cache-control': /\.html?$/.test(key) ? 'public, max-age=60' : 'public, max-age=86400',
+      },
+    });
+  };
+  // exact asset first, then SPA fallback to index.html for extensionless routes
+  return (await tryFetch(rel))
+    || (/\.[\w]{1,5}$/.test(rel) ? null : await tryFetch('index.html'));
+}
+
 function head(p, tpl) {
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
@@ -51,7 +85,7 @@ function head(p, tpl) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${ORIGIN}/style.css"><link rel="stylesheet" href="${ORIGIN}/templates.css"></head>`;
+<link rel="stylesheet" href="${ORIGIN}/style.css"><link rel="stylesheet" href="${ORIGIN}/templates.css"><link rel="stylesheet" href="${ORIGIN}/resume.css"></head>`;
 }
 function nav(p) {
   return `<nav><a class="logo" href="${ORIGIN}/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
@@ -239,9 +273,69 @@ function page(p) {
   <section class="wrap" style="padding-top:10px"><span class="eyebrow">● Projects</span>
   <h2 class="title">Work that <span class="grad">speaks</span></h2>
   <div class="${gridCls}" style="margin-top:22px">${projectsFor(p, tpl) || '<p>No projects yet.</p>'}</div></section>
+  ${resumeTeaser(p)}
   <section class="wrap"><div class="card" style="display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap">
   <div><h3>Like this portfolio?</h3><p>Claim yours free at <b>portfoolio.me</b>.</p></div>
   <a class="btn btn-primary" href="${ORIGIN}/">Create mine</a></div></section>${foot(p)}</body></html>`;
+}
+
+function resumeTheme(p) {
+  const t = String((p.resume && p.resume.theme) || 'ats').toLowerCase();
+  return ['ats', 'modern', 'midnight', 'terminal'].includes(t) ? t : 'ats';
+}
+function resumeBullets(desc) {
+  const lines = String(desc || '').split('\n').map((s) => s.trim()).filter(Boolean);
+  if (!lines.length) return '';
+  if (lines.length === 1) return `<p class="rs-p">${esc(lines[0])}</p>`;
+  return `<ul class="rs-ul">${lines.map((l) => `<li>${esc(l.replace(/^[-•*]\s*/, ''))}</li>`).join('')}</ul>`;
+}
+function resumeBody(p) {
+  // server mirror of frontend/resume.js docBody (worker has no shared imports)
+  const summary = String((p.resume && p.resume.summary) || p.tagline || '').trim();
+  const exps = Array.isArray(p.experience) ? p.experience : [];
+  const edus = Array.isArray(p.education) ? p.education : [];
+  const skills = (p.skills || []).filter(Boolean);
+  const projs = (p.projects || []).slice(0, 6);
+  const sec = (t) => `<h2 class="rs-sec-h">${t}</h2>`;
+  const contact = [p.email ? `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : '',
+    p.phone ? `<span>${esc(p.phone)}</span>` : '', p.location ? `<span>${esc(p.location)}</span>` : '',
+    p.github ? `<a href="${esc(p.github)}">GitHub</a>` : '', p.linkedin ? `<a href="${esc(p.linkedin)}">LinkedIn</a>` : '']
+    .filter(Boolean).join(' &nbsp;•&nbsp; ');
+  const dl = (e) => [e.start, e.current ? 'Present' : e.end].filter(Boolean).map(esc).join(' – ');
+  return `
+  <div class="rs-head"><h1 class="rs-name">${esc(p.name || p.username)}</h1>
+  <p class="rs-title">${esc(p.title || '')}</p><p class="rs-contact">${contact}</p></div>
+  ${summary ? `${sec('Summary')}<p class="rs-p">${esc(summary)}</p>` : ''}
+  ${skills.length ? `${sec('Skills')}<p class="rs-p">${skills.map(esc).join(' • ')}</p>` : ''}
+  ${sec('Experience')}
+  ${exps.length ? exps.map((e) => `<div class="rs-item"><div class="rs-item-top"><b>${esc(e.role || 'Role')} — ${esc(e.company || '')}</b><span class="rs-dates">${dl(e)}</span></div>${resumeBullets(e.desc)}</div>`).join('')
+    : '<p class="rs-p rs-dim">No roles listed yet.</p>'}
+  ${sec('Education')}
+  ${edus.length ? edus.map((e) => `<div class="rs-item"><div class="rs-item-top"><b>${esc(e.school || '')}</b><span class="rs-dates">${esc([e.start, e.end].filter(Boolean).join(' – '))}</span></div><p class="rs-p">${esc([e.degree, e.field].filter(Boolean).join(', '))}</p></div>`).join('')
+    : '<p class="rs-p rs-dim">No education listed yet.</p>'}
+  ${projs.length ? `${sec('Projects')}${projs.map((pr) => `<div class="rs-item"><div class="rs-item-top"><b>${esc(pr.title)}</b>${pr.url && pr.url !== '#' ? `<a href="${esc(pr.url)}">Code →</a>` : ''}</div><p class="rs-p">${esc(pr.desc || '')}</p></div>`).join('')}` : ''}`;
+}
+function pageResume(p) {
+  const theme = resumeTheme(p);
+  return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resume — ${esc(p.name)} | portfoolio.me</title>
+<link rel="stylesheet" href="${ORIGIN}/style.css"><link rel="stylesheet" href="${ORIGIN}/resume.css"></head>
+<body class="rs-page rs-${theme}"><div class="bg-fx"></div>${nav(p)}
+<div style="max-width:860px;margin:0 auto;padding:120px 16px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+<a href="/" style="font-weight:800">← ${esc(p.name)}</a>
+<span style="margin-left:auto;display:flex;gap:10px"><a href="/" style="font-weight:700">Portfolio</a><a href="javascript:window.print()" style="font-weight:800">⬇ Print / PDF</a></span></div>
+<main class="rs-doc rs-${theme}">${resumeBody(p)}
+<p class="rs-foot">Resume auto-built from <b>portfoolio.me</b> profile · ${esc(p.username)}.portfoolio.me</p></main>
+<div style="text-align:center;padding:0 0 40px"><a href="javascript:window.print()" style="font-weight:800">⬇ Print / Save as PDF</a></div>${foot(p)}</body></html>`;
+}
+function resumeTeaser(p) {
+  const exps = Array.isArray(p.experience) ? p.experience : [];
+  return `<section class="wrap" style="padding-top:10px"><span class="eyebrow">● Resume</span>
+  <h2 class="title">Hire-ready <span class="grad">resume</span></h2>
+  <div class="card"><div style="display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+  <div><h3>📄 ${esc(p.name)} — ${esc(p.title)}</h3>
+  <p style="color:var(--muted);font-size:13.5px;margin-top:4px">${exps.length ? `${exps.length} role${exps.length > 1 ? 's' : ''} · ` : ''}${(p.skills || []).length} skills · ${(p.projects || []).length} projects · theme: ${resumeTheme(p).toUpperCase()}</p></div>
+  <div style="display:flex;gap:8px"><a class="btn btn-primary btn-sm" href="/resume">View resume →</a></div></div></div></section>`;
 }
 
 function techsOf(pr) {
@@ -281,6 +375,19 @@ export default {
     }
     const p = await getProfile(sub);
     if (!p) return Response.redirect(`${ORIGIN}/?claim=${encodeURIComponent(sub)}`, 302);
+    // resume page works on every site type (built from profile data)
+    if (url.pathname === '/resume' || url.pathname === '/resume/' || url.searchParams.get('resume')) {
+      const html = pageResume(p);
+      return new Response(html, {
+        headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300' },
+      });
+    }
+    // custom upload wins over builder templates — serve raw files incl. assets
+    if (p.site_type === 'upload') {
+      const hit = await serveUploadedSite(sub, url.pathname);
+      if (hit) return hit;
+      // storage empty / deleted → fall through to builder theme instead of 404
+    }
     const m = url.pathname.match(/^\/skills\/([^/]+)\/?$/);
     const html = m ? pageSkill(p, decodeURIComponent(m[1])) : page(p);
     return new Response(html, {

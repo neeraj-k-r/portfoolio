@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>portfoolio.me — Your name. Your portfolio. username.portfoolio.me</title>
 <meta name="description" content="Create a wow portfolio in 60 seconds and get your own username.portfoolio.me subdomain. Free for developers." />
+<base href="/frontend/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="templates.css">
+<link rel="stylesheet" href="resume.css">
 <style>
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-grid .full{grid-column:1/-1}
@@ -249,7 +251,16 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div><label class="flabel">Instagram Handle / URL</label><input id="inInsta" placeholder="@yourname or https://instagram.com/yourname"></div>
           <div class="full"><label class="flabel">Location</label><input id="inLoc" placeholder="Kerala, India"></div>
           <div class="full"><label class="flabel">Skills (comma separated)</label><input id="inSkills" placeholder="React, JavaScript, Node.js, Python, Tailwind"></div>
-          
+          <div class="full"><label class="flabel">Resume summary (one or two lines — used on your resume page)</label><input id="inResumeSummary" placeholder="Full-stack developer who ships…"></div>
+          <div class="full"><label class="flabel">Resume theme</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="ats" checked> <span><b>📄 ATS Clean</b></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="modern"> <span><b>✨ Modern</b></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="midnight"> <span><b>🌌 Midnight</b></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="terminal"> <span><b>💻 Terminal</b></span></label>
+            </div>
+          </div>
+
           <div class="full">
             <label class="flabel">Pick your portfolio theme *</label>
             <div class="tpl-grid" id="tplGrid">
@@ -301,6 +312,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <button class="dash-tab-btn active" onclick="switchUserTab('info')"><i class="fa-solid fa-user-pen"></i> Profile Info</button>
         <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Theme & Skills</button>
         <button class="dash-tab-btn" onclick="switchUserTab('projects')"><i class="fa-solid fa-code"></i> Projects & GitHub</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('resume')"><i class="fa-solid fa-file-lines"></i> Resume</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Site</button>
         <button class="dash-tab-btn" onclick="switchUserTab('proof')"><i class="fa-solid fa-award"></i> Proof of Work</button>
         <button class="dash-tab-btn" onclick="switchUserTab('share')"><i class="fa-solid fa-share-nodes"></i> Share & Links</button>
       </div>
@@ -376,6 +389,88 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         </div>
       </div>
 
+      <!-- User Studio Tab: Resume builder -->
+      <div id="tabResume" class="card" style="display:none">
+        <h3>📄 Resume — auto-built from your info</h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Name, contact, skills & projects are reused automatically. Add your summary, experience & education below, pick a theme, and share a recruiter-ready page + print-to-PDF.</p>
+        <div class="form-grid">
+          <div class="full"><label class="flabel">Professional summary</label><textarea id="rsSummary" rows="3" placeholder="Full-stack developer with 2 years building…"></textarea></div>
+          <div class="full"><label class="flabel">Resume theme</label>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="ats"> <span><b>📄 ATS Clean</b> <small>parser-safe • default</small></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="modern"> <span><b>✨ Modern</b> <small>light card</small></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="midnight"> <span><b>🌌 Midnight</b> <small>dark neon</small></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="terminal"> <span><b>💻 Terminal</b> <small>mono green</small></span></label>
+            </div>
+          </div>
+          <div class="full"><label class="flabel">Experience</label>
+            <div id="rsExpList" style="display:grid;gap:8px;margin-bottom:8px"></div>
+            <div class="form-grid">
+              <div><input id="rsExpRole" placeholder="Role — e.g. Frontend Intern"></div>
+              <div><input id="rsExpCompany" placeholder="Company — e.g. Acme"></div>
+              <div><input id="rsExpStart" placeholder="Start — e.g. Jun 2024"></div>
+              <div><input id="rsExpEnd" placeholder="End — e.g. Dec 2024"></div>
+              <div class="full"><textarea id="rsExpDesc" rows="2" placeholder="One achievement per line"></textarea></div>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
+              <label class="mono" style="font-size:12.5px"><input type="checkbox" id="rsExpCurrent" style="width:auto"> Currently here</label>
+              <button type="button" class="btn btn-ghost btn-sm" id="rsExpAdd"><i class="fa-solid fa-plus"></i> Add role</button>
+            </div>
+          </div>
+          <div class="full"><label class="flabel">Education</label>
+            <div id="rsEduList" style="display:grid;gap:8px;margin-bottom:8px"></div>
+            <div class="form-grid">
+              <div><input id="rsEduSchool" placeholder="School — e.g. CUSAT"></div>
+              <div><input id="rsEduDegree" placeholder="Degree — e.g. B.Tech"></div>
+              <div><input id="rsEduField" placeholder="Field — e.g. Computer Science"></div>
+              <div><input id="rsEduYears" placeholder="Years — e.g. 2022 – 2026"></div>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" id="rsEduAdd" style="margin-top:8px"><i class="fa-solid fa-plus"></i> Add education</button>
+          </div>
+          <div class="full"><label class="flabel">Live preview</label>
+            <iframe id="rsPreview" title="resume preview" style="width:100%;height:380px;border:1px solid var(--stroke);border-radius:12px;background:#fff"></iframe>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+              <a class="btn btn-ghost btn-sm" id="rsViewBtn" target="_blank"><i class="fa-solid fa-eye"></i> Open full resume</a>
+              <button type="button" class="btn btn-ghost btn-sm" id="rsPrintBtn"><i class="fa-solid fa-print"></i> Print / Save PDF</button>
+            </div>
+            <p class="mono" style="font-size:11.5px;color:var(--muted);margin-top:8px">Hit <b>Save Changes</b> below to publish — your portfolio also gains a Resume section linking to this page.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Studio Tab: Upload prebuilt site -->
+      <div id="tabUpload" class="card" style="display:none">
+        <h3>☁️ Host your prebuilt portfolio</h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Already built a site with HTML/CSS/JS, React (exported <span class="mono">dist/</span>), or any static builder? Zip it and host it on <b style="color:#fff">yourname.portfoolio.me</b> — no code changes needed.</p>
+        <div id="uploadModeBanner" style="display:none;background:rgba(163,230,53,.08);border:1px solid rgba(163,230,53,.4);border-radius:12px;padding:12px 14px;font-size:13.5px;margin-bottom:14px"></div>
+        <div class="form-grid">
+          <div class="full">
+            <label class="flabel">Step 1 — pick a .zip (with index.html at root) or a single .html file</label>
+            <div id="uploadDrop" style="border:1.5px dashed rgba(34,211,238,.5);border-radius:16px;padding:22px;text-align:center;cursor:pointer;background:rgba(34,211,238,.04)">
+              <div style="font-size:28px">📦</div>
+              <p style="font-weight:800;margin:6px 0 2px">Drop your .zip / .html here or click to browse</p>
+              <p class="mono" style="font-size:12px;color:var(--muted)">Limits: ZIP ≤ 20MB • ≤ 200 files • each ≤ 8MB • needs index.html • no .exe/.sh/.php</p>
+              <input id="uploadFile" type="file" accept=".zip,.html,.htm" style="display:none">
+            </div>
+          </div>
+          <div class="full">
+            <label class="flabel">Step 2 — review files</label>
+            <div id="uploadFileList" style="display:grid;gap:8px;max-height:220px;overflow:auto"><p style="color:var(--muted);font-size:13px">No file staged yet.</p></div>
+            <p class="mono" id="uploadMsg" style="font-size:12.5px;color:var(--muted);margin-top:8px"></p>
+          </div>
+          <div class="full">
+            <label class="flabel">Step 3 — preview, then publish</label>
+            <iframe id="uploadPreview" title="upload preview" sandbox="allow-scripts allow-same-origin" style="width:100%;height:340px;border:1px solid var(--stroke);border-radius:12px;background:#fff;display:none"></iframe>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+              <button type="button" class="btn btn-primary btn-sm" id="uploadPublishBtn" disabled><i class="fa-solid fa-rocket"></i> Publish to my subdomain</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="uploadRevertBtn"><i class="fa-solid fa-rotate-left"></i> Use builder theme instead</button>
+              <a class="btn btn-ghost btn-sm" id="uploadViewLiveBtn" target="_blank" style="display:none"><i class="fa-solid fa-eye"></i> View live uploaded site</a>
+            </div>
+            <p class="mono" style="font-size:11.5px;color:var(--muted);margin-top:8px">Publishing replaces your template view at <span id="uploadHostHint">yourname.portfoolio.me</span> with your files. Your builder data is kept — revert anytime.</p>
+          </div>
+        </div>
+      </div>
+
       <!-- User Studio Tab: Proof of Work -->
       <div id="tabProof" class="card" style="display:none">
         <h3>🏆 Proof of Work</h3>
@@ -402,6 +497,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <div style="background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.3);border-radius:16px;padding:16px">
           <p class="mono" id="shareSub" style="font-size:14px;color:#d9f99d;word-break:break-all"></p>
           <p class="mono" id="sharePath" style="font-size:12px;color:var(--muted);word-break:break-all;margin-top:4px"></p>
+          <p class="mono" id="shareResume" style="font-size:12px;color:#22d3ee;word-break:break-all;margin-top:4px"></p>
           <div class="share-row" style="margin-top:12px">
             <button class="btn btn-ghost btn-sm" id="shareCopy"><i class="fa-solid fa-copy"></i> Copy URL</button>
             <button class="btn btn-ghost btn-sm" id="shareWA"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
@@ -463,11 +559,13 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 
 <div id="toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="../backend/supabase-config.js"></script>
 <script src="app.js"></script>
 <script src="evidence.js"></script>
 <script src="cloudinary-config.js"></script>
 <script src="templates.js"></script>
+<script src="resume.js"></script>
 <script>
 function toast(m){const t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
 const $=id=>document.getElementById(id);
@@ -487,7 +585,7 @@ function setAuthMode(mode) {
 }
 
 function switchUserTab(tabName) {
-  ['info', 'theme', 'projects', 'proof', 'share'].forEach(t => {
+  ['info', 'theme', 'projects', 'resume', 'upload', 'proof', 'share'].forEach(t => {
     const el = $('tab' + t.charAt(0).toUpperCase() + t.slice(1));
     if(el) el.style.display = (t === tabName) ? '' : 'none';
   });
@@ -581,6 +679,8 @@ function setupUserDashboardView(profile) {
     paintUserProjects(profile);
     paintShareSection(profile);
     paintProof();
+    paintResumeTab();
+    paintUploadBanner();
   }
 }
 
@@ -666,6 +766,7 @@ function paintShareSection(p) {
   const sub = `https://${p.username}.portfoolio.me`, path = `${location.origin}/?u=${encodeURIComponent(p.username)}`;
   if($('shareSub')) $('shareSub').textContent = sub;
   if($('sharePath')) $('sharePath').textContent = 'Direct link: ' + path;
+  if($('shareResume')) $('shareResume').textContent = 'Resume: ' + `${location.origin}/?u=${encodeURIComponent(p.username)}&resume=1`;
   if($('edPreviewBtn')) $('edPreviewBtn').href = path;
 
   const text = encodeURIComponent(`Check out my portfolio: ${p.name} — ${p.title}`);
@@ -811,7 +912,9 @@ if ($('builderForm')) {
       phone: $('inPhone').value.trim(), location: $('inLoc').value.trim(),
       github: $('inGithub').value.trim(), linkedin: $('inLinkedin').value.trim(), instagram: normInsta($('inInsta').value),
       template, skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
-      projects: [...manual, ...picked], available: true, status: 'approved', createdAt: new Date().toISOString()
+      projects: [...manual, ...picked], available: true, status: 'approved', createdAt: new Date().toISOString(),
+      experience: [], education: [],
+      resume: { summary: ($('inResumeSummary') || {}).value ? $('inResumeSummary').value.trim().slice(0, 600) : '', theme: (document.querySelector('input[name=rstpl]:checked') || {}).value || 'ats' }
     };
 
     const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
@@ -846,6 +949,12 @@ async function saveStudio() {
       avatarUrl: draftAvatar || '',
       skillsDisplay: (document.querySelector('input[name=skillsDisplay]:checked') || {}).value || 'evidence',
       skills: $('edSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
+      experience: Array.isArray(activeUserProfile.experience) ? activeUserProfile.experience : [],
+      education: Array.isArray(activeUserProfile.education) ? activeUserProfile.education : [],
+      resume: {
+        summary: $('rsSummary') ? $('rsSummary').value.trim().slice(0, 600) : ((activeUserProfile.resume || {}).summary || ''),
+        theme: (document.querySelector('input[name=rstheme]:checked') || {}).value || 'ats',
+      },
       updatedAt: new Date().toISOString(),
     });
 
@@ -860,6 +969,7 @@ async function saveStudio() {
 
     paintShareSection(activeUserProfile);
     paintProof();
+    paintResumeTab();
     renderDir();
 }
 if ($('edSaveBtn')) $('edSaveBtn').onclick = saveStudio;
@@ -903,6 +1013,235 @@ if ($('edGhAdd')) $('edGhAdd').onclick = () => {
   });
   paintUserProjects(activeUserProfile); paintProof();
   toast(n ? `✅ Added ${n} — hit Save Changes to publish` : 'Nothing new ticked');
+};
+
+// ---- Resume builder (auto-built from profile info) ----
+function draftResume() {
+  const p = activeUserProfile || {};
+  if (!p.resume || typeof p.resume !== 'object') p.resume = {};
+  if (!Array.isArray(p.experience)) p.experience = [];
+  if (!Array.isArray(p.education)) p.education = [];
+  return p.resume;
+}
+function paintResumeTab() {
+  if (!$('tabResume')) return;
+  const p = activeUserProfile;
+  if (!p || !p.username) return;
+  const R = window.PortfoolioResume;
+  const r = draftResume();
+  if ($('rsSummary') && document.activeElement !== $('rsSummary')) $('rsSummary').value = r.summary || '';
+  document.querySelectorAll('input[name=rstheme]').forEach(x => { x.checked = x.value === (r.theme || 'ats'); });
+  const expEl = $('rsExpList');
+  if (expEl) expEl.innerHTML = (p.experience || []).map((e, i) => `
+    <div class="proj-row"><b>${(e.role || 'Role')}${e.company ? ' @ ' + e.company : ''}</b>
+    <small style="color:var(--muted)">${[e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ')}</small>
+    <button data-rsrm="exp${i}">Remove</button></div>`).join('')
+    || '<p style="color:var(--muted);font-size:13px">No roles yet — add your first below.</p>';
+  const eduEl = $('rsEduList');
+  if (eduEl) eduEl.innerHTML = (p.education || []).map((e, i) => `
+    <div class="proj-row"><b>${(e.school || 'School')}${e.degree ? ' · ' + e.degree : ''}</b>
+    <small style="color:var(--muted)">${[e.start, e.end].filter(Boolean).join(' – ')}</small>
+    <button data-rsrm="edu${i}">Remove</button></div>`).join('')
+    || '<p style="color:var(--muted);font-size:13px">No education yet.</p>';
+  expEl && expEl.querySelectorAll('[data-rsrm]').forEach(b => b.onclick = () => {
+    p.experience.splice(+b.dataset.rsrm.slice(3), 1); paintResumeTab();
+  });
+  eduEl && eduEl.querySelectorAll('[data-rsrm]').forEach(b => b.onclick = () => {
+    p.education.splice(+b.dataset.rsrm.slice(3), 1); paintResumeTab();
+  });
+  // preview (draft: theme + summary applied live, lists need Save)
+  const prev = $('rsPreview');
+  if (prev) {
+    if (!R) { prev.style.display = 'none'; }
+    else {
+      const draft = Object.assign({}, p, { resume: { summary: ($('rsSummary') || {}).value || r.summary || '', theme: (document.querySelector('input[name=rstheme]:checked') || {}).value || 'ats' } });
+      prev.srcdoc = R.fullDoc(draft);
+    }
+  }
+  const url = R ? R.resumeURL(p.username) : `/?u=${encodeURIComponent(p.username)}`;
+  if ($('rsViewBtn')) $('rsViewBtn').href = url;
+}
+if ($('rsExpAdd')) $('rsExpAdd').onclick = () => {
+  if (!activeUserProfile) return toast('❌ Log in first');
+  const role = $('rsExpRole').value.trim(), company = $('rsExpCompany').value.trim();
+  if (!role && !company) return toast('❌ Add at least a role or company');
+  draftResume();
+  activeUserProfile.experience.unshift({ role, company, start: $('rsExpStart').value.trim(), end: $('rsExpEnd').value.trim(), current: $('rsExpCurrent').checked, desc: $('rsExpDesc').value.trim() });
+  ['rsExpRole', 'rsExpCompany', 'rsExpStart', 'rsExpEnd', 'rsExpDesc'].forEach(id => { $(id).value = ''; });
+  $('rsExpCurrent').checked = false;
+  paintResumeTab();
+  toast('✅ Role added — hit Save Changes to publish');
+};
+if ($('rsEduAdd')) $('rsEduAdd').onclick = () => {
+  if (!activeUserProfile) return toast('❌ Log in first');
+  const school = $('rsEduSchool').value.trim();
+  if (!school) return toast('❌ Add at least a school');
+  draftResume();
+  activeUserProfile.education.unshift({ school, degree: $('rsEduDegree').value.trim(), field: $('rsEduField').value.trim(), start: '', end: $('rsEduYears').value.trim() });
+  ['rsEduSchool', 'rsEduDegree', 'rsEduField', 'rsEduYears'].forEach(id => { $(id).value = ''; });
+  paintResumeTab();
+  toast('✅ Education added — hit Save Changes to publish');
+};
+if ($('rsPrintBtn')) $('rsPrintBtn').onclick = () => {
+  if (!activeUserProfile || !activeUserProfile.username) return toast('❌ Nothing to print yet');
+  open((window.PortfoolioResume ? PortfoolioResume.resumeURL(activeUserProfile.username) : '/'), '_blank');
+};
+document.addEventListener('input', (e) => {
+  if (e.target && (e.target.id === 'rsSummary')) paintResumeTab();
+});
+document.addEventListener('change', (e) => {
+  if (e.target && e.target.name === 'rstheme') paintResumeTab();
+});
+
+// ---- Prebuilt site upload (.zip / .html → your subdomain) ----
+const UPLOAD_LIMITS = { zipMax: 20 * 1024 * 1024, eachMax: 8 * 1024 * 1024, fileMax: 200 };
+const UPLOAD_BLOCKED = new Set(['exe', 'sh', 'php', 'py', 'dll', 'so', 'bat', 'cmd', 'msi']);
+let stagedUploadFiles = [];
+function uploadSetMsg(t, ok) {
+  if ($('uploadMsg')) { $('uploadMsg').textContent = t || ''; $('uploadMsg').style.color = ok ? '#d9f99d' : 'var(--muted)'; }
+}
+function uploadMime(path) {
+  const ext = String(path).split('.').pop().toLowerCase();
+  const m = { html: 'text/html', htm: 'text/html', css: 'text/css', js: 'text/javascript', json: 'application/json', svg: 'image/svg+xml', png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', gif: 'image/gif', webp: 'image/webp', ico: 'image/x-icon', woff: 'font/woff', woff2: 'font/woff2', ttf: 'font/ttf', txt: 'text/plain', mp4: 'video/mp4' };
+  return m[ext] || 'application/octet-stream';
+}
+function paintUploadBanner() {
+  const p = activeUserProfile, banner = $('uploadModeBanner');
+  if (!banner) return;
+  if (p && p.site_type === 'upload') {
+    banner.style.display = '';
+    const live = (typeof sitePublicUrl === 'function' && cloudEnabled())
+      ? sitePublicUrl(p.username, 'index.html')
+      : `${location.origin}/?u=${encodeURIComponent(p.username)}`;
+    banner.innerHTML = `✅ <b>Live now:</b> your subdomain serves your uploaded files. <a href="${live}" target="_blank" style="color:#d9f99d;font-weight:800">Open live site →</a><br><span style="color:var(--muted);font-size:12.5px">Upload a new zip to replace it, or revert to your builder theme below. Builder data is kept.</span>`;
+    if ($('uploadViewLiveBtn')) { $('uploadViewLiveBtn').style.display = ''; $('uploadViewLiveBtn').href = live; }
+  } else {
+    banner.style.display = 'none';
+    if ($('uploadViewLiveBtn')) $('uploadViewLiveBtn').style.display = 'none';
+  }
+  if (p && $('uploadHostHint')) $('uploadHostHint').textContent = `${p.username}.portfoolio.me`;
+}
+function paintStagedUpload() {
+  const list = $('uploadFileList');
+  if (!list) return;
+  if (!stagedUploadFiles.length) { list.innerHTML = '<p style="color:var(--muted);font-size:13px">No file staged yet.</p>'; }
+  else {
+    const total = stagedUploadFiles.reduce((a, f) => a + (f.blob.size || 0), 0);
+    list.innerHTML = `<p class="mono" style="font-size:12px;color:#d9f99d">${stagedUploadFiles.length} files • ${(total / 1024).toFixed(0)} KB staged</p>` +
+      stagedUploadFiles.slice(0, 60).map(f => `<div class="proj-row"><b>${f.path}</b><small style="color:var(--muted)">${(f.blob.size / 1024).toFixed(1)} KB</small></div>`).join('') +
+      (stagedUploadFiles.length > 60 ? `<p style="font-size:12px;color:var(--muted)">…and ${stagedUploadFiles.length - 60} more</p>` : '');
+  }
+  if ($('uploadPublishBtn')) $('uploadPublishBtn').disabled = !stagedUploadFiles.length;
+}
+function previewStagedUpload() {
+  const frame = $('uploadPreview');
+  if (!frame) return;
+  const idx = stagedUploadFiles.find(f => f.path.toLowerCase() === 'index.html');
+  if (!idx) { frame.style.display = 'none'; return; }
+  const urlMap = {};
+  stagedUploadFiles.forEach(f => { urlMap[f.path.toLowerCase()] = URL.createObjectURL(f.blob); });
+  idx.blob.text().then(txt => {
+    // rewrite relative asset refs to blob URLs so CSS/JS/images preview locally
+    const out = txt.replace(/(src|href)=["']([^"']+)["']/gi, (m, attr, ref) => {
+      if (/^(https?:|data:|mailto:|tel:|#)/i.test(ref)) return m;
+      const clean = ref.split('?')[0].split('#')[0].replace(/^\.\//, '').replace(/^\/+/, '').toLowerCase();
+      const hit = urlMap[clean] || urlMap[clean.split('/').pop()];
+      return hit ? `${attr}="${hit}"` : m;
+    });
+    frame.srcdoc = out;
+    frame.style.display = '';
+  }).catch(() => { frame.style.display = 'none'; });
+}
+async function handleUploadFile(file) {
+  stagedUploadFiles = []; paintStagedUpload();
+  if ($('uploadPreview')) $('uploadPreview').style.display = 'none';
+  if (!file) return;
+  const name = (file.name || '').toLowerCase();
+  try {
+    if (/\.html?$/.test(name)) {
+      if (file.size > UPLOAD_LIMITS.eachMax) return uploadSetMsg('❌ That HTML file is over 8MB.');
+      stagedUploadFiles = [{ path: 'index.html', blob: file, contentType: 'text/html' }];
+      uploadSetMsg(`Staged ${(file.name)} — preview below, then Publish.`, true);
+    } else if (/\.zip$/.test(name)) {
+      if (file.size > UPLOAD_LIMITS.zipMax) return uploadSetMsg('❌ ZIP is over 20MB — remove videos/node_modules and re-zip.');
+      if (typeof JSZip === 'undefined') return uploadSetMsg('❌ Zip engine failed to load (CDN blocked) — retry or upload a single .html.');
+      uploadSetMsg('Unpacking zip…');
+      const zip = await JSZip.loadAsync(file);
+      const entries = Object.values(zip.files).filter(e => !e.dir && !/(^|\/)__macosx(\/|$)/i.test(e.name) && !/\.ds_store$/i.test(e.name));
+      if (entries.length > UPLOAD_LIMITS.fileMax) return uploadSetMsg(`❌ Too many files (${entries.length} > ${UPLOAD_LIMITS.fileMax}). Zip only your build output.`);
+      // locate index.html → treat its folder as site root (handles dist.zip / my-site.zip)
+      const idxEntry = entries.find(e => e.name.toLowerCase().endsWith('index.html'));
+      if (!idxEntry) return uploadSetMsg('❌ No index.html found in this zip. Put index.html at the root (or export your builder dist/) and re-zip.');
+      const root = idxEntry.name.slice(0, idxEntry.name.toLowerCase().lastIndexOf('index.html'));
+      const out = [];
+      for (const e of entries) {
+        if (!e.name.startsWith(root)) continue;
+        const rel = e.name.slice(root.length).replace(/^\/+/, '');
+        if (!rel || rel.includes('..')) continue;
+        const ext = rel.split('.').pop().toLowerCase();
+        if (UPLOAD_BLOCKED.has(ext)) return uploadSetMsg(`❌ Blocked file type in zip: .${ext} (${rel}). Static assets only.`);
+        const blob = await e.async('blob');
+        if (blob.size > UPLOAD_LIMITS.eachMax) return uploadSetMsg(`❌ ${rel} is over 8MB.`);
+        out.push({ path: rel, blob: blob.slice(0, blob.size, uploadMime(rel)), contentType: uploadMime(rel) });
+      }
+      if (!out.some(f => f.path.toLowerCase() === 'index.html')) return uploadSetMsg('❌ index.html missing after unpack — re-zip with it at the top level.');
+      stagedUploadFiles = out;
+      uploadSetMsg(`Staged ${out.length} files from ${file.name} — preview below, then Publish.`, true);
+    } else {
+      return uploadSetMsg('❌ Only .zip or .html files. Export your site as static files first.');
+    }
+  } catch (err) {
+    console.error('upload parse failed', err);
+    return uploadSetMsg('❌ Could not read that file — corrupt zip? Try re-exporting.');
+  }
+  paintStagedUpload();
+  previewStagedUpload();
+}
+if ($('uploadDrop')) {
+  $('uploadDrop').onclick = (e) => { if (e.target.tagName !== 'INPUT') $('uploadFile').click(); };
+  $('uploadFile').onchange = (e) => handleUploadFile(e.target.files[0]);
+  ['dragover', 'dragenter'].forEach(ev => $('uploadDrop').addEventListener(ev, (e) => { e.preventDefault(); $('uploadDrop').style.borderColor = '#a3e635'; }));
+  ['dragleave', 'drop'].forEach(ev => $('uploadDrop').addEventListener(ev, (e) => { e.preventDefault(); $('uploadDrop').style.borderColor = ''; }));
+  $('uploadDrop').addEventListener('drop', (e) => {
+    const f = e.dataTransfer && e.dataTransfer.files[0];
+    if (f) handleUploadFile(f);
+  });
+}
+if ($('uploadPublishBtn')) $('uploadPublishBtn').onclick = async () => {
+  if (!activeUserProfile || !activeUserProfile.username) return toast('❌ Claim your subdomain first (Profile Info tab shows after login)');
+  if (!stagedUploadFiles.length) return toast('❌ Stage a .zip or .html first');
+  if (!cloudEnabled()) return toast('❌ Cloud storage is offline — owner must connect Supabase first');
+  $('uploadPublishBtn').disabled = true;
+  uploadSetMsg('Uploading files to your subdomain…');
+  try {
+    await cloudUploadSiteFiles(activeUserProfile.username, stagedUploadFiles);
+    activeUserProfile.site_type = 'upload';
+    activeUserProfile.site_path = 'sites/' + activeUserProfile.username.toLowerCase() + '/index.html';
+    const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+    all[activeUserProfile.username] = activeUserProfile;
+    localStorage.setItem('portfoolio_users_v1', JSON.stringify(all));
+    paintUploadBanner(); paintShareSection(activeUserProfile);
+    uploadSetMsg('Published! Your subdomain now serves your uploaded site.', true);
+    toast('🎉 Uploaded site is live on your subdomain!');
+  } catch (e) {
+    console.error('upload publish failed', e);
+    uploadSetMsg('❌ Publish failed: ' + (e.message || e) + ' — check login + bucket SQL, then retry.');
+    toast('❌ Publish failed — see message above');
+  } finally {
+    $('uploadPublishBtn').disabled = !stagedUploadFiles.length;
+  }
+};
+if ($('uploadRevertBtn')) $('uploadRevertBtn').onclick = async () => {
+  if (!activeUserProfile || !activeUserProfile.username) return toast('❌ Nothing to revert');
+  try {
+    if (cloudEnabled()) await cloudSetSiteTypeUpload(activeUserProfile.username, false);
+    activeUserProfile.site_type = 'builder';
+    const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+    all[activeUserProfile.username] = activeUserProfile;
+    localStorage.setItem('portfoolio_users_v1', JSON.stringify(all));
+    paintUploadBanner();
+    toast('✅ Back to your builder theme');
+  } catch (e) { toast('❌ Revert failed: ' + (e.message || e)); }
 };
 
 // Global Log out handler

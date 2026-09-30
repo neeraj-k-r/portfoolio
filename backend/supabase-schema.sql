@@ -58,5 +58,44 @@ drop policy if exists "admin all" on profiles;
 create policy "admin all" on profiles
   for all using (is_admin()) with check (is_admin());
 
--- 4) make yourself admin (run AFTER creating the admin user in Authentication):
+-- 4) custom uploaded sites (prebuilt portfolio hosting — idempotent)
+-- site_type: 'builder' (default templates) | 'upload' (user's own HTML/ZIP)
+-- site_path: storage prefix marker, e.g. 'sites/<username>/index.html'
+alter table profiles add column if not exists site_type text default 'builder'
+  check (site_type in ('builder', 'upload'));
+alter table profiles add column if not exists site_path text default '';
+alter table profiles add column if not exists site_updated_at timestamptz;
+
+-- public storage bucket for uploaded static sites (1GB free on Supabase)
+insert into storage.buckets (id, name, public)
+values ('portfolio-sites', 'portfolio-sites', true)
+on conflict (id) do update set public = true;
+
+-- storage policies: public read, owners manage their own prefix
+drop policy if exists "public read sites" on storage.objects;
+create policy "public read sites" on storage.objects
+  for select using (bucket_id = 'portfolio-sites');
+
+drop policy if exists "owner upload sites" on storage.objects;
+create policy "owner upload sites" on storage.objects
+  for insert with check (bucket_id = 'portfolio-sites' and auth.uid() is not null);
+
+drop policy if exists "owner update sites" on storage.objects;
+create policy "owner update sites" on storage.objects
+  for update using (bucket_id = 'portfolio-sites' and (auth.uid() = owner or is_admin()))
+  with check (bucket_id = 'portfolio-sites');
+
+drop policy if exists "owner delete sites" on storage.objects;
+create policy "owner delete sites" on storage.objects
+  for delete using (bucket_id = 'portfolio-sites' and (auth.uid() = owner or is_admin()));
+
+-- 5) resume section (auto-built from profile info, ATS + styled themes)
+-- experience[]: {role, company, start, end, current, desc}
+-- education[]:  {school, degree, field, start, end}
+-- resume{}:     {summary, theme: ats|modern|midnight|terminal}
+alter table profiles add column if not exists experience jsonb default '[]';
+alter table profiles add column if not exists education jsonb default '[]';
+alter table profiles add column if not exists resume jsonb default '{}';
+
+-- 6) make yourself admin (run AFTER creating the admin user in Authentication):
 -- insert into admins (user_id) select id from auth.users where email = 'portfoolio.me@gmail.com';

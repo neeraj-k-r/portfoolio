@@ -61,6 +61,19 @@ Sites publish instantly; use the admin console to reject/delete spam. Existing `
 - Email is locked to the signup account: `cloudSaveProfile` always writes `auth.users.email`, editor shows it read-only.
 - Phone, LinkedIn, Instagram (`instagram` column, `@handle` auto-normalized to URL) save from wizard + editor and render on midnight, all 6 theme renderers, and worker subdomains.
 
+## Prebuilt upload hosting (bring your own site)
+- User Dashboard → **Upload Site** tab: drop a `.zip` (with `index.html` at root, or inside one folder like `dist/`) or a single `.html` file. Limits: ZIP ≤ 20MB, ≤ 200 files, each ≤ 8MB, no executables.
+- Flow: files are staged locally → previewed in an iframe (relative CSS/JS/images rewired to blob URLs) → **Publish to my subdomain** uploads each file to the public Supabase Storage bucket `portfolio-sites` at `sites/<username>/<path>` and flips `profiles.site_type` to `'upload'`.
+- Serving: `username.portfoolio.me/*` (Cloudflare worker) proxies that prefix file-by-file with correct MIME types + SPA fallback to `index.html`; `?u=username` path mode renders the storage `index.html` in a full-bleed iframe with a small portfoolio bar.
+- Revert anytime with **Use builder theme instead** (builder data is kept; `site_type` back to `'builder'`). Owner one-time setup: re-run `backend/supabase-schema.sql` (creates the bucket + `site_type`/`site_path` columns + storage policies), then `npx wrangler deploy`.
+
+## Resume section (auto-built from profile info, 4 themes)
+- Data model: NO new tables. `profiles.experience[]` (`{role, company, start, end, current, desc}` — one achievement per line), `profiles.education[]` (`{school, degree, field, start, end}`), `profiles.resume{}` (`{summary, theme}`). Name, contact, skills & projects are reused — manage info once.
+- Themes (`resume.theme`, picked in signup form + Resume tab): 📄 `ats` (default — white, system font, parser-safe for job applications), ✨ `modern` (light card), 🌌 `midnight` (dark neon), 💻 `terminal` (mono green). Print CSS normalizes every theme to clean ATS output.
+- Public: every portfolio template (all 10) gains a Resume section linking to the full page; full page at `?u=x&resume=1`, `/u/x/resume`, and `username.portfoolio.me/resume` with a Print / Save-as-PDF button (no server PDF needed).
+- Dashboard: **Resume** tab (summary, theme radios, experience/education add/remove, live iframe preview, open/print buttons) + resume link in Share tab. Old profiles without the new fields render with empty-state hints.
+- Files: `frontend/resume.js` (normalizer + section + full doc) + `frontend/resume.css` (themes + print); worker mirrors the renderer server-side (same pattern as skill evidence). Owner setup: re-run `backend/supabase-schema.sql`, then `npx wrangler deploy`.
+
 ## Profile photos (Cloudinary, free)
 1. Cloudinary dashboard → Settings → Upload → Upload presets → Add new, Signing Mode **Unsigned** → copy cloud name + preset.
 2. Paste into `frontend/cloudinary-config.js`, commit + push. Users upload from Profile Info (JPG/PNG ≤5MB); URL saved on the profile and shown on all templates + worker pages.

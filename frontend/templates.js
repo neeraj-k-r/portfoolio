@@ -52,7 +52,7 @@ function renderMinimal(p) {
     <div class="two" style="margin-top:14px"><div class="card"><h3>Skills</h3><div class="badges" style="justify-content:flex-start;margin-top:10px">${skills}</div></div>
     <div class="card"><h3>Contact</h3><p class="mono" style="font-size:13px">${tplEsc(p.email || '')}<br>${tplEsc(p.phone || '')}<br>${tplEsc(p.location || '')}</p></div></div>
     <h2 class="title" style="margin-top:26px">Selected work</h2><div class="dir-grid">${projects}</div>
-  </section>${tplFoot(p)}`;
+  </section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
@@ -76,7 +76,7 @@ function renderTerminal(p) {
     <p class="mono" style="margin-top:10px">$ contact --email ${tplEsc(p.email || '')} ${p.github ? `--github ${tplEsc(p.github)}` : ''}</p></div>
     <div class="card" style="margin-top:14px"><p class="mono">$ ls --skills</p><div style="margin-top:8px">${skills}</div></div>
     <h2 class="title" style="margin-top:22px">$ ls --projects</h2><div class="dir-grid">${projects}</div>
-  </section>${tplFoot(p)}`;
+  </section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
@@ -102,7 +102,7 @@ function renderCreative(p) {
       ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">Say hi 👋</a>` : ''}
       ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}
     </div></div></header>
-  <section class="wrap"><div class="proj-grid">${projects}</div></section>${tplFoot(p)}`;
+  <section class="wrap"><div class="proj-grid">${projects}</div></section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
@@ -130,7 +130,7 @@ function renderAurora(p) {
       ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}
       ${p.linkedin ? `<a class="btn btn-ghost" href="${tplEsc(p.linkedin)}" target="_blank">LinkedIn</a>` : ''}${p.instagram ? `<a class="btn btn-ghost" href="${tplEsc(p.instagram)}" target="_blank">Instagram</a>` : ''}
     </div></div></header>
-  <section class="wrap"><span class="eyebrow">● Selected work</span><div class="proj-grid" style="margin-top:16px">${projects || '<p>No projects yet.</p>'}</div></section>${tplFoot(p)}`;
+  <section class="wrap"><span class="eyebrow">● Selected work</span><div class="proj-grid" style="margin-top:16px">${projects || '<p>No projects yet.</p>'}</div></section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
@@ -156,10 +156,12 @@ function renderEditorial(p) {
     <hr style="margin:22px 0;border:none;border-top:2px solid currentColor;opacity:.2">
     <h3>Index of capabilities</h3><div style="margin-top:8px">${skills || '<p>No skills listed yet.</p>'}</div>
   </section>
-  <section class="wrap" style="max-width:760px"><h2 style="font-size:32px">Selected work</h2><div style="margin-top:14px">${projects || '<p>No projects yet.</p>'}</div></section>${tplFoot(p)}`;
+  <section class="wrap" style="max-width:760px"><h2 style="font-size:32px">Selected work</h2><div style="margin-top:14px">${projects || '<p>No projects yet.</p>'}</div></section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 function esc2(s) { return tplEsc(s || ''); }
+// Resume section (shared) — auto-built from profile info, themed via profile.resume.theme
+function rsSec(p) { return (window.PortfoolioResume ? window.PortfoolioResume.sectionHTML(p) : ''); }
 
 function renderBrutalist(p) {
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
@@ -188,7 +190,7 @@ function renderBrutalist(p) {
     ${p.avatarUrl ? `<div class="brut-portrait"><img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}"></div>` : ''}
     </div>
   </section>
-  <section class="wrap"><h2 style="font-size:34px">▼ WORK</h2><div class="dir-grid" style="margin-top:14px">${projects || '<p>No projects yet.</p>'}</div></section>${tplFoot(p)}`;
+  <section class="wrap"><h2 style="font-size:34px">▼ WORK</h2><div class="dir-grid" style="margin-top:14px">${projects || '<p>No projects yet.</p>'}</div></section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
@@ -219,7 +221,7 @@ function renderAfterglow(p) {
     ${p.avatarUrl ? `<div class="ag-sunring"><img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}"></div>` : '<div class="ag-sunring ag-sunring-empty"></div>'}
   </div></header>
   <section class="wrap"><span class="eyebrow">● After dark, still shipping</span>
-  <div style="margin-top:16px">${projects || '<p>No projects yet.</p>'}</div></section>${tplFoot(p)}`;
+  <div style="margin-top:16px">${projects || '<p>No projects yet.</p>'}</div></section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
@@ -255,7 +257,7 @@ function renderUltraviolet(p) {
       <h2 class="mono" style="margin-top:22px;font-size:15px;color:#e0aaff">~/transmissions</h2>
       <div style="margin-top:6px">${projects || '<p>No projects yet.</p>'}</div>
     </div>
-  </div></section>${tplFoot(p)}`;
+  </div></section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
@@ -282,7 +284,7 @@ function renderTidepool(p) {
     <div style="margin-top:10px">${skills}</div>
     <p style="margin-top:12px">${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${tplEsc(p.email)}">Send a bubble</a>` : ''} ${p.github ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}</p></div>
   </section>
-  <section class="wrap"><h2 class="title">Catch of the <span class="grad">day</span></h2><div class="proj-grid tp-zig" style="margin-top:14px">${projects || '<p>Nothing surfaced yet.</p>'}</div></section>${tplFoot(p)}`;
+  <section class="wrap"><h2 class="title">Catch of the <span class="grad">day</span></h2><div class="proj-grid tp-zig" style="margin-top:14px">${projects || '<p>Nothing surfaced yet.</p>'}</div></section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 

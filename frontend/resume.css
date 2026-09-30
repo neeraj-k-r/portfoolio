@@ -1,0 +1,69 @@
+/* portfoolio.me — resume themes (ats default) + print */
+.rs-doc{max-width:860px;margin:26px auto 40px;padding:34px 38px;border-radius:14px}
+.rs-head{text-align:left;margin-bottom:6px}
+.rs-name{margin:0;line-height:1.1}
+.rs-title{margin:4px 0;font-weight:700}
+.rs-contact{font-size:13.5px;margin:6px 0 0}
+.rs-contact a{text-decoration:underline}
+.rs-sec-h{font-size:15px;letter-spacing:1.5px;text-transform:uppercase;margin:22px 0 8px;padding-bottom:5px;border-bottom:2px solid currentColor}
+.rs-item{margin:0 0 12px}
+.rs-item-top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+.rs-dates{font-size:12.5px;white-space:nowrap;opacity:.75}
+.rs-p{font-size:14px;line-height:1.6;margin:4px 0}
+.rs-ul{margin:4px 0 4px 20px;font-size:14px;line-height:1.6}
+.rs-dim{opacity:.6;font-size:13px}
+.rs-foot{margin-top:26px;font-size:11.5px;opacity:.55;text-align:center}
+
+/* ATS — parser-safe: plain white, system font, zero decoration */
+.rs-ats{background:#fff;color:#111;color-scheme:light}
+body.rs-page.rs-ats{background:#e8eaf0}
+.rs-ats .rs-name{font-family:Arial,Helvetica,sans-serif;font-size:30px}
+.rs-ats .rs-title{font-family:Arial,Helvetica,sans-serif;font-size:16px;color:#222}
+.rs-ats .rs-contact{font-family:Arial,Helvetica,sans-serif;color:#222}
+.rs-ats .rs-sec-h{font-family:Arial,Helvetica,sans-serif;border-bottom-color:#111}
+.rs-ats a{color:#111}
+
+/* Modern — soft light card */
+.rs-modern{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.12);box-shadow:0 18px 50px rgba(15,23,42,.12)}
+body.rs-page.rs-modern{background:#0b1226}
+.rs-modern .rs-name{font-size:34px;letter-spacing:-1px}
+.rs-modern .rs-title{color:#4f46e5}
+.rs-modern .rs-sec-h{color:#4f46e5;border-bottom-color:#c7d2fe}
+.rs-modern a{color:#4f46e5}
+
+/* Midnight — dark neon on-brand */
+.rs-midnight{background:rgba(255,255,255,.05);color:#eef2ff;border:1px solid rgba(108,108,245,.4)}
+body.rs-page.rs-midnight{background:#070b16;color:#eef2ff}
+.rs-midnight .rs-name{font-size:34px;background:linear-gradient(90deg,#a5b4fc,#22d3ee,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rs-midnight .rs-title{color:#22d3ee}
+.rs-midnight .rs-sec-h{color:#22d3ee;border-bottom-color:rgba(34,211,238,.4)}
+.rs-midnight a{color:#22d3ee}
+.rs-midnight .rs-foot{color:#9aa3c0;opacity:.8}
+
+/* Terminal — mono green */
+.rs-terminal{background:#0a0f0a;color:#d1fae5;border:1px solid #166534;font-family:'JetBrains Mono',monospace}
+body.rs-page.rs-terminal{background:#050805;color:#d1fae5}
+.rs-terminal .rs-name{font-size:30px;color:#4ade80}
+.rs-terminal .rs-title{color:#86efac}
+.rs-terminal .rs-sec-h{color:#4ade80;border-bottom-color:#166534}
+.rs-terminal .rs-p,.rs-terminal .rs-ul{font-size:13.5px}
+.rs-terminal a{color:#4ade80}
+
+/* embedded portfolio section card tint per resume theme */
+.rs-embed-card.rs-ats{border-left:4px solid #fff}
+.rs-embed-card.rs-modern{border-left:4px solid #4f46e5}
+.rs-embed-card.rs-midnight{border-left:4px solid #22d3ee}
+.rs-embed-card.rs-terminal{border-left:4px solid #4ade80}
+
+@media(max-width:640px){.rs-doc{padding:22px 18px;margin:16px 12px 30px}.rs-item-top{flex-direction:column;gap:2px}}
+
+/* Print → clean ATS output on every theme, chrome hidden */
+@media print{
+  body{background:#fff !important}
+  .no-print,nav,.bg-fx,.grid-overlay,#toast{display:none !important}
+  .rs-doc{box-shadow:none !important;border:none !important;border-radius:0 !important;max-width:100% !important;margin:0 !important;padding:0 !important;background:#fff !important;color:#111 !important}
+  .rs-doc *{color:#111 !important;background:transparent !important;text-shadow:none !important;box-shadow:none !important}
+  .rs-doc a{text-decoration:none !important}
+  .rs-sec-h{border-bottom-color:#111 !important}
+  .rs-name{font-size:26px !important}
+}

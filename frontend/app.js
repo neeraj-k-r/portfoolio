@@ -194,6 +194,7 @@ function renderPortfolio(p) {
         <p class="sub">${esc(p.tagline || '')}</p>
         <div class="hero-cta">
           ${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}"><i class="fa-solid fa-paper-plane"></i> Email me</a>` : ''}
+          ${window.PortfoolioResume ? `<a class="btn btn-ghost" href="${window.PortfoolioResume.resumeURL(p.username)}"><i class="fa-solid fa-file-lines"></i> Resume</a>` : ''}
           ${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
           ${p.linkedin ? `<a class="btn btn-ghost" href="${esc(p.linkedin)}" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
           ${p.instagram ? `<a class="btn btn-ghost" href="${esc(p.instagram)}" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
@@ -222,6 +223,7 @@ function renderPortfolio(p) {
     <h2 class="title">Work that <span class="grad">speaks</span></h2>
     <div class="proj-grid" style="margin-top:22px">${projects || '<p style="color:var(--muted)">No projects yet.</p>'}</div>
   </section>
+  ${window.PortfoolioResume ? window.PortfoolioResume.sectionHTML(p) : ''}
   <section class="wrap">
     <div class="card" style="display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap">
       <div><h3>Like this portfolio?</h3><p>Claim yours free — <b style="color:#fff">yourname.portfoolio.me</b> in 60 seconds.</p></div>
@@ -286,14 +288,99 @@ function renderSkillPage(p, skillName) {
   window.scrollTo(0, 0);
 }
 
+// ---- Uploaded prebuilt sites (user's own HTML/ZIP hosted on their subdomain) ----
+function uploadedSiteURL(p) {
+  try {
+    if (typeof sitePublicUrl === 'function' && typeof cloudEnabled === 'function' && cloudEnabled()) {
+      return sitePublicUrl(p.username, 'index.html');
+    }
+  } catch {}
+  // local/dev fallback: site_path marker only; builder preview otherwise
+  return null;
+}
+function renderUploadedSite(p) {
+  const url = uploadedSiteURL(p);
+  const app = document.getElementById('app');
+  document.title = `${p.name || p.username} | portfoolio.me`;
+  if (!url) { renderPortfolio(p); return; } // storage offline → builder theme
+  document.body.dataset.template = '';
+  app.innerHTML = `
+  <div style="position:fixed;inset:0;display:flex;flex-direction:column;background:#070b16">
+    <div style="display:flex;align-items:center;gap:10px;padding:8px 14px;background:rgba(11,18,38,.92);border-bottom:1px solid rgba(255,255,255,.12);font-size:13px;z-index:5">
+      <a href="/" style="font-weight:800;letter-spacing:.3px">◈ PORTFOOLIO</a>
+      <span style="color:#9aa3c0">${esc(p.username)}.portfoolio.me · custom upload</span>
+      <span style="margin-left:auto;display:flex;gap:8px">
+        <a href="${esc(portfolioPathURL(p.username))}" style="font-weight:700;color:#22d3ee">Direct link</a>
+        <a href="/" style="font-weight:700">Make yours</a>
+      </span>
+    </div>
+    <iframe src="${esc(url)}" title="${esc(p.username)} portfolio" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" style="flex:1;width:100%;border:0;background:#fff"></iframe>
+  </div>`;
+  window.scrollTo(0, 0);
+}
+
+// ---- Resume page (?u=<user>&resume=1, /u/<user>/resume, #/u/<user>/resume, <sub>.portfoolio.me/resume) ----
+function getSubdomainUser() {
+  const host = location.hostname.toLowerCase();
+  if (host.endsWith('portfoolio.me')) {
+    const parts = host.split('.');
+    if (parts.length === 3 && parts[0] !== 'www' && parts[0] !== 'portfoolio') return slugify(parts[0]);
+  }
+  return null;
+}
+function getResumeUser() {
+  const qs = new URLSearchParams(location.search);
+  if (qs.has('resume')) {
+    if (qs.get('u')) return slugify(qs.get('u'));
+    const sub = getSubdomainUser();
+    if (sub) return sub;
+  }
+  const pm = location.pathname.match(/^\/u\/([A-Za-z0-9-]+)\/resume\/?$/);
+  if (pm) return slugify(pm[1]);
+  const hm = location.hash.match(/#\/u\/([A-Za-z0-9-]+)\/resume/);
+  if (hm) return slugify(hm[1]);
+  if (/^\/resume\/?$/.test(location.pathname)) {
+    const sub = getSubdomainUser();
+    if (sub) return sub;
+  }
+  return null;
+}
+function renderResumePage(p) {
+  const R = window.PortfoolioResume;
+  document.body.dataset.template = '';
+  document.title = `Resume — ${p.name || p.username} | portfoolio.me`;
+  const app = document.getElementById('app');
+  if (!R) { renderPortfolio(p); return; }
+  const theme = R.get(p).theme;
+  const back = `/?u=${encodeURIComponent(p.username)}`;
+  app.innerHTML = `
+  <nav class="no-print">
+    <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="btn btn-ghost btn-sm" href="${back}">← Portfolio</a>
+      <button class="btn btn-primary btn-sm" onclick="window.print()">⬇ Print / PDF</button>
+    </div>
+  </nav>
+  <main class="rs-doc rs-${theme}">${R.docBody(p)}
+  <p class="rs-foot">Resume auto-built from <b>portfoolio.me</b> profile · ${esc(p.username)}.portfoolio.me</p></main>
+  <div class="no-print" style="text-align:center;padding:0 0 50px">
+    <button class="btn btn-primary btn-sm" onclick="window.print()">⬇ Print / Save as PDF</button>
+    <a class="btn btn-ghost btn-sm" href="${back}">Back to portfolio</a>
+  </div>`;
+  window.scrollTo(0, 0);
+}
+
 // ---- Boot ----
 document.addEventListener('DOMContentLoaded', async () => {
-  const requested = getRequestedUser();
+  const resumeUser = getResumeUser();
+  const requested = resumeUser || getRequestedUser();
   if (!requested) return; // landing view stays
   document.getElementById('landing').style.display = 'none';
   document.getElementById('app').style.display = '';
   const p = await loadProfile(requested);
   if (!p) { renderNotFound(requested); return; }
+  if (resumeUser) { renderResumePage(p); return; }
+  if (p.site_type === 'upload') { renderUploadedSite(p); return; }
   const skill = new URLSearchParams(location.search).get('skill');
   if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
 });

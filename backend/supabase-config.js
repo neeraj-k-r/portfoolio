@@ -26,18 +26,103 @@ async function cloudSaveProfile(p) {
   const sb = cloud(); if (!sb) throw new Error('cloud-off');
   const { data: { user } } = await sb.auth.getUser();
   if (!user) throw new Error('not-logged-in');
-  const { data: existing } = await sb.from('profiles').select('status').eq('user_id', user.id).maybeSingle();
+  const { data: existing } = await sb.from('profiles').select('status,site_type,site_path').eq('user_id', user.id).maybeSingle();
   const row = {
     user_id: user.id, username: p.username.toLowerCase(), name: p.name, title: p.title,
     tagline: p.tagline, email: user.email, phone: p.phone, location: p.location,
     github: p.github, linkedin: p.linkedin, instagram: p.instagram || '', template: p.template || 'midnight',
     avatar_url: p.avatarUrl || '',
     skills: p.skills || [], projects: p.projects || [], available: p.available !== false,
+    experience: Array.isArray(p.experience) ? p.experience.slice(0, 20) : [],
+    education: Array.isArray(p.education) ? p.education.slice(0, 10) : [],
+    resume: (p.resume && typeof p.resume === 'object') ? p.resume : {},
     status: (existing && existing.status) || 'approved',
+    // prebuilt-upload hosting: explicit value on p wins, else keep what is live
+    site_type: p.site_type || (existing && existing.site_type) || 'builder',
+    site_path: (typeof p.site_path === 'string' ? p.site_path : (existing && existing.site_path)) || '',
   };
+  if (p.site_type === 'upload') row.site_updated_at = new Date().toISOString();
   const { error } = await sb.from('profiles').upsert(row, { onConflict: 'user_id' });
   if (error) throw error;
   return row;
+}
+
+// ---- Prebuilt portfolio hosting (Supabase Storage, bucket: portfolio-sites) ----
+// Layout: sites/<username>/<relative path>  (index.html required at root)
+const PORTFOOLIO_SITES_BUCKET = 'portfolio-sites';
+function siteStoragePrefix(username) {
+  return 'sites/' + String(username || '').toLowerCase();
+}
+function sitePublicUrl(username, relPath) {
+  if (!cloudEnabled()) return null;
+  const rel = String(relPath || 'index.html').replace(/^\/+/, '');
+  return PORTFOOLIO_SUPABASE_URL + '/storage/v1/object/public/' +
+    PORTFOOLIO_SITES_BUCKET + '/' + siteStoragePrefix(username) + '/' + rel;
+}
+function guessContentType(path) {
+  const ext = String(path || '').split('.').pop().toLowerCase().split('?')[0];
+  const map = { html: 'text/html', htm: 'text/html', css: 'text/css', js: 'text/javascript',
+    json: 'application/json', svg: 'image/svg+xml', png: 'image/png', jpg: 'image/jpeg',
+    jpeg: 'image/jpeg', gif: 'image/gif', webp: 'image/webp', ico: 'image/x-icon',
+    woff: 'font/woff', woff2: 'font/woff2', ttf: 'font/ttf', mp4: 'video/mp4', txt: 'text/plain' };
+  return map[ext] || 'application/octet-stream';
+}
+async function cloudUploadSiteFiles(username, files) {
+  const sb = cloud(); if (!sb) throw new Error('cloud-off');
+  const u = String(username || '').toLowerCase();
+  if (!u) throw new Error('no-username');
+  const prefix = siteStoragePrefix(u);
+  for (const f of files) {
+    const rel = String(f.path || '').replace(/^\/+/, '');
+    if (!rel || rel.includes('..')) throw new Error('bad-path: ' + rel);
+    const { error } = await sb.storage.from(PORTFOOLIO_SITES_BUCKET)
+      .upload(prefix + '/' + rel, f.blob, { upsert: true, contentType: f.contentType || guessContentType(rel) });
+    if (error) throw error;
+  }
+  // mark profile as upload-hosted
+  const { data: { user } } = await sb.auth.getUser();
+  if (user) {
+    await sb.from('profiles').update({
+      site_type: 'upload', site_path: prefix + '/index.html', site_updated_at: new Date().toISOString(),
+    }).eq('user_id', user.id);
+  }
+  return prefix + '/index.html';
+}
+async function cloudSetSiteTypeUpload(username, on) {
+  const sb = cloud(); if (!sb) throw new Error('cloud-off');
+  const { data: { user } } = await sb.auth.getUser();
+  if (!user) throw new Error('not-logged-in');
+  const patch = on
+    ? { site_type: 'upload', site_path: siteStoragePrefix(username) + '/index.html', site_updated_at: new Date().toISOString() }
+    : { site_type: 'builder' };
+  const { error } = await sb.from('profiles').update(patch).eq('user_id', user.id);
+  if (error) throw error;
+  return patch;
+}
+async function cloudDeleteSite(username) {
+  const sb = cloud(); if (!sb) throw new Error('cloud-off');
+  const u = String(username || '').toLowerCase();
+  const prefix = siteStoragePrefix(u);
+  // list + remove in chunks (storage has no recursive delete)
+  let removed = 0;
+  async function wipe(dir) {
+    const { data, error } = await sb.storage.from(PORTFOOLIO_SITES_BUCKET).list(dir, { limit: 100 });
+    if (error) throw error;
+    for (const e of (data || [])) {
+      if (!e || !e.name) continue;
+      const full = dir + '/' + e.name;
+      if (e.id == null) { await wipe(full); } // folder placeholder
+      else {
+        const { error: rerr } = await sb.storage.from(PORTFOOLIO_SITES_BUCKET).remove([full]);
+        if (rerr) throw rerr;
+        removed++;
+      }
+    }
+  }
+  await wipe(prefix);
+  const { data: { user } } = await sb.auth.getUser();
+  if (user) await sb.from('profiles').update({ site_type: 'builder', site_path: '' }).eq('user_id', user.id);
+  return removed;
 }
 async function cloudSignUp(email, password) {
   const sb = cloud(); if (!sb) throw new Error('cloud-off');
