@@ -393,6 +393,15 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <div id="tabResume" class="card" style="display:none">
         <h3>📄 Resume — auto-built from your info</h3>
         <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Name, contact, skills & projects are reused automatically. Add your summary, experience & education below, pick a theme, and share a recruiter-ready page + print-to-PDF.</p>
+        <div style="background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.3);border-radius:12px;padding:12px 14px;margin-bottom:14px">
+          <label class="flabel"><i class="fa-brands fa-linkedin"></i> Import from LinkedIn</label>
+          <p style="color:var(--muted);font-size:12.5px;margin-bottom:8px">LinkedIn blocks auto-fetch, so copy your About + Experience + Education text from your LinkedIn profile, paste it below, and hit Parse &amp; Fill. Review the preview, then Save Changes to publish.</p>
+          <textarea id="liPaste" rows="4" placeholder="Paste LinkedIn profile text here… or type guided lines:&#10;Headline: Full-Stack Developer&#10;Role @ Company | Jun 2024 - Present&#10;- an achievement&#10;CUSAT | B.Tech, Computer Science | 2022 - 2026"></textarea>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <button type="button" class="btn btn-ghost btn-sm" id="liParseBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Parse &amp; Fill resume</button>
+          </div>
+          <p class="mono" id="liParseMsg" style="font-size:11.5px;color:var(--muted);margin-top:6px"></p>
+        </div>
         <div class="form-grid">
           <div class="full"><label class="flabel">Professional summary</label><textarea id="rsSummary" rows="3" placeholder="Full-stack developer with 2 years building…"></textarea></div>
           <div class="full"><label class="flabel">Resume theme</label>
@@ -566,6 +575,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <script src="cloudinary-config.js"></script>
 <script src="templates.js"></script>
 <script src="resume.js"></script>
+<script src="linkedin-import.js"></script>
 <script>
 function toast(m){const t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
 const $=id=>document.getElementById(id);
@@ -1109,6 +1119,38 @@ if ($('rsEduAdd')) $('rsEduAdd').onclick = () => {
 if ($('rsPrintBtn')) $('rsPrintBtn').onclick = () => {
   if (!activeUserProfile || !activeUserProfile.username) return toast('❌ Nothing to print yet');
   open((window.PortfoolioResume ? PortfoolioResume.resumeURL(activeUserProfile.username) : '/'), '_blank');
+};
+// ---- LinkedIn paste-import (resume fields; profile sections come next) ----
+if ($('liParseBtn')) $('liParseBtn').onclick = () => {
+  if (!activeUserProfile) return toast('❌ Log in first');
+  const LI = window.PortfoolioLinkedIn;
+  if (!LI) return toast('❌ Import engine failed to load — check connection and reload');
+  const raw = (($('liPaste') || {}).value || '').trim();
+  if (!raw) return toast('❌ Paste your LinkedIn text first');
+  const parsed = LI.parseLinkedInText(raw);
+  const p = activeUserProfile;
+  draftResume();
+  let addedExp = 0, addedEdu = 0;
+  const haveExp = new Set((p.experience || []).map((e) => ((e.role || '') + '@' + (e.company || '')).toLowerCase()));
+  (parsed.experience || []).forEach((e) => {
+    const k = ((e.role || '') + '@' + (e.company || '')).toLowerCase();
+    if (k.replace(/@/g, '').trim() && !haveExp.has(k)) { p.experience.push(e); haveExp.add(k); addedExp++; }
+  });
+  const haveEdu = new Set((p.education || []).map((e) => (e.school || '').toLowerCase()));
+  (parsed.education || []).forEach((e) => {
+    const k = (e.school || '').toLowerCase();
+    if (k && !haveEdu.has(k)) { p.education.push(e); haveEdu.add(k); addedEdu++; }
+  });
+  if (parsed.summary && !((p.resume || {}).summary || '').trim()) {
+    p.resume.summary = parsed.summary.slice(0, 600);
+    if ($('rsSummary')) $('rsSummary').value = p.resume.summary;
+  }
+  if ($('liParseMsg')) $('liParseMsg').textContent =
+    (!parsed.experience.length && !parsed.education.length && !parsed.summary && !parsed.skills.length)
+      ? 'Could not detect entries — try the guided format from the placeholder.'
+      : `Detected ${parsed.experience.length} roles, ${parsed.education.length} schools — added ${addedExp} new roles, ${addedEdu} new schools. Hit Save Changes to publish.`;
+  paintResumeTab();
+  toast(addedExp || addedEdu ? `✅ Imported ${addedExp + addedEdu} — hit Save Changes to publish` : 'Nothing new — entries already listed');
 };
 document.addEventListener('input', (e) => {
   if (e.target && (e.target.id === 'rsSummary')) paintResumeTab();
