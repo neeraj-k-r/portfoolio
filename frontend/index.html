@@ -894,6 +894,25 @@ if ($('builderForm')) {
     if (/^[A-Za-z0-9._]{1,30}$/.test(v)) return 'https://instagram.com/' + v;
     return v;
   }
+  // normalize GitHub / LinkedIn the same way: bare handles or scheme-less
+  // URLs become full https links so saved values always render working anchors
+  function normGithub(v) {
+    v = String(v || '').trim().replace(/^@/, '');
+    if (!v) return '';
+    if (/^https?:\/\//i.test(v)) return v;
+    if (/^(www\.)?github\.com\//i.test(v)) return 'https://' + v.replace(/^www\./i, '');
+    if (/^[A-Za-z0-9-]{1,39}(\/[A-Za-z0-9-_.]{1,100})?$/.test(v)) return 'https://github.com/' + v;
+    return v;
+  }
+  function normLinkedIn(v) {
+    v = String(v || '').trim().replace(/^@/, '');
+    if (!v) return '';
+    if (/^https?:\/\//i.test(v)) return v;
+    if (/^(www\.)?linkedin\.com\//i.test(v)) return 'https://' + v.replace(/^www\./i, '');
+    if (/^(in|company)\/[\w.-]+\/?$/i.test(v)) return 'https://linkedin.com/' + v.replace(/^\/*/, '');
+    if (/^[\w.-]{3,100}$/.test(v)) return 'https://linkedin.com/in/' + v;
+    return v;
+  }
   if ($('inP1techGrid')) $('inP1techGrid').innerHTML = techGridHTML([]);
 
   $('builderForm').addEventListener('submit', async e => {
@@ -910,7 +929,7 @@ if ($('builderForm')) {
       username, name: $('inName').value.trim(), title: $('inTitle').value.trim(),
       tagline: $('inTag').value.trim(), email: $('inEmail').value.trim(),
       phone: $('inPhone').value.trim(), location: $('inLoc').value.trim(),
-      github: $('inGithub').value.trim(), linkedin: $('inLinkedin').value.trim(), instagram: normInsta($('inInsta').value),
+      github: normGithub($('inGithub').value), linkedin: normLinkedIn($('inLinkedin').value), instagram: normInsta($('inInsta').value),
       template, skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       projects: [...manual, ...picked], available: true, status: 'approved', createdAt: new Date().toISOString(),
       experience: [], education: [],
@@ -944,7 +963,7 @@ async function saveStudio() {
     Object.assign(activeUserProfile, {
       name: $('edName').value.trim(), title: $('edTitle').value.trim(), tagline: $('edTag').value.trim(),
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
-      github: $('edGithub').value.trim(), linkedin: $('edLinkedin').value.trim(), instagram: normInsta($('edInsta').value), location: $('edLoc').value.trim(),
+      github: normGithub($('edGithub').value), linkedin: normLinkedIn($('edLinkedin').value), instagram: normInsta($('edInsta').value), location: $('edLoc').value.trim(),
       template: (document.querySelector('input[name=edtpl]:checked') || {}).value || 'midnight',
       avatarUrl: draftAvatar || '',
       skillsDisplay: (document.querySelector('input[name=skillsDisplay]:checked') || {}).value || 'evidence',
