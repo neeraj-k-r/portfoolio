@@ -1145,12 +1145,25 @@ if ($('liParseBtn')) $('liParseBtn').onclick = () => {
     p.resume.summary = parsed.summary.slice(0, 600);
     if ($('rsSummary')) $('rsSummary').value = p.resume.summary;
   }
+  // normal sections too: title / tagline / location fill empty fields,
+  // parsed skills merge into the profile skill list (visible after Save)
+  let filledProfile = 0, addedSkills = 0;
+  if (parsed.title && !$('edTitle').value.trim()) { p.title = parsed.title; $('edTitle').value = parsed.title; filledProfile++; }
+  if (parsed.tagline && !$('edTag').value.trim()) { p.tagline = parsed.tagline; $('edTag').value = parsed.tagline; filledProfile++; }
+  if (parsed.location && !$('edLoc').value.trim()) { p.location = parsed.location; $('edLoc').value = parsed.location; filledProfile++; }
+  if ((parsed.skills || []).length) {
+    const have = new Set((p.skills || []).map((s) => String(s).toLowerCase()));
+    parsed.skills.forEach((s) => { if (!have.has(String(s).toLowerCase())) { p.skills.push(s); have.add(String(s).toLowerCase()); addedSkills++; } });
+    p.skills = p.skills.slice(0, 12);
+    if ($('edSkills')) $('edSkills').value = p.skills.join(', ');
+  }
   if ($('liParseMsg')) $('liParseMsg').textContent =
-    (!parsed.experience.length && !parsed.education.length && !parsed.summary && !parsed.skills.length)
+    (!parsed.experience.length && !parsed.education.length && !parsed.summary && !parsed.skills.length && !parsed.title)
       ? 'Could not detect entries — try the guided format from the placeholder.'
-      : `Detected ${parsed.experience.length} roles, ${parsed.education.length} schools — added ${addedExp} new roles, ${addedEdu} new schools. Hit Save Changes to publish.`;
+      : `Detected ${parsed.experience.length} roles, ${parsed.education.length} schools, ${parsed.skills.length} skills — added ${addedExp} roles, ${addedEdu} schools, ${addedSkills} skills${filledProfile ? `, filled ${filledProfile} profile fields` : ''}. Hit Save Changes to publish.`;
   paintResumeTab();
-  toast(addedExp || addedEdu ? `✅ Imported ${addedExp + addedEdu} — hit Save Changes to publish` : 'Nothing new — entries already listed');
+  paintProof();
+  toast(addedExp || addedEdu || addedSkills || filledProfile ? `✅ Imported — hit Save Changes to publish` : 'Nothing new — entries already listed');
 };
 document.addEventListener('input', (e) => {
   if (e.target && (e.target.id === 'rsSummary')) paintResumeTab();
