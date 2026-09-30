@@ -982,7 +982,12 @@ async function saveStudio() {
     localStorage.setItem('portfoolio_users_v1', JSON.stringify(all));
 
     if (cloudEnabled() && editingCloudSession) {
-      try { await cloudSaveProfile(activeUserProfile); toast('✅ Saved to cloud'); }
+      try {
+        const saved = await cloudSaveProfile(activeUserProfile);
+        toast(saved && saved._partial
+          ? '✅ Saved core fields — re-run supabase-schema.sql in Supabase to unlock resume/upload fields'
+          : '✅ Saved to cloud');
+      }
       catch (e) { toast('⚠️ Cloud save failed: ' + (e.message || e) + ' — kept locally'); console.error('cloudSave failed', e); }
     } else toast('✅ Portfolio updated');
 

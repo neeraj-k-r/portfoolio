@@ -42,9 +42,17 @@ async function cloudSaveProfile(p) {
     site_path: (typeof p.site_path === 'string' ? p.site_path : (existing && existing.site_path)) || '',
   };
   if (p.site_type === 'upload') row.site_updated_at = new Date().toISOString();
-  const { error } = await sb.from('profiles').upsert(row, { onConflict: 'user_id' });
-  if (error) throw error;
-  return row;
+  const res = await sb.from('profiles').upsert(row, { onConflict: 'user_id' });
+  if (!res.error) return row;
+  // Older DB missing the newest columns (resume/upload set): PostgREST rejects
+  // the whole upsert, which would lose ALL edits. Retry once with core fields
+  // only — a partial save beats no save. Owner fix: re-run supabase-schema.sql.
+  if (/could not find the '.+' column/i.test(res.error.message || '')) {
+    const { experience, education, resume, site_type, site_path, site_updated_at, ...core } = row;
+    const retry = await sb.from('profiles').upsert(core, { onConflict: 'user_id' });
+    if (!retry.error) return { ...core, _partial: true };
+  }
+  throw res.error;
 }
 
 // ---- Prebuilt portfolio hosting (Supabase Storage, bucket: portfolio-sites) ----
