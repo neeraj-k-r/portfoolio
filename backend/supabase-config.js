@@ -14,24 +14,60 @@ function cloud() {
   return _cloud;
 }
 function normRow(r) {
-  if (r && typeof r.avatar_url !== 'undefined' && typeof r.avatarUrl === 'undefined') r.avatarUrl = r.avatar_url || '';
+  // DB uses snake_case, app uses camelCase — keep both in sync so a save
+  // never wipes a newly uploaded photo (and every renderer finds it).
+  if (!r) return r;
+  if (typeof r.avatar_url !== 'undefined' && !r.avatarUrl) r.avatarUrl = r.avatar_url || '';
+  if (r.avatarUrl && !r.avatar_url) r.avatar_url = r.avatarUrl || '';
+  if (typeof r.show_instagram === 'boolean' && typeof r.showInstagram === 'undefined') r.showInstagram = r.show_instagram;
+  if (typeof r.showInstagram === 'boolean' && typeof r.show_instagram === 'undefined') r.show_instagram = r.showInstagram;
   return r;
+}
+function getAvatar(p) {
+  return (p && (p.avatarUrl || p.avatar_url)) || '';
+}
+// Instagram visibility: explicit false (either key) hides it; default is show
+// so existing profiles without the flag keep current behavior.
+function shouldShowInsta(p) {
+  if (!p || !p.instagram) return false;
+  if (p.showInstagram === false || p.show_instagram === false) return false;
+  return true;
+}
+function getShowInstagram(p) {
+  if (!p) return true;
+  if (p.showInstagram === false || p.show_instagram === false) return false;
+  return true;
 }
 async function cloudGetProfile(username) {
   const sb = cloud(); if (!sb) return null;
   const { data } = await sb.from('profiles').select('*').eq('username', String(username).toLowerCase()).eq('status', 'approved').maybeSingle();
   return normRow(data) || null;
 }
+function isMissingColumnError(err) {
+  const msg = String((err && err.message) || err || '');
+  return /could not find the '.+' column/i.test(msg) || String((err && err.code) || '') === 'PGRST204';
+}
+function needsSchemaUpgradeMessage() {
+  return 'Database not upgraded: run backend/supabase-schema.sql in the Supabase SQL Editor (adds site_type / site_path / portfolio-sites bucket), then retry.';
+}
 async function cloudSaveProfile(p) {
   const sb = cloud(); if (!sb) throw new Error('cloud-off');
   const { data: { user } } = await sb.auth.getUser();
   if (!user) throw new Error('not-logged-in');
-  const { data: existing } = await sb.from('profiles').select('status,site_type,site_path').eq('user_id', user.id).maybeSingle();
+  // New columns may not exist yet if the owner never re-ran supabase-schema.sql.
+  // Try the full lookup first, then fall back to status-only so saves never break.
+  let existing = null;
+  const full = await sb.from('profiles').select('status,site_type,site_path,show_instagram').eq('user_id', user.id).maybeSingle();
+  if (!full.error) existing = full.data;
+  else if (isMissingColumnError(full.error)) {
+    const core = await sb.from('profiles').select('status').eq('user_id', user.id).maybeSingle();
+    if (!core.error) existing = core.data;
+  } else if (full.data) existing = full.data;
   const row = {
     user_id: user.id, username: p.username.toLowerCase(), name: p.name, title: p.title,
     tagline: p.tagline, email: user.email, phone: p.phone, location: p.location,
     github: p.github, linkedin: p.linkedin, instagram: p.instagram || '', template: p.template || 'midnight',
-    avatar_url: p.avatarUrl || '',
+    avatar_url: getAvatar(p),
     skills: p.skills || [], projects: p.projects || [], available: p.available !== false,
     experience: Array.isArray(p.experience) ? p.experience.slice(0, 20) : [],
     education: Array.isArray(p.education) ? p.education.slice(0, 10) : [],
@@ -40,6 +76,10 @@ async function cloudSaveProfile(p) {
     // prebuilt-upload hosting: explicit value on p wins, else keep what is live
     site_type: p.site_type || (existing && existing.site_type) || 'builder',
     site_path: (typeof p.site_path === 'string' ? p.site_path : (existing && existing.site_path)) || '',
+    // instagram visibility toggle (default true; explicit false wins, else keep live)
+    show_instagram: (p.showInstagram === false || p.show_instagram === false) ? false
+      : (p.showInstagram === true || p.show_instagram === true) ? true
+      : (existing && typeof existing.show_instagram === 'boolean' ? existing.show_instagram : true),
   };
   if (p.site_type === 'upload') row.site_updated_at = new Date().toISOString();
   const res = await sb.from('profiles').upsert(row, { onConflict: 'user_id' });
@@ -47,8 +87,8 @@ async function cloudSaveProfile(p) {
   // Older DB missing the newest columns (resume/upload set): PostgREST rejects
   // the whole upsert, which would lose ALL edits. Retry once with core fields
   // only — a partial save beats no save. Owner fix: re-run supabase-schema.sql.
-  if (/could not find the '.+' column/i.test(res.error.message || '')) {
-    const { experience, education, resume, site_type, site_path, site_updated_at, ...core } = row;
+  if (isMissingColumnError(res.error)) {
+    const { experience, education, resume, site_type, site_path, site_updated_at, show_instagram, ...core } = row;
     const retry = await sb.from('profiles').upsert(core, { onConflict: 'user_id' });
     if (!retry.error) return { ...core, _partial: true };
   }
@@ -85,14 +125,23 @@ async function cloudUploadSiteFiles(username, files) {
     if (!rel || rel.includes('..')) throw new Error('bad-path: ' + rel);
     const { error } = await sb.storage.from(PORTFOOLIO_SITES_BUCKET)
       .upload(prefix + '/' + rel, f.blob, { upsert: true, contentType: f.contentType || guessContentType(rel) });
-    if (error) throw error;
+    if (error) {
+      const msg = String(error.message || '');
+      if (/bucket not found|bucket.*does not exist|row-level security|policy|unauthorized/i.test(msg))
+        throw new Error(msg + ' — owner must run backend/supabase-schema.sql (creates the portfolio-sites bucket + policies), then retry.');
+      throw error;
+    }
   }
   // mark profile as upload-hosted
   const { data: { user } } = await sb.auth.getUser();
   if (user) {
-    await sb.from('profiles').update({
+    const { error } = await sb.from('profiles').update({
       site_type: 'upload', site_path: prefix + '/index.html', site_updated_at: new Date().toISOString(),
     }).eq('user_id', user.id);
+    if (error) {
+      if (isMissingColumnError(error)) throw new Error(needsSchemaUpgradeMessage());
+      throw error;
+    }
   }
   return prefix + '/index.html';
 }
@@ -104,7 +153,13 @@ async function cloudSetSiteTypeUpload(username, on) {
     ? { site_type: 'upload', site_path: siteStoragePrefix(username) + '/index.html', site_updated_at: new Date().toISOString() }
     : { site_type: 'builder' };
   const { error } = await sb.from('profiles').update(patch).eq('user_id', user.id);
-  if (error) throw error;
+  if (error) {
+    // Reverting to the builder theme must always work: if the DB was never
+    // upgraded, there is no upload state to clear — treat as already-builder.
+    if (!on && isMissingColumnError(error)) return { site_type: 'builder' };
+    if (isMissingColumnError(error)) throw new Error(needsSchemaUpgradeMessage());
+    throw error;
+  }
   return patch;
 }
 async function cloudDeleteSite(username) {
@@ -129,7 +184,11 @@ async function cloudDeleteSite(username) {
   }
   await wipe(prefix);
   const { data: { user } } = await sb.auth.getUser();
-  if (user) await sb.from('profiles').update({ site_type: 'builder', site_path: '' }).eq('user_id', user.id);
+  if (user) {
+    const { error } = await sb.from('profiles').update({ site_type: 'builder', site_path: '' }).eq('user_id', user.id);
+    // Ignore missing-column: DB without the upgrade is already effectively 'builder'.
+    if (error && !isMissingColumnError(error)) throw error;
+  }
   return removed;
 }
 async function cloudSignUp(email, password) {

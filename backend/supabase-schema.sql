@@ -97,5 +97,9 @@ alter table profiles add column if not exists experience jsonb default '[]';
 alter table profiles add column if not exists education jsonb default '[]';
 alter table profiles add column if not exists resume jsonb default '{}';
 
--- 6) make yourself admin (run AFTER creating the admin user in Authentication):
+-- 6) social visibility toggles (users choose what shows on their portfolio)
+-- show_instagram defaults true so existing profiles keep current behavior.
+alter table profiles add column if not exists show_instagram boolean default true;
+
+-- 7) make yourself admin (run AFTER creating the admin user in Authentication):
 -- insert into admins (user_id) select id from auth.users where email = 'portfoolio.me@gmail.com';

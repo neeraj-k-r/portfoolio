@@ -34,22 +34,39 @@ function getRequestedUser() {
   return null;
 }
 
+function normLocalProfile(p) {
+  if (!p) return p;
+  if (typeof normRow === 'function') return normRow(p);
+  // supabase-config.js may not be loaded on public pages — sync keys manually
+  if (p.avatar_url && !p.avatarUrl) p.avatarUrl = p.avatar_url || '';
+  if (p.avatarUrl && !p.avatar_url) p.avatar_url = p.avatarUrl || '';
+  if (typeof p.show_instagram === 'boolean' && typeof p.showInstagram === 'undefined') p.showInstagram = p.show_instagram;
+  if (typeof p.showInstagram === 'boolean' && typeof p.show_instagram === 'undefined') p.show_instagram = p.showInstagram;
+  return p;
+}
+function showInsta(p) {
+  // Prefer shared helper from supabase-config.js when loaded.
+  try { if (typeof shouldShowInsta === 'function') return shouldShowInsta(p); } catch {}
+  if (!p || !p.instagram) return false;
+  if (p.showInstagram === false || p.show_instagram === false) return false;
+  return true;
+}
 async function loadProfile(username) {
   const u = username.toLowerCase();
   // 1. cloud (Supabase) — live on every device, when owner connects it
   try {
     if (typeof cloudEnabled === 'function' && cloudEnabled()) {
       const c = await cloudGetProfile(u);
-      if (c) return c;
+      if (c) return normLocalProfile(c);
     }
   } catch {}
   // 2. localStorage (user-created, this browser)
   const local = store.get(u);
-  if (local) return local;
+  if (local) return normLocalProfile(local);
   // 2. seed JSON files
   try {
     const r = await fetch(`profiles/${encodeURIComponent(u)}.json`, { cache: 'no-store' });
-    if (r.ok) return await r.json();
+    if (r.ok) return normLocalProfile(await r.json());
   } catch {}
   return null;
 }
@@ -144,6 +161,7 @@ function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 function renderPortfolio(p) {
+  p = normLocalProfile(p) || p;
   const tpl = String(p.template || 'midnight').toLowerCase();
   if (tpl !== 'midnight' && window.PortfoolioTemplates && window.PortfoolioTemplates[tpl]) {
     window.PortfoolioTemplates[tpl](p); return;
@@ -197,13 +215,13 @@ function renderPortfolio(p) {
           ${window.PortfoolioResume ? `<a class="btn btn-ghost" href="${window.PortfoolioResume.resumeURL(p.username)}"><i class="fa-solid fa-file-lines"></i> Resume</a>` : ''}
           ${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
           ${p.linkedin ? `<a class="btn btn-ghost" href="${esc(p.linkedin)}" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
-          ${p.instagram ? `<a class="btn btn-ghost" href="${esc(p.instagram)}" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
+          ${showInsta(p) ? `<a class="btn btn-ghost" href="${esc(p.instagram)}" target="_blank"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
         </div>
         <div class="hero-meta">
           ${p.location ? `<span><i class="fa-solid fa-location-dot"></i> ${esc(p.location)}</span>` : ''}
           ${p.email ? `<span><i class="fa-solid fa-envelope"></i> ${esc(p.email)}</span>` : ''}
           ${p.phone ? `<span><i class="fa-solid fa-phone"></i> ${esc(p.phone)}</span>` : ''}
-          ${p.instagram ? `<span><i class="fa-brands fa-instagram"></i> ${esc(p.instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, '@').replace(/\/$/, ''))}</span>` : ''}
+          ${showInsta(p) ? `<span><i class="fa-brands fa-instagram"></i> ${esc(p.instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, '@').replace(/\/$/, ''))}</span>` : ''}
         </div>
       </div>
       <div class="visual"><div class="avatar-card"><div class="avatar-inner">
@@ -231,7 +249,7 @@ function renderPortfolio(p) {
     </div>
   </section>
   <footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b style="color:#fff">${esc(p.name)}</b> via <b style="color:#fff">portfoolio.me</b></div>
-  <div class="socials">${p.github ? `<a href="${esc(p.github)}" target="_blank"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank"><i class="fa-brands fa-linkedin"></i></a>` : ''}${p.instagram ? `<a href="${esc(p.instagram)}" target="_blank"><i class="fa-brands fa-instagram"></i></a>` : ''}${p.email ? `<a href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
+  <div class="socials">${p.github ? `<a href="${esc(p.github)}" target="_blank"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank"><i class="fa-brands fa-linkedin"></i></a>` : ''}${showInsta(p) ? `<a href="${esc(p.instagram)}" target="_blank"><i class="fa-brands fa-instagram"></i></a>` : ''}${p.email ? `<a href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
   window.scrollTo(0, 0);
 }
 

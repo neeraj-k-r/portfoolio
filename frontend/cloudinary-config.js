@@ -17,7 +17,12 @@ async function uploadAvatar(file) {
   const r = await fetch(`https://api.cloudinary.com/v1_1/${encodeURIComponent(PORTFOOLIO_CLOUDINARY_CLOUD)}/image/upload`, {
     method: 'POST', body: fd,
   });
-  if (!r.ok) throw new Error('av-upload');
+  if (!r.ok) {
+    let detail = '';
+    try { const e = await r.json(); detail = (e && e.error && e.error.message) || ''; } catch {}
+    throw new Error('av-upload' + (detail ? ': ' + detail : ' (HTTP ' + r.status + ')'));
+  }
   const d = await r.json();
+  if (!d.secure_url) throw new Error('av-upload: no secure_url in response');
   return d.secure_url;
 }

@@ -249,6 +249,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div><label class="flabel">GitHub Profile URL</label><input id="inGithub" placeholder="https://github.com/yourname"></div>
           <div><label class="flabel">LinkedIn Profile URL</label><input id="inLinkedin" placeholder="https://linkedin.com/in/yourname"></div>
           <div><label class="flabel">Instagram Handle / URL</label><input id="inInsta" placeholder="@yourname or https://instagram.com/yourname"></div>
+          <div><label class="flabel">Instagram visibility</label><label class="gh-repo" style="padding:8px 12px"><input type="checkbox" id="inShowInsta" checked> <span><b>Display Instagram on my portfolio</b><br><small>Uncheck to keep it private (link still saved)</small></span></label></div>
           <div class="full"><label class="flabel">Location</label><input id="inLoc" placeholder="Kerala, India"></div>
           <div class="full"><label class="flabel">Skills (comma separated)</label><input id="inSkills" placeholder="React, JavaScript, Node.js, Python, Tailwind"></div>
           <div class="full"><label class="flabel">Resume summary (one or two lines — used on your resume page)</label><input id="inResumeSummary" placeholder="Full-stack developer who ships…"></div>
@@ -343,6 +344,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div><label class="flabel">GitHub URL</label><input id="edGithub"></div>
           <div><label class="flabel">LinkedIn URL</label><input id="edLinkedin"></div>
           <div><label class="flabel">Instagram Handle / URL</label><input id="edInsta" placeholder="@yourname"></div>
+          <div><label class="flabel">Instagram visibility</label><label class="gh-repo" style="padding:8px 12px"><input type="checkbox" id="edShowInsta" checked> <span><b>Display Instagram on my portfolio</b><br><small>Uncheck to hide it (link still saved)</small></span></label></div>
           <div class="full"><label class="flabel">Location</label><input id="edLoc"></div>
         </div>
       </div>
@@ -669,9 +671,10 @@ function setupUserDashboardView(profile) {
     if($('edGithub')) $('edGithub').value = profile.github || '';
     if($('edLinkedin')) $('edLinkedin').value = profile.linkedin || '';
     if($('edInsta')) $('edInsta').value = profile.instagram || '';
+    if($('edShowInsta')) $('edShowInsta').checked = profile.showInstagram !== false && profile.show_instagram !== false;
     if($('edLoc')) $('edLoc').value = profile.location || '';
     if($('edSkills')) $('edSkills').value = (profile.skills || []).join(', ');
-    draftAvatar = profile.avatarUrl || ''; paintAvatarPreview();
+    draftAvatar = profile.avatarUrl || profile.avatar_url || ''; paintAvatarPreview();
 
     // Template selection (paint saved choice; clicks update highlight + radio)
     document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
@@ -700,8 +703,11 @@ let draftAvatar = '';
 function paintAvatarPreview() {
   const img = $('edAvatarImg');
   if (!img) return;
-  if (draftAvatar) { img.src = draftAvatar; img.style.display = ''; }
-  else img.style.display = 'none';
+  if (draftAvatar) {
+    img.onerror = () => { $('edAvatarMsg').textContent = 'Preview failed to load — the upload URL may be blocked. Try re-uploading.'; };
+    img.src = draftAvatar; img.style.display = '';
+  }
+  else { img.onerror = null; img.removeAttribute('src'); img.style.display = 'none'; }
 }
 if ($('edAvatarUp')) $('edAvatarUp').onclick = async () => {
   const f = $('edAvatarFile') && $('edAvatarFile').files[0];
@@ -713,7 +719,12 @@ if ($('edAvatarUp')) $('edAvatarUp').onclick = async () => {
     paintAvatarPreview();
     $('edAvatarMsg').textContent = 'Uploaded — hit Save Changes to publish.';
   } catch (e) {
-    $('edAvatarMsg').textContent = e.message === 'av-type' ? 'Only JPG/PNG images.' : e.message === 'av-size' ? 'Keep it under 5MB.' : 'Upload failed — retry.';
+    const msg = String((e && e.message) || '');
+    console.error('avatar upload failed', e);
+    $('edAvatarMsg').textContent = msg === 'av-type' ? 'Only JPG/PNG images.'
+      : msg === 'av-size' ? 'Keep it under 5MB.'
+      : msg === 'av-setup' ? 'Cloudinary preset not configured — owner must enable Unsigned preset.'
+      : ('Upload failed — ' + (msg.startsWith('av-upload') ? msg : 'retry. ' + msg));
   }
 };
 if ($('edAvatarRm')) $('edAvatarRm').onclick = () => {
@@ -941,6 +952,8 @@ if ($('builderForm')) {
       tagline: $('inTag').value.trim(), email: $('inEmail').value.trim(),
       phone: $('inPhone').value.trim(), location: $('inLoc').value.trim(),
       github: normGithub($('inGithub').value), linkedin: normLinkedIn($('inLinkedin').value), instagram: normInsta($('inInsta').value),
+      showInstagram: !$('inShowInsta') || $('inShowInsta').checked,
+      show_instagram: !$('inShowInsta') || $('inShowInsta').checked,
       template, skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       projects: [...manual, ...picked], available: true, status: 'approved', createdAt: new Date().toISOString(),
       experience: [], education: [],
@@ -971,12 +984,15 @@ async function saveStudio() {
     if (!activeUserProfile) return;
     if (!$('edName').value.trim() || !$('edTitle').value.trim() || !$('edEmail').value.trim()) return toast('❌ Name, title + email required');
 
+    const showInsta = !$('edShowInsta') || $('edShowInsta').checked;
     Object.assign(activeUserProfile, {
       name: $('edName').value.trim(), title: $('edTitle').value.trim(), tagline: $('edTag').value.trim(),
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
       github: normGithub($('edGithub').value), linkedin: normLinkedIn($('edLinkedin').value), instagram: normInsta($('edInsta').value), location: $('edLoc').value.trim(),
+      showInstagram: showInsta, show_instagram: showInsta,
       template: (document.querySelector('input[name=edtpl]:checked') || {}).value || 'midnight',
-      avatarUrl: draftAvatar || '',
+      avatarUrl: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
+      avatar_url: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
       skillsDisplay: (document.querySelector('input[name=skillsDisplay]:checked') || {}).value || 'evidence',
       skills: $('edSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       experience: Array.isArray(activeUserProfile.experience) ? activeUserProfile.experience : [],

@@ -15,9 +15,24 @@ const TEMPLATES = [
 function tplEsc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
+function normTpl(p) {
+  if (p) {
+    if (p.avatar_url && !p.avatarUrl) p.avatarUrl = p.avatar_url || '';
+    if (p.avatarUrl && !p.avatar_url) p.avatar_url = p.avatarUrl || '';
+    if (typeof p.show_instagram === 'boolean' && typeof p.showInstagram === 'undefined') p.showInstagram = p.show_instagram;
+    if (typeof p.showInstagram === 'boolean' && typeof p.show_instagram === 'undefined') p.show_instagram = p.showInstagram;
+  }
+  return p;
+}
+function tplShowInsta(p) {
+  try { if (typeof shouldShowInsta === 'function') return shouldShowInsta(p); } catch {}
+  if (!p || !p.instagram) return false;
+  if (p.showInstagram === false || p.show_instagram === false) return false;
+  return true;
+}
 function tplFoot(p) {
   return `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b>${tplEsc(p.name)}</b> via <b>portfoolio.me</b> • template: ${tplEsc(p.template || 'midnight')}</div>
-  <div class="socials">${p.github ? `<a href="${tplEsc(p.github)}" target="_blank"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank"><i class="fa-brands fa-linkedin"></i></a>` : ''}${p.instagram ? `<a href="${tplEsc(p.instagram)}" target="_blank"><i class="fa-brands fa-instagram"></i></a>` : ''}${p.email ? `<a href="mailto:${tplEsc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
+  <div class="socials">${p.github ? `<a href="${tplEsc(p.github)}" target="_blank"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank"><i class="fa-brands fa-linkedin"></i></a>` : ''}${tplShowInsta(p) ? `<a href="${tplEsc(p.instagram)}" target="_blank"><i class="fa-brands fa-instagram"></i></a>` : ''}${p.email ? `<a href="mailto:${tplEsc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
 }
 function tplNav(p) {
   return `<nav><a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${tplEsc(p.username)}.portfoolio.me</small></span></a>
@@ -26,6 +41,7 @@ function tplNav(p) {
 }
 
 function renderMinimal(p) {
+  normTpl(p);
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
 
   document.body.dataset.template = 'minimal';
@@ -46,7 +62,7 @@ function renderMinimal(p) {
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px">
       ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${tplEsc(p.email)}">Email me</a>` : ''}
       ${p.github ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}
-      ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.linkedin)}" target="_blank">LinkedIn</a>` : ''}${p.instagram ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.instagram)}" target="_blank">Instagram</a>` : ''}
+      ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.linkedin)}" target="_blank">LinkedIn</a>` : ''}${tplShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.instagram)}" target="_blank">Instagram</a>` : ''}
       ${p.phone ? `<span class="badge">☎ ${tplEsc(p.phone)}</span>` : ''}
     </div></div>
     <div class="two" style="margin-top:14px"><div class="card"><h3>Skills</h3><div class="badges" style="justify-content:flex-start;margin-top:10px">${skills}</div></div>
@@ -57,6 +73,7 @@ function renderMinimal(p) {
 }
 
 function renderTerminal(p) {
+  normTpl(p);
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
 
   document.body.dataset.template = 'terminal';
@@ -73,7 +90,7 @@ function renderTerminal(p) {
     ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" style="width:96px;height:96px;border-radius:12px;object-fit:cover;margin:10px 0;border:1px solid #166534">` : ''}
     <p class="mono" style="color:#86efac">${tplEsc(p.title)} — ${tplEsc(p.location || 'remote')}</p>
     <p style="margin-top:8px">${tplEsc(p.tagline || '')}</p>
-    <p class="mono" style="margin-top:10px">$ contact --email ${tplEsc(p.email || '')} ${p.github ? `--github ${tplEsc(p.github)}` : ''}</p></div>
+    <p class="mono" style="margin-top:10px">$ contact --email ${tplEsc(p.email || '')} ${p.github ? `--github ${tplEsc(p.github)}` : ''}${p.linkedin ? ` --linkedin ${tplEsc(p.linkedin)}` : ''}${tplShowInsta(p) ? ` --instagram ${tplEsc(p.instagram)}` : ''}</p></div>
     <div class="card" style="margin-top:14px"><p class="mono">$ ls --skills</p><div style="margin-top:8px">${skills}</div></div>
     <h2 class="title" style="margin-top:22px">$ ls --projects</h2><div class="dir-grid">${projects}</div>
   </section>${rsSec(p)}${tplFoot(p)}`;
@@ -81,6 +98,7 @@ function renderTerminal(p) {
 }
 
 function renderCreative(p) {
+  normTpl(p);
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
 
   document.body.dataset.template = 'creative';
@@ -101,12 +119,15 @@ function renderCreative(p) {
     <div class="hero-cta" style="justify-content:center;display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
       ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">Say hi 👋</a>` : ''}
       ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}
+      ${p.linkedin ? `<a class="btn btn-ghost" href="${tplEsc(p.linkedin)}" target="_blank">LinkedIn</a>` : ''}
+      ${tplShowInsta(p) ? `<a class="btn btn-ghost" href="${tplEsc(p.instagram)}" target="_blank">Instagram</a>` : ''}
     </div></div></header>
   <section class="wrap"><div class="proj-grid">${projects}</div></section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
 function renderAurora(p) {
+  normTpl(p);
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
 
   document.body.dataset.template = 'aurora';
@@ -128,13 +149,14 @@ function renderAurora(p) {
     <div class="hero-cta" style="justify-content:center;display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
       ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">Get in touch</a>` : ''}
       ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}
-      ${p.linkedin ? `<a class="btn btn-ghost" href="${tplEsc(p.linkedin)}" target="_blank">LinkedIn</a>` : ''}${p.instagram ? `<a class="btn btn-ghost" href="${tplEsc(p.instagram)}" target="_blank">Instagram</a>` : ''}
+      ${p.linkedin ? `<a class="btn btn-ghost" href="${tplEsc(p.linkedin)}" target="_blank">LinkedIn</a>` : ''}${tplShowInsta(p) ? `<a class="btn btn-ghost" href="${tplEsc(p.instagram)}" target="_blank">Instagram</a>` : ''}
     </div></div></header>
   <section class="wrap"><span class="eyebrow">● Selected work</span><div class="proj-grid" style="margin-top:16px">${projects || '<p>No projects yet.</p>'}</div></section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);
 }
 
 function renderEditorial(p) {
+  normTpl(p);
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
 
   document.body.dataset.template = 'editorial';
@@ -152,7 +174,7 @@ function renderEditorial(p) {
     <h1 style="font-size:clamp(44px,7vw,76px);line-height:1.02">${tplEsc(p.name)}</h1>
     <h2 style="font-size:22px;font-style:italic">${tplEsc(p.title)}</h2>
     <p style="font-size:18px;margin-top:10px">${esc2(p.tagline)}</p>
-    <p style="margin-top:12px">${p.email ? `<a href="mailto:${tplEsc(p.email)}" style="font-weight:800">${tplEsc(p.email)}</a>` : ''}${p.location ? ` · ${tplEsc(p.location)}` : ''}</p>
+    <p style="margin-top:12px">${p.email ? `<a href="mailto:${tplEsc(p.email)}" style="font-weight:800">${tplEsc(p.email)}</a>` : ''}${p.location ? ` · ${tplEsc(p.location)}` : ''}${p.github ? ` · <a href="${tplEsc(p.github)}" target="_blank" style="font-weight:800">GitHub</a>` : ''}${p.linkedin ? ` · <a href="${tplEsc(p.linkedin)}" target="_blank" style="font-weight:800">LinkedIn</a>` : ''}${tplShowInsta(p) ? ` · <a href="${tplEsc(p.instagram)}" target="_blank" style="font-weight:800">Instagram</a>` : ''}</p>
     <hr style="margin:22px 0;border:none;border-top:2px solid currentColor;opacity:.2">
     <h3>Index of capabilities</h3><div style="margin-top:8px">${skills || '<p>No skills listed yet.</p>'}</div>
   </section>
@@ -164,6 +186,7 @@ function esc2(s) { return tplEsc(s || ''); }
 function rsSec(p) { return (window.PortfoolioResume ? window.PortfoolioResume.sectionHTML(p) : ''); }
 
 function renderBrutalist(p) {
+  normTpl(p);
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
 
   document.body.dataset.template = 'brutalist';
@@ -185,6 +208,8 @@ function renderBrutalist(p) {
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
       ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">HIRE ME →</a>` : ''}
       ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GITHUB →</a>` : ''}
+      ${p.linkedin ? `<a class="btn btn-ghost" href="${tplEsc(p.linkedin)}" target="_blank">LINKEDIN →</a>` : ''}
+      ${tplShowInsta(p) ? `<a class="btn btn-ghost" href="${tplEsc(p.instagram)}" target="_blank">INSTAGRAM →</a>` : ''}
     </div>
     </div>
     ${p.avatarUrl ? `<div class="brut-portrait"><img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}"></div>` : ''}
@@ -195,6 +220,7 @@ function renderBrutalist(p) {
 }
 
 function renderAfterglow(p) {
+  normTpl(p);
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
 
   document.body.dataset.template = 'afterglow';
@@ -217,6 +243,8 @@ function renderAfterglow(p) {
     <div class="hero-cta" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
       ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">Say hello</a>` : ''}
       ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}
+      ${p.linkedin ? `<a class="btn btn-ghost" href="${tplEsc(p.linkedin)}" target="_blank">LinkedIn</a>` : ''}
+      ${tplShowInsta(p) ? `<a class="btn btn-ghost" href="${tplEsc(p.instagram)}" target="_blank">Instagram</a>` : ''}
     </div></div>
     ${p.avatarUrl ? `<div class="ag-sunring"><img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}"></div>` : '<div class="ag-sunring ag-sunring-empty"></div>'}
   </div></header>
@@ -226,6 +254,7 @@ function renderAfterglow(p) {
 }
 
 function renderUltraviolet(p) {
+  normTpl(p);
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
 
   document.body.dataset.template = 'ultraviolet';
@@ -247,6 +276,7 @@ function renderUltraviolet(p) {
       ${p.email ? `<a href="mailto:${tplEsc(p.email)}">email →</a>` : ''}
       ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank">github →</a>` : ''}
       ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank">linkedin →</a>` : ''}
+      ${tplShowInsta(p) ? `<a href="${tplEsc(p.instagram)}" target="_blank">instagram →</a>` : ''}
       </div>
     </aside>
     <div>
@@ -262,6 +292,7 @@ function renderUltraviolet(p) {
 }
 
 function renderTidepool(p) {
+  normTpl(p);
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
 
   document.body.dataset.template = 'tidepool';
@@ -282,7 +313,7 @@ function renderTidepool(p) {
     <p class="mono">${esc2(p.title)} — ${tplEsc(p.location || 'remote reef')}</p></div></div>
     <p style="margin-top:10px">${esc2(p.tagline)}</p>
     <div style="margin-top:10px">${skills}</div>
-    <p style="margin-top:12px">${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${tplEsc(p.email)}">Send a bubble</a>` : ''} ${p.github ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''}</p></div>
+    <p style="margin-top:12px">${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${tplEsc(p.email)}">Send a bubble</a>` : ''} ${p.github ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.github)}" target="_blank">GitHub</a>` : ''} ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.linkedin)}" target="_blank">LinkedIn</a>` : ''} ${tplShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.instagram)}" target="_blank">Instagram</a>` : ''}</p></div>
   </section>
   <section class="wrap"><h2 class="title">Catch of the <span class="grad">day</span></h2><div class="proj-grid tp-zig" style="margin-top:14px">${projects || '<p>Nothing surfaced yet.</p>'}</div></section>${rsSec(p)}${tplFoot(p)}`;
   window.scrollTo(0, 0);

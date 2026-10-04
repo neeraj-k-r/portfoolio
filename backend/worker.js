@@ -9,6 +9,11 @@ const RESERVED = new Set(['www', 'app', 'api', 'admin', 'mail', 'blog', 'portfoo
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
+function wShowInsta(p) {
+  if (!p || !p.instagram) return false;
+  if (p.showInstagram === false || p.show_instagram === false) return false;
+  return true;
+}
 const ICONS = {
   campus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4 2 9l10 5 10-5-10-5Z"/><path d="M6 11.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-4.5"/><path d="M22 9v5"/></svg>',
   bot: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="9" width="14" height="10" rx="2"/><path d="M12 9V6"/><circle cx="12" cy="4.5" r="1.2"/><circle cx="9.5" cy="13.5" r="1" fill="currentColor" stroke="none"/><circle cx="14.5" cy="13.5" r="1" fill="currentColor" stroke="none"/><path d="M9.5 16.5h5"/></svg>',
@@ -26,20 +31,41 @@ function iconFor(pr) {
 async function getProfile(sub) {
   // 1) Supabase: approved rows are publicly readable
   try {
-    const url = `${SUPABASE_URL}/rest/v1/profiles?username=eq.${encodeURIComponent(sub)}&status=eq.approved&select=username,name,title,tagline,email,phone,location,github,linkedin,instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume`;
-    const r = await fetch(url, { headers: { apikey: SUPABASE_KEY, Accept: 'application/json' } });
-    if (r.ok) {
+    const fullSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume';
+    // Fallback select for DBs where the owner never re-ran supabase-schema.sql
+    // (missing site_type / resume columns). PostgREST 400s the whole query
+    // when any selected column is absent, so retry with v1 core columns.
+    const coreSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,template,skills,projects,avatar_url';
+    const fetchSel = async (sel) => {
+      const url = `${SUPABASE_URL}/rest/v1/profiles?username=eq.${encodeURIComponent(sub)}&status=eq.approved&select=${sel}`;
+      const r = await fetch(url, { headers: { apikey: SUPABASE_KEY, Accept: 'application/json' } });
+      if (!r.ok) return null;
       const rows = await r.json();
-      if (rows.length) {
-        if (rows[0].avatar_url) rows[0].avatarUrl = rows[0].avatar_url;
-        return rows[0];
-      }
+      return rows.length ? rows[0] : null;
+    };
+    let row = await fetchSel(fullSelect);
+    if (!row) row = await fetchSel(coreSelect);
+    if (row) {
+      if (row.avatar_url && !row.avatarUrl) row.avatarUrl = row.avatar_url;
+      if (row.avatarUrl && !row.avatar_url) row.avatar_url = row.avatarUrl;
+      if (typeof row.show_instagram === 'boolean' && typeof row.showInstagram === 'undefined') row.showInstagram = row.show_instagram;
+      if (typeof row.showInstagram === 'boolean' && typeof row.show_instagram === 'undefined') row.show_instagram = row.showInstagram;
+      return row;
     }
   } catch {}
   // 2) seed showcase files on the origin site
   try {
     const r = await fetch(`${ORIGIN}/profiles/${encodeURIComponent(sub)}.json`);
-    if (r.ok) return await r.json();
+    if (r.ok) {
+      const seed = await r.json();
+      if (seed) {
+        if (seed.avatar_url && !seed.avatarUrl) seed.avatarUrl = seed.avatar_url;
+        if (seed.avatarUrl && !seed.avatar_url) seed.avatar_url = seed.avatarUrl;
+        if (typeof seed.show_instagram === 'boolean' && typeof seed.showInstagram === 'undefined') seed.showInstagram = seed.show_instagram;
+        if (typeof seed.showInstagram === 'boolean' && typeof seed.show_instagram === 'undefined') seed.show_instagram = seed.showInstagram;
+      }
+      return seed;
+    }
   } catch {}
   return null;
 }
@@ -94,7 +120,7 @@ function nav(p) {
 }
 function foot(p) {
   return `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b style="color:#fff">${esc(p.name)}</b> via <b style="color:#fff">portfoolio.me</b></div>
-  <div class="socials">${p.github ? `<a href="${esc(p.github)}"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${esc(p.linkedin)}"><i class="fa-brands fa-linkedin"></i></a>` : ''}${p.instagram ? `<a href="${esc(p.instagram)}"><i class="fa-brands fa-instagram"></i></a>` : ''}${p.email ? `<a href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
+  <div class="socials">${p.github ? `<a href="${esc(p.github)}"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${esc(p.linkedin)}"><i class="fa-brands fa-linkedin"></i></a>` : ''}${wShowInsta(p) ? `<a href="${esc(p.instagram)}"><i class="fa-brands fa-instagram"></i></a>` : ''}${p.email ? `<a href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
 }
 function projectsFor(p, tpl) {
   // mirror frontend/templates.js per-template project styles so subdomain == trial
@@ -199,14 +225,14 @@ function page(p) {
        <p class="mono ag-kicker">— GOLDEN HOUR, SHIPPED —</p>
        <h1>${esc(p.name)}</h1><div class="ag-sunbar"></div>
        <p class="sub">${esc(p.title)} — ${esc(p.tagline || '')}</p>
-       <div class="hero-cta" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">Say hello</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GitHub</a>` : ''}</div></div>
+       <div class="hero-cta" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">Say hello</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GitHub</a>` : ''}${p.linkedin ? `<a class="btn btn-ghost" href="${esc(p.linkedin)}">LinkedIn</a>` : ''}${wShowInsta(p) ? `<a class="btn btn-ghost" href="${esc(p.instagram)}">Instagram</a>` : ''}</div></div>
        ${p.avatarUrl ? `<div class="ag-sunring"><img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}"></div>` : '<div class="ag-sunring ag-sunring-empty"></div>'}
        </div></header>`
     : tpl === 'ultraviolet'
     ? `<section class="wrap" style="padding:140px 0 20px"><div class="uv-grid">
        <aside class="uv-rail">${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}">` : `<div class="uv-orb">${esc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`}
        <h1>${esc(p.name)}</h1><p class="mono uv-status">◉ signal: strong</p>
-       <div class="uv-links">${p.email ? `<a href="mailto:${esc(p.email)}">email →</a>` : ''}${p.github ? `<a href="${esc(p.github)}">github →</a>` : ''}</div></aside>
+       <div class="uv-links">${p.email ? `<a href="mailto:${esc(p.email)}">email →</a>` : ''}${p.github ? `<a href="${esc(p.github)}">github →</a>` : ''}${p.linkedin ? `<a href="${esc(p.linkedin)}">linkedin →</a>` : ''}${wShowInsta(p) ? `<a href="${esc(p.instagram)}">instagram →</a>` : ''}</div></aside>
        <div><p class="mono" style="font-size:13px;color:#e0aaff">◈ ${esc(p.title)}</p>
        <p style="margin-top:10px;font-size:19px">${esc(p.tagline || '')}</p>
        <div style="margin-top:26px;height:2px;background:linear-gradient(90deg,transparent,#b5179e,#4cc9f0,transparent)"></div></div>
@@ -217,21 +243,21 @@ function page(p) {
        ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:112px;height:112px;border-radius:50%;object-fit:cover;border:2px solid #80ffdb;box-shadow:0 0 32px rgba(46,196,182,.7);flex-shrink:0">` : ''}
        <div style="flex:1;min-width:240px"><h1 style="font-size:clamp(38px,6vw,64px)">${esc(p.name)}</h1>
        <p class="mono">${esc(p.title)} — ${esc(p.location || 'remote reef')}</p></div></div>
-       <p style="margin-top:10px">${esc(p.tagline || '')}</p></div></section>`
+       <p style="margin-top:10px">${esc(p.tagline || '')}</p><p style="margin-top:12px">${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Send a bubble</a>` : ''} ${p.github ? `<a class="btn btn-ghost btn-sm" href="${esc(p.github)}">GitHub</a>` : ''} ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${esc(p.linkedin)}">LinkedIn</a>` : ''} ${wShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${esc(p.instagram)}">Instagram</a>` : ''}</p></div></section>`
     : tpl === 'aurora'
     ? `<header class="hero wrap"><div style="text-align:center;padding:50px 0 10px">
        ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 10px;display:block">` : ''}
        <p class="mono" style="letter-spacing:3px;font-size:12px;opacity:.8">PORTFOLIO</p>
        <h1 style="font-size:clamp(44px,7vw,84px)">${esc(p.name)}</h1>
        <p class="sub" style="margin:12px auto;max-width:560px">${esc(p.title)} — ${esc(p.tagline || '')}</p>
-       <div class="hero-cta" style="justify-content:center;display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">Get in touch</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GitHub</a>` : ''}</div></div></header>`
+       <div class="hero-cta" style="justify-content:center;display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">Get in touch</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GitHub</a>` : ''}${p.linkedin ? `<a class="btn btn-ghost" href="${esc(p.linkedin)}">LinkedIn</a>` : ''}${wShowInsta(p) ? `<a class="btn btn-ghost" href="${esc(p.instagram)}">Instagram</a>` : ''}</div></div></header>`
     : tpl === 'editorial'
     ? `<section class="wrap" style="padding:140px 0 20px;max-width:760px">
        ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:110px;height:110px;border-radius:50%;object-fit:cover;margin-bottom:12px">` : ''}
        <p class="mono" style="font-size:13px">The portfolio of</p>
        <h1 style="font-size:clamp(44px,7vw,76px)">${esc(p.name)}</h1>
        <h2 style="font-size:22px;font-style:italic">${esc(p.title)}</h2>
-       <p style="font-size:18px;margin-top:10px">${esc(p.tagline || '')}</p></section>`
+       <p style="font-size:18px;margin-top:10px">${esc(p.tagline || '')}</p><p style="margin-top:12px">${p.email ? `<a href="mailto:${esc(p.email)}" style="font-weight:800">${esc(p.email)}</a>` : ''}${p.github ? ` · <a href="${esc(p.github)}" style="font-weight:800">GitHub</a>` : ''}${p.linkedin ? ` · <a href="${esc(p.linkedin)}" style="font-weight:800">LinkedIn</a>` : ''}${wShowInsta(p) ? ` · <a href="${esc(p.instagram)}" style="font-weight:800">Instagram</a>` : ''}</p></section>`
     : tpl === 'brutalist'
     ? `<section class="wrap" style="padding:140px 0 20px">
        <span class="badge">● OPEN FOR WORK</span>
@@ -241,7 +267,7 @@ function page(p) {
        <h2 style="font-size:clamp(20px,3vw,30px);background:#000;color:#fef08a;display:inline-block;padding:6px 14px;margin-top:10px">${esc(p.title)}</h2>
        <p class="sub" style="margin-top:12px;font-weight:600">${esc(p.tagline || '')}</p>
        <div style="margin-top:12px">${(p.skills || []).map((s) => `<a href="/skills/${encodeURIComponent(String(s).toLowerCase())}" style="text-decoration:none"><span class="badge">★ ${esc(s)}</span></a>`).join(' ')}</div>
-       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">HIRE ME</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GITHUB</a>` : ''}</div>
+       <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">HIRE ME</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GITHUB</a>` : ''}${p.linkedin ? `<a class="btn btn-ghost" href="${esc(p.linkedin)}">LINKEDIN</a>` : ''}${wShowInsta(p) ? `<a class="btn btn-ghost" href="${esc(p.instagram)}">INSTAGRAM</a>` : ''}</div>
        </div>
        ${p.avatarUrl ? `<div class="brut-portrait"><img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}"></div>` : ''}
        </div></section>`
@@ -251,7 +277,7 @@ function page(p) {
        <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
        <h2 style="font-size:20px">${esc(p.title)}</h2><p style="margin:10px 0">${esc(p.tagline || '')}</p>
        <div class="badges" style="justify-content:flex-start">${skills}</div>
-       <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Email me</a>` : ''}${p.github ? `<a class="btn btn-ghost btn-sm" href="${esc(p.github)}">GitHub</a>` : ''}${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${esc(p.linkedin)}">LinkedIn</a>` : ''}${p.instagram ? `<a class="btn btn-ghost btn-sm" href="${esc(p.instagram)}">Instagram</a>` : ''}</div></div></section>`
+       <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Email me</a>` : ''}${p.github ? `<a class="btn btn-ghost btn-sm" href="${esc(p.github)}">GitHub</a>` : ''}${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${esc(p.linkedin)}">LinkedIn</a>` : ''}${wShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${esc(p.instagram)}">Instagram</a>` : ''}</div></div></section>`
     : tpl === 'terminal'
     ? `<section class="wrap" style="padding:140px 0 30px"><div class="card"><p class="mono">$ whoami</p>
        ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:96px;height:96px;border-radius:12px;object-fit:cover;margin:10px 0">` : ''}
@@ -261,7 +287,7 @@ function page(p) {
        ${p.available === false ? '' : '<div class="pill"><span class="dot"></span> Open to work</div>'}
        <h1>Hi, I'm <span class="grad">${esc(p.name)}</span><br>${esc(p.title)}</h1>
        <p class="sub">${esc(p.tagline || '')}</p>
-       <div class="hero-cta">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">Email me</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GitHub</a>` : ''}${p.linkedin ? `<a class="btn btn-ghost" href="${esc(p.linkedin)}">LinkedIn</a>` : ''}${p.instagram ? `<a class="btn btn-ghost" href="${esc(p.instagram)}">Instagram</a>` : ''}</div>
+       <div class="hero-cta">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">Email me</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GitHub</a>` : ''}${p.linkedin ? `<a class="btn btn-ghost" href="${esc(p.linkedin)}">LinkedIn</a>` : ''}${wShowInsta(p) ? `<a class="btn btn-ghost" href="${esc(p.instagram)}">Instagram</a>` : ''}</div>
        <div class="hero-meta">${p.location ? `<span>${esc(p.location)}</span>` : ''} ${p.email ? `<span>${esc(p.email)}</span>` : ''} ${p.phone ? `<span>${esc(p.phone)}</span>` : ''}</div></div>
        <div class="visual"><div class="avatar-card"><div class="avatar-inner">
          ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:132px;height:132px;border-radius:50%;object-fit:cover">` : `<div style="width:120px;height:120px;border-radius:50%;margin:0 auto;display:grid;place-items:center;font-size:52px;color:#fff;background:linear-gradient(135deg,#6c6cf5,#22d3ee)">${esc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`}
