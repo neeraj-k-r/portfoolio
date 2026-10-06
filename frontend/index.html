@@ -439,6 +439,16 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             </div>
             <button type="button" class="btn btn-ghost btn-sm" id="rsEduAdd" style="margin-top:8px"><i class="fa-solid fa-plus"></i> Add education</button>
           </div>
+          <div class="full"><label class="flabel">Certifications</label>
+            <div id="rsCertList" style="display:grid;gap:8px;margin-bottom:8px"></div>
+            <div class="form-grid">
+              <div><input id="rsCertName" placeholder="Certification name — e.g. Google UX Design"></div>
+              <div><input id="rsCertIssuer" placeholder="Issuer — e.g. Coursera"></div>
+              <div><input id="rsCertYear" placeholder="Year — e.g. 2024"></div>
+              <div><input id="rsCertUrl" placeholder="URL (optional)"></div>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" id="rsCertAdd" style="margin-top:8px"><i class="fa-solid fa-plus"></i> Add certification</button>
+          </div>
           <div class="full"><label class="flabel">Live preview</label>
             <iframe id="rsPreview" title="resume preview" style="width:100%;height:380px;border:1px solid var(--stroke);border-radius:12px;background:#fff"></iframe>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
@@ -997,6 +1007,7 @@ async function saveStudio() {
       skills: $('edSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       experience: Array.isArray(activeUserProfile.experience) ? activeUserProfile.experience : [],
       education: Array.isArray(activeUserProfile.education) ? activeUserProfile.education : [],
+      certifications: Array.isArray(activeUserProfile.certifications) ? activeUserProfile.certifications : [],
       resume: {
         summary: $('rsSummary') ? $('rsSummary').value.trim().slice(0, 600) : ((activeUserProfile.resume || {}).summary || ''),
         theme: (document.querySelector('input[name=rstheme]:checked') || {}).value || 'ats',
@@ -1094,11 +1105,20 @@ function paintResumeTab() {
     <small style="color:var(--muted)">${[e.start, e.end].filter(Boolean).join(' – ')}</small>
     <button data-rsrm="edu${i}">Remove</button></div>`).join('')
     || '<p style="color:var(--muted);font-size:13px">No education yet.</p>';
+  const certEl = $('rsCertList');
+  if (certEl) certEl.innerHTML = (p.certifications || []).map((c, i) => `
+    <div class="proj-row"><b>${(c.name || 'Certification')}${c.issuer ? ' · ' + c.issuer : ''}</b>
+    <small style="color:var(--muted)">${c.year || ''}</small>
+    <button data-rsrm="cert${i}">Remove</button></div>`).join('')
+    || '<p style="color:var(--muted);font-size:13px">No certifications yet.</p>';
   expEl && expEl.querySelectorAll('[data-rsrm]').forEach(b => b.onclick = () => {
     p.experience.splice(+b.dataset.rsrm.slice(3), 1); paintResumeTab();
   });
   eduEl && eduEl.querySelectorAll('[data-rsrm]').forEach(b => b.onclick = () => {
     p.education.splice(+b.dataset.rsrm.slice(3), 1); paintResumeTab();
+  });
+  certEl && certEl.querySelectorAll('[data-rsrm]').forEach(b => b.onclick = () => {
+    p.certifications.splice(+b.dataset.rsrm.slice(4), 1); paintResumeTab();
   });
   // preview (draft: theme + summary applied live, lists need Save)
   const prev = $('rsPreview');
@@ -1132,6 +1152,16 @@ if ($('rsEduAdd')) $('rsEduAdd').onclick = () => {
   ['rsEduSchool', 'rsEduDegree', 'rsEduField', 'rsEduYears'].forEach(id => { $(id).value = ''; });
   paintResumeTab();
   toast('✅ Education added — hit Save Changes to publish');
+};
+if ($('rsCertAdd')) $('rsCertAdd').onclick = () => {
+  if (!activeUserProfile) return toast('❌ Log in first');
+  const name = $('rsCertName').value.trim();
+  if (!name) return toast('❌ Add at least a certification name');
+  draftResume();
+  activeUserProfile.certifications.unshift({ name, issuer: $('rsCertIssuer').value.trim(), year: $('rsCertYear').value.trim(), url: $('rsCertUrl').value.trim() });
+  ['rsCertName', 'rsCertIssuer', 'rsCertYear', 'rsCertUrl'].forEach(id => { $(id).value = ''; });
+  paintResumeTab();
+  toast('✅ Certification added — hit Save Changes to publish');
 };
 if ($('rsPrintBtn')) $('rsPrintBtn').onclick = () => {
   if (!activeUserProfile || !activeUserProfile.username) return toast('❌ Nothing to print yet');

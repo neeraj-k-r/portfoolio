@@ -93,9 +93,11 @@ create policy "owner delete sites" on storage.objects
 -- experience[]: {role, company, start, end, current, desc}
 -- education[]:  {school, degree, field, start, end}
 -- resume{}:     {summary, theme: ats|modern|midnight|terminal}
+-- certifications[]: {name, issuer, year, url}
 alter table profiles add column if not exists experience jsonb default '[]';
 alter table profiles add column if not exists education jsonb default '[]';
 alter table profiles add column if not exists resume jsonb default '{}';
+alter table profiles add column if not exists certifications jsonb default '[]';
 
 -- 6) social visibility toggles (users choose what shows on their portfolio)
 -- show_instagram defaults true so existing profiles keep current behavior.

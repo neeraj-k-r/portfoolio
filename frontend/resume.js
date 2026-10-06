@@ -1,10 +1,10 @@
 /* portfoolio.me — resume builder (auto-built from profile info)
-   Data: name/title/tagline/contact + skills + experience[] + education[] + projects[]
+   Data: name/title/tagline/contact + skills + experience[] + education[] + projects[] + certifications[]
    Theme: profile.resume.theme — 'ats' (default, recruiter/ATS clean) | 'modern' | 'midnight' | 'terminal'
    Old profiles without experience/education/resume still render (empty states everywhere). */
 window.PortfoolioResume = (() => {
   const THEMES = [
-    { id: 'ats', name: 'ATS Clean', desc: 'Black on white, parser-safe', emoji: '📄', best: 'Job applications' },
+    { id: 'ats', name: 'ATS Clean', desc: 'Black on white, parser-safe, standard headings', emoji: '📄', best: 'Job applications' },
     { id: 'modern', name: 'Modern', desc: 'Light card, soft + clean', emoji: '✨', best: 'General use' },
     { id: 'midnight', name: 'Midnight', desc: 'Dark neon, on-brand', emoji: '🌌', best: 'Match portfolio' },
     { id: 'terminal', name: 'Terminal', desc: 'Mono green, dev cred', emoji: '💻', best: 'Backend • OSS' },
@@ -12,7 +12,13 @@ window.PortfoolioResume = (() => {
   const VALID = new Set(THEMES.map((t) => t.id));
 
   function esc(s) {
-    return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    return String(s ?? '').replace(/[&<>"']/g, (c) => {
+      if (c === '&') return '&';
+      if (c === '<') return '<';
+      if (c === '>') return '>';
+      if (c === '"') return '"';
+      return '\'';
+    });
   }
   function get(p) {
     const r = (p && p.resume && typeof p.resume === 'object') ? p.resume : {};
@@ -23,6 +29,17 @@ window.PortfoolioResume = (() => {
   }
   function expOf(p) { return Array.isArray(p.experience) ? p.experience.filter(Boolean) : []; }
   function eduOf(p) { return Array.isArray(p.education) ? p.education.filter(Boolean) : []; }
+  function certOf(p) { return Array.isArray(p.certifications) ? p.certifications.filter(Boolean) : []; }
+  function splitSkills(skills) {
+    const hard = [], soft = [];
+    const softList = new Set(['communication','leadership','teamwork','problem solving','critical thinking','adaptability','time management','creativity','collaboration','attention to detail','organization','interpersonal']);
+    skills.forEach((s) => {
+      const k = String(s || '').trim().toLowerCase();
+      if (softList.has(k)) soft.push(s);
+      else hard.push(s);
+    });
+    return { hard, soft };
+  }
   function dateLine(e) {
     const s = String(e.start || '').trim(), en = e.current ? 'Present' : String(e.end || '').trim();
     return [s, en].filter(Boolean).join(' – ') || '';
@@ -32,8 +49,8 @@ window.PortfoolioResume = (() => {
     if (p.email) out.push(`<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>`);
     if (p.phone) out.push(`<span>${esc(p.phone)}</span>`);
     if (p.location) out.push(`<span>${esc(p.location)}</span>`);
-    if (p.github) out.push(`<a href="${esc(p.github)}" target="_blank" rel="noopener">GitHub</a>`);
     if (p.linkedin) out.push(`<a href="${esc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`);
+    if (p.github) out.push(`<a href="${esc(p.github)}" target="_blank" rel="noopener">GitHub</a>`);
     return out;
   }
   function techsOf(pr) {
@@ -56,19 +73,26 @@ window.PortfoolioResume = (() => {
   // Full resume body (shared by embedded section preview, standalone page, worker mirror)
   function docBody(p) {
     const r = get(p);
+    const isATS = r.theme === 'ats';
     const summary = r.summary || p.tagline || '';
-    const exps = expOf(p), edus = eduOf(p);
+    const exps = expOf(p), edus = eduOf(p), certs = certOf(p);
     const skills = (p.skills || []).filter(Boolean);
+    const { hard, soft } = splitSkills(skills);
     const projs = (p.projects || []).slice(0, 6);
     const sec = (t) => `<h2 class="rs-sec-h">${t}</h2>`;
+    const contact = contactItems(p).join(' | ');
     return `
     <div class="rs-head">
       <h1 class="rs-name">${esc(p.name || p.username || 'Your Name')}</h1>
       <p class="rs-title">${esc(p.title || '')}</p>
-      <p class="rs-contact">${contactItems(p).join(' &nbsp;•&nbsp; ')}</p>
+      <p class="rs-contact">${contact}</p>
     </div>
-    ${summary ? `${sec('Summary')}<p class="rs-p">${esc(summary)}</p>` : ''}
-    ${skills.length ? `${sec('Skills')}<p class="rs-p">${skills.map(esc).join(' • ')}</p>` : ''}
+    ${summary ? `${sec('Professional Summary')}<p class="rs-p">${esc(summary)}</p>` : ''}
+    ${skills.length ? `
+      ${sec('Skills')}
+      ${hard.length ? `<p class="rs-p"><strong>Technical Skills:</strong> ${hard.map(esc).join(', ')}</p>` : ''}
+      ${soft.length ? `<p class="rs-p"><strong>Soft Skills:</strong> ${soft.map(esc).join(', ')}</p>` : ''}
+    ` : ''}
     ${sec('Experience')}
     ${exps.length ? exps.map((e) => `
       <div class="rs-item">
@@ -81,6 +105,10 @@ window.PortfoolioResume = (() => {
         <div class="rs-item-top"><b>${esc(e.school || '')}</b><span class="rs-dates">${esc([e.start, e.end].filter(Boolean).join(' – '))}</span></div>
         <p class="rs-p">${esc([e.degree, e.field].filter(Boolean).join(', '))}</p>
       </div>`).join('') : '<p class="rs-p rs-dim">Add education from your dashboard → Resume tab.</p>'}
+    ${certs.length ? `
+      ${sec('Certifications')}
+      ${certs.map((c) => `<p class="rs-p">${esc(c.name || c)}</p>`).join('')}
+    ` : ''}
     ${projs.length ? `${sec('Projects')}${projs.map((pr) => {
       const t = techsOf(pr);
       return `<div class="rs-item"><div class="rs-item-top"><b>${esc(pr.title)}</b>${pr.url && pr.url !== '#' ? `<a href="${esc(pr.url)}" target="_blank" rel="noopener">Code →</a>` : ''}</div>
@@ -137,5 +165,5 @@ ${o.bare ? '' : `<div class="no-print" style="text-align:center;padding:0 0 40px
 </body></html>`;
   }
 
-  return { THEMES, get, expOf, eduOf, resumeURL, docBody, sectionHTML, fullDoc, esc };
+  return { THEMES, get, expOf, eduOf, certOf, resumeURL, docBody, sectionHTML, fullDoc, esc };
 })();

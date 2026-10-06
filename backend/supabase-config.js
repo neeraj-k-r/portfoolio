@@ -71,6 +71,7 @@ async function cloudSaveProfile(p) {
     skills: p.skills || [], projects: p.projects || [], available: p.available !== false,
     experience: Array.isArray(p.experience) ? p.experience.slice(0, 20) : [],
     education: Array.isArray(p.education) ? p.education.slice(0, 10) : [],
+    certifications: Array.isArray(p.certifications) ? p.certifications.slice(0, 10) : [],
     resume: (p.resume && typeof p.resume === 'object') ? p.resume : {},
     status: (existing && existing.status) || 'approved',
     // prebuilt-upload hosting: explicit value on p wins, else keep what is live
@@ -88,7 +89,7 @@ async function cloudSaveProfile(p) {
   // the whole upsert, which would lose ALL edits. Retry once with core fields
   // only — a partial save beats no save. Owner fix: re-run supabase-schema.sql.
   if (isMissingColumnError(res.error)) {
-    const { experience, education, resume, site_type, site_path, site_updated_at, show_instagram, ...core } = row;
+    const { experience, education, certifications, resume, site_type, site_path, site_updated_at, show_instagram, ...core } = row;
     const retry = await sb.from('profiles').upsert(core, { onConflict: 'user_id' });
     if (!retry.error) return { ...core, _partial: true };
   }

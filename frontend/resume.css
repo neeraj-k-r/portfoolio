@@ -14,7 +14,7 @@
 .rs-dim{opacity:.6;font-size:13px}
 .rs-foot{margin-top:26px;font-size:11.5px;opacity:.55;text-align:center}
 
-/* ATS — parser-safe: plain white, system font, zero decoration */
+/* ATS — parser-safe: plain white, system font, zero decoration, standard headings */
 .rs-ats{background:#fff;color:#111;color-scheme:light}
 body.rs-page.rs-ats{background:#e8eaf0}
 .rs-ats .rs-name{font-family:Arial,Helvetica,sans-serif;font-size:30px}
@@ -22,6 +22,7 @@ body.rs-page.rs-ats{background:#e8eaf0}
 .rs-ats .rs-contact{font-family:Arial,Helvetica,sans-serif;color:#222}
 .rs-ats .rs-sec-h{font-family:Arial,Helvetica,sans-serif;border-bottom-color:#111}
 .rs-ats a{color:#111}
+.rs-ats strong{font-weight:700}
 
 /* Modern — soft light card */
 .rs-modern{background:#fff;color:#0f172a;border:1px solid rgba(15,23,42,.12);box-shadow:0 18px 50px rgba(15,23,42,.12)}
@@ -66,4 +67,7 @@ body.rs-page.rs-terminal{background:#050805;color:#d1fae5}
   .rs-doc a{text-decoration:none !important}
   .rs-sec-h{border-bottom-color:#111 !important}
   .rs-name{font-size:26px !important}
+  .rs-ats .rs-name{font-family:Arial,Helvetica,sans-serif !important}
+  .rs-ats .rs-title{font-family:Arial,Helvetica,sans-serif !important}
+  .rs-ats .rs-contact{font-family:Arial,Helvetica,sans-serif !important}
 }
