@@ -396,9 +396,9 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <h3>📄 Resume — auto-built from your info</h3>
         <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Name, contact, skills & projects are reused automatically. Add your summary, experience & education below, pick a theme, and share a recruiter-ready page + print-to-PDF.</p>
         <div style="background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.3);border-radius:12px;padding:12px 14px;margin-bottom:14px">
-          <label class="flabel"><i class="fa-brands fa-linkedin"></i> Import from LinkedIn</label>
-          <p style="color:var(--muted);font-size:12.5px;margin-bottom:8px">LinkedIn blocks auto-fetch, so copy your About + Experience + Education text from your LinkedIn profile, paste it below, and hit Parse &amp; Fill. Review the preview, then Save Changes to publish.</p>
-          <textarea id="liPaste" rows="4" placeholder="Paste LinkedIn profile text here… or type guided lines:&#10;Headline: Full-Stack Developer&#10;Role @ Company | Jun 2024 - Present&#10;- an achievement&#10;CUSAT | B.Tech, Computer Science | 2022 - 2026"></textarea>
+          <label class="flabel"><i class="fa-solid fa-paste"></i> Quick fill from pasted text</label>
+          <p style="color:var(--muted);font-size:12.5px;margin-bottom:8px">Paste your About + Experience + Education text from anywhere (resume, profile or portfolio doc) below, and hit Parse &amp; Fill. Review the preview, then Save Changes to publish.</p>
+          <textarea id="liPaste" rows="4" placeholder="Paste your profile text here… or type guided lines:&#10;Headline: Full-Stack Developer&#10;Role @ Company | Jun 2024 - Present&#10;- an achievement&#10;CUSAT | B.Tech, Computer Science | 2022 - 2026"></textarea>
           <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
             <button type="button" class="btn btn-ghost btn-sm" id="liParseBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Parse &amp; Fill resume</button>
             <button type="button" class="btn btn-ghost btn-sm" id="liSampleBtn"><i class="fa-solid fa-flask"></i> Try a sample</button>
@@ -1137,7 +1137,7 @@ if ($('rsPrintBtn')) $('rsPrintBtn').onclick = () => {
   if (!activeUserProfile || !activeUserProfile.username) return toast('❌ Nothing to print yet');
   open((window.PortfoolioResume ? PortfoolioResume.resumeURL(activeUserProfile.username) : '/'), '_blank');
 };
-// ---- LinkedIn paste-import (resume fields; profile sections come next) ----
+// ---- Pasted-text quick-fill (resume fields; profile sections come next) ----
 if ($('liSampleBtn')) $('liSampleBtn').onclick = () => {
   if ($('liPaste')) $('liPaste').value =
 `Headline: Full-Stack Developer
@@ -1168,7 +1168,7 @@ if ($('liParseBtn')) $('liParseBtn').onclick = () => {
   const LI = window.PortfoolioLinkedIn;
   if (!LI) return toast('❌ Import engine failed to load — check connection and reload');
   const raw = (($('liPaste') || {}).value || '').trim();
-  if (!raw) return toast('❌ Paste your LinkedIn text first');
+  if (!raw) return toast('❌ Paste your profile text first');
   const parsed = LI.parseLinkedInText(raw);
   const p = activeUserProfile;
   draftResume();
