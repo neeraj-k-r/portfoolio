@@ -5,7 +5,7 @@ Give your name + details, get a wow portfolio on **yourname.portfoolio.me**.
 Live: https://portfoolio.me (Netlify + Namecheap) • Demo: https://portfoolio.me/?u=neerajkr
 
 ## Repo layout
-- `frontend/` — everything visitors see: landing, auth, dashboards, templates, seed profiles. (`index.html`, `admin.html`, `app.js`, `templates.js`, `style.css`, `templates.css`, `profiles/`)
+- `frontend/` — everything visitors see: landing, auth, dashboards, templates, seed profiles. (`index.html`, `admin.html`, `app.js`, `templates.js`, `style.css`, `templates.css`, `resume.js`, `resume.css`, `profiles/`)
 - `backend/` — server + data layer: Cloudflare Worker, wrangler config, Supabase config/helpers/schema.
 - `netlify.toml` (root) — publishes repo root and rewrites all page URLs into `frontend/`; `/backend/*` files serve directly.
 
@@ -59,7 +59,8 @@ Sites publish instantly; use the admin console to reject/delete spam. Existing `
 
 ## Identity (email permanent, socials stored + shown)
 - Email is locked to the signup account: `cloudSaveProfile` always writes `auth.users.email`, editor shows it read-only.
-- Phone, LinkedIn, Instagram (`instagram` column, `@handle` auto-normalized to URL) save from wizard + editor and render on midnight, all 6 theme renderers, and worker subdomains.
+- Phone, LinkedIn, Instagram (`instagram` column, `@handle` auto-normalized to URL) save from wizard + editor and render on midnight, all 10 theme renderers, and worker subdomains.
+- **Instagram visibility toggle**: users choose whether to show Instagram on their portfolio (checkbox in Profile Info + Claim form, default ON). Respected by all 10 themes, worker subdomains, and footer socials.
 
 ## Prebuilt upload hosting (bring your own site)
 - User Dashboard → **Upload Site** tab: drop a `.zip` (with `index.html` at root, or inside one folder like `dist/`) or a single `.html` file. Limits: ZIP ≤ 20MB, ≤ 200 files, each ≤ 8MB, no executables.
@@ -68,15 +69,16 @@ Sites publish instantly; use the admin console to reject/delete spam. Existing `
 - Revert anytime with **Use builder theme instead** (builder data is kept; `site_type` back to `'builder'`). Owner one-time setup: re-run `backend/supabase-schema.sql` (creates the bucket + `site_type`/`site_path` columns + storage policies), then `npx wrangler deploy`.
 
 ## Resume section (auto-built from profile info, 4 themes)
-- Data model: NO new tables. `profiles.experience[]` (`{role, company, start, end, current, desc}` — one achievement per line), `profiles.education[]` (`{school, degree, field, start, end}`), `profiles.resume{}` (`{summary, theme}`). Name, contact, skills & projects are reused — manage info once.
+- Data model: NO new tables. `profiles.experience[]` (`{role, company, start, end, current, desc}` — one achievement per line), `profiles.education[]` (`{school, degree, field, start, end}`), `profiles.certifications[]` (`{name, issuer, year, url}`), `profiles.resume{}` (`{summary, theme}`). Name, contact, skills & projects are reused — manage info once.
+- **ATS-friendly template** (default 📄 `ats`): standard headings (Professional Summary, Technical Skills / Soft Skills, Experience, Education, Certifications, Projects), contact line uses `|` separators, auto-splits skills into Technical vs Soft, print output normalizes to clean ATS format on all themes.
 - Themes (`resume.theme`, picked in signup form + Resume tab): 📄 `ats` (default — white, system font, parser-safe for job applications), ✨ `modern` (light card), 🌌 `midnight` (dark neon), 💻 `terminal` (mono green). Print CSS normalizes every theme to clean ATS output.
 - Public: every portfolio template (all 10) gains a Resume section linking to the full page; full page at `?u=x&resume=1`, `/u/x/resume`, and `username.portfoolio.me/resume` with a Print / Save-as-PDF button (no server PDF needed).
-- Dashboard: **Resume** tab (summary, theme radios, experience/education add/remove, live iframe preview, open/print buttons) + resume link in Share tab. Old profiles without the new fields render with empty-state hints.
+- Dashboard: **Resume** tab (summary, theme radios, experience/education/certifications add/remove, live iframe preview, open/print buttons) + resume link in Share tab. Old profiles without the new fields render with empty-state hints.
 - Files: `frontend/resume.js` (normalizer + section + full doc) + `frontend/resume.css` (themes + print); worker mirrors the renderer server-side (same pattern as skill evidence). Owner setup: re-run `backend/supabase-schema.sql`, then `npx wrangler deploy`.
 
-## LinkedIn import (paste, not fetch — LinkedIn blocks auto-fetch)
-- No public LinkedIn API exists and LinkedIn blocks scraping (login wall + CORS), so there is no fetch-by-URL: user copies About + Experience + Education text from LinkedIn into Resume tab → **Parse & Fill**.
-- Parser (`frontend/linkedin-import.js`, pure + tested via `node frontend/linkedin-import.test.mjs`): labeled lines (`Headline:`/`Location:`/`Skills:`/`Role @ Company | dates`/`School | Degree | years`) anywhere in the paste, plus best-effort LinkedIn section (`Experience`/`Education`) + date-range detection. Fills resume fields (summary if empty, new roles/schools deduped) AND normal sections (empty title/tagline/location, merged skills ≤12). Everything still needs **Save Changes** to publish.
+## Pasted-text quick fill (resume fields)
+- Renamed from "LinkedIn import" — works with any pasted profile text (resume, portfolio doc, LinkedIn, etc.).
+- Parser (`frontend/linkedin-import.js`, pure + tested via `node frontend/linkedin-import.test.mjs`): labeled lines (`Headline:`/`Location:`/`Skills:`/`Role @ Company | dates`/`School | Degree | years`) anywhere in the paste, plus best-effort section (`Experience`/`Education`) + date-range detection. Fills resume fields (summary if empty, new roles/schools deduped) AND normal sections (empty title/tagline/location, merged skills ≤12). Everything still needs **Save Changes** to publish.
 
 ## Profile photos (Cloudinary, free)
 1. Cloudinary dashboard → Settings → Upload → Upload presets → Add new, Signing Mode **Unsigned** → copy cloud name + preset.
@@ -94,3 +96,20 @@ Sites publish instantly; use the admin console to reject/delete spam. Existing `
 - 🟣 `ultraviolet` *fresh* — violet haze neon → `?u=iris`
 - 🪼 `tidepool` *fresh* — abyss glow → `?u=kai`
 - Files: `frontend/templates.css` (themes) + `frontend/templates.js` (renderers) hooked in `app.js`.
+
+## Key files
+| File | Purpose |
+|------|---------|
+| `frontend/index.html` | Landing + builder + user dashboard (all tabs) |
+| `frontend/app.js` | Router, renderers (midnight default + helpers), GitHub sync, evidence |
+| `frontend/templates.js` | 9 non-midnight theme renderers |
+| `frontend/templates.css` | Theme styles |
+| `frontend/resume.js` | Resume builder (docBody, sectionHTML, fullDoc, themes) |
+| `frontend/resume.css` | Resume theme styles + print normalization |
+| `frontend/evidence.js` | Skill↔Project derivation (shared pure functions) |
+| `frontend/linkedin-import.js` | Paste parser for resume quick-fill |
+| `frontend/cloudinary-config.js` | Cloudinary unsigned upload config |
+| `backend/worker.js` | Cloudflare Worker for `*.portfoolio.me/*` (reads Supabase, serves uploads, mirrors all renderers) |
+| `backend/supabase-config.js` | Browser Supabase client + helpers (save, upload, avatar, etc.) |
+| `backend/supabase-schema.sql` | Idempotent schema (profiles, admins, storage bucket, RLS policies) |
+| `backend/wrangler.toml` | Worker config + route `*.portfoolio.me/*` |
