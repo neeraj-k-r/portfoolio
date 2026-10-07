@@ -232,6 +232,18 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
 .f-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;transition:all .3s}
 .feature-arrow{position:absolute;bottom:24px;right:24px;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--stroke);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(-10px);transition:all .3s}
 
+/* Auth form enhancements */
+.input-wrapper{position:relative}
+.input-wrapper.focused input{border-color:#6c6cf5;box-shadow:0 0 0 3px rgba(108,108,245,.25)}
+.input-wrapper .input-icon{transition:color .2s}
+.input-wrapper.focused .input-icon{color:#22d3ee}
+.toggle-pass:hover{color:#fff !important}
+.toggle-pass:focus{outline:none}
+.auth-card{border-radius:24px}
+
+/* Demo link hover */
+.auth-card .btn-ghost:hover{background:rgba(108,108,245,.15);border-color:#6c6cf5;color:#22d3ee}
+
 .steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
 .step-card{background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:24px;position:relative}
 .step-num{font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:800;color:rgba(108,108,245,.4);margin-bottom:8px}

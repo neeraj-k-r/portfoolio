@@ -260,36 +260,61 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 
   <!-- Auth Section (Sign Up / Log In) - NO CLAIM SUBDOMAIN FORM HERE -->
   <section id="auth" class="wrap" style="padding-top:20px">
-    <div class="two" style="grid-template-columns:.9fr 1.1fr;align-items:center">
-      <div>
+    <div class="auth-layout" style="display:grid;grid-template-columns:1.1fr .9fr;gap:32px;align-items:start">
+      <div class="auth-promo" style="position:relative;padding:24px">
+        <div class="auth-promo-glow" style="position:absolute;inset:-20%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(108,108,245,.12),rgba(34,211,238,.12),transparent 85%);border-radius:50%;opacity:.6;animation:spin 8s linear infinite"></div>
         <span class="eyebrow">● Access Platform</span>
-        <h2 class="title">Log in or <span class="grad">sign up</span></h2>
-        <p class="lead">Sign up to claim your subdomain or log in to access your customized dashboard.</p>
-        <div class="hl-list">
-          <div class="hl"><i class="fa-solid fa-user-check"></i><div><b>Instant Account Access:</b> Manage your profile, themes, and GitHub repos anytime.</div></div>
-          <div class="hl"><i class="fa-solid fa-shield-halved"></i><div><b>Role-Based Dashboards:</b> Separate tailored experiences for users and administrators.</div></div>
+        <h2 class="title" style="margin-top:8px">Log in or <span class="grad">sign up</span></h2>
+        <p class="lead" style="margin-top:12px">Sign up to claim your subdomain or log in to access your customized dashboard.</p>
+        <div class="hl-list" style="margin-top:24px">
+          <div class="hl" style="background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:14px;padding:14px 16px;font-size:14.5px;display:flex;gap:14px;align-items:flex-start">
+            <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#6c6cf5,#22d3ee);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid fa-rocket" style="color:#fff;font-size:16px"></i></div>
+            <div><b>Instant Setup:</b> Claim your subdomain and go live in under 60 seconds.</div>
+          </div>
+          <div class="hl" style="background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:14px;padding:14px 16px;font-size:14.5px;display:flex;gap:14px;align-items:flex-start;margin-top:10px">
+            <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#22d3ee,#a3e635);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid fa-palette" style="color:#fff;font-size:16px"></i></div>
+            <div><b>10 Themes:</b> Switch between Midnight, Minimal, Terminal, Creative, Aurora, Editorial, Brutalist, Afterglow, Ultraviolet, Tidepool.</div>
+          </div>
+          <div class="hl" style="background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:14px;padding:14px 16px;font-size:14.5px;display:flex;gap:14px;align-items:flex-start;margin-top:10px">
+            <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#a3e635,#84cc16);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-brands fa-github" style="color:#fff;font-size:16px"></i></div>
+            <div><b>GitHub Sync:</b> Auto-import repos with stars, tags, and descriptions in one click.</div>
+          </div>
+          <div class="hl" style="background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:14px;padding:14px 16px;font-size:14.5px;display:flex;gap:14px;align-items:flex-start;margin-top:10px">
+            <div style="width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#f472b6,#fbbf24);display:flex;align-items:center;justify-content:center;flex-shrink:0"><i class="fa-solid fa-file-lines" style="color:#fff;font-size:16px"></i></div>
+            <div><b>ATS Resume:</b> Auto-generated from your profile — print to PDF instantly.</div>
+          </div>
         </div>
       </div>
-      <div class="card">
-        <div class="auth-tabs">
-          <button class="auth-tab active" id="tabSignup" type="button">Sign up</button>
-          <button class="auth-tab" id="tabLogin" type="button">Log in</button>
+      <div class="card auth-card" style="position:relative;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid var(--stroke);border-radius:24px;padding:32px;box-shadow:var(--shadow)">
+        <div class="auth-tabs" style="display:flex;gap:8px;margin-bottom:24px;background:rgba(255,255,255,.04);border-radius:12px;padding:4px">
+          <button class="auth-tab active" id="tabSignup" type="button" style="flex:1;padding:12px 20px;border-radius:10px;border:1px solid transparent;background:rgba(255,255,255,.04);color:var(--muted);font-weight:700;font-size:14px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px"><i class="fa-solid fa-user-plus"></i> Sign up</button>
+          <button class="auth-tab" id="tabLogin" type="button" style="flex:1;padding:12px 20px;border-radius:10px;border:1px solid transparent;background:rgba(255,255,255,.04);color:var(--muted);font-weight:700;font-size:14px;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px"><i class="fa-solid fa-right-to-bracket"></i> Log in</button>
         </div>
         <div id="authCloudOff" style="display:none">
-          <p>Cloud login is inactive — enter credentials below to continue to your dashboard:</p>
+          <p style="color:var(--muted);font-size:13.5px;margin-bottom:16px">Cloud login is inactive — enter credentials below to continue to your dashboard:</p>
         </div>
         <div id="authCloudOn">
-          <div><label class="flabel">Email Address</label><input id="authEmail" type="email" placeholder="you@gmail.com"></div>
-          <div style="margin-top:10px"><label class="flabel">Password (min 6 characters)</label><input id="authPass" type="password" placeholder="••••••••"></div>
-          <button class="btn btn-primary" id="authGoBtn" style="margin-top:14px;width:100%;justify-content:center"><i class="fa-solid fa-right-to-bracket"></i> <span id="authGoLabel">Create account</span></button>
-          <p class="mono" id="authMsg" style="font-size:12.5px;color:var(--muted);margin-top:10px"></p>
-        </div>
-        <details style="margin-top:14px;border-top:1px solid var(--stroke);padding-top:12px">
-          <summary style="cursor:pointer;font-weight:700;font-size:12.5px;color:var(--muted)">Explore a demo portfolio (no login)</summary>
-          <div style="display:grid;gap:8px;margin-top:10px">
-            <a class="btn btn-ghost btn-sm" href="/?u=demo"><i class="fa-solid fa-user"></i> View demo portfolio</a>
+          <div style="margin-bottom:16px">
+            <label class="flabel" style="display:block;font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Email Address</label>
+            <div class="input-wrapper" style="position:relative">
+              <input id="authEmail" type="email" placeholder="you@gmail.com" style="width:100%;background:rgba(0,0,0,.35);border:1px solid var(--stroke);border-radius:12px;padding:14px 16px;color:#fff;font-family:inherit;font-size:15px;transition:border-color .2s,box-shadow .2s">
+              <i class="fa-solid fa-envelope input-icon" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;font-size:16px"></i>
+            </div>
           </div>
-        </details>
+          <div style="margin-bottom:16px">
+            <label class="flabel" style="display:block;font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Password</label>
+            <div class="input-wrapper" style="position:relative">
+              <input id="authPass" type="password" placeholder="••••••••" style="width:100%;background:rgba(0,0,0,.35);border:1px solid var(--stroke);border-radius:12px;padding:14px 16px;color:#fff;font-family:inherit;font-size:15px;transition:border-color .2s,box-shadow .2s">
+              <button type="button" id="togglePass" class="toggle-pass" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;padding:4px;font-size:16px;transition:color .2s" aria-label="Toggle password visibility"><i class="fa-solid fa-eye"></i></button>
+            </div>
+          </div>
+          <button class="btn btn-primary" id="authGoBtn" style="margin-top:20px;width:100%;justify-content:center;padding:14px 24px;font-size:15px;font-weight:700;border-radius:12px;background:linear-gradient(135deg,#6c6cf5,#22d3ee);border:none;box-shadow:0 8px 24px rgba(108,108,245,.3);transition:transform .2s,box-shadow .2s"><i class="fa-solid fa-right-to-bracket"></i> <span id="authGoLabel">Create account</span></button>
+          <p class="mono" id="authMsg" style="font-size:12.5px;color:var(--muted);margin-top:14px;text-align:center;min-height:20px"></p>
+        </div>
+        <div style="margin-top:20px;padding-top:20px;border-top:1px solid var(--stroke);text-align:center">
+          <p style="color:var(--muted);font-size:13px;margin-bottom:10px">Want to see it first?</p>
+          <a class="btn btn-ghost btn-sm" href="/?u=demo" style="display:inline-flex;align-items:center;gap:8px"><i class="fa-solid fa-eye"></i> View demo portfolio</a>
+        </div>
       </div>
     </div>
   </section>
@@ -705,6 +730,35 @@ function setAuthMode(mode) {
   if($('authGoLabel')) $('authGoLabel').textContent = mode === 'signup' ? 'Create account' : 'Log in';
   if($('authMsg')) $('authMsg').textContent = mode === 'signup' ? 'New here? Create your account, then claim your subdomain.' : 'Welcome back — enter your email & password to log in.';
 }
+
+// Password visibility toggle
+if($('togglePass')) {
+  $('togglePass').addEventListener('click', function() {
+    const passInput = $('authPass');
+    const icon = this.querySelector('i');
+    if(passInput.type === 'password') {
+      passInput.type = 'text';
+      icon.classList.remove('fa-eye');
+      icon.classList.add('fa-eye-slash');
+    } else {
+      passInput.type = 'password';
+      icon.classList.remove('fa-eye-slash');
+      icon.classList.add('fa-eye');
+    }
+  });
+}
+
+// Auth tab click handlers (attach after DOM ready)
+document.addEventListener('DOMContentLoaded', () => {
+  if($('tabSignup')) $('tabSignup').addEventListener('click', () => setAuthMode('signup'));
+  if($('tabLogin')) $('tabLogin').addEventListener('click', () => setAuthMode('login'));
+  
+  // Input focus effects
+  document.querySelectorAll('.input-wrapper input').forEach(input => {
+    input.addEventListener('focus', () => input.parentElement.classList.add('focused'));
+    input.addEventListener('blur', () => input.parentElement.classList.remove('focused'));
+  });
+});
 
 function switchUserTab(tabName) {
   ['info', 'theme', 'projects', 'resume', 'upload', 'proof', 'share'].forEach(t => {
