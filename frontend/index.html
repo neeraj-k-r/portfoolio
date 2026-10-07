@@ -76,13 +76,70 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <div class="hero-meta mono" style="font-size:13px">Free subdomain &nbsp;•&nbsp; 10 themes &nbsp;•&nbsp; GitHub sync &nbsp;•&nbsp; Mobile ready</div>
       </div>
       <div class="visual">
-        <div class="avatar-card">
-          <div class="avatar-inner" style="text-align:left">
-            <p class="mono" style="font-size:12px;color:#22d3ee">$ your developer home</p>
-            <div class="mono" style="font-size:26px;font-weight:700;margin:8px 0"><span id="livePrev" style="color:#fff">yourname</span><span style="color:#6b7594">.portfoolio.me</span></div>
-            <p style="color:var(--muted);font-size:13.5px">Sign up or log in below to access your dashboard, claim your custom subdomain, and publish your portfolio in seconds.</p>
-            <div class="badges" style="justify-content:flex-start"><span class="badge">⚡ 60s setup</span><span class="badge">🔒 SSL included</span><span class="badge">🎨 10 themes</span></div>
-            <a class="btn btn-primary btn-sm" href="#auth" onclick="setAuthMode('signup')" style="margin-top:8px">Get started →</a>
+        <div class="avatar-card" style="position:relative">
+          <div class="hero-preview" id="heroPreview" style="
+            position:relative;
+            border-radius:20px;
+            overflow:hidden;
+            background:linear-gradient(180deg, rgba(11,18,38,.95) 0%, rgba(7,11,22,.98) 100%);
+            border:1px solid var(--stroke);
+            box-shadow:var(--shadow);
+            min-height:380px;
+            display:flex;
+            flex-direction:column;
+          ">
+            <!-- Preview header -->
+            <div style="
+              display:flex;align-items:center;justify-content:space-between;
+              padding:16px 20px;border-bottom:1px solid var(--stroke);
+              background:rgba(255,255,255,.03);
+            ">
+              <div style="display:flex;gap:8px">
+                <div style="width:12px;height:12px;border-radius:50%;background:#ff5f57"></div>
+                <div style="width:12px;height:12px;border-radius:50%;background:#febc2e"></div>
+                <div style="width:12px;height:12px;border-radius:50%;background:#28c840"></div>
+              </div>
+              <div class="mono" style="font-size:12px;color:#6b7594">yourname.portfoolio.me</div>
+              <div style="width:12px;height:12px"></div>
+            </div>
+            <!-- Preview content -->
+            <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 20px;text-align:center">
+              <div class="preview-avatar" style="
+                width:100px;height:100px;border-radius:50%;
+                background:linear-gradient(135deg,#6c6cf5,#22d3ee);
+                margin:0 auto 16px;
+                display:flex;align-items:center;justify-content:center;
+                font-size:42px;color:#fff;
+                box-shadow:0 0 40px rgba(108,108,245,.4);
+              ">Y</div>
+              <h2 style="font-size:clamp(28px,5vw,40px);margin-bottom:8px;background:linear-gradient(135deg,#fff,#22d3ee,#a3e635);-webkit-background-clip:text;background-clip:text;color:transparent">Your Name</h2>
+              <p style="color:#22d3ee;font-size:18px;margin-bottom:6px;font-weight:600">Full-Stack Developer & AI Engineer</p>
+              <p style="color:var(--muted);font-size:15px;max-width:400px;margin-bottom:24px">Building scalable web apps & AI solutions. Open to opportunities.</p>
+              <div class="preview-links" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:20px">
+                <a href="#" class="preview-link" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,255,255,.08);border:1px solid var(--stroke);border-radius:10px;color:#c6ccea;font-size:13.5px;font-weight:600;transition:all .2s"><i class="fa-brands fa-github"></i> GitHub</a>
+                <a href="#" class="preview-link" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,255,255,.08);border:1px solid var(--stroke);border-radius:10px;color:#c6ccea;font-size:13.5px;font-weight:600"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                <a href="#" class="preview-link" style="display:flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(255,255,255,.08);border:1px solid var(--stroke);border-radius:10px;color:#c6ccea;font-size:13.5px;font-weight:600"><i class="fa-solid fa-envelope"></i> Email</a>
+              </div>
+              <div class="preview-skills" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+                <span class="preview-badge">React</span>
+                <span class="preview-badge">TypeScript</span>
+                <span class="preview-badge">Node.js</span>
+                <span class="preview-badge">Python</span>
+                <span class="preview-badge">PostgreSQL</span>
+                <span class="preview-badge">Docker</span>
+              </div>
+            </div>
+            <!-- Preview footer with theme indicator -->
+            <div style="display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 20px;border-top:1px solid var(--stroke);background:rgba(255,255,255,.02)">
+              <span class="mono" style="font-size:11px;color:#6b7594">Theme:</span>
+              <div class="theme-indicators" style="display:flex;gap:6px">
+                <div class="theme-dot active" data-theme="midnight" style="width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#6c6cf5,#22d3ee);box-shadow:0 0 10px #6c6cf5"></div>
+                <div class="theme-dot" data-theme="minimal" style="width:10px;height:10px;border-radius:50%;background:#e8eaf0;border:1px solid var(--stroke)"></div>
+                <div class="theme-dot" data-theme="terminal" style="width:10px;height:10px;border-radius:50%;background:#0a0f0a;border:1px solid #166534"></div>
+                <div class="theme-dot" data-theme="creative" style="width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,#f472b6,#8b5cf6)"></div>
+              </div>
+              <span class="mono" style="font-size:11px;color:#6b7594">10 themes available</span>
+            </div>
           </div>
         </div>
       </div>

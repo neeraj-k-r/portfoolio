@@ -390,6 +390,35 @@ function renderResumePage(p) {
 
 // ---- Boot ----
 document.addEventListener('DOMContentLoaded', async () => {
+  // Landing page: hero preview theme switcher
+  const heroPreview = document.getElementById('heroPreview');
+  if (heroPreview) {
+    document.querySelectorAll('.theme-dot').forEach(dot => {
+      dot.addEventListener('click', () => {
+        document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+        dot.classList.add('active');
+        const theme = dot.dataset.theme;
+        const avatars = {
+          midnight: { bg: 'linear-gradient(135deg,#6c6cf5,#22d3ee)', label: 'Y', color: '#fff' },
+          minimal: { bg: '#e8eaf0', label: 'Y', color: '#1e293b' },
+          terminal: { bg: '#0a0f0a', label: '>', color: '#4ade80' },
+          creative: { bg: 'linear-gradient(135deg,#f472b6,#8b5cf6)', label: 'Y', color: '#fff' },
+        };
+        const avatar = heroPreview.querySelector('.preview-avatar');
+        if (avatar && avatars[theme]) {
+          avatar.style.background = avatars[theme].bg;
+          avatar.textContent = avatars[theme].label;
+          avatar.style.color = avatars[theme].color;
+        }
+        // Update theme indicators
+        document.querySelectorAll('.theme-dot').forEach(d => {
+          d.style.transform = d === dot ? 'scale(1.25)' : 'scale(1)';
+          d.style.boxShadow = d === dot ? '0 0 12px currentColor' : 'none';
+        });
+      });
+    });
+  }
+
   const resumeUser = getResumeUser();
   const requested = resumeUser || getRequestedUser();
   if (!requested) return; // landing view stays
