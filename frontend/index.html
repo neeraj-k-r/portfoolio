@@ -195,27 +195,35 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
     <span class="eyebrow">● Built for Developers</span>
     <h2 class="title">Everything you need to <span class="grad">stand out</span></h2>
     <p class="lead">Stop sending plain PDF resumes. Build a developer homepage that recruiters and hiring managers love.</p>
-    <div class="features-grid">
-      <div class="feature-card">
-        <div class="f-icon"><i class="fa-solid fa-globe"></i></div>
-        <h3>Personal Subdomain</h3>
-        <p>Get your own clean <b>username.portfoolio.me</b> address with instant SSL security and mobile optimization.</p>
-      </div>
-      <div class="feature-card">
-        <div class="f-icon"><i class="fa-solid fa-palette"></i></div>
-        <h3>4 Wow Themes</h3>
-        <p>Midnight Wow, Minimal Clean, Terminal Hacker, or Creative Pop — switch designs with a single click anytime.</p>
-      </div>
-      <div class="feature-card">
-        <div class="f-icon"><i class="fa-brands fa-github"></i></div>
-        <h3>1-Click GitHub Sync</h3>
-        <p>Auto-load your public repositories, star counts, tags, and project descriptions without manual entry.</p>
-      </div>
-      <div class="feature-card">
-        <div class="f-icon"><i class="fa-solid fa-shield-halved"></i></div>
-        <h3>Verified Publishing</h3>
-        <p>Admin-reviewed portfolio directory guarantees spam-free quality, high performance, and recruiter trust.</p>
-      </div>
+    <div class="features-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:32px">
+      <article class="feature-card" style="position:relative;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid var(--stroke);border-radius:20px;padding:28px 24px;transition:transform .3s,box-shadow .3s,border-color .3s;overflow:hidden;display:flex;flex-direction:column;height:100%">
+        <div class="feature-glow" style="position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(108,108,245,.15),rgba(34,211,238,.15),transparent 85%);opacity:0;transition:opacity .5s;pointer-events:none"></div>
+        <div class="f-icon" style="width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;background:linear-gradient(135deg,rgba(108,108,245,.2),rgba(34,211,238,.2));border:1px solid rgba(108,108,245,.3);color:#22d3ee;transition:all .3s"><i class="fa-solid fa-globe"></i></div>
+        <h3 style="font-size:18px;margin-bottom:10px;font-weight:700">Personal Subdomain</h3>
+        <p style="color:var(--muted);font-size:14.5px;line-height:1.6;flex:1">Get your own clean <b>username.portfoolio.me</b> address with instant SSL security and mobile optimization.</p>
+        <div class="feature-arrow" style="position:absolute;bottom:24px;right:24px;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--stroke);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(-10px);transition:all .3s"><i class="fa-solid fa-arrow-right" style="color:var(--muted)"></i></div>
+      </article>
+      <article class="feature-card" style="position:relative;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid var(--stroke);border-radius:20px;padding:28px 24px;transition:transform .3s,box-shadow .3s,border-color .3s;overflow:hidden;display:flex;flex-direction:column;height:100%">
+        <div class="feature-glow" style="position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(34,211,238,.15),rgba(244,114,182,.15),transparent 85%);opacity:0;transition:opacity .5s;pointer-events:none"></div>
+        <div class="f-icon" style="width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;background:linear-gradient(135deg,rgba(34,211,238,.2),rgba(244,114,182,.2));border:1px solid rgba(34,211,238,.3);color:#f472b6;transition:all .3s"><i class="fa-solid fa-palette"></i></div>
+        <h3 style="font-size:18px;margin-bottom:10px;font-weight:700">10 Handcrafted Themes</h3>
+        <p style="color:var(--muted);font-size:14.5px;line-height:1.6;flex:1">Midnight, Minimal, Terminal, Creative, Aurora, Editorial, Brutalist, Afterglow, Ultraviolet, Tidepool — switch anytime.</p>
+        <div class="feature-arrow" style="position:absolute;bottom:24px;right:24px;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--stroke);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(-10px);transition:all .3s"><i class="fa-solid fa-arrow-right" style="color:var(--muted)"></i></div>
+      </article>
+      <article class="feature-card" style="position:relative;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid var(--stroke);border-radius:20px;padding:28px 24px;transition:transform .3s,box-shadow .3s,border-color .3s;overflow:hidden;display:flex;flex-direction:column;height:100%">
+        <div class="feature-glow" style="position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(163,230,53,.15),rgba(108,108,245,.15),transparent 85%);opacity:0;transition:opacity .5s;pointer-events:none"></div>
+        <div class="f-icon" style="width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;background:linear-gradient(135deg,rgba(163,230,53,.2),rgba(108,108,245,.2));border:1px solid rgba(163,230,53,.3);color:#a3e635;transition:all .3s"><i class="fa-brands fa-github"></i></div>
+        <h3 style="font-size:18px;margin-bottom:10px;font-weight:700">1-Click GitHub Sync</h3>
+        <p style="color:var(--muted);font-size:14.5px;line-height:1.6;flex:1">Auto-load your public repositories, star counts, tags, and project descriptions without manual entry.</p>
+        <div class="feature-arrow" style="position:absolute;bottom:24px;right:24px;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--stroke);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(-10px);transition:all .3s"><i class="fa-solid fa-arrow-right" style="color:var(--muted)"></i></div>
+      </article>
+      <article class="feature-card" style="position:relative;background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.03));border:1px solid var(--stroke);border-radius:20px;padding:28px 24px;transition:transform .3s,box-shadow .3s,border-color .3s;overflow:hidden;display:flex;flex-direction:column;height:100%">
+        <div class="feature-glow" style="position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:conic-gradient(from 0deg,transparent 0 70%,rgba(251,191,36,.15),rgba(244,114,182,.15),transparent 85%);opacity:0;transition:opacity .5s;pointer-events:none"></div>
+        <div class="f-icon" style="width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;background:linear-gradient(135deg,rgba(251,191,36,.2),rgba(244,114,182,.2));border:1px solid rgba(251,191,36,.3);color:#fbbf24;transition:all .3s"><i class="fa-solid fa-shield-halved"></i></div>
+        <h3 style="font-size:18px;margin-bottom:10px;font-weight:700">Verified Publishing</h3>
+        <p style="color:var(--muted);font-size:14.5px;line-height:1.6;flex:1">Admin-reviewed portfolio directory guarantees spam-free quality, high performance, and recruiter trust.</p>
+        <div class="feature-arrow" style="position:absolute;bottom:24px;right:24px;width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid var(--stroke);display:flex;align-items:center;justify-content:center;opacity:0;transform:translateX(-10px);transition:all .3s"><i class="fa-solid fa-arrow-right" style="color:var(--muted)"></i></div>
+      </article>
     </div>
   </section>
 
