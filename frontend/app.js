@@ -419,6 +419,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  // Landing page: animated stats counter on scroll
+  const statsBar = document.querySelector('.stats-bar');
+  if (statsBar) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          document.querySelectorAll('.stat-number').forEach(el => {
+            const target = parseInt(el.dataset.target || '0');
+            const suffix = el.dataset.suffix || '';
+            const duration = 1500;
+            const start = Date.now();
+            const animate = () => {
+              const progress = Math.min((Date.now() - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+              el.textContent = Math.floor(target * eased) + suffix;
+              if (progress < 1) requestAnimationFrame(animate);
+            };
+            animate();
+            // Animate ring progress
+            const ring = el.closest('.stat-item')?.querySelector('.stat-ring-progress');
+            if (ring) {
+              const circumference = 2 * Math.PI * 34;
+              ring.style.strokeDashoffset = circumference * (1 - 1); // will animate to 0
+              ring.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(.2,.7,.2,1)';
+              setTimeout(() => { ring.style.strokeDashoffset = '0'; }, 100);
+            }
+          });
+          observer.unobserve(statsBar);
+        }
+      });
+    }, { threshold: 0.3 });
+    observer.observe(statsBar);
+  }
+
   const resumeUser = getResumeUser();
   const requested = resumeUser || getRequestedUser();
   if (!requested) return; // landing view stays
