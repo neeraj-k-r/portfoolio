@@ -696,51 +696,14 @@ if($('togglePass')) {
   });
 }
 
-// Directory filter handlers
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.dir-filter').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.dir-filter').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
-      document.querySelectorAll('#dirGrid > .dir-card').forEach(card => {
-        const cardTheme = card.dataset.theme || 'other';
-        if(filter === 'all' || filter === cardTheme || (filter === 'other' && !['midnight','minimal','terminal','creative'].includes(cardTheme))) {
-          card.style.display = '';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
+// Auth tab click handlers (script runs at end of body, so DOM is ready)
+if($('tabSignup')) $('tabSignup').addEventListener('click', () => setAuthMode('signup'));
+if($('tabLogin')) $('tabLogin').addEventListener('click', () => setAuthMode('login'));
 
-  // Password visibility toggle
-  if($('togglePass')) {
-  $('togglePass').addEventListener('click', function() {
-    const passInput = $('authPass');
-    const icon = this.querySelector('i');
-    if(passInput.type === 'password') {
-      passInput.type = 'text';
-      icon.classList.remove('fa-eye');
-      icon.classList.add('fa-eye-slash');
-    } else {
-      passInput.type = 'password';
-      icon.classList.remove('fa-eye-slash');
-      icon.classList.add('fa-eye');
-    }
-  });
-}
-
-// Auth tab click handlers (attach after DOM ready)
-document.addEventListener('DOMContentLoaded', () => {
-  if($('tabSignup')) $('tabSignup').addEventListener('click', () => setAuthMode('signup'));
-  if($('tabLogin')) $('tabLogin').addEventListener('click', () => setAuthMode('login'));
-  
-  // Input focus effects
-  document.querySelectorAll('.input-wrapper input').forEach(input => {
-    input.addEventListener('focus', () => input.parentElement.classList.add('focused'));
-    input.addEventListener('blur', () => input.parentElement.classList.remove('focused'));
-  });
+// Input focus effects
+document.querySelectorAll('.input-wrapper input').forEach(input => {
+  input.addEventListener('focus', () => input.parentElement.classList.add('focused'));
+  input.addEventListener('blur', () => input.parentElement.classList.remove('focused'));
 });
 
 function switchUserTab(tabName) {
