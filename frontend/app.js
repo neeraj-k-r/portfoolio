@@ -453,6 +453,127 @@ document.addEventListener('DOMContentLoaded', async () => {
     observer.observe(statsBar);
   }
 
+  // Landing Hero Interactive Theme Switcher
+  const initHeroThemeSwitcher = () => {
+    const previewFrame = document.getElementById('previewFrame');
+    const themeBtns = document.querySelectorAll('.theme-dot-btn, .footer-theme-btn');
+    if (!previewFrame || !themeBtns.length) return;
+
+    const themePresets = {
+      midnight: {
+        name: 'Your Name',
+        title: 'Full-Stack Developer',
+        desc: 'Building scalable web apps & AI solutions. Open to opportunities.',
+        skills: ['React', 'TypeScript', 'Node.js', 'Python', 'PostgreSQL', 'Docker']
+      },
+      minimal: {
+        name: 'Alex Morgan',
+        title: 'Product Engineer',
+        desc: 'Crafting thoughtful digital interfaces with clean architecture.',
+        skills: ['UI/UX', 'Next.js', 'Tailwind', 'GraphQL', 'SwiftUI', 'Figma']
+      },
+      terminal: {
+        name: 'dev@root:~$',
+        title: 'Systems & Backend Engineer',
+        desc: 'Kernel hacker, Rust enthusiast, distributed systems builder.',
+        skills: ['Rust', 'Go', 'Kubernetes', 'Linux', 'gRPC', 'eBPF']
+      },
+      creative: {
+        name: 'Maya Lin',
+        title: 'Creative Technologist',
+        desc: 'Blending generative art, WebGL, and interactive 3D experiences.',
+        skills: ['Three.js', 'WebGL', 'GLSL', 'Canvas', 'GSAP', 'Shader']
+      },
+      aurora: {
+        name: 'Jordan Kai',
+        title: 'Cloud Architect',
+        desc: 'Designing resilient cloud platforms, serverless microservices & DevOps pipelines.',
+        skills: ['AWS', 'Terraform', 'Docker', 'CI/CD', 'Python', 'Prometheus']
+      }
+    };
+
+    const switchTheme = (themeName) => {
+      const preset = themePresets[themeName] || themePresets.midnight;
+      previewFrame.setAttribute('data-active-theme', themeName);
+
+      themeBtns.forEach(btn => {
+        if (btn.dataset.theme === themeName) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      const nameEl = document.getElementById('previewName');
+      const titleEl = document.getElementById('previewTitle');
+      const descEl = document.getElementById('previewDesc');
+      const skillsEl = document.getElementById('previewSkills');
+
+      if (nameEl) nameEl.textContent = preset.name;
+      if (titleEl) titleEl.textContent = preset.title;
+      if (descEl) descEl.textContent = preset.desc;
+      if (skillsEl) {
+        skillsEl.innerHTML = preset.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+      }
+    };
+
+    themeBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const theme = btn.dataset.theme;
+        if (theme) switchTheme(theme);
+      });
+    });
+
+    // Default to midnight
+    switchTheme('midnight');
+  };
+
+  // Hero Ambient Canvas Particle Effect
+  const initHeroCanvas = () => {
+    const canvas = document.getElementById('heroCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = canvas.parentElement.offsetWidth || window.innerWidth;
+    let height = canvas.height = canvas.parentElement.offsetHeight || 500;
+
+    const particles = Array.from({ length: 35 }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      r: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.4,
+      dy: (Math.random() - 0.5) * 0.4,
+      alpha: Math.random() * 0.5 + 0.2
+    }));
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+      particles.forEach(p => {
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > width) p.dx *= -1;
+        if (p.y < 0 || p.y > height) p.dy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(108, 108, 245, ${p.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(render);
+    };
+    render();
+
+    window.addEventListener('resize', () => {
+      if (canvas.parentElement) {
+        width = canvas.width = canvas.parentElement.offsetWidth;
+        height = canvas.height = canvas.parentElement.offsetHeight;
+      }
+    });
+  };
+
+  initHeroThemeSwitcher();
+  initHeroCanvas();
+
   const resumeUser = getResumeUser();
   const requested = resumeUser || getRequestedUser();
   if (!requested) return; // landing view stays
