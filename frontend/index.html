@@ -140,24 +140,14 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 
   <!-- Live Showcase / Directory Section -->
   <section id="directory" class="wrap">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;margin-bottom:24px">
-      <div>
-        <span class="eyebrow">● Live Showcase</span>
-        <h2 class="title">Active portfolios <span class="grad">on portfoolio</span></h2>
-        <p class="lead">Explore real portfolios created by developers using portfoolio.me.</p>
-      </div>
-      <div class="dir-filters" style="display:flex;gap:10px;flex-wrap:wrap">
-        <button class="dir-filter active" data-filter="all" style="padding:8px 16px;border-radius:100px;border:1px solid var(--stroke);background:rgba(255,255,255,.06);color:var(--muted);font-weight:700;font-size:13px;cursor:pointer;transition:all .2s">All</button>
-        <button class="dir-filter" data-filter="midnight" style="padding:8px 16px;border-radius:100px;border:1px solid var(--stroke);background:rgba(255,255,255,.06);color:var(--muted);font-weight:700;font-size:13px;cursor:pointer;transition:all .2s">Midnight</button>
-        <button class="dir-filter" data-filter="minimal" style="padding:8px 16px;border-radius:100px;border:1px solid var(--stroke);background:rgba(255,255,255,.06);color:var(--muted);font-weight:700;font-size:13px;cursor:pointer;transition:all .2s">Minimal</button>
-        <button class="dir-filter" data-filter="terminal" style="padding:8px 16px;border-radius:100px;border:1px solid var(--stroke);background:rgba(255,255,255,.06);color:var(--muted);font-weight:700;font-size:13px;cursor:pointer;transition:all .2s">Terminal</button>
-        <button class="dir-filter" data-filter="creative" style="padding:8px 16px;border-radius:100px;border:1px solid var(--stroke);background:rgba(255,255,255,.06);color:var(--muted);font-weight:700;font-size:13px;cursor:pointer;transition:all .2s">Creative</button>
-        <button class="dir-filter" data-filter="other" style="padding:8px 16px;border-radius:100px;border:1px solid var(--stroke);background:rgba(255,255,255,.06);color:var(--muted);font-weight:700;font-size:13px;cursor:pointer;transition:all .2s">Others</button>
-      </div>
+    <div style="margin-bottom:32px">
+      <span class="eyebrow" style="background:none;border:none;color:#666;padding:6px 12px;font-size:11px">Live Showcase</span>
+      <h2 class="title" style="background:none;-webkit-background-clip:initial;color:#111;margin-top:8px">Active portfolios on portfoolio</h2>
+      <p style="color:#666;font-size:15px;margin-top:8px">Explore real portfolios created by developers using portfoolio.me.</p>
     </div>
     <div class="dir-grid" id="dirGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px"></div>
-    <div style="text-align:center;margin-top:32px">
-      <a class="btn btn-ghost" href="/admin" style="display:inline-flex;align-items:center;gap:8px"><i class="fa-solid fa-users"></i> View all portfolios</a>
+    <div style="text-align:center;margin-top:40px">
+      <a class="btn btn-ghost" href="/admin" style="display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid #ddd;color:#666;padding:10px 20px;font-size:14px;border-radius:8px;transition:all .2s" onmouseover="this.style.borderColor='#111';this.style.color='#111'" onmouseout="this.style.borderColor='#ddd';this.style.color='#666'"><i class="fa-solid fa-users" style="font-size:13px"></i> View all portfolios</a>
     </div>
   </section>
 
