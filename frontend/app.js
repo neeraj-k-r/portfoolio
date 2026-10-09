@@ -435,6 +435,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     previewFrame.style.transition = 'transform .25s ease';
   }
 
+  // Landing: reveal sections on scroll
+  const revealEls = document.querySelectorAll('#landing .lx-section, #landing .lx-logos');
+  if (revealEls.length && 'IntersectionObserver' in window) {
+    const ro = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => ro.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in'));
+  }
+
   // Landing nav: shrink on scroll + highlight current section
   const mainNav = document.getElementById('mainNav');
   const spySections = ['features','directory','howitworks','auth'].map(id => document.getElementById(id)).filter(Boolean);
