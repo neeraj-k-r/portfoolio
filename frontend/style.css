@@ -1151,5 +1151,9 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
   .footer-content { flex-direction: column; text-align: center; }
 }
 
+/* Modern light theme — pre-login landing only (app views stay dark) */
+body.landing-modern { background: #fafaf9; color: #18181b; }
+body.landing-modern .bg-fx, body.landing-modern .grid-overlay, body.landing-modern #particles { display: none; }
+
 #toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,80px);background:#fff;color:#0b1226;font-weight:800;padding:12px 18px;border-radius:12px;transition:.35s;z-index:9999;opacity:0}
 #toast.show{transform:translate(-50%,0);opacity:1}
