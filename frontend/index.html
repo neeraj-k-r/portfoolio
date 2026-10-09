@@ -63,66 +63,50 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   </nav>
 
   <!-- Hero Section -->
-  <header class="hero-wrap" id="hero">
-    <div class="hero-bg">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-      <canvas id="heroCanvas"></canvas>
-    </div>
-    <div class="hero-grid">
-      <div class="hero-content">
-        <div class="hero-badge"><span class="pulse-dot"></span> Free subdomain hosting for developers</div>
-        <h1 class="hero-title">Your work deserves<br>its own <span class="grad-text">address.</span></h1>
-        <p class="hero-sub">Get your own <strong class="highlight">yourname.portfoolio.me</strong> subdomain — a recruiter-ready developer homepage featuring 10 handcrafted themes, 1-click GitHub sync, ATS resume, and instant publishing.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary-lg" href="#auth" onclick="setAuthMode('signup')"><span>Sign up free</span><i class="fa-solid fa-arrow-right"></i></a>
-          <a class="btn btn-glass" href="#auth" onclick="setAuthMode('login')">Log in</a>
-          <a class="btn btn-glass" href="/?u=neerajkr">See live demo</a>
-        </div>
-        <div class="hero-trust">
-          <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-shield-halved"></i></span><span>Verified developers</span></div>
-          <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-bolt"></i></span><span>Instant SSL</span></div>
-          <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-code"></i></span><span>GitHub sync</span></div>
-          <div class="trust-item"><span class="trust-icon"><i class="fa-solid fa-file-lines"></i></span><span>ATS resume</span></div>
-        </div>
+  <header class="lx-hero" id="hero">
+    <canvas id="heroCanvas"></canvas>
+    <div class="lx-hero-inner">
+      <div class="lx-badge"><span class="lx-badge-dot"></span> Free subdomain hosting for developers</div>
+      <h1 class="lx-title">Your work deserves<br>its own <span class="lx-lime">address.</span></h1>
+      <p class="lx-sub">Claim <strong>yourname.portfoolio.me</strong> — a recruiter-ready homepage with 10 themes, 1-click GitHub sync, ATS resume, and instant publishing.</p>
+      <div class="lx-cta">
+        <a class="lx-btn-lg" href="#auth" onclick="setAuthMode('signup')">Claim your subdomain <i class="fa-solid fa-arrow-right"></i></a>
+        <a class="lx-btn-ghost" href="/?u=neerajkr">See live demo</a>
       </div>
-      <div class="hero-visual" id="heroVisual">
-        <div class="preview-frame" id="previewFrame">
-          <div class="frame-header">
-            <div class="frame-dots"><span></span><span></span><span></span></div>
-            <div class="frame-url">yourname.portfoolio.me</div>
-            <div class="frame-theme-selector" id="frameThemeSelector">
-              <button class="theme-dot-btn active" data-theme="midnight" title="Midnight"></button>
-              <button class="theme-dot-btn" data-theme="minimal" title="Minimal"></button>
-              <button class="theme-dot-btn" data-theme="terminal" title="Terminal"></button>
-              <button class="theme-dot-btn" data-theme="creative" title="Creative"></button>
-              <button class="theme-dot-btn" data-theme="aurora" title="Aurora"></button>
-            </div>
+      <div class="lx-proof">
+        <div class="lx-avatars"><span>Y</span><span>P</span><span>A</span><span>Z</span><span>+</span></div>
+        <div class="lx-proof-text"><span class="lx-stars">★★★★★</span> Loved by 500+ developers shipping portfolios</div>
+      </div>
+      <div class="lx-window" id="heroVisual">
+        <div class="lx-win-bar" id="previewFrame">
+          <div class="lx-win-dots"><span></span><span></span><span></span></div>
+          <div class="lx-win-url">yourname.portfoolio.me</div>
+          <div class="frame-theme-selector" id="frameThemeSelector">
+            <button class="theme-dot-btn active" data-theme="midnight" title="Midnight"></button>
+            <button class="theme-dot-btn" data-theme="minimal" title="Minimal"></button>
+            <button class="theme-dot-btn" data-theme="terminal" title="Terminal"></button>
+            <button class="theme-dot-btn" data-theme="creative" title="Creative"></button>
+            <button class="theme-dot-btn" data-theme="aurora" title="Aurora"></button>
           </div>
-          <div class="frame-content" id="frameContent">
-            <div class="preview-avatar" id="previewAvatar"></div>
+        </div>
+        <div class="lx-win-body" id="frameContent">
+          <div class="lx-win-side">
+            <div class="preview-avatar" id="previewAvatar">Y</div>
             <h2 class="preview-name" id="previewName">Your Name</h2>
             <p class="preview-title" id="previewTitle">Full-Stack Developer</p>
-            <p class="preview-desc" id="previewDesc">Building scalable web apps & AI solutions. Open to opportunities.</p>
-            <div class="preview-links" id="previewLinks">
-              <a class="preview-link" href="#"><i class="fa-brands fa-github"></i> GitHub</a>
-              <a class="preview-link" href="#"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-              <a class="preview-link" href="#"><i class="fa-solid fa-envelope"></i> Email</a>
-            </div>
+            <p class="preview-desc" id="previewDesc">Building scalable web apps. Open to opportunities.</p>
+          </div>
+          <div class="lx-win-main">
+            <div class="lx-win-line"><span class="lx-prompt">$</span> portfoolio claim yourname</div>
+            <div class="lx-win-line dim">✓ subdomain reserved · SSL issued · live in 60s</div>
             <div class="preview-skills" id="previewSkills">
               <span class="skill-tag">React</span>
               <span class="skill-tag">TypeScript</span>
               <span class="skill-tag">Node.js</span>
               <span class="skill-tag">Python</span>
-              <span class="skill-tag">PostgreSQL</span>
-              <span class="skill-tag">Docker</span>
             </div>
-          </div>
-          <div class="frame-footer">
-            <span class="frame-footer-label">Switch theme:</span>
             <div class="footer-themes" id="footerThemes">
-              <button class="footer-theme-btn active" data-theme="midnight"><span></span> Midnight</button>
+              <button class="footer-theme-btn active" data-theme="midnight">Midnight</button>
               <button class="footer-theme-btn" data-theme="minimal">Minimal</button>
               <button class="footer-theme-btn" data-theme="terminal">Terminal</button>
               <button class="footer-theme-btn" data-theme="creative">Creative</button>
@@ -130,7 +114,6 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             </div>
           </div>
         </div>
-        <div class="floating-elements" id="floatingElements"></div>
       </div>
     </div>
   </header>
