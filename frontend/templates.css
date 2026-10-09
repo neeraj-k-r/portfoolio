@@ -24,6 +24,9 @@
 .tpl-card .lx-tp{width:100%;height:100%;min-height:70px;aspect-ratio:auto;margin:0;border-radius:10px}
 @media(max-width:900px){.tpl-grid{grid-template-columns:1fr 1fr}}
 
+/* Light themes: readable muted text on pale surfaces (dashboard + portfolio) */
+body[data-template="minimal"],body[data-template="editorial"],body[data-template="brutalist"]{--muted:#55606e}
+
 /* ---- Template: minimal (light, ATS-friendly) ---- */
 body[data-template="minimal"]{background:#f8fafc;color:#0f172a}
 body[data-template="minimal"] .bg-fx,body[data-template="minimal"] .grid-overlay{display:none}
