@@ -576,6 +576,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <button type="button" class="btn btn-ghost btn-sm" id="liParseBtn"><i class="fa-solid fa-wand-magic-sparkles"></i> Parse &amp; Fill resume</button>
             <button type="button" class="btn btn-ghost btn-sm" id="liSampleBtn"><i class="fa-solid fa-flask"></i> Try a sample</button>
           </div>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--stroke);padding-top:10px">
+            <input id="rsFile" type="file" accept=".pdf,.docx,.txt" style="flex:1;min-width:180px">
+            <button type="button" class="btn btn-ghost btn-sm" id="rsFileBtn"><i class="fa-solid fa-file-arrow-up"></i> Upload &amp; Fill resume</button>
+          </div>
+          <p class="mono" style="font-size:11px;color:var(--muted);margin-top:4px">Have a ready resume? Upload PDF / DOCX / TXT (≤ 5MB) — text is extracted in your browser and parsed into the fields below.</p>
           <p class="mono" id="liParseMsg" style="font-size:11.5px;color:var(--muted);margin-top:6px"></p>
         </div>
         <div class="form-grid">
