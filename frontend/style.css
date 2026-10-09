@@ -1175,6 +1175,13 @@ body.landing-modern .orb { display: none; }
 body.landing-modern .trust-item { color: #57534e; }
 body.landing-modern .trust-item:hover { color: #1c1917; }
 body.landing-modern .trust-icon { background: #f5f5f4; border-color: #e7e5e4; color: #4f46e5; }
+/* Modern preview: light browser mockup */
+body.landing-modern .preview-frame { background: #fff; border-color: #e7e5e4; box-shadow: 0 24px 60px rgba(28,25,23,.12); }
+body.landing-modern .frame-header { background: #f5f5f4; border-color: #e7e5e4; }
+body.landing-modern .frame-url { color: #78716c; }
+body.landing-modern .preview-name { color: #1c1917; }
+body.landing-modern .preview-title { color: #4f46e5; }
+body.landing-modern .preview-desc { color: #57534e; }
 
 #toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,80px);background:#fff;color:#0b1226;font-weight:800;padding:12px 18px;border-radius:12px;transition:.35s;z-index:9999;opacity:0}
 #toast.show{transform:translate(-50%,0);opacity:1}
