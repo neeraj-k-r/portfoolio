@@ -745,6 +745,9 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-tp-editorial { background: #faf7f2; }
 .lx-tp-editorial .lx-tp-nav { background: transparent; border-bottom-color: #d6cfc4; }
 .lx-tp-editorial .lx-tp-hero { background: #292524; height: 8%; border-radius: 2px; }
+/* Editorial: serif masthead instead of a bar */
+.lx-tp-editorial .lx-tp-hero { background: none; height: auto; top: 18%; font-family: Georgia,'Times New Roman',serif; font-style: italic; }
+.lx-tp-editorial .lx-tp-hero::after { content: "Ag"; font-size: 30px; line-height: 1; color: #1c1917; }
 .lx-tp-editorial .lx-tp-cards { background: #fff; border: 1px solid #e7e0d5; }
 .lx-tp-editorial .lx-tp-cards::after { content: ""; position: absolute; left: 0; right: 0; top: 20%; height: 1px; background: #e7e0d5; }
 /* Brutalist — bold blocks */
