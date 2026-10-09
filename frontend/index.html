@@ -1177,7 +1177,7 @@ if ($('builderForm')) {
     const picked = [...$('ghRepoList').querySelectorAll('input:checked')].map(c => repoToProject(wizardGhRepos[+c.dataset.i]));
 
     const profile = {
-      username, name: $('inName').value.trim(), title: $('inTitle').value.trim(),
+      username, name: $('inName').value.trim(), title: $('inTitle').value.trim() || 'Aspiring Developer',
       tagline: $('inTag').value.trim(), email: $('inEmail').value.trim(),
       phone: $('inPhone').value.trim(), location: $('inLoc').value.trim(),
       github: normGithub($('inGithub').value), linkedin: normLinkedIn($('inLinkedin').value), instagram: normInsta($('inInsta').value),
