@@ -727,6 +727,10 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-tp-terminal .lx-tp-nav { background: #111a11; border-bottom-color: #166534; }
 .lx-tp-terminal .lx-tp-hero { background: #4ade80; box-shadow: 0 0 14px rgba(74,222,128,.6); }
 .lx-tp-terminal .lx-tp-cards { background: #0f1a0f; border: 1px solid #166534; }
+/* Terminal: short prompt block + blinking cursor */
+.lx-tp-terminal .lx-tp-hero { width: 30%; border-radius: 2px; }
+.lx-tp-terminal .lx-tp-hero::after { content: ""; position: absolute; top: 0; right: -13px; width: 8px; height: 100%; background: #4ade80; animation: lxBlink 1.1s steps(1) infinite; }
+@keyframes lxBlink { 50% { opacity: 0; } }
 /* Creative — warm gradient */
 .lx-tp-creative { background: linear-gradient(150deg, #fdf2f8, #ede9fe); }
 .lx-tp-creative .lx-tp-nav { background: rgba(255,255,255,.6); border-bottom-color: rgba(139,92,246,.25); }
