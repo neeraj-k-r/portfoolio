@@ -799,6 +799,23 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-modal-body[data-theme="aurora"] .lx-win-line { color: #1e1b4b; background: rgba(255,255,255,.7); border-color: #c7d2fe; }
 .lx-modal-body[data-theme="aurora"] .lx-prompt { color: #6d28d9; }
 .lx-modal-body[data-theme="aurora"] .skill-tag { background: rgba(255,255,255,.7); border-color: #c7d2fe; color: #6d28d9; }
+.lx-modal-body[data-theme="editorial"] { background: #faf7f2; }
+.lx-modal-body[data-theme="editorial"] .preview-name { color: #292524; }
+.lx-modal-body[data-theme="editorial"] .preview-title { color: #78716c; }
+.lx-modal-body[data-theme="editorial"] .preview-desc { color: #57534e; }
+.lx-modal-body[data-theme="editorial"] .lx-win-line { color: #292524; background: #fff; border-color: #e7e0d5; }
+.lx-modal-body[data-theme="editorial"] .lx-prompt { color: #78716c; }
+.lx-modal-body[data-theme="editorial"] .skill-tag { background: #fff; border-color: #e7e0d5; color: #57534e; }
+.lx-modal-body[data-theme="brutalist"] { background: #fef08a; }
+.lx-modal-body[data-theme="brutalist"] .preview-name { color: #000; }
+.lx-modal-body[data-theme="brutalist"] .preview-title { color: #000; }
+.lx-modal-body[data-theme="brutalist"] .preview-desc { color: #1c1917; }
+.lx-modal-body[data-theme="brutalist"] .lx-win-line { color: #000; background: #fff; border-color: #000; }
+.lx-modal-body[data-theme="brutalist"] .lx-prompt { color: #000; }
+.lx-modal-body[data-theme="brutalist"] .skill-tag { background: #fff; border-color: #000; color: #000; }
+.lx-modal-body[data-theme="afterglow"] { background: linear-gradient(160deg, #2b1055, #7597de); }
+.lx-modal-body[data-theme="ultraviolet"] { background: linear-gradient(150deg, #1e1b4b, #4c1d95); }
+.lx-modal-body[data-theme="tidepool"] { background: linear-gradient(170deg, #042f2e, #083344); }
 /* Bento theme swatches */
 .lx-swatches { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
 .lx-swatches i { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); }
