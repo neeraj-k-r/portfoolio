@@ -349,6 +349,14 @@ img{max-width:100%}
   color: #22d3ee;
   font-size: 14px;
 }
+/* Trust row: icon chips + hover lift */
+.trust-item { transition: transform .2s ease, color .2s ease; }
+.trust-item:hover { transform: translateY(-2px); color: #eef2ff; }
+.trust-icon {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(34,211,238,.1); border: 1px solid rgba(34,211,238,.25);
+}
 
 /* Interactive Preview Browser Frame */
 .hero-visual {
