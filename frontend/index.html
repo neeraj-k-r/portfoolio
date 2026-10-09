@@ -722,7 +722,7 @@ function switchUserTab(tabName) {
 
 function syncLandingTheme() {
   const landingVisible = $('landing') && $('landing').style.display !== 'none';
-  document.body.classList.toggle('landing-modern', !!landingVisible);
+  document.body.classList.toggle('lx', !!landingVisible);
 }
 function showAppRole(role, emailOrUser, profile = null) {
   currentUserRole = role;

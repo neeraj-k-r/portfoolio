@@ -610,7 +610,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const resumeUser = getResumeUser();
   const requested = resumeUser || getRequestedUser();
-  document.body.classList.toggle('landing-modern', !requested);
+  document.body.classList.toggle('lx', !requested);
   if (!requested) return; // landing view stays
   document.getElementById('landing').style.display = 'none';
   document.getElementById('app').style.display = '';
