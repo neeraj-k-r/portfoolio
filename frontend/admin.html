@@ -14,7 +14,8 @@
 .console-bar{position:sticky;top:14px;z-index:50;display:flex;align-items:center;gap:12px;justify-content:space-between;padding:12px 18px;background:rgba(20,8,4,.8);backdrop-filter:blur(18px);border:1px solid rgba(251,191,36,.35);border-radius:16px;margin:14px auto;width:min(1180px,94%);box-shadow:0 12px 34px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06)}
 .console-bar .live{width:10px;height:10px;border-radius:50%;background:#a3e635;box-shadow:0 0 0 6px rgba(163,230,53,.15);animation:pulse 1.8s infinite}
 .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
-.tile{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--stroke);border-radius:18px;padding:18px}
+.tile{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid var(--stroke);border-radius:18px;padding:18px;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.tile:hover{transform:translateY(-4px);border-color:rgba(251,191,36,.45);box-shadow:0 14px 34px rgba(0,0,0,.4)}
 .tile b{font-family:'Space Grotesk';font-size:36px;display:block;line-height:1}
 .tile span{font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
 .tile.pending b{color:var(--amber)}.tile.live b{color:var(--lime)}.tile.users b{color:var(--brand2)}.tile.rejected b{color:var(--pink)}
