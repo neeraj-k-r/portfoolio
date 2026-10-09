@@ -970,6 +970,15 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
   border-radius: 24px;
   padding: 36px 30px;
   backdrop-filter: blur(18px);
+  position: relative;
+  overflow: hidden;
+}
+/* Auth card: gradient top glow line */
+.auth-card::before {
+  content: ""; position: absolute; top: 0; left: 15%; right: 15%; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #6c6cf5, #22d3ee, transparent);
+  opacity: .8;
+}
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(108, 108, 245, 0.15);
 }
 .auth-tabs {
