@@ -1161,6 +1161,15 @@ body.landing-modern .nav-link { color: #57534e; }
 body.landing-modern .nav-link:hover, body.landing-modern .nav-link.active { color: #18181b; }
 body.landing-modern .btn-ghost-sm { background: #fff; border-color: #e7e5e4; color: #44403c; }
 body.landing-modern .logo-suffix { color: #a8a29e; }
+/* Modern hero: dark ink headline, single accent */
+body.landing-modern .hero-title { color: #1c1917; }
+body.landing-modern .grad-text { background: linear-gradient(90deg,#4f46e5,#0ea5e9); -webkit-background-clip: text; background-clip: text; }
+body.landing-modern .hero-sub { color: #57534e; }
+body.landing-modern .hero-sub .highlight { color: #1c1917; }
+body.landing-modern .hero-badge { background: #eef2ff; border-color: #c7d2fe; color: #4338ca; }
+body.landing-modern .hero-badge::after { display: none; }
+body.landing-modern .btn-primary-lg { background: #1c1917; box-shadow: 0 10px 24px rgba(28,25,23,.25); animation: none; }
+body.landing-modern .btn-glass { background: #fff; border-color: #e7e5e4; color: #44403c; }
 
 #toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,80px);background:#fff;color:#0b1226;font-weight:800;padding:12px 18px;border-radius:12px;transition:.35s;z-index:9999;opacity:0}
 #toast.show{transform:translate(-50%,0);opacity:1}
