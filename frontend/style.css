@@ -876,6 +876,12 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
   .lx-win-side { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); padding-right: 0; padding-bottom: 16px; }
   .lx-bento-card.lx-span { grid-column: span 1; }
   .lx-hero { padding-top: 130px; }
+  .lx-gallery { grid-template-columns: repeat(2, 1fr); }
+  .lx-modal-panel { width: 100%; }
+}
+@media(max-width:560px){
+  .lx-gallery { grid-template-columns: 1fr; }
+  .lx-modal-body { min-height: 300px; }
 }
 /* LX footer */
 .lx-footer { border-top: 1px solid rgba(255,255,255,.08); margin-top: 70px; background: rgba(8,12,11,.9); }
