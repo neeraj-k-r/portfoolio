@@ -707,7 +707,9 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-showcase .dir-visit span { display: inline-block; transition: transform .2s ease; }
 .lx-showcase .dir-visit:hover span { transform: translateX(4px); }
 /* LX steps */
-.lx-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 30px; }
+.lx-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 30px; position: relative; }
+.lx-steps::before { content: ""; position: absolute; top: 52px; left: 8%; right: 8%; border-top: 1px dashed rgba(190,242,100,.3); }
+.lx-step { position: relative; }
 .lx-step { background: rgba(17,24,22,.85); border: 1px solid rgba(255,255,255,.09); border-radius: 20px; padding: 26px 24px; position: relative; }
 .lx-step h3 { color: #f4f7f3; font-size: 19px; margin: 12px 0 8px; }
 .lx-step p { color: #a7b3ab; font-size: 14.5px; }
