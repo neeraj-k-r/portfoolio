@@ -1319,3 +1319,10 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-showcase .dir-card h3 { color: #f4f7f3; }
 .lx-showcase .dir-card p { color: #a7b3ab; }
 .lx-showcase .dir-card .mono { color: #bef264; }
+/* LX steps */
+.lx-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 30px; }
+.lx-step { background: rgba(17,24,22,.85); border: 1px solid rgba(255,255,255,.09); border-radius: 20px; padding: 26px 24px; position: relative; }
+.lx-step h3 { color: #f4f7f3; font-size: 19px; margin: 12px 0 8px; }
+.lx-step p { color: #a7b3ab; font-size: 14.5px; }
+.lx-step strong { color: #e7ece9; }
+.lx-step-num { font-family: 'Space Grotesk',sans-serif; font-size: 40px; font-weight: 800; color: transparent; -webkit-text-stroke: 1.5px rgba(190,242,100,.65); }
