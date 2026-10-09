@@ -1491,6 +1491,21 @@ if ($('liParseBtn')) $('liParseBtn').onclick = () => {
   paintProof();
   toast(addedExp || addedEdu || addedSkills || filledProfile ? `✅ Imported — hit Save Changes to publish` : 'Nothing new — entries already listed');
 };
+if ($('rsFileBtn')) $('rsFileBtn').onclick = async () => {
+  if (!activeUserProfile) return toast('❌ Log in first');
+  const f = $('rsFile') && $('rsFile').files[0];
+  if (!f) return toast('❌ Pick your resume file first');
+  if ($('liParseMsg')) $('liParseMsg').textContent = 'Reading ' + f.name + '…';
+  try {
+    const text = (await extractResumeFile(f)).trim();
+    if (text.length < 50) { if ($('liParseMsg')) $('liParseMsg').textContent = '❌ Barely any text found — scanned image PDF? Export as text and retry.'; return; }
+    if ($('liPaste')) $('liPaste').value = text.slice(0, 20000);
+    if ($('liParseBtn')) $('liParseBtn').onclick();
+  } catch (e) {
+    console.error('resume upload failed', e);
+    if ($('liParseMsg')) $('liParseMsg').textContent = '❌ ' + (e.message || e);
+  }
+};
 document.addEventListener('input', (e) => {
   if (e.target && (e.target.id === 'rsSummary')) paintResumeTab();
 });
