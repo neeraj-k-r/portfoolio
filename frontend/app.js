@@ -574,6 +574,63 @@ document.addEventListener('DOMContentLoaded', async () => {
     switchTheme('midnight');
   };
 
+  // Theme gallery lightbox
+  const themeModal = document.getElementById('themeModal');
+  if (themeModal) {
+    const modalBody = document.getElementById('modalBody');
+    const modalName = document.getElementById('modalThemeName');
+    const modalAvatar = document.getElementById('modalAvatar');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalSkills = document.getElementById('modalSkills');
+    const modalThemeBtns = document.querySelectorAll('#modalThemes .footer-theme-btn');
+    const modalPresets = {
+      midnight: { name: 'Your Name', title: 'Full-Stack Developer', desc: 'Building scalable web apps. Open to opportunities.', skills: ['React', 'TypeScript', 'Node.js'] },
+      minimal: { name: 'Alex Morgan', title: 'Product Engineer', desc: 'Crafting thoughtful digital interfaces with clean architecture.', skills: ['UI/UX', 'Next.js', 'Tailwind'] },
+      terminal: { name: 'dev@root:~$', title: 'Systems & Backend Engineer', desc: 'Kernel hacker, Rust enthusiast, distributed systems builder.', skills: ['Rust', 'Go', 'Kubernetes'] },
+      creative: { name: 'Maya Lin', title: 'Creative Technologist', desc: 'Blending generative art, WebGL, and interactive 3D experiences.', skills: ['Three.js', 'WebGL', 'GLSL'] },
+      aurora: { name: 'Jordan Kai', title: 'Cloud Architect', desc: 'Designing resilient cloud platforms, serverless microservices & DevOps pipelines.', skills: ['AWS', 'Terraform', 'Docker'] }
+    };
+    let lastFocus = null;
+    const openModal = (theme, name) => {
+      lastFocus = document.activeElement;
+      modalBody.setAttribute('data-theme', theme);
+      modalName.textContent = name || theme;
+      const preset = modalPresets[theme] || modalPresets.midnight;
+      if (modalAvatar) modalAvatar.textContent = (preset.name || 'Y').trim().charAt(0).toUpperCase();
+      if (modalTitle) modalTitle.textContent = preset.title;
+      if (modalDesc) modalDesc.textContent = preset.desc;
+      if (modalSkills) modalSkills.innerHTML = preset.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+      modalThemeBtns.forEach(b => b.classList.toggle('active', b.dataset.theme === theme));
+      themeModal.classList.add('open');
+      themeModal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      const closeBtn = themeModal.querySelector('.lx-modal-close');
+      if (closeBtn) closeBtn.focus();
+    };
+    const closeModal = () => {
+      themeModal.classList.remove('open');
+      themeModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    };
+    document.querySelectorAll('.lx-theme-card').forEach(card => {
+      card.addEventListener('click', () => openModal(card.dataset.theme, card.dataset.name));
+    });
+    modalThemeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.dataset.theme;
+        modalBody.setAttribute('data-theme', theme);
+        modalName.textContent = btn.textContent;
+        modalThemeBtns.forEach(b => b.classList.toggle('active', b === btn));
+      });
+    });
+    themeModal.querySelectorAll('[data-close-modal]').forEach(el => el.addEventListener('click', closeModal));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && themeModal.classList.contains('open')) closeModal();
+    });
+  }
+
   // Hero Ambient Canvas Particle Effect
   const initHeroCanvas = () => {
     const canvas = document.getElementById('heroCanvas');
