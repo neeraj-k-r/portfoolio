@@ -607,6 +607,9 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #bef264; box-shadow: 0 0 0 4px rgba(190,242,100,.2); animation: pulseDot 2s infinite; }
 .lx-title { font-family: 'Space Grotesk',sans-serif; font-size: clamp(44px,7vw,84px); line-height: 1; letter-spacing: -3px; color: #f4f7f3; margin: 24px 0 18px; font-weight: 700; }
 .lx-lime { color: #bef264; }
+/* Keyboard hint line */
+.lx-kbd-hint { margin-top: 14px; font-size: 12.5px; color: #5d6a62; }
+.lx-kbd-hint kbd { font-family: 'JetBrains Mono',monospace; font-size: 11px; color: #d9f99d; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-bottom-width: 2px; border-radius: 6px; padding: 2px 7px; }
 /* Serif italic accent word (editorial contrast) */
 .lx-serif { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 400; letter-spacing: -1px; color: #bef264; }
 .lx-sub { color: #a7b3ab; font-size: 18px; max-width: 620px; margin: 0 auto; }
