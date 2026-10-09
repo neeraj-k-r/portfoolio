@@ -1350,6 +1350,14 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-auth-card .btn-primary-block { background: #bef264; color: #0b0f0e; }
 .lx-btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.14); color: #e7ece9; padding: 12px 20px; border-radius: 12px; font-weight: 700; }
 .lx-btn-ghost:hover { border-color: rgba(190,242,100,.5); color: #bef264; }
+/* LX responsive */
+@media(max-width:980px){
+  .lx-bento, .lx-steps, .lx-quotes, .lx-auth-grid { grid-template-columns: 1fr; }
+  .lx-win-body { grid-template-columns: 1fr; }
+  .lx-win-side { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); padding-right: 0; padding-bottom: 16px; }
+  .lx-bento-card.lx-span { grid-column: span 1; }
+  .lx-hero { padding-top: 130px; }
+}
 /* LX footer */
 .lx-footer { border-top: 1px solid rgba(255,255,255,.08); margin-top: 70px; background: rgba(8,12,11,.9); }
 .lx-footer-inner { width: min(1180px,92%); margin: 0 auto; padding: 30px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
