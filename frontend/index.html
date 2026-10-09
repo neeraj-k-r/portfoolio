@@ -1679,13 +1679,13 @@ async function renderDir() {
     $('dirGrid').innerHTML = seeds.map(p => `
       <div class="dir-card" data-theme="${(p.title.split('•').pop() || '').trim().toLowerCase()}">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-          <span style="width:36px;height:36px;border-radius:50%;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:linear-gradient(135deg,#6c6cf5,#22d3ee)">${(p.name || '?').trim().charAt(0).toUpperCase()}</span>
+          <span style="width:36px;height:36px;border-radius:50%;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#0b0f0e;background:linear-gradient(135deg,#bef264,#34d399)">${(p.name || '?').trim().charAt(0).toUpperCase()}</span>
           <h3 style="margin:0">${p.name}</h3>
         </div>
         <p>${p.title || ''}</p>
-        <p class="mono" style="font-size:12.5px;color:#22d3ee;margin-bottom:12px">${p.username}.portfoolio.me</p>
+        <p class="mono" style="font-size:12.5px;color:#bef264;margin-bottom:12px">${p.username}.portfoolio.me</p>
         <div style="display:flex;gap:8px">
-          <a class="btn btn-primary btn-sm" href="/?u=${encodeURIComponent(p.username)}">Visit Site →</a>
+          <a class="btn btn-primary btn-sm dir-visit" href="/?u=${encodeURIComponent(p.username)}">Visit Site <span>→</span></a>
         </div>
       </div>`).join('');
   }

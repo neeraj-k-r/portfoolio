@@ -703,6 +703,9 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-showcase .dir-card h3 { color: #f4f7f3; }
 .lx-showcase .dir-card p { color: #a7b3ab; }
 .lx-showcase .dir-card .mono { color: #bef264; }
+/* Showcase: visit arrow slides on hover */
+.lx-showcase .dir-visit span { display: inline-block; transition: transform .2s ease; }
+.lx-showcase .dir-visit:hover span { transform: translateX(4px); }
 /* LX steps */
 .lx-steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 30px; }
 .lx-step { background: rgba(17,24,22,.85); border: 1px solid rgba(255,255,255,.09); border-radius: 20px; padding: 26px 24px; position: relative; }
