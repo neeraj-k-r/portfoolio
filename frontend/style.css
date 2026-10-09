@@ -1281,3 +1281,13 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-prompt { color: #bef264; font-weight: 700; margin-right: 6px; }
 .lx-btn-lg { animation: lxBreathe 3s ease-in-out infinite; }
 @keyframes lxBreathe { 0%,100% { box-shadow: 0 14px 40px rgba(190,242,100,.3); } 50% { box-shadow: 0 14px 52px rgba(190,242,100,.5); } }
+/* LX window: retint kept interactive classes (fight old purple rules) */
+.lx-window .preview-avatar { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #0b0f0e; background: linear-gradient(135deg,#bef264,#34d399); margin-bottom: 12px; }
+.lx-window .preview-name { color: #f4f7f3; font-size: 22px; margin: 0 0 2px; }
+.lx-window .preview-title { color: #bef264; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; }
+.lx-window .preview-desc { color: #a7b3ab; font-size: 13px; }
+.lx-window .skill-tag { background: rgba(190,242,100,.1); border: 1px solid rgba(190,242,100,.3); color: #d9f99d; }
+.lx-window .theme-dot-btn { border-color: rgba(255,255,255,.2); }
+.lx-window .theme-dot-btn.active { box-shadow: 0 0 10px rgba(190,242,100,.7); }
+.lx-window .footer-theme-btn { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: #a7b3ab; }
+.lx-window .footer-theme-btn.active { background: rgba(190,242,100,.14); border-color: rgba(190,242,100,.45); color: #d9f99d; }
