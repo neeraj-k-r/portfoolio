@@ -688,6 +688,9 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-bento-icon { width: 46px; height: 46px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #bef264; background: rgba(190,242,100,.1); border: 1px solid rgba(190,242,100,.3); }
 .lx-bento-url { margin-top: 16px; font-family: 'JetBrains Mono',monospace; font-size: 13px; color: #d9f99d; background: rgba(0,0,0,.35); border: 1px solid rgba(190,242,100,.25); border-radius: 10px; padding: 10px 14px; display: inline-block; }
 .lx-bento-url span { color: #bef264; font-weight: 700; }
+/* Bento mini sparkline */
+.lx-spark { display: flex; align-items: flex-end; gap: 5px; height: 44px; margin-top: 16px; }
+.lx-spark i { flex: 1; border-radius: 3px; background: linear-gradient(180deg, #bef264, rgba(190,242,100,.25)); opacity: .85; }
 /* LX showcase: retint directory cards */
 .lx-showcase .dir-card { background: rgba(17,24,22,.85); border-color: rgba(255,255,255,.09); }
 .lx-showcase .dir-card:hover { border-color: rgba(190,242,100,.45); box-shadow: 0 18px 44px rgba(0,0,0,.45); transform: translateY(-5px); }
