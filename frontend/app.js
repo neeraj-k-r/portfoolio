@@ -419,6 +419,24 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  // Landing nav: shrink on scroll + highlight current section
+  const mainNav = document.getElementById('mainNav');
+  const spySections = ['features','directory','howitworks','auth'].map(id => document.getElementById(id)).filter(Boolean);
+  if (mainNav) {
+    const onScroll = () => {
+      mainNav.classList.toggle('scrolled', window.scrollY > 24);
+      if (spySections.length) {
+        let current = '';
+        spySections.forEach(s => { if (window.scrollY + 140 >= s.offsetTop) current = s.id; });
+        document.querySelectorAll('.nav-link').forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+        });
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
   // Landing page: animated stats counter on scroll
   const statsBar = document.querySelector('.stats-bar');
   if (statsBar) {
