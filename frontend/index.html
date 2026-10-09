@@ -326,6 +326,46 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
     </div>
   </section>
 
+  <!-- Theme preview lightbox -->
+  <div class="lx-modal" id="themeModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Theme preview">
+    <div class="lx-modal-backdrop" data-close-modal></div>
+    <div class="lx-modal-panel" role="document">
+      <button class="lx-modal-close" data-close-modal aria-label="Close preview"><i class="fa-solid fa-xmark"></i></button>
+      <div class="lx-modal-frame" id="modalFrame">
+        <div class="lx-win-bar">
+          <div class="lx-win-dots"><span></span><span></span><span></span></div>
+          <div class="lx-win-url">yourname.portfoolio.me</div>
+        </div>
+        <div class="lx-win-body lx-modal-body" id="modalBody">
+          <div class="lx-win-side">
+            <div class="preview-avatar" id="modalAvatar">Y</div>
+            <h2 class="preview-name" id="modalName">Your Name</h2>
+            <p class="preview-title" id="modalTitle">Full-Stack Developer</p>
+            <p class="preview-desc" id="modalDesc">Building scalable web apps. Open to opportunities.</p>
+          </div>
+          <div class="lx-win-main">
+            <div class="lx-win-line"><span class="lx-prompt">$</span> portfoolio claim yourname</div>
+            <div class="preview-skills" id="modalSkills">
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">Node.js</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="lx-modal-foot">
+        <span class="lx-modal-name" id="modalThemeName">Midnight Wow</span>
+        <div class="footer-themes" id="modalThemes">
+          <button class="footer-theme-btn active" data-theme="midnight">Midnight</button>
+          <button class="footer-theme-btn" data-theme="minimal">Minimal</button>
+          <button class="footer-theme-btn" data-theme="terminal">Terminal</button>
+          <button class="footer-theme-btn" data-theme="creative">Creative</button>
+          <button class="footer-theme-btn" data-theme="aurora">Aurora</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <footer class="lx-footer">
     <div class="lx-footer-inner">
       <a class="lx-brand sm" href="/"><span class="lx-mark">◈</span><span>PORTFOOLIO<em>.me</em></span></a>
