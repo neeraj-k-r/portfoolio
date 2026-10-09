@@ -720,7 +720,7 @@ function switchUserTab(tabName) {
   });
 }
 
-function syncLandingTheme() {
+function syncLx() {
   const landingVisible = $('landing') && $('landing').style.display !== 'none';
   document.body.classList.toggle('lx', !!landingVisible);
 }
@@ -733,7 +733,7 @@ function showAppRole(role, emailOrUser, profile = null) {
   if (!role) {
     if(landing) landing.style.display = '';
     if(dashApp) dashApp.style.display = 'none';
-    syncLandingTheme();
+    syncLx();
     return;
   }
 
@@ -757,9 +757,9 @@ function showAppRole(role, emailOrUser, profile = null) {
     // lock claim email to the login account (permanent identity)
     if (!profile && $('inEmail')) { $('inEmail').value = emailOrUser || ''; $('inEmail').readOnly = true; }
   }
-  syncLandingTheme();
+  syncLx();
 }
-syncLandingTheme();
+syncLx();
 
 function setupUserDashboardView(profile) {
   const wizard = $('subdomainWizardCard'), studio = $('userStudioHub');
