@@ -1336,3 +1336,25 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-cta-banner h2 { font-family: 'Space Grotesk',sans-serif; font-size: clamp(32px,5vw,56px); letter-spacing: -2px; color: #f4f7f3; margin-bottom: 10px; }
 .lx-cta-banner h2 span { color: #bef264; }
 .lx-cta-banner p { color: #a7b3ab; margin-bottom: 26px; }
+/* LX auth split */
+.lx-auth-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 30px; }
+.lx-auth-points { list-style: none; margin: 22px 0; padding: 0; display: grid; gap: 10px; }
+.lx-auth-points li { display: flex; align-items: center; gap: 10px; color: #a7b3ab; font-size: 15px; }
+.lx-auth-points i { color: #bef264; }
+.lx-auth-card { background: rgba(17,24,22,.9); border: 1px solid rgba(190,242,100,.22); border-radius: 22px; padding: 30px 28px; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+/* LX auth: retint kept tab + input + button classes */
+.lx-auth-card .auth-tab.active { background: linear-gradient(135deg,#bef264,#34d399); color: #0b0f0e; box-shadow: 0 4px 16px rgba(190,242,100,.35); }
+.lx-auth-card .input-wrapper input { background: rgba(0,0,0,.4); border-color: rgba(255,255,255,.12); color: #f4f7f3; }
+.lx-auth-card .input-wrapper.focused input { border-color: #bef264; box-shadow: 0 0 0 3px rgba(190,242,100,.2); }
+.lx-auth-card .input-wrapper.focused .input-icon { color: #bef264; }
+.lx-auth-card .btn-primary-block { background: #bef264; color: #0b0f0e; }
+.lx-btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.14); color: #e7ece9; padding: 12px 20px; border-radius: 12px; font-weight: 700; }
+.lx-btn-ghost:hover { border-color: rgba(190,242,100,.5); color: #bef264; }
+/* LX footer */
+.lx-footer { border-top: 1px solid rgba(255,255,255,.08); margin-top: 70px; background: rgba(8,12,11,.9); }
+.lx-footer-inner { width: min(1180px,92%); margin: 0 auto; padding: 30px 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.lx-brand.sm { font-size: 15px; }
+.lx-footer-tag { color: #5d6a62; font-size: 13.5px; margin: 0; }
+.lx-footer-links { display: flex; gap: 20px; }
+.lx-footer-links a { color: #a7b3ab; font-size: 14px; font-weight: 500; }
+.lx-footer-links a:hover { color: #bef264; }
