@@ -1074,6 +1074,18 @@ if ($('builderForm')) {
   function previewTemplate(v) {
     document.body.dataset.template = (v && v !== 'midnight') ? v : '';
   }
+  // Theme picker thumbnails: swap emoji placeholders for live mini-previews
+  function paintThemeThumbs() {
+    document.querySelectorAll('.tpl-card').forEach(c => {
+      const inp = c.querySelector('input');
+      const prev = c.querySelector('.tpl-preview');
+      if (!inp || !prev || prev.dataset.thumbed) return;
+      const theme = (inp.value || 'midnight').toLowerCase();
+      prev.innerHTML = `<span class="lx-tp lx-tp-${theme}"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>`;
+      prev.dataset.thumbed = '1';
+    });
+  }
+  paintThemeThumbs();
   document.querySelectorAll('#tplGrid .tpl-card').forEach(c => c.addEventListener('click', () => {
     document.querySelectorAll('#tplGrid .tpl-card').forEach(x => x.classList.remove('selected'));
     c.classList.add('selected');
