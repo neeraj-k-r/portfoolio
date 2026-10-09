@@ -741,11 +741,16 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-tp-creative .lx-tp-nav { background: rgba(255,255,255,.6); border-bottom-color: rgba(139,92,246,.25); }
 .lx-tp-creative .lx-tp-hero { background: linear-gradient(90deg, #f472b6, #8b5cf6); border-radius: 999px; }
 .lx-tp-creative .lx-tp-cards { background: rgba(255,255,255,.75); border: 1px solid rgba(139,92,246,.3); }
+/* Creative: playful blob badge */
+.lx-tp-creative .lx-tp-hero { border-radius: 999px 999px 999px 12px; }
+.lx-tp-creative .lx-tp-hero::after { content: ""; position: absolute; right: -8px; top: -8px; width: 16px; height: 16px; border-radius: 50%; background: #fbbf24; border: 2px solid #fff; }
 /* Aurora — frosted pastel */
 .lx-tp-aurora { background: linear-gradient(150deg, #e0e7ff, #fce7f3, #ccfbf1); }
 .lx-tp-aurora .lx-tp-nav { background: rgba(255,255,255,.5); backdrop-filter: blur(4px); border-bottom-color: rgba(99,102,241,.2); }
 .lx-tp-aurora .lx-tp-hero { background: linear-gradient(90deg, #a5b4fc, #f9a8d4); border-radius: 10px; }
 .lx-tp-aurora .lx-tp-cards { background: rgba(255,255,255,.6); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,.8); }
+/* Aurora: centered glass bar, symmetric */
+.lx-tp-aurora .lx-tp-hero { left: 20%; width: 60%; text-align: center; }
 /* Editorial — paper serif */
 .lx-tp-editorial { background: #faf7f2; }
 .lx-tp-editorial .lx-tp-nav { background: transparent; border-bottom-color: #d6cfc4; }
