@@ -1214,6 +1214,12 @@ body.landing-modern .auth-card { background: #fff; border-color: #e7e5e4; box-sh
 body.landing-modern .auth-card::before { background: linear-gradient(90deg, transparent, #4f46e5, #0ea5e9, transparent); }
 body.landing-modern .auth-tab { color: #78716c; }
 body.landing-modern .auth-msg { color: #78716c; }
+/* Modern footer: light band */
+body.landing-modern .landing-footer { background: #fff; border-color: #e7e5e4; }
+body.landing-modern .footer-brand { color: #57534e; }
+body.landing-modern .footer-brand strong { color: #1c1917; }
+body.landing-modern .footer-links a { color: #78716c; }
+body.landing-modern .footer-links a:hover { color: #1c1917; }
 
 #toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,80px);background:#fff;color:#0b1226;font-weight:800;padding:12px 18px;border-radius:12px;transition:.35s;z-index:9999;opacity:0}
 #toast.show{transform:translate(-50%,0);opacity:1}
