@@ -662,7 +662,9 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-window .footer-theme-btn { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: #a7b3ab; }
 .lx-window .footer-theme-btn.active { background: rgba(190,242,100,.14); border-color: rgba(190,242,100,.45); color: #d9f99d; }
 /* LX sections */
-.lx-section { width: min(1180px,92%); margin: 0 auto; padding: 72px 0 8px; }
+#landing { counter-reset: lxsec; }
+.lx-section { width: min(1180px,92%); margin: 0 auto; padding: 72px 0 8px; counter-increment: lxsec; }
+.lx-kicker::before { content: "0" counter(lxsec) " · "; color: #5d6a62; letter-spacing: 1px; }
 .lx-kicker { display: inline-block; font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #bef264; background: rgba(190,242,100,.08); border: 1px solid rgba(190,242,100,.25); padding: 7px 14px; border-radius: 100px; margin-bottom: 14px; }
 .lx-h2 { font-family: 'Space Grotesk',sans-serif; font-size: clamp(30px,4vw,46px); letter-spacing: -1.5px; line-height: 1.05; color: #f4f7f3; margin-bottom: 10px; }
 .lx-lead { color: #a7b3ab; font-size: 16.5px; max-width: 640px; }
