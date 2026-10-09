@@ -8,6 +8,11 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--txt);font-family:'Plus Jakarta Sans',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
 ::selection{background:#6c6cf5;color:#fff}
+body.lx ::selection{background:#bef264;color:#0b0f0e}
+body.lx ::-webkit-scrollbar{width:10px}
+body.lx ::-webkit-scrollbar-track{background:#0b0f0e}
+body.lx ::-webkit-scrollbar-thumb{background:#2a3532;border-radius:8px;border:2px solid #0b0f0e}
+body.lx ::-webkit-scrollbar-thumb:hover{background:#bef264}
 a{color:inherit;text-decoration:none}
 img{max-width:100%}
 .mono{font-family:'JetBrains Mono',monospace}
