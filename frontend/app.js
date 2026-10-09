@@ -419,6 +419,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  // Landing preview frame: subtle mousemove tilt (desktop only)
+  const previewFrame = document.getElementById('previewFrame');
+  const heroVisual = document.getElementById('heroVisual');
+  if (previewFrame && heroVisual && window.matchMedia('(pointer:fine)').matches) {
+    heroVisual.addEventListener('mousemove', (e) => {
+      const r = heroVisual.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      previewFrame.style.transform = `perspective(1000px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg)`;
+    });
+    heroVisual.addEventListener('mouseleave', () => {
+      previewFrame.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg)';
+    });
+    previewFrame.style.transition = 'transform .25s ease';
+  }
+
   // Landing nav: shrink on scroll + highlight current section
   const mainNav = document.getElementById('mainNav');
   const spySections = ['features','directory','howitworks','auth'].map(id => document.getElementById(id)).filter(Boolean);
