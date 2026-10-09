@@ -737,6 +737,32 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-tp-aurora .lx-tp-nav { background: rgba(255,255,255,.5); backdrop-filter: blur(4px); border-bottom-color: rgba(99,102,241,.2); }
 .lx-tp-aurora .lx-tp-hero { background: linear-gradient(90deg, #a5b4fc, #f9a8d4); border-radius: 10px; }
 .lx-tp-aurora .lx-tp-cards { background: rgba(255,255,255,.6); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,.8); }
+/* Editorial — paper serif */
+.lx-tp-editorial { background: #faf7f2; }
+.lx-tp-editorial .lx-tp-nav { background: transparent; border-bottom-color: #d6cfc4; }
+.lx-tp-editorial .lx-tp-hero { background: #292524; height: 8%; border-radius: 2px; }
+.lx-tp-editorial .lx-tp-cards { background: #fff; border: 1px solid #e7e0d5; }
+.lx-tp-editorial .lx-tp-cards::after { content: ""; position: absolute; left: 0; right: 0; top: 20%; height: 1px; background: #e7e0d5; }
+/* Brutalist — bold blocks */
+.lx-tp-brutalist { background: #fef08a; }
+.lx-tp-brutalist .lx-tp-nav { background: #000; border-bottom-color: #000; }
+.lx-tp-brutalist .lx-tp-hero { background: #000; border: 2px solid #000; box-shadow: 4px 4px 0 #000; }
+.lx-tp-brutalist .lx-tp-cards { background: #fff; border: 2px solid #000; box-shadow: 4px 4px 0 #000; }
+/* Afterglow — sunset dusk */
+.lx-tp-afterglow { background: linear-gradient(160deg, #2b1055, #7597de); }
+.lx-tp-afterglow .lx-tp-nav { background: rgba(255,255,255,.08); border-bottom-color: rgba(244,114,182,.4); }
+.lx-tp-afterglow .lx-tp-hero { background: linear-gradient(90deg, #f472b6, #fbbf24); border-radius: 999px; }
+.lx-tp-afterglow .lx-tp-cards { background: rgba(0,0,0,.3); border: 1px solid rgba(244,114,182,.5); }
+/* Ultraviolet — violet haze */
+.lx-tp-ultraviolet { background: linear-gradient(150deg, #1e1b4b, #4c1d95); }
+.lx-tp-ultraviolet .lx-tp-nav { background: rgba(168,85,247,.15); border-bottom-color: rgba(168,85,247,.4); }
+.lx-tp-ultraviolet .lx-tp-hero { background: linear-gradient(90deg, #c084fc, #e879f9); box-shadow: 0 0 16px rgba(192,132,252,.6); border-radius: 2px; }
+.lx-tp-ultraviolet .lx-tp-cards { background: rgba(30,27,75,.8); border: 1px solid rgba(168,85,247,.5); }
+/* Tidepool — deep teal abyss */
+.lx-tp-tidepool { background: linear-gradient(170deg, #042f2e, #083344); }
+.lx-tp-tidepool .lx-tp-nav { background: rgba(125,211,252,.08); border-bottom-color: rgba(125,211,252,.3); }
+.lx-tp-tidepool .lx-tp-hero { background: linear-gradient(90deg, #80ffdb, #2ec4b6); box-shadow: 0 0 16px rgba(128,255,219,.5); }
+.lx-tp-tidepool .lx-tp-cards { background: rgba(8,51,68,.8); border: 1px solid rgba(125,211,252,.4); }
 /* Bento theme swatches */
 .lx-swatches { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
 .lx-swatches i { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); }
