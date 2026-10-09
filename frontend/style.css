@@ -712,6 +712,31 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-tp-cards:last-of-type { right: 8%; }
 .lx-theme-name { display: flex; flex-direction: column; font-size: 14px; font-weight: 700; color: #f4f7f3; }
 .lx-theme-name em { font-style: normal; font-size: 11.5px; font-weight: 500; color: #7d8a82; }
+/* Midnight — deep navy + violet glow */
+.lx-tp-midnight { background: linear-gradient(160deg, #0b1226, #131b3a); }
+.lx-tp-midnight .lx-tp-nav { background: rgba(108,108,245,.12); }
+.lx-tp-midnight .lx-tp-hero { background: linear-gradient(90deg, #6c6cf5, #22d3ee); box-shadow: 0 4px 18px rgba(108,108,245,.5); }
+.lx-tp-midnight .lx-tp-cards { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); }
+/* Minimal — clean white */
+.lx-tp-minimal { background: #f1f5f9; }
+.lx-tp-minimal .lx-tp-nav { background: #fff; border-bottom-color: #e2e8f0; }
+.lx-tp-minimal .lx-tp-hero { background: #1e293b; border-radius: 8px; }
+.lx-tp-minimal .lx-tp-cards { background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(15,23,42,.06); }
+/* Terminal — near-black + green */
+.lx-tp-terminal { background: #0a0f0a; }
+.lx-tp-terminal .lx-tp-nav { background: #111a11; border-bottom-color: #166534; }
+.lx-tp-terminal .lx-tp-hero { background: #4ade80; box-shadow: 0 0 14px rgba(74,222,128,.6); }
+.lx-tp-terminal .lx-tp-cards { background: #0f1a0f; border: 1px solid #166534; }
+/* Creative — warm gradient */
+.lx-tp-creative { background: linear-gradient(150deg, #fdf2f8, #ede9fe); }
+.lx-tp-creative .lx-tp-nav { background: rgba(255,255,255,.6); border-bottom-color: rgba(139,92,246,.25); }
+.lx-tp-creative .lx-tp-hero { background: linear-gradient(90deg, #f472b6, #8b5cf6); border-radius: 999px; }
+.lx-tp-creative .lx-tp-cards { background: rgba(255,255,255,.75); border: 1px solid rgba(139,92,246,.3); }
+/* Aurora — frosted pastel */
+.lx-tp-aurora { background: linear-gradient(150deg, #e0e7ff, #fce7f3, #ccfbf1); }
+.lx-tp-aurora .lx-tp-nav { background: rgba(255,255,255,.5); backdrop-filter: blur(4px); border-bottom-color: rgba(99,102,241,.2); }
+.lx-tp-aurora .lx-tp-hero { background: linear-gradient(90deg, #a5b4fc, #f9a8d4); border-radius: 10px; }
+.lx-tp-aurora .lx-tp-cards { background: rgba(255,255,255,.6); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,.8); }
 /* Bento theme swatches */
 .lx-swatches { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
 .lx-swatches i { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); }
