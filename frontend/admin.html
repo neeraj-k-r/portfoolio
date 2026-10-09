@@ -86,8 +86,9 @@ let SITES = [];
 function row(r, queue) {
   const sub = `https://${r.username}.portfoolio.me`;
   return `<div class="rowline" data-search="${(r.username + ' ' + r.name + ' ' + r.email).toLowerCase()}">
+    <div style="display:flex;gap:10px;align-items:center"><span style="width:34px;height:34px;border-radius:50%;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:linear-gradient(135deg,#6c6cf5,#22d3ee)">${(r.name || r.username || '?').trim().charAt(0).toUpperCase()}</span>
     <div><b>@${r.username}</b> — ${r.name} <span class="st ${r.status}">${r.status}</span>
-      <div class="meta">${r.email} • ${r.title || ''} • ${new Date(r.created_at).toLocaleDateString()}</div></div>
+      <div class="meta">${r.email} • ${r.title || ''} • ${new Date(r.created_at).toLocaleDateString()}</div></div></div>
     <div class="acts">
       <a class="ghost-btn" href="/?u=${encodeURIComponent(r.username)}" target="_blank">Preview</a>
       ${r.status !== 'approved' ? `<button class="ok-btn" data-ok="${r.username}">Approve</button>` : ''}
