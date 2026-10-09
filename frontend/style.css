@@ -698,6 +698,10 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 /* Bento mini sparkline */
 .lx-spark { display: flex; align-items: flex-end; gap: 5px; height: 44px; margin-top: 16px; }
 .lx-spark i { flex: 1; border-radius: 3px; background: linear-gradient(180deg, #bef264, rgba(190,242,100,.25)); opacity: .85; }
+/* Theme gallery */
+.lx-gallery { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 30px; }
+.lx-theme-card { background: rgba(17,24,22,.7); border: 1px solid rgba(255,255,255,.09); border-radius: 18px; padding: 14px; text-align: left; cursor: pointer; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; font: inherit; color: inherit; }
+.lx-theme-card:hover, .lx-theme-card:focus-visible { transform: translateY(-5px); border-color: rgba(190,242,100,.45); box-shadow: 0 18px 40px rgba(0,0,0,.45); }
 /* Bento theme swatches */
 .lx-swatches { display: flex; align-items: center; gap: 8px; margin-top: 16px; }
 .lx-swatches i { width: 26px; height: 26px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2); }
