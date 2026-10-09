@@ -827,6 +827,13 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
   border-color: rgba(108, 108, 245, 0.4);
   box-shadow: 0 16px 40px rgba(108, 108, 245, 0.2);
 }
+/* Stats: gradient top accent line */
+.stat-card { position: relative; overflow: hidden; }
+.stat-card::before {
+  content: ""; position: absolute; top: 0; left: 20%; right: 20%; height: 2px; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #6c6cf5, #22d3ee, transparent);
+  opacity: .7;
+}
 .stat-num {
   font-family: 'Space Grotesk', sans-serif;
   font-size: clamp(32px, 3.5vw, 44px);
