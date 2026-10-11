@@ -952,6 +952,11 @@ function paintTrackTabs(profile) {
   const btn = (name) => document.querySelector(`.dash-tab-btn[onclick*="'${name}'"]`);
   ['projects', 'resume', 'proof'].forEach(n => { const b = btn(n); if (b) b.style.display = visual ? 'none' : ''; });
   if ($('tabBtnWorks')) $('tabBtnWorks').style.display = visual ? '' : 'none';
+  document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
+    const v = (c.querySelector('input') || {}).value || '';
+    const isVisualTheme = ['gallery', 'studio', 'noir'].includes(v);
+    c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
+  });
   if (visual) { paintWorks(); switchUserTab('works'); }
 }
 
