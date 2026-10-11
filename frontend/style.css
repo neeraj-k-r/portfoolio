@@ -622,8 +622,8 @@ body.lx .bg-fx { background:
   linear-gradient(#0b0f0e,#0b0f0e); }
 body.lx .grid-overlay { opacity: .2; }
 /* LX nav */
-.lx-nav { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); width: min(1180px,94%); z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: rgba(11,15,14,.78); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(190,242,100,.18); border-radius: 16px; transition: padding .25s ease, background .25s ease; }
-.lx-nav.scrolled, body.lx #mainNav.scrolled { padding: 8px 18px; background: rgba(11,15,14,.92); }
+.lx-nav { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); width: min(1180px,94%); z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: rgba(11,15,14,.78); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(190,242,100,.18); border-radius: 16px; transition: padding .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease); }
+.lx-nav.scrolled, body.lx #mainNav.scrolled { padding: 8px 18px; background: rgba(11,15,14,.92); border-color: rgba(190,242,100,.28); box-shadow: 0 14px 40px rgba(0,0,0,.45); }
 .lx-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .2px; color: #f2f5f1; }
 .lx-brand .lx-mark { color: #bef264; font-size: 22px; }
 .lx-brand .brand-logo, .dash-nav .logo .brand-logo, a.logo .brand-logo { width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0; display: inline-block; vertical-align: middle; }
