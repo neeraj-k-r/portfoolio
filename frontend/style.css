@@ -514,7 +514,7 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
   color: #ffffff;
   font-family: inherit;
   font-size: 14.5px;
-  transition: all 0.25s ease;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease), box-shadow 0.25s var(--ease);
   outline: none;
 }
 .input-wrapper input::placeholder {
