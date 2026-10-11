@@ -216,6 +216,26 @@ function skillsSection(p) {
       <span style="color:#22d3ee;font-size:13px;font-weight:800">View evidence →</span>
     </a>`).join('')}</div></section>`;
 }
+function pageGallery(p, wIdx) {
+  const works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
+  const i = parseInt(wIdx, 10);
+  const w = (!isNaN(i) && works[i]) ? works[i] : null;
+  const body = w
+    ? `<section class="wrap" style="padding:140px 0 20px;max-width:900px">
+      ${w.category ? `<span class="badge">✦ ${esc(w.category)}</span>` : ''}
+      <h1 style="font-size:clamp(32px,5vw,52px);margin:10px 0">${esc(w.title || 'Untitled')}</h1>
+      ${w.desc ? `<p style="color:var(--muted);font-size:16px">${esc(w.desc)}</p>` : ''}
+      <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" style="width:100%;border-radius:18px;margin-top:18px">
+      <p style="margin-top:16px"><a class="btn btn-ghost btn-sm" href="/">← ${esc(p.name)}</a></p></section>`
+    : `<header class="wrap" style="padding:140px 0 10px;text-align:center">
+      <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
+      <p style="color:var(--muted);font-size:17px">${esc(p.title || '')}</p>
+      <p style="color:var(--muted);font-size:14px;margin-top:6px">${esc(p.location || '')} · ${works.length} work${works.length === 1 ? '' : 's'}</p></header>
+    <section class="wrap" style="padding-top:10px"><div class="proj-grid" style="margin-top:18px">${works.map((k, n) => `
+      <a class="proj" href="/?w=${n}" style="text-decoration:none"><div class="proj-top p${(n % 6) + 1}"><img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" style="width:100%;height:100%;object-fit:cover"></div>
+      <div class="proj-body"><h3>${esc(k.title || 'Untitled')}</h3>${k.category ? `<p>${esc(k.category)}</p>` : ''}</div></a>`).join('') || '<p>No works published yet.</p>'}</div></section>`;
+  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body><div class="bg-fx"></div>${nav(p)}${body}${foot(p)}</body></html>`;
+}
 function page(p) {
   const tpl = (p.template || 'midnight').toLowerCase();
   const skills = (p.skills || []).map((s) => `<span class="badge">${esc(s)}</span>`).join('');
