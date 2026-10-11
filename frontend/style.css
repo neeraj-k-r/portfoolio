@@ -653,7 +653,7 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-kbd-hint kbd { font-family: 'JetBrains Mono',monospace; font-size: 11px; color: #d9f99d; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-bottom-width: 2px; border-radius: 6px; padding: 2px 7px; }
 /* Serif italic accent word (editorial contrast) */
 .lx-serif { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 400; letter-spacing: -1px; color: #bef264; }
-.lx-sub { color: #a7b3ab; font-size: 18px; max-width: 620px; margin: 0 auto; }
+.lx-sub { color: #b6c2ba; font-size: 18px; max-width: 620px; margin: 0 auto; line-height: 1.7; text-wrap: pretty; }
 .lx-sub strong { color: #f4f7f3; }
 .lx-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 30px 0 26px; }
 .lx-btn-lg { display: inline-flex; align-items: center; gap: 10px; background: #bef264; color: #0b0f0e; font-weight: 800; font-size: 16px; padding: 16px 30px; border-radius: 14px; box-shadow: 0 14px 40px rgba(190,242,100,.3); transition: transform .25s var(--ease), box-shadow .25s var(--ease); animation: ctaBreathe 3s ease-in-out infinite; }
