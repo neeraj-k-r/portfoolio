@@ -948,12 +948,20 @@ function setupUserDashboardView(profile) {
     });
     previewTemplate(profile.template);
 
-    paintUserProjects(profile);
-    paintShareSection(profile);
-    paintProof();
-    paintResumeTab();
-    paintUploadBanner();
-    paintTrackTabs(profile);
+    try {
+      paintUserProjects(profile);
+      paintShareSection(profile);
+      paintProof();
+      paintResumeTab();
+      paintUploadBanner();
+      paintTrackTabs(profile);
+    } catch (err) {
+      console.error('studio paint failed', err);
+      toast('⚠️ Studio hit a snag: ' + ((err && err.message) || err) + ' — tabs below still work');
+    }
+    // Self-heal: a claimed profile must never see an empty studio.
+    if (wizard) wizard.style.display = 'none';
+    if (studio) studio.style.display = 'block';
   }
 }
 // Show only the tabs that fit the profile track.
