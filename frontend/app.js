@@ -160,6 +160,41 @@ async function fetchGitHubInput(input) {
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
+// ---- Visual track: Behance-style gallery (no resume, no code) ----
+function galleryWorks(p) {
+  return Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
+}
+function renderGallery(p) {
+  p = normLocalProfile(p) || p;
+  document.body.dataset.template = '';
+  document.title = `${p.name} — visual portfolio | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = galleryWorks(p);
+  const cover = works[0];
+  app.innerHTML = `
+  <nav>
+    <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="btn btn-ghost btn-sm" href="/"><i class="fa-solid fa-plus"></i> Make yours</a>
+      ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Contact</a>` : ''}
+    </div>
+  </nav>
+  <header class="wrap" style="padding:140px 0 10px;text-align:center">
+    ${cover ? `<img src="${esc(cover.imageUrl)}" alt="" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">` : `<div style="width:120px;height:120px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:48px;background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee)">${esc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`}
+    <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
+    <p style="color:var(--muted);font-size:17px">${esc(p.title || '')}</p>
+    <p style="color:var(--muted);font-size:14px;margin-top:6px">${esc(p.location || '')} · ${works.length} work${works.length === 1 ? '' : 's'}</p>
+  </header>
+  <section class="wrap" style="padding-top:10px">
+    <div class="works-grid" id="galGrid" style="margin-top:18px">${works.map((w, i) => `
+      <div class="work-card" data-gal="${i}" style="cursor:pointer">
+        <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
+        <div class="work-meta" style="padding:12px 14px"><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small style="color:var(--muted)">${esc(w.category)}</small>` : ''}</div>
+      </div>`).join('') || '<p style="color:var(--muted)">No works published yet.</p>'}</div>
+  </section>
+  <footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b style="color:#fff">${esc(p.name)}</b> via <b style="color:#fff">portfoolio.me</b></div></div></footer>`;
+  window.scrollTo(0, 0);
+}
 function renderPortfolio(p) {
   p = normLocalProfile(p) || p;
   const tpl = String(p.template || 'midnight').toLowerCase();
