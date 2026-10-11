@@ -920,6 +920,9 @@ body[data-template="noir"]{background:#050807}
 body[data-template="noir"] .work-card{background:#0d1312;border-color:rgba(255,255,255,.1);border-radius:8px}
 body[data-template="noir"] .work-card img{height:220px}
 body[data-template="noir"] .btn-primary{background:#e7ece9;color:#050807;box-shadow:none}
+/* Visual theme: museum (framed art on warm gallery walls) */
+body[data-template="museum"]{background:#f4efe6;color:#241f1a}
+body[data-template="museum"] .bg-fx,body[data-template="museum"] .grid-overlay{display:none}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
