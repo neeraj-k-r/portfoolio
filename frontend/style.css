@@ -905,6 +905,13 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.works-grid{grid-template-columns:1fr}}
+/* Works tab: work card + cover badge */
+.work-card{background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:14px;overflow:hidden}
+.work-card img{width:100%;height:150px;object-fit:cover;display:block;background:#0b1226}
+.work-card .work-meta{padding:10px 12px;display:grid;gap:6px}
+.work-card input{background:rgba(0,0,0,.3);border:1px solid var(--stroke);border-radius:8px;padding:8px 10px;color:#fff;font-size:13px;width:100%}
+.work-cover{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:100px;background:rgba(163,230,53,.15);border:1px solid rgba(163,230,53,.45);color:#d9f99d}
+.work-row-btns{display:flex;gap:6px;flex-wrap:wrap}
 /* Scroll reveal (JS adds .in when visible) */
 #landing .lx-section, #landing .lx-logos { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
 #landing .lx-section.in, #landing .lx-logos.in { opacity: 1; transform: none; }
