@@ -1306,6 +1306,14 @@ if ($('builderForm')) {
       const isVisualTheme = ['gallery', 'studio', 'noir'].includes(v);
       c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
     });
+    const wantTpl = visual ? 'gallery' : 'midnight';
+    const wantInp = document.querySelector(`#tplGrid input[value="${wantTpl}"]`);
+    if (wantInp) {
+      document.querySelectorAll('#tplGrid .tpl-card').forEach(x => x.classList.remove('selected'));
+      wantInp.checked = true;
+      wantInp.closest('.tpl-card').classList.add('selected');
+      previewTemplate(wantTpl);
+    }
   }
   document.querySelectorAll('input[name=intrack]').forEach(r => r.addEventListener('change', paintClaimTrack));
   paintClaimTrack();
