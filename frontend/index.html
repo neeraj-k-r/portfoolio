@@ -922,7 +922,16 @@ function setupUserDashboardView(profile) {
   const wizard = $('subdomainWizardCard'), techSt = $('techStudio'), visSt = $('visualStudio');
   const headerName = $('userHeaderName'), statusPill = $('userStatusPill');
 
-  const visual = !!(profile && profile.track === 'visual');
+  const getTrack = (profile) => {
+    if (profile && profile.track) return profile.track;
+    // Fallback to localStorage for legacy profiles without DB track column
+    const ls = localStorage.getItem('portfoolio_track');
+    if (ls === 'visual' || ls === 'tech') return ls;
+    // Also sync localStorage with profile if profile has track
+    if (profile && profile.track) localStorage.setItem('portfoolio_track', profile.track);
+    return 'tech';
+  };
+  const visual = getTrack(profile) === 'visual';
   if (!profile || !profile.username) {
     if(wizard) wizard.style.display = '';
     if(techSt) techSt.style.display = 'none';
@@ -1377,6 +1386,8 @@ if ($('builderForm')) {
       show_instagram: !$('inShowInsta') || $('inShowInsta').checked,
       template, skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       track: claimTrack(), works: [],
+      // Persist track locally as fallback for legacy DB
+      (claimTrack() === 'visual' ? localStorage.setItem('portfoolio_track', 'visual') : localStorage.setItem('portfoolio_track', 'tech')),
       projects: [...manual, ...picked], available: true, status: 'approved', createdAt: new Date().toISOString(),
       experience: [], education: [],
       resume: { summary: ($('inResumeSummary') || {}).value ? $('inResumeSummary').value.trim().slice(0, 600) : '', theme: (document.querySelector('input[name=rstpl]:checked') || {}).value || 'ats' }
