@@ -193,6 +193,32 @@ function renderGallery(p) {
       </div>`).join('') || '<p style="color:var(--muted)">No works published yet.</p>'}</div>
   </section>
   <footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b style="color:#fff">${esc(p.name)}</b> via <b style="color:#fff">portfoolio.me</b></div></div></footer>`;
+  app.querySelectorAll('[data-gal]').forEach(c => c.onclick = () => renderWorkDetail(p, +c.dataset.gal));
+  window.scrollTo(0, 0);
+}
+function renderWorkDetail(p, idx) {
+  const works = galleryWorks(p);
+  const w = works[idx] || works[0];
+  if (!w) { renderGallery(p); return; }
+  document.title = `${w.title || 'Work'} — ${p.name} | portfoolio.me`;
+  const app = document.getElementById('app');
+  const back = portfolioPathURL(p.username);
+  app.innerHTML = `
+  <nav><a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
+  <a class="btn btn-ghost btn-sm" href="${back}">← ${esc(p.name)}</a></nav>
+  <section class="wrap" style="padding:140px 0 20px;max-width:900px">
+    ${w.category ? `<span class="badge">✦ ${esc(w.category)}</span>` : ''}
+    <h1 style="font-size:clamp(32px,5vw,52px);margin:10px 0">${esc(w.title || 'Untitled')}</h1>
+    ${w.desc ? `<p style="color:var(--muted);font-size:16px">${esc(w.desc)}</p>` : ''}
+    <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" style="width:100%;border-radius:18px;margin-top:18px;border:1px solid var(--stroke)">
+    <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+      ${idx > 0 ? `<button class="btn btn-ghost btn-sm" id="galPrev">← Prev</button>` : ''}
+      ${idx < works.length - 1 ? `<button class="btn btn-ghost btn-sm" id="galNext">Next →</button>` : ''}
+    </div>
+  </section>`;
+  const pv = document.getElementById('galPrev'), nx = document.getElementById('galNext');
+  if (pv) pv.onclick = () => renderWorkDetail(p, idx - 1);
+  if (nx) nx.onclick = () => renderWorkDetail(p, idx + 1);
   window.scrollTo(0, 0);
 }
 function renderPortfolio(p) {
