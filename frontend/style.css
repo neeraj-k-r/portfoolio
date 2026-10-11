@@ -927,7 +927,8 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-auth-points { list-style: none; margin: 22px 0; padding: 0; display: grid; gap: 10px; }
 .lx-auth-points li { display: flex; align-items: center; gap: 10px; color: #a7b3ab; font-size: 15px; }
 .lx-auth-points i { color: #bef264; }
-.lx-auth-card { background: rgba(17,24,22,.9); border: 1px solid rgba(190,242,100,.22); border-radius: 22px; padding: 30px 28px; box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+.lx-auth-card { background: rgba(17,24,22,.9); border: 1px solid rgba(190,242,100,.22); border-radius: 22px; padding: 30px 28px; box-shadow: 0 24px 60px rgba(0,0,0,.45); transition: border-color .3s var(--ease), box-shadow .3s var(--ease); }
+.lx-auth-card:hover { border-color: rgba(190,242,100,.35); box-shadow: 0 28px 70px rgba(0,0,0,.5), 0 0 40px rgba(190,242,100,.06); }
 /* LX auth: retint kept tab + input + button classes */
 .lx-auth-card .auth-tab.active { background: linear-gradient(135deg,#bef264,#34d399); color: #0b0f0e; box-shadow: 0 4px 16px rgba(190,242,100,.35); }
 .lx-auth-card .input-wrapper input { background: rgba(0,0,0,.4); border-color: rgba(255,255,255,.12); color: #f4f7f3; }
