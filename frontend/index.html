@@ -917,17 +917,20 @@ function showAppRole(role, emailOrUser, profile = null) {
 syncLx();
 
 function setupUserDashboardView(profile) {
-  const wizard = $('subdomainWizardCard'), studio = $('userStudioHub');
+  const wizard = $('subdomainWizardCard'), techSt = $('techStudio'), visSt = $('visualStudio');
   const headerName = $('userHeaderName'), statusPill = $('userStatusPill');
 
+  const visual = !!(profile && profile.track === 'visual');
   if (!profile || !profile.username) {
     if(wizard) wizard.style.display = '';
-    if(studio) studio.style.display = 'none';
+    if(techSt) techSt.style.display = 'none';
+    if(visSt) visSt.style.display = 'none';
     if(headerName) headerName.textContent = 'Developer';
     if(statusPill) { statusPill.textContent = '● NO SUBDOMAIN CLAIMED'; statusPill.className = 'status-pill none'; }
   } else {
     if(wizard) wizard.style.display = 'none';
-    if(studio) studio.style.display = '';
+    if(techSt) techSt.style.display = visual ? 'none' : 'block';
+    if(visSt) visSt.style.display = visual ? 'block' : 'none';
     if(headerName) headerName.textContent = profile.name ? profile.name.split(' ')[0] : profile.username;
 
     const st = profile.status || 'pending';
@@ -977,15 +980,13 @@ function setupUserDashboardView(profile) {
     }
     // Self-heal: a claimed profile must never see an empty studio.
     if (wizard) wizard.style.display = 'none';
-    if (studio) studio.style.display = 'block';
+    if (techSt) techSt.style.display = visual ? 'none' : 'block';
+    if (visSt) visSt.style.display = visual ? 'block' : 'none';
   }
 }
-// Show only the tabs that fit the profile track.
+// Track extras: theme grid shows the active track's themes; visual lands on Works.
 function paintTrackTabs(profile) {
   const visual = (profile && profile.track) === 'visual';
-  const btn = (name) => document.querySelector(`.dash-tab-btn[onclick*="'${name}'"]`);
-  ['projects', 'resume', 'proof'].forEach(n => { const b = btn(n); if (b) b.style.display = visual ? 'none' : ''; });
-  if ($('tabBtnWorks')) $('tabBtnWorks').style.display = visual ? '' : 'none';
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
     const v = (c.querySelector('input') || {}).value || '';
     const isVisualTheme = ['gallery', 'studio', 'noir'].includes(v);
