@@ -969,6 +969,12 @@ body[data-template="bloom"] .works-grid{gap:22px}
 body[data-template="bloom"] .work-card{background:rgba(255,255,255,.72);border-color:rgba(255,182,213,.55);border-radius:22px;backdrop-filter:blur(10px);box-shadow:0 14px 34px rgba(214,140,190,.18);transition:transform .3s ease,box-shadow .3s ease}
 body[data-template="bloom"] .work-card:hover{transform:translateY(-6px) scale(1.015);box-shadow:0 22px 46px rgba(196,132,220,.26)}
 body[data-template="bloom"] .work-card img{height:200px;border-radius:18px 18px 0 0}
+body[data-template="bloom"] .work-card .work-meta{padding:14px 16px 16px}
+body[data-template="bloom"] .work-card b{font-size:15.5px;font-weight:700;color:#4a3560}
+body[data-template="bloom"] .work-card small{display:block;margin-top:3px;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#b07cc6}
+body[data-template="bloom"] .btn-primary{background:linear-gradient(135deg,#f472b6,#a78bfa);color:#fff;border:none;box-shadow:0 8px 20px rgba(196,132,220,.4)}
+body[data-template="bloom"] .btn-primary:hover{filter:brightness(1.06)}
+body[data-template="bloom"] #app h1{background:linear-gradient(120deg,#e879a8,#a78bfa,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
