@@ -1003,6 +1003,28 @@ if ($('workUpBtn')) $('workUpBtn').onclick = async () => {
   paintWorks();
   if ($('workMsg')) $('workMsg').textContent = n ? `Uploaded ${n} — edit titles below, then Save Changes.` : 'Upload failed — retry.';
 };
+function paintWorks() {
+  const body = $('worksBody');
+  if (!body || !activeUserProfile) return;
+  const works = Array.isArray(activeUserProfile.works) ? activeUserProfile.works : [];
+  if (!works.length) { body.innerHTML = '<p style="color:var(--muted);font-size:13px">No works yet — upload your first images above.</p>'; return; }
+  body.innerHTML = `<div class="works-grid">` + works.map((w, i) => `
+    <div class="work-card">
+      <img src="${w.imageUrl}" alt="" loading="lazy" onerror="this.style.display='none'">
+      <div class="work-meta">
+        ${i === 0 ? '<span class="work-cover">★ Cover</span>' : ''}
+        <input data-work="title" data-i="${i}" value="${String(w.title || '').replace(/"/g, '&quot;')}" placeholder="Title">
+        <input data-work="category" data-i="${i}" value="${String(w.category || '').replace(/"/g, '&quot;')}" placeholder="Category (painting, sport…)">
+        <input data-work="desc" data-i="${i}" value="${String(w.desc || '').replace(/"/g, '&quot;')}" placeholder="Short description">
+        <div class="work-row-btns">
+          <button data-wcover="${i}">Cover</button>
+          <button data-wup="${i}">↑</button>
+          <button data-wdown="${i}">↓</button>
+          <button data-wrm="${i}">Remove</button>
+        </div>
+      </div>
+    </div>`).join('') + `</div>`;
+}
 function techChipsHTML(pr) {
   const techs = (window.PortfoolioEvidence ? PortfoolioEvidence.projectTechs(pr) : (pr.technologies || []));
   return techs.map(t => `<span class="badge" style="font-size:11px">✦ ${t}</span>`).join('');
