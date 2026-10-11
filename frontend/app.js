@@ -206,6 +206,19 @@ function renderGallery(p) {
           <div class="museum-plaque-text"><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small>${esc(w.category)}</small>` : ''}</div>
         </figcaption>
       </figure>`).join('') || emptyMsg}</section>`;
+  } else if (document.body.dataset.template === 'bloom') {
+    headHtml = `<header class="wrap gal-bloom-head">
+      <div class="bloom-orb"></div>
+      ${srcAvatar ? `<img class="bloom-portrait" src="${esc(srcAvatar)}" alt="${esc(p.name || '')}">` : `<div class="bloom-portrait bloom-portrait-fallback">${letter}</div>`}
+      <h1>${esc(p.name)}</h1>
+      <p class="bloom-sub">${esc(p.title || '')}</p>
+      <p class="bloom-meta">${esc(p.location || '')} · ${countLabel}</p>
+    </header>`;
+    gridHtml = `<section class="wrap bloom-masonry">${works.map((w, i) => `
+      <figure class="bloom-tile ${i % 5 === 0 ? 'tall' : ''}" data-gal="${i}">
+        <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
+        <figcaption><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small>${esc(w.category)}</small>` : ''}</figcaption>
+      </figure>`).join('') || emptyMsg}</section>`;
   } else {
     const face = srcAvatar
       ? `<img src="${esc(srcAvatar)}" alt="${esc(p.name || '')}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">`
