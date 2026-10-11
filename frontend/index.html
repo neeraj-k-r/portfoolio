@@ -1301,6 +1301,7 @@ if ($('builderForm')) {
     if ($('inRsSummaryRow')) $('inRsSummaryRow').style.display = visual ? 'none' : '';
     if ($('inRsThemeRow')) $('inRsThemeRow').style.display = visual ? 'none' : '';
     if ($('inSkillsRow')) $('inSkillsRow').style.display = visual ? 'none' : '';
+    if ($('inP1Block')) $('inP1Block').style.display = visual ? 'none' : 'contents';
     if ($('inTrackHint')) $('inTrackHint').style.display = visual ? '' : 'none';
     document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
       const v = (c.querySelector('input') || {}).value || '';
