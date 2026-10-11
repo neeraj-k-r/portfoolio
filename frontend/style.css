@@ -655,10 +655,12 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-sub { color: #a7b3ab; font-size: 18px; max-width: 620px; margin: 0 auto; }
 .lx-sub strong { color: #f4f7f3; }
 .lx-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin: 30px 0 26px; }
-.lx-btn-lg { display: inline-flex; align-items: center; gap: 10px; background: #bef264; color: #0b0f0e; font-weight: 800; font-size: 16px; padding: 16px 30px; border-radius: 14px; box-shadow: 0 14px 40px rgba(190,242,100,.3); transition: transform .2s ease, box-shadow .2s ease; animation: ctaBreathe 3s ease-in-out infinite; }
+.lx-btn-lg { display: inline-flex; align-items: center; gap: 10px; background: #bef264; color: #0b0f0e; font-weight: 800; font-size: 16px; padding: 16px 30px; border-radius: 14px; box-shadow: 0 14px 40px rgba(190,242,100,.3); transition: transform .25s var(--ease), box-shadow .25s var(--ease); animation: ctaBreathe 3s ease-in-out infinite; }
 .lx-btn-lg:hover { transform: translateY(-3px); }
-.lx-btn-ghost { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14); color: #e7ece9; font-weight: 700; font-size: 16px; padding: 16px 26px; border-radius: 14px; transition: all .2s ease; }
-.lx-btn-ghost:hover { background: rgba(255,255,255,.1); transform: translateY(-3px); }
+.lx-btn-lg:active { transform: translateY(0) scale(.98); animation: none; }
+.lx-btn-ghost { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.14); color: #e7ece9; font-weight: 700; font-size: 16px; padding: 16px 26px; border-radius: 14px; transition: background .25s var(--ease), transform .25s var(--ease), border-color .25s var(--ease); }
+.lx-btn-ghost:hover { background: rgba(255,255,255,.1); transform: translateY(-3px); border-color: rgba(255,255,255,.24); }
+.lx-btn-ghost:active { transform: translateY(0) scale(.98); }
 .lx-proof { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
 .lx-avatars { display: flex; }
 .lx-avatars span { width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #0b0f0e; background: linear-gradient(135deg,#bef264,#34d399); border: 2px solid #0b0f0e; margin-left: -10px; }
