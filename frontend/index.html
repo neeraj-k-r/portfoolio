@@ -1212,6 +1212,7 @@ if ($('builderForm')) {
       showInstagram: !$('inShowInsta') || $('inShowInsta').checked,
       show_instagram: !$('inShowInsta') || $('inShowInsta').checked,
       template, skills: $('inSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
+      track: claimTrack(), works: [],
       projects: [...manual, ...picked], available: true, status: 'approved', createdAt: new Date().toISOString(),
       experience: [], education: [],
       resume: { summary: ($('inResumeSummary') || {}).value ? $('inResumeSummary').value.trim().slice(0, 600) : '', theme: (document.querySelector('input[name=rstpl]:checked') || {}).value || 'ats' }
