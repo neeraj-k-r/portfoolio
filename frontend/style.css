@@ -978,6 +978,24 @@ body[data-template="museum"] .proj-body h3{font-family:Georgia,'Times New Roman'
 .cat-arrow{font-size:20px;color:#bbb;transition:transform .25s ease,color .25s ease}
 .cat-row:hover .cat-arrow{color:#111;transform:translateX(6px)}
 @media(max-width:760px){.cat-row{grid-template-columns:44px 1fr;gap:12px}.cat-thumb{grid-column:2}.cat-arrow{display:none}.cat-portrait{display:none}}
+/* Bloom: portrait header + tall-tile masonry */
+.gal-bloom-head{padding:150px 0 36px;text-align:center;position:relative}
+.bloom-orb{position:absolute;top:120px;left:50%;transform:translateX(-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(244,114,182,.28),rgba(167,139,250,.18) 45%,transparent 70%);filter:blur(30px);pointer-events:none;z-index:-1}
+.bloom-portrait{width:140px;height:140px;object-fit:cover;border-radius:50%;margin:0 auto 18px;display:block;border:5px solid #fff;box-shadow:0 20px 50px rgba(196,132,220,.35)}
+.bloom-portrait-fallback{display:grid!important;place-items:center;font-size:54px;font-weight:800;color:#fff;background:linear-gradient(135deg,#f472b6,#a78bfa,#60a5fa)}
+.gal-bloom-head h1{font-family:Georgia,serif;font-size:clamp(38px,5vw,56px);margin:0;background:linear-gradient(120deg,#e879a8,#a78bfa,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
+.bloom-sub{font-size:17px;color:#6b5b8a;margin:10px 0 0}
+.bloom-meta{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#a78bba;margin:12px 0 0}
+.bloom-masonry{columns:3;column-gap:20px;padding:10px 0 100px}
+.bloom-tile{break-inside:avoid;margin:0 0 20px;background:rgba(255,255,255,.75);border:1px solid rgba(255,182,213,.5);border-radius:20px;overflow:hidden;backdrop-filter:blur(8px);box-shadow:0 14px 34px rgba(214,140,190,.2);cursor:pointer;transition:transform .3s ease,box-shadow .3s ease}
+.bloom-tile:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 24px 48px rgba(196,132,220,.3)}
+.bloom-tile img{width:100%;display:block}
+.bloom-tile.tall img{min-height:320px;object-fit:cover}
+.bloom-tile figcaption{padding:14px 16px 16px}
+.bloom-tile figcaption b{display:block;font-size:15px;font-weight:700;color:#4a3560}
+.bloom-tile figcaption small{display:block;margin-top:3px;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#b07cc6}
+@media(max-width:900px){.bloom-masonry{columns:2}}
+@media(max-width:620px){.bloom-masonry{columns:1}}
 /* Visual theme: catalog (print art-book, numbered plates) */
 body[data-template="catalog"]{background:#faf9f7;color:#111}
 body[data-template="catalog"] .bg-fx,body[data-template="catalog"] .grid-overlay{display:none}
