@@ -608,6 +608,9 @@ body.lx .grid-overlay { opacity: .2; }
 .lx-nav.scrolled, body.lx #mainNav.scrolled { padding: 8px 18px; background: rgba(11,15,14,.92); }
 .lx-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .2px; color: #f2f5f1; }
 .lx-brand .lx-mark { color: #bef264; font-size: 22px; }
+.lx-brand .brand-logo, .dash-nav .logo .brand-logo, a.logo .brand-logo { width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+.dash-nav .logo { display: inline-flex; align-items: center; gap: 10px; }
+.lx-brand.sm .brand-logo { width: 24px; height: 24px; }
 .lx-brand em { font-style: normal; color: #bef264; font-size: 12px; font-weight: 700; }
 .lx-nav-cta { display: flex; align-items: center; gap: 12px; }
 .lx-login { color: #c9d2cc; font-weight: 600; font-size: 14px; }
