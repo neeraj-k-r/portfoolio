@@ -901,6 +901,12 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-auth-card .btn-primary-block { background: #bef264; color: #0b0f0e; }
 .lx-btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.14); color: #e7ece9; padding: 12px 20px; border-radius: 12px; font-weight: 700; }
 .lx-btn-ghost:hover { border-color: rgba(190,242,100,.5); color: #bef264; }
+/* Visual theme: gallery (masonry stagger) */
+body[data-template="gallery"] .works-grid{grid-template-columns:repeat(3,1fr);align-items:start}
+body[data-template="gallery"] .work-card:nth-child(3n+2){transform:translateY(26px)}
+body[data-template="gallery"] .work-card img{height:190px}
+body[data-template="gallery"] .work-card:nth-child(3n) img{height:150px}
+body[data-template="gallery"] .work-card:nth-child(3n+1) img{height:230px}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
