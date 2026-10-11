@@ -413,6 +413,12 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       
       <form id="builderForm" class="contact-form">
         <div class="form-grid">
+          <div class="full"><label class="flabel">I am a… *</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="inTrackRow">
+              <label class="gh-repo" style="padding:10px 12px"><input type="radio" name="intrack" value="tech" checked> <span><b>💻 Technical</b><br><small>Developer flow: GitHub sync, resume, code themes</small></span></label>
+              <label class="gh-repo" style="padding:10px 12px"><input type="radio" name="intrack" value="visual"> <span><b>🎨 Visual &amp; Creative</b><br><small>Art, craft, sport, photo — image gallery, no GitHub</small></span></label>
+            </div>
+          </div>
           <div><label class="flabel">Subdomain Name *</label><input id="inUser" required minlength="3" maxlength="30" placeholder="neerajkr"></div>
           <div><label class="flabel">Full Name *</label><input id="inName" required placeholder="Neeraj K R"></div>
           <div class="full"><label class="flabel">Headline Title <small style="font-weight:600;text-transform:none;letter-spacing:0">(optional — defaults to “Aspiring Developer”)</small></label><input id="inTitle" placeholder="Full-Stack Developer & AI Engineer"></div>
