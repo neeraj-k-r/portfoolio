@@ -1126,7 +1126,7 @@ function paintShareSection(p) {
   const sub = `https://${p.username}.portfoolio.me`, path = `${location.origin}/?u=${encodeURIComponent(p.username)}`;
   if($('shareSub')) $('shareSub').textContent = sub;
   if($('sharePath')) $('sharePath').textContent = 'Direct link: ' + path;
-  if($('shareResume')) $('shareResume').textContent = 'Resume: ' + `${location.origin}/?u=${encodeURIComponent(p.username)}&resume=1`;
+  if($('shareResume')) $('shareResume').textContent = (p.track === 'visual') ? '' : 'Resume: ' + `${location.origin}/?u=${encodeURIComponent(p.username)}&resume=1`;
   if($('edPreviewBtn')) $('edPreviewBtn').href = path;
 
   const text = encodeURIComponent(`Check out my portfolio: ${p.name} — ${p.title}`);
