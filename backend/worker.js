@@ -414,6 +414,13 @@ export default {
       if (hit) return hit;
       // storage empty / deleted → fall through to builder theme instead of 404
     }
+    // visual track renders the gallery, not the code portfolio
+    if (p.track === 'visual') {
+      const html = pageGallery(p, url.searchParams.get('w'));
+      return new Response(html, {
+        headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300' },
+      });
+    }
     const m = url.pathname.match(/^\/skills\/([^/]+)\/?$/);
     const html = m ? pageSkill(p, decodeURIComponent(m[1])) : page(p);
     return new Response(html, {
