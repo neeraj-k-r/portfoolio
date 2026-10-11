@@ -638,7 +638,22 @@ document.addEventListener('DOMContentLoaded', async () => {
       themeBtns.forEach(btn => {
         if (btn.dataset.theme === themeName) {
           btn.classList.add('active');
-        } else {
+  } else if (document.body.dataset.template === 'catalog') {
+    headHtml = `<header class="wrap gal-catalog-head">
+      <p class="cat-kicker">— CATALOGUE —</p>
+      <h1>${esc(p.name)}</h1>
+      <p class="cat-sub">${esc(p.title || '')}</p>
+      <p class="cat-meta">${esc(p.location || '')} · ${countLabel}</p>
+      ${srcAvatar ? `<img class="cat-portrait" src="${esc(srcAvatar)}" alt="${esc(p.name || '')}">` : ''}
+    </header>`;
+    gridHtml = `<section class="wrap cat-index">${works.map((w, i) => `
+      <article class="cat-row" data-gal="${i}">
+        <span class="cat-no">${String(i + 1).padStart(2, '0')}</span>
+        <div class="cat-thumb"><img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy"></div>
+        <div class="cat-text"><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small>${esc(w.category)}</small>` : ''}${w.desc ? `<p>${esc(w.desc)}</p>` : ''}</div>
+        <span class="cat-arrow">→</span>
+      </article>`).join('') || emptyMsg}</section>`;
+  } else {
           btn.classList.remove('active');
         }
       });
