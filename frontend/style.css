@@ -401,8 +401,8 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
 .admin-head{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap;border-bottom:1px solid var(--stroke);padding-bottom:16px}
 
 .admin-tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
-.admin-tile{background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:18px;padding:18px;transition:.25s}
-.admin-tile:hover{transform:translateY(-3px)}
+.admin-tile{background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:18px;padding:18px;transition:transform .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease)}
+.admin-tile:hover{transform:translateY(-3px);border-color:rgba(251,191,36,.4);box-shadow:var(--sh-sm)}
 .admin-tile b{font-family:'Space Grotesk',sans-serif;font-size:36px;line-height:1;display:block;margin-bottom:4px}
 .admin-tile span{font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
 .admin-tile.pending b{color:#fde68a}.admin-tile.live b{color:#d9f99d}.admin-tile.total b{color:#22d3ee}.admin-tile.rejected b{color:#f9a8d4}
