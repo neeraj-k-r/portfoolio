@@ -3,6 +3,9 @@
   --stroke:rgba(255,255,255,.12); --txt:#eef2ff; --muted:#9aa3c0; --muted2:#6b7594;
   --brand:#6c6cf5; --brand2:#22d3ee; --lime:#a3e635; --pink:#f472b6; --amber:#fbbf24;
   --radius:20px; --shadow:0 20px 60px rgba(0,0,0,.5);
+  --r-sm:10px; --r-md:14px; --r-lg:20px; --r-xl:26px;
+  --sh-sm:0 4px 14px rgba(0,0,0,.28); --sh-md:0 12px 32px rgba(0,0,0,.38); --sh-lg:0 24px 64px rgba(0,0,0,.5);
+  --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:90px;-webkit-text-size-adjust:100%}
