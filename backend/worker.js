@@ -222,7 +222,7 @@ function skillsSection(p) {
     </a>`).join('')}</div></section>`;
 }
 function pageGallery(p, wIdx) {
-  const vtpl = ['gallery', 'studio', 'noir'].includes(String(p.template || '').toLowerCase()) ? String(p.template).toLowerCase() : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(p.template || '').toLowerCase()) ? String(p.template).toLowerCase() : 'gallery';
   const works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   const i = parseInt(wIdx, 10);
   const w = (!isNaN(i) && works[i]) ? works[i] : null;
