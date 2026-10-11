@@ -962,6 +962,9 @@ body[data-template="catalog"] .proj-top::before{display:none}
 body[data-template="catalog"] .proj-body h3{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:500;color:#111}
 body[data-template="catalog"] .proj-body p{color:#666;text-transform:uppercase;letter-spacing:.12em;font-size:11px}
 @media(max-width:620px){body[data-template="catalog"] .works-grid{gap:26px 16px}body[data-template="catalog"] .work-card img{height:200px}}
+/* Visual theme: bloom (soft pastel dream) */
+body[data-template="bloom"]{background:linear-gradient(160deg,#fff7fb 0%,#f7f3ff 50%,#f0f9ff 100%);color:#3b2f4a}
+body[data-template="bloom"] .bg-fx,body[data-template="bloom"] .grid-overlay{display:none}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
