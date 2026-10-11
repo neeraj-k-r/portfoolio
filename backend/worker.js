@@ -230,6 +230,9 @@ function pageGallery(p, wIdx) {
   const face = avatar
     ? `<img src="${esc(avatar)}" alt="${esc(p.name || '')}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">`
     : '';
+  const letter = esc((p.name || '?').trim().charAt(0).toUpperCase());
+  const countLabel = `${works.length} work${works.length === 1 ? '' : 's'}`;
+  const emptyMsg = '<p>No works published yet.</p>';
   const body = w
     ? `<section class="wrap" style="padding:140px 0 20px;max-width:900px">
       ${w.category ? `<span class="badge">✦ ${esc(w.category)}</span>` : ''}
@@ -237,14 +240,30 @@ function pageGallery(p, wIdx) {
       ${w.desc ? `<p style="color:var(--muted);font-size:16px">${esc(w.desc)}</p>` : ''}
       <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" style="width:100%;border-radius:18px;margin-top:18px">
       <p style="margin-top:16px"><a class="btn btn-ghost btn-sm" href="/">← ${esc(p.name)}</a></p></section>`
+    : vtpl === 'museum'
+    ? `<header class="wrap gal-museum-head">
+      ${avatar ? `<img class="museum-portrait" src="${esc(avatar)}" alt="${esc(p.name || '')}">` : `<div class="museum-portrait museum-portrait-fallback">${letter}</div>`}
+      <p class="museum-kicker">— EXHIBITION —</p>
+      <h1>${esc(p.name)}</h1>
+      <p class="museum-sub">${esc(p.title || '')}</p>
+      <p class="museum-meta">${esc(p.location || '')} · ${countLabel}</p>
+    </header>
+    <section class="wrap museum-hang">${works.map((k, n) => `
+      <a class="museum-piece" href="/?w=${n}" style="text-decoration:none;color:inherit">
+        <div class="museum-frame"><img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy"></div>
+        <div class="museum-plaque">
+          <span class="museum-no">${String(n + 1).padStart(2, '0')}</span>
+          <div class="museum-plaque-text"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}</div>
+        </div>
+      </a>`).join('') || emptyMsg}</section>`
     : `<header class="wrap" style="padding:140px 0 10px;text-align:center">
       ${face}
       <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
       <p style="color:var(--muted);font-size:17px">${esc(p.title || '')}</p>
-      <p style="color:var(--muted);font-size:14px;margin-top:6px">${esc(p.location || '')} · ${works.length} work${works.length === 1 ? '' : 's'}</p></header>
+      <p style="color:var(--muted);font-size:14px;margin-top:6px">${esc(p.location || '')} · ${countLabel}</p></header>
     <section class="wrap" style="padding-top:10px"><div class="proj-grid" style="margin-top:18px">${works.map((k, n) => `
       <a class="proj" href="/?w=${n}" style="text-decoration:none"><div class="proj-top p${(n % 6) + 1}"><img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" style="width:100%;height:100%;object-fit:cover"></div>
-      <div class="proj-body"><h3>${esc(k.title || 'Untitled')}</h3>${k.category ? `<p>${esc(k.category)}</p>` : ''}</div></a>`).join('') || '<p>No works published yet.</p>'}</div></section>`;
+      <div class="proj-body"><h3>${esc(k.title || 'Untitled')}</h3>${k.category ? `<p>${esc(k.category)}</p>` : ''}</div></a>`).join('') || emptyMsg}</div></section>`;
   return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body data-template="${vtpl}"><div class="bg-fx"></div>${nav(p)}${body}${foot(p)}</body></html>`;
 }
 function page(p) {
