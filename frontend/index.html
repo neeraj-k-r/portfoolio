@@ -976,6 +976,14 @@ if ($('edAvatarRm')) $('edAvatarRm').onclick = () => {
   draftAvatar = ''; if ($('edAvatarFile')) $('edAvatarFile').value = '';
   paintAvatarPreview(); $('edAvatarMsg').textContent = 'Removed — hit Save Changes.';
 };
+// Works tab: keep only real images, ≤5MB each, max 10 per batch.
+function validWorkFiles(list) {
+  const files = [...(list || [])].filter(f => /^image\//.test(f.type || ''));
+  if (!files.length) { toast('❌ Pick image files first'); return []; }
+  const ok = files.filter(f => f.size <= 5 * 1024 * 1024);
+  if (ok.length < files.length) toast('⚠️ Skipped files over 5MB');
+  return ok.slice(0, 10);
+}
 function techChipsHTML(pr) {
   const techs = (window.PortfoolioEvidence ? PortfoolioEvidence.projectTechs(pr) : (pr.technologies || []));
   return techs.map(t => `<span class="badge" style="font-size:11px">✦ ${t}</span>`).join('');
