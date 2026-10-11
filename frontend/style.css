@@ -940,6 +940,15 @@ body[data-template="museum"] .proj:hover{transform:translateY(-6px);box-shadow:0
 body[data-template="museum"] .proj-top{background:#f4efe6}
 body[data-template="museum"] .proj-top::before{display:none}
 body[data-template="museum"] .proj-body h3{font-family:Georgia,'Times New Roman',serif;font-weight:600;color:#2c2416}
+/* Visual theme: catalog (print art-book, numbered plates) */
+body[data-template="catalog"]{background:#faf9f7;color:#111}
+body[data-template="catalog"] .bg-fx,body[data-template="catalog"] .grid-overlay{display:none}
+body[data-template="catalog"] .works-grid{counter-reset:plate;gap:34px 22px}
+body[data-template="catalog"] .work-card{background:transparent;border:none;border-top:2px solid #111;border-radius:0;padding:0;overflow:visible}
+body[data-template="catalog"] .work-card::before{counter-increment:plate;content:"PLATE " counter(plate, decimal-leading-zero);display:block;font-size:10.5px;font-weight:800;letter-spacing:.22em;color:#111;padding:10px 0 8px}
+body[data-template="catalog"] .work-card img{height:230px;border-radius:0;filter:grayscale(.15)}
+body[data-template="catalog"] .work-card:hover img{filter:none}
+body[data-template="catalog"] .work-card .work-meta{padding:12px 0 0}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
