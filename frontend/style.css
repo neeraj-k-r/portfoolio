@@ -991,9 +991,11 @@ body[data-template="museum"] .proj-body h3{font-family:Georgia,'Times New Roman'
 .bloom-tile:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 24px 48px rgba(196,132,220,.3)}
 .bloom-tile img{width:100%;display:block}
 .bloom-tile.tall img{min-height:320px;object-fit:cover}
-.bloom-tile figcaption{padding:14px 16px 16px}
-.bloom-tile figcaption b{display:block;font-size:15px;font-weight:700;color:#4a3560}
-.bloom-tile figcaption small{display:block;margin-top:3px;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#b07cc6}
+.bloom-tile figcaption,.bloom-tile .bloom-cap{padding:14px 16px 16px}
+.bloom-tile figcaption b,.bloom-tile .bloom-cap b{display:block;font-size:15px;font-weight:700;color:#4a3560}
+.bloom-tile figcaption small,.bloom-tile .bloom-cap small{display:block;margin-top:3px;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#b07cc6}
+a.bloom-tile,a.museum-piece,a.cat-row{display:block}
+a.museum-piece,a.cat-row{color:inherit}
 @media(max-width:900px){.bloom-masonry{columns:2}}
 @media(max-width:620px){.bloom-masonry{columns:1}}
 /* Visual theme: catalog (print art-book, numbered plates) */
