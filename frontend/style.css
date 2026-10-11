@@ -919,7 +919,7 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-cta-banner:hover { border-color: rgba(190,242,100,.55); box-shadow: 0 0 60px rgba(190,242,100,.12); }
 .lx-cta-banner::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(rgba(190,242,100,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(190,242,100,.07) 1px, transparent 1px); background-size: 44px 44px; mask-image: radial-gradient(60% 80% at 50% 50%, #000 20%, transparent 100%); -webkit-mask-image: radial-gradient(60% 80% at 50% 50%, #000 20%, transparent 100%); pointer-events: none; }
 .lx-cta-banner > * { position: relative; }
-.lx-cta-banner h2 { font-family: 'Space Grotesk',sans-serif; font-size: clamp(32px,5vw,56px); letter-spacing: -2px; color: #f4f7f3; margin-bottom: 10px; }
+.lx-cta-banner h2 { font-family: 'Space Grotesk',sans-serif; font-size: clamp(32px,5vw,56px); letter-spacing: -2px; color: #f4f7f3; margin-bottom: 10px; text-wrap: balance; }
 .lx-cta-banner h2 span { color: #bef264; }
 .lx-cta-banner p { color: #a7b3ab; margin-bottom: 26px; }
 /* LX auth split */
