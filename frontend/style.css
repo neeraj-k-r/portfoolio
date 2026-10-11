@@ -954,6 +954,13 @@ body[data-template="catalog"] .work-card small{display:block;margin-top:3px;font
 body[data-template="catalog"] .btn-primary{background:#111;color:#faf9f7;border:none}
 body[data-template="catalog"] .btn-primary:hover{background:#333}
 body[data-template="catalog"] #app h1{font-family:Georgia,'Times New Roman',serif;font-weight:500}
+body[data-template="catalog"] section img[style*="border-radius"]{border-radius:0!important;filter:grayscale(.15)}
+/* Catalog: subdomain pages render works as .proj cards (worker gallery) */
+body[data-template="catalog"] .proj{background:transparent;border:none;border-top:2px solid #111;border-radius:0;box-shadow:none}
+body[data-template="catalog"] .proj-top{background:transparent;border-radius:0}
+body[data-template="catalog"] .proj-top::before{display:none}
+body[data-template="catalog"] .proj-body h3{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:500;color:#111}
+body[data-template="catalog"] .proj-body p{color:#666;text-transform:uppercase;letter-spacing:.12em;font-size:11px}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
