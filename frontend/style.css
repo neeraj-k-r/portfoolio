@@ -923,6 +923,10 @@ body[data-template="noir"] .btn-primary{background:#e7ece9;color:#050807;box-sha
 /* Visual theme: museum (framed art on warm gallery walls) */
 body[data-template="museum"]{background:#f4efe6;color:#241f1a}
 body[data-template="museum"] .bg-fx,body[data-template="museum"] .grid-overlay{display:none}
+body[data-template="museum"] .works-grid{gap:26px}
+body[data-template="museum"] .work-card{background:#fffdf8;border-color:#e4d9c5;border-radius:2px;padding:14px 14px 0;box-shadow:0 18px 40px rgba(60,45,20,.12);transition:transform .3s ease,box-shadow .3s ease}
+body[data-template="museum"] .work-card:hover{transform:translateY(-6px);box-shadow:0 28px 55px rgba(60,45,20,.18)}
+body[data-template="museum"] .work-card img{height:210px;border:1px solid #ece3d2;border-radius:0}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
