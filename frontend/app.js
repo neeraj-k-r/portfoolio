@@ -173,31 +173,58 @@ function renderGallery(p) {
   const works = galleryWorks(p);
   const cover = works[0];
   const avatar = (p.avatarUrl || p.avatar_url || '').trim();
-  const face = avatar
-    ? `<img src="${esc(avatar)}" alt="${esc(p.name || '')}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">`
-    : cover ? `<img src="${esc(cover.imageUrl)}" alt="" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">` : `<div style="width:120px;height:120px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:48px;background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee)">${esc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`;
-  app.innerHTML = `
+  const srcAvatar = avatar || (cover ? cover.imageUrl : '');
+  const letter = esc((p.name || '?').trim().charAt(0).toUpperCase());
+  const countLabel = `${works.length} work${works.length === 1 ? '' : 's'}`;
+  const navHtml = `
   <nav>
     <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
     <div style="display:flex;gap:10px;align-items:center">
       <a class="btn btn-ghost btn-sm" href="/"><i class="fa-solid fa-plus"></i> Make yours</a>
       ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Contact</a>` : ''}
     </div>
-  </nav>
-  <header class="wrap" style="padding:140px 0 10px;text-align:center">
-    ${face}
-    <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
-    <p style="color:var(--muted);font-size:17px">${esc(p.title || '')}</p>
-    <p style="color:var(--muted);font-size:14px;margin-top:6px">${esc(p.location || '')} · ${works.length} work${works.length === 1 ? '' : 's'}</p>
-  </header>
-  <section class="wrap" style="padding-top:10px">
-    <div class="works-grid" id="galGrid" style="margin-top:18px">${works.map((w, i) => `
-      <div class="work-card" data-gal="${i}" style="cursor:pointer">
-        <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
-        <div class="work-meta" style="padding:12px 14px"><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small style="color:var(--muted)">${esc(w.category)}</small>` : ''}</div>
-      </div>`).join('') || '<p style="color:var(--muted)">No works published yet.</p>'}</div>
-  </section>
-  <footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b style="color:#fff">${esc(p.name)}</b> via <b style="color:#fff">portfoolio.me</b></div></div></footer>`;
+  </nav>`;
+  const footHtml = `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b style="color:#fff">${esc(p.name)}</b> via <b style="color:#fff">portfoolio.me</b></div></div></footer>`;
+  const emptyMsg = '<p style="color:var(--muted)">No works published yet.</p>';
+  let headHtml = '', gridHtml = '';
+  if (document.body.dataset.template === 'museum') {
+    const faceArt = srcAvatar
+      ? `<img class="museum-portrait" src="${esc(srcAvatar)}" alt="${esc(p.name || '')}">`
+      : `<div class="museum-portrait museum-portrait-fallback">${letter}</div>`;
+    headHtml = `<header class="wrap gal-museum-head">
+      ${faceArt}
+      <p class="museum-kicker">— EXHIBITION —</p>
+      <h1>${esc(p.name)}</h1>
+      <p class="museum-sub">${esc(p.title || '')}</p>
+      <p class="museum-meta">${esc(p.location || '')} · ${countLabel}</p>
+    </header>`;
+    gridHtml = `<section class="wrap museum-hang">${works.map((w, i) => `
+      <figure class="museum-piece" data-gal="${i}">
+        <div class="museum-frame"><img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy"></div>
+        <figcaption class="museum-plaque">
+          <span class="museum-no">${String(i + 1).padStart(2, '0')}</span>
+          <div class="museum-plaque-text"><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small>${esc(w.category)}</small>` : ''}</div>
+        </figcaption>
+      </figure>`).join('') || emptyMsg}</section>`;
+  } else {
+    const face = srcAvatar
+      ? `<img src="${esc(srcAvatar)}" alt="${esc(p.name || '')}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">`
+      : `<div style="width:120px;height:120px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:48px;background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee)">${letter}</div>`;
+    headHtml = `<header class="wrap" style="padding:140px 0 10px;text-align:center">
+      ${face}
+      <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
+      <p style="color:var(--muted);font-size:17px">${esc(p.title || '')}</p>
+      <p style="color:var(--muted);font-size:14px;margin-top:6px">${esc(p.location || '')} · ${countLabel}</p>
+    </header>`;
+    gridHtml = `<section class="wrap" style="padding-top:10px">
+      <div class="works-grid" id="galGrid" style="margin-top:18px">${works.map((w, i) => `
+        <div class="work-card" data-gal="${i}" style="cursor:pointer">
+          <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
+          <div class="work-meta" style="padding:12px 14px"><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small style="color:var(--muted)">${esc(w.category)}</small>` : ''}</div>
+        </div>`).join('') || emptyMsg}</div>
+    </section>`;
+  }
+  app.innerHTML = navHtml + headHtml + gridHtml + footHtml;
   app.querySelectorAll('[data-gal]').forEach(c => c.onclick = () => renderWorkDetail(p, +c.dataset.gal));
   window.scrollTo(0, 0);
 }
