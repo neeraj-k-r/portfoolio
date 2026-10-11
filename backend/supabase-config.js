@@ -72,6 +72,7 @@ async function cloudSaveProfile(p) {
     experience: Array.isArray(p.experience) ? p.experience.slice(0, 20) : [],
     education: Array.isArray(p.education) ? p.education.slice(0, 10) : [],
     certifications: Array.isArray(p.certifications) ? p.certifications.slice(0, 10) : [],
+    track: (p.track === 'visual' || (existing && existing.track === 'visual')) ? 'visual' : 'tech',
     resume: (p.resume && typeof p.resume === 'object') ? p.resume : {},
     status: (existing && existing.status) || 'approved',
     // prebuilt-upload hosting: explicit value on p wins, else keep what is live
