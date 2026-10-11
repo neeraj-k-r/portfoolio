@@ -961,6 +961,7 @@ body[data-template="catalog"] .proj-top{background:transparent;border-radius:0}
 body[data-template="catalog"] .proj-top::before{display:none}
 body[data-template="catalog"] .proj-body h3{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:500;color:#111}
 body[data-template="catalog"] .proj-body p{color:#666;text-transform:uppercase;letter-spacing:.12em;font-size:11px}
+@media(max-width:620px){body[data-template="catalog"] .works-grid{gap:26px 16px}body[data-template="catalog"] .work-card img{height:200px}}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
