@@ -217,6 +217,7 @@ function skillsSection(p) {
     </a>`).join('')}</div></section>`;
 }
 function pageGallery(p, wIdx) {
+  const vtpl = ['gallery', 'studio', 'noir'].includes(String(p.template || '').toLowerCase()) ? String(p.template).toLowerCase() : 'gallery';
   const works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   const i = parseInt(wIdx, 10);
   const w = (!isNaN(i) && works[i]) ? works[i] : null;
@@ -234,7 +235,7 @@ function pageGallery(p, wIdx) {
     <section class="wrap" style="padding-top:10px"><div class="proj-grid" style="margin-top:18px">${works.map((k, n) => `
       <a class="proj" href="/?w=${n}" style="text-decoration:none"><div class="proj-top p${(n % 6) + 1}"><img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" style="width:100%;height:100%;object-fit:cover"></div>
       <div class="proj-body"><h3>${esc(k.title || 'Untitled')}</h3>${k.category ? `<p>${esc(k.category)}</p>` : ''}</div></a>`).join('') || '<p>No works published yet.</p>'}</div></section>`;
-  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body><div class="bg-fx"></div>${nav(p)}${body}${foot(p)}</body></html>`;
+  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body data-template="${vtpl}"><div class="bg-fx"></div>${nav(p)}${body}${foot(p)}</body></html>`;
 }
 function page(p) {
   const tpl = (p.template || 'midnight').toLowerCase();
