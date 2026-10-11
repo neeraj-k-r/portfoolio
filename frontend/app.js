@@ -185,7 +185,7 @@ function renderGallery(p) {
     </div>
   </nav>`;
   const footHtml = `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b style="color:#fff">${esc(p.name)}</b> via <b style="color:#fff">portfoolio.me</b></div></div></footer>`;
-  const emptyMsg = '<p style="color:var(--muted)">No works published yet.</p>';
+  const emptyMsg = '<p style="color:var(--muted);text-align:center;padding:40px 0">No works published yet.</p>';
   let headHtml = '', gridHtml = '';
   if (document.body.dataset.template === 'museum') {
     const faceArt = srcAvatar
