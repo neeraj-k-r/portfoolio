@@ -1037,6 +1037,12 @@ function bindWorks() {
     const w = activeUserProfile.works[+inp.dataset.i];
     if (w) w[inp.dataset.work] = inp.value.trim().slice(0, 200);
   });
+  body.querySelectorAll('[data-wcover]').forEach(b => b.onclick = () => {
+    const i = +b.dataset.wcover;
+    const [w] = activeUserProfile.works.splice(i, 1);
+    if (w) activeUserProfile.works.unshift(w);
+    paintWorks();
+  });
 }
 function techChipsHTML(pr) {
   const techs = (window.PortfoolioEvidence ? PortfoolioEvidence.projectTechs(pr) : (pr.technologies || []));
