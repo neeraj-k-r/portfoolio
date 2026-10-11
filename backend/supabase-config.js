@@ -21,6 +21,8 @@ function normRow(r) {
   if (r.avatarUrl && !r.avatar_url) r.avatar_url = r.avatarUrl || '';
   if (typeof r.show_instagram === 'boolean' && typeof r.showInstagram === 'undefined') r.showInstagram = r.show_instagram;
   if (typeof r.showInstagram === 'boolean' && typeof r.show_instagram === 'undefined') r.show_instagram = r.showInstagram;
+  if (r.track !== 'visual') r.track = 'tech';
+  if (!Array.isArray(r.works)) r.works = [];
   return r;
 }
 function getAvatar(p) {
