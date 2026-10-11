@@ -419,6 +419,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="gh-repo" style="padding:10px 12px"><input type="radio" name="intrack" value="tech" checked> <span><b>💻 Technical</b><br><small>Developer flow: GitHub sync, resume, code themes</small></span></label>
               <label class="gh-repo" style="padding:10px 12px"><input type="radio" name="intrack" value="visual"> <span><b>🎨 Visual &amp; Creative</b><br><small>Art, craft, sport, photo — image gallery, no GitHub</small></span></label>
             </div>
+            <p class="mono" id="inTrackHint" style="display:none;font-size:12px;color:#d9f99d;margin-top:8px">🎨 Visual track: claim with the basics — you will upload your work images in the Works tab right after.</p>
           </div>
           <div><label class="flabel">Subdomain Name *</label><input id="inUser" required minlength="3" maxlength="30" placeholder="neerajkr"></div>
           <div><label class="flabel">Full Name *</label><input id="inName" required placeholder="Neeraj K R"></div>
@@ -1189,6 +1190,7 @@ if ($('builderForm')) {
     if ($('inGhBlock')) $('inGhBlock').style.display = visual ? 'none' : '';
     if ($('inRsSummaryRow')) $('inRsSummaryRow').style.display = visual ? 'none' : '';
     if ($('inRsThemeRow')) $('inRsThemeRow').style.display = visual ? 'none' : '';
+    if ($('inTrackHint')) $('inTrackHint').style.display = visual ? '' : 'none';
   }
   document.querySelectorAll('input[name=intrack]').forEach(r => r.addEventListener('change', paintClaimTrack));
   paintClaimTrack();
