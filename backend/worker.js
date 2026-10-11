@@ -31,7 +31,7 @@ function iconFor(pr) {
 async function getProfile(sub) {
   // 1) Supabase: approved rows are publicly readable
   try {
-    const fullSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume';
+    const fullSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works';
     // Fallback select for DBs where the owner never re-ran supabase-schema.sql
     // (missing site_type / resume columns). PostgREST 400s the whole query
     // when any selected column is absent, so retry with v1 core columns.
