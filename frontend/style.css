@@ -387,7 +387,8 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
 .status-pill.rejected{background:rgba(244,114,182,.15);color:#f9a8d4;border:1px solid rgba(244,114,182,.4)}
 .status-pill.none{background:rgba(255,255,255,.08);color:var(--muted);border:1px solid var(--stroke)}
 
-.dash-header-card{background:linear-gradient(135deg,rgba(108,108,245,.12),rgba(34,211,238,.06));border:1px solid rgba(108,108,245,.3);border-radius:24px;padding:26px;margin-bottom:24px}
+.dash-header-card{background:linear-gradient(135deg,rgba(108,108,245,.12),rgba(34,211,238,.06));border:1px solid rgba(108,108,245,.3);border-radius:24px;padding:26px;margin-bottom:24px;transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
+.dash-header-card:hover{border-color:rgba(108,108,245,.45);box-shadow:0 12px 36px rgba(108,108,245,.12)}
 .dash-header-card h2{font-size:26px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 
 .dash-tab-btns{display:flex;gap:8px;margin-bottom:18px;border-bottom:1px solid var(--stroke);padding-bottom:12px;overflow-x:auto}
