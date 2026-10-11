@@ -927,6 +927,11 @@ body[data-template="museum"] .works-grid{gap:26px}
 body[data-template="museum"] .work-card{background:#fffdf8;border-color:#e4d9c5;border-radius:2px;padding:14px 14px 0;box-shadow:0 18px 40px rgba(60,45,20,.12);transition:transform .3s ease,box-shadow .3s ease}
 body[data-template="museum"] .work-card:hover{transform:translateY(-6px);box-shadow:0 28px 55px rgba(60,45,20,.18)}
 body[data-template="museum"] .work-card img{height:210px;border:1px solid #ece3d2;border-radius:0}
+body[data-template="museum"] .work-card .work-meta{padding:14px 4px 16px;text-align:center}
+body[data-template="museum"] .work-card b{font-family:Georgia,'Times New Roman',serif;font-size:16px;font-weight:600;color:#2c2416;letter-spacing:.01em}
+body[data-template="museum"] .work-card small{display:block;margin-top:4px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a7a5c}
+body[data-template="museum"] .btn-primary{background:#2c2416;color:#f7f2e7;border:none}
+body[data-template="museum"] .btn-primary:hover{background:#453923}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
