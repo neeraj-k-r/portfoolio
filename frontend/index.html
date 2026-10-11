@@ -843,14 +843,18 @@ document.querySelectorAll('.input-wrapper input').forEach(input => {
 });
 
 function switchUserTab(tabName) {
-  ['info', 'works', 'theme', 'projects', 'resume', 'upload', 'proof', 'share'].forEach(t => {
+  const panes = ['info', 'works', 'theme', 'projects', 'resume', 'upload', 'proof', 'share'];
+  if (!panes.includes(tabName)) return;
+  panes.forEach(t => {
     const el = $('tab' + t.charAt(0).toUpperCase() + t.slice(1));
     if(el) el.style.display = (t === tabName) ? '' : 'none';
   });
   document.querySelectorAll('.dash-tab-btn').forEach(b => {
     const onclickAttr = b.getAttribute('onclick') || '';
-    b.classList.toggle('active', onclickAttr.includes(tabName));
+    b.classList.toggle('active', onclickAttr.includes(`'${tabName}'`));
   });
+  const shown = $('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
+  if (shown && shown.scrollIntoView) shown.scrollIntoView({ block: 'nearest' });
 }
 
 function syncLx() {
