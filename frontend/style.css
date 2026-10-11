@@ -901,6 +901,10 @@ body.lx .nav-link.active::after { background: linear-gradient(90deg,#bef264,#34d
 .lx-auth-card .btn-primary-block { background: #bef264; color: #0b0f0e; }
 .lx-btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.14); color: #e7ece9; padding: 12px 20px; border-radius: 12px; font-weight: 700; }
 .lx-btn-ghost:hover { border-color: rgba(190,242,100,.5); color: #bef264; }
+/* Works tab: gallery grid */
+.works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.works-grid{grid-template-columns:1fr}}
 /* Scroll reveal (JS adds .in when visible) */
 #landing .lx-section, #landing .lx-logos { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
 #landing .lx-section.in, #landing .lx-logos.in { opacity: 1; transform: none; }
