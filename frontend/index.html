@@ -1033,6 +1033,10 @@ function bindWorks() {
     activeUserProfile.works.splice(+b.dataset.wrm, 1);
     paintWorks();
   });
+  body.querySelectorAll('[data-work]').forEach(inp => inp.onchange = () => {
+    const w = activeUserProfile.works[+inp.dataset.i];
+    if (w) w[inp.dataset.work] = inp.value.trim().slice(0, 200);
+  });
 }
 function techChipsHTML(pr) {
   const techs = (window.PortfoolioEvidence ? PortfoolioEvidence.projectTechs(pr) : (pr.technologies || []));
