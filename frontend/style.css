@@ -1125,3 +1125,16 @@ body[data-template="bloom"] .proj-body p{color:#b07cc6}
 .lx-footer-links a::after { content: ""; position: absolute; left: 0; bottom: -3px; height: 1px; width: 0; background: linear-gradient(90deg,#bef264,#34d399); transition: width .3s var(--ease); }
 .lx-footer-links a:hover { color: #bef264; }
 .lx-footer-links a:hover::after { width: 100%; }
+
+/* Mobile/responsive polish pass */
+@media(max-width:760px){
+  .btn { min-height: 44px; min-width: 44px; }
+  .btn-sm { min-height: 38px; }
+  .nav-links a, .dash-tab-btn, .tpl-card, [data-gal], .lx-theme-card, .work-card, .proj, .bloom-tile, .museum-piece, .cat-row { min-height: 44px; }
+  .lx-nav .nav-links { gap: 10px; }
+  .lx-footer-inner { flex-direction: column; text-align: center; padding: 26px 0; }
+  .lx-footer-links { justify-content: center; gap: 16px; }
+  .dash-nav { flex-wrap: wrap; gap: 10px; }
+  body { padding-bottom: env(safe-area-inset-bottom); }
+  .lx-footer { padding-bottom: calc(30px + env(safe-area-inset-bottom)); }
+}
