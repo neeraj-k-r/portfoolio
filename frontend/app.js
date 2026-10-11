@@ -255,7 +255,7 @@ function renderWorkDetail(p, idx) {
     ${w.category ? `<span class="badge">✦ ${esc(w.category)}</span>` : ''}
     <h1 style="font-size:clamp(32px,5vw,52px);margin:10px 0">${esc(w.title || 'Untitled')}</h1>
     ${w.desc ? `<p style="color:var(--muted);font-size:16px">${esc(w.desc)}</p>` : ''}
-    <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" style="width:100%;border-radius:18px;margin-top:18px;border:1px solid var(--stroke)">
+    <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" style="width:100%;border-radius:18px;margin-top:18px;border:1px solid var(--stroke);box-shadow:0 24px 60px rgba(0,0,0,.35);transition:box-shadow .35s var(--ease)">
     <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
       ${idx > 0 ? `<button class="btn btn-ghost btn-sm" id="galPrev">← Prev</button>` : ''}
       ${idx < works.length - 1 ? `<button class="btn btn-ghost btn-sm" id="galNext">Next →</button>` : ''}
