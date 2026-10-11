@@ -495,11 +495,10 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       </form>
     </div>
 
-    <!-- STATE B: User HAS claimed a subdomain -> Portfolio Studio Hub -->
-    <div id="userStudioHub" style="display:none">
-      <div class="dash-tab-btns">
+    <!-- STATE B: claimed subdomain -> per-track studio (own tabs, shared panes below) -->
+    <div id="techStudio" style="display:none">
+      <div class="dash-tab-btns" data-studio="tech">
         <button class="dash-tab-btn active" onclick="switchUserTab('info')"><i class="fa-solid fa-user-pen"></i> Profile Info</button>
-<button class="dash-tab-btn" id="tabBtnWorks" onclick="switchUserTab('works')"><i class="fa-solid fa-images"></i> Works</button>
         <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Theme & Skills</button>
         <button class="dash-tab-btn" onclick="switchUserTab('projects')"><i class="fa-solid fa-code"></i> Projects & GitHub</button>
         <button class="dash-tab-btn" onclick="switchUserTab('resume')"><i class="fa-solid fa-file-lines"></i> Resume</button>
@@ -507,6 +506,17 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <button class="dash-tab-btn" onclick="switchUserTab('proof')"><i class="fa-solid fa-award"></i> Proof of Work</button>
         <button class="dash-tab-btn" onclick="switchUserTab('share')"><i class="fa-solid fa-share-nodes"></i> Share & Links</button>
       </div>
+    </div>
+    <div id="visualStudio" style="display:none">
+      <div class="dash-tab-btns" data-studio="visual">
+        <button class="dash-tab-btn active" onclick="switchUserTab('info')"><i class="fa-solid fa-user-pen"></i> Profile Info</button>
+        <button class="dash-tab-btn" id="tabBtnWorks" onclick="switchUserTab('works')"><i class="fa-solid fa-images"></i> Works</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Gallery Themes</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Site</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('share')"><i class="fa-solid fa-share-nodes"></i> Share & Links</button>
+      </div>
+    </div>
+    <div id="studioPanes">
 
       <!-- User Studio Tab 1: Profile Info -->
       <div id="tabInfo" class="card">
@@ -744,6 +754,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <button class="btn btn-primary" id="edSaveBtn"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
         <a class="btn btn-ghost" id="edPreviewBtn" target="_blank"><i class="fa-solid fa-eye"></i> View Live Site</a>
       </div>
+    </div>
     </div>
   </div>
 
