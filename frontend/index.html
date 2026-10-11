@@ -1303,6 +1303,8 @@ if ($('builderForm')) {
     if ($('inSkillsRow')) $('inSkillsRow').style.display = visual ? 'none' : '';
     if ($('inP1Block')) $('inP1Block').style.display = visual ? 'none' : 'contents';
     if ($('inTrackHint')) $('inTrackHint').style.display = visual ? '' : 'none';
+    if ($('inTitle')) $('inTitle').placeholder = visual ? 'Illustrator, Muralist & Art Educator' : 'Full-Stack Developer & AI Engineer';
+    if ($('inTag')) $('inTag').placeholder = visual ? 'Painting stories in color and form. Open for commissions.' : 'Building web apps & AI solutions that scale.';
     document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
       const v = (c.querySelector('input') || {}).value || '';
       const isVisualTheme = ['gallery', 'studio', 'noir'].includes(v);
