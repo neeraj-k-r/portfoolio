@@ -686,6 +686,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!p) { renderNotFound(requested); return; }
   if (resumeUser) { renderResumePage(p); return; }
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
+  if (p.track === 'visual') { renderGallery(p); return; }
   const skill = new URLSearchParams(location.search).get('skill');
   if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
 });
