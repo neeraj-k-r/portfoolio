@@ -940,7 +940,16 @@ function setupUserDashboardView(profile) {
     paintProof();
     paintResumeTab();
     paintUploadBanner();
+    paintTrackTabs(profile);
   }
+}
+// Show only the tabs that fit the profile track.
+function paintTrackTabs(profile) {
+  const visual = (profile && profile.track) === 'visual';
+  const btn = (name) => document.querySelector(`.dash-tab-btn[onclick*="'${name}'"]`);
+  ['projects', 'resume', 'proof'].forEach(n => { const b = btn(n); if (b) b.style.display = visual ? 'none' : ''; });
+  if ($('tabBtnWorks')) $('tabBtnWorks').style.display = visual ? '' : 'none';
+  if (visual) { paintWorks(); switchUserTab('works'); }
 }
 
 let projEditOpen = -1;
