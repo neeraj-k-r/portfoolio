@@ -1108,5 +1108,7 @@ body[data-template="bloom"] .proj-body p{color:#b07cc6}
 .lx-brand.sm { font-size: 15px; }
 .lx-footer-tag { color: #5d6a62; font-size: 13.5px; margin: 0; }
 .lx-footer-links { display: flex; gap: 20px; }
-.lx-footer-links a { color: #a7b3ab; font-size: 14px; font-weight: 500; }
+.lx-footer-links a { color: #a7b3ab; font-size: 14px; font-weight: 500; transition: color .25s var(--ease); position: relative; }
+.lx-footer-links a::after { content: ""; position: absolute; left: 0; bottom: -3px; height: 1px; width: 0; background: linear-gradient(90deg,#bef264,#34d399); transition: width .3s var(--ease); }
 .lx-footer-links a:hover { color: #bef264; }
+.lx-footer-links a:hover::after { width: 100%; }
