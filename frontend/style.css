@@ -907,6 +907,11 @@ body[data-template="gallery"] .work-card:nth-child(3n+2){transform:translateY(26
 body[data-template="gallery"] .work-card img{height:190px}
 body[data-template="gallery"] .work-card:nth-child(3n) img{height:150px}
 body[data-template="gallery"] .work-card:nth-child(3n+1) img{height:230px}
+/* Visual theme: studio (light editorial) */
+body[data-template="studio"]{background:#faf9f7;color:#1c1917}
+body[data-template="studio"] .bg-fx,body[data-template="studio"] .grid-overlay{display:none}
+body[data-template="studio"] .work-card{background:#fff;border-color:#e7e0d3;box-shadow:0 10px 30px rgba(28,25,23,.07)}
+body[data-template="studio"] .work-card b{color:#1c1917}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
