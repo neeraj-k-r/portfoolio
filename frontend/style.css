@@ -498,7 +498,10 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
   text-transform: uppercase;
   color: #9aa3c0;
   margin-bottom: 8px;
+  transition: color 0.25s var(--ease);
 }
+.input-wrapper:focus-within .flabel,
+.form-group:focus-within .flabel { color: #818cf8; }
 .input-wrapper {
   position: relative;
 }
