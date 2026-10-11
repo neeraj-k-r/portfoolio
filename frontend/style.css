@@ -275,8 +275,8 @@ h2.title{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,4vw,46px);l
 p.lead{color:var(--muted);max-width:720px;font-size:16.5px}
 /* About */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:28px}
-.card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);padding:24px;backdrop-filter:blur(12px);position:relative;overflow:hidden}
-.card:hover{border-color:rgba(108,108,245,.5)}
+.card{background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);padding:24px;backdrop-filter:blur(12px);position:relative;overflow:hidden;transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease)}
+.card:hover{border-color:rgba(108,108,245,.5);transform:translateY(-3px);box-shadow:var(--sh-md)}
 .card h3{font-size:19px;margin-bottom:8px}.card p{color:var(--muted);font-size:14.8px}
 .hl-list{display:grid;gap:12px;margin-top:14px}
 .hl{display:flex;gap:12px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:14px;padding:12px 14px;font-size:14.2px}
