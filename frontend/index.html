@@ -800,6 +800,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <script>
 function toast(m){const t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
 const $=id=>document.getElementById(id);
+// Legacy rows may store lists as comma strings — normalize before .map/.join.
+const asArray = (v) => Array.isArray(v) ? v : (typeof v === 'string' && v.trim() ? v.split(',').map(s => s.trim()).filter(Boolean) : []);
 
 let currentAuthMode = 'signup';
 let currentUserRole = null; // 'user' | 'admin' | null
@@ -929,7 +931,7 @@ function setupUserDashboardView(profile) {
     if($('edInsta')) $('edInsta').value = profile.instagram || '';
     if($('edShowInsta')) $('edShowInsta').checked = profile.showInstagram !== false && profile.show_instagram !== false;
     if($('edLoc')) $('edLoc').value = profile.location || '';
-    if($('edSkills')) $('edSkills').value = (profile.skills || []).join(', ');
+    if($('edSkills')) $('edSkills').value = asArray(profile.skills).join(', ');
     draftAvatar = profile.avatarUrl || profile.avatar_url || ''; paintAvatarPreview();
 
     // Template selection (paint saved choice; clicks update highlight + radio)
