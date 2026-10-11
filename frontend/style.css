@@ -18,7 +18,7 @@ body.lx ::-webkit-scrollbar{width:10px}
 body.lx ::-webkit-scrollbar-track{background:#0b0f0e}
 body.lx ::-webkit-scrollbar-thumb{background:#2a3532;border-radius:8px;border:2px solid #0b0f0e}
 body.lx ::-webkit-scrollbar-thumb:hover{background:#bef264}
-a{color:inherit;text-decoration:none}
+a{color:inherit;text-decoration:none;transition:color .2s var(--ease),opacity .2s var(--ease)}
 img{max-width:100%}
 .mono{font-family:'JetBrains Mono',monospace}
 .wrap{width:min(1180px,92%);margin:0 auto}
