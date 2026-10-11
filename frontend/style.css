@@ -949,6 +949,11 @@ body[data-template="catalog"] .work-card::before{counter-increment:plate;content
 body[data-template="catalog"] .work-card img{height:230px;border-radius:0;filter:grayscale(.15)}
 body[data-template="catalog"] .work-card:hover img{filter:none}
 body[data-template="catalog"] .work-card .work-meta{padding:12px 0 0}
+body[data-template="catalog"] .work-card b{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:17px;font-weight:500;color:#111}
+body[data-template="catalog"] .work-card small{display:block;margin-top:3px;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#666}
+body[data-template="catalog"] .btn-primary{background:#111;color:#faf9f7;border:none}
+body[data-template="catalog"] .btn-primary:hover{background:#333}
+body[data-template="catalog"] #app h1{font-family:Georgia,'Times New Roman',serif;font-weight:500}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
