@@ -256,6 +256,21 @@ function pageGallery(p, wIdx) {
           <div class="museum-plaque-text"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}</div>
         </div>
       </a>`).join('') || emptyMsg}</section>`
+    : vtpl === 'catalog'
+    ? `<header class="wrap gal-catalog-head">
+      <p class="cat-kicker">— CATALOGUE —</p>
+      <h1>${esc(p.name)}</h1>
+      <p class="cat-sub">${esc(p.title || '')}</p>
+      <p class="cat-meta">${esc(p.location || '')} · ${countLabel}</p>
+      ${avatar ? `<img class="cat-portrait" src="${esc(avatar)}" alt="${esc(p.name || '')}">` : ''}
+    </header>
+    <section class="wrap cat-index">${works.map((k, n) => `
+      <a class="cat-row" href="/?w=${n}" style="text-decoration:none;color:inherit">
+        <span class="cat-no">${String(n + 1).padStart(2, '0')}</span>
+        <div class="cat-thumb"><img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy"></div>
+        <div class="cat-text"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}${k.desc ? `<p>${esc(k.desc)}</p>` : ''}</div>
+        <span class="cat-arrow">→</span>
+      </a>`).join('') || emptyMsg}</section>`
     : `<header class="wrap" style="padding:140px 0 10px;text-align:center">
       ${face}
       <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
