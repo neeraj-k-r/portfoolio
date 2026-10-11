@@ -97,6 +97,13 @@ Sites publish instantly; use the admin console to reject/delete spam. Existing `
 - 🪼 `tidepool` *fresh* — abyss glow → `?u=kai`
 - Files: `frontend/templates.css` (themes) + `frontend/templates.js` (renderers) hooked in `app.js`.
 
+## Visual track (non-technical portfolios)
+- Signup asks **Technical vs Visual & Creative**. Visual hides GitHub import + resume fields; claim saves `track:'visual'`, `works:[]`, `template:'gallery'`.
+- **Works tab** (visual only): multi-image upload via Cloudinary (≤5MB each, ≤10/batch), inline title/category/desc, cover pick, reorder, remove. Tech tabs (Projects, Resume, Proof) hide for visual profiles.
+- Public page at the same `username.portfoolio.me` renders a Behance-style gallery (grid → work detail with prev/next); no resume section. Worker mirrors it (`pageGallery`, `?w=<i>` detail).
+- 3 visual themes: 🖼️ `gallery` (masonry stagger) · ☀️ `studio` (light editorial) · 🌙 `noir` (dark full-bleed). Picker shows only the active track's themes.
+- Schema: `profiles.track text default 'tech'` + `profiles.works jsonb default '[]'` (re-run `supabase-schema.sql`; missing = tech, so old profiles are untouched).
+
 ## Key files
 | File | Purpose |
 |------|---------|
