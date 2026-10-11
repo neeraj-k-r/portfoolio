@@ -1015,18 +1015,21 @@ if ($('workUpBtn')) $('workUpBtn').onclick = async () => {
   if (!files.length) return;
   if (!cloudinaryEnabled()) return toast('❌ Image uploads activate once the owner connects Cloudinary');
   if (!Array.isArray(activeUserProfile.works)) activeUserProfile.works = [];
-  let n = 0;
+  let n = 0, firstErr = '';
   for (const f of files) {
     if ($('workMsg')) $('workMsg').textContent = `Uploading ${n + 1}/${files.length}… ${f.name}`;
     try {
       const url = await uploadAvatar(f);
       activeUserProfile.works.push({ id: 'w' + Date.now().toString(36) + n, title: (f.name || 'Untitled').replace(/\.[^.]+$/, ''), category: '', desc: '', imageUrl: url, createdAt: new Date().toISOString() });
       n++;
-    } catch (e) { console.error('work upload failed', e); }
+    } catch (e) {
+      console.error('work upload failed', e);
+      if (!firstErr) firstErr = String((e && e.message) || e);
+    }
   }
   if ($('workFiles')) $('workFiles').value = '';
   paintWorks();
-  if ($('workMsg')) $('workMsg').textContent = n ? `Uploaded ${n} — edit titles below, then Save Changes.` : 'Upload failed — retry.';
+  if ($('workMsg')) $('workMsg').textContent = n ? `Uploaded ${n} — edit titles below, then Save Changes.` : ('❌ Upload failed' + (firstErr ? ': ' + (firstErr === 'av-setup' ? 'image uploads need the owner to connect Cloudinary' : firstErr) : ' — retry.'));
 };
 function paintWorks() {
   const body = $('worksBody');
