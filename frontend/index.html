@@ -1183,6 +1183,12 @@ if ($('builderForm')) {
   function claimTrack() {
     return ((document.querySelector('input[name=intrack]:checked') || {}).value === 'visual') ? 'visual' : 'tech';
   }
+  function paintClaimTrack() {
+    const visual = claimTrack() === 'visual';
+    if ($('inGhRow')) $('inGhRow').style.display = visual ? 'none' : '';
+  }
+  document.querySelectorAll('input[name=intrack]').forEach(r => r.addEventListener('change', paintClaimTrack));
+  paintClaimTrack();
   $('builderForm').addEventListener('submit', async e => {
     e.preventDefault();
     const username = $('inUser').value.toLowerCase().trim().replace(/[^a-z0-9-]+/g,'');
