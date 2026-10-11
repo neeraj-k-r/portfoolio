@@ -932,6 +932,8 @@ body[data-template="museum"] .work-card b{font-family:Georgia,'Times New Roman',
 body[data-template="museum"] .work-card small{display:block;margin-top:4px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#8a7a5c}
 body[data-template="museum"] .btn-primary{background:#2c2416;color:#f7f2e7;border:none}
 body[data-template="museum"] .btn-primary:hover{background:#453923}
+body[data-template="museum"] #app h1{font-family:Georgia,'Times New Roman',serif;font-weight:600;letter-spacing:.005em}
+@media(max-width:620px){body[data-template="museum"] .works-grid{gap:18px}}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
