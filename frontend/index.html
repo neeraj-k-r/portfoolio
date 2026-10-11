@@ -831,7 +831,7 @@ document.querySelectorAll('.input-wrapper input').forEach(input => {
 });
 
 function switchUserTab(tabName) {
-  ['info', 'theme', 'projects', 'resume', 'upload', 'proof', 'share'].forEach(t => {
+  ['info', 'works', 'theme', 'projects', 'resume', 'upload', 'proof', 'share'].forEach(t => {
     const el = $('tab' + t.charAt(0).toUpperCase() + t.slice(1));
     if(el) el.style.display = (t === tabName) ? '' : 'none';
   });
