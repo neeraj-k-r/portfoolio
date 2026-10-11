@@ -912,6 +912,11 @@ body[data-template="studio"]{background:#faf9f7;color:#1c1917}
 body[data-template="studio"] .bg-fx,body[data-template="studio"] .grid-overlay{display:none}
 body[data-template="studio"] .work-card{background:#fff;border-color:#e7e0d3;box-shadow:0 10px 30px rgba(28,25,23,.07)}
 body[data-template="studio"] .work-card b{color:#1c1917}
+/* Visual theme: noir (dark full-bleed) */
+body[data-template="noir"]{background:#050807}
+body[data-template="noir"] .work-card{background:#0d1312;border-color:rgba(255,255,255,.1);border-radius:8px}
+body[data-template="noir"] .work-card img{height:220px}
+body[data-template="noir"] .btn-primary{background:#e7ece9;color:#050807;box-shadow:none}
 /* Works tab: gallery grid */
 .works-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 @media(max-width:900px){.works-grid{grid-template-columns:repeat(2,1fr)}}
