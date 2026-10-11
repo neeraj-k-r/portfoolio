@@ -1024,6 +1024,15 @@ function paintWorks() {
         </div>
       </div>
     </div>`).join('') + `</div>`;
+  bindWorks();
+}
+function bindWorks() {
+  const body = $('worksBody');
+  if (!body || !activeUserProfile || !Array.isArray(activeUserProfile.works)) return;
+  body.querySelectorAll('[data-wrm]').forEach(b => b.onclick = () => {
+    activeUserProfile.works.splice(+b.dataset.wrm, 1);
+    paintWorks();
+  });
 }
 function techChipsHTML(pr) {
   const techs = (window.PortfoolioEvidence ? PortfoolioEvidence.projectTechs(pr) : (pr.technologies || []));
