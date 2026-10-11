@@ -1180,6 +1180,9 @@ if ($('builderForm')) {
   }
   if ($('inP1techGrid')) $('inP1techGrid').innerHTML = techGridHTML([]);
 
+  function claimTrack() {
+    return ((document.querySelector('input[name=intrack]:checked') || {}).value === 'visual') ? 'visual' : 'tech';
+  }
   $('builderForm').addEventListener('submit', async e => {
     e.preventDefault();
     const username = $('inUser').value.toLowerCase().trim().replace(/[^a-z0-9-]+/g,'');
