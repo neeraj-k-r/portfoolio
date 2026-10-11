@@ -271,6 +271,19 @@ function pageGallery(p, wIdx) {
         <div class="cat-text"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}${k.desc ? `<p>${esc(k.desc)}</p>` : ''}</div>
         <span class="cat-arrow">→</span>
       </a>`).join('') || emptyMsg}</section>`
+    : vtpl === 'bloom'
+    ? `<header class="wrap gal-bloom-head">
+      <div class="bloom-orb"></div>
+      ${avatar ? `<img class="bloom-portrait" src="${esc(avatar)}" alt="${esc(p.name || '')}">` : `<div class="bloom-portrait bloom-portrait-fallback">${letter}</div>`}
+      <h1>${esc(p.name)}</h1>
+      <p class="bloom-sub">${esc(p.title || '')}</p>
+      <p class="bloom-meta">${esc(p.location || '')} · ${countLabel}</p>
+    </header>
+    <section class="wrap bloom-masonry">${works.map((k, n) => `
+      <a class="bloom-tile ${n % 5 === 0 ? 'tall' : ''}" href="/?w=${n}" style="text-decoration:none;color:inherit">
+        <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+        <div class="bloom-cap"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}</div>
+      </a>`).join('') || emptyMsg}</section>`
     : `<header class="wrap" style="padding:140px 0 10px;text-align:center">
       ${face}
       <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
