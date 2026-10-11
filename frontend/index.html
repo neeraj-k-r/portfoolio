@@ -1301,6 +1301,11 @@ if ($('builderForm')) {
     if ($('inRsThemeRow')) $('inRsThemeRow').style.display = visual ? 'none' : '';
     if ($('inSkillsRow')) $('inSkillsRow').style.display = visual ? 'none' : '';
     if ($('inTrackHint')) $('inTrackHint').style.display = visual ? '' : 'none';
+    document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
+      const v = (c.querySelector('input') || {}).value || '';
+      const isVisualTheme = ['gallery', 'studio', 'noir'].includes(v);
+      c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
+    });
   }
   document.querySelectorAll('input[name=intrack]').forEach(r => r.addEventListener('change', paintClaimTrack));
   paintClaimTrack();
