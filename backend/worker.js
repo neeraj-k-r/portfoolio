@@ -226,6 +226,10 @@ function pageGallery(p, wIdx) {
   const works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   const i = parseInt(wIdx, 10);
   const w = (!isNaN(i) && works[i]) ? works[i] : null;
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const face = avatar
+    ? `<img src="${esc(avatar)}" alt="${esc(p.name || '')}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">`
+    : '';
   const body = w
     ? `<section class="wrap" style="padding:140px 0 20px;max-width:900px">
       ${w.category ? `<span class="badge">✦ ${esc(w.category)}</span>` : ''}
@@ -234,6 +238,7 @@ function pageGallery(p, wIdx) {
       <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" style="width:100%;border-radius:18px;margin-top:18px">
       <p style="margin-top:16px"><a class="btn btn-ghost btn-sm" href="/">← ${esc(p.name)}</a></p></section>`
     : `<header class="wrap" style="padding:140px 0 10px;text-align:center">
+      ${face}
       <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
       <p style="color:var(--muted);font-size:17px">${esc(p.title || '')}</p>
       <p style="color:var(--muted);font-size:14px;margin-top:6px">${esc(p.location || '')} · ${works.length} work${works.length === 1 ? '' : 's'}</p></header>

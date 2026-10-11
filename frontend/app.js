@@ -172,6 +172,10 @@ function renderGallery(p) {
   const app = document.getElementById('app');
   const works = galleryWorks(p);
   const cover = works[0];
+  const avatar = (p.avatarUrl || p.avatar_url || '').trim();
+  const face = avatar
+    ? `<img src="${esc(avatar)}" alt="${esc(p.name || '')}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">`
+    : cover ? `<img src="${esc(cover.imageUrl)}" alt="" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">` : `<div style="width:120px;height:120px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:48px;background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee)">${esc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`;
   app.innerHTML = `
   <nav>
     <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
@@ -181,7 +185,7 @@ function renderGallery(p) {
     </div>
   </nav>
   <header class="wrap" style="padding:140px 0 10px;text-align:center">
-    ${cover ? `<img src="${esc(cover.imageUrl)}" alt="" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">` : `<div style="width:120px;height:120px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:48px;background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee)">${esc((p.name || '?').trim().charAt(0).toUpperCase())}</div>`}
+    ${face}
     <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
     <p style="color:var(--muted);font-size:17px">${esc(p.title || '')}</p>
     <p style="color:var(--muted);font-size:14px;margin-top:6px">${esc(p.location || '')} · ${works.length} work${works.length === 1 ? '' : 's'}</p>
