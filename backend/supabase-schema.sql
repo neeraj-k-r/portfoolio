@@ -103,5 +103,9 @@ alter table profiles add column if not exists certifications jsonb default '[]';
 -- show_instagram defaults true so existing profiles keep current behavior.
 alter table profiles add column if not exists show_instagram boolean default true;
 
+-- 7) portfolio track (tech vs visual). Default 'tech' keeps every existing profile unchanged.
+alter table profiles add column if not exists track text default 'tech'
+  check (track in ('tech', 'visual'));
+
 -- 7) make yourself admin (run AFTER creating the admin user in Authentication):
 -- insert into admins (user_id) select id from auth.users where email = 'portfoolio.me@gmail.com';
