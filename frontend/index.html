@@ -869,7 +869,9 @@ function switchUserTab(tabName) {
   });
   document.querySelectorAll('.dash-tab-btn').forEach(b => {
     const onclickAttr = b.getAttribute('onclick') || '';
-    b.classList.toggle('active', onclickAttr.includes(`'${tabName}'`));
+    const row = b.closest('#techStudio,#visualStudio');
+    const rowVisible = !row || row.style.display !== 'none';
+    b.classList.toggle('active', rowVisible && onclickAttr.includes(`'${tabName}'`));
   });
   const shown = $('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
   if (shown && shown.scrollIntoView) shown.scrollIntoView({ block: 'nearest' });
