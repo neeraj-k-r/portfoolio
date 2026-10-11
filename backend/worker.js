@@ -111,6 +111,8 @@ function head(p, tpl) {
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
 <meta name="description" content="${esc(p.tagline || p.title || '')}">
+<link rel="icon" type="image/svg+xml" href="${ORIGIN}/frontend/favicon.svg">
+<link rel="apple-touch-icon" href="${ORIGIN}/frontend/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -369,6 +371,7 @@ function pageResume(p) {
   const theme = resumeTheme(p);
   return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Resume — ${esc(p.name)} | portfoolio.me</title>
+<link rel="icon" type="image/svg+xml" href="${ORIGIN}/frontend/favicon.svg">
 <link rel="stylesheet" href="${ORIGIN}/style.css"><link rel="stylesheet" href="${ORIGIN}/resume.css"></head>
 <body class="rs-page rs-${theme}"><div class="bg-fx"></div>${nav(p)}
 <div style="max-width:860px;margin:0 auto;padding:120px 16px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
