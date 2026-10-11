@@ -1186,6 +1186,7 @@ if ($('builderForm')) {
   function paintClaimTrack() {
     const visual = claimTrack() === 'visual';
     if ($('inGhRow')) $('inGhRow').style.display = visual ? 'none' : '';
+    if ($('inGhBlock')) $('inGhBlock').style.display = visual ? 'none' : '';
   }
   document.querySelectorAll('input[name=intrack]').forEach(r => r.addEventListener('change', paintClaimTrack));
   paintClaimTrack();
