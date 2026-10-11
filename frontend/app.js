@@ -394,7 +394,8 @@ function renderUploadedSite(p) {
         <a href="/" style="font-weight:700">Make yours</a>
       </span>
     </div>
-    <iframe src="${esc(url)}" title="${esc(p.username)} portfolio" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" style="flex:1;width:100%;border:0;background:#fff"></iframe>
+    <!-- No allow-same-origin: untrusted upload runs cross-origin so it can never touch parent storage/DOM -->
+    <iframe src="${esc(url)}" title="${esc(p.username)} portfolio" sandbox="allow-scripts allow-forms allow-popups" style="flex:1;width:100%;border:0;background:#fff"></iframe>
   </div>`;
   window.scrollTo(0, 0);
 }
