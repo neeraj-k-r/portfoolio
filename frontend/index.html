@@ -1105,7 +1105,7 @@ function paintProof() {
 function paintUserProjects(p) {
   const list = $('edProjList');
   if(!list) return;
-  list.innerHTML = (p.projects || []).map((pr, i) => {
+  list.innerHTML = asArray(p.projects).map((pr, i) => {
     const badges = `${pr.repo ? '<span class="badge" style="font-size:11px" title="Repository retrieved from GitHub">✓ GitHub</span>' : ''}${pr.demoUrl ? '<span class="badge" style="font-size:11px">↗ Live</span>' : ''}`;
     const open = projEditOpen === i ? `
       <div style="grid-column:1/-1;background:rgba(0,0,0,.25);border:1px solid var(--stroke);border-radius:12px;padding:12px;margin-top:8px">
@@ -1478,19 +1478,19 @@ function paintResumeTab() {
   if ($('rsSummary') && document.activeElement !== $('rsSummary')) $('rsSummary').value = r.summary || '';
   document.querySelectorAll('input[name=rstheme]').forEach(x => { x.checked = x.value === (r.theme || 'ats'); });
   const expEl = $('rsExpList');
-  if (expEl) expEl.innerHTML = (p.experience || []).map((e, i) => `
+  if (expEl) expEl.innerHTML = asArray(p.experience).map((e, i) => `
     <div class="proj-row"><b>${(e.role || 'Role')}${e.company ? ' @ ' + e.company : ''}</b>
     <small style="color:var(--muted)">${[e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ')}</small>
     <button data-rsrm="exp${i}">Remove</button></div>`).join('')
     || '<p style="color:var(--muted);font-size:13px">No roles yet — add your first below.</p>';
   const eduEl = $('rsEduList');
-  if (eduEl) eduEl.innerHTML = (p.education || []).map((e, i) => `
+  if (eduEl) eduEl.innerHTML = asArray(p.education).map((e, i) => `
     <div class="proj-row"><b>${(e.school || 'School')}${e.degree ? ' · ' + e.degree : ''}</b>
     <small style="color:var(--muted)">${[e.start, e.end].filter(Boolean).join(' – ')}</small>
     <button data-rsrm="edu${i}">Remove</button></div>`).join('')
     || '<p style="color:var(--muted);font-size:13px">No education yet.</p>';
   const certEl = $('rsCertList');
-  if (certEl) certEl.innerHTML = (p.certifications || []).map((c, i) => `
+  if (certEl) certEl.innerHTML = asArray(p.certifications).map((c, i) => `
     <div class="proj-row"><b>${(c.name || 'Certification')}${c.issuer ? ' · ' + c.issuer : ''}</b>
     <small style="color:var(--muted)">${c.year || ''}</small>
     <button data-rsrm="cert${i}">Remove</button></div>`).join('')
