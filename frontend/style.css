@@ -556,7 +556,9 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
   margin-top: 16px;
   text-align: center;
   min-height: 20px;
+  animation: msgIn .3s var(--ease);
 }
+@keyframes msgIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 input[type="checkbox"], input[type="radio"] { accent-color: #6c6cf5; cursor: pointer; transition: transform .15s var(--ease); }
 input[type="checkbox"]:active, input[type="radio"]:active { transform: scale(.9); }
 select { width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 13px 14px; color: #fff; font-family: inherit; font-size: 14.5px; outline: none; transition: border-color .25s var(--ease), box-shadow .25s var(--ease); cursor: pointer; }
