@@ -150,6 +150,7 @@ window.PortfoolioResume = (() => {
     const back = `/?u=${encodeURIComponent(p.username)}`;
     return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Resume — ${esc(p.name)} | portfoolio.me</title>
+<link rel="icon" type="image/svg+xml" href="/frontend/favicon.svg">
 ${o.bare ? '' : '<link rel="stylesheet" href="style.css"><link rel="stylesheet" href="resume.css">'}
 </head><body class="rs-page rs-${r.theme}">
 ${o.bare ? '' : `<div class="no-print" style="max-width:860px;margin:0 auto;padding:18px 16px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
