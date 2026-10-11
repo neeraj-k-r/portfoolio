@@ -166,7 +166,8 @@ function galleryWorks(p) {
 }
 function renderGallery(p) {
   p = normLocalProfile(p) || p;
-  document.body.dataset.template = '';
+  const vtpl = String(p.template || 'gallery').toLowerCase();
+  document.body.dataset.template = ['gallery', 'studio', 'noir'].includes(vtpl) ? vtpl : 'gallery';
   document.title = `${p.name} — visual portfolio | portfoolio.me`;
   const app = document.getElementById('app');
   const works = galleryWorks(p);
