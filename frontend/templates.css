@@ -17,6 +17,7 @@
 .tpl-preview.ultraviolet{background:radial-gradient(circle at 50% 120%,#b5179e,#3a0ca3 70%);color:#e0aaff}
 .tpl-preview.tidepool{background:linear-gradient(180deg,#012a4a,#01497c 55%,#2ec4b6);color:#d8f3dc}
 .tpl-preview.museum{background:#f4efe6;color:#2c2416;border:6px solid #fff;box-shadow:0 6px 16px rgba(60,45,20,.25);font-family:Georgia,serif}
+.tpl-preview.catalog{background:#faf9f7;color:#111;border-top:3px solid #111;font-family:Georgia,serif;font-style:italic}
 .tpl-meta{padding:10px 12px}
 .tpl-meta b{font-size:14px;display:block}
 .tpl-meta span{font-size:12px;color:var(--muted)}
