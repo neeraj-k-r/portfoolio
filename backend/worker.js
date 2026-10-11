@@ -50,6 +50,9 @@ async function getProfile(sub) {
       if (row.avatarUrl && !row.avatar_url) row.avatar_url = row.avatarUrl;
       if (typeof row.show_instagram === 'boolean' && typeof row.showInstagram === 'undefined') row.showInstagram = row.show_instagram;
       if (typeof row.showInstagram === 'boolean' && typeof row.show_instagram === 'undefined') row.show_instagram = row.showInstagram;
+      // Self-heal legacy rows: a visual-only template implies the visual track
+      if (row.track !== 'visual' && ['gallery', 'studio', 'noir'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
+      if (row.track !== 'visual') row.track = 'tech';
       return row;
     }
   } catch {}
