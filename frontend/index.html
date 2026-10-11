@@ -535,6 +535,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <div id="tabWorks" class="card" style="display:none">
         <h3>🖼️ My Works</h3>
         <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Upload paintings, craft, builds, match photos — anything visual. First image is your cover.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+          <input id="workFiles" type="file" accept="image/*" multiple style="flex:1;min-width:180px">
+          <button type="button" class="btn btn-ghost btn-sm" id="workUpBtn"><i class="fa-solid fa-cloud-arrow-up"></i> Upload works</button>
+        </div>
+        <p class="mono" id="workMsg" style="font-size:12px;color:var(--muted);margin-bottom:10px"></p>
         <div id="worksBody"></div>
       </div>
 
