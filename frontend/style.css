@@ -960,7 +960,8 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="minimal"] .preview-desc { color: #64748b; }
 .lx-modal-body[data-theme="minimal"] .lx-win-line { color: #1e293b; background: #fff; border-color: #e2e8f0; }
 .lx-modal-body[data-theme="minimal"] .lx-prompt { color: #4f46e5; }
-.lx-modal-body[data-theme="minimal"] .skill-tag { background: #eef2ff; border-color: #c7d2fe; color: #4338ca; }
+.lx-modal-body[data-theme="minimal"] .skill-tag { background: #eef2ff; border-color: #c7d2fe; color: #4338ca; transition: border-color .25s var(--ease), background .25s var(--ease), transform .15s var(--ease); }
+.lx-modal-body[data-theme="minimal"] .skill-tag:hover { border-color: #6c6cf5; background: #e0e7ff; transform: scale(1.05); }
 .lx-modal-body[data-theme="terminal"] { background: #0a0f0a; }
 .lx-modal-body[data-theme="creative"] { background: linear-gradient(150deg, #fdf2f8, #ede9fe); }
 .lx-modal-body[data-theme="creative"] .preview-name { color: #1e293b; }
