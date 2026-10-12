@@ -835,7 +835,7 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-bento-card h3 { color: #f4f7f3; font-size: 19px; margin: 14px 0 8px; }
 .lx-bento-card p { color: #a7b3ab; font-size: 14.5px; }
 .lx-bento-card strong { color: #e7ece9; }
-.lx-bento-icon { width: 46px; height: 46px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #bef264; background: rgba(190,242,100,.1); border: 1px solid rgba(190,242,100,.3); transition: box-shadow .3s var(--ease), transform .3s var(--ease); }
+.lx-bento-icon { width: 46px; height: 46px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 20px; color: #4f46e5; background: rgba(79,70,229,.1); border: 1px solid rgba(79,70,229,.3); transition: box-shadow .3s var(--ease), transform .3s var(--ease); }
 .lx-bento-card:hover .lx-bento-icon { box-shadow: 0 0 20px rgba(190,242,100,.3); transform: scale(1.06); }
 .lx-bento-url { margin-top: 16px; font-family: 'JetBrains Mono',monospace; font-size: 13px; color: #d9f99d; background: rgba(0,0,0,.35); border: 1px solid rgba(190,242,100,.25); border-radius: 10px; padding: 10px 14px; display: inline-block; transition: border-color .3s var(--ease), box-shadow .3s var(--ease), color .3s var(--ease); }
 .lx-bento-url:hover { border-color: rgba(190,242,100,.5); box-shadow: 0 0 16px rgba(190,242,100,.15); color: #bef264; }
