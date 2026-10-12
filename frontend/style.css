@@ -765,8 +765,9 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-window .preview-title { color: #bef264; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; }
 .lx-window .preview-desc { color: #a7b3ab; font-size: 13px; }
 .lx-window .skill-tag { background: rgba(190,242,100,.1); border: 1px solid rgba(190,242,100,.3); color: #d9f99d; }
-.lx-window .theme-dot-btn { border-color: rgba(255,255,255,.2); }
-.lx-window .theme-dot-btn.active { box-shadow: 0 0 10px rgba(190,242,100,.7); }
+.lx-window .theme-dot-btn { border-color: rgba(255,255,255,.2); transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .15s var(--ease); }
+.lx-window .theme-dot-btn:hover { border-color: rgba(190,242,100,.5); transform: scale(1.1); }
+.lx-window .theme-dot-btn.active { box-shadow: 0 0 10px rgba(190,242,100,.7); transition: box-shadow .25s var(--ease); }
 .lx-window .footer-theme-btn { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: #a7b3ab; }
 .lx-window .footer-theme-btn.active { background: rgba(190,242,100,.14); border-color: rgba(190,242,100,.45); color: #d9f99d; }
 /* LX sections */
