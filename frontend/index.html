@@ -847,6 +847,7 @@ function toast(m){const t=document.getElementById('toast');if(!t)return;t.textCo
 const $=id=>document.getElementById(id);
 // Legacy rows may store lists as comma strings — normalize before .map/.join.
 const asArray = (v) => Array.isArray(v) ? v : (typeof v === 'string' && v.trim() ? v.split(',').map(s => s.trim()).filter(Boolean) : []);
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&', '<': '<', '>': '>', '"': '"', "'": ''' }[c])); }
 
 let currentAuthMode = 'signup';
 let currentUserRole = null; // 'user' | 'admin' | null
@@ -1141,12 +1142,12 @@ function paintWorks() {
   if (!works.length) { body.innerHTML = '<p style="color:var(--muted);font-size:13px">No works yet — upload your first images above.</p>'; return; }
   body.innerHTML = `<div class="works-grid">` + works.map((w, i) => `
     <div class="work-card">
-      <img src="${w.imageUrl}" alt="" loading="lazy" onerror="this.style.display='none'">
+      <img src="${esc(w.imageUrl)}" alt="" loading="lazy" onerror="this.style.display='none'">
       <div class="work-meta">
         ${i === 0 ? '<span class="work-cover">★ Cover</span>' : ''}
-        <input data-work="title" data-i="${i}" value="${String(w.title || '').replace(/"/g, '&quot;')}" placeholder="Title">
-        <input data-work="category" data-i="${i}" value="${String(w.category || '').replace(/"/g, '&quot;')}" placeholder="Category (painting, sport…)">
-        <input data-work="desc" data-i="${i}" value="${String(w.desc || '').replace(/"/g, '&quot;')}" placeholder="Short description">
+        <input data-work="title" data-i="${i}" value="${esc(w.title || '')}" placeholder="Title">
+        <input data-work="category" data-i="${i}" value="${esc(w.category || '')}" placeholder="Category (painting, sport…)">
+        <input data-work="desc" data-i="${i}" value="${esc(w.desc || '')}" placeholder="Short description">
         <div class="work-row-btns">
           <button data-wcover="${i}">Cover</button>
           <button data-wup="${i}">↑</button>
