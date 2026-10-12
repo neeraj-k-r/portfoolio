@@ -325,9 +325,11 @@ p.lead{color:var(--muted);max-width:720px;font-size:16.5px;line-height:1.7}
 .tags{display:flex;gap:7px;flex-wrap:wrap}
 .tags span{font-size:11.5px;font-weight:700;padding:5px 9px;border-radius:100px;background:rgba(108,108,245,.16);border:1px solid rgba(108,108,245,.35);color:#c7d2fe}
 .proj-actions{display:flex;gap:10px;margin-top:6px}
-.proj-actions a{flex:1;text-align:center;padding:10px;border-radius:12px;font-size:13.5px;font-weight:800;border:1px solid var(--stroke);background:rgba(255,255,255,.06)}
+.proj-actions a{flex:1;text-align:center;padding:10px;border-radius:12px;font-size:13.5px;font-weight:800;border:1px solid var(--stroke);background:rgba(255,255,255,.06);transition:transform .15s var(--ease),background .25s var(--ease),border-color .25s var(--ease),color .25s var(--ease)}
 .proj-actions a.primary{background:#fff;color:#0b1226;border-color:#fff}
-.proj-actions a:hover{transform:translateY(-1px)}
+.proj-actions a:hover{transform:translateY(-2px);border-color:rgba(108,108,245,.4)}
+.proj-actions a.primary:hover{box-shadow:0 0 16px rgba(255,255,255,.2)}
+.proj-actions a:active{transform:scale(.98)}
 .p1{background:radial-gradient(400px 200px at 30% 20%,rgba(108,108,245,.5),transparent),#141b3a}
 .p2{background:radial-gradient(400px 200px at 70% 30%,rgba(34,211,238,.4),transparent),#0f2a3a}
 .p3{background:radial-gradient(400px 200px at 50% 20%,rgba(244,114,182,.4),transparent),#2a1430}
