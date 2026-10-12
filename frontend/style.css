@@ -377,9 +377,11 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
 .dash-nav{position:sticky;top:14px;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(11,18,38,.85);backdrop-filter:blur(20px);border:1px solid var(--stroke);border-radius:18px;margin:14px auto;width:min(1180px,94%);transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
 .dash-nav:hover{border-color:rgba(108,108,245,.35);box-shadow:0 8px 28px rgba(0,0,0,.3)}
 .dash-user-info{display:flex;align-items:center;gap:12px}
-.role-badge{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:100px;display:inline-flex;align-items:center;gap:6px}
+.role-badge{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:5px 12px;border-radius:100px;display:inline-flex;align-items:center;gap:6px;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
 .role-badge.user{background:rgba(34,211,238,.14);color:#22d3ee;border:1px solid rgba(34,211,238,.35)}
 .role-badge.admin{background:rgba(251,191,36,.14);color:#fde68a;border:1px solid rgba(251,191,36,.4)}
+.role-badge.user:hover{border-color:rgba(34,211,238,.6);box-shadow:0 0 12px rgba(34,211,238,.2)}
+.role-badge.admin:hover{border-color:rgba(251,191,36,.6);box-shadow:0 0 12px rgba(251,191,36,.2)}
 
 .status-pill{font-size:12px;font-weight:800;padding:6px 14px;border-radius:100px;display:inline-flex;align-items:center;gap:8px;transition:box-shadow .3s var(--ease)}
 .status-pill.live{background:rgba(163,230,53,.15);color:#d9f99d;border:1px solid rgba(163,230,53,.4);box-shadow:0 0 16px rgba(163,230,53,.15)}
