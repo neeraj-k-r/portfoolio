@@ -977,7 +977,8 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="aurora"] .preview-desc { color: #475569; }
 .lx-modal-body[data-theme="aurora"] .lx-win-line { color: #1e1b4b; background: rgba(255,255,255,.7); border-color: #c7d2fe; }
 .lx-modal-body[data-theme="aurora"] .lx-prompt { color: #6d28d9; }
-.lx-modal-body[data-theme="aurora"] .skill-tag { background: rgba(255,255,255,.7); border-color: #c7d2fe; color: #6d28d9; }
+.lx-modal-body[data-theme="aurora"] .skill-tag { background: rgba(255,255,255,.7); border-color: #c7d2fe; color: #6d28d9; transition: border-color .25s var(--ease), background .25s var(--ease), transform .15s var(--ease); }
+.lx-modal-body[data-theme="aurora"] .skill-tag:hover { border-color: #6d28d9; background: rgba(109,40,217,.1); transform: scale(1.05); }
 .lx-modal-body[data-theme="editorial"] { background: #faf7f2; }
 .lx-modal-body[data-theme="editorial"] .preview-name { color: #292524; }
 .lx-modal-body[data-theme="editorial"] .preview-title { color: #78716c; }
