@@ -493,7 +493,7 @@ export default {
     if (url.pathname === '/resume' || url.pathname === '/resume/' || url.searchParams.get('resume')) {
       const html = pageResume(p);
       return new Response(html, {
-        headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300' },
+        headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
       });
     }
     // custom upload wins over builder templates — serve raw files incl. assets
