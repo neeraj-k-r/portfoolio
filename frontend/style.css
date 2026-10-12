@@ -783,7 +783,7 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-btn-lg { animation: lxBreathe 3s ease-in-out infinite; transition: transform .15s var(--ease), box-shadow .25s var(--ease); }
 .lx-btn-lg:hover { transform: translateY(-3px); }
 .lx-btn-lg:active { transform: scale(.97); }
-@keyframes lxBreathe { 0%,100% { box-shadow: 0 14px 40px rgba(190,242,100,.3); } 50% { box-shadow: 0 14px 52px rgba(190,242,100,.5); } }
+@keyframes lxBreathe { 0%,100% { box-shadow: 0 14px 40px rgba(79,70,229,.3); } 50% { box-shadow: 0 14px 52px rgba(79,70,229,.5); } }
 /* Window status bar (editor chrome detail) */
 .lx-win-status { display: flex; gap: 16px; align-items: center; padding: 8px 16px; background: rgba(190,242,100,.05); border-top: 1px solid rgba(255,255,255,.08); font-family: 'JetBrains Mono',monospace; font-size: 11px; color: #7d8a82; transition: background .25s var(--ease), border-color .25s var(--ease); }
 .lx-window:hover .lx-win-status { background: rgba(190,242,100,.08); border-color: rgba(190,242,100,.2); }
