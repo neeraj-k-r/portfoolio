@@ -1198,4 +1198,12 @@ body[data-template="bloom"] .proj-body p{color:#b07cc6}
   .dash-nav { flex-wrap: wrap; gap: 10px; }
   body { padding-bottom: env(safe-area-inset-bottom); }
   .lx-footer { padding-bottom: calc(30px + env(safe-area-inset-bottom)); }
+  .lx-hero { padding-top: 110px; }
+  .lx-h2 { font-size: clamp(26px,6vw,38px); }
+  .lx-bento, .lx-steps, .lx-quotes, .lx-gallery { grid-template-columns: 1fr; }
+  .lx-bento-card.lx-span { grid-column: span 1; }
+  .lx-win-body { grid-template-columns: 1fr; }
+  .lx-win-side { border-right: none; border-bottom: 1px solid rgba(255,255,255,.08); padding-right: 0; padding-bottom: 16px; }
+  .lx-marquee .lx-logos-row { animation-duration: 18s; }
+  .dash-save-bar { bottom: calc(14px + env(safe-area-inset-bottom)); }
 }
