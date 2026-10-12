@@ -748,8 +748,8 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-btn-ghost:active { transform: translateY(0) scale(.98); }
 .lx-proof { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; }
 .lx-avatars { display: flex; }
-.lx-avatars span { width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #0b0f0e; background: linear-gradient(135deg,#bef264,#34d399); border: 2px solid #0b0f0e; margin-left: -10px; transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease); }
-.lx-avatars span:hover { transform: translateY(-3px) scale(1.1); z-index: 1; box-shadow: 0 8px 20px rgba(190,242,100,.4); border-color: rgba(190,242,100,.5); }
+.lx-avatars span { width: 34px; height: 34px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; color: #fff; background: linear-gradient(135deg,#4f46e5,#6366f1); border: 2px solid #0b0f0e; margin-left: -10px; transition: transform .25s var(--ease), box-shadow .25s var(--ease), border-color .25s var(--ease); }
+.lx-avatars span:hover { transform: translateY(-3px) scale(1.1); z-index: 1; box-shadow: 0 8px 20px rgba(79,70,229,.4); border-color: rgba(79,70,229,.5); }
 .lx-avatars span:first-child { margin-left: 0; }
 .lx-proof-text { color: #a7b3ab; font-size: 14px; transition: color .25s var(--ease); }
 .lx-proof:hover .lx-proof-text { color: #d9f99d; }
