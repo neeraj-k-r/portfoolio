@@ -506,7 +506,7 @@ export default {
     if (p.track === 'visual') {
       const html = pageGallery(p, url.searchParams.get('w'));
       return new Response(html, {
-        headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300' },
+        headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
       });
     }
     const m = url.pathname.match(/^\/skills\/([^/]+)\/?$/);
