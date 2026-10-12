@@ -1161,7 +1161,16 @@ body[data-template="bloom"] .proj-body p{color:#b07cc6}
 /* Scroll reveal (JS adds .in when visible) */
 #landing .lx-section, #landing .lx-logos { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
 #landing .lx-section.in, #landing .lx-logos.in { opacity: 1; transform: none; }
-@media (prefers-reduced-motion: reduce) { #landing .lx-section, #landing .lx-logos { opacity: 1; transform: none; transition: none; } }
+/* Reduced motion refinements */
+@media (prefers-reduced-motion: reduce) {
+  #landing .lx-section, #landing .lx-logos { opacity: 1; transform: none; transition: none; }
+  .lx-spark i { animation: none; opacity: .85; }
+  .lx-steps::before { animation: none; transform: scaleX(1); }
+  .lx-marquee .lx-logos-row { animation: none; }
+  .lx-btn-lg { animation: none; }
+  .lx-modal-panel { animation: none; }
+  .lx-lightbox img { animation: none; }
+}
 /* LX responsive */
 @media(max-width:980px){
   .lx-bento, .lx-steps, .lx-quotes, .lx-auth-grid { grid-template-columns: 1fr; }
