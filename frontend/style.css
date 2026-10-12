@@ -800,6 +800,13 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-lightbox-nav:hover{background:rgba(190,242,100,.15);border-color:rgba(190,242,100,.4);color:#bef264}
 .lx-lightbox-prev{left:20px}.lx-lightbox-next{right:20px}
 
+/* Empty state polish */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state i{font-size:48px;color:rgba(190,242,100,.4);margin-bottom:16px;display:block}
+.empty-state h3{color:#f4f7f3;margin-bottom:8px}
+.empty-state p{max-width:360px;margin:0 auto;line-height:1.6}
+.empty-state .btn{margin-top:20px}
+
 /* Section divider rhythm */
 .lx-section + .lx-section::before { content: ""; display: block; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(190,242,100,.15), transparent); margin-bottom: 72px; }
 
