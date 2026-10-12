@@ -1235,6 +1235,8 @@ body[data-template="bloom"] .proj-body p{color:#b07cc6}
 #landing .lx-section, #landing .lx-logos { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
 #landing .lx-section.in, #landing .lx-logos.in { opacity: 1; transform: none; }
 /* Reduced motion refinements */
+#landing .lx-section, #landing .lx-logos { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+#landing .lx-section.in, #landing .lx-logos.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   #landing .lx-section, #landing .lx-logos { opacity: 1; transform: none; transition: none; }
   .lx-spark i { animation: none; opacity: .85; }
