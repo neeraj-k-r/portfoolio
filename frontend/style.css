@@ -351,7 +351,10 @@ p.lead{color:var(--muted);max-width:720px;font-size:16.5px;line-height:1.7}
 .gh-card:hover img{border-color:rgba(108,108,245,.4);transform:translateY(-4px);box-shadow:var(--sh-md)}
 /* Why hire */
 .hire{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
-.hire .card{text-align:left}
+.hire .card{text-align:left;transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease)}
+.hire .card:hover{border-color:rgba(190,242,100,.5);transform:translateY(-4px);box-shadow:var(--sh-md)}
+.hire .card h3{transition:color .25s var(--ease)}
+.hire .card:hover h3{color:#bef264}
 .hire .num{font-family:'Space Grotesk';font-size:34px;font-weight:700;background:linear-gradient(90deg,#fff,#9aa3c0);-webkit-background-clip:text;background-clip:text;color:transparent}
 /* Contact */
 .contact-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:16px;margin-top:26px}
