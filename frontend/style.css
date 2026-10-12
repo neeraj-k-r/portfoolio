@@ -842,7 +842,7 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-bento-url span { color: #4f46e5; font-weight: 700; }
 /* Bento mini sparkline */
 .lx-spark { display: flex; align-items: flex-end; gap: 5px; height: 44px; margin-top: 16px; }
-.lx-spark i { flex: 1; border-radius: 3px; background: linear-gradient(180deg, #bef264, rgba(190,242,100,.25)); opacity: .85; animation: lxSparkIn .8s ease-out backwards; }
+.lx-spark i { flex: 1; border-radius: 3px; background: linear-gradient(180deg, #4f46e5, rgba(79,70,229,.25)); opacity: .85; animation: lxSparkIn .8s ease-out backwards; }
 .lx-spark i:nth-child(1) { animation-delay: 0ms; }
 .lx-spark i:nth-child(2) { animation-delay: 60ms; }
 .lx-spark i:nth-child(3) { animation-delay: 120ms; }
