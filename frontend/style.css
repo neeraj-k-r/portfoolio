@@ -863,7 +863,7 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-lightbox-close{position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#e7ece9;font-size:20px;cursor:pointer;transition:all .2s ease,transform .15s var(--ease)}
 .lx-lightbox-close:hover{border-color:rgba(79,70,229,.5);color:#4f46e5;transform:rotate(90deg)}
 .lx-lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:50%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.06);color:#e7ece9;font-size:20px;cursor:pointer;transition:all .2s ease}
-.lx-lightbox-nav:hover{background:rgba(190,242,100,.15);border-color:rgba(190,242,100,.4);color:#bef264}
+.lx-lightbox-nav:hover{background:rgba(79,70,229,.15);border-color:rgba(79,70,229,.4);color:#4f46e5}
 .lx-lightbox-prev{left:20px}.lx-lightbox-next{right:20px}
 
 /* Empty state polish */
