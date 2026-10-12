@@ -32,7 +32,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 .success.show{display:block}
 .success a{color:#d9f99d;font-weight:800;word-break:break-all}
 .dir-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
-.gh-repo{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:12px;padding:10px 12px;font-size:13px;cursor:pointer}
+.gh-repo{display:flex;gap:10px;align-items:flex-start;background:rgba(255,255,255,.04);border:1px solid var(--stroke);border-radius:12px;padding:10px 12px;font-size:13px;cursor:pointer;transition:border-color .25s var(--ease),box-shadow .25s var(--ease),transform .25s var(--ease)}
+.gh-repo:hover{border-color:rgba(108,108,245,.4);box-shadow:var(--sh-sm);transform:translateX(4px)}
 .gh-repo input{margin-top:4px;width:auto;flex-shrink:0}
 .gh-repo b{display:block;font-size:13.5px}.gh-repo small{color:var(--muted)}
 .track-pick .gh-repo:has(input:checked){border-color:#22d3ee;box-shadow:0 0 0 3px rgba(34,211,238,.25)}
