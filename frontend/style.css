@@ -200,7 +200,9 @@ img{max-width:100%}
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: #cbd5ff;
+  transition: border-color .25s var(--ease), background .25s var(--ease), color .25s var(--ease), transform .15s var(--ease);
 }
+.skill-tag:hover { border-color: rgba(190,242,100,.5); background: rgba(190,242,100,.1); color: #d9f99d; transform: scale(1.05); }
 .footer-themes {
   display: flex;
   gap: 6px;
