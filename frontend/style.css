@@ -753,7 +753,7 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-avatars span:first-child { margin-left: 0; }
 .lx-proof-text { color: #a7b3ab; font-size: 14px; transition: color .25s var(--ease); }
 .lx-proof:hover .lx-proof-text { color: #d9f99d; }
-.lx-stars { color: #bef264; letter-spacing: 2px; }
+.lx-stars { color: #4f46e5; letter-spacing: 2px; }
 /* Announcement pill */
 .lx-announce { display: inline-flex; align-items: center; gap: 10px; padding: 7px 8px 7px 8px; border-radius: 100px; background: rgba(190,242,100,.06); border: 1px solid rgba(190,242,100,.25); color: #d9f99d; font-size: 13px; font-weight: 600; transition: border-color .2s var(--ease), background .2s var(--ease), transform .2s var(--ease); }
 .lx-announce:hover { border-color: rgba(190,242,100,.5); background: rgba(190,242,100,.1); transform: translateY(-2px); }
