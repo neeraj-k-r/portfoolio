@@ -730,6 +730,8 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-h2 { font-family: 'Space Grotesk',sans-serif; font-size: clamp(30px,4vw,46px); letter-spacing: -1.5px; line-height: 1.06; color: #f4f7f3; margin-bottom: 10px; text-wrap: balance; }
 .lx-lead { color: #b6c2ba; font-size: 16.5px; max-width: 640px; line-height: 1.7; }
 .lx-center { text-align: center; margin-top: 28px; }
+.lx-center .lx-btn-ghost { transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), transform .25s var(--ease); }
+.lx-center .lx-btn-ghost:hover { background: rgba(190,242,100,.1); border-color: rgba(190,242,100,.4); color: #bef264; transform: translateY(-2px); }
 /* LX logo strip */
 .lx-logos { width: min(1180px,92%); margin: 0 auto; padding: 26px 0 6px; text-align: center; }
 .lx-logos-label { font-size: 11.5px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: #5d6a62; margin-bottom: 14px; }
