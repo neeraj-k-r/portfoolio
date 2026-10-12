@@ -577,6 +577,11 @@ input[type="checkbox"]:active, input[type="radio"]:active { transform: scale(.9)
 select { width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; padding: 13px 14px; color: #fff; font-family: inherit; font-size: 14.5px; outline: none; transition: border-color .25s var(--ease), box-shadow .25s var(--ease); cursor: pointer; }
 select:focus { border-color: #6c6cf5; box-shadow: 0 0 0 4px rgba(108,108,245,.25); }
 select option { background: #0b1226; color: #fff; }
+/* Form helper text & error state */
+.form-hint{font-size:12px;color:var(--muted);margin-top:6px;transition:color .25s var(--ease)}
+.input-wrapper.error input{border-color:#f472b6;box-shadow:0 0 0 4px rgba(244,114,182,.2)}
+.input-wrapper.error .input-icon{color:#f472b6}
+.form-hint.error{color:#f472b6}
 .auth-demo-footer {
   margin-top: 28px;
   padding-top: 24px;
