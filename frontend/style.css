@@ -772,7 +772,8 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-win-url { font-family: 'JetBrains Mono',monospace; font-size: 12.5px; color: #7d8a82; flex: 1; }
 .lx-win-body { display: grid; grid-template-columns: .9fr 1.1fr; gap: 20px; padding: 24px; }
 .lx-win-side { border-right: 1px solid rgba(255,255,255,.08); padding-right: 20px; }
-.lx-win-line { font-family: 'JetBrains Mono',monospace; font-size: 13.5px; color: #e7ece9; background: rgba(190,242,100,.06); border: 1px solid rgba(190,242,100,.18); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+.lx-win-line { font-family: 'JetBrains Mono',monospace; font-size: 13.5px; color: #e7ece9; background: rgba(190,242,100,.06); border: 1px solid rgba(190,242,100,.18); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; transition: border-color .25s var(--ease), background .25s var(--ease), transform .15s var(--ease); }
+.lx-window:hover .lx-win-line { border-color: rgba(190,242,100,.4); background: rgba(190,242,100,.1); transform: translateX(4px); }
 .lx-win-line.dim { background: transparent; border: none; color: #7d8a82; font-size: 12.5px; padding: 2px 4px; }
 .lx-win-main { min-width: 0; }
 .lx-auth-copy { min-width: 0; }
