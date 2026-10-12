@@ -253,7 +253,9 @@ img{max-width:100%}
   background: rgba(34, 197, 94, 0.08);
   border-color: rgba(34, 197, 94, 0.25);
   color: #4ade80;
+  transition: border-color .25s var(--ease), background .25s var(--ease), transform .15s var(--ease);
 }
+.preview-frame[data-active-theme="terminal"] .skill-tag:hover { border-color: #22c55e; background: rgba(34,197,94,.12); transform: scale(1.05); }
 .preview-frame[data-active-theme="creative"] .preview-avatar {
   background: linear-gradient(135deg, #ec4899, #8b5cf6);
   border-color: rgba(236, 72, 153, 0.5);
