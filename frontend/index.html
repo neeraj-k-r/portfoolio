@@ -45,8 +45,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 .auth-tabs{display:flex;gap:8px;margin:14px 0}
 .auth-tab{flex:1;padding:11px;border-radius:12px;border:1px solid var(--stroke);background:rgba(255,255,255,.04);font-weight:800;font-size:14px;cursor:pointer;color:var(--muted);text-align:center}
 .auth-tab.active{background:#fff;color:#0b1226;border-color:#fff}
-.dir-card{background:var(--card);border:1px solid var(--stroke);border-radius:18px;padding:20px;transition:.25s}
-.dir-card:hover{transform:translateY(-5px);border-color:rgba(108,108,245,.55)}
+.dir-card{background:var(--card);border:1px solid var(--stroke);border-radius:18px;padding:20px;transition:transform .25s var(--ease),border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.dir-card:hover{transform:translateY(-5px);border-color:rgba(108,108,245,.55);box-shadow:var(--sh-md)}
 .dir-card h3{font-size:18px}.dir-card p{color:var(--muted);font-size:13.5px;margin:6px 0 12px}
 @media(max-width:900px){.form-grid{grid-template-columns:1fr}.dir-grid{grid-template-columns:1fr}}
 </style>
