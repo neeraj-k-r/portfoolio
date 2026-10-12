@@ -755,11 +755,11 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-proof:hover .lx-proof-text { color: #d9f99d; }
 .lx-stars { color: #4f46e5; letter-spacing: 2px; }
 /* Announcement pill */
-.lx-announce { display: inline-flex; align-items: center; gap: 10px; padding: 7px 8px 7px 8px; border-radius: 100px; background: rgba(190,242,100,.06); border: 1px solid rgba(190,242,100,.25); color: #d9f99d; font-size: 13px; font-weight: 600; transition: border-color .2s var(--ease), background .2s var(--ease), transform .2s var(--ease); }
-.lx-announce:hover { border-color: rgba(190,242,100,.5); background: rgba(190,242,100,.1); transform: translateY(-2px); }
-.lx-announce-tag { background: #bef264; color: #0b0f0e; font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 100px; letter-spacing: .4px; transition: transform .2s var(--ease); }
+.lx-announce { display: inline-flex; align-items: center; gap: 10px; padding: 7px 8px 7px 8px; border-radius: 100px; background: rgba(79,70,229,.06); border: 1px solid rgba(79,70,229,.25); color: #c7d2fe; font-size: 13px; font-weight: 600; transition: border-color .2s var(--ease), background .2s var(--ease), transform .2s var(--ease); }
+.lx-announce:hover { border-color: rgba(79,70,229,.5); background: rgba(79,70,229,.1); transform: translateY(-2px); }
+.lx-announce-tag { background: #4f46e5; color: #fff; font-size: 11px; font-weight: 800; padding: 3px 9px; border-radius: 100px; letter-spacing: .4px; transition: transform .2s var(--ease); }
 .lx-announce:hover .lx-announce-tag { transform: scale(1.05); }
-.lx-announce-arrow { color: #bef264; font-weight: 800; padding-right: 6px; transition: transform .2s var(--ease); }
+.lx-announce-arrow { color: #4f46e5; font-weight: 800; padding-right: 6px; transition: transform .2s var(--ease); }
 .lx-announce:hover .lx-announce-arrow { transform: translateX(3px); }
 /* LX code window */
 .lx-window { margin: 44px auto 0; max-width: 720px; background: rgba(13,19,18,.92); border: 1px solid rgba(190,242,100,.2); border-radius: 18px; overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(190,242,100,.06); text-align: left; transition: transform .4s var(--ease), box-shadow .4s var(--ease), border-color .4s var(--ease); }
