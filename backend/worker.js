@@ -108,6 +108,7 @@ async function serveUploadedSite(sub, pathname) {
       headers: {
         'content-type': r.headers.get('content-type') || siteMime(key),
         'cache-control': /\.html?$/.test(key) ? 'public, max-age=60' : 'public, max-age=86400',
+        ...SEC_HEADERS,
       },
     });
   };
