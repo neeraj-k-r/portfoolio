@@ -271,7 +271,8 @@ img{max-width:100%}
   color: #67e8f9;
 }
 /* Marquee */
-.marquee{margin:36px 0 6px;overflow:hidden;border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);background:rgba(255,255,255,.03)}
+.marquee{margin:36px 0 6px;overflow:hidden;border-top:1px solid var(--stroke);border-bottom:1px solid var(--stroke);background:rgba(255,255,255,.03);transition:border-color .3s var(--ease)}
+.marquee:hover{border-color:rgba(108,108,245,.4)}
 .marquee-track{display:flex;gap:34px;padding:14px 0;white-space:nowrap;animation:scroll 22s linear infinite;font-weight:700;color:#c7cdf0;font-size:14px;letter-spacing:.4px}
 @keyframes scroll{to{transform:translateX(-50%)}}
 /* Sections */
