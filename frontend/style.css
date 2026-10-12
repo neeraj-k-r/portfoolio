@@ -362,7 +362,7 @@ h2.title:hover + p.lead, .eyebrow:hover + h2.title + p.lead{color:#b6c2ba}
 .hire .card{text-align:left;transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease)}
 .hire .card:hover{border-color:rgba(190,242,100,.5);transform:translateY(-4px);box-shadow:var(--sh-md)}
 .hire .card h3{transition:color .25s var(--ease)}
-.hire .card:hover h3{color:#bef264}
+.hire .card:hover h3{color:#4f46e5}
 .hire .num{font-family:'Space Grotesk';font-size:34px;font-weight:700;background:linear-gradient(90deg,#fff,#9aa3c0);-webkit-background-clip:text;background-clip:text;color:transparent}
 /* Contact */
 .contact-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:16px;margin-top:26px}
