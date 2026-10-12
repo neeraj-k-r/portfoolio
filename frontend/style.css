@@ -768,8 +768,9 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-window .theme-dot-btn { border-color: rgba(255,255,255,.2); transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .15s var(--ease); }
 .lx-window .theme-dot-btn:hover { border-color: rgba(190,242,100,.5); transform: scale(1.1); }
 .lx-window .theme-dot-btn.active { box-shadow: 0 0 10px rgba(190,242,100,.7); transition: box-shadow .25s var(--ease); }
-.lx-window .footer-theme-btn { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: #a7b3ab; }
-.lx-window .footer-theme-btn.active { background: rgba(190,242,100,.14); border-color: rgba(190,242,100,.45); color: #d9f99d; }
+.lx-window .footer-theme-btn { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: #a7b3ab; transition: background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease), transform .15s var(--ease); }
+.lx-window .footer-theme-btn:hover { background: rgba(190,242,100,.1); border-color: rgba(190,242,100,.4); color: #bef264; transform: translateY(-2px); }
+.lx-window .footer-theme-btn.active { background: rgba(190,242,100,.14); border-color: rgba(190,242,100,.45); color: #d9f99d; transition: background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease); }
 /* LX sections */
 #landing { counter-reset: lxsec; }
 .lx-section { width: min(1180px,92%); margin: 0 auto; padding: 72px 0 8px; counter-increment: lxsec; }
