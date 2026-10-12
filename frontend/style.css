@@ -564,6 +564,7 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
   color: #6b7594;
   pointer-events: none;
   font-size: 14px;
+  transition: color .2s var(--ease);
 }
 .toggle-pass {
   position: absolute;
