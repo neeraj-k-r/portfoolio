@@ -512,7 +512,7 @@ export default {
     const m = url.pathname.match(/^\/skills\/([^/]+)\/?$/);
     const html = m ? pageSkill(p, decodeURIComponent(m[1])) : page(p);
     return new Response(html, {
-      headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300' },
+      headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
     });
   },
 };
