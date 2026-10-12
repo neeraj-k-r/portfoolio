@@ -985,7 +985,8 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="editorial"] .preview-desc { color: #57534e; }
 .lx-modal-body[data-theme="editorial"] .lx-win-line { color: #292524; background: #fff; border-color: #e7e0d5; }
 .lx-modal-body[data-theme="editorial"] .lx-prompt { color: #78716c; }
-.lx-modal-body[data-theme="editorial"] .skill-tag { background: #fff; border-color: #e7e0d5; color: #57534e; }
+.lx-modal-body[data-theme="editorial"] .skill-tag { background: #fff; border-color: #e7e0d5; color: #57534e; transition: border-color .25s var(--ease), background .25s var(--ease), transform .15s var(--ease); }
+.lx-modal-body[data-theme="editorial"] .skill-tag:hover { border-color: #78716c; background: #faf7f2; transform: scale(1.05); }
 .lx-modal-body[data-theme="brutalist"] { background: #fef08a; }
 .lx-modal-body[data-theme="brutalist"] .preview-name { color: #000; }
 .lx-modal-body[data-theme="brutalist"] .preview-title { color: #000; }
