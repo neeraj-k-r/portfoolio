@@ -731,7 +731,7 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-badge:hover { border-color: rgba(190,242,100,.5); box-shadow: 0 0 24px rgba(190,242,100,.18); }
 .lx-badge-dot { width: 8px; height: 8px; border-radius: 50%; background: #4f46e5; box-shadow: 0 0 0 4px rgba(79,70,229,.2); animation: pulseDot 2s infinite; }
 .lx-title { font-family: 'Space Grotesk',sans-serif; font-size: clamp(44px,7vw,84px); line-height: 1.02; letter-spacing: -3px; color: #f4f7f3; margin: 24px 0 18px; font-weight: 700; text-wrap: balance; }
-.lx-lime { color: #bef264; }
+.lx-lime { color: #4f46e5; }
 /* Keyboard hint line */
 .lx-kbd-hint { margin-top: 14px; font-size: 12.5px; color: #5d6a62; }
 .lx-kbd-hint kbd { font-family: 'JetBrains Mono',monospace; font-size: 11px; color: #d9f99d; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); border-bottom-width: 2px; border-radius: 6px; padding: 2px 7px; }
