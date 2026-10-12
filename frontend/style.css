@@ -791,19 +791,19 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-win-live i { width: 7px; height: 7px; border-radius: 50%; background: #4f46e5; animation: pulseDot 2s infinite; transition: box-shadow .25s var(--ease); }
 .lx-window:hover .lx-win-live i { box-shadow: 0 0 10px rgba(79,70,229,.8); }
 /* LX window: retint kept interactive classes (fight old purple rules) */
-.lx-window .preview-avatar { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #0b0f0e; background: linear-gradient(135deg,#bef264,#34d399); margin-bottom: 12px; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
-.lx-window:hover .preview-avatar { transform: scale(1.06); box-shadow: 0 0 24px rgba(190,242,100,.5); }
+.lx-window .preview-avatar { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; color: #fff; background: linear-gradient(135deg,#4f46e5,#6366f1); margin-bottom: 12px; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+.lx-window:hover .preview-avatar { transform: scale(1.06); box-shadow: 0 0 24px rgba(79,70,229,.5); }
 .lx-window .preview-name { color: #f4f7f3; font-size: 22px; margin: 0 0 2px; }
-.lx-window .preview-title { color: #bef264; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; }
+.lx-window .preview-title { color: #4f46e5; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; }
 .lx-window .preview-desc { color: #a7b3ab; font-size: 13px; }
-.lx-window .skill-tag { background: rgba(190,242,100,.1); border: 1px solid rgba(190,242,100,.3); color: #d9f99d; transition: border-color .25s var(--ease), background .25s var(--ease), color .25s var(--ease), transform .15s var(--ease); }
-.lx-window:hover .skill-tag { border-color: rgba(190,242,100,.6); background: rgba(190,242,100,.15); transform: scale(1.05); }
+.lx-window .skill-tag { background: rgba(79,70,229,.1); border: 1px solid rgba(79,70,229,.3); color: #c7d2fe; transition: border-color .25s var(--ease), background .25s var(--ease), color .25s var(--ease), transform .15s var(--ease); }
+.lx-window:hover .skill-tag { border-color: rgba(79,70,229,.6); background: rgba(79,70,229,.15); transform: scale(1.05); }
 .lx-window .theme-dot-btn { border-color: rgba(255,255,255,.2); transition: border-color .25s var(--ease), box-shadow .25s var(--ease), transform .15s var(--ease); }
-.lx-window .theme-dot-btn:hover { border-color: rgba(190,242,100,.5); transform: scale(1.1); }
-.lx-window .theme-dot-btn.active { box-shadow: 0 0 10px rgba(190,242,100,.7); transition: box-shadow .25s var(--ease); }
+.lx-window .theme-dot-btn:hover { border-color: rgba(79,70,229,.5); transform: scale(1.1); }
+.lx-window .theme-dot-btn.active { box-shadow: 0 0 10px rgba(79,70,229,.7); transition: box-shadow .25s var(--ease); }
 .lx-window .footer-theme-btn { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: #a7b3ab; transition: background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease), transform .15s var(--ease); }
-.lx-window .footer-theme-btn:hover { background: rgba(190,242,100,.1); border-color: rgba(190,242,100,.4); color: #bef264; transform: translateY(-2px); }
-.lx-window .footer-theme-btn.active { background: rgba(190,242,100,.14); border-color: rgba(190,242,100,.45); color: #d9f99d; transition: background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease); }
+.lx-window .footer-theme-btn:hover { background: rgba(79,70,229,.1); border-color: rgba(79,70,229,.4); color: #4f46e5; transform: translateY(-2px); }
+.lx-window .footer-theme-btn.active { background: rgba(79,70,229,.14); border-color: rgba(79,70,229,.45); color: #c7d2fe; transition: background .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease); }
 /* LX sections */
 #landing { counter-reset: lxsec; }
 .lx-section { width: min(1180px,92%); margin: 0 auto; padding: 72px 0 8px; counter-increment: lxsec; }
