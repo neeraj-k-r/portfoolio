@@ -830,8 +830,8 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 /* LX bento */
 .lx-bento { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 30px; }
 .lx-bento-card { background: rgba(17,24,22,.85); border: 1px solid rgba(255,255,255,.09); border-radius: 20px; padding: 26px 24px; transition: transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease); }
-.lx-bento-card:hover { transform: translateY(-5px); border-color: rgba(190,242,100,.4); box-shadow: 0 18px 44px rgba(0,0,0,.45); }
-.lx-bento-card.lx-span { grid-column: span 2; background: linear-gradient(135deg, rgba(190,242,100,.1), rgba(17,24,22,.9) 60%); }
+.lx-bento-card:hover { transform: translateY(-5px); border-color: rgba(79,70,229,.4); box-shadow: 0 18px 44px rgba(0,0,0,.45); }
+.lx-bento-card.lx-span { grid-column: span 2; background: linear-gradient(135deg, rgba(79,70,229,.1), rgba(17,24,22,.9) 60%); }
 .lx-bento-card h3 { color: #f4f7f3; font-size: 19px; margin: 14px 0 8px; }
 .lx-bento-card p { color: #a7b3ab; font-size: 14.5px; }
 .lx-bento-card strong { color: #e7ece9; }
