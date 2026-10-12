@@ -580,8 +580,9 @@ footer{border-top:1px solid var(--stroke);padding:28px 0 34px;margin-top:20px;co
 }
 .toggle-pass:hover {
   color: #22d3ee;
-  transform: scale(1.1);
+  transform: translateY(-50%) scale(1.1);
 }
+.toggle-pass:active { transform: translateY(-50%) scale(.9); }
 .toggle-pass:active { transform: scale(.9); }
 .auth-msg {
   font-size: 12.5px;
