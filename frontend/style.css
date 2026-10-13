@@ -922,6 +922,9 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 /* Terminal: short prompt block + blinking cursor */
 .lx-tp-terminal .lx-tp-hero { width: 30%; border-radius: 2px; }
 .lx-tp-terminal .lx-tp-hero::after { content: ""; position: absolute; top: 0; right: -13px; width: 8px; height: 100%; background: #4ade80; animation: lxBlink 1.1s steps(1) infinite; }
+/* Terminal: window traffic dots + mono prompt glyph on the hero */
+.lx-tp-terminal .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 5px; height: 5px; border-radius: 50%; background: #166534; box-shadow: 9px 0 0 #14532d, 18px 0 0 #16a34a; }
+.lx-tp-terminal .lx-tp-hero::before { content: ">_"; position: absolute; left: 5px; top: 50%; transform: translateY(-54%); font-family: 'JetBrains Mono',monospace; font-size: 9px; font-weight: 700; color: #052e16; }
 @keyframes lxBlink { 50% { opacity: 0; } }
 /* Creative — warm gradient */
 .lx-tp-creative { background: linear-gradient(150deg, #fdf2f8, #ede9fe); }
