@@ -778,8 +778,8 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-win-line.dim { background: transparent; border: none; color: #7d8a82; font-size: 12.5px; padding: 2px 4px; }
 .lx-win-main { min-width: 0; }
 .lx-auth-copy { min-width: 0; }
-.lx-prompt { color: #bef264; font-weight: 700; margin-right: 6px; transition: color .25s var(--ease); }
-.lx-window:hover .lx-prompt { color: #d9f99d; }
+.lx-prompt { color: #4f46e5; font-weight: 700; margin-right: 6px; transition: color .25s var(--ease); }
+.lx-window:hover .lx-prompt { color: #c7d2fe; }
 .lx-btn-lg { animation: lxBreathe 3s ease-in-out infinite; transition: transform .15s var(--ease), box-shadow .25s var(--ease); }
 .lx-btn-lg:hover { transform: translateY(-3px); }
 .lx-btn-lg:active { transform: scale(.97); }
