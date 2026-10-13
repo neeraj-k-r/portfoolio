@@ -202,7 +202,7 @@ img{max-width:100%}
   color: #cbd5ff;
   transition: border-color .25s var(--ease), background .25s var(--ease), color .25s var(--ease), transform .15s var(--ease);
 }
-.skill-tag:hover { border-color: rgba(190,242,100,.5); background: rgba(190,242,100,.1); color: #d9f99d; transform: scale(1.05); }
+.skill-tag:hover { border-color: rgba(79,70,229,.5); background: rgba(79,70,229,.1); color: #c7d2fe; transform: scale(1.05); }
 .footer-themes {
   display: flex;
   gap: 6px;
@@ -874,7 +874,7 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .empty-state .btn{margin-top:20px}
 
 /* Section divider rhythm */
-.lx-section + .lx-section::before { content: ""; display: block; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(190,242,100,.15), transparent); margin-bottom: 72px; }
+.lx-section + .lx-section::before { content: ""; display: block; width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(79,70,229,.15), transparent); margin-bottom: 72px; }
 
 /* LX steps connector line animate on reveal */
 .lx-steps::before { content: ""; position: absolute; top: 52px; left: 8%; right: 8%; border-top: 1px dashed rgba(190,242,100,.3); transform: scaleX(0); transform-origin: left; animation: lxConnectorIn 1s var(--ease) forwards; }
