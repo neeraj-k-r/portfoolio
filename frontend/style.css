@@ -995,6 +995,10 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-tp-tidepool .lx-tp-hero { background: linear-gradient(90deg, #80ffdb, #2ec4b6); box-shadow: 0 0 16px rgba(128,255,219,.5); }
 /* Tidepool: glowing ring buoy */
 .lx-tp-tidepool .lx-tp-hero::after { content: ""; position: absolute; right: 4%; top: -24px; width: 22px; height: 22px; border-radius: 50%; border: 3px solid #80ffdb; box-shadow: 0 0 12px rgba(128,255,219,.8); }
+/* Tidepool: abyss glow + rising bubbles + staggered zigzag cards */
+.lx-tp-tidepool::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 48%; background: radial-gradient(120% 100% at 50% 115%, rgba(46,196,182,.45), transparent 65%); }
+.lx-tp-tidepool .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 4px; height: 4px; border-radius: 50%; background: rgba(128,255,219,.9); box-shadow: 10px -3px 0 rgba(128,255,219,.6), 20px 1px 0 rgba(128,255,219,.35); }
+.lx-tp-tidepool .lx-tp-cards:nth-child(4) { margin-top: 12px; }
 .lx-tp-tidepool .lx-tp-cards { background: rgba(8,51,68,.8); border: 1px solid rgba(125,211,252,.4); }
 /* Theme lightbox */
 .lx-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
