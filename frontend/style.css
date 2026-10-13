@@ -911,6 +911,9 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-tp-minimal .lx-tp-hero { height: 9%; border-radius: 3px; }
 .lx-tp-minimal .lx-tp-hero::after { content: ""; position: absolute; left: 0; bottom: -9px; width: 100%; height: 2px; background: #4f46e5; border-radius: 2px; }
 .lx-tp-minimal .lx-tp-cards { background: #fff; border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(15,23,42,.06); }
+/* Minimal: dark browser dots + signature indigo badge chip on the first card */
+.lx-tp-minimal .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 5px; height: 5px; border-radius: 50%; background: #94a3b8; box-shadow: 9px 0 0 #cbd5e1, 18px 0 0 #e2e8f0; }
+.lx-tp-minimal .lx-tp-cards:nth-child(3)::before { content: ""; position: absolute; left: 8px; top: 8px; width: 30%; height: 8px; border-radius: 99px; background: #eef2ff; border: 1px solid #c7d2fe; }
 /* Terminal — near-black + green */
 .lx-tp-terminal { background: #0a0f0a; }
 .lx-tp-terminal .lx-tp-nav { background: #111a11; border-bottom-color: #166534; }
