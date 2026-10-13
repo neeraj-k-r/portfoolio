@@ -964,7 +964,10 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 /* Brutalist — bold blocks */
 .lx-tp-brutalist { background: #fef08a; }
 .lx-tp-brutalist .lx-tp-nav { background: #000; border-bottom-color: #000; }
-.lx-tp-brutalist .lx-tp-hero { background: #000; border: 2px solid #000; box-shadow: 4px 4px 0 #000; }
+/* Brutalist — giant ink headline + lime button like the real theme */
+.lx-tp-brutalist .lx-tp-hero { background: none; border: none; box-shadow: none; height: auto; top: 20%; }
+.lx-tp-brutalist .lx-tp-hero::after { content: "HEY!"; font-family: 'Space Grotesk',sans-serif; font-size: 30px; font-weight: 800; letter-spacing: -1px; line-height: 1; color: #000; background: linear-gradient(transparent 62%, #a3e635 62%); }
+.lx-tp-brutalist .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 5px; height: 5px; border-radius: 0; background: #000; box-shadow: 9px 0 0 #7c3aed, 18px 0 0 #a3e635; }
 .lx-tp-brutalist .lx-tp-cards { background: #fff; border: 2px solid #000; box-shadow: 4px 4px 0 #000; }
 /* Afterglow — sunset dusk */
 .lx-tp-afterglow { background: linear-gradient(160deg, #2b1055, #7597de); }
