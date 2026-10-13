@@ -1081,11 +1081,11 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-auth-card { background: rgba(17,24,22,.9); border: 1px solid rgba(79,70,229,.22); border-radius: 22px; padding: 30px 28px; box-shadow: 0 24px 60px rgba(0,0,0,.45); transition: border-color .3s var(--ease), box-shadow .3s var(--ease); }
 .lx-auth-card:hover { border-color: rgba(79,70,229,.35); box-shadow: 0 28px 70px rgba(0,0,0,.5), 0 0 40px rgba(79,70,229,.06); }
 /* LX auth: retint kept tab + input + button classes */
-.lx-auth-card .auth-tab.active { background: linear-gradient(135deg,#bef264,#34d399); color: #0b0f0e; box-shadow: 0 4px 16px rgba(190,242,100,.35); }
+.lx-auth-card .auth-tab.active { background: linear-gradient(135deg,#4f46e5,#6366f1); color: #fff; box-shadow: 0 4px 16px rgba(79,70,229,.35); }
 .lx-auth-card .input-wrapper input { background: rgba(0,0,0,.4); border-color: rgba(255,255,255,.12); color: #f4f7f3; }
-.lx-auth-card .input-wrapper.focused input { border-color: #bef264; box-shadow: 0 0 0 3px rgba(190,242,100,.2); }
-.lx-auth-card .input-wrapper.focused .input-icon { color: #bef264; }
-.lx-auth-card .btn-primary-block { background: #bef264; color: #0b0f0e; }
+.lx-auth-card .input-wrapper.focused input { border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,.2); }
+.lx-auth-card .input-wrapper.focused .input-icon { color: #4f46e5; }
+.lx-auth-card .btn-primary-block { background: #4f46e5; color: #fff; }
 .lx-btn-ghost { display: inline-flex; align-items: center; gap: 8px; border: 1px solid rgba(255,255,255,.14); color: #e7ece9; padding: 12px 20px; border-radius: 12px; font-weight: 700; transition: background .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease), transform .15s var(--ease); }
 .lx-btn-ghost:active { transform: scale(.97); }
 .lx-btn-ghost:hover { background: rgba(190,242,100,.1); border-color: rgba(190,242,100,.4); color: #bef264; }
