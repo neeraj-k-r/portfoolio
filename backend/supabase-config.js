@@ -10,7 +10,13 @@ function cloudEnabled() {
 }
 function cloud() {
   if (!cloudEnabled()) return null;
-  if (!_cloud) _cloud = window.supabase.createClient(PORTFOOLIO_SUPABASE_URL, PORTFOOLIO_SUPABASE_ANON_KEY);
+  if (!_cloud) {
+    if (!window.supabase || typeof window.supabase.createClient !== 'function') {
+      console.error('Supabase library not loaded: window.supabase.createClient is undefined');
+      return null;
+    }
+    _cloud = window.supabase.createClient(PORTFOOLIO_SUPABASE_URL, PORTFOOLIO_SUPABASE_ANON_KEY);
+  }
   return _cloud;
 }
 function normRow(r) {
