@@ -944,6 +944,10 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-tp-aurora .lx-tp-cards { background: rgba(255,255,255,.6); backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,.8); }
 /* Aurora: centered glass bar, symmetric */
 .lx-tp-aurora .lx-tp-hero { left: 20%; width: 60%; text-align: center; }
+/* Aurora: frosted dots + violet/cyan ambient orbs like the real theme */
+.lx-tp-aurora .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 5px; height: 5px; border-radius: 50%; background: #a78bfa; box-shadow: 9px 0 0 #67e8f9, 18px 0 0 #f9a8d4; }
+.lx-tp-aurora::before { content: ""; position: absolute; left: -14px; top: -14px; width: 60px; height: 60px; border-radius: 50%; background: radial-gradient(circle, rgba(167,139,250,.55), transparent 70%); }
+.lx-tp-aurora::after { content: ""; position: absolute; right: -16px; bottom: -16px; width: 70px; height: 70px; border-radius: 50%; background: radial-gradient(circle, rgba(103,232,249,.5), transparent 70%); }
 /* Editorial — paper serif */
 .lx-tp-editorial { background: #faf7f2; }
 .lx-tp-editorial .lx-tp-nav { background: transparent; border-bottom-color: #d6cfc4; }
