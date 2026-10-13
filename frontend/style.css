@@ -976,6 +976,9 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-tp-afterglow .lx-tp-cards { background: rgba(0,0,0,.3); border: 1px solid rgba(244,114,182,.5); }
 /* Afterglow: setting-sun dot over the pill */
 .lx-tp-afterglow .lx-tp-hero::before { content: ""; position: absolute; right: 6%; top: -22px; width: 20px; height: 20px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fde68a, #f97316); box-shadow: 0 0 14px rgba(251,146,60,.9); }
+/* Afterglow: golden horizon glow + dusk stars like the real theme */
+.lx-tp-afterglow::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 46%; background: radial-gradient(120% 100% at 50% 115%, rgba(255,107,107,.5), transparent 65%); }
+.lx-tp-afterglow .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 4px; height: 4px; border-radius: 50%; background: #ffd166; box-shadow: 10px -3px 0 rgba(255,209,102,.8), 20px 2px 0 rgba(255,209,102,.5); }
 /* Ultraviolet — violet haze */
 .lx-tp-ultraviolet { background: linear-gradient(150deg, #1e1b4b, #4c1d95); }
 .lx-tp-ultraviolet .lx-tp-nav { background: rgba(168,85,247,.15); border-bottom-color: rgba(168,85,247,.4); }
