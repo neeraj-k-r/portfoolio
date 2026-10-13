@@ -1303,3 +1303,18 @@ body[data-template="bloom"] .proj-body p{color:#b07cc6}
   .lx-lightbox-next { right: 10px; }
   .lx-lightbox-close { top: 10px; right: 10px; width: 38px; height: 38px; }
 }
+/* Dashboard theme isolation: the portfolio template preview sets
+   body[data-template], which would otherwise recolor studio cards, buttons
+   and inputs (white-on-light text). The studio always renders dark. */
+body[data-template] #dashboardApp{background:#070b16;color:#eef2ff;--card:rgba(255,255,255,.06);--stroke:rgba(255,255,255,.12);--txt:#eef2ff;--muted:#9aa3c0}
+body[data-template] #dashboardApp h1,body[data-template] #dashboardApp h2,body[data-template] #dashboardApp h3{color:#eef2ff}
+body[data-template] #dashboardApp .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
+body[data-template] #dashboardApp .card p{color:#eef2ff}
+body[data-template] #dashboardApp .btn-primary{background:linear-gradient(135deg,#6c6cf5,#22d3ee);color:#fff;border-color:transparent;box-shadow:0 10px 30px rgba(108,108,245,.4)}
+body[data-template] #dashboardApp .btn-ghost{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12);color:#fff}
+body[data-template] #dashboardApp input,body[data-template] #dashboardApp textarea{background:rgba(0,0,0,.35);border-color:rgba(255,255,255,.12);color:#fff}
+/* Works-tab row buttons never had styling (native browser buttons) */
+.work-row-btns button{background:rgba(255,255,255,.07);border:1px solid var(--stroke);color:#fff;border-radius:9px;padding:7px 12px;font-size:12.5px;font-weight:700;cursor:pointer;transition:background .2s ease}
+.work-row-btns button:hover{background:rgba(255,255,255,.14)}
+.work-row-btns button[data-wrm]{border-color:rgba(244,114,182,.4);color:#f9a8d4;background:rgba(244,114,182,.1)}
+.work-row-btns button[data-wrm]:hover{background:rgba(244,114,182,.2)}
