@@ -388,8 +388,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       </div>
       <div class="lx-auth-card">
         <div class="auth-tabs">
-          <button class="auth-tab active" id="tabSignup" type="button"><i class="fa-solid fa-user-plus"></i> Sign up</button>
-          <button class="auth-tab" id="tabLogin" type="button"><i class="fa-solid fa-right-to-bracket"></i> Log in</button>
+          <button class="auth-tab active" id="tabSignup" type="button" onclick="setAuthMode('signup')"><i class="fa-solid fa-user-plus"></i> Sign up</button>
+          <button class="auth-tab" id="tabLogin" type="button" onclick="setAuthMode('login')"><i class="fa-solid fa-right-to-bracket"></i> Log in</button>
         </div>
         <div id="authCloudOff" style="display:none">
           <p class="auth-hint">Cloud login is inactive — enter credentials below to continue to your dashboard:</p>
@@ -409,7 +409,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <button type="button" id="togglePass" class="toggle-pass" aria-label="Toggle password visibility"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
-          <button class="btn btn-primary-block" id="authGoBtn"><i class="fa-solid fa-right-to-bracket"></i> <span id="authGoLabel">Create account</span></button>
+          <button class="btn btn-primary-block" id="authGoBtn" onclick="handleAuthSubmit()"><i class="fa-solid fa-right-to-bracket"></i> <span id="authGoLabel">Create account</span></button>
           <p class="mono auth-msg" id="authMsg"></p>
         </div>
       </div>
@@ -1320,6 +1320,10 @@ function paintShareSection(p) {
   if($('shareWA')) $('shareWA').onclick = () => open(`https://wa.me/?text=${text}%20${encodeURIComponent(sub)}`, '_blank');
   if($('shareLI')) $('shareLI').onclick = () => open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sub)}`, '_blank');
   if($('shareX')) $('shareX').onclick = () => open(`https://x.com/intent/post?text=${text}&url=${encodeURIComponent(sub)}`, '_blank');
+}
+function handleAuthSubmit() {
+  const btn = $('authGoBtn');
+  if (btn && btn.onclick) btn.onclick();
 }
 
 // Global Auth & Login Handlers
