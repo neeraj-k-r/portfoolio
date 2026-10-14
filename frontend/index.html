@@ -2202,8 +2202,40 @@ async function renderDir() {
   });
 })();
 
+// Directory filter functionality
+(function() {
+  const filterBtns = document.querySelectorAll('.dir-filter-btn');
+  const dirCards = document.querySelectorAll('.dir-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+
+      dirCards.forEach(card => {
+        const theme = card.dataset.theme || '';
+        const isVisible = filter === 'all' ||
+          (filter === 'developer' && ['midnight', 'minimal', 'terminal', 'editorial', 'aurora'].includes(theme)) ||
+          (filter === 'designer' && ['creative', 'aurora', 'afterglow', 'ultraviolet', 'tidepool', 'bloom'].includes(theme)) ||
+          (filter === 'writer' && ['editorial', 'minimal'].includes(theme)) ||
+          (filter === 'student' && ['tidepool', 'minimal'].includes(theme));
+
+        if (isVisible) {
+          card.style.display = '';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(10px)';
+          setTimeout(() => { card.style.display = 'none'; }, 200);
+        }
+      });
+    });
+  });
+})();
+
 // Boot check
-  renderDir();
   try {
     if (cloudEnabled()) {
       if (await cloudIsAdmin()) {
