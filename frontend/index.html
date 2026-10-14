@@ -961,8 +961,15 @@ if($('authGoBtn')) $('authGoBtn').addEventListener('click', async () => {
   if (!/.+@.+\..+/.test(email)) return toast('❌ Enter a valid email address');
   if (pass.length < 6) return toast('❌ Password must be at least 6 characters');
 
-  if (cloudEnabled()) {
-    try {
+  const btn = $('authGoBtn');
+  const label = $('authGoLabel');
+  const origLabel = label ? label.textContent : '';
+  if (btn) btn.disabled = true;
+  if (label) label.textContent = currentAuthMode === 'signup' ? 'Creating account…' : 'Logging in…';
+  if ($('authMsg')) $('authMsg').textContent = '';
+
+  try {
+    if (typeof cloudEnabled === 'function' && cloudEnabled()) {
       if (currentAuthMode === 'signup') {
         const data = await cloudSignUp(email, pass);
         if (!data.session) {
@@ -971,15 +978,7 @@ if($('authGoBtn')) $('authGoBtn').addEventListener('click', async () => {
           return;
         }
       } else {
-        try {
-          await cloudSignIn(email, pass);
-        } catch (e) {
-          if (e.message.includes('Email not confirmed')) {
-            $('authMsg').innerHTML = '❌ Email not confirmed. <strong>Check your inbox</strong> (and spam folder) for the confirmation link, then try again.';
-            return;
-          }
-          throw e;
-        }
+        await cloudSignIn(email, pass);
       }
 
       if (await cloudIsAdmin()) {
@@ -992,20 +991,49 @@ if($('authGoBtn')) $('authGoBtn').addEventListener('click', async () => {
       editingCloudSession = true;
       showAppRole('user', email, p);
       toast('✅ Logged in successfully!');
-    } catch (e) {
-      $('authMsg').textContent = e.message;
-    }
-  } else {
-    // Local session fallback
-    localStorage.setItem('portfoolio_session_email', email);
-    let p = null;
-    try {
-      const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
-      p = Object.values(all).find(u => (u.email || '').toLowerCase() === email.toLowerCase()) || null;
-    } catch {}
+    } else {
+      // Local session fallback
+      localStorage.setItem('portfoolio_session_email', email);
+      let p = null;
+      try {
+        const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+        p = Object.values(all).find(u => (u.email || '').toLowerCase() === email.toLowerCase()) || null;
+      } catch {}
 
-    showAppRole('user', email, p);
-    toast('✅ Logged in to User Studio');
+      showAppRole('user', email, p);
+      toast('✅ Logged in to User Studio');
+    }
+  } catch (e) {
+    const rawMsg = e?.message || e?.error_description || String(e || '');
+    if (rawMsg.includes('Invalid login credentials')) {
+      $('authMsg').textContent = '❌ Invalid email or password. Please try again.';
+    } else if (rawMsg.includes('Email not confirmed')) {
+      $('authMsg').innerHTML = '❌ Email not confirmed. <strong>Check your inbox</strong> (and spam folder) for the confirmation link, then try again.';
+    } else if (rawMsg.includes('User already registered')) {
+      $('authMsg').innerHTML = '⚠️ An account with this email already exists. Click <strong>Log in</strong> above.';
+      setAuthMode('login');
+    } else if (rawMsg === 'cloud-off') {
+      $('authMsg').textContent = '❌ Cloud auth service is unavailable. Please check your connection or ad blocker.';
+    } else {
+      $('authMsg').textContent = '❌ ' + (rawMsg || 'Authentication failed. Please try again.');
+    }
+  } finally {
+    if (btn) btn.disabled = false;
+    if (label) label.textContent = origLabel || (currentAuthMode === 'signup' ? 'Create account' : 'Log in');
+  }
+});
+
+// Submit auth form on Enter key
+['authEmail', 'authPass'].forEach(id => {
+  const el = $(id);
+  if (el) {
+    el.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const goBtn = $('authGoBtn');
+        if (goBtn) goBtn.click();
+      }
+    });
   }
 });
 
@@ -2262,21 +2290,25 @@ async function renderDir() {
   });
 })();
 
-// Boot check
+// Local session fallback boot check (when cloud is disabled)
+(async () => {
+  await renderDir();
   try {
-    if (cloudEnabled()) {
-      if (await cloudIsAdmin()) {
-        showAppRole('admin', PORTFOOLIO_SUPERADMIN_EMAIL);
-        return;
-      }
-      const p = await cloudMyProfile();
-      if (p) {
-        editingCloudSession = true;
-        showAppRole('user', p.email, p);
+    if (!(typeof cloudEnabled === 'function' && cloudEnabled())) {
+      const localEmail = localStorage.getItem('portfoolio_session_email');
+      if (localEmail) {
+        let p = null;
+        try {
+          const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+          p = Object.values(all).find(u => (u.email || '').toLowerCase() === localEmail.toLowerCase()) || null;
+        } catch {}
+        showAppRole('user', localEmail, p);
         return;
       }
     }
-  } catch {}
+  } catch (err) {
+    console.error('Local boot check error:', err);
+  }
 })();
 </script>
 </body>

@@ -249,3 +249,28 @@ async function cloudDeleteProfile(username) {
   const { error } = await sb.from('profiles').delete().eq('username', String(username).toLowerCase());
   if (error) throw error;
 }
+
+// Boot check: wait for DOM and supabase config to be ready, then check auth state
+if (typeof window !== 'undefined') {
+  window.addEventListener('DOMContentLoaded', async () => {
+    await renderDir();
+    try {
+      if (typeof cloudEnabled === 'function' && cloudEnabled()) {
+        if (await cloudIsAdmin()) {
+          const sb = cloud();
+          const { data: { user } } = await sb.auth.getUser();
+          if (user && await cloudIsAdmin()) {
+            showAppRole('admin', PORTFOOLIO_SUPERADMIN_EMAIL);
+            return;
+          }
+        }
+        const p = await cloudMyProfile();
+        if (p) {
+          editingCloudSession = true;
+          showAppRole('user', p.email, p);
+          return;
+        }
+      }
+    } catch {}
+  });
+}
