@@ -2147,8 +2147,55 @@ async function renderDir() {
   }
 }
 
+// Hero theme preview interactivity
+(function() {
+  const themeBtns = document.querySelectorAll('#frameThemeSelector .theme-dot-btn');
+  const footerBtns = document.querySelectorAll('#footerThemes .footer-theme-btn');
+  const previewAvatar = document.getElementById('previewAvatar');
+  const previewName = document.getElementById('previewName');
+  const previewTitle = document.getElementById('previewTitle');
+  const previewDesc = document.getElementById('previewDesc');
+  const previewSkills = document.getElementById('previewSkills');
+
+  const themeData = {
+    midnight: { bg: 'linear-gradient(160deg, #0b1226, #131b3a)', avatar: 'linear-gradient(135deg,#6c6cf5,#22d3ee)', name: 'Your Name', title: 'Full-Stack Developer', desc: 'Building scalable web apps. Open to opportunities.', skills: ['React', 'TypeScript', 'Node.js', 'Python'] },
+    minimal: { bg: '#f1f5f9', avatar: '#0f172a', name: 'Your Name', title: 'Software Engineer', desc: 'Clean code, clean design. Minimalist at heart.', skills: ['Go', 'Rust', 'PostgreSQL', 'Docker'] },
+    terminal: { bg: '#0a0f0a', avatar: 'linear-gradient(135deg,#15803d,#22c55e)', name: 'user@portfoolio', title: 'Backend Engineer', desc: 'vim > everything. Linux. Containers. Automation.', skills: ['Go', 'Linux', 'Kubernetes', 'Bash'] },
+    creative: { bg: 'linear-gradient(150deg, #fdf2f8, #ede9fe)', avatar: 'linear-gradient(135deg,#ec4899,#8b5cf6)', name: 'Your Name', title: 'Creative Developer', desc: 'Where code meets art. Interactive experiences.', skills: ['React', 'Three.js', 'GSAP', 'CSS'] },
+    aurora: { bg: 'linear-gradient(150deg, #e0e7ff, #fce7f3, #ccfbf1)', avatar: 'linear-gradient(135deg,#06b6d4,#10b981)', name: 'Your Name', title: 'Full-Stack Developer', desc: 'Frosted glass aesthetics. Modern web craft.', skills: ['React', 'Next.js', 'Tailwind', 'TypeScript'] }
+  };
+
+  function applyTheme(theme) {
+    const data = themeData[theme] || themeData.midnight;
+    document.body.dataset.theme = theme;
+    if (previewAvatar) {
+      previewAvatar.style.background = data.avatar;
+    }
+    if (previewName) previewName.textContent = data.name;
+    if (previewTitle) previewTitle.textContent = data.title;
+    if (previewDesc) previewDesc.textContent = data.desc;
+    if (previewSkills) previewSkills.innerHTML = data.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+  }
+
+  themeBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      themeBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyTheme(btn.dataset.theme);
+    });
+  });
+
+  footerBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      footerBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyTheme(btn.dataset.theme);
+      themeBtns.forEach(b => { b.classList.toggle('active', b.dataset.theme === btn.dataset.theme); });
+    });
+  });
+})();
+
 // Boot check
-(async () => {
   renderDir();
   try {
     if (cloudEnabled()) {
