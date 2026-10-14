@@ -388,8 +388,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       </div>
       <div class="lx-auth-card">
         <div class="auth-tabs">
-          <button class="auth-tab active" id="tabSignup" type="button" onclick="setAuthMode('signup')"><i class="fa-solid fa-user-plus"></i> Sign up</button>
-          <button class="auth-tab" id="tabLogin" type="button" onclick="setAuthMode('login')"><i class="fa-solid fa-right-to-bracket"></i> Log in</button>
+          <button class="auth-tab active" id="tabSignup" type="button"><i class="fa-solid fa-user-plus"></i> Sign up</button>
+          <button class="auth-tab" id="tabLogin" type="button"><i class="fa-solid fa-right-to-bracket"></i> Log in</button>
         </div>
         <div id="authCloudOff" style="display:none">
           <p class="auth-hint">Cloud login is inactive — enter credentials below to continue to your dashboard:</p>
@@ -409,7 +409,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <button type="button" id="togglePass" class="toggle-pass" aria-label="Toggle password visibility"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
-          <button class="btn btn-primary-block" id="authGoBtn" onclick="handleAuthSubmit()"><i class="fa-solid fa-right-to-bracket"></i> <span id="authGoLabel">Create account</span></button>
+          <button class="btn btn-primary-block" id="authGoBtn"><i class="fa-solid fa-right-to-bracket"></i> <span id="authGoLabel">Create account</span></button>
           <p class="mono auth-msg" id="authMsg"></p>
         </div>
       </div>
@@ -955,6 +955,60 @@ if($('togglePass')) {
 if($('tabSignup')) $('tabSignup').addEventListener('click', () => setAuthMode('signup'));
 if($('tabLogin')) $('tabLogin').addEventListener('click', () => setAuthMode('login'));
 
+// Auth submit handler
+if($('authGoBtn')) $('authGoBtn').addEventListener('click', async () => {
+  const email = $('authEmail').value.trim(), pass = $('authPass').value;
+  if (!/.+@.+\..+/.test(email)) return toast('❌ Enter a valid email address');
+  if (pass.length < 6) return toast('❌ Password must be at least 6 characters');
+
+  if (cloudEnabled()) {
+    try {
+      if (currentAuthMode === 'signup') {
+        const data = await cloudSignUp(email, pass);
+        if (!data.session) {
+          $('authMsg').innerHTML = '✅ Account created! <strong>Check your email</strong> (and spam folder) for a confirmation link. Click it, then come back and hit <strong>Log in</strong>.';
+          setAuthMode('login');
+          return;
+        }
+      } else {
+        try {
+          await cloudSignIn(email, pass);
+        } catch (e) {
+          if (e.message.includes('Email not confirmed')) {
+            $('authMsg').innerHTML = '❌ Email not confirmed. <strong>Check your inbox</strong> (and spam folder) for the confirmation link, then try again.';
+            return;
+          }
+          throw e;
+        }
+      }
+
+      if (await cloudIsAdmin()) {
+        showAppRole('admin', email);
+        toast('🛡️ Admin Mode unlocked');
+        return;
+      }
+
+      const p = await cloudMyProfile();
+      editingCloudSession = true;
+      showAppRole('user', email, p);
+      toast('✅ Logged in successfully!');
+    } catch (e) {
+      $('authMsg').textContent = e.message;
+    }
+  } else {
+    // Local session fallback
+    localStorage.setItem('portfoolio_session_email', email);
+    let p = null;
+    try {
+      const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+      p = Object.values(all).find(u => (u.email || '').toLowerCase() === email.toLowerCase()) || null;
+    } catch {}
+
+    showAppRole('user', email, p);
+    toast('✅ Logged in to User Studio');
+  }
+});
+
 // Input focus effects
 document.querySelectorAll('.input-wrapper input').forEach(input => {
   input.addEventListener('focus', () => input.parentElement.classList.add('focused'));
@@ -1321,66 +1375,6 @@ function paintShareSection(p) {
   if($('shareLI')) $('shareLI').onclick = () => open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sub)}`, '_blank');
   if($('shareX')) $('shareX').onclick = () => open(`https://x.com/intent/post?text=${text}&url=${encodeURIComponent(sub)}`, '_blank');
 }
-function handleAuthSubmit() {
-  const btn = $('authGoBtn');
-  if (btn && btn.onclick) btn.onclick();
-}
-
-// Global Auth & Login Handlers
-$('authGoBtn').onclick = async () => {
-  const email = $('authEmail').value.trim(), pass = $('authPass').value;
-  if (!/.+@.+\..+/.test(email)) return toast('❌ Enter a valid email address');
-  if (pass.length < 6) return toast('❌ Password must be at least 6 characters');
-
-  // NOTE: no email-only admin shortcut here by design — admin UI requires a
-  // password-verified session plus cloudIsAdmin(). See boot check below.
-if (cloudEnabled()) {
-        try {
-          if (currentAuthMode === 'signup') {
-            const data = await cloudSignUp(email, pass);
-            if (!data.session) {
-              $('authMsg').innerHTML = '✅ Account created! <strong>Check your email</strong> (and spam folder) for a confirmation link. Click it, then come back and hit <strong>Log in</strong>.';
-              setAuthMode('login');
-              return;
-            }
-} else {
-        try {
-          await cloudSignIn(email, pass);
-        } catch (e) {
-          if (e.message.includes('Email not confirmed')) {
-            $('authMsg').innerHTML = '❌ Email not confirmed. <strong>Check your inbox</strong> (and spam folder) for the confirmation link, then try again.';
-            return;
-          }
-          throw e;
-        }
-      }
-      
-      if (await cloudIsAdmin()) {
-        showAppRole('admin', email);
-        toast('🛡️ Admin Mode unlocked');
-        return;
-      }
-
-      const p = await cloudMyProfile();
-      editingCloudSession = true;
-      showAppRole('user', email, p);
-      toast('✅ Logged in successfully!');
-    } catch (e) {
-      $('authMsg').textContent = e.message;
-    }
-  } else {
-    // Local session fallback
-    localStorage.setItem('portfoolio_session_email', email);
-    let p = null;
-    try {
-      const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
-      p = Object.values(all).find(u => (u.email || '').toLowerCase() === email.toLowerCase()) || null;
-    } catch {}
-    
-    showAppRole('user', email, p);
-    toast('✅ Logged in to User Studio');
-  }
-};
 
 // Subdomain Builder Form (Wizard inside User Dashboard)
 if ($('builderForm')) {
