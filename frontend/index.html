@@ -1330,17 +1330,25 @@ $('authGoBtn').onclick = async () => {
 
   // NOTE: no email-only admin shortcut here by design — admin UI requires a
   // password-verified session plus cloudIsAdmin(). See boot check below.
-  if (cloudEnabled()) {
-    try {
-      if (currentAuthMode === 'signup') {
-        const data = await cloudSignUp(email, pass);
-        if (!data.session) {
-          $('authMsg').textContent = 'Account created! Please check your inbox to confirm, then hit Log in.';
-          setAuthMode('login');
-          return;
+if (cloudEnabled()) {
+        try {
+          if (currentAuthMode === 'signup') {
+            const data = await cloudSignUp(email, pass);
+            if (!data.session) {
+              $('authMsg').innerHTML = '✅ Account created! <strong>Check your email</strong> (and spam folder) for a confirmation link. Click it, then come back and hit <strong>Log in</strong>.';
+              setAuthMode('login');
+              return;
+            }
+} else {
+        try {
+          await cloudSignIn(email, pass);
+        } catch (e) {
+          if (e.message.includes('Email not confirmed')) {
+            $('authMsg').innerHTML = '❌ Email not confirmed. <strong>Check your inbox</strong> (and spam folder) for the confirmation link, then try again.';
+            return;
+          }
+          throw e;
         }
-      } else {
-        await cloudSignIn(email, pass);
       }
       
       if (await cloudIsAdmin()) {
