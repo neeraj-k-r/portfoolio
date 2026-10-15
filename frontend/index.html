@@ -2292,6 +2292,22 @@ async function renderDir() {
   });
 })();
 
+// Hero preview window: subtle 3D tilt that follows the mouse
+(function() {
+  const hero = document.getElementById('hero');
+  const win = document.getElementById('heroVisual');
+  if (!hero || !win) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!window.matchMedia('(hover: hover)').matches) return;
+  hero.addEventListener('mousemove', e => {
+    const r = hero.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    win.style.transform = `perspective(1200px) rotateY(${(px * 6).toFixed(2)}deg) rotateX(${(-py * 5).toFixed(2)}deg) translateY(-2px)`;
+  });
+  hero.addEventListener('mouseleave', () => { win.style.transform = ''; });
+})();
+
 // Local session fallback boot check (when cloud is disabled)
 (async () => {
   await renderDir();
