@@ -1319,9 +1319,22 @@ function paintWorkStaging() {
       <img src="${esc(s.url)}" alt="">
       <div class="work-stage-name" title="${esc(s.file.name || '')}">${esc(s.file.name || ('image ' + (i + 1)))}</div>
       <div class="work-stage-btns">
+        <button type="button" class="btn btn-ghost btn-sm" data-wcropstage="${i}"><i class="fa-solid fa-crop-simple"></i> Crop</button>
         <button type="button" class="btn btn-ghost btn-sm" data-wremstage="${i}">Remove</button>
       </div>
     </div>`).join('');
+  box.querySelectorAll('[data-wcropstage]').forEach(b => b.onclick = async () => {
+    const i = +b.dataset.wcropstage;
+    const item = workStaging[i];
+    if (!item) return;
+    if (!window.PortfoolioCrop) return toast('❌ Cropper unavailable — reload the page');
+    const cropped = await window.PortfoolioCrop.open(item.file);
+    if (!cropped) return;
+    if (cropped.size > 5 * 1024 * 1024) return toast('⚠️ Cropped image is over 5MB — crop a smaller area');
+    try { URL.revokeObjectURL(item.url); } catch (e) {}
+    workStaging[i] = { file: cropped, url: URL.createObjectURL(cropped) };
+    paintWorkStaging();
+  });
   box.querySelectorAll('[data-wremstage]').forEach(b => b.onclick = () => {
     const i = +b.dataset.wremstage;
     if (workStaging[i]) { try { URL.revokeObjectURL(workStaging[i].url); } catch (e) {} }
