@@ -25,7 +25,7 @@
         st.natH = img.naturalHeight;
         modal.classList.add('open');
         modal.setAttribute('aria-hidden', 'false');
-        requestAnimationFrame(function () { resetBox(st); });
+        requestAnimationFrame(function () { resetBox(st); if (st.ratio) setRatio(st, st.ratio); syncRatioButtons(st.ratio); });
       };
       img.onerror = function () { finish(st, null); };
       img.src = st.url;
@@ -127,6 +127,25 @@
     }, mime, q);
   }
 
+  function setRatio(st, ratio) {
+    st.ratio = ratio || null;
+    if (!st.ratio) return;
+    var w = st.stageW, h = w / st.ratio;
+    if (h > st.stageH) { h = st.stageH; w = h * st.ratio; }
+    st.box = { x: (st.stageW - w) / 2, y: (st.stageH - h) / 2, w: w, h: h };
+    render(st);
+  }
+
+  function syncRatioButtons(ratio) {
+    var wrap = $('cropRatios');
+    if (!wrap) return;
+    wrap.querySelectorAll('button').forEach(function (b) {
+      var v = b.getAttribute('data-ratio');
+      var match = (v === 'free' && !ratio) || (v !== 'free' && Math.abs(parseFloat(v) - ratio) < 1e-4);
+      b.classList.toggle('active', match);
+    });
+  }
+
   function resetBox(st) {
     st.stageW = st.img.clientWidth;
     st.stageH = st.img.clientHeight;
@@ -161,6 +180,13 @@
     if ($('cropApply')) $('cropApply').onclick = function () { if (state) applyCrop(state); };
     if ($('cropBox')) $('cropBox').addEventListener('pointerdown', onBoxDown);
     modal.querySelectorAll('.crop-h').forEach(function (h) { h.addEventListener('pointerdown', onHandleDown); });
+    if ($('cropRatios')) $('cropRatios').addEventListener('click', function (e) {
+      var b = e.target.closest ? e.target.closest('button') : null;
+      if (!b || !state) return;
+      var v = b.getAttribute('data-ratio');
+      setRatio(state, v === 'free' ? null : parseFloat(v));
+      syncRatioButtons(state.ratio);
+    });
   }
 
   window.PortfoolioCrop = { open: function (file, opts) { bindOnce(); return open(file, opts); } };
