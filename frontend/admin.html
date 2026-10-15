@@ -87,7 +87,7 @@
 <script src="../backend/supabase-config.js"></script>
 <script>
 const $ = id => document.getElementById(id);
-function esc(s) { return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&', '<': '<', '>': '>', '"': '"', "'": ''' }[c])); }
+function esc(s) { return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 function toast(m){const t=$('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
 let SITES = [];
 function row(r, queue) {
