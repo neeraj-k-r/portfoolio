@@ -58,6 +58,52 @@
     box.addEventListener('pointercancel', up);
   }
 
+  function onHandleDown(e) {
+    if (!state) return;
+    var dir = e.target.getAttribute && e.target.getAttribute('data-h');
+    if (!dir) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var st = state, handle = e.target, stage = $('cropStage');
+    var r = stage.getBoundingClientRect();
+    var s = { x: st.box.x, y: st.box.y, w: st.box.w, h: st.box.h };
+    var west = dir.charAt(1) === 'w', north = dir.charAt(0) === 'n';
+    var anchorX = west ? s.x + s.w : s.x;
+    var anchorY = north ? s.y + s.h : s.y;
+    var maxW = west ? anchorX : st.stageW - anchorX;
+    var maxH = north ? anchorY : st.stageH - anchorY;
+    try { handle.setPointerCapture(e.pointerId); } catch (err) {}
+    function move(ev) {
+      var px = clamp(ev.clientX - r.left, 0, st.stageW);
+      var py = clamp(ev.clientY - r.top, 0, st.stageH);
+      var w, h;
+      if (st.ratio) {
+        w = Math.abs(px - anchorX);
+        h = w / st.ratio;
+        if (h > maxH) { h = maxH; w = h * st.ratio; }
+        if (w > maxW) { w = maxW; h = w / st.ratio; }
+        if (w < MIN) { w = MIN; h = w / st.ratio; }
+        if (h < MIN) { h = MIN; w = h * st.ratio; }
+      } else {
+        w = clamp(Math.abs(px - anchorX), west ? Math.min(MIN, anchorX) : MIN, maxW);
+        h = clamp(Math.abs(py - anchorY), north ? Math.min(MIN, anchorY) : MIN, maxH);
+      }
+      st.box.w = w; st.box.h = h;
+      st.box.x = west ? anchorX - w : anchorX;
+      st.box.y = north ? anchorY - h : anchorY;
+      render(st);
+    }
+    function up(ev) {
+      handle.removeEventListener('pointermove', move);
+      handle.removeEventListener('pointerup', up);
+      handle.removeEventListener('pointercancel', up);
+      try { handle.releasePointerCapture(ev.pointerId); } catch (err) {}
+    }
+    handle.addEventListener('pointermove', move);
+    handle.addEventListener('pointerup', up);
+    handle.addEventListener('pointercancel', up);
+  }
+
   function resetBox(st) {
     st.stageW = st.img.clientWidth;
     st.stageH = st.img.clientHeight;
@@ -90,6 +136,7 @@
     if ($('cropBackdrop')) $('cropBackdrop').onclick = function () { if (state) finish(state, null); };
     if ($('cropReset')) $('cropReset').onclick = function () { if (state) resetBox(state); };
     if ($('cropBox')) $('cropBox').addEventListener('pointerdown', onBoxDown);
+    modal.querySelectorAll('.crop-h').forEach(function (h) { h.addEventListener('pointerdown', onHandleDown); });
   }
 
   window.PortfoolioCrop = { open: function (file, opts) { bindOnce(); return open(file, opts); } };
