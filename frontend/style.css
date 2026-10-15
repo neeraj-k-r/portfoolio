@@ -1315,6 +1315,16 @@ body[data-template="bloom"] .proj-body p{color:#b07cc6}
 body[data-template="studio"] .work-row-btns button{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.16);color:#1c1917}
 body[data-template="studio"] .work-row-btns button:hover{background:rgba(0,0,0,.1)}
 body[data-template="studio"] .work-row-btns button[data-wrm]{border-color:rgba(244,63,94,.5);color:#e11d48;background:rgba(244,63,94,.08)}
+/* Same contrast fix for the other light work-card templates */
+body[data-template="museum"] .work-row-btns button,
+body[data-template="bloom"] .work-row-btns button,
+body[data-template="catalog"] .work-row-btns button{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.16);color:#1c1917}
+body[data-template="museum"] .work-row-btns button:hover,
+body[data-template="bloom"] .work-row-btns button:hover,
+body[data-template="catalog"] .work-row-btns button:hover{background:rgba(0,0,0,.1)}
+body[data-template="museum"] .work-row-btns button[data-wrm],
+body[data-template="bloom"] .work-row-btns button[data-wrm],
+body[data-template="catalog"] .work-row-btns button[data-wrm]{border-color:rgba(244,63,94,.5);color:#e11d48;background:rgba(244,63,94,.08)}
 /* Scroll reveal (JS adds .in when visible) */
 #landing .lx-section, #landing .lx-logos { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
 #landing .lx-section.in, #landing .lx-logos.in { opacity: 1; transform: none; }
