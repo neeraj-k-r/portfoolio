@@ -559,6 +559,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (mainNav) {
     const onScroll = () => {
       mainNav.classList.toggle('scrolled', window.scrollY > 24);
+      const prog = document.getElementById('scrollProgress');
+      if (prog) {
+        const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        prog.style.width = (max > 0 ? Math.min(100, (window.scrollY / max) * 100) : 0) + '%';
+      }
       if (spySections.length) {
         let current = '';
         spySections.forEach(s => { if (window.scrollY + 140 >= s.offsetTop) current = s.id; });
