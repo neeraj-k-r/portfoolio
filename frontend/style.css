@@ -1096,6 +1096,10 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-swatches .more { width: auto; height: auto; border: none; background: none; font-style: normal; font-size: 12.5px; font-weight: 700; color: #4f46e5; transition: color .25s var(--ease); }
 .lx-swatches .more:hover { color: #6366f1; }
 /* LX showcase: retint directory cards */
+.dir-filter { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin: 16px 0 20px; }
+.dir-filter-btn { padding: 8px 16px; border-radius: 100px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.05); color: #e7ece9; font-weight: 700; font-size: 13.5px; cursor: pointer; transition: all .2s var(--ease); }
+.dir-filter-btn:hover { border-color: rgba(79,70,229,.45); background: rgba(79,70,229,.1); color: #c7d2fe; transform: translateY(-1px); }
+.dir-filter-btn.active { background: linear-gradient(135deg,#4f46e5,#6366f1); border-color: transparent; color: #fff; box-shadow: 0 6px 18px rgba(79,70,229,.35); }
 .lx-showcase .dir-card { background: rgba(17,24,22,.85); border-color: rgba(255,255,255,.09); transition: transform .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease); }
 .lx-showcase .dir-card:hover { border-color: rgba(79,70,229,.45); box-shadow: 0 24px 56px rgba(79,70,229,.2), 0 8px 24px rgba(0,0,0,.3); transform: translateY(-8px) scale(1.01); }
 .lx-showcase .dir-card h3 { color: #f4f7f3; transition: color .25s var(--ease); }
