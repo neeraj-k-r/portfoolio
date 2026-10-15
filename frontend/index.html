@@ -1387,6 +1387,7 @@ function paintWorks() {
         <input data-work="desc" data-i="${i}" value="${esc(w.desc || '')}" placeholder="Short description">
         <div class="work-row-btns">
           <button data-wcover="${i}">Cover</button>
+          <button data-wcrop="${i}"><i class="fa-solid fa-crop-simple"></i> Crop</button>
           <button data-wup="${i}">↑</button>
           <button data-wdown="${i}">↓</button>
           <button data-wrm="${i}">Remove</button>
@@ -1420,6 +1421,36 @@ function bindWorks() {
   };
   body.querySelectorAll('[data-wup]').forEach(b => b.onclick = () => move(+b.dataset.wup, -1));
   body.querySelectorAll('[data-wdown]').forEach(b => b.onclick = () => move(+b.dataset.wdown, 1));
+  body.querySelectorAll('[data-wcrop]').forEach(b => b.onclick = async () => {
+    const i = +b.dataset.wcrop;
+    const w = activeUserProfile.works[i];
+    if (!w || !w.imageUrl) return;
+    if (!window.PortfoolioCrop) return toast('❌ Cropper unavailable — reload the page');
+    if (!cloudinaryEnabled()) return toast('❌ Image uploads activate once the owner connects Cloudinary');
+    let file;
+    try {
+      const res = await fetch(w.imageUrl, { mode: 'cors' });
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const blob = await res.blob();
+      file = new File([blob], (w.title || 'work') + '.jpg', { type: blob.type || 'image/jpeg' });
+    } catch (e) {
+      return toast('❌ Can\'t load this image to crop (network/CORS)');
+    }
+    const cropped = await window.PortfoolioCrop.open(file);
+    if (!cropped) return;
+    b.disabled = true;
+    const prev = b.innerHTML;
+    b.innerHTML = '…';
+    try {
+      const url = await uploadAvatar(cropped);
+      w.imageUrl = url;
+      paintWorks();
+    } catch (e) {
+      toast('❌ Crop upload failed — retry');
+      b.disabled = false;
+      b.innerHTML = prev;
+    }
+  });
 }
 function techChipsHTML(pr) {
   const techs = (window.PortfoolioEvidence ? PortfoolioEvidence.projectTechs(pr) : (pr.technologies || []));
