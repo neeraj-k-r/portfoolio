@@ -903,6 +903,42 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 </div>
 
 <div id="toast"></div>
+
+<!-- Image crop modal (works upload) -->
+<div class="crop-modal" id="cropModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Crop image">
+  <div class="crop-backdrop" id="cropBackdrop"></div>
+  <div class="crop-panel">
+    <div class="crop-head">
+      <strong><i class="fa-solid fa-crop-simple"></i> Crop image</strong>
+      <div class="crop-ratios" id="cropRatios">
+        <button type="button" class="active" data-ratio="free">Free</button>
+        <button type="button" data-ratio="1">1:1</button>
+        <button type="button" data-ratio="1.3333333">4:3</button>
+        <button type="button" data-ratio="1.7777778">16:9</button>
+        <button type="button" data-ratio="0.75">3:4</button>
+      </div>
+    </div>
+    <div class="crop-stagewrap">
+      <div class="crop-stage" id="cropStage">
+        <img id="cropImage" alt="Image to crop" draggable="false">
+        <div class="crop-box" id="cropBox">
+          <span class="crop-h" data-h="nw"></span>
+          <span class="crop-h" data-h="ne"></span>
+          <span class="crop-h" data-h="sw"></span>
+          <span class="crop-h" data-h="se"></span>
+        </div>
+      </div>
+    </div>
+    <div class="crop-foot">
+      <span class="crop-hint" id="cropHint">Drag to move · drag a corner to resize</span>
+      <div class="crop-actions">
+        <button type="button" class="btn btn-ghost btn-sm" id="cropCancel">Cancel</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="cropReset">Reset</button>
+        <button type="button" class="btn btn-primary btn-sm" id="cropApply"><i class="fa-solid fa-crop-simple"></i> Apply crop</button>
+      </div>
+    </div>
+  </div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
