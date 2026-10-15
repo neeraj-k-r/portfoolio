@@ -104,6 +104,29 @@
     handle.addEventListener('pointercancel', up);
   }
 
+  function applyCrop(st) {
+    var scale = st.stageW ? st.natW / st.stageW : 1;
+    var sx = Math.max(0, Math.min(Math.round(st.box.x * scale), st.natW - 1));
+    var sy = Math.max(0, Math.min(Math.round(st.box.y * scale), st.natH - 1));
+    var sw = Math.max(1, Math.min(Math.round(st.box.w * scale), st.natW - sx));
+    var sh = Math.max(1, Math.min(Math.round(st.box.h * scale), st.natH - sy));
+    var c = document.createElement('canvas');
+    c.width = sw; c.height = sh;
+    c.getContext('2d').drawImage(st.img, sx, sy, sw, sh, 0, 0, sw, sh);
+    var base = (st.file.name || 'image').replace(/\.[^.]+$/, '');
+    var mime = /image\/(png|jpeg|webp)/.test(st.file.type || '') ? st.file.type : 'image/png';
+    encode(st, c, base, mime, 0.92);
+  }
+
+  function encode(st, canvas, base, mime, q) {
+    canvas.toBlob(function (blob) {
+      if (!blob && mime !== 'image/jpeg') { encode(st, canvas, base, 'image/jpeg', q); return; }
+      if (!blob) { finish(st, null); return; }
+      var ext = mime === 'image/png' ? 'png' : mime === 'image/webp' ? 'webp' : 'jpg';
+      finish(st, new File([blob], base + '-crop.' + ext, { type: mime }));
+    }, mime, q);
+  }
+
   function resetBox(st) {
     st.stageW = st.img.clientWidth;
     st.stageH = st.img.clientHeight;
@@ -135,6 +158,7 @@
     if ($('cropCancel')) $('cropCancel').onclick = function () { if (state) finish(state, null); };
     if ($('cropBackdrop')) $('cropBackdrop').onclick = function () { if (state) finish(state, null); };
     if ($('cropReset')) $('cropReset').onclick = function () { if (state) resetBox(state); };
+    if ($('cropApply')) $('cropApply').onclick = function () { if (state) applyCrop(state); };
     if ($('cropBox')) $('cropBox').addEventListener('pointerdown', onBoxDown);
     modal.querySelectorAll('.crop-h').forEach(function (h) { h.addEventListener('pointerdown', onHandleDown); });
   }
