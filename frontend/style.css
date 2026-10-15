@@ -791,6 +791,10 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-btn-lg:hover { transform: translateY(-3px); }
 .lx-btn-lg:active { transform: scale(.97); }
 @keyframes lxBreathe { 0%,100% { box-shadow: 0 14px 40px rgba(79,70,229,.3); } 50% { box-shadow: 0 14px 52px rgba(79,70,229,.5); } }
+/* CTA shine sweep on hover */
+.lx-btn-lg { position: relative; overflow: hidden; }
+.lx-btn-lg::after { content: ""; position: absolute; top: 0; left: -70%; width: 45%; height: 100%; background: linear-gradient(105deg, transparent, rgba(255,255,255,.32), transparent); transform: skewX(-20deg); transition: left .55s var(--ease); pointer-events: none; }
+.lx-btn-lg:hover::after { left: 135%; }
 /* Window status bar (editor chrome detail) */
 .lx-win-status { display: flex; gap: 16px; align-items: center; padding: 8px 16px; background: rgba(79,70,229,.05); border-top: 1px solid rgba(255,255,255,.08); font-family: 'JetBrains Mono',monospace; font-size: 11px; color: #7d8a82; transition: background .25s var(--ease), border-color .25s var(--ease); }
 .lx-window:hover .lx-win-status { background: rgba(79,70,229,.08); border-color: rgba(79,70,229,.2); }
