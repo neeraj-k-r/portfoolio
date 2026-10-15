@@ -32,6 +32,32 @@
     });
   }
 
+  function clamp(v, a, b) { return v < a ? a : v > b ? b : v; }
+
+  function onBoxDown(e) {
+    if (!state) return;
+    if (e.target.classList && e.target.classList.contains('crop-h')) return;
+    e.preventDefault();
+    var st = state, box = $('cropBox');
+    var sx = e.clientX, sy = e.clientY;
+    var start = { x: st.box.x, y: st.box.y };
+    try { box.setPointerCapture(e.pointerId); } catch (err) {}
+    function move(ev) {
+      st.box.x = clamp(start.x + (ev.clientX - sx), 0, st.stageW - st.box.w);
+      st.box.y = clamp(start.y + (ev.clientY - sy), 0, st.stageH - st.box.h);
+      render(st);
+    }
+    function up(ev) {
+      box.removeEventListener('pointermove', move);
+      box.removeEventListener('pointerup', up);
+      box.removeEventListener('pointercancel', up);
+      try { box.releasePointerCapture(ev.pointerId); } catch (err) {}
+    }
+    box.addEventListener('pointermove', move);
+    box.addEventListener('pointerup', up);
+    box.addEventListener('pointercancel', up);
+  }
+
   function resetBox(st) {
     st.stageW = st.img.clientWidth;
     st.stageH = st.img.clientHeight;
@@ -63,6 +89,7 @@
     if ($('cropCancel')) $('cropCancel').onclick = function () { if (state) finish(state, null); };
     if ($('cropBackdrop')) $('cropBackdrop').onclick = function () { if (state) finish(state, null); };
     if ($('cropReset')) $('cropReset').onclick = function () { if (state) resetBox(state); };
+    if ($('cropBox')) $('cropBox').addEventListener('pointerdown', onBoxDown);
   }
 
   window.PortfoolioCrop = { open: function (file, opts) { bindOnce(); return open(file, opts); } };
