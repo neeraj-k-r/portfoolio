@@ -899,7 +899,9 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 @keyframes lxConnectorIn { to { transform: scaleX(1); } }
 /* Theme gallery */
 .lx-gallery { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 30px; }
-.lx-theme-card { background: rgba(17,24,22,.7); border: 1px solid rgba(255,255,255,.09); border-radius: 18px; padding: 14px; text-align: left; cursor: pointer; transition: transform .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease); font: inherit; color: inherit; }
+.lx-theme-card { position: relative; background: rgba(17,24,22,.7); border: 1px solid rgba(255,255,255,.09); border-radius: 18px; padding: 14px; text-align: left; cursor: pointer; transition: transform .35s var(--ease), border-color .35s var(--ease), box-shadow .35s var(--ease); font: inherit; color: inherit; }
+.lx-theme-card::after { content: "Click to preview"; position: absolute; top: 24px; left: 50%; transform: translate(-50%, 6px); background: rgba(11,15,14,.9); border: 1px solid rgba(79,70,229,.5); color: #c7d2fe; font-size: 11px; font-weight: 800; padding: 5px 11px; border-radius: 100px; opacity: 0; pointer-events: none; transition: opacity .25s var(--ease), transform .25s var(--ease); z-index: 2; white-space: nowrap; }
+.lx-theme-card:hover::after, .lx-theme-card:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
 .lx-theme-card:hover, .lx-theme-card:focus-visible { transform: translateY(-8px) scale(1.02); border-color: rgba(79,70,229,.5); box-shadow: 0 28px 56px rgba(79,70,229,.15), 0 12px 32px rgba(0,0,0,.35); }
 .lx-theme-card .lx-tp { transition: transform .35s var(--ease), box-shadow .35s var(--ease); }
 .lx-theme-card:hover .lx-tp { transform: scale(1.03); box-shadow: 0 16px 40px rgba(79,70,229,.25); }
