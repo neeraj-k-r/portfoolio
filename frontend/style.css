@@ -1311,6 +1311,10 @@ body[data-template="bloom"] .proj-body p{color:#b07cc6}
 .work-card input{background:rgba(0,0,0,.3);border:1px solid var(--stroke);border-radius:8px;padding:8px 10px;color:#fff;font-size:13px;width:100%}
 .work-cover{display:inline-block;font-size:11px;font-weight:800;padding:3px 9px;border-radius:100px;background:rgba(163,230,53,.15);border:1px solid rgba(163,230,53,.45);color:#d9f99d}
 .work-row-btns{display:flex;gap:6px;flex-wrap:wrap}
+/* Work buttons must stay readable on the white studio cards (white text is invisible) */
+body[data-template="studio"] .work-row-btns button{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.16);color:#1c1917}
+body[data-template="studio"] .work-row-btns button:hover{background:rgba(0,0,0,.1)}
+body[data-template="studio"] .work-row-btns button[data-wrm]{border-color:rgba(244,63,94,.5);color:#e11d48;background:rgba(244,63,94,.08)}
 /* Scroll reveal (JS adds .in when visible) */
 #landing .lx-section, #landing .lx-logos { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
 #landing .lx-section.in, #landing .lx-logos.in { opacity: 1; transform: none; }
