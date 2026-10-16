@@ -1220,6 +1220,7 @@ function setupUserDashboardView(profile) {
 
     // Populate editor fields
     if($('edName')) $('edName').value = profile.name || '';
+    if($('edSubdomain')) $('edSubdomain').value = profile.username || '';
     if($('edTitle')) $('edTitle').value = profile.title || '';
     if($('edTag')) $('edTag').value = profile.tagline || '';
     if($('edEmail')) $('edEmail').value = profile.email || '';
@@ -1753,6 +1754,30 @@ async function saveStudio() {
 }
 if ($('edSaveBtn')) $('edSaveBtn').onclick = saveStudio;
 if ($('edSaveThemeBtn')) $('edSaveThemeBtn').onclick = saveStudio;
+
+// Change subdomain: validate, re-key local store, move cloud row, refresh share links
+async function changeUsername() {
+  if (!activeUserProfile) return toast('❌ Log in first');
+  const input = $('edSubdomain');
+  if (!input) return;
+  const n = input.value.toLowerCase().trim();
+  const cur = activeUserProfile.username;
+  if (n === cur) return toast('❌ That is your current subdomain');
+  const chk = await checkUsernameAvailability(n);
+  if (!chk.ok) return toast('❌ ' + chk.msg);
+  const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+  delete all[cur];
+  all[n] = activeUserProfile;
+  localStorage.setItem('portfoolio_users_v1', JSON.stringify(all));
+  activeUserProfile.username = n;
+  if (cloudEnabled() && editingCloudSession) {
+    try { await cloudDeleteProfile(cur); } catch (e) {}
+    try { await cloudSaveProfile(activeUserProfile); } catch (e) {}
+  }
+  paintShareSection(activeUserProfile);
+  toast('✅ Subdomain changed to ' + n + '.portfoolio.me');
+}
+if ($('edSubdomainSave')) $('edSubdomainSave').onclick = changeUsername;
 
 // Editor: load repos (username or repo URL) + add selected
 let edGhRepos = [];
