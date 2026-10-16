@@ -496,6 +496,25 @@ function renderResumePage(p) {
 }
 
 // ---- /explore : public directory of all portfolios ----
+const EXPLORE_SEEDS = ['arjun','demo','ember','iris','june','kai','leo','mira','neerajkr','priya','zoe'];
+async function getPublicProfiles() {
+  const out = [];
+  try { (store.all() || []).forEach(p => out.push(normLocalProfile(p))); } catch (e) {}
+  await Promise.all(EXPLORE_SEEDS.map(async (u) => {
+    try {
+      const r = await fetch(`profiles/${u}.json`, { cache: 'no-store' });
+      if (r.ok) out.push(normLocalProfile(await r.json()));
+    } catch (e) {}
+  }));
+  const seen = new Set();
+  return out.filter(p => {
+    if (!p || !p.username) return false;
+    const k = String(p.username).toLowerCase();
+    if (seen.has(k)) return false;
+    seen.add(k);
+    return true;
+  });
+}
 async function renderExplorePage() {
   const app = document.getElementById('app');
   if (!app) return;
@@ -506,6 +525,9 @@ async function renderExplorePage() {
       <p class="lx-lead">Every public portfolio on portfoolio.me.</p>
       <div class="dir-grid" id="exploreGrid"><p style="color:var(--muted)">Loading…</p></div>
     </div>`;
+  const profiles = await getPublicProfiles();
+  const grid = document.getElementById('exploreGrid');
+  if (grid) grid.innerHTML = `<p style="color:var(--muted)">${profiles.length} public portfolios</p>`;
   window.scrollTo(0, 0);
 }
 
