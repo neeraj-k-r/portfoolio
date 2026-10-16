@@ -495,8 +495,33 @@ function renderResumePage(p) {
   window.scrollTo(0, 0);
 }
 
+// ---- /explore : public directory of all portfolios ----
+async function renderExplorePage() {
+  const app = document.getElementById('app');
+  if (!app) return;
+  app.innerHTML = `
+    <div class="wrap lx-explore">
+      <p class="lx-kicker">Directory</p>
+      <h1 class="lx-h1">Explore portfolios</h1>
+      <p class="lx-lead">Every public portfolio on portfoolio.me.</p>
+      <div class="dir-grid" id="exploreGrid"><p style="color:var(--muted)">Loading…</p></div>
+    </div>`;
+  window.scrollTo(0, 0);
+}
+
 // ---- Boot ----
 document.addEventListener('DOMContentLoaded', async () => {
+  // ---- /explore : public directory of all portfolios ----
+  if (/^\/explore\/?$/.test(location.pathname)) {
+    document.body.classList.remove('lx');
+    const land = document.getElementById('landing');
+    if (land) land.style.display = 'none';
+    const appEl = document.getElementById('app');
+    if (appEl) appEl.style.display = '';
+    renderExplorePage();
+    return;
+  }
+
   // Landing page: hero preview theme switcher
   const heroPreview = document.getElementById('heroPreview');
   if (heroPreview) {
