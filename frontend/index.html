@@ -1780,6 +1780,7 @@ async function changeUsername() {
   toast('✅ Subdomain changed to ' + n + '.portfoolio.me');
 }
 if ($('edSubdomainSave')) $('edSubdomainSave').onclick = changeUsername;
+if ($('exportHtmlBtn')) $('exportHtmlBtn').onclick = () => exportStaticHTML(activeUserProfile);
 
 // Export: build a self-contained static HTML portfolio and download it
 function exportStaticHTML(p) {
