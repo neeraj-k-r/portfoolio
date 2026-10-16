@@ -70,7 +70,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   <nav class="lx-nav" id="mainNav">
     <div class="lx-brand-wrap" style="display:flex;align-items:center;gap:12px">
       <a class="lx-brand" href="/"><img class="brand-logo" src="favicon.svg" alt="portfoolio.me logo" width="28" height="28"><span>PORTFOOLIO<em>.me</em></span></a>
-      <span class="lx-live-badge" aria-label="Live sites count"><span class="live-dot"></span><span id="liveCount">980+</span> portfolios deployed</span>
+      <span class="lx-live-badge" aria-label="Live sites count"><span class="live-dot"></span><span id="liveCount">…</span> portfolios deployed</span>
     </div>
     <div class="nav-links" id="navLinks">
       <a href="#features" class="nav-link">Features</a>
@@ -2324,6 +2324,27 @@ async function renderDir() {
   }
 }
 
+// Live portfolio counter: exact approved-profile count from the cloud.
+async function paintLiveCount() {
+  const el = $('liveCount');
+  if (!el) return;
+  try {
+    if (typeof cloudEnabled === 'function' && cloudEnabled()) {
+      const { count, error } = await cloud().from('profiles').select('username', { count: 'exact', head: true }).eq('status', 'approved');
+      if (!error && typeof count === 'number') {
+        el.textContent = count >= 1000 ? (count / 1000).toFixed(1).replace(/\.0$/, '') + 'k' : String(count);
+        return;
+      }
+    }
+  } catch {}
+  try {
+    const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+    const n = Object.values(all).filter(u => (u.status || 'approved') === 'approved').length;
+    if (n > 0) { el.textContent = String(n); return; }
+  } catch {}
+  el.textContent = 'live';
+}
+
 // Hero theme preview interactivity
 (function() {
   const themeBtns = document.querySelectorAll('#frameThemeSelector .theme-dot-btn');
@@ -2424,6 +2445,7 @@ async function renderDir() {
 // Local session fallback boot check (when cloud is disabled)
 (async () => {
   await renderDir();
+  paintLiveCount();
   try {
     if (!(typeof cloudEnabled === 'function' && cloudEnabled())) {
       const localEmail = localStorage.getItem('portfoolio_session_email');
