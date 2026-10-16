@@ -527,7 +527,23 @@ async function renderExplorePage() {
     </div>`;
   const profiles = await getPublicProfiles();
   const grid = document.getElementById('exploreGrid');
-  if (grid) grid.innerHTML = `<p style="color:var(--muted)">${profiles.length} public portfolios</p>`;
+  if (!grid) return;
+  if (!profiles.length) { grid.innerHTML = '<p style="color:var(--muted)">No public portfolios yet.</p>'; return; }
+  grid.innerHTML = profiles.map(p => {
+    const initial = (p.name || p.username || '?').trim().charAt(0).toUpperCase();
+    return `
+    <div class="dir-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="width:36px;height:36px;border-radius:50%;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:linear-gradient(135deg,#4f46e5,#6366f1)">${esc(initial)}</span>
+        <h3 style="margin:0">${esc(p.name || p.username)}</h3>
+      </div>
+      <p>${esc(p.title || '')}</p>
+      <p class="mono" style="font-size:12.5px;color:#4f46e5;margin-bottom:12px">${esc(p.username)}.portfoolio.me</p>
+      <div style="display:flex;gap:8px">
+        <a class="btn btn-primary btn-sm" href="/?u=${encodeURIComponent(p.username)}">Visit Site <span>→</span></a>
+      </div>
+    </div>`;
+  }).join('');
   window.scrollTo(0, 0);
 }
 
