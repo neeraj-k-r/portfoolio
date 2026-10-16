@@ -1421,6 +1421,7 @@ body[data-template] #dashboardApp input,body[data-template] #dashboardApp textar
 .work-stage-btns{display:flex;gap:6px;flex-wrap:wrap}
 .work-stage-btns .btn{flex:1;justify-content:center;padding:6px 8px;font-size:11px}
 /* Image crop modal (works upload) */
+#edSubdomain{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;text-transform:lowercase;letter-spacing:.02em}
 .crop-modal{position:fixed;inset:0;z-index:400;display:none;align-items:center;justify-content:center;padding:20px}
 .crop-modal.open{display:flex}
 .crop-backdrop{position:absolute;inset:0;background:rgba(4,7,6,.85);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
