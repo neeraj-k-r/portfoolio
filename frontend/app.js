@@ -506,6 +506,12 @@ async function getPublicProfiles() {
       if (r.ok) out.push(normLocalProfile(await r.json()));
     } catch (e) {}
   }));
+  try {
+    if (typeof cloudEnabled === 'function' && cloudEnabled() && typeof cloudListProfiles === 'function') {
+      const cloudRows = await cloudListProfiles();
+      (cloudRows || []).forEach(p => out.push(normLocalProfile(p)));
+    }
+  } catch (e) {}
   const seen = new Set();
   return out.filter(p => {
     if (!p || !p.username) return false;
