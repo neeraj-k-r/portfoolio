@@ -239,6 +239,12 @@ async function cloudPending() {
   if (error) throw error;
   return data || [];
 }
+async function cloudListProfiles() {
+  const sb = cloud(); if (!sb) return [];
+  const { data, error } = await sb.from('profiles').select('username,name,title,avatar_url,avatarUrl,template,track,location').eq('status', 'approved').order('created_at', { ascending: false }).limit(200);
+  if (error) throw error;
+  return data || [];
+}
 async function cloudSetStatus(username, status) {
   const sb = cloud(); if (!sb) throw new Error('cloud-off');
   const { error } = await sb.from('profiles').update({ status }).eq('username', String(username).toLowerCase());
