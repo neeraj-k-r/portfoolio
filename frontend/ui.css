@@ -113,4 +113,141 @@ body.ui-admin ::-webkit-scrollbar-thumb:hover {
   background: #b9ac91;
 }
 
+/* ── Landing navigation ─────────────────────────────────────────────── */
+body.lx .lx-nav {
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: none;
+  width: 100%;
+  padding: 20px clamp(20px, 4.5vw, 60px);
+  background: rgba(245, 241, 232, 0.82);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body.lx #mainNav.scrolled {
+  padding: 13px clamp(20px, 4.5vw, 60px);
+  background: rgba(245, 241, 232, 0.94);
+  border-bottom-color: var(--line);
+  box-shadow: 0 1px 0 rgba(27, 25, 20, 0.02);
+}
+
+body.lx .lx-progress {
+  height: 2px;
+  background: var(--ink);
+  box-shadow: none;
+  border-radius: 0;
+}
+
+body.lx .lx-brand {
+  color: var(--ink);
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  gap: 11px;
+}
+
+body.lx .lx-brand .brand-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+
+body.lx .lx-brand em {
+  color: var(--muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-left: 1px;
+}
+
+body.lx .lx-brand-wrap .lx-live-badge {
+  display: none;
+}
+
+body.lx .nav-links {
+  gap: 32px;
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+body.lx .nav-links .nav-link[href="#auth"] {
+  display: none;
+}
+
+body.lx .nav-link {
+  position: relative;
+  color: #6d6759;
+  opacity: 1;
+  transition: color 0.2s var(--ease);
+}
+
+body.lx .nav-link:hover,
+body.lx .nav-link.active {
+  color: var(--ink);
+}
+
+body.lx .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s var(--ease);
+}
+
+body.lx .nav-link:hover::after,
+body.lx .nav-link.active::after {
+  transform: scaleX(1);
+  background: var(--ink);
+}
+
+body.lx .lx-nav-cta {
+  gap: 22px;
+}
+
+body.lx .lx-login {
+  color: var(--ink);
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+body.lx .lx-login:hover {
+  color: #000;
+}
+
+body.lx .lx-btn {
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(27, 25, 20, 0.16);
+}
+
+body.lx .lx-btn::before {
+  display: none;
+}
+
+body.lx .lx-btn:hover {
+  transform: translateY(-1px);
+  background: #000;
+  box-shadow: 0 12px 26px rgba(27, 25, 20, 0.22);
+}
+
+body.lx .lx-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
 /* ===== APPEND ===== */
