@@ -451,6 +451,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
     <a class="logo" href="/"><img class="brand-logo" src="favicon.png" alt="portfoolio.me logo" width="26" height="26"><span>PORTFOOLIO<small id="dashNavSub">dashboard</small></span></a>
     <div class="dash-user-info">
       <span class="role-badge user" id="dashRoleBadge">User Studio</span>
+      <span class="dash-avatar" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
       <span class="mono" id="dashUserEmail" style="font-size:13px;color:var(--muted)">user@portfoolio.me</span>
       <button class="btn btn-ghost btn-sm" id="globalLogoutBtn"><i class="fa-solid fa-right-to-bracket"></i> Log out</button>
     </div>
@@ -1097,12 +1098,14 @@ function showAppRole(role, emailOrUser, profile = null) {
   if (!role) {
     if(landing) landing.style.display = '';
     if(dashApp) dashApp.style.display = 'none';
+    document.body.classList.remove('studio');
     syncLx();
     return;
   }
 
   if(landing) landing.style.display = 'none';
   if(dashApp) dashApp.style.display = '';
+  document.body.classList.add('studio');
 
   if (role === 'admin') {
     if(badge) { badge.textContent = '🛡️ Superadmin'; badge.className = 'role-badge admin'; }
