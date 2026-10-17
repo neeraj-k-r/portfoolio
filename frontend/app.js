@@ -297,7 +297,7 @@ function renderWorkDetail(p, idx) {
   const back = portfolioPathURL(p.username);
   app.innerHTML = `
   <nav><a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
-  <a class="btn btn-ghost btn-sm" href="${back}">← ${esc(p.name)}</a></nav>
+  <a class="btn btn-primary btn-sm" href="${back}">← Back to ${esc(p.name)}'s portfolio</a></nav>
   <section class="wrap" style="padding:140px 0 20px;max-width:900px">
     ${w.category ? `<span class="badge">✦ ${esc(w.category)}</span>` : ''}
     <h1 style="font-size:clamp(32px,5vw,52px);margin:10px 0">${esc(w.title || 'Untitled')}</h1>
