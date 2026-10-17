@@ -2869,6 +2869,36 @@ body.studio #dashboardApp .btn-ghost {
   border-radius: 999px;
 }
 
+/* Action bar: pinned colours so a stale template attribute can never hide it */
+body.studio #edSaveBtn {
+  border: 0 !important;
+  background: var(--ink) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 22px rgba(27, 25, 20, 0.16) !important;
+}
+
+body.studio #edSaveBtn:hover {
+  background: #000 !important;
+  color: #fff !important;
+}
+
+body.studio #edPreviewBtn,
+body.studio #exportHtmlBtn,
+body.studio #exportPdfBtn {
+  border: 1px solid var(--line) !important;
+  background: transparent !important;
+  color: #5f594b !important;
+  box-shadow: none !important;
+}
+
+body.studio #edPreviewBtn:hover,
+body.studio #exportHtmlBtn:hover,
+body.studio #exportPdfBtn:hover {
+  border-color: var(--ink) !important;
+  background: var(--surface) !important;
+  color: var(--ink) !important;
+}
+
 body.lx :focus-visible,
 body.studio :focus-visible,
 body.ui-admin :focus-visible {

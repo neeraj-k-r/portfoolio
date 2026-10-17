@@ -22,7 +22,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="ui.css">
+<link rel="stylesheet" href="ui.css?v=20261018c">
 <link rel="stylesheet" href="templates.css">
 <link rel="stylesheet" href="resume.css">
 <style>
@@ -931,7 +931,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.9.1/mammoth.browser.min.js"></script>
 <script src="../backend/supabase-config.js"></script>
-<script src="app.js"></script>
+<script src="app.js?v=20261018c"></script>
 <script src="crop.js"></script>
 <script src="evidence.js"></script>
 <script src="cloudinary-config.js"></script>
@@ -1197,6 +1197,12 @@ function setupUserDashboardView(profile) {
       $('trackSwitchBtn').style.display = '';
       if ($('trackSwitchLabel')) $('trackSwitchLabel').textContent = visual ? 'Switch to Developer' : 'Switch to Visual';
     }
+
+    // Live-site links are set before any pane painting so a paint error can
+    // never leave the buttons pointing at nothing.
+    const livePath = `${location.origin}/?u=${encodeURIComponent(profile.username)}`;
+    if ($('edPreviewBtn')) { $('edPreviewBtn').href = livePath; $('edPreviewBtn').target = '_blank'; }
+    if ($('dashViewLive')) { $('dashViewLive').href = livePath; $('dashViewLive').style.display = 'inline-flex'; }
 
     // Populate editor fields
     if($('edName')) $('edName').value = profile.name || '';
