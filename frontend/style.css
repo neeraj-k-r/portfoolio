@@ -707,8 +707,8 @@ body.lx .grid-overlay { opacity: .2; }
 .lx-nav { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); width: min(1180px,94%); z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: rgba(255,255,255,.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--stroke); border-radius: 16px; transition: padding .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease); box-shadow: var(--sh-sm); }
 .lx-nav.scrolled, body.lx #mainNav.scrolled { padding: 8px 18px; background: rgba(255,255,255,.95); border-color: var(--stroke); box-shadow: var(--sh-md); }
 .lx-progress { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: linear-gradient(90deg,#4f46e5,#22d3ee); border-radius: 0 0 16px 16px; box-shadow: 0 0 10px rgba(79,70,229,.7); transition: width .12s linear; }
-.lx-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .2px; color: #f2f5f1; }
-.lx-brand .lx-mark { color: #4f46e5; font-size: 22px; }
+.lx-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .2px; color: var(--txt); }
+.lx-brand .lx-mark { color: var(--brand); font-size: 22px; }
 .lx-brand .brand-logo, .dash-nav .logo .brand-logo, a.logo .brand-logo { width: 28px; height: auto; max-height: 28px; flex-shrink: 0; display: inline-block; vertical-align: middle; }
 .dash-nav .logo { display: inline-flex; align-items: center; gap: 10px; }
 .lx-brand.sm .brand-logo { width: 24px; height: 24px; }
