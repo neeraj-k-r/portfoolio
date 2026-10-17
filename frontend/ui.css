@@ -748,4 +748,169 @@ body.lx .lx-swatches i {
   border-radius: 10px;
 }
 
+/* ── Theme gallery ──────────────────────────────────────────────────── */
+body.lx .lx-gallery {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 36px;
+}
+
+body.lx .lx-theme-card {
+  padding: 12px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+body.lx .lx-theme-card:hover,
+body.lx .lx-theme-card:focus-visible {
+  transform: translateY(-6px);
+  border-color: #d6cdb9;
+  box-shadow: var(--sh-md);
+}
+
+body.lx .lx-theme-card::after {
+  top: 26px;
+  padding: 5px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #f5f1e8;
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+body.lx .lx-tp {
+  border: 1px solid #e2dac9;
+  border-radius: 13px;
+  margin-bottom: 12px;
+}
+
+body.lx .lx-theme-card:hover .lx-tp {
+  box-shadow: none;
+  transform: scale(1.015);
+}
+
+body.lx .lx-theme-name {
+  gap: 1px;
+  padding: 2px 4px 3px;
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+body.lx .lx-theme-name em {
+  color: #948c79;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* ── Live showcase ──────────────────────────────────────────────────── */
+body.lx .dir-filter {
+  justify-content: flex-start;
+  gap: 8px;
+  margin: 22px 0 24px;
+}
+
+body.lx .dir-filter-btn {
+  padding: 9px 17px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: #6c6657;
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), border-color 0.2s var(--ease), transform 0.2s var(--ease);
+}
+
+body.lx .dir-filter-btn:hover {
+  transform: translateY(-1px);
+  border-color: #cfc5b1;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+body.lx .dir-filter-btn.active {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #f5f1e8;
+  box-shadow: none;
+}
+
+body.lx .dir-grid {
+  gap: 16px;
+}
+
+body.lx .dir-card {
+  padding: 22px;
+  border-radius: 22px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+body.lx .dir-card:hover {
+  transform: translateY(-4px);
+  border-color: #d6cdb9;
+  box-shadow: var(--sh-md);
+}
+
+body.lx .dir-card h3 {
+  color: var(--ink);
+  font-size: 17px;
+  letter-spacing: -0.02em;
+}
+
+body.lx .dir-card p {
+  color: #6c6657;
+  font-size: 13.5px;
+}
+
+body.lx .dir-card .mono {
+  color: #7b68c9 !important;
+  font-size: 12px !important;
+}
+
+body.lx .dir-card > div:first-child > span {
+  background: var(--lav) !important;
+  color: #4c4270 !important;
+  font-weight: 800;
+}
+
+body.lx .dir-card .btn-primary {
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: none;
+  padding: 9px 16px;
+}
+
+body.lx .dir-card .btn-primary:hover {
+  background: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(27, 25, 20, 0.2);
+}
+
+body.lx .lx-center {
+  margin-top: 34px;
+}
+
+body.lx .lx-center .lx-btn-ghost {
+  padding: 13px 22px;
+  border-color: var(--line-strong);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+body.lx .lx-center .lx-btn-ghost:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: var(--surface);
+}
+
 /* ===== APPEND ===== */
