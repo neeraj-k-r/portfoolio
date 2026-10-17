@@ -1,0 +1,116 @@
+/* portfoolio.me — warm editorial product UI
+   Layered on top of style.css and scoped to the marketing site / dashboards so
+   published portfolio themes keep their own look. */
+
+body.lx,
+body.studio,
+body.ui-admin {
+  --paper: #f5f1e8;
+  --paper-2: #efe8da;
+  --surface: #fffdf8;
+  --surface-2: #faf6ed;
+  --ink: #1b1914;
+  --ink-2: #4c473c;
+  --muted: #787160;
+  --muted2: #9c9382;
+  --line: #e6dfd0;
+  --line-strong: #d8cfba;
+  --sun: #f5c84b;
+  --sun-soft: #fbe7a3;
+  --mint: #dcefdc;
+  --mint-2: #c9e6cd;
+  --lav: #e8e1f8;
+  --peach: #f8dfc8;
+  --sky: #dbe9f4;
+  --rose: #f6dbe3;
+  --danger: #b45309;
+
+  --bg: var(--paper);
+  --bg2: var(--paper-2);
+  --card: var(--surface);
+  --card2: var(--surface-2);
+  --stroke: var(--line);
+  --txt: var(--ink);
+  --brand: var(--ink);
+  --brand2: #7b68c9;
+  --lime: var(--sun);
+  --pink: var(--rose);
+  --amber: var(--sun);
+  --radius: 24px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --sh-sm: 0 2px 8px rgba(45, 38, 20, 0.05);
+  --sh-md: 0 18px 44px rgba(45, 38, 20, 0.09);
+  --sh-lg: 0 34px 84px rgba(45, 38, 20, 0.13);
+  --serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+}
+
+body.lx,
+body.studio,
+body.ui-admin {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body.lx .bg-fx,
+body.studio .bg-fx,
+body.ui-admin .bg-fx {
+  background:
+    radial-gradient(900px 620px at 88% 4%, rgba(245, 200, 75, 0.14), transparent 62%),
+    radial-gradient(820px 620px at 6% 12%, rgba(201, 230, 205, 0.32), transparent 60%),
+    radial-gradient(760px 700px at 54% 106%, rgba(232, 225, 248, 0.42), transparent 64%),
+    linear-gradient(var(--paper), var(--paper));
+}
+
+body.lx .grid-overlay,
+body.studio .grid-overlay,
+body.ui-admin .grid-overlay {
+  opacity: 0.18;
+  background-image:
+    linear-gradient(rgba(27, 25, 20, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 25, 20, 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+body.lx #particles,
+body.studio #particles,
+body.ui-admin #particles {
+  display: none;
+}
+
+body.lx ::selection,
+body.studio ::selection,
+body.ui-admin ::selection {
+  background: var(--sun);
+  color: var(--ink);
+}
+
+body.lx ::-webkit-scrollbar,
+body.studio ::-webkit-scrollbar,
+body.ui-admin ::-webkit-scrollbar {
+  width: 11px;
+}
+
+body.lx ::-webkit-scrollbar-track,
+body.studio ::-webkit-scrollbar-track,
+body.ui-admin ::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+body.lx ::-webkit-scrollbar-thumb,
+body.studio ::-webkit-scrollbar-thumb,
+body.ui-admin ::-webkit-scrollbar-thumb {
+  background: #d5cbb6;
+  border-radius: 8px;
+  border: 2px solid var(--paper);
+}
+
+body.lx ::-webkit-scrollbar-thumb:hover,
+body.studio ::-webkit-scrollbar-thumb:hover,
+body.ui-admin ::-webkit-scrollbar-thumb:hover {
+  background: #b9ac91;
+}
+
+/* ===== APPEND ===== */
