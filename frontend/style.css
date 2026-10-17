@@ -24,11 +24,11 @@ img{max-width:100%}
 .wrap{width:min(1180px,92%);margin:0 auto}
 /* BG FX */
 .bg-fx{position:fixed;inset:0;z-index:-2;background:
- radial-gradient(800px 500px at 10% 5%,rgba(108,108,245,.28),transparent 60%),
- radial-gradient(700px 500px at 90% 15%,rgba(34,211,238,.18),transparent 60%),
- radial-gradient(600px 600px at 50% 100%,rgba(244,114,182,.14),transparent 60%),
- linear-gradient(#070b16,#070b16);}
-.grid-overlay{position:fixed;inset:0;z-index:-1;opacity:.35;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(70% 60% at 50% 20%,#000 30%,transparent 100%)}
+ radial-gradient(800px 500px at 10% 5%,rgba(139,92,246,.12),transparent 60%),
+ radial-gradient(700px 500px at 90% 15%,rgba(244,114,182,.10),transparent 60%),
+ radial-gradient(600px 600px at 50% 100%,rgba(251,191,36,.08),transparent 60%),
+ linear-gradient(#f8fafc,#f8fafc);}
+.grid-overlay{position:fixed;inset:0;z-index:-1;opacity:.25;background-image:linear-gradient(rgba(0,0,0,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.03) 1px,transparent 1px);background-size:56px 56px}
 #particles{position:fixed;inset:0;z-index:-1;opacity:.7}
 /* Preloader */
 #loader{position:fixed;inset:0;background:#070b16;z-index:9999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;transition:opacity .6s,visibility .6s}
