@@ -709,7 +709,7 @@ body.lx .grid-overlay { opacity: .2; }
 .lx-progress { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: linear-gradient(90deg,#4f46e5,#22d3ee); border-radius: 0 0 16px 16px; box-shadow: 0 0 10px rgba(79,70,229,.7); transition: width .12s linear; }
 .lx-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; letter-spacing: .2px; color: #f2f5f1; }
 .lx-brand .lx-mark { color: #4f46e5; font-size: 22px; }
-.lx-brand .brand-logo, .dash-nav .logo .brand-logo, a.logo .brand-logo { width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0; display: inline-block; vertical-align: middle; }
+.lx-brand .brand-logo, .dash-nav .logo .brand-logo, a.logo .brand-logo { width: 28px; height: auto; max-height: 28px; border-radius: 8px; flex-shrink: 0; display: inline-block; vertical-align: middle; }
 .dash-nav .logo { display: inline-flex; align-items: center; gap: 10px; }
 .lx-brand.sm .brand-logo { width: 24px; height: 24px; }
 .lx-brand em { font-style: normal; color: #4f46e5; font-size: 12px; font-weight: 700; }
