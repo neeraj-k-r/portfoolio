@@ -471,6 +471,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           </div>
         </div>
         <div id="userStatusBadgeContainer" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+          <a class="dash-live-link" id="dashViewLive" target="_blank" rel="noopener" style="display:none">View Live Site <i class="fa-solid fa-arrow-right"></i></a>
           <button class="btn btn-ghost btn-sm" id="trackSwitchBtn" title="Switch between Developer and Visual studio" style="display:none">
             <i class="fa-solid fa-repeat"></i> <span id="trackSwitchLabel">Switch track</span>
           </button>
@@ -1500,6 +1501,7 @@ function paintShareSection(p) {
   if($('shareResume')) $('shareResume').textContent = (p.track === 'visual') ? '' : 'Resume: ' + `${location.origin}/?u=${encodeURIComponent(p.username)}&resume=1`;
   if($('shareViews')) $('shareViews').textContent = '👁 ' + getProfileViews(p.username) + ' views this week';
   if($('edPreviewBtn')) $('edPreviewBtn').href = path;
+  if($('dashViewLive')) { $('dashViewLive').href = path; $('dashViewLive').style.display = 'inline-flex'; }
 
   const text = encodeURIComponent(`Check out my portfolio: ${p.name} — ${p.title}`);
   if($('shareCopy')) $('shareCopy').onclick = () => navigator.clipboard.writeText(sub).then(() => toast('✅ Link copied!')).catch(() => toast(sub));

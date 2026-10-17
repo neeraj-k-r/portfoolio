@@ -1575,4 +1575,127 @@ body.studio .dash-tab-btn:active {
   transform: none;
 }
 
+/* ── Welcome banner ─────────────────────────────────────────────────── */
+body.studio .dash-header-card {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+  padding: 26px 30px;
+  border: 1px solid #e1dbc7;
+  border-radius: 26px;
+  background:
+    radial-gradient(420px 220px at 96% 10%, rgba(245, 200, 75, 0.16), transparent 70%),
+    linear-gradient(105deg, #eef6e8 0%, #f8f5e9 54%, #f4efdf 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+}
+
+body.studio .dash-header-card:hover {
+  border-color: #d9d2bd;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+}
+
+body.studio .dash-header-card h2 {
+  gap: 8px;
+  color: var(--ink);
+  font-size: clamp(22px, 2.1vw, 27px);
+  font-weight: 800;
+  letter-spacing: -0.032em;
+}
+
+body.studio .dash-header-card h2 .grad {
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: currentColor;
+  color: var(--ink);
+}
+
+body.studio #dashWelcomeSub {
+  color: #6c6657 !important;
+  font-size: 14px !important;
+  margin-top: 5px !important;
+}
+
+.dash-live-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  box-shadow: 0 10px 22px rgba(27, 25, 20, 0.18);
+  transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+.dash-live-link:hover {
+  transform: translateY(-1px);
+  background: #000;
+  box-shadow: 0 14px 28px rgba(27, 25, 20, 0.24);
+}
+
+.dash-live-link i {
+  font-size: 11px;
+}
+
+.dash-live-link:active {
+  transform: translateY(0) scale(0.98);
+}
+
+body.studio #trackSwitchBtn {
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid #cfc5b1;
+  background: rgba(255, 253, 248, 0.6);
+  color: #5f594b;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+body.studio #trackSwitchBtn:hover {
+  border-color: var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+body.studio .status-pill {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  box-shadow: none;
+}
+
+body.studio .status-pill.none {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: #8a8272;
+}
+
+body.studio .status-pill.live {
+  border: 1px solid rgba(93, 141, 98, 0.24);
+  background: var(--mint);
+  color: #3c6140;
+  box-shadow: none;
+}
+
+body.studio .status-pill.pending {
+  border: 1px solid rgba(180, 139, 32, 0.24);
+  background: var(--sun-soft);
+  color: #6b5210;
+  box-shadow: none;
+}
+
+body.studio .status-pill.rejected {
+  border: 1px solid rgba(180, 82, 82, 0.22);
+  background: var(--rose);
+  color: #7c3b3b;
+  box-shadow: none;
+}
+
 /* ===== APPEND ===== */
