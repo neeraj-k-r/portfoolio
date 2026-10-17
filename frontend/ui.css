@@ -1074,4 +1074,258 @@ body.lx .lx-verified {
   color: #34503a;
 }
 
+/* ── Closing CTA ────────────────────────────────────────────────────── */
+body.lx .lx-cta-banner {
+  margin-top: 36px;
+  padding: 76px 32px;
+  border: 0;
+  border-radius: 32px;
+  background: var(--ink);
+  box-shadow: 0 30px 70px rgba(27, 25, 20, 0.2);
+  transition: box-shadow 0.4s var(--ease);
+}
+
+body.lx .lx-cta-banner:hover {
+  border: 0;
+  box-shadow: 0 38px 84px rgba(27, 25, 20, 0.26);
+}
+
+body.lx .lx-cta-banner::before,
+body.lx .lx-cta-banner::after {
+  display: none;
+}
+
+body.lx .lx-cta-banner h2 {
+  color: #f7f2e8;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: clamp(32px, 4.6vw, 54px);
+  font-weight: 800;
+  letter-spacing: -0.042em;
+  line-height: 1.03;
+  margin-bottom: 14px;
+}
+
+body.lx .lx-cta-banner h2 span {
+  color: #c9bcf4;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+body.lx .lx-cta-banner p {
+  color: #b9b2a2;
+  font-size: 14.5px;
+  margin-bottom: 30px;
+}
+
+body.lx .lx-cta-banner .lx-btn-lg {
+  background: var(--sun);
+  color: var(--ink);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+}
+
+body.lx .lx-cta-banner .lx-btn-lg:hover {
+  background: #ffd45f;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.36);
+}
+
+/* ── Auth section ───────────────────────────────────────────────────── */
+body.lx .lx-auth-grid {
+  gap: 48px;
+  margin-top: 40px;
+  align-items: center;
+}
+
+body.lx .lx-auth-points {
+  margin: 24px 0;
+  gap: 12px;
+}
+
+body.lx .lx-auth-points li {
+  color: #5f594b;
+  font-size: 14.5px;
+}
+
+body.lx .lx-auth-points li:hover {
+  color: var(--ink);
+}
+
+body.lx .lx-auth-points i {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--mint-2);
+  color: #34503a;
+  font-size: 9px;
+}
+
+body.lx .lx-auth-grid .lx-btn-ghost {
+  padding: 13px 20px;
+  font-size: 14px;
+  border-color: var(--line-strong);
+  background: var(--surface);
+}
+
+body.lx .lx-auth-card {
+  padding: 32px 30px;
+  border-radius: 26px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--sh-md);
+}
+
+body.lx .lx-auth-card::before {
+  display: none;
+}
+
+body.lx .lx-auth-card:hover {
+  border-color: #d6cdb9;
+  box-shadow: var(--sh-md);
+}
+
+body.lx .lx-auth-card .auth-tabs {
+  margin-bottom: 26px;
+  padding: 5px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+body.lx .lx-auth-card .auth-tab {
+  padding: 11px 16px;
+  border-radius: 999px;
+  color: #6c6657;
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+body.lx .lx-auth-card .auth-tab:hover {
+  color: var(--ink);
+}
+
+body.lx .lx-auth-card .auth-tab.active,
+body.lx .lx-auth-card .auth-tab.active:hover {
+  background: var(--ink);
+  color: #fff;
+  box-shadow: none;
+}
+
+body.lx .lx-auth-card .flabel {
+  color: #948c79;
+  font-size: 11px;
+  letter-spacing: 0.9px;
+}
+
+body.lx .lx-auth-card .input-wrapper input,
+body.lx .lx-auth-card input {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 14.5px;
+}
+
+body.lx .lx-auth-card .input-wrapper input {
+  padding-right: 44px;
+}
+
+body.lx .lx-auth-card input::placeholder {
+  color: #a79e8b;
+}
+
+body.lx .lx-auth-card .input-wrapper input:focus,
+body.lx .lx-auth-card input:focus {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(27, 25, 20, 0.08);
+  background: var(--surface);
+}
+
+body.lx .lx-auth-card .input-icon,
+body.lx .lx-auth-card .toggle-pass {
+  color: #a79e8b;
+}
+
+body.lx .lx-auth-card .toggle-pass:hover {
+  color: var(--ink);
+}
+
+body.lx .lx-auth-card .btn-primary-block {
+  padding: 15px 24px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  box-shadow: 0 12px 26px rgba(27, 25, 20, 0.18);
+}
+
+body.lx .lx-auth-card .btn-primary-block:hover {
+  background: #000;
+  box-shadow: 0 16px 32px rgba(27, 25, 20, 0.24);
+}
+
+body.lx .lx-auth-card .auth-msg,
+body.lx .lx-auth-card .auth-hint,
+body.lx .lx-auth-card .demo-text {
+  color: #8a8272;
+}
+
+/* ── Footer ─────────────────────────────────────────────────────────── */
+body.lx .lx-footer {
+  margin-top: 80px;
+  border-top: 1px solid var(--line);
+  background: transparent;
+}
+
+body.lx .lx-footer-inner {
+  width: min(1200px, 92%);
+  padding: 36px 0;
+}
+
+body.lx .lx-footer .lx-brand {
+  font-size: 15px;
+}
+
+body.lx .lx-footer-tag {
+  color: #8a8272;
+  font-size: 13px;
+}
+
+body.lx .lx-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: #5f7a5f;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+body.lx .lx-status i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6aa86f;
+}
+
+body.lx .lx-footer-links a {
+  color: #6c6657;
+  font-size: 13.5px;
+}
+
+body.lx .lx-footer-links a:hover {
+  color: var(--ink);
+}
+
+body.lx .lx-footer-links a::after {
+  background: var(--ink);
+}
+
 /* ===== APPEND ===== */
