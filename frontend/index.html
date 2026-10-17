@@ -19,7 +19,7 @@
 <base href="/frontend/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="ui.css">
@@ -91,61 +91,17 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   <header class="lx-hero" id="hero">
     <canvas id="heroCanvas"></canvas>
     <div class="lx-hero-inner">
-      <a class="lx-announce" href="#auth" onclick="setAuthMode('signup')"><span class="lx-announce-tag">New</span> ATS-friendly resume builder is live <span class="lx-announce-arrow">→</span></a>
-      <h1 class="lx-title">Your work deserves<br>its own <span class="lx-serif">address.</span></h1>
-      <p class="lx-sub">Ship a recruiter-ready portfolio in <strong>60 seconds</strong> — zero config, instant SSL, auto-generated ATS resume, 1-click GitHub sync. Free forever.</p>
-      <div class="lx-cta">
-        <a class="lx-btn-lg" href="#auth" onclick="setAuthMode('signup')">Claim your subdomain <i class="fa-solid fa-arrow-right"></i></a>
-        <a class="lx-btn-ghost" href="/?u=neerajkr">See live demo</a>
-      </div>
-      <p class="lx-trust" style="display:flex;align-items:center;justify-content:center;gap:20px;margin-top:16px;font-size:13px;color:#7d8a82;flex-wrap:wrap">
-        <span><i class="fa-solid fa-shield-check" style="color:#22c55e;margin-right:6px"></i>No credit card required</span>
-        <span><i class="fa-solid fa-bolt" style="color:#4f46e5;margin-right:6px"></i>Live in 60 seconds</span>
-        <span><i class="fa-solid fa-globe" style="color:#22c55e;margin-right:6px"></i>Free custom subdomain</span>
-      </p>
-      <p class="lx-kbd-hint">Press <kbd>↵</kbd> on the signup form — your site goes live instantly</p>
-      <div class="lx-proof">
-        <div class="lx-avatars"><span>Y</span><span>P</span><span>A</span><span>Z</span><span>+</span></div>
-        <div class="lx-proof-text"><span class="lx-stars">★★★★★</span> Loved by 500+ developers shipping portfolios</div>
-      </div>
-      <div class="lx-window" id="heroVisual">
-        <div class="lx-win-bar" id="previewFrame">
-          <div class="lx-win-dots"><span></span><span></span><span></span></div>
-          <div class="lx-win-url">yourname.portfoolio.me</div>
-          <div class="frame-theme-selector" id="frameThemeSelector">
-            <button class="theme-dot-btn active" data-theme="midnight" title="Midnight"></button>
-            <button class="theme-dot-btn" data-theme="minimal" title="Minimal"></button>
-            <button class="theme-dot-btn" data-theme="terminal" title="Terminal"></button>
-            <button class="theme-dot-btn" data-theme="creative" title="Creative"></button>
-            <button class="theme-dot-btn" data-theme="aurora" title="Aurora"></button>
-          </div>
+      <div class="hero-copy">
+        <h1 class="lx-title">Your work deserves<br>its own <span class="lx-serif">address.</span></h1>
+        <p class="lx-sub">Ship a recruiter-ready portfolio in <strong>60 seconds</strong> — zero config, instant SSL, auto-generated ATS resume, 1-click GitHub sync. Free forever.</p>
+        <div class="lx-cta">
+          <a class="lx-btn-lg" href="#auth" onclick="setAuthMode('signup')">Claim your subdomain <i class="fa-solid fa-arrow-right"></i></a>
+          <a class="lx-btn-ghost" href="/?u=neerajkr"><span class="hero-play"><i class="fa-solid fa-play"></i></span> See live demo</a>
         </div>
-        <div class="lx-win-body" id="frameContent">
-          <div class="lx-win-side">
-            <div class="preview-avatar" id="previewAvatar">Y</div>
-            <h2 class="preview-name" id="previewName">Your Name</h2>
-            <p class="preview-title" id="previewTitle">Full-Stack Developer</p>
-            <p class="preview-desc" id="previewDesc">Building scalable web apps. Open to opportunities.</p>
-          </div>
-          <div class="lx-win-main">
-            <div class="lx-win-line"><span class="lx-prompt">$</span> portfoolio claim yourname</div>
-            <div class="lx-win-line dim">✓ subdomain reserved · SSL issued · live in 60s</div>
-            <div class="preview-skills" id="previewSkills">
-              <span class="skill-tag">React</span>
-              <span class="skill-tag">TypeScript</span>
-              <span class="skill-tag">Node.js</span>
-              <span class="skill-tag">Python</span>
-            </div>
-            <div class="footer-themes" id="footerThemes">
-              <button class="footer-theme-btn active" data-theme="midnight">Midnight</button>
-              <button class="footer-theme-btn" data-theme="minimal">Minimal</button>
-              <button class="footer-theme-btn" data-theme="terminal">Terminal</button>
-              <button class="footer-theme-btn" data-theme="creative">Creative</button>
-              <button class="footer-theme-btn" data-theme="aurora">Aurora</button>
-            </div>
-          </div>
+        <div class="lx-proof">
+          <div class="lx-avatars"><span>Y</span><span>P</span><span>A</span><span>Z</span><span>+</span></div>
+          <div class="lx-proof-text"><span class="lx-stars">★★★★★</span> Loved by 500+ developers</div>
         </div>
-        <div class="lx-win-status"><span>⎇ main</span><span>0 problems</span><span>Ln 1, Col 1</span><span>UTF-8</span><span class="lx-win-live"><i></i> live</span></div>
       </div>
     </div>
   </header>
