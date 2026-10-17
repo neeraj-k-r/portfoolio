@@ -572,6 +572,7 @@ async function getPublicProfiles() {
 async function renderExplorePage() {
   const app = document.getElementById('app');
   if (!app) return;
+  document.body.classList.add('explore');
   app.innerHTML = `
     <div class="wrap lx-explore">
       <p class="lx-kicker">Directory</p>
