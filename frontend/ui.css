@@ -2416,4 +2416,285 @@ body.studio #adminDashboardView input {
   border-radius: 999px;
 }
 
+/* ── Admin gate form ────────────────────────────────────────────────── */
+body.ui-admin input:not([type="checkbox"]):not([type="radio"]) {
+  padding: 12px 15px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13.5px;
+}
+
+body.ui-admin input:not([type="checkbox"]):not([type="radio"])::placeholder {
+  color: #a79e8b;
+}
+
+body.ui-admin input:not([type="checkbox"]):not([type="radio"]):focus {
+  outline: none;
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px rgba(27, 25, 20, 0.07);
+}
+
+body.ui-admin .flabel {
+  margin-bottom: 7px;
+  color: #948c79;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+}
+
+body.ui-admin .btn-primary {
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 700;
+  box-shadow: 0 12px 26px rgba(27, 25, 20, 0.18);
+}
+
+body.ui-admin .btn-primary:hover {
+  background: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px rgba(27, 25, 20, 0.24);
+}
+
+body.ui-admin #gate .panel {
+  max-width: 540px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────────────── */
+@media (max-width: 1080px) {
+  body.lx .lx-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 44px;
+  }
+
+  .hero-copy {
+    max-width: 760px;
+  }
+
+  .hero-nodes {
+    justify-self: center;
+    max-width: 500px;
+  }
+
+  body.lx .lx-gallery {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  body.studio #userDashboardView {
+    grid-template-columns: 1fr;
+  }
+
+  body.studio #techStudio,
+  body.studio #visualStudio {
+    grid-column: 1;
+    grid-row: auto;
+    position: static;
+  }
+
+  body.studio #studioPanes {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  body.studio #techStudio,
+  body.studio #visualStudio,
+  body.studio #studioPanes,
+  body.studio .dash-header-card,
+  body.studio #subdomainWizardCard {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  body.studio .dash-tab-btns {
+    flex-direction: row;
+    max-width: 100%;
+    gap: 4px;
+    padding: 8px;
+    border-radius: 16px;
+    overflow-x: auto;
+  }
+
+  body.studio .dash-tab-btns::before {
+    display: none;
+  }
+
+  body.studio .dash-tab-btn {
+    width: auto;
+    white-space: nowrap;
+  }
+
+  body.studio .works-grid {
+    columns: 2;
+  }
+}
+
+@media (max-width: 760px) {
+  body.lx .lx-nav {
+    padding: 14px 18px;
+  }
+
+  body.lx #mainNav.scrolled {
+    padding: 11px 18px;
+  }
+
+  body.lx .lx-brand {
+    font-size: 15px;
+  }
+
+  body.lx .lx-login {
+    display: none;
+  }
+
+  body.lx .lx-hero {
+    padding: 128px 0 40px;
+  }
+
+  body.lx .lx-title {
+    font-size: clamp(37px, 10vw, 54px);
+    letter-spacing: -0.045em;
+  }
+
+  body.lx .lx-sub {
+    font-size: 16px;
+  }
+
+  body.lx .lx-cta {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  body.lx .lx-btn-lg,
+  body.lx .lx-btn-ghost {
+    width: 100%;
+    justify-content: center;
+  }
+
+  body.lx .hero-nodes {
+    max-width: 380px;
+  }
+
+  .hnode {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    font-size: 18px;
+  }
+
+  .hnode-hub {
+    left: 42.9%;
+    top: 42.9%;
+    width: 74px;
+    height: 74px;
+    border-radius: 22px;
+    font-size: 24px;
+  }
+
+  .hnode-plug {
+    width: 38px;
+    height: 38px;
+    font-size: 13px;
+  }
+
+  body.lx .lx-section {
+    padding-top: 76px;
+  }
+
+  body.lx .lx-gallery {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  body.lx .lx-bento,
+  body.lx .lx-steps,
+  body.lx .lx-quotes,
+  body.lx .lx-auth-grid {
+    grid-template-columns: 1fr;
+  }
+
+  body.lx .lx-bento-card.lx-span {
+    grid-column: auto;
+  }
+
+  body.lx .lx-cta-banner {
+    padding: 52px 22px;
+    border-radius: 26px;
+  }
+
+  body.lx .lx-footer-inner {
+    justify-content: flex-start;
+    gap: 14px;
+  }
+
+  body.studio .dash-nav {
+    width: 96%;
+    padding: 9px 13px;
+  }
+
+  body.studio #dashUserEmail {
+    display: none;
+  }
+
+  body.studio .dash-header-card {
+    padding: 20px;
+  }
+
+  body.studio .dash-header-card h2 {
+    font-size: 22px;
+  }
+
+  body.studio #studioPanes > .card,
+  body.studio #subdomainWizardCard {
+    padding: 20px;
+  }
+
+  body.studio .works-grid {
+    columns: 1;
+  }
+}
+
+@media (max-width: 460px) {
+  body.lx .lx-nav-cta .lx-btn {
+    padding: 10px 16px;
+    font-size: 12.5px;
+  }
+
+  body.lx .lx-brand em {
+    display: none;
+  }
+
+  body.lx .lx-title {
+    font-size: 36px;
+  }
+
+  body.lx .lx-section {
+    width: min(1200px, 90%);
+  }
+
+  body.studio .dash-avatar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hnode {
+    animation: none;
+  }
+
+  body.lx .lx-btn-lg:hover,
+  body.lx .lx-btn-ghost:hover,
+  body.lx .lx-bento-card:hover,
+  body.lx .lx-theme-card:hover,
+  body.lx .lx-step:hover,
+  body.lx .lx-quote:hover,
+  body.lx .dir-card:hover {
+    transform: none;
+  }
+}
+
 /* ===== APPEND ===== */
