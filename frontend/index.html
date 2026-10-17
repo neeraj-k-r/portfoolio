@@ -1523,6 +1523,7 @@ function paintShareSection(p) {
   if($('shareSub')) $('shareSub').textContent = sub;
   if($('sharePath')) $('sharePath').textContent = 'Direct link: ' + path;
   if($('shareResume')) $('shareResume').textContent = (p.track === 'visual') ? '' : 'Resume: ' + `${location.origin}/?u=${encodeURIComponent(p.username)}&resume=1`;
+  if($('shareViews')) $('shareViews').textContent = '👁 ' + getProfileViews(p.username) + ' views this week';
   if($('edPreviewBtn')) $('edPreviewBtn').href = path;
 
   const text = encodeURIComponent(`Check out my portfolio: ${p.name} — ${p.title}`);
