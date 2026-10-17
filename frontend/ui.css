@@ -537,4 +537,215 @@ body.lx .lx-stars {
   50% { transform: translateY(-9px); }
 }
 
+/* ── Tool marquee ───────────────────────────────────────────────────── */
+body.lx .lx-logos {
+  width: min(1320px, 94%);
+  margin: 0 auto;
+  padding: 26px 0 4px;
+}
+
+body.lx .lx-logos-label {
+  color: #9a927f;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+body.lx .lx-logos-row {
+  gap: 10px;
+}
+
+body.lx .lx-logos-row span {
+  color: #7e7664;
+  background: transparent;
+  border: 1px solid #e3dbca;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+body.lx .lx-logos-row span:hover {
+  color: var(--ink);
+  border-color: #cdc3af;
+  background: var(--surface);
+}
+
+/* ── Section rhythm ─────────────────────────────────────────────────── */
+body.lx .lx-section {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  padding: 100px 0 8px;
+}
+
+body.lx .lx-section + .lx-section::before {
+  display: none;
+}
+
+body.lx .lx-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  margin-bottom: 16px;
+  border: 0;
+  background: none;
+  color: #9a927f;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+}
+
+body.lx .lx-kicker::before {
+  content: "";
+  width: 22px;
+  height: 1px;
+  background: #c9bfa9;
+  display: inline-block;
+}
+
+body.lx .lx-section:hover .lx-kicker::before {
+  background: var(--ink);
+}
+
+body.lx .lx-section:hover .lx-kicker {
+  border: 0;
+  box-shadow: none;
+}
+
+body.lx .lx-h2 {
+  margin-bottom: 14px;
+  color: var(--ink);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-size: clamp(32px, 3.9vw, 48px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.038em;
+  text-wrap: balance;
+}
+
+body.lx .lx-lime {
+  color: #7b68c9;
+  background: none;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  -webkit-text-fill-color: currentColor;
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.015em;
+}
+
+body.lx .lx-lead {
+  max-width: 620px;
+  color: #6c6657;
+  font-size: 16.5px;
+  line-height: 1.7;
+}
+
+/* ── Feature / bento cards ──────────────────────────────────────────── */
+body.lx .lx-bento {
+  gap: 18px;
+  margin-top: 36px;
+}
+
+body.lx .lx-bento::before,
+body.lx .lx-bento::after {
+  display: none;
+}
+
+body.lx .lx-bento-card {
+  padding: 28px 26px;
+  border-radius: 26px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+
+body.lx .lx-bento-card::before {
+  display: none;
+}
+
+body.lx .lx-bento-card:hover {
+  transform: translateY(-5px);
+  border-color: #d9d0bd;
+  box-shadow: var(--sh-md);
+}
+
+body.lx .lx-bento-card.lx-span {
+  background: linear-gradient(150deg, #fbf6e9, var(--surface) 62%);
+}
+
+body.lx .lx-bento-card h3 {
+  margin: 16px 0 8px;
+  color: var(--ink);
+  font-size: 19.5px;
+  letter-spacing: -0.02em;
+}
+
+body.lx .lx-bento-card p {
+  color: #6c6657;
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+body.lx .lx-bento-card strong {
+  color: var(--ink);
+}
+
+body.lx .lx-bento-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 15px;
+  border: 0;
+  color: var(--ink);
+  background: var(--mint);
+  box-shadow: none;
+  font-size: 19px;
+}
+
+body.lx .lx-bento-card:nth-child(2) .lx-bento-icon { background: var(--sun-soft); }
+body.lx .lx-bento-card:nth-child(3) .lx-bento-icon { background: var(--lav); }
+body.lx .lx-bento-card:nth-child(4) .lx-bento-icon { background: var(--peach); }
+body.lx .lx-bento-card:nth-child(5) .lx-bento-icon { background: var(--sky); }
+
+body.lx .lx-bento-card:hover .lx-bento-icon {
+  transform: translateY(-2px) rotate(-3deg);
+  box-shadow: none;
+}
+
+body.lx .lx-bento-url {
+  margin-top: 18px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: #5f5849;
+  font-size: 12px;
+}
+
+body.lx .lx-bento-url span {
+  color: #4f7a52;
+}
+
+body.lx .lx-bento-url:hover {
+  border-color: #cdc3af;
+  color: var(--ink);
+  box-shadow: none;
+}
+
+body.lx .lx-spark i {
+  background: #2b2820;
+  opacity: 0.22;
+  border-radius: 4px;
+}
+
+body.lx .lx-swatches i {
+  border-radius: 10px;
+}
+
 /* ===== APPEND ===== */
