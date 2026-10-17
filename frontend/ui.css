@@ -1940,4 +1940,224 @@ body.studio .share-row button {
   border-radius: 999px;
 }
 
+/* ── Theme picker ───────────────────────────────────────────────────── */
+body.studio .tpl-card {
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+body.studio .tpl-card:hover {
+  border-color: #d2c8b4;
+  transform: translateY(-2px);
+}
+
+body.studio .tpl-card.selected {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px var(--sun-soft);
+}
+
+body.studio .tpl-card.selected:hover {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 3px var(--sun-soft);
+}
+
+body.studio .tpl-card input:focus-visible + .tpl-preview {
+  border-color: var(--ink);
+}
+
+body.studio .tpl-preview {
+  height: 92px;
+  border-bottom: 1px solid var(--line);
+}
+
+body.studio .tpl-meta {
+  padding: 11px 13px;
+}
+
+body.studio .tpl-meta b {
+  color: var(--ink);
+  font-size: 13px;
+  letter-spacing: -0.01em;
+}
+
+body.studio .tpl-meta span {
+  color: #8a8272;
+  font-size: 11.5px;
+}
+
+/* ── Works gallery ──────────────────────────────────────────────────── */
+body.studio .works-grid {
+  columns: 3;
+  column-gap: 14px;
+}
+
+body.studio .work-card {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  break-inside: avoid;
+  margin: 0 0 14px;
+}
+
+body.studio .work-card img {
+  background: var(--surface-2);
+}
+
+body.studio .work-card .work-meta {
+  padding: 12px 14px;
+}
+
+body.studio .work-card .work-meta b {
+  color: var(--ink);
+}
+
+body.studio .work-card .work-meta small {
+  color: #8a8272;
+}
+
+body.studio .work-card input {
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface-2);
+  color: var(--ink);
+  font-size: 12.5px;
+}
+
+body.studio .work-cover {
+  padding: 3px 9px;
+  border: 1px solid rgba(180, 139, 32, 0.2);
+  background: var(--sun-soft);
+  color: #6b5210;
+  font-size: 10px;
+}
+
+body.studio .work-row-btns button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: #5f594b;
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 7px 12px;
+}
+
+body.studio .work-row-btns button:hover {
+  border-color: var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+body.studio .work-row-btns button[data-wrm] {
+  border-color: rgba(180, 82, 82, 0.2);
+  background: var(--rose);
+  color: #7c3b3b;
+}
+
+body.studio .work-row-btns button[data-wrm]:hover {
+  background: #f3ccd6;
+  color: #6b2f2f;
+}
+
+body.studio .work-staging {
+  margin: 4px 0 16px;
+}
+
+body.studio .work-stage-item {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+
+body.studio .work-stage-name {
+  color: #8a8272;
+}
+
+/* ── Upload tab ─────────────────────────────────────────────────────── */
+body.studio #tabUpload #uploadDrop {
+  padding: 34px 22px !important;
+  border: 1.5px dashed #cfc5b1 !important;
+  border-radius: 18px !important;
+  background: var(--surface-2) !important;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease);
+}
+
+body.studio #tabUpload #uploadDrop:hover,
+body.studio #tabUpload #uploadDrop.dragover {
+  border-color: var(--ink) !important;
+  background: var(--paper) !important;
+}
+
+body.studio #tabUpload #uploadDrop p {
+  color: #8a8272 !important;
+}
+
+body.studio #tabUpload #uploadDrop p[style*="font-weight"] {
+  color: var(--ink) !important;
+}
+
+body.studio #tabUpload b,
+body.studio #tabUpload strong {
+  color: var(--ink) !important;
+}
+
+body.studio #tabUpload #uploadModeBanner {
+  border: 1px solid var(--line) !important;
+  background: var(--mint) !important;
+  color: #3c6140 !important;
+  border-radius: 14px !important;
+}
+
+body.studio #tabUpload iframe,
+body.studio #tabResume iframe {
+  border: 1px solid var(--line) !important;
+  border-radius: 14px !important;
+}
+
+body.studio #tabUpload #uploadFileList > p {
+  color: #8a8272 !important;
+}
+
+/* ── Resume quick-fill panel ────────────────────────────────────────── */
+body.studio #tabResume > div[style*="background"] {
+  border: 1px solid var(--line) !important;
+  background: var(--surface-2) !important;
+  border-radius: 16px !important;
+}
+
+body.studio #tabResume > div[style*="background"] p {
+  color: #8a8272 !important;
+}
+
+/* ── Share tab ──────────────────────────────────────────────────────── */
+body.studio #tabShare > div[style*="background"] {
+  padding: 20px !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 18px !important;
+  background: var(--surface-2) !important;
+}
+
+body.studio #shareSub {
+  color: var(--ink) !important;
+  font-size: 13.5px !important;
+  font-weight: 600;
+}
+
+body.studio #sharePath,
+body.studio #shareViews {
+  color: #8a8272 !important;
+}
+
+body.studio #shareResume {
+  color: #7b68c9 !important;
+}
+
+body.studio .share-row {
+  gap: 8px;
+  margin-top: 14px !important;
+}
+
 /* ===== APPEND ===== */
