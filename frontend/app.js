@@ -282,7 +282,10 @@ function renderGallery(p) {
     </section>`;
   }
   app.innerHTML = navHtml + headHtml + gridHtml + footHtml;
-  app.querySelectorAll('[data-gal]').forEach(c => c.onclick = () => renderWorkDetail(p, +c.dataset.gal));
+  app.querySelectorAll('[data-gal]').forEach(c => c.onclick = () => {
+    history.pushState({ view: 'work', username: p.username, idx: +c.dataset.gal }, '', `${location.origin}/?u=${encodeURIComponent(p.username)}`);
+    renderWorkDetail(p, +c.dataset.gal);
+  });
   window.scrollTo(0, 0);
 }
 function renderWorkDetail(p, idx) {
@@ -930,4 +933,15 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (p.track === 'visual') { renderGallery(p); return; }
   const skill = new URLSearchParams(location.search).get('skill');
   if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
+
+  // Browser Back from a work detail returns to the gallery
+  window.addEventListener('popstate', async (e) => {
+    const s = e.state || {};
+    if (s.view === 'work' && requested) {
+      const pp = await loadProfile(requested);
+      if (!pp) return;
+      if (pp.track === 'visual') { renderGallery(pp); return; }
+      renderPortfolio(pp);
+    }
+  });
 });
