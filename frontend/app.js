@@ -36,6 +36,30 @@ async function checkUsernameAvailability(name) {
   return { ok: true, msg: 'Available — ' + n + '.portfoolio.me' };
 }
 
+const VIEW_KEY = 'portfoolio_views_v1';
+const VIEW_WEEK = 7 * 24 * 60 * 60 * 1000;
+function trackProfileView(username) {
+  try {
+    const u = String(username).toLowerCase();
+    const now = Date.now();
+    const all = JSON.parse(localStorage.getItem(VIEW_KEY) || '{}');
+    const row = all[u];
+    if (!row || now - (row.weekStart || 0) > VIEW_WEEK) all[u] = { count: 0, weekStart: now };
+    all[u].count = (all[u].count || 0) + 1;
+    localStorage.setItem(VIEW_KEY, JSON.stringify(all));
+  } catch (e) {}
+}
+function getProfileViews(username) {
+  try {
+    const u = String(username).toLowerCase();
+    const row = (JSON.parse(localStorage.getItem(VIEW_KEY) || '{}'))[u];
+    if (!row) return 0;
+    const now = Date.now();
+    if (now - (row.weekStart || 0) > VIEW_WEEK) return 0;
+    return row.count || 0;
+  } catch (e) { return 0; }
+}
+
 // ---- Router: subdomain > ?u= > /u/<name> > #/u/<name> ----
 function getRequestedUser() {
   const host = location.hostname.toLowerCase();
@@ -900,6 +924,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.getElementById('app').style.display = '';
   const p = await loadProfile(requested);
   if (!p) { renderNotFound(requested); return; }
+  trackProfileView(requested);
   if (resumeUser) { renderResumePage(p); return; }
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
   if (p.track === 'visual') { renderGallery(p); return; }
