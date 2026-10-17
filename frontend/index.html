@@ -1106,6 +1106,7 @@ function showAppRole(role, emailOrUser, profile = null) {
 
   if(landing) landing.style.display = 'none';
   if(dashApp) dashApp.style.display = '';
+  document.body.removeAttribute('data-template');
   document.body.classList.add('studio');
 
   if (role === 'admin') {
