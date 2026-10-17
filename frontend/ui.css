@@ -2837,6 +2837,46 @@ body.explore .grid-overlay {
   }
 }
 
+/* ── Defensive studio buttons (portfolio template rules use an id) ──── */
+body.studio #dashboardApp .btn-primary {
+  border: 0;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 10px 22px rgba(27, 25, 20, 0.16);
+}
+
+body.studio #dashboardApp .btn-primary:hover {
+  background: #000;
+  color: #fff;
+  box-shadow: 0 14px 28px rgba(27, 25, 20, 0.22);
+}
+
+body.studio #dashboardApp .btn-ghost {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: #5f594b;
+}
+
+body.studio #dashboardApp .btn-ghost:hover {
+  border-color: var(--ink);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+body.studio #dashboardApp .btn,
+body.studio #dashboardApp .btn-primary,
+body.studio #dashboardApp .btn-ghost {
+  border-radius: 999px;
+}
+
+body.lx :focus-visible,
+body.studio :focus-visible,
+body.ui-admin :focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
 /* ── Accent actions ─────────────────────────────────────────────────── */
 body.studio #workUpBtn,
 body.studio #edSaveThemeBtn {

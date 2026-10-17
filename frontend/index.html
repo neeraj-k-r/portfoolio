@@ -1520,6 +1520,11 @@ if ($('builderForm')) {
 
   // Live theme preview: selecting a card restyles this page instantly (reverts on lock)
   function previewTemplate(v) {
+    // Studio is product UI — never inherit a published portfolio template.
+    if (document.body.classList.contains('studio')) {
+      document.body.removeAttribute('data-template');
+      return;
+    }
     document.body.dataset.template = (v && v !== 'midnight') ? v : '';
   }
   // Theme picker thumbnails: swap emoji placeholders for live mini-previews
