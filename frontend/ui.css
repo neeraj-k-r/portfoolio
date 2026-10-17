@@ -913,4 +913,165 @@ body.lx .lx-center .lx-btn-ghost:hover {
   background: var(--surface);
 }
 
+/* ── Three-step process ─────────────────────────────────────────────── */
+body.lx .lx-steps {
+  gap: 18px;
+  margin-top: 38px;
+}
+
+body.lx .lx-steps::before {
+  display: none;
+}
+
+body.lx .lx-step {
+  padding: 28px 26px;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+body.lx .lx-step:hover {
+  transform: translateY(-4px);
+  border-color: #d6cdb9;
+  box-shadow: var(--sh-md);
+}
+
+body.lx .lx-step-num {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  border: 0;
+  background: var(--mint);
+  color: #34503a;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0;
+  box-shadow: none;
+}
+
+body.lx .lx-step:nth-child(2) .lx-step-num { background: var(--sun-soft); color: #6b5210; }
+body.lx .lx-step:nth-child(3) .lx-step-num { background: var(--lav); color: #4c4270; }
+
+body.lx .lx-step:hover .lx-step-num {
+  transform: translateY(-2px);
+  background: var(--mint);
+  color: #34503a;
+  box-shadow: none;
+}
+
+body.lx .lx-step:nth-child(2):hover .lx-step-num { background: var(--sun-soft); color: #6b5210; }
+body.lx .lx-step:nth-child(3):hover .lx-step-num { background: var(--lav); color: #4c4270; }
+
+body.lx .lx-step h3 {
+  margin: 18px 0 8px;
+  color: var(--ink);
+  font-size: 19px;
+  letter-spacing: -0.02em;
+}
+
+body.lx .lx-step p {
+  color: #6c6657;
+  font-size: 14.5px;
+  line-height: 1.65;
+}
+
+body.lx .lx-step strong {
+  color: var(--ink);
+}
+
+/* ── Testimonials ───────────────────────────────────────────────────── */
+body.lx .lx-quotes {
+  gap: 18px;
+  margin-top: 38px;
+}
+
+body.lx .lx-quotes::before,
+body.lx .lx-quotes::after {
+  display: none;
+}
+
+body.lx .lx-quote {
+  padding: 28px 26px 24px;
+  border-radius: 24px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+  transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+body.lx .lx-quote::before {
+  display: none;
+}
+
+body.lx .lx-quote::after {
+  display: none;
+}
+
+body.lx .lx-quote:hover {
+  transform: translateY(-4px);
+  border-color: #d6cdb9;
+  box-shadow: var(--sh-md);
+}
+
+body.lx .lx-quote blockquote {
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.62;
+  letter-spacing: -0.01em;
+  margin-bottom: 22px;
+}
+
+body.lx .lx-quote blockquote::before {
+  color: #b9aee6;
+  font-family: var(--serif);
+  font-size: 46px;
+  line-height: 0.55;
+  margin-bottom: 14px;
+}
+
+body.lx .lx-quote figcaption {
+  color: #6c6657;
+  gap: 11px;
+}
+
+body.lx .lx-quote-ava {
+  width: 36px;
+  height: 36px;
+  background: var(--mint) !important;
+  color: #34503a !important;
+  font-size: 13px;
+}
+
+body.lx .lx-quote:nth-child(2) .lx-quote-ava {
+  background: var(--sun-soft) !important;
+  color: #6b5210 !important;
+}
+
+body.lx .lx-quote:nth-child(3) .lx-quote-ava {
+  background: var(--lav) !important;
+  color: #4c4270 !important;
+}
+
+body.lx .lx-quote:hover .lx-quote-ava {
+  box-shadow: 0 0 0 3px rgba(201, 230, 205, 0.6);
+}
+
+body.lx .lx-quote-name {
+  color: var(--ink);
+  font-size: 13.5px;
+}
+
+body.lx .lx-quote-role {
+  color: #948c79;
+  font-size: 11.5px;
+}
+
+body.lx .lx-verified {
+  background: var(--mint-2);
+  color: #34503a;
+}
+
 /* ===== APPEND ===== */
