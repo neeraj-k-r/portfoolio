@@ -266,8 +266,8 @@ body.lx .lx-hero-inner {
   width: min(1320px, 94%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 48px;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+  gap: clamp(24px, 3vw, 48px);
   align-items: center;
   text-align: left;
 }
@@ -289,13 +289,13 @@ body.lx .lx-hero-inner::before {
 .hero-copy {
   position: relative;
   z-index: 2;
-  max-width: 760px;
+  max-width: 720px;
 }
 
 body.lx .lx-title {
   margin: 0 0 24px;
   font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  font-size: clamp(46px, 6.1vw, 82px);
+  font-size: clamp(44px, 5.6vw, 78px);
   font-weight: 800;
   line-height: 0.99;
   letter-spacing: -0.052em;
@@ -438,6 +438,103 @@ body.lx .lx-stars {
   color: #e8a33d;
   letter-spacing: 2px;
   margin-right: 4px;
+}
+
+/* ── Hero node cluster ──────────────────────────────────────────────── */
+.hero-nodes {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  aspect-ratio: 1 / 1;
+  justify-self: end;
+}
+
+.hero-nodes::before {
+  content: "";
+  position: absolute;
+  inset: 6% 4% 8% 6%;
+  background:
+    radial-gradient(circle at 58% 44%, rgba(251, 231, 163, 0.5), transparent 58%),
+    radial-gradient(circle at 34% 68%, rgba(220, 239, 220, 0.55), transparent 62%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.hero-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.hero-lines path {
+  stroke: #2c2921;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  opacity: 0.26;
+}
+
+.hnode {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  border-radius: 20px;
+  color: #2b2820;
+  font-size: 23px;
+  border: 1px solid rgba(43, 40, 32, 0.07);
+  box-shadow:
+    0 18px 34px rgba(58, 48, 24, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+  animation: heroNodeFloat 6.4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.hnode i { pointer-events: none; }
+
+.hnode-a { left: 26.9%; top: 11.1%; background: #dff0dd; animation-delay: -0.4s; }
+.hnode-b { left: 64.6%; top: 11.1%; background: #fbe6a1; animation-delay: -1.6s; }
+.hnode-c { left: 10.4%; top: 34.6%; background: #e8e1f8; animation-delay: -2.4s; }
+.hnode-d { left: 74.2%; top: 34.6%; background: #d9efdb; animation-delay: -3.1s; }
+.hnode-e { left: 10.4%; top: 63.5%; background: #f8e2c8; animation-delay: -1.1s; }
+.hnode-f { left: 74.2%; top: 63.5%; background: #e8e1f8; animation-delay: -2.8s; }
+.hnode-g { left: 48.1%; top: 78.5%; background: #d8edda; animation-delay: -0.8s; }
+
+.hnode-plug {
+  left: 22.7%;
+  top: 48.1%;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #1b1914;
+  color: #f5f1e8;
+  font-size: 16px;
+  animation-delay: -3.7s;
+}
+
+.hnode-hub {
+  left: 41.2%;
+  top: 41.2%;
+  width: 92px;
+  height: 92px;
+  border-radius: 28px;
+  background: #1b1914;
+  color: #f5f1e8;
+  font-size: 30px;
+  z-index: 3;
+  box-shadow:
+    0 24px 46px rgba(27, 25, 20, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  animation-delay: -2s;
+}
+
+@keyframes heroNodeFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
 }
 
 /* ===== APPEND ===== */
