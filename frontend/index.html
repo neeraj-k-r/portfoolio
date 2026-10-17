@@ -1781,10 +1781,11 @@ async function changeUsername() {
 }
 if ($('edSubdomainSave')) $('edSubdomainSave').onclick = changeUsername;
 if ($('exportHtmlBtn')) $('exportHtmlBtn').onclick = () => exportStaticHTML(activeUserProfile);
+if ($('exportPdfBtn')) $('exportPdfBtn').onclick = () => exportPDF(activeUserProfile);
 
 // Export: build a self-contained static HTML portfolio and download it
-function exportStaticHTML(p) {
-  if (!p) return;
+function buildStaticHTML(p) {
+  if (!p) return '';
   const skills = (p.skills || []).map(s => `<span class="skill">${esc(s)}</span>`).join('');
   const projects = (p.projects || []).map(pr => `
     <div class="proj">
@@ -1846,6 +1847,14 @@ ${works ? `<section class="wrap"><h2>Works</h2><div class="works">${works}</div>
 </section>
 <footer class="wrap">Built with <a href="https://portfoolio.me">portfoolio.me</a> · ${esc(p.username)}.portfoolio.me</footer>
 </body></html>`;
+  return html;
+}
+
+// Export: download the static HTML portfolio
+function exportStaticHTML(p) {
+  if (!p) return;
+  const html = buildStaticHTML(p);
+  if (!html) return;
   const blob = new Blob([html], { type: 'text/html' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
@@ -1855,6 +1864,19 @@ ${works ? `<section class="wrap"><h2>Works</h2><div class="works">${works}</div>
   a.remove();
   setTimeout(() => URL.revokeObjectURL(a.href), 5000);
   toast('⬇ Exported ' + (p.username || 'portfolio') + '.html');
+}
+
+// Export: open the static portfolio in a new tab and print/save as PDF
+function exportPDF(p) {
+  if (!p) return;
+  const html = buildStaticHTML(p);
+  if (!html) return;
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const w = window.open(url, '_blank');
+  if (!w) { toast('❌ Popup blocked — allow popups to export PDF'); return; }
+  w.addEventListener('load', () => { setTimeout(() => { w.print(); }, 400); });
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
 
 // Editor: load repos (username or repo URL) + add selected
