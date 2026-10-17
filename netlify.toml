@@ -19,6 +19,11 @@
   to = "/frontend/admin.html"
   status = 200
 
+[[redirects]]
+  from = "/explore"
+  to = "/frontend/index.html"
+  status = 200
+
 # everything else renders from frontend/; real files (e.g. /backend/*) still serve directly
 [[redirects]]
   from = "/*"
