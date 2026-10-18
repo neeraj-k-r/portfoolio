@@ -695,14 +695,6 @@ select option { background: #0b1226; color: #fff; }
 iframe{max-width:100%}
 #uploadDrop{overflow:hidden}
 
-/* ===== LX THEME (ink + lime, pre-login landing only) ===== */
-body.lx { background: #0b0f0e; color: #e7ece9; }
-body.lx .bg-fx { background:
-  radial-gradient(800px 500px at 12% 4%, rgba(163,230,53,.1), transparent 60%),
-  radial-gradient(700px 500px at 88% 12%, rgba(52,211,153,.12), transparent 60%),
-  radial-gradient(600px 600px at 50% 100%, rgba(163,230,53,.06), transparent 60%),
-  linear-gradient(#0b0f0e,#0b0f0e); }
-body.lx .grid-overlay { opacity: .2; }
 /* LX nav */
 .lx-nav { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); width: min(1180px,94%); z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; background: rgba(255,255,255,.85); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border: 1px solid var(--stroke); border-radius: 16px; transition: padding .3s var(--ease), background .3s var(--ease), border-color .3s var(--ease), box-shadow .3s var(--ease); box-shadow: var(--sh-sm); }
 .lx-nav.scrolled, body.lx #mainNav.scrolled { padding: 8px 18px; background: rgba(255,255,255,.95); border-color: var(--stroke); box-shadow: var(--sh-md); }

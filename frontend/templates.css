@@ -42,12 +42,25 @@
 /* Light themes: readable muted text on pale surfaces (dashboard + portfolio) */
 body[data-template="minimal"],body[data-template="editorial"],body[data-template="brutalist"]{--muted:#55606e}
 
+/* ---- Template: midnight (dark neon wow, default) ---- */
+body[data-template="midnight"],
+body.portfolio-view:not([data-template]),
+body.portfolio-view[data-template=""]{background:#070b16;color:#eef2ff}
+body[data-template="midnight"] .bg-fx,
+body.portfolio-view:not([data-template]) .bg-fx,
+body.portfolio-view[data-template=""] .bg-fx{background:radial-gradient(800px 500px at 10% 5%,rgba(108,108,245,.28),transparent 60%),radial-gradient(700px 500px at 90% 15%,rgba(34,211,238,.18),transparent 60%),radial-gradient(600px 600px at 50% 100%,rgba(244,114,182,.14),transparent 60%),linear-gradient(#070b16,#070b16)}
+body[data-template="midnight"] .grid-overlay,
+body.portfolio-view:not([data-template]) .grid-overlay,
+body.portfolio-view[data-template=""] .grid-overlay{opacity:.35;background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:56px 56px}
+body[data-template="midnight"] .card,body[data-template="midnight"] .stat,body[data-template="midnight"] .proj,
+body.portfolio-view:not([data-template]) .card,body.portfolio-view:not([data-template]) .stat,body.portfolio-view:not([data-template]) .proj{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);box-shadow:0 20px 60px rgba(0,0,0,.5);color:#eef2ff}
+
 /* ---- Template: minimal (light, ATS-friendly) ---- */
 body[data-template="minimal"]{background:#f8fafc;color:#0f172a}
 body[data-template="minimal"] .bg-fx,body[data-template="minimal"] .grid-overlay{display:none}
 body[data-template="minimal"] nav{background:rgba(255,255,255,.9);border-color:#e2e8f0}
 body[data-template="minimal"] .nav-links a,body[data-template="minimal"] .logo{color:#0f172a}
-body[data-template="minimal"] .card,body[data-template="minimal"] .stat,body[data-template="minimal"] .proj,body[data-template="minimal"] .dir-card{background:#fff;border-color:#e2e8f0;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+body[data-template="minimal"] .card,body[data-template="minimal"] .stat,body[data-template="minimal"] .proj,body[data-template="minimal"] .dir-card{background:#fff;border-color:#e2e8f0;box-shadow:0 8px 24px rgba(15,23,42,.06);color:#0f172a}
 body[data-template="minimal"] .card p,body[data-template="minimal"] .sub,body[data-template="minimal"] p.lead,body[data-template="minimal"] .hero-meta{color:#475569}
 body[data-template="minimal"] h1,body[data-template="minimal"] h2,body[data-template="minimal"] h3{color:#0f172a;letter-spacing:-.5px}
 body[data-template="minimal"] .grad{background:linear-gradient(90deg,#4f46e5,#0ea5e9);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -62,7 +75,7 @@ body[data-template="terminal"]{background:#030b06;color:#d1fae5;font-family:'Jet
 body[data-template="terminal"] .bg-fx{background:radial-gradient(600px 400px at 50% 0%,rgba(74,222,128,.12),transparent),#030b06}
 body[data-template="terminal"] .grid-overlay{opacity:.15}
 body[data-template="terminal"] nav{background:rgba(3,11,6,.9);border-color:#14532d}
-body[data-template="terminal"] .card,body[data-template="terminal"] .stat,body[data-template="terminal"] .proj{background:rgba(6,40,20,.6);border-color:#166534}
+body[data-template="terminal"] .card,body[data-template="terminal"] .stat,body[data-template="terminal"] .proj{background:rgba(6,40,20,.6);border-color:#166534;color:#d1fae5}
 body[data-template="terminal"] h1,body[data-template="terminal"] h2,body[data-template="terminal"] h3{font-family:'JetBrains Mono',monospace;color:#ecfdf5}
 body[data-template="terminal"] .grad{background:none;color:#4ade80;-webkit-text-fill-color:#4ade80}
 body[data-template="terminal"] .btn-primary{background:#16a34a;box-shadow:0 10px 30px rgba(22,163,74,.4)}
@@ -71,15 +84,17 @@ body[data-template="terminal"] .badge,body[data-template="terminal"] .tags span{
 body[data-template="terminal"] input,body[data-template="terminal"] textarea{background:#02120a;border-color:#166534;color:#d1fae5}
 
 /* ---- Template: creative (playful gradient) ---- */
+body[data-template="creative"]{background:#0b0620;color:#fff}
 body[data-template="creative"] .bg-fx{background:radial-gradient(700px 400px at 15% 10%,rgba(244,114,182,.35),transparent 60%),radial-gradient(700px 400px at 85% 20%,rgba(139,92,246,.4),transparent 60%),radial-gradient(600px 500px at 50% 100%,rgba(34,211,238,.25),transparent 60%),#0b0620}
 body[data-template="creative"] .btn-primary{background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee)}
 body[data-template="creative"] .proj-top{font-size:64px}
-body[data-template="creative"] .card,body[data-template="creative"] .proj{border-color:rgba(244,114,182,.35)}
+body[data-template="creative"] .card,body[data-template="creative"] .stat,body[data-template="creative"] .proj{background:rgba(255,255,255,.06);border-color:rgba(244,114,182,.35);color:#fff}
 body[data-template="creative"] .card:hover,body[data-template="creative"] .proj:hover{border-color:#f472b6}
 
 /* ---- Template: aurora (glassmorphism pastel) ---- */
+body[data-template="aurora"]{background:#12102e;color:#fff}
 body[data-template="aurora"] .bg-fx{background:radial-gradient(700px 450px at 15% 10%,rgba(167,139,250,.35),transparent 60%),radial-gradient(700px 450px at 85% 25%,rgba(103,232,249,.3),transparent 60%),radial-gradient(600px 500px at 50% 100%,rgba(249,168,212,.22),transparent 60%),#12102e}
-body[data-template="aurora"] .card,body[data-template="aurora"] .proj,body[data-template="aurora"] nav{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(18px);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+body[data-template="aurora"] .card,body[data-template="aurora"] .stat,body[data-template="aurora"] .proj,body[data-template="aurora"] nav{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(18px);box-shadow:0 20px 50px rgba(0,0,0,.35);color:#fff}
 body[data-template="aurora"] .btn-primary{background:linear-gradient(135deg,#a78bfa,#67e8f9);color:#1e1b4b}
 body[data-template="aurora"] .badge{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.3);color:#ede9fe}
 body[data-template="aurora"] .tags span{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.25);color:#e0e7ff}

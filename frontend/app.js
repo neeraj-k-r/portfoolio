@@ -320,7 +320,7 @@ function renderPortfolio(p) {
   if (tpl !== 'midnight' && window.PortfoolioTemplates && window.PortfoolioTemplates[tpl]) {
     window.PortfoolioTemplates[tpl](p); return;
   }
-  document.body.dataset.template = '';
+  document.body.dataset.template = 'midnight';
   document.title = `${p.name} — ${p.title} | portfoolio.me`;
   const app = document.getElementById('app');
   const EV = window.PortfoolioEvidence || null;
@@ -606,7 +606,8 @@ async function renderExplorePage() {
 document.addEventListener('DOMContentLoaded', async () => {
   // ---- /explore : public directory of all portfolios ----
   if (/^\/explore\/?$/.test(location.pathname)) {
-    document.body.classList.remove('lx');
+    document.body.classList.remove('lx', 'portfolio-view', 'studio', 'ui-admin');
+    document.body.classList.add('explore');
     const land = document.getElementById('landing');
     if (land) land.style.display = 'none';
     const appEl = document.getElementById('app');
@@ -923,7 +924,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const resumeUser = getResumeUser();
   const requested = resumeUser || getRequestedUser();
-  document.body.classList.toggle('lx', !requested);
+  if (requested) {
+    document.body.classList.remove('lx', 'studio', 'ui-admin', 'explore');
+    document.body.classList.add('portfolio-view');
+    const dash = document.getElementById('dashboardApp');
+    if (dash) dash.style.display = 'none';
+  } else {
+    document.body.classList.remove('portfolio-view');
+    document.body.classList.add('lx');
+  }
   if (!requested) return; // landing view stays
   document.getElementById('landing').style.display = 'none';
   document.getElementById('app').style.display = '';

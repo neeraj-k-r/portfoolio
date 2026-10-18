@@ -59,7 +59,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 @media(max-width:900px){.form-grid{grid-template-columns:1fr}.dir-grid{grid-template-columns:1fr}}
 </style>
 </head>
-<body>
+<body class="lx">
 <div class="bg-fx"></div><div class="grid-overlay"></div>
 <div id="particles"></div>
 
@@ -1087,10 +1087,18 @@ function switchUserTab(tabName) {
 }
 
 function syncLx() {
+  const isPortfolio = typeof getRequestedUser === 'function' ? !!(getRequestedUser() || (typeof getResumeUser === 'function' && getResumeUser())) : false;
+  if (isPortfolio) {
+    document.body.classList.remove('lx', 'studio', 'ui-admin', 'explore');
+    document.body.classList.add('portfolio-view');
+    return;
+  }
   const landingVisible = $('landing') && $('landing').style.display !== 'none';
   document.body.classList.toggle('lx', !!landingVisible);
 }
 function showAppRole(role, emailOrUser, profile = null) {
+  const isPortfolio = typeof getRequestedUser === 'function' ? !!(getRequestedUser() || (typeof getResumeUser === 'function' && getResumeUser())) : false;
+  if (isPortfolio) return;
   currentUserRole = role;
   const landing = $('landing'), dashApp = $('dashboardApp');
   const uDash = $('userDashboardView'), aDash = $('adminDashboardView');

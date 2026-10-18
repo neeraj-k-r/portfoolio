@@ -2,9 +2,10 @@
    Layered on top of style.css and scoped to the marketing site / dashboards so
    published portfolio themes keep their own look. */
 
-body.lx,
-body.studio,
-body.ui-admin {
+body.lx:not(.portfolio-view),
+body.studio:not(.portfolio-view),
+body.ui-admin:not(.portfolio-view),
+body.explore:not(.portfolio-view) {
   --paper: #f5f1e8;
   --paper-2: #efe8da;
   --surface: #fffdf8;
@@ -47,16 +48,18 @@ body.ui-admin {
   --serif: 'Instrument Serif', Georgia, 'Times New Roman', serif;
 }
 
-body.lx,
-body.studio,
-body.ui-admin {
+body.lx:not(.portfolio-view),
+body.studio:not(.portfolio-view),
+body.ui-admin:not(.portfolio-view),
+body.explore:not(.portfolio-view) {
   background: var(--paper);
   color: var(--ink);
 }
 
-body.lx .bg-fx,
-body.studio .bg-fx,
-body.ui-admin .bg-fx {
+body.lx:not(.portfolio-view) .bg-fx,
+body.studio:not(.portfolio-view) .bg-fx,
+body.ui-admin:not(.portfolio-view) .bg-fx,
+body.explore:not(.portfolio-view) .bg-fx {
   background:
     radial-gradient(900px 620px at 88% 4%, rgba(245, 200, 75, 0.14), transparent 62%),
     radial-gradient(820px 620px at 6% 12%, rgba(201, 230, 205, 0.32), transparent 60%),
@@ -64,9 +67,10 @@ body.ui-admin .bg-fx {
     linear-gradient(var(--paper), var(--paper));
 }
 
-body.lx .grid-overlay,
-body.studio .grid-overlay,
-body.ui-admin .grid-overlay {
+body.lx:not(.portfolio-view) .grid-overlay,
+body.studio:not(.portfolio-view) .grid-overlay,
+body.ui-admin:not(.portfolio-view) .grid-overlay,
+body.explore:not(.portfolio-view) .grid-overlay {
   opacity: 0.18;
   background-image:
     linear-gradient(rgba(27, 25, 20, 0.035) 1px, transparent 1px),
@@ -74,42 +78,48 @@ body.ui-admin .grid-overlay {
   background-size: 64px 64px;
 }
 
-body.lx #particles,
-body.studio #particles,
-body.ui-admin #particles {
+body.lx:not(.portfolio-view) #particles,
+body.studio:not(.portfolio-view) #particles,
+body.ui-admin:not(.portfolio-view) #particles,
+body.explore:not(.portfolio-view) #particles {
   display: none;
 }
 
-body.lx ::selection,
-body.studio ::selection,
-body.ui-admin ::selection {
+body.lx:not(.portfolio-view) ::selection,
+body.studio:not(.portfolio-view) ::selection,
+body.ui-admin:not(.portfolio-view) ::selection,
+body.explore:not(.portfolio-view) ::selection {
   background: var(--sun);
   color: var(--ink);
 }
 
-body.lx ::-webkit-scrollbar,
-body.studio ::-webkit-scrollbar,
-body.ui-admin ::-webkit-scrollbar {
+body.lx:not(.portfolio-view) ::-webkit-scrollbar,
+body.studio:not(.portfolio-view) ::-webkit-scrollbar,
+body.ui-admin:not(.portfolio-view) ::-webkit-scrollbar,
+body.explore:not(.portfolio-view) ::-webkit-scrollbar {
   width: 11px;
 }
 
-body.lx ::-webkit-scrollbar-track,
-body.studio ::-webkit-scrollbar-track,
-body.ui-admin ::-webkit-scrollbar-track {
+body.lx:not(.portfolio-view) ::-webkit-scrollbar-track,
+body.studio:not(.portfolio-view) ::-webkit-scrollbar-track,
+body.ui-admin:not(.portfolio-view) ::-webkit-scrollbar-track,
+body.explore:not(.portfolio-view) ::-webkit-scrollbar-track {
   background: var(--paper);
 }
 
-body.lx ::-webkit-scrollbar-thumb,
-body.studio ::-webkit-scrollbar-thumb,
-body.ui-admin ::-webkit-scrollbar-thumb {
+body.lx:not(.portfolio-view) ::-webkit-scrollbar-thumb,
+body.studio:not(.portfolio-view) ::-webkit-scrollbar-thumb,
+body.ui-admin:not(.portfolio-view) ::-webkit-scrollbar-thumb,
+body.explore:not(.portfolio-view) ::-webkit-scrollbar-thumb {
   background: #d5cbb6;
   border-radius: 8px;
   border: 2px solid var(--paper);
 }
 
-body.lx ::-webkit-scrollbar-thumb:hover,
-body.studio ::-webkit-scrollbar-thumb:hover,
-body.ui-admin ::-webkit-scrollbar-thumb:hover {
+body.lx:not(.portfolio-view) ::-webkit-scrollbar-thumb:hover,
+body.studio:not(.portfolio-view) ::-webkit-scrollbar-thumb:hover,
+body.ui-admin:not(.portfolio-view) ::-webkit-scrollbar-thumb:hover,
+body.explore:not(.portfolio-view) ::-webkit-scrollbar-thumb:hover {
   background: #b9ac91;
 }
 
@@ -1882,62 +1892,212 @@ body.studio .proj-row:hover {
   background: var(--surface);
 }
 
-/* ── Studio buttons ─────────────────────────────────────────────────── */
-body.studio .btn {
-  padding: 11px 19px;
+/* ── Studio action bar ────────────────────────────────────────────── */
+#deskActionBar {
+  display: none;
+}
+
+#studioControls {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 14px 16px;
+  border-top: 1px solid #e6dfd0;
+  background: #fffdf8;
+  box-shadow: 0 2px 8px rgba(45, 38, 20, 0.06);
+  justify-content: space-between;
+}
+
+#studioControls .ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#studioControls .ctrl-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 16px;
   border-radius: 999px;
+  border: 0;
+  background: #1b1914;
+  color: #f5f1e8;
   font-size: 13px;
   font-weight: 700;
-  letter-spacing: -0.005em;
-  transition: transform 0.2s var(--ease), background 0.2s var(--ease), border-color 0.2s var(--ease), box-shadow 0.2s var(--ease), color 0.2s var(--ease);
+  letter-spacing: -0.01em;
+  box-shadow: 0 8px 18px rgba(27, 25, 20, 0.22);
+  cursor: pointer;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease), background 0.15s var(--ease);
 }
 
-body.studio .btn-sm {
-  padding: 9px 15px;
-  font-size: 12px;
-}
-
-body.studio .btn-primary {
-  border: 0;
-  background: var(--ink);
-  color: #fff;
-  box-shadow: 0 10px 22px rgba(27, 25, 20, 0.16);
-}
-
-body.studio .btn-primary:hover {
+#studioControls .ctrl-btn:hover {
+  transform: translateY(-1px);
   background: #000;
-  transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(27, 25, 20, 0.22);
+  box-shadow: 0 12px 24px rgba(27, 25, 20, 0.28);
 }
 
-body.studio .btn-primary:active {
-  transform: translateY(0) scale(0.99);
-  box-shadow: 0 8px 18px rgba(27, 25, 20, 0.16);
+#studioControls .ctrl-btn:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: 0 6px 14px rgba(27, 25, 20, 0.18);
 }
 
-body.studio .btn-ghost {
-  border: 1px solid var(--line);
+#studioControls .ctrl-btn.ghost {
   background: transparent;
-  color: #5f594b;
+  color: #1b1914;
+  box-shadow: none;
+  border: 1px solid #d8cfba;
 }
 
-body.studio .btn-ghost:hover {
-  border-color: var(--ink);
-  background: var(--surface);
-  color: var(--ink);
+#studioControls .ctrl-btn.ghost:hover {
+  background: #faf6ed;
+  border-color: #1b1914;
+  box-shadow: 0 4px 10px rgba(27, 25, 20, 0.12);
+}
+
+#studioControls .ctrl-btn:focus-visible {
+  outline: 2px solid #7b68c9;
+  outline-offset: 2px;
+}
+
+#studioControls .ctrl-btn.ghost:focus-visible {
+  outline-offset: 2px;
+}
+
+#studioControls .ctrl-label {
+  color: #787160;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-right: 4px;
+}
+
+body.studio .dash-header-card .dash-live-link {
+  box-shadow: 0 12px 26px rgba(27, 25, 20, 0.3);
+}
+
+body.studio .dash-header-card .dash-live-link:hover {
+  box-shadow: 0 16px 32px rgba(27, 25, 20, 0.36);
+}
+
+/* ── Vertical studio controls (left action rail) ────────────────────── */
+#verticalControls {
+  display: none;
+}
+
+#verticalControls .vctrl-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 56px;
+  padding: 18px 8px;
+  border-right: 1px solid #e6dfd0;
+  background: #fffdf8;
+}
+
+#verticalControls .vctrl-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 0;
+  background: transparent;
+  color: #1b1914;
+  font-size: 17px;
+  box-shadow: none;
+  cursor: pointer;
+  transition: background 0.15s var(--ease), box-shadow 0.15s var(--ease), transform 0.15s var(--ease);
+}
+
+#verticalControls .vctrl-btn:hover {
+  background: #faf6ed;
+  box-shadow: 0 4px 10px rgba(27, 25, 20, 0.1);
   transform: translateY(-1px);
 }
 
-body.studio .btn:disabled,
-body.studio .btn-primary:disabled,
-body.studio .btn-ghost:disabled {
-  filter: none;
-  opacity: 0.45;
-  box-shadow: none;
+#verticalControls .vctrl-btn:active {
+  transform: translateY(0) scale(0.96);
 }
 
-body.studio .share-row button {
-  border-radius: 999px;
+#verticalControls .vctrl-btn.primary {
+  background: #1b1914;
+  color: #f5f1e8;
+  box-shadow: 0 8px 18px rgba(27, 25, 20, 0.22);
+  width: 46px;
+  height: 46px;
+}
+
+#verticalControls .vctrl-btn.primary:hover {
+  background: #000;
+  box-shadow: 0 12px 24px rgba(27, 25, 20, 0.28);
+}
+
+#verticalControls .vctrl-btn.primary:active {
+  box-shadow: 0 6px 14px rgba(27, 25, 20, 0.18);
+  transform: translateY(0) scale(0.96);
+}
+
+#verticalControls .vctrl-btn:focus-visible {
+  outline: 2px solid #7b68c9;
+  outline-offset: 2px;
+}
+
+#verticalControls .vctrl-label {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  color: #787160;
+  margin-top: 10px;
+  line-height: 1;
+}
+
+/* ── Bottom ribbon variant (landscape action bar) ─────────────────── */
+#ribbonBar {
+  display: none;
+}
+
+#ribbonBar .ribbon-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-bottom: 1px solid #e6dfd0;
+  background: #fffdf8;
+  box-shadow: 0 2px 8px rgba(45, 38, 20, 0.06);
+}
+
+#ribbonBar .ribbon-row .ctrl-btn {
+  padding: 9px 18px;
+  font-size: 13px;
+}
+
+#ribbonBar .ribbon-row .ctrl-btn.ghost {
+  border-color: #d8cfba;
+}
+
+#ribbonBar .ribbon-spacer {
+  flex: 1;
+}
+
+#ribbonBar .ribbon-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #787160;
+  font-size: 11.5px;
+  font-weight: 600;
+}
+
+#ribbonBar .ribbon-meta strong {
+  color: #1b1914;
+  font-weight: 800;
 }
 
 /* ── Theme picker ───────────────────────────────────────────────────── */

@@ -1,0 +1,11 @@
+{
+  "name": "portfoolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "portfoolio.me — developer & creator portfolios",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "test": "node frontend/evidence.test.mjs && node frontend/linkedin-import.test.mjs"
+  }
+}
