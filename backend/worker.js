@@ -7,7 +7,7 @@ const ORIGIN = 'https://portfoolio.me';
 const RESERVED = new Set(['www', 'app', 'api', 'admin', 'mail', 'blog', 'portfoolio', 'netlify']);
 
 const SEC_HEADERS = {
-  'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://oorcivmymcokbjiawkig.supabase.co https://*.supabase.co https://res.cloudinary.com https://api.cloudinary.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+  'Content-Security-Policy': "default-src 'self' https://portfoolio.me https://*.portfoolio.me; script-src 'self' 'unsafe-inline' https://portfoolio.me https://*.portfoolio.me https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://portfoolio.me https://*.portfoolio.me https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; font-src 'self' https://portfoolio.me https://*.portfoolio.me https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://portfoolio.me https://*.portfoolio.me https://oorcivmymcokbjiawkig.supabase.co https://*.supabase.co https://res.cloudinary.com https://api.cloudinary.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
   'X-Frame-Options': 'DENY',
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
@@ -121,12 +121,12 @@ function head(p, tpl) {
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
 <meta name="description" content="${esc(p.tagline || p.title || '')}">
-<link rel="icon" type="image/svg+xml" href="${ORIGIN}/frontend/favicon.svg">
-<link rel="apple-touch-icon" href="${ORIGIN}/frontend/favicon.svg">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="${ORIGIN}/style.css"><link rel="stylesheet" href="${ORIGIN}/templates.css"><link rel="stylesheet" href="${ORIGIN}/resume.css"></head>`;
+<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/templates.css"><link rel="stylesheet" href="/resume.css"></head>`;
 }
 function nav(p) {
   return `<nav><a class="logo" href="${ORIGIN}/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
@@ -302,12 +302,12 @@ function pageGallery(p, wIdx) {
     <section class="wrap" style="padding-top:10px"><div class="works-grid" style="margin-top:18px">${works.map((k, n) => `
       <a class="work-card" href="/?w=${n}" style="text-decoration:none;color:inherit"><img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
       <div class="work-meta"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}</div></a>`).join('') || emptyMsg}</div></section>`;
-  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body data-template="${vtpl}"><div class="bg-fx"></div>${nav(p)}${body}${foot(p)}</body></html>`;
+  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div>${nav(p)}${body}${foot(p)}</body></html>`;
 }
 function page(p) {
   const tpl = (p.template || 'midnight').toLowerCase();
   const skills = (p.skills || []).map((s) => `<span class="badge">${esc(s)}</span>`).join('');
-  const bodyAttr = tpl === 'midnight' ? '' : ` data-template="${tpl}"`;
+  const bodyAttr = ` class="portfolio-view" data-template="${tpl}"`;
   const hero = tpl === 'afterglow'
     ? `<header class="hero wrap"><div class="ag-split"><div>
        <p class="mono ag-kicker">— GOLDEN HOUR, SHIPPED —</p>
@@ -433,9 +433,9 @@ function pageResume(p) {
   const theme = resumeTheme(p);
   return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Resume — ${esc(p.name)} | portfoolio.me</title>
-<link rel="icon" type="image/svg+xml" href="${ORIGIN}/frontend/favicon.svg">
-<link rel="stylesheet" href="${ORIGIN}/style.css"><link rel="stylesheet" href="${ORIGIN}/resume.css"></head>
-<body class="rs-page rs-${theme}"><div class="bg-fx"></div>${nav(p)}
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/resume.css"></head>
+<body class="portfolio-view rs-page rs-${theme}"><div class="bg-fx"></div>${nav(p)}
 <div style="max-width:860px;margin:0 auto;padding:120px 16px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
 <a href="/" style="font-weight:800">← ${esc(p.name)}</a>
 <span style="margin-left:auto;display:flex;gap:10px"><a href="/" style="font-weight:700">Portfolio</a><a href="javascript:window.print()" style="font-weight:800">⬇ Print / PDF</a></span></div>
@@ -466,7 +466,7 @@ function pageSkill(p, skillName) {
   const list = (p.projects || []).filter((pr) => techsOf(pr).some((t) => t.toLowerCase() === key));
   const gh = list.filter((pr) => pr.repo).length, live = list.filter((pr) => pr.demoUrl).length;
   const tpl = (p.template || 'midnight').toLowerCase();
-  const bodyAttr = tpl === 'midnight' ? '' : ` data-template="${tpl}"`;
+  const bodyAttr = ` class="portfolio-view" data-template="${tpl}"`;
   const rows = list.map((pr) => `
     <article class="proj"><div class="proj-body"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
     <div class="proj-actions"><a class="primary" href="${esc(pr.url)}">View project</a></div></div></article>`).join('');
@@ -488,6 +488,33 @@ export default {
     if (!sub || RESERVED.has(sub) || !/^[a-z0-9][a-z0-9-]{2,29}$/.test(sub)) {
       return Response.redirect(`${ORIGIN}/`, 302);
     }
+
+    // Proxy shared static assets (CSS, icons, seeds) directly from ORIGIN so they serve same-origin on every subdomain
+    if (
+      url.pathname === '/style.css' ||
+      url.pathname === '/templates.css' ||
+      url.pathname === '/resume.css' ||
+      url.pathname === '/ui.css' ||
+      url.pathname === '/favicon.svg' ||
+      url.pathname === '/favicon.png' ||
+      url.pathname.startsWith('/profiles/') ||
+      url.pathname.startsWith('/frontend/')
+    ) {
+      const assetRes = await fetch(`${ORIGIN}${url.pathname}`);
+      if (assetRes.ok) {
+        const ct = assetRes.headers.get('content-type') || siteMime(url.pathname);
+        return new Response(assetRes.body, {
+          status: assetRes.status,
+          headers: {
+            'content-type': ct,
+            'cache-control': 'public, max-age=86400',
+            'access-control-allow-origin': '*',
+            ...SEC_HEADERS,
+          },
+        });
+      }
+    }
+
     const p = await getProfile(sub);
     if (!p) return Response.redirect(`${ORIGIN}/?claim=${encodeURIComponent(sub)}`, 302);
     // resume page works on every site type (built from profile data)
