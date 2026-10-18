@@ -129,7 +129,7 @@ function head(p, tpl) {
 <link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/templates.css"><link rel="stylesheet" href="/resume.css"></head>`;
 }
 function nav(p) {
-  return `<nav><a class="logo" href="${ORIGIN}/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
+  return `<nav><a class="logo" href="${ORIGIN}/"><img class="brand-logo" src="/favicon.png" alt="portfoolio logo" width="24" height="24" style="vertical-align:middle"><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
   <div style="display:flex;gap:10px"><a class="btn btn-ghost btn-sm" href="${ORIGIN}/">Make yours</a>
   ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Hire ${esc((p.name || '').split(' ')[0])}</a>` : ''}</div></nav>`;
 }
