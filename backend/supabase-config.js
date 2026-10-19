@@ -259,7 +259,6 @@ async function cloudDeleteProfile(username) {
 // Boot check: wait for DOM and supabase config to be ready, then check auth state
 if (typeof window !== 'undefined') {
   window.addEventListener('DOMContentLoaded', async () => {
-    await renderDir();
     try {
       if (typeof cloudEnabled === 'function' && cloudEnabled()) {
         if (await cloudIsAdmin()) {
