@@ -241,7 +241,7 @@ async function cloudPending() {
 }
 async function cloudListProfiles() {
   const sb = cloud(); if (!sb) return [];
-  const { data, error } = await sb.from('profiles').select('username,name,title,avatar_url,avatarUrl,template,track,location').eq('status', 'approved').order('created_at', { ascending: false }).limit(200);
+  const { data, error } = await sb.from('profiles').select('username,name,title,avatar_url,avatarUrl,template,track,location,featured').eq('status', 'approved').order('created_at', { ascending: false }).limit(200);
   if (error) throw error;
   return data || [];
 }
