@@ -102,6 +102,7 @@ function row(r, queue) {
       ${r.status !== 'approved' ? `<button class="ok-btn" data-ok="${esc(r.username)}">Approve</button>` : ''}
       ${r.status === 'pending' ? `<button class="no-btn" data-no="${esc(r.username)}">Reject</button>` : ''}
       <button class="no-btn" data-del="${esc(r.username)}" title="Delete forever">✕</button>
+      <button class="star-btn" data-star="${esc(r.username)}" title="${r.featured ? 'Unfeature' : 'Feature'} on dashboard">★</button>
     </div></div>`;
 }
 function paint() {
