@@ -572,6 +572,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <button class="dash-tab-btn" onclick="switchUserTab('resume')"><i class="fa-solid fa-file-lines"></i> Resume</button>
         <button class="dash-tab-btn" onclick="switchUserTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Site</button>
         <button class="dash-tab-btn" onclick="switchUserTab('proof')"><i class="fa-solid fa-award"></i> Proof of Work</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('featured')"><i class="fa-solid fa-star"></i> Featured</button>
         <button class="dash-tab-btn" onclick="switchUserTab('share')"><i class="fa-solid fa-share-nodes"></i> Share & Links</button>
       </div>
     </div>
@@ -581,6 +582,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <button class="dash-tab-btn" id="tabBtnWorks" onclick="switchUserTab('works')"><i class="fa-solid fa-images"></i> Works</button>
         <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Gallery Themes</button>
         <button class="dash-tab-btn" onclick="switchUserTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Site</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('featured')"><i class="fa-solid fa-star"></i> Featured</button>
         <button class="dash-tab-btn" onclick="switchUserTab('share')"><i class="fa-solid fa-share-nodes"></i> Share & Links</button>
       </div>
     </div>
@@ -809,7 +811,15 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <button class="btn btn-ghost btn-sm" onclick="switchUserTab('theme')">Manage skills</button>
           <button class="btn btn-ghost btn-sm" onclick="switchUserTab('projects')">Manage evidence</button>
           <a class="btn btn-ghost btn-sm" id="proofPreviewBtn" target="_blank">View public profile</a>
-        </div>
+</div>
+    </div>
+
+      <!-- User Studio Tab: Featured Portfolios -->
+      <div id="tabFeatured" class="card" style="display:none">
+        <h3>⭐ Featured Portfolios</h3>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">These portfolios are featured on the public showcase and your dashboard. Admin can feature/unfeature from the admin console.</p>
+        <div id="featuredPortfoliosGrid" class="dir-grid lx-showcase"></div>
+        <p class="mono" id="featuredEmpty" style="color:var(--muted);text-align:center;padding:40px 0;display:none">No featured portfolios yet. Ask admin to feature yours!</p>
       </div>
 
       <!-- User Studio Tab 4: Share & Links -->
@@ -1063,7 +1073,7 @@ document.querySelectorAll('.input-wrapper input').forEach(input => {
 });
 
 function switchUserTab(tabName) {
-  const panes = ['info', 'works', 'theme', 'projects', 'resume', 'upload', 'proof', 'share'];
+  const panes = ['info', 'works', 'theme', 'projects', 'resume', 'upload', 'proof', 'featured', 'share'];
   if (!panes.includes(tabName)) return;
   panes.forEach(t => {
     const el = $('tab' + t.charAt(0).toUpperCase() + t.slice(1));
@@ -1241,6 +1251,7 @@ function setupUserDashboardView(profile) {
       paintResumeTab();
       paintUploadBanner();
       paintTrackTabs(profile);
+      paintFeaturedPortfolios();
     } catch (err) {
       console.error('studio paint failed', err);
       toast('⚠️ Studio hit a snag: ' + ((err && err.message) || err) + ' — tabs below still work');
@@ -1252,6 +1263,46 @@ function setupUserDashboardView(profile) {
   }
 }
 // Track extras: theme grid shows the active track's themes; visual lands on Works.
+}
+}
+async function paintFeaturedPortfolios() {
+  const grid = $('featuredPortfoliosGrid');
+  const empty = $('featuredEmpty');
+  if (!grid) return;
+  // Fetch featured approved portfolios from cloud + localStorage
+  const all = [];
+  try {
+    if (typeof cloudEnabled === 'function' && cloudEnabled() && typeof cloudListProfiles === 'function') {
+      const cloudProfiles = await cloudListProfiles();
+      all.push(...cloudProfiles);
+    }
+  } catch (e) { console.warn('cloudListProfiles failed', e); }
+  try {
+    const local = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+    Object.values(local).forEach(p => { if (p && p.username && p.status !== 'pending') all.push(p); });
+  } catch {}
+  // Dedupe by username & filter featured + approved
+  const seen = new Set();
+  const profiles = all.filter(p => p && p.username && p.featured && (p.status === 'approved' || p.status === undefined) && !seen.has(p.username) && (seen.add(p.username), true));
+  if (profiles.length === 0) {
+    grid.innerHTML = '';
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  grid.innerHTML = profiles.map(p => `
+    <div class="dir-card" data-theme="${((p.template || 'midnight').toLowerCase())}">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+        <span style="width:36px;height:36px;border-radius:50%;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:linear-gradient(135deg,#4f46e5,#6366f1)">${(p.name || p.username || '?').trim().charAt(0).toUpperCase()}</span>
+        <h3 style="margin:0">${esc(p.name || p.username)}</h3>
+      </div>
+      <p>${esc(p.title || '')}</p>
+      <p class="mono" style="font-size:12.5px;color:#4f46e5;margin-bottom:12px">${esc(p.username)}.portfoolio.me</p>
+      <div style="display:flex;gap:8px">
+        <a class="btn btn-primary btn-sm dir-visit" href="/?u=${encodeURIComponent(p.username)}" target="_blank">Visit <span>→</span></a>
+      </div>
+    </div>`).join('');
+}
 function paintTrackTabs(profile) {
   const visual = (profile && profile.track) === 'visual';
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
