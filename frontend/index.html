@@ -2435,7 +2435,7 @@ function loginAsAdmin(email) {
 }
 
 async function renderDir() {
-  // Public showcase: fetch live approved profiles from cloud + localStorage
+  // Public showcase: fetch featured approved portfolios from cloud + localStorage
   const all = [];
   try {
     if (typeof cloudEnabled === 'function' && cloudEnabled() && typeof cloudListProfiles === 'function') {
@@ -2447,12 +2447,12 @@ async function renderDir() {
     const local = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
     Object.values(local).forEach(p => { if (p && p.username && p.status !== 'pending') all.push(p); });
   } catch {}
-  // Dedupe by username
+  // Dedupe by username & filter featured
   const seen = new Set();
-  const profiles = all.filter(p => p && p.username && !seen.has(p.username) && (seen.add(p.username), true));
+  const profiles = all.filter(p => p && p.username && p.featured && !seen.has(p.username) && (seen.add(p.username), true));
   if($('dirGrid')) {
     if (profiles.length === 0) {
-      $('dirGrid').innerHTML = '<p style="color:var(--muted);text-align:center;padding:40px 0">No live portfolios yet. Be the first!</p>';
+      $('dirGrid').innerHTML = '<p style="color:var(--muted);text-align:center;padding:40px 0">No featured portfolios yet.</p>';
       return;
     }
     $('dirGrid').innerHTML = profiles.map(p => `
