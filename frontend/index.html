@@ -225,13 +225,6 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
     <p class="lx-kicker">Live showcase</p>
     <h2 class="lx-h2">Portfolios shipping on <span class="lx-lime">portfoolio</span></h2>
     <p class="lx-lead">Real sites from developers using portfoolio.me right now.</p>
-    <div class="dir-filter">
-      <button class="dir-filter-btn active" data-filter="all">All</button>
-      <button class="dir-filter-btn" data-filter="developer">Developers</button>
-      <button class="dir-filter-btn" data-filter="designer">Designers</button>
-      <button class="dir-filter-btn" data-filter="writer">Writers</button>
-      <button class="dir-filter-btn" data-filter="student">Students</button>
-    </div>
     <div class="dir-grid lx-showcase" id="dirGrid"></div>
     <div class="lx-center">
       <a class="lx-btn-ghost" href="/admin"><i class="fa-solid fa-users"></i> View all portfolios</a>
@@ -2376,6 +2369,7 @@ function paintAdminAllUsers(allSites) {
         <a class="btn btn-ghost btn-sm" href="/?u=${encodeURIComponent(r.username)}" target="_blank">View Site</a>
         ${r.status !== 'approved' ? `<button class="btn btn-ghost btn-sm" style="color:#a3e635" onclick="adminApproveUser('${r.username}')">Approve</button>` : ''}
         ${r.status === 'pending' ? `<button class="btn btn-ghost btn-sm" style="color:#f472b6" onclick="adminRejectUser('${r.username}')">Reject</button>` : ''}
+        <button class="btn btn-ghost btn-sm ${r.featured ? 'featured' : ''}" onclick="adminToggleFeatured('${r.username}')" title="${r.featured ? 'Unfeature' : 'Feature'} on dashboard">★</button>
         <button class="btn btn-ghost btn-sm" onclick="adminDeleteUser('${r.username}')" title="Delete forever">✕</button>
       </div>
     </div>`).join('') : '<p style="color:var(--muted);font-size:13.5px">No matching users found.</p>';
@@ -2415,6 +2409,21 @@ async function adminDeleteUser(username) {
   toast(`🗑 @${username} deleted`);
   loadAdminConsole();
   renderDir();
+}
+
+async function adminToggleFeatured(username) {
+  if (cloudEnabled()) {
+    try {
+      const { data: profile } = await cloud().from('profiles').select('featured').eq('username', username).single();
+      if (profile) {
+        await cloud().from('profiles').update({ featured: !profile.featured }).eq('username', username);
+      }
+    } catch (e) { console.error('cloud toggle featured failed', e); }
+  }
+  const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
+  if (all[username]) { all[username].featured = !all[username].featured; localStorage.setItem('portfoolio_users_v1', JSON.stringify(all)); }
+  toast(all[username]?.featured ? `⭐ @${username} featured on dashboard` : `☆ @${username} unfeatured`);
+  loadAdminConsole();
 }
 
 function loginAsUser(username, mockProfile) {
