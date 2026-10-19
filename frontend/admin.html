@@ -32,6 +32,7 @@
 .no-btn{background:rgba(244,114,182,.12);border:1px solid rgba(244,114,182,.4);color:#f9a8d4;border-radius:10px;padding:8px 14px;font-weight:800;font-size:13px;cursor:pointer}
 .ghost-btn{background:rgba(255,255,255,.06);border:1px solid var(--stroke);color:#fff;border-radius:10px;padding:8px 14px;font-weight:700;font-size:13px;cursor:pointer;text-decoration:none;display:inline-block}
 .star-btn{background:#fef3c7;border:1px solid #fde68a;color:#b45309;border-radius:10px;padding:8px 14px;font-weight:800;font-size:13px;cursor:pointer}
+.star-btn.featured{background:#fbbf24;border-color:#f59e0b;color:#fff}
 .st{font-size:11px;font-weight:800;padding:4px 10px;border-radius:100px;letter-spacing:.6px}
 .st.pending{background:rgba(251,191,36,.15);color:#fde68a;border:1px solid rgba(251,191,36,.4)}
 .st.approved{background:rgba(163,230,53,.12);color:#d9f99d;border:1px solid rgba(163,230,53,.4)}
@@ -103,7 +104,7 @@ function row(r, queue) {
       ${r.status !== 'approved' ? `<button class="ok-btn" data-ok="${esc(r.username)}">Approve</button>` : ''}
       ${r.status === 'pending' ? `<button class="no-btn" data-no="${esc(r.username)}">Reject</button>` : ''}
       <button class="no-btn" data-del="${esc(r.username)}" title="Delete forever">✕</button>
-      <button class="star-btn" data-star="${esc(r.username)}" title="${r.featured ? 'Unfeature' : 'Feature'} on dashboard">★</button>
+      <button class="star-btn ${r.featured ? 'featured' : ''}" data-star="${esc(r.username)}" title="${r.featured ? 'Unfeature' : 'Feature'} on dashboard">${r.featured ? '★' : '☆'}</button>
     </div></div>`;
 }
 function paint() {
