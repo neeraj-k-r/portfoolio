@@ -991,9 +991,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     }
 
-    /* Gradient text animation on hero */
+    /* Gradient text animation on hero (skip if template already built .w spans) */
     const hero = document.querySelector('#landing .lx-h1, .hero h1');
-    if (hero) {
+    if (hero && !hero.querySelector('.w')) {
       const text = hero.textContent;
       hero.innerHTML = text.split(' ').map((w, i) => `<span class="w" style="--i:${i}">${w}</span>`).join(' ');
       hero.querySelectorAll('.w').forEach((w, i) => {
@@ -1004,19 +1004,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     /* Year in footer */
     const yr = document.getElementById('yr');
     if (yr) yr.textContent = new Date().getFullYear();
-
-    /* Blob background */
-    const blob = document.querySelector('.blob');
-    if (blob) {
-      blob.style.width = '46vmax';
-      blob.style.height = '46vmax';
-      blob.style.borderRadius = '50%';
-      blob.style.background = 'radial-gradient(circle, var(--acc), transparent 62%)';
-      blob.style.opacity = '0.14';
-      blob.style.pointerEvents = 'none';
-      blob.style.willChange = 'transform';
-      blob.style.zIndex = '0';
-    }
   };
 
   initMotionTheme();
@@ -1042,9 +1029,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   trackProfileView(requested);
   if (resumeUser) { renderResumePage(p); return; }
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
-  if (p.track === 'visual') { renderGallery(p); return; }
+  if (p.track === 'visual') { renderGallery(p); initMotionTheme(); return; }
   const skill = new URLSearchParams(location.search).get('skill');
   if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
+  initMotionTheme();
 
   // Browser Back from a work detail returns to the gallery
   window.addEventListener('popstate', async (e) => {
