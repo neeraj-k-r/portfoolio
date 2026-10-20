@@ -529,6 +529,9 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="tpl-card" data-vtrack="visual"><input type="radio" name="tpl" value="museum"><div class="tpl-preview museum">🏛️</div><div class="tpl-meta"><b>Museum</b><span>Framed gallery walls</span></div></label>
               <label class="tpl-card" data-vtrack="visual"><input type="radio" name="tpl" value="catalog"><div class="tpl-preview catalog">📖</div><div class="tpl-meta"><b>Catalog</b><span>Print art-book plates</span></div></label>
               <label class="tpl-card" data-vtrack="visual"><input type="radio" name="tpl" value="bloom"><div class="tpl-preview bloom">🌸</div><div class="tpl-meta"><b>Bloom</b><span>Soft pastel dream</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="motion"><div class="tpl-preview motion">⚡</div><div class="tpl-meta"><b>Motion Flow</b><span>Light • Motion • Gradients</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="darkpro"><div class="tpl-preview darkpro">🌑</div><div class="tpl-meta"><b>Dark Pro</b><span>Dark • Yellow Accent</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="fullpage"><div class="tpl-preview fullpage">📄</div><div class="tpl-meta"><b>Fullpage Scroll</b><span>Red Accent • Fullpage</span></div></label>
             </div>
           </div>
 
@@ -665,8 +668,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <label class="tpl-card"><input type="radio" name="edtpl" value="brutalist"><div class="tpl-preview brutalist">🧱</div><div class="tpl-meta"><b>Neo-Brutalist</b><span>Bold loud</span></div></label>
             <label class="tpl-card"><input type="radio" name="edtpl" value="afterglow"><div class="tpl-preview afterglow">🌇</div><div class="tpl-meta"><b>Afterglow *</b><span>Sunset neon</span></div></label>
             <label class="tpl-card"><input type="radio" name="edtpl" value="ultraviolet"><div class="tpl-preview ultraviolet">🟣</div><div class="tpl-meta"><b>Ultraviolet *</b><span>Haze neon</span></div></label>
-            <label class="tpl-card"><input type="radio" name="edtpl" value="tidepool"><div class="tpl-preview tidepool">🪼</div><div class="tpl-meta"><b>Tidepool *</b><span>Abyss glow</span></div></label>
-          </div>
+<label class="tpl-card"><input type="radio" name="edtpl" value="tidepool"><div class="tpl-preview tidepool">🪼</div><div class="tpl-meta"><b>Tidepool *</b><span>Abyss glow</span></div></label>
+              <label class="tpl-card"><input type="radio" name="edtpl" value="motion"><div class="tpl-preview motion">⚡</div><div class="tpl-meta"><b>Motion Flow</b><span>Light · Motion · Gradients</span></div></label>
+              <label class="tpl-card"><input type="radio" name="edtpl" value="darkpro"><div class="tpl-preview darkpro">🌑</div><div class="tpl-meta"><b>Dark Pro</b><span>Dark · Yellow Accent</span></div></label>
+              <label class="tpl-card"><input type="radio" name="edtpl" value="fullpage"><div class="tpl-preview fullpage">📄</div><div class="tpl-meta"><b>Fullpage Scroll</b><span>Red Accent · Fullpage</span></div></label>
+            </div>
           <button class="btn btn-primary btn-sm" id="edSaveThemeBtn" style="margin-top:12px"><i class="fa-solid fa-floppy-disk"></i> Save theme</button>
         </div>
       </div>
@@ -1145,7 +1151,7 @@ function setupUserDashboardView(profile) {
   const wizard = $('subdomainWizardCard'), techSt = $('techStudio'), visSt = $('visualStudio');
   const headerName = $('userHeaderName'), statusPill = $('userStatusPill');
 
-  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'];
+  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'darkpro', 'fullpage'];
   const getTrack = (profile) => {
     if (profile && profile.track === 'visual') {
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
@@ -1305,7 +1311,7 @@ function paintTrackTabs(profile) {
   const visual = (profile && profile.track) === 'visual';
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
     const v = (c.querySelector('input') || {}).value || '';
-    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(v);
+    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'darkpro', 'fullpage'].includes(v);
     c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
   });
   if (visual) { paintWorks(); switchUserTab('works'); }
@@ -1691,7 +1697,7 @@ if ($('builderForm')) {
     if ($('inTag')) $('inTag').placeholder = visual ? 'Painting stories in color and form. Open for commissions.' : 'Building web apps & AI solutions that scale.';
     document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
       const v = (c.querySelector('input') || {}).value || '';
-      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(v);
+const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'darkpro', 'fullpage'].includes(v);
       c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
     });
     const wantTpl = visual ? 'gallery' : 'midnight';

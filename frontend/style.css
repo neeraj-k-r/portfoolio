@@ -1294,6 +1294,73 @@ body[data-template="bloom"] .proj-top{background:transparent;border-radius:18px 
 body[data-template="bloom"] .proj-top::before{display:none}
 body[data-template="bloom"] .proj-body h3{color:#4a3560}
 body[data-template="bloom"] .proj-body p{color:#b07cc6}
+
+/* Motion Flow: light cream + motion gradients + animated hero */
+body[data-template="motion"]{background:linear-gradient(160deg,#f6f5f2 0%,#f0f4f8 50%,#e8f4f8 100%);color:#1e293b}
+body[data-template="motion"] .bg-fx,body[data-template="motion"] .grid-overlay{display:none}
+body[data-template="motion"] .works-grid{gap:20px}
+body[data-template="motion"] .work-card{background:rgba(255,255,255,.85);border-color:rgba(148,163,184,.3);border-radius:20px;backdrop-filter:blur(12px);box-shadow:0 12px 32px rgba(148,163,184,.12);transition:transform .3s ease,box-shadow .3s ease}
+body[data-template="motion"] .work-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 24px 48px rgba(148,163,184,.2)}
+body[data-template="motion"] .work-card img{border-radius:16px 16px 0 0}
+body[data-template="motion"] .work-card .work-meta{padding:14px 16px 16px}
+body[data-template="motion"] .work-card b{font-size:15.5px;font-weight:700;color:#1e293b}
+body[data-template="motion"] .work-card small{display:block;margin-top:3px;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#64748b}
+body[data-template="motion"] .btn-primary{background:linear-gradient(135deg,#8b5cf6,#22d3ee);color:#fff;border:none;box-shadow:0 8px 20px rgba(139,92,246,.4)}
+body[data-template="motion"] .btn-primary:hover{filter:brightness(1.06)}
+body[data-template="motion"] #app h1{background:linear-gradient(120deg,#8b5cf6,#22d3ee,#a3e635);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Motion Flow: subdomain pages render works as .proj cards */
+body[data-template="motion"] .proj{background:rgba(255,255,255,.85);border-color:rgba(148,163,184,.3);border-radius:22px;backdrop-filter:blur(12px);box-shadow:0 14px 34px rgba(148,163,184,.12);transition:transform .3s ease,box-shadow .3s ease}
+body[data-template="motion"] .proj:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 24px 48px rgba(148,163,184,.2)}
+body[data-template="motion"] .proj-top{background:transparent;border-radius:18px 18px 0 0}
+body[data-template="motion"] .proj-top::before{display:none}
+body[data-template="motion"] .proj-body h3{color:#1e293b}
+body[data-template="motion"] .proj-body p{color:#64748b}
+
+/* Dark Pro: dark theme with yellow/gold accent, sidebar-style nav */
+body[data-template="darkpro"]{background:#0b0b0c;color:#f2f1ed}
+body[data-template="darkpro"] .bg-fx,body[data-template="darkpro"] .grid-overlay{display:none}
+body[data-template="darkpro"] .works-grid{gap:22px}
+body[data-template="darkpro"] .work-card{background:#1a1a1c;border-color:#2d2d30;border-radius:16px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.4);transition:transform .3s ease,box-shadow .3s ease}
+body[data-template="darkpro"] .work-card:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 24px 48px rgba(251,191,36,.25)}
+body[data-template="darkpro"] .work-card img{border-radius:12px 12px 0 0}
+body[data-template="darkpro"] .work-card .work-meta{padding:14px 16px 16px}
+body[data-template="darkpro"] .work-card b{font-size:15.5px;font-weight:700;color:#f2f1ed}
+body[data-template="darkpro"] .work-card small{display:block;margin-top:3px;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#8b8b86}
+body[data-template="darkpro"] .btn-primary{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#0b0b0c;border:none;box-shadow:0 8px 20px rgba(251,191,36,.4)}
+body[data-template="darkpro"] .btn-primary:hover{filter:brightness(1.06)}
+body[data-template="darkpro"] #app h1{background:linear-gradient(120deg,#fbbf24,#f59e0b,#fcd34d);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Dark Pro: subdomain pages */
+body[data-template="darkpro"] .proj{background:#1a1a1c;border-color:#2d2d30;border-radius:20px;overflow:hidden;box-shadow:0 14px 34px rgba(0,0,0,.4);transition:transform .3s ease,box-shadow .3s ease}
+body[data-template="darkpro"] .proj:hover{transform:translateY(-8px) scale(1.015);box-shadow:0 24px 48px rgba(251,191,36,.25)}
+body[data-template="darkpro"] .proj-top{background:transparent;border-radius:12px 12px 0 0}
+body[data-template="darkpro"] .proj-top::before{display:none}
+body[data-template="darkpro"] .proj-body h3{color:#f2f1ed}
+body[data-template="darkpro"] .proj-body p{color:#8b8b86}
+
+/* Fullpage Scroll: white theme with red accent, fullpage scroll sections */
+body[data-template="fullpage"]{background:#ffffff;color:#1c1917}
+body[data-template="fullpage"] .bg-fx,body[data-template="fullpage"] .grid-overlay{display:none}
+body[data-template="fullpage"] .works-grid{gap:24px}
+body[data-template="fullpage"] .work-card{background:#ffffff;border-color:#ff6363;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(255,99,99,.15);transition:transform .3s ease,box-shadow .3s ease}
+body[data-template="fullpage"] .work-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(255,99,99,.25)}
+body[data-template="fullpage"] .work-card img{border-radius:12px 12px 0 0}
+body[data-template="fullpage"] .work-card .work-meta{padding:14px 16px 16px}
+body[data-template="fullpage"] .work-card b{font-size:15.5px;font-weight:700;color:#1c1917}
+body[data-template="fullpage"] .work-card small{display:block;margin-top:3px;font-size:11.5px;font-weight:700;letter-spacing:.05em;color:#78716c}
+body[data-template="fullpage"] .btn-primary{background:#ff6363;color:#fff;border:none;box-shadow:0 8px 20px rgba(255,99,99,.4)}
+body[data-template="fullpage"] .btn-primary:hover{background:#ff4a4a}
+body[data-template="fullpage"] #app h1{background:linear-gradient(120deg,#ff6363,#ff8c8c);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* Fullpage: subdomain pages */
+body[data-template="fullpage"] .proj{background:#ffffff;border-color:#ff6363;border-radius:16px;overflow:hidden;box-shadow:0 10px 30px rgba(255,99,99,.15);transition:transform .3s ease,box-shadow .3s ease}
+body[data-template="fullpage"] .proj:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(255,99,99,.25)}
+body[data-template="fullpage"] .proj-top{background:transparent;border-radius:12px 12px 0 0}
+body[data-template="fullpage"] .proj-top::before{display:none}
+body[data-template="fullpage"] .proj-body h3{color:#1c1917}
+body[data-template="fullpage"] .proj-body p{color:#78716c}
+
 /* Works tab: gallery grid (masonry — full images, no hard crops) */
 .works-grid{display:block;columns:3 260px;column-gap:14px}
 @media(max-width:900px){.works-grid{columns:2 240px}}
