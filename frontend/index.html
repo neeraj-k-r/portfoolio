@@ -92,7 +92,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
     <canvas id="heroCanvas"></canvas>
     <div class="lx-hero-inner">
       <div class="hero-copy">
-        <h1 class="lx-title">Your work deserves<br>its own <span class="lx-serif">address.</span></h1>
+        <h1 class="lx-title lx-h1" aria-label="Your work deserves its own address."><span class="w"><span style="--i:0">Your</span></span> <span class="w"><span style="--i:1">work</span></span> <span class="w"><span style="--i:2">deserves</span></span> <span class="w"><span style="--i:3">its</span></span> <span class="w"><span style="--i:4">own</span></span> <span class="w"><span style="--i:5">address.</span></span></h1>
         <p class="lx-sub">Ship a recruiter-ready portfolio in <strong>60 seconds</strong> — zero config, instant SSL, auto-generated ATS resume, 1-click GitHub sync. Free forever.</p>
         <div class="lx-cta">
           <a class="lx-btn-lg" href="#auth" onclick="setAuthMode('signup')">Claim your subdomain <i class="fa-solid fa-arrow-right"></i></a>
@@ -119,10 +119,27 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <span class="hnode hnode-hub"><i class="fa-solid fa-database"></i></span>
       </div>
     </div>
-  </header>
+</header>
 
-<!-- Stats Counter Bar -->
-  <section class="lx-logos">
+  <!-- Motion theme elements (blob, pointer preview, stats) -->
+  <div id="bar" aria-hidden="true"></div>
+  <div class="blob" aria-hidden="true"></div>
+  <div class="pv" aria-hidden="true"><i></i></div>
+
+  <!-- Stats Counter Bar (Motion theme live stats) -->
+  <section class="lx-logos" id="stats" aria-hidden="true">
+    <p class="lx-logos-label">Performance, measured live on this page</p>
+    <p class="lead" style="max-width: 28ch; margin: 0 0 48px;">One file. Zero dependencies. Only transform and opacity animate.</p>
+    <div class="stats">
+      <div class="stat"><strong id="s-fcp">…</strong><span>First contentful paint</span></div>
+      <div class="stat"><strong id="s-load">…</strong><span>Load complete</span></div>
+      <div class="stat"><strong id="s-dom">…</strong><span>DOM elements</span></div>
+      <div class="stat"><strong id="s-fps">…</strong><span>Frames per second</span></div>
+    </div>
+  </section>
+
+<!-- Stats Counter Bar (original) -->
+  <section class="lx-logos rv">
     <p class="lx-logos-label">Powered by the tools you already use</p>
     <div class="lx-marquee">
       <div class="lx-logos-row">
@@ -135,7 +152,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   </section>
 
 <!-- Features Section -->
-  <section id="features" class="lx-section">
+  <section id="features" class="lx-section rv">
     <p class="lx-kicker">Built for developers</p>
     <h2 class="lx-h2">Everything you need to <span class="lx-lime">stand out</span></h2>
     <p class="lx-lead">Stop sending plain PDF resumes. Ship a professional homepage that recruiters remember — live in 60 seconds, free forever.</p>
@@ -172,7 +189,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   </section>
 
   <!-- Theme Gallery -->
-  <section id="themes" class="lx-section">
+  <section id="themes" class="lx-section rv">
     <p class="lx-kicker">10 themes</p>
     <h2 class="lx-h2">Pick a look. <span class="lx-lime">Preview them all.</span></h2>
     <p class="lx-lead">Click any preview to see it larger — every theme is one tap away in your dashboard.</p>
@@ -221,7 +238,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   </section>
 
   <!-- Live Showcase / Directory Section -->
-  <section id="directory" class="lx-section">
+  <section id="directory" class="lx-section rv">
     <p class="lx-kicker">Live showcase</p>
     <h2 class="lx-h2">Portfolios shipping on <span class="lx-lime">portfoolio</span></h2>
     <p class="lx-lead">Real sites from developers using portfoolio.me right now.</p>
@@ -232,7 +249,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   </section>
 
   <!-- How It Works Section -->
-  <section id="howitworks" class="lx-section">
+  <section id="howitworks" class="lx-section rv">
     <p class="lx-kicker">Simple process</p>
     <h2 class="lx-h2">Live in three <span class="lx-lime">steps</span></h2>
     <p class="lx-lead">No complex setup. No deployment configs. Just claim, customize, and publish.</p>
@@ -256,7 +273,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   </section>
 
   <!-- Testimonials -->
-  <section class="lx-section">
+  <section class="lx-section rv">
     <p class="lx-kicker">Trusted by developers</p>
     <h2 class="lx-h2">Developers <span class="lx-lime">ship here</span></h2>
     <div class="lx-quotes">
@@ -297,7 +314,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   </section>
 
   <!-- Big CTA banner -->
-  <section class="lx-section">
+  <section class="lx-section rv">
     <div class="lx-cta-banner">
       <h2>Your name is waiting.<br><span>Claim it today — free forever.</span></h2>
       <p>Free subdomain · 10 professional themes · ATS resume · live in 60 seconds</p>
@@ -306,7 +323,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   </section>
 
   <!-- Why portfoolio -->
-  <section class="lx-section">
+  <section class="lx-section rv">
     <p class="lx-kicker">Why portfoolio</p>
     <h2 class="lx-h2">Built for <span class="lx-lime">everyone</span> — developers, designers, writers, students</h2>
     <p class="lx-lead">Every feature exists to save you time and help you get hired. No coding required.</p>
@@ -340,7 +357,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
   </section>
 
   <!-- Auth Section (Sign Up / Log In) -->
-  <section id="auth" class="lx-section">
+  <section id="auth" class="lx-section rv">
     <div class="lx-auth-grid">
       <div class="lx-auth-copy">
         <p class="lx-kicker">Get started</p>
