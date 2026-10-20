@@ -227,7 +227,20 @@ function renderMotion(p) {
     </nav>
   </nav>
   <main id="top">
-    <div class="hero pad">
+    <div id="bar" aria-hidden="true"></div>
+    <div class="blob" aria-hidden="true"></div>
+    <div class="pv" aria-hidden="true"><i></i></div>
+    <section class="lx-motion-stats" id="stats">
+      <p class="lx-logos-label">Performance, measured live on this page</p>
+      <p class="lead" style="max-width: 28ch; margin: 0 0 48px;">One file. Zero dependencies. Only transform and opacity animate.</p>
+      <div class="stats">
+        <div class="stat"><strong id="s-fcp">…</strong><span>First contentful paint</span></div>
+        <div class="stat"><strong id="s-load">…</strong><span>Load complete</span></div>
+        <div class="stat"><strong id="s-dom">…</strong><span>DOM elements</span></div>
+        <div class="stat"><strong id="s-fps">…</strong><span>Frames per second</span></div>
+      </div>
+    </section>
+    <nav class="motion-nav pad">
       <h1 aria-label="${tplEsc(p.title || p.name)}">
         <span class="w"><span style="--i:0">${tplEsc((p.title || p.name || 'Portfolio').split(' ').slice(0, 2).join(' '))}</span></span>
         <span class="w"><span style="--i:1">${tplEsc((p.title || '').split(' ').slice(2).join(' '))}</span></span>
