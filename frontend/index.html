@@ -1151,7 +1151,7 @@ function setupUserDashboardView(profile) {
   const wizard = $('subdomainWizardCard'), techSt = $('techStudio'), visSt = $('visualStudio');
   const headerName = $('userHeaderName'), statusPill = $('userStatusPill');
 
-  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'darkpro', 'fullpage'];
+  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'];
   const getTrack = (profile) => {
     if (profile && profile.track === 'visual') {
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
@@ -1311,7 +1311,7 @@ function paintTrackTabs(profile) {
   const visual = (profile && profile.track) === 'visual';
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
     const v = (c.querySelector('input') || {}).value || '';
-    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'darkpro', 'fullpage'].includes(v);
+const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(v);
     c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
   });
   if (visual) { paintWorks(); switchUserTab('works'); }
@@ -1697,7 +1697,7 @@ if ($('builderForm')) {
     if ($('inTag')) $('inTag').placeholder = visual ? 'Painting stories in color and form. Open for commissions.' : 'Building web apps & AI solutions that scale.';
     document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
       const v = (c.querySelector('input') || {}).value || '';
-const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'darkpro', 'fullpage'].includes(v);
+const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(v);
       c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
     });
     const wantTpl = visual ? 'gallery' : 'midnight';
