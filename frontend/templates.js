@@ -185,6 +185,76 @@ function esc2(s) { return tplEsc(s || ''); }
 // Resume section (shared) — auto-built from profile info, themed via profile.resume.theme
 function rsSec(p) { return (window.PortfoolioResume ? window.PortfoolioResume.sectionHTML(p) : ''); }
 
+// Motion Flow (Dominique R. style) — light cream, word-reveal hero, work rows, live stats
+const MOTION_GRADS = [
+  'linear-gradient(135deg,#ff6a3d,#ffb36b)',
+  'linear-gradient(135deg,#3d5afe,#8ab4ff)',
+  'linear-gradient(135deg,#00bfa5,#b9f6ca)',
+  'linear-gradient(135deg,#8e24aa,#f48fb1)',
+  'linear-gradient(135deg,#f9a825,#ffe082)',
+  'linear-gradient(135deg,#00838f,#4dd0e1)',
+];
+function renderMotion(p) {
+  normTpl(p);
+  const skills = (p.skills || []).map((s) => `<span class="skill">${tplEsc(s)}</span>`).join('');
+  const rows = (p.projects || []).map((pr, i) => `
+    <li class="rv" style="--d:${i * 60}ms">
+      <a class="row" href="${tplEsc(pr.url || '#')}" data-g="${MOTION_GRADS[i % MOTION_GRADS.length]}">
+        <b>${String(i + 1).padStart(2, '0')}</b>
+        <h3>${tplEsc(pr.title)}</h3>
+        <span>${tplEsc((pr.technologies || pr.tags || []).slice(0, 2).join(' · '))}</span>
+        <span>${pr.repo && pr.repo.updatedAt ? new Date(pr.repo.updatedAt).getFullYear() : new Date().getFullYear()}</span>
+      </a>
+    </li>`).join('');
+  const contact = p.email || p.github || p.linkedin || p.phone;
+
+  document.body.dataset.template = 'motion';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const app = document.getElementById('app');
+  app.innerHTML = `
+  <div id="bar" aria-hidden="true"></div>
+  <div class="blob" aria-hidden="true"></div>
+  <div class="pv" aria-hidden="true"><i></i></div>
+  <nav class="motion-nav pad">
+    <a class="logo" href="/">${tplEsc(p.name)}</a>
+    <nav>
+      <a class="hide" href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </nav>
+  <main id="top">
+    <div class="hero pad">
+      <h1 aria-label="${tplEsc(p.title || p.name)}">
+        <span class="w"><span style="--i:0">${tplEsc((p.title || p.name || 'Portfolio').split(' ').slice(0, 2).join(' '))}</span></span>
+        <span class="w"><span style="--i:1">${tplEsc((p.title || '').split(' ').slice(2).join(' '))}</span></span>
+      </h1>
+      <div class="hero-meta">
+        <p class="rv" style="--d:700ms">${tplEsc(p.tagline || p.title || '')}</p>
+        <div class="scroll rv" style="--d:900ms"><i></i>Scroll</div>
+      </div>
+    </div>
+    <section class="pad" id="work">
+      <p class="eyebrow rv">Selected work</p>
+      <ul class="work-rows">${rows || '<li class="rv">No projects yet.</li>'}</ul>
+    </section>
+    <section class="pad" id="about">
+      <p class="eyebrow rv">About</p>
+      <p class="lead rv">${tplEsc(p.tagline || p.title || '')}</p>
+      ${skills ? `<div class="skills rv">${skills}</div>` : ''}
+    </section>
+    <section class="pad" id="contact">
+      <p class="eyebrow rv">Say hello</p>
+      <a class="big rv" href="mailto:${tplEsc(p.email || '')}">${tplEsc(p.email || p.phone || 'Get in touch')}</a>
+    </section>
+  </main>
+  <footer class="pad">
+    <span>© <span class="yr"></span> ${tplEsc(p.name)}</span>
+    <span>Built with portfoolio.me</span>
+  </footer>`;
+  window.scrollTo(0, 0);
+}
+
 function renderBrutalist(p) {
   normTpl(p);
   const skillLink = (s) => `?u=${encodeURIComponent(p.username)}&skill=${encodeURIComponent(String(s).toLowerCase())}`;
@@ -319,5 +389,5 @@ function renderTidepool(p) {
   window.scrollTo(0, 0);
 }
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool };
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion };
 window.PortfoolioTemplateList = TEMPLATES;
