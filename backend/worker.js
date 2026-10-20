@@ -477,7 +477,8 @@ function page(p) {
     return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}>${hero}</body></html>`;
   }
   if (tpl === 'darkpro' || tpl === 'fullpage') {
-    return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}>${hero}${foot(p)}</body></html>`;
+    const dpScript = tpl === 'darkpro' ? `<script>document.querySelectorAll('[data-dp-page]').forEach(function(b){b.onclick=function(){var k=b.dataset.dpPage;document.querySelectorAll('[data-dp-page]').forEach(function(x){x.classList.toggle('active',x===b)});document.querySelectorAll('[data-dp-content]').forEach(function(pg){pg.classList.toggle('active',pg.dataset.dpContent===k)});window.scrollTo(0,0)};});</script>` : '';
+    return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}>${hero}${foot(p)}${dpScript}</body></html>`;
   }
   return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}><div class="bg-fx"></div>${nav(p)}${hero}
   ${skillsSection(p)}

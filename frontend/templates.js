@@ -10,6 +10,9 @@ const TEMPLATES = [
   { id: 'afterglow', name: 'Afterglow', desc: 'Sunset neon over plum dusk', emoji: '🌇', best: 'Original • Warm neon' },
   { id: 'ultraviolet', name: 'Ultraviolet', desc: 'Violet haze, electric glow', emoji: '🟣', best: 'Original • Haze neon' },
   { id: 'tidepool', name: 'Tidepool', desc: 'Bioluminescent deep-teal abyss', emoji: '🪼', best: 'Original • Abyss glow' },
+  { id: 'motion', name: 'Motion Flow', desc: 'Light cream, animated word reveal, work rows', emoji: '⚡', best: 'Designers • Motion lovers' },
+  { id: 'darkpro', name: 'Dark Pro', desc: 'Dark sidebar nav with gold accent', emoji: '🌑', best: 'Product designers • Dark UI' },
+  { id: 'fullpage', name: 'Fullpage Scroll', desc: 'Full-height sections, red accent, slider', emoji: '📄', best: 'Agencies • Bold presentation' },
 ];
 
 function tplEsc(s) {
