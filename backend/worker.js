@@ -382,6 +382,73 @@ function page(p) {
        </div>
        ${p.avatarUrl ? `<div class="brut-portrait"><img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}"></div>` : ''}
        </div></section>`
+    : tpl === 'motion'
+    ? `<div id="bar" aria-hidden="true"></div><div class="blob" aria-hidden="true"></div><div class="pv" aria-hidden="true"><i></i></div>
+       <nav class="motion-nav pad"><a class="logo" href="/">${esc(p.name)}</a>
+       <nav><a class="hide" href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav></nav>
+       <main id="top">
+       <div class="hero pad"><h1 aria-label="${esc(p.title || p.name)}">
+         <span class="w"><span style="--i:0">${esc((p.title || p.name || 'Portfolio').split(' ').slice(0, 2).join(' '))}</span></span>
+         <span class="w"><span style="--i:1">${esc((p.title || '').split(' ').slice(2).join(' '))}</span></span></h1>
+         <div class="hero-meta"><p class="rv" style="--d:700ms">${esc(p.tagline || p.title || '')}</p>
+         <div class="scroll rv" style="--d:900ms"><i></i>Scroll</div></div></div>
+       <section class="pad" id="work"><p class="eyebrow rv">Selected work</p>
+         <ul class="work-rows">${projectsFor(p, tpl) || '<li class="rv">No projects yet.</li>'}</ul></section>
+       <section class="pad" id="about"><p class="eyebrow rv">About</p>
+         <p class="lead rv">${esc(p.tagline || p.title || '')}</p>
+         ${(p.skills || []).length ? `<div class="skills rv">${(p.skills || []).map((s) => `<span class="skill">${esc(s)}</span>`).join('')}</div>` : ''}</section>
+       <section class="pad contact" id="contact"><p class="eyebrow rv">Say hello</p>
+         <a class="big rv" href="mailto:${esc(p.email || '')}">${esc(p.email || p.phone || 'Get in touch')}</a></section>
+       </main>
+       <footer class="pad"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span><span>Built with portfoolio.me</span></footer>`
+    : tpl === 'darkpro'
+    ? `<main class="dp-shell">
+       <aside class="dp-sidebar">
+         <div class="dp-info"><figure class="dp-avatar">${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}">` : `<span>${esc((p.name || '?').trim().charAt(0).toUpperCase())}</span>`}</figure>
+         <div class="dp-ident"><h1 class="dp-name">${esc(p.name)}</h1><p class="dp-title">${esc(p.title)}</p></div></div>
+         <div class="dp-sep"></div>
+         <ul class="dp-contacts">
+           ${p.email ? `<li><i class="fa-regular fa-envelope"></i><a href="mailto:${esc(p.email)}">${esc(p.email)}</a></li>` : ''}
+           ${p.phone ? `<li><i class="fa-solid fa-phone"></i><a href="tel:${esc(p.phone)}">${esc(p.phone)}</a></li>` : ''}
+           ${p.location ? `<li><i class="fa-solid fa-location-dot"></i><span>${esc(p.location)}</span></li>` : ''}
+           ${p.github ? `<li><i class="fa-brands fa-github"></i><a href="${esc(p.github)}">GitHub</a></li>` : ''}
+           ${p.linkedin ? `<li><i class="fa-brands fa-linkedin"></i><a href="${esc(p.linkedin)}">LinkedIn</a></li>` : ''}</ul>
+         <div class="dp-sep"></div>
+         <ul class="dp-social">
+           ${p.github ? `<li><a href="${esc(p.github)}"><i class="fa-brands fa-github"></i></a></li>` : ''}
+           ${p.linkedin ? `<li><a href="${esc(p.linkedin)}"><i class="fa-brands fa-linkedin"></i></a></li>` : ''}
+           ${wShowInsta(p) ? `<li><a href="${esc(p.instagram)}"><i class="fa-brands fa-instagram"></i></a></li>` : ''}
+           ${p.email ? `<li><a href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i></a></li>` : ''}</ul>
+       </aside>
+       <div class="dp-main">
+         <nav class="dp-nav"><ul><li><button class="dp-nav-link active" data-dp-page="about">About</button></li>
+           <li><button class="dp-nav-link" data-dp-page="portfolio">Portfolio</button></li>
+           <li><button class="dp-nav-link" data-dp-page="contact">Contact</button></li></ul></nav>
+         <article class="dp-page active" data-dp-content="about"><h2 class="dp-h2">About me</h2>
+           <p class="dp-text">${esc(p.tagline || p.title || '')}</p>
+           ${(p.skills || []).length ? `<h3 class="dp-h3">My Skills</h3><ul class="dp-skills">${(p.skills || []).map((s) => `<li><span class="skill-name">${esc(s)}</span></li>`).join('')}</ul>` : ''}</article>
+         <article class="dp-page" data-dp-content="portfolio"><h2 class="dp-h2">Portfolio</h2>
+           <ul class="dp-projects">${projectsFor(p, tpl) || '<li class="dp-text">No projects yet.</li>'}</ul></article>
+         <article class="dp-page" data-dp-content="contact"><h2 class="dp-h2">Contact</h2>
+           <p class="dp-text">${p.email ? `Reach me at <a href="mailto:${esc(p.email)}" style="color:#fbbf24">${esc(p.email)}</a>` : 'Get in touch via any link in the sidebar.'}</p></article>
+       </div></main>`
+    : tpl === 'fullpage'
+    ? `<div class="fp-nav"><a class="fp-logo" href="/"><img class="brand-logo" src="/favicon.png" alt="portfoolio.me" width="30" height="30">${esc(p.name)}</a>
+       <ul class="fp-links"><li><a href="#fp-about">ABOUT</a></li><li><a href="#fp-work">PORTFOLIO</a></li><li><a href="#fp-contact">CONTACT</a></li></ul></div>
+       <div class="fp-fullpage">
+       <section class="fp-section fp-hero" id="fp-about"><h1 class="fp-h1">${esc((p.name || '').toUpperCase())}</h1>
+         <p class="fp-typed">${esc(p.title || '')}</p><a class="fp-scroll" href="#fp-work"><i class="fa-solid fa-chevron-down"></i></a></section>
+       <section class="fp-section" id="fp-work"><h2 class="fp-h2">PROJECTS</h2>
+         <div class="fp-slider">${projectsFor(p, tpl) || '<p class="fp-text">No projects yet.</p>'}</div></section>
+       <section class="fp-section" id="fp-about2"><h2 class="fp-h2">ABOUT ME</h2>
+         <p class="fp-text">${esc(p.tagline || p.title || '')}</p>
+         ${(p.skills || []).length ? `<div class="fp-skills">${(p.skills || []).map((s) => `<span class="fp-skill">${esc(s)}</span>`).join('')}</div>` : ''}</section>
+       <section class="fp-section" id="fp-contact"><h2 class="fp-h2">CONTACT ME</h2>
+         <p class="fp-text">${esc(p.tagline || 'Let us build something together.')}</p>
+         <div class="fp-contact-links">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">SEND MESSAGE</a>` : ''}
+           ${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
+           ${p.linkedin ? `<a class="btn btn-ghost" href="${esc(p.linkedin)}"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}</div></section>
+       </div>`
     : tpl === 'minimal'
     ? `<section class="wrap" style="padding:140px 0 30px"><div class="card">
        ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}" style="width:96px;height:96px;border-radius:16px;object-fit:cover;margin-bottom:10px">` : ''}
@@ -405,6 +472,13 @@ function page(p) {
          <h3>${esc(p.name)}</h3><p class="mono">@${esc(p.username)} • portfoolio.me</p><div class="badges">${skills}</div>
        </div></div></div></div></header>`;
   const gridCls = (tpl === 'minimal' || tpl === 'terminal' || tpl === 'brutalist') ? 'dir-grid' : (tpl === 'tidepool' ? 'proj-grid tp-zig' : 'proj-grid');
+  // These three templates render their own full page layout (no standard sections)
+  if (tpl === 'motion') {
+    return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}>${hero}</body></html>`;
+  }
+  if (tpl === 'darkpro' || tpl === 'fullpage') {
+    return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}>${hero}${foot(p)}</body></html>`;
+  }
   return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}><div class="bg-fx"></div>${nav(p)}${hero}
   ${skillsSection(p)}
   <section class="wrap" style="padding-top:10px"><span class="eyebrow">● Projects</span>
