@@ -456,8 +456,32 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 
 <!-- Logged In Dashboard Area (User Dashboard OR Admin Dashboard) -->
 <div id="dashboardApp" style="display:none">
-  <!-- Top Navigation Bar for Dashboard -->
-  <div class="dash-nav">
+  <!-- Darkpro Theme: Sidebar Navigation -->
+  <nav class="dash-sidebar" id="dashSidebar" style="display:none" aria-label="Dashboard navigation">
+    <a class="sidebar-logo" href="/"><img class="brand-logo" src="favicon.png" alt="portfoolio.me logo" width="26" height="26"><span>PORTFOOLIO<small>dashboard</small></span></a>
+    <div class="sidebar-user">
+      <span class="role-badge user" id="sidebarRoleBadge">User Studio</span>
+      <span class="sidebar-avatar" aria-hidden="true"><i class="fa-solid fa-user"></i></span>
+      <span class="mono" id="sidebarUserEmail" style="font-size:13px;color:var(--muted)">user@portfoolio.me</span>
+    </div>
+    <ul class="sidebar-tabs" id="sidebarTabs">
+      <li><button class="sidebar-tab active" onclick="switchUserTab('info')"><i class="fa-solid fa-user-pen"></i> Profile Info</button></li>
+      <li><button class="sidebar-tab" onclick="switchUserTab('projects')"><i class="fa-solid fa-code"></i> Projects</button></li>
+      <li><button class="sidebar-tab" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Theme & Skills</button></li>
+      <li><button class="sidebar-tab" onclick="switchUserTab('resume')"><i class="fa-solid fa-file-lines"></i> Resume</button></li>
+      <li><button class="sidebar-tab" onclick="switchUserTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Site</button></li>
+      <li><button class="sidebar-tab" onclick="switchUserTab('proof')"><i class="fa-solid fa-trophy"></i> Proof of Work</button></li>
+      <li><button class="sidebar-tab" onclick="switchUserTab('featured')"><i class="fa-solid fa-star"></i> Featured</button></li>
+      <li><button class="sidebar-tab" onclick="switchUserTab('share')"><i class="fa-solid fa-share-nodes"></i> Share & Links</button></li>
+    </ul>
+    <div class="sidebar-footer">
+      <span class="mono" id="sidebarUserEmail2" style="font-size:12px;color:var(--muted)"></span>
+      <button class="btn btn-ghost btn-sm" id="sidebarLogoutBtn" style="width:100%;margin-top:8px"><i class="fa-solid fa-right-to-bracket"></i> Log out</button>
+    </div>
+  </nav>
+
+  <!-- Top Navigation Bar for Dashboard (default, hidden for darkpro) -->
+  <nav class="dash-nav" id="dashTopNav">
     <a class="logo" href="/"><img class="brand-logo" src="favicon.png" alt="portfoolio.me logo" width="26" height="26"><span>PORTFOOLIO<small id="dashNavSub">dashboard</small></span></a>
     <div class="dash-user-info">
       <span class="role-badge user" id="dashRoleBadge">User Studio</span>
@@ -465,7 +489,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <span class="mono" id="dashUserEmail" style="font-size:13px;color:var(--muted)">user@portfoolio.me</span>
       <button class="btn btn-ghost btn-sm" id="globalLogoutBtn"><i class="fa-solid fa-right-to-bracket"></i> Log out</button>
     </div>
-  </div>
+  </nav>
 
   <!-- 1. USER DASHBOARD (NORMAL USER) -->
   <div id="userDashboardView" class="wrap" style="padding-top:10px;display:none">
@@ -1102,7 +1126,7 @@ function switchUserTab(tabName) {
     const el = $('tab' + t.charAt(0).toUpperCase() + t.slice(1));
     if(el) el.style.display = (t === tabName) ? '' : 'none';
   });
-  document.querySelectorAll('.dash-tab-btn').forEach(b => {
+  document.querySelectorAll('.dash-tab-btn, .sidebar-tab').forEach(b => {
     const onclickAttr = b.getAttribute('onclick') || '';
     const row = b.closest('#techStudio,#visualStudio');
     const rowVisible = !row || row.style.display !== 'none';
@@ -1230,6 +1254,21 @@ function setupUserDashboardView(profile) {
     if ($('trackSwitchBtn')) {
       $('trackSwitchBtn').style.display = '';
       if ($('trackSwitchLabel')) $('trackSwitchLabel').textContent = visual ? 'Switch to Developer' : 'Switch to Visual';
+    }
+
+    // Darkpro theme: toggle sidebar vs top nav
+    const isDarkpro = profile && profile.template === 'darkpro';
+    const sidebar = $('dashSidebar');
+    const topNav = $('dashTopNav');
+    const dashApp = $('dashboardApp');
+    if (isDarkpro) {
+      if (sidebar) sidebar.style.display = 'flex';
+      if (topNav) topNav.style.display = 'none';
+      if (dashApp) dashApp.style.marginLeft = '240px';
+    } else {
+      if (sidebar) sidebar.style.display = 'none';
+      if (topNav) topNav.style.display = 'flex';
+      if (dashApp) dashApp.style.marginLeft = '0';
     }
 
     // Live-site links are set before any pane painting so a paint error can
@@ -2353,6 +2392,21 @@ if ($('uploadRevertBtn')) $('uploadRevertBtn').onclick = async () => {
 // Global Log out handler
 if ($('globalLogoutBtn')) {
   $('globalLogoutBtn').onclick = async () => {
+    if (cloudEnabled()) {
+      try { await cloud().auth.signOut(); } catch {}
+    }
+    localStorage.removeItem('portfoolio_session_email');
+    activeUserProfile = null;
+    editingCloudSession = false;
+    previewTemplate('midnight');
+    showAppRole(null);
+    toast('🔒 Logged out');
+  };
+}
+
+// Sidebar logout handler
+if ($('sidebarLogoutBtn')) {
+  $('sidebarLogoutBtn').onclick = async () => {
     if (cloudEnabled()) {
       try { await cloud().auth.signOut(); } catch {}
     }

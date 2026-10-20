@@ -1332,13 +1332,26 @@ body[data-template="darkpro"] .btn-primary:hover{background:#f59e0b}
 body[data-template="darkpro"] #app h1{color:#fbbf24}
 
 /* Dark Pro: sidebar navigation */
+.dash-sidebar{display:none;position:fixed;left:0;top:0;bottom:0;width:240px;background:#0b0b0c;border-right:1px solid #242426;padding:20px;flex-direction:column;z-index:100;overflow-y:auto}
+.dash-sidebar .sidebar-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:#fbbf24;text-decoration:none;margin-bottom:22px}
+.dash-sidebar .sidebar-logo span{display:flex;flex-direction:column;line-height:1.1}
+.dash-sidebar .sidebar-logo small{font-size:10.5px;font-weight:500;color:#8b8b86;letter-spacing:.1em;text-transform:uppercase}
+.dash-sidebar .sidebar-user{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px;border-radius:12px;background:#1a1a1c;border:1px solid #242426;margin-bottom:20px}
+.dash-sidebar .sidebar-avatar{width:30px;height:30px;border-radius:50%;background:#242426;display:inline-flex;align-items:center;justify-content:center;font-size:13px;color:#fbbf24;flex-shrink:0}
+.dash-sidebar .sidebar-user .mono{width:100%;word-break:break-all}
+.dash-sidebar .sidebar-tabs{list-style:none;padding:0;margin:0 0 20px;display:flex;flex-direction:column;gap:2px}
+.dash-sidebar .sidebar-tab{display:flex;align-items:center;gap:10px;width:100%;background:transparent;border:none;border-left:3px solid transparent;color:#8b8b86;padding:11px 12px;border-radius:8px;font-size:13.5px;font-weight:600;text-align:left;cursor:pointer;transition:all .2s var(--ease)}
+.dash-sidebar .sidebar-tab:hover{background:#1a1a1c;color:#f2f1ed}
+.dash-sidebar .sidebar-tab.active{background:#1a1a1c;color:#fbbf24;border-left-color:#fbbf24}
+.dash-sidebar .sidebar-tab i{width:16px;text-align:center;flex-shrink:0}
+.dash-sidebar .sidebar-footer{margin-top:auto;padding-top:16px;border-top:1px solid #242426}
 body[data-template="darkpro"] .lx-nav{display:none}
-body[data-template="darkpro"] .dash-nav{display:flex;position:fixed;left:0;top:0;bottom:0;width:240px;background:#0b0b0c;border-right:1px solid #242426;padding:20px;flex-direction:column;z-index:100}
-body[data-template="darkpro"] .dash-nav .logo{font-weight:700;font-size:18px;color:#fbbf24;margin-bottom:32px;padding-left:4px}
-body[data-template="darkpro"] .dash-nav .dash-tab-btn{background:transparent;border:none;color:#8b8b86;padding:12px 16px;border-radius:8px;font-size:14px;font-weight:500;text-align:left;cursor:pointer;transition:all .2s ease}
-body[data-template="darkpro"] .dash-nav .dash-tab-btn:hover{background:#1a1a1c;color:#fbbf24}
-body[data-template="darkpro"] .dash-nav .dash-tab-btn.active{background:#1a1a1c;color:#fbbf24;border-left:3px solid #fbbf24}
-body[data-template="darkpro"] #dashboardApp{margin-left:240px;padding:24px;min-height:100vh}
+body[data-template="darkpro"] #dashboardApp{background:#0b0b0c;color:#f2f1ed}
+body[data-template="darkpro"] #dashboardApp .card{background:#1a1a1c;border-color:#242426;color:#f2f1ed}
+body[data-template="darkpro"] #dashboardApp .card p{color:#8b8b86}
+body[data-template="darkpro"] #dashboardApp input,body[data-template="darkpro"] #dashboardApp textarea{background:#0b0b0c;border-color:#242426;color:#f2f1ed}
+body[data-template="darkpro"] #dashboardApp .dash-tab-btn{background:#1a1a1c;border-color:#242426;color:#8b8b86}
+body[data-template="darkpro"] #dashboardApp .dash-tab-btn.active{background:#fbbf24;color:#0b0b0c;border-color:#fbbf24}
 
 /* Dark Pro: subdomain pages */
 body[data-template="darkpro"] .proj{background:#1a1a1c;border:1px solid #242426;border-radius:12px;overflow:hidden}
