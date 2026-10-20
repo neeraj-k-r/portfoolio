@@ -389,5 +389,140 @@ function renderTidepool(p) {
   window.scrollTo(0, 0);
 }
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion };
+// Dark Pro (Dark portfolio style) — sticky sidebar nav, gold accent, dark cards
+function renderDarkpro(p) {
+  normTpl(p);
+  const skills = (p.skills || []).map((s) => `<li><span class="skill-name">${tplEsc(s)}</span></li>`).join('');
+  const projects = (p.projects || []).map((pr) => `
+    <li class="proj-item">
+      <a href="${tplEsc(pr.url || '#')}" target="_blank" rel="noopener">
+        <figure class="proj-img">
+          <div class="proj-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+          <img src="${tplEsc((pr.repo && pr.repo.screenshot) || p.avatarUrl || '')}" alt="${tplEsc(pr.title)}" loading="lazy" onerror="this.style.display='none'">
+        </figure>
+        <h3 class="proj-title">${tplEsc(pr.title)}</h3>
+        <p class="proj-cat">${tplEsc((pr.technologies || pr.tags || []).slice(0, 2).join(' • '))}</p>
+      </a>
+    </li>`).join('');
+
+  document.body.dataset.template = 'darkpro';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const app = document.getElementById('app');
+  app.innerHTML = `
+  <main class="dp-shell">
+    <aside class="dp-sidebar">
+      <div class="dp-info">
+        <figure class="dp-avatar">
+          ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}">` : `<span>${tplEsc((p.name || '?').charAt(0).toUpperCase())}</span>`}
+        </figure>
+        <div class="dp-ident">
+          <h1 class="dp-name">${tplEsc(p.name)}</h1>
+          <p class="dp-title">${tplEsc(p.title)}</p>
+        </div>
+      </div>
+      <div class="dp-sep"></div>
+      <ul class="dp-contacts">
+        ${p.email ? `<li><i class="fa-regular fa-envelope"></i><a href="mailto:${tplEsc(p.email)}">${tplEsc(p.email)}</a></li>` : ''}
+        ${p.phone ? `<li><i class="fa-solid fa-phone"></i><a href="tel:${tplEsc(p.phone)}">${tplEsc(p.phone)}</a></li>` : ''}
+        ${p.location ? `<li><i class="fa-solid fa-location-dot"></i><span>${tplEsc(p.location)}</span></li>` : ''}
+        ${p.github ? `<li><i class="fa-brands fa-github"></i><a href="${tplEsc(p.github)}" target="_blank" rel="noopener">GitHub</a></li>` : ''}
+        ${p.linkedin ? `<li><i class="fa-brands fa-linkedin"></i><a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></li>` : ''}
+      </ul>
+      <div class="dp-sep"></div>
+      <ul class="dp-social">
+        ${p.github ? `<li><a href="${tplEsc(p.github)}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a></li>` : ''}
+        ${p.linkedin ? `<li><a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i></a></li>` : ''}
+        ${tplShowInsta(p) ? `<li><a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a></li>` : ''}
+        ${p.email ? `<li><a href="mailto:${tplEsc(p.email)}"><i class="fa-solid fa-envelope"></i></a></li>` : ''}
+      </ul>
+    </aside>
+    <div class="dp-main">
+      <nav class="dp-nav">
+        <ul>
+          <li><button class="dp-nav-link active" data-dp-page="about">About</button></li>
+          <li><button class="dp-nav-link" data-dp-page="portfolio">Portfolio</button></li>
+          <li><button class="dp-nav-link" data-dp-page="contact">Contact</button></li>
+        </ul>
+      </nav>
+      <article class="dp-page active" data-dp-content="about">
+        <h2 class="dp-h2">About me</h2>
+        <p class="dp-text">${tplEsc(p.tagline || p.title || '')}</p>
+        ${p.resume && p.resume.summary ? `<p class="dp-text">${tplEsc(p.resume.summary)}</p>` : ''}
+        ${skills ? `<h3 class="dp-h3">My Skills</h3><ul class="dp-skills">${skills}</ul>` : ''}
+      </article>
+      <article class="dp-page" data-dp-content="portfolio">
+        <h2 class="dp-h2">Portfolio</h2>
+        <ul class="dp-projects">${projects || '<li class="dp-text">No projects yet.</li>'}</ul>
+      </article>
+      <article class="dp-page" data-dp-content="contact">
+        <h2 class="dp-h2">Contact</h2>
+        <p class="dp-text">${p.email ? `Reach me at <a href="mailto:${tplEsc(p.email)}" style="color:#fbbf24">${tplEsc(p.email)}</a>` : 'Get in touch via any link in the sidebar.'}</p>
+      </article>
+    </div>
+  </main>
+  ${tplFoot(p)}`;
+  app.querySelectorAll('[data-dp-page]').forEach(b => b.onclick = () => {
+    const key = b.dataset.dpPage;
+    app.querySelectorAll('[data-dp-page]').forEach(x => x.classList.toggle('active', x === b));
+    app.querySelectorAll('[data-dp-content]').forEach(pg => pg.classList.toggle('active', pg.dataset.dpContent === key));
+    window.scrollTo(0, 0);
+  });
+  window.scrollTo(0, 0);
+}
+
+// Fullpage Scroll (Brad Engelhardt style) — full-height sections, red accent, horizontal slider
+function renderFullpage(p) {
+  normTpl(p);
+  const slides = (p.projects || []).map((pr) => `
+    <div class="fp-slide">
+      <h3>${tplEsc(pr.title)}</h3>
+      <p>${tplEsc(pr.desc || pr.title || '')}</p>
+      <a class="btn btn-ghost btn-sm" href="${tplEsc(pr.url || '#')}" target="_blank" rel="noopener">View →</a>
+    </div>`).join('');
+  const skills = (p.skills || []).map((s) => `<span class="fp-skill">${tplEsc(s)}</span>`).join('');
+
+  document.body.dataset.template = 'fullpage';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const app = document.getElementById('app');
+  app.innerHTML = `
+  <div class="fp-nav">
+    <a class="fp-logo" href="/"><img class="brand-logo" src="favicon.png" alt="portfoolio.me" width="30" height="30">${tplEsc(p.name)}</a>
+    <ul class="fp-links">
+      <li><a href="#fp-about">ABOUT</a></li>
+      <li><a href="#fp-work">PORTFOLIO</a></li>
+      <li><a href="#fp-contact">CONTACT</a></li>
+    </ul>
+  </div>
+  <div id="fp-nav-dots" class="fp-dots" aria-hidden="true"></div>
+  <div class="fp-fullpage">
+    <section class="fp-section fp-hero" id="fp-about">
+      <h1 class="fp-h1">${tplEsc((p.name || '').toUpperCase())}</h1>
+      <p class="fp-typed" id="fpTyped">${tplEsc(p.title || '')}</p>
+      <a class="fp-scroll" href="#fp-work"><i class="fa-solid fa-chevron-down"></i></a>
+    </section>
+    <section class="fp-section" id="fp-work">
+      <h2 class="fp-h2">PROJECTS</h2>
+      <div class="fp-slider">${slides || '<p class="fp-text">No projects yet.</p>'}</div>
+    </section>
+    <section class="fp-section" id="fp-about2">
+      <h2 class="fp-h2">ABOUT ME</h2>
+      <p class="fp-text">${tplEsc(p.tagline || p.title || '')}</p>
+      ${p.resume && p.resume.summary ? `<p class="fp-text">${tplEsc(p.resume.summary)}</p>` : ''}
+      ${skills ? `<div class="fp-skills">${skills}</div>` : ''}
+    </section>
+    <section class="fp-section" id="fp-contact">
+      <h2 class="fp-h2">CONTACT ME</h2>
+      <p class="fp-text">${tplEsc(p.tagline || 'Let us build something together.')}</p>
+      <div class="fp-contact-links">
+        ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">SEND MESSAGE</a>` : ''}
+        ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
+        ${p.linkedin ? `<a class="btn btn-ghost" href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+      </div>
+    </section>
+  </div>
+  ${tplFoot(p)}`;
+  window.scrollTo(0, 0);
+}
+
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage };
 window.PortfoolioTemplateList = TEMPLATES;
