@@ -179,6 +179,29 @@ function projectsFor(p, tpl) {
     <p>${techsOf(pr).map((t) => `<a href="/skills/${encodeURIComponent(t.toLowerCase())}" style="text-decoration:none"><span class="badge">${esc(t)}</span></a>`).join(' ')}</p>
     <p><a class="btn btn-primary btn-sm" href="${esc(pr.url)}">CODE →</a> ${pr.demoUrl ? `<a class="btn btn-ghost btn-sm" href="${esc(pr.demoUrl)}">DEMO →</a>` : ''}</p></div>`).join('');
   }
+  if (tpl === 'motion') {
+    const grads = ['linear-gradient(135deg,#ff6a3d,#ffb36b)','linear-gradient(135deg,#3d5afe,#8ab4ff)','linear-gradient(135deg,#00bfa5,#b9f6ca)','linear-gradient(135deg,#8e24aa,#f48fb1)','linear-gradient(135deg,#f9a825,#ffe082)','linear-gradient(135deg,#00838f,#4dd0e1)'];
+    return (p.projects || []).map((pr, i) => `
+    <li class="rv" style="--d:${i * 60}ms"><a class="row" href="${esc(pr.url || '#')}" data-g="${grads[i % grads.length]}">
+      <b>${String(i + 1).padStart(2, '0')}</b>
+      <h3>${esc(pr.title)}</h3>
+      <span>${techsOf(pr).slice(0, 2).map(esc).join(' · ')}</span>
+      <span>${pr.repo && pr.repo.updatedAt ? esc(String(pr.repo.updatedAt).slice(0, 4)) : new Date().getFullYear()}</span>
+    </a></li>`).join('');
+  }
+  if (tpl === 'darkpro') {
+    return (p.projects || []).map((pr) => `
+    <li class="proj-item"><a href="${esc(pr.url || '#')}" target="_blank" rel="noopener">
+      <figure class="proj-img"><div class="proj-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
+      ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(pr.title)}" loading="lazy">` : ''}</figure>
+      <h3 class="proj-title">${esc(pr.title)}</h3>
+      <p class="proj-cat">${techsOf(pr).slice(0, 2).map(esc).join(' • ')}</p></a></li>`).join('');
+  }
+  if (tpl === 'fullpage') {
+    return (p.projects || []).map((pr) => `
+    <div class="fp-slide"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc || pr.title || '')}</p>
+      <a class="btn btn-ghost btn-sm" href="${esc(pr.url || '#')}" target="_blank" rel="noopener">View →</a></div>`).join('');
+  }
   return cards(p);
 }
 function cards(p) {
