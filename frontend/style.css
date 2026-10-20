@@ -1486,6 +1486,9 @@ body[data-template="fullpage"] .fp-skill{background:#fff1f1;color:#d63b3b;border
 body[data-template="fullpage"] .fp-contact-links{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px}
 body[data-template="fullpage"] .fp-dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:40}
 body[data-template="fullpage"] .fp-dots i{width:9px;height:9px;border-radius:50%;background:#e5e5e5;display:block}
+/* Footer contrast for the new themes */
+body[data-template="fullpage"] .foot,body[data-template="fullpage"] footer .wrap.foot b{color:#484848}
+body[data-template="darkpro"] .foot,body[data-template="darkpro"] footer .wrap.foot b{color:#8b8b86}
 @media(max-width:720px){body[data-template="fullpage"] .fp-links li:nth-child(2){display:none}}
 
 /* Dark Pro: subdomain pages */
