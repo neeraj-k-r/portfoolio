@@ -201,12 +201,18 @@ function projectsFor(p, tpl) {
     </a></li>`).join('');
   }
   if (tpl === 'darkpro') {
-    return (p.projects || []).map((pr) => `
+    return (p.projects || []).map((pr) => {
+      const screenshot = pr.image || pr.imageUrl || pr.screenshot || (pr.repo && pr.repo.screenshot ? pr.repo.screenshot : '');
+      return `
     <li class="proj-item"><a href="${esc(pr.url || '#')}" target="_blank" rel="noopener">
-      <figure class="proj-img"><div class="proj-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-      ${pr.repo && pr.repo.screenshot ? `<img src="${esc(pr.repo.screenshot)}" alt="${esc(pr.title)}" loading="lazy">` : ''}</figure>
+      <figure class="proj-img${screenshot ? '' : ' proj-img-placeholder'}">
+        ${screenshot
+          ? `<div class="proj-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div><img src="${esc(screenshot)}" alt="${esc(pr.title)}" loading="lazy">`
+          : `<div class="proj-placeholder"><div class="proj-placeholder-icon">${dpProjectIcon(pr)}</div><span class="proj-placeholder-title">${esc(pr.title)}</span></div><div class="proj-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>`}
+      </figure>
       <h3 class="proj-title">${esc(pr.title)}</h3>
-      <p class="proj-cat">${techsOf(pr).slice(0, 2).map(esc).join(' • ')}</p></a></li>`).join('');
+      <p class="proj-cat">${techsOf(pr).slice(0, 2).map(esc).join(' • ') || 'Project'}</p></a></li>`;
+    }).join('');
   }
   if (tpl === 'fullpage') {
     return (p.projects || []).map((pr) => `
@@ -488,7 +494,17 @@ function page(p) {
     return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}>${hero}</body></html>`;
   }
   if (tpl === 'darkpro' || tpl === 'fullpage') {
-    const dpScript = tpl === 'darkpro' ? `<script>document.querySelectorAll('[data-dp-page]').forEach(function(b){b.onclick=function(){var k=b.dataset.dpPage;document.querySelectorAll('[data-dp-page]').forEach(function(x){x.classList.toggle('active',x===b)});document.querySelectorAll('[data-dp-content]').forEach(function(pg){pg.classList.toggle('active',pg.dataset.dpContent===k)});window.scrollTo(0,0)};});</script>` : '';
+    const dpScript = tpl === 'darkpro' ? `<script>
+    function switchDpTab(k){
+      document.querySelectorAll('[data-dp-page]').forEach(function(x){x.classList.toggle('active',x.dataset.dpPage===k)});
+      document.querySelectorAll('[data-dp-content]').forEach(function(pg){pg.classList.toggle('active',pg.dataset.dpContent===k)});
+    }
+    document.querySelectorAll('[data-dp-page]').forEach(function(b){
+      b.onclick=function(e){if(e)e.preventDefault();switchDpTab(b.dataset.dpPage);window.scrollTo(0,0)};
+    });
+    var h=(location.hash||'').replace('#','').toLowerCase();
+    if(['about','portfolio','resume','contact'].indexOf(h)!==-1){switchDpTab(h);}
+    </script>` : '';
     return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}>${hero}${foot(p)}${dpScript}</body></html>`;
   }
   return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}><div class="bg-fx"></div>${nav(p)}${hero}
