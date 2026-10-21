@@ -404,10 +404,10 @@ function page(p) {
        <nav class="motion-nav pad"><a class="logo" href="/">${esc(p.name)}</a>
        <nav><a class="hide" href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav></nav>
        <main id="top">
-       <div class="hero pad"><h1 class="lx-title" aria-label="${esc(p.title || p.name || 'Portfolio')}">
-         <span class="w"><span style="--i:0">${esc((p.title || p.name || 'Portfolio').split(' ').slice(0, Math.max(1, Math.ceil((p.title || p.name || 'Portfolio').split(' ').length / 2))).join(' '))}</span></span>
-         ${(p.title || p.name || 'Portfolio').split(' ').slice(Math.max(1, Math.ceil((p.title || p.name || 'Portfolio').split(' ').length / 2))).length ? `<span class="w"><span style="--i:1">${esc((p.title || p.name || 'Portfolio').split(' ').slice(Math.max(1, Math.ceil((p.title || p.name || 'Portfolio').split(' ').length / 2))).join(' '))}</span></span>` : ''}</h1>
-         <div class="hero-meta"><p class="rv" style="--d:700ms">${esc(p.tagline || p.title || '')}</p>
+       <div class="hero pad"><h1 class="lx-title" aria-label="${esc(p.name || p.title || 'Portfolio')}">
+         <span class="w"><span style="--i:0">${esc((p.name || p.title || 'Portfolio').split(' ').slice(0, Math.max(1, Math.ceil((p.name || p.title || 'Portfolio').split(' ').length / 2))).join(' '))}</span></span>
+         ${(p.name || p.title || 'Portfolio').split(' ').slice(Math.max(1, Math.ceil((p.name || p.title || 'Portfolio').split(' ').length / 2))).length ? `<span class="w"><span style="--i:1">${esc((p.name || p.title || 'Portfolio').split(' ').slice(Math.max(1, Math.ceil((p.name || p.title || 'Portfolio').split(' ').length / 2))).join(' '))}</span></span>` : ''}</h1>
+         <div class="hero-meta"><p class="rv" style="--d:700ms">${esc(p.title ? `${p.title}${p.tagline ? ' — ' + p.tagline : ''}` : (p.tagline || ''))}</p>
          <div class="scroll rv" style="--d:900ms"><i></i>Scroll</div></div></div>
        <section class="pad" id="work"><p class="eyebrow rv">Selected work</p>
          <ul class="work-rows">${projectsFor(p, tpl) || '<li class="rv">No projects yet.</li>'}</ul></section>
@@ -415,7 +415,7 @@ function page(p) {
          <p class="lead rv">${esc(p.tagline || p.title || '')}</p>
          ${(p.skills || []).length ? `<div class="skills rv">${(p.skills || []).map((s) => `<span class="skill">${esc(s)}</span>`).join('')}</div>` : ''}</section>
        <section class="pad contact" id="contact"><p class="eyebrow rv">Say hello</p>
-          <a class="big rv" href="mailto:${esc(p.email || '')}">${esc(p.email || p.phone || 'Get in touch')}</a>
+          <a class="big rv" href="mailto:${esc(p.email || '')}">${esc(p.name || 'Get in touch')}</a>
           <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
             ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Email</a>` : ''}
             ${p.github ? `<a class="btn btn-ghost btn-sm" href="${esc(p.github)}" target="_blank" rel="noopener">GitHub</a>` : ''}

@@ -209,7 +209,7 @@ function renderMotion(p) {
         <span>${pr.repo && pr.repo.updatedAt ? new Date(pr.repo.updatedAt).getFullYear() : new Date().getFullYear()}</span>
       </a>
     </li>`).join('');
-  const heroWords = (p.title || p.name || 'Portfolio').split(' ');
+  const heroWords = (p.name || p.title || 'Portfolio').split(' ');
   const heroMid = Math.max(1, Math.ceil(heroWords.length / 2));
   const heroL1 = heroWords.slice(0, heroMid).join(' ');
   const heroL2 = heroWords.slice(heroMid).join(' ');
@@ -231,12 +231,12 @@ function renderMotion(p) {
   </nav>
   <main id="top">
     <div class="hero pad">
-      <h1 class="lx-title" aria-label="${tplEsc(p.title || p.name || 'Portfolio')}">
+      <h1 class="lx-title" aria-label="${tplEsc(p.name || p.title || 'Portfolio')}">
         <span class="w"><span style="--i:0">${tplEsc(heroL1)}</span></span>
         ${heroL2 ? `<span class="w"><span style="--i:1">${tplEsc(heroL2)}</span></span>` : ''}
       </h1>
       <div class="hero-meta">
-        <p class="rv" style="--d:700ms">${tplEsc(p.tagline || p.title || '')}</p>
+        <p class="rv" style="--d:700ms">${tplEsc(p.title ? `${p.title}${p.tagline ? ' — ' + p.tagline : ''}` : (p.tagline || ''))}</p>
         <div class="scroll rv" style="--d:900ms"><i></i>Scroll</div>
       </div>
     </div>
@@ -252,12 +252,12 @@ function renderMotion(p) {
     </section>
     <section class="pad contact" id="contact">
       <p class="eyebrow rv">Say hello</p>
-      <a class="big rv" href="mailto:${tplEsc(p.email || '')}">${tplEsc(p.email || p.phone || 'Get in touch')}</a>
-      <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
-        ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${tplEsc(p.email)}">Email</a>` : ''}
-        ${p.github ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.github)}" target="_blank" rel="noopener">GitHub</a>` : ''}
-        ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
-        ${tplShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.instagram)}" target="_blank" rel="noopener">Instagram</a>` : ''}
+      <a class="big rv" href="mailto:${tplEsc(p.email || '')}">${tplEsc(p.name || 'Get in touch')}</a>
+      <div class="contact-links" style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
+        ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${tplEsc(p.email)}"><i class="fa-solid fa-envelope"></i> Email</a>` : ''}
+        ${p.github ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.github)}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
+        ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+        ${tplShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.instagram)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
       </div>
     </section>
   </main>

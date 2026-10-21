@@ -1307,7 +1307,10 @@ body[data-template="motion"] .work-card .work-meta{padding:16px}
 body[data-template="motion"] .work-card b{font-size:15px;font-weight:600;color:#121212}
 body[data-template="motion"] .work-card small{display:block;margin-top:4px;font-size:12px;color:#6d6d68}
 body[data-template="motion"] .btn-primary{background:#ff4d1c;color:#fff;border:none;box-shadow:0 4px 16px rgba(255,77,28,.3)}
-body[data-template="motion"] .btn-primary:hover{background:#e0431a}
+body[data-template="motion"] .btn-primary:hover{background:#e0431a;color:#fff}
+body[data-template="motion"] .btn-ghost{background:#fff;border:1px solid #d4d2cb;color:#121212;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+body[data-template="motion"] .btn-ghost:hover{background:#121212;border-color:#121212;color:#fff}
+body[data-template="motion"] .btn-ghost i,body[data-template="motion"] .btn-primary i{color:inherit}
 body[data-template="motion"] #app h1{background:none;-webkit-text-fill-color:initial;color:#121212;font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif}
 
 /* Motion: layout container padding & alignment */
