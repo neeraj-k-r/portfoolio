@@ -509,14 +509,19 @@ function renderDarkpro(p) {
   app.querySelectorAll('[data-dp-page]').forEach(b => {
     b.onclick = (e) => {
       if (e) e.preventDefault();
+      try { history.replaceState(null, '', '#' + b.dataset.dpPage); } catch (_) {}
       switchDpTab(b.dataset.dpPage);
       window.scrollTo(0, 0);
     };
   });
+  window.addEventListener('hashchange', () => {
+    const h = (location.hash || '').replace('#', '').toLowerCase();
+    if (['about', 'portfolio', 'resume', 'contact'].includes(h)) switchDpTab(h);
+  });
   const hash = (location.hash || '').replace('#', '').toLowerCase();
-  if (['about', 'portfolio', 'resume', 'contact'].includes(hash)) {
-    switchDpTab(hash);
-  }
+  const qTab = (new URL(location.href).searchParams.get('tab') || new URL(location.href).searchParams.get('page') || '').toLowerCase();
+  const startTab = ['about', 'portfolio', 'resume', 'contact'].includes(hash) ? hash : (['about', 'portfolio', 'resume', 'contact'].includes(qTab) ? qTab : 'about');
+  switchDpTab(startTab);
   window.scrollTo(0, 0);
 }
 

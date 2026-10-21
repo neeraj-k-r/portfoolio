@@ -347,6 +347,8 @@ function pageGallery(p, wIdx) {
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   const tpl = String(qTpl || p.template || 'midnight').toLowerCase();
+  const reqTab = url ? (url.searchParams.get('tab') || url.searchParams.get('page')) : null;
+  const dpTab = ['about', 'portfolio', 'resume', 'contact'].includes(String(reqTab).toLowerCase()) ? String(reqTab).toLowerCase() : 'about';
   const skills = (p.skills || []).map((s) => `<span class="badge">${esc(s)}</span>`).join('');
   const bodyAttr = ` class="portfolio-view" data-template="${tpl}"`;
   const hero = tpl === 'afterglow'
@@ -446,19 +448,19 @@ function page(p, url) {
            ${p.email ? `<li><a href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i></a></li>` : ''}</ul>
        </aside>
        <div class="dp-main">
-         <nav class="dp-nav"><ul><li><button class="dp-nav-link active" data-dp-page="about">About</button></li>
-           <li><button class="dp-nav-link" data-dp-page="portfolio">Portfolio</button></li>
-           <li><button class="dp-nav-link" data-dp-page="resume">Resume</button></li>
-           <li><button class="dp-nav-link" data-dp-page="contact">Contact</button></li></ul></nav>
-         <article class="dp-page active" data-dp-content="about"><h2 class="dp-h2">About me</h2>
+         <nav class="dp-nav"><ul><li><button class="dp-nav-link ${dpTab === 'about' ? 'active' : ''}" data-dp-page="about">About</button></li>
+           <li><button class="dp-nav-link ${dpTab === 'portfolio' ? 'active' : ''}" data-dp-page="portfolio">Portfolio</button></li>
+           <li><button class="dp-nav-link ${dpTab === 'resume' ? 'active' : ''}" data-dp-page="resume">Resume</button></li>
+           <li><button class="dp-nav-link ${dpTab === 'contact' ? 'active' : ''}" data-dp-page="contact">Contact</button></li></ul></nav>
+         <article class="dp-page ${dpTab === 'about' ? 'active' : ''}" data-dp-content="about"><h2 class="dp-h2">About me</h2>
            <p class="dp-text">${esc(p.tagline || p.title || '')}</p>
            ${(p.skills || []).length ? `<h3 class="dp-h3">My Skills</h3><ul class="dp-skills">${(p.skills || []).map((s) => `<li><span class="skill-name">${esc(s)}</span></li>`).join('')}</ul>` : ''}</article>
-         <article class="dp-page" data-dp-content="portfolio"><h2 class="dp-h2">Portfolio</h2>
+         <article class="dp-page ${dpTab === 'portfolio' ? 'active' : ''}" data-dp-content="portfolio"><h2 class="dp-h2">Portfolio</h2>
            <ul class="dp-projects">${projectsFor(p, tpl) || '<li class="dp-text">No projects yet.</li>'}</ul></article>
-         <article class="dp-page" data-dp-content="resume">
+         <article class="dp-page ${dpTab === 'resume' ? 'active' : ''}" data-dp-content="resume">
            ${resumeTeaser(p)}
          </article>
-         <article class="dp-page" data-dp-content="contact"><h2 class="dp-h2">Contact</h2>
+         <article class="dp-page ${dpTab === 'contact' ? 'active' : ''}" data-dp-content="contact"><h2 class="dp-h2">Contact</h2>
            <div class="dp-contact-links">
              ${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">SEND MESSAGE</a>` : ''}
              ${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
@@ -557,10 +559,14 @@ function page(p, url) {
       document.querySelectorAll('[data-dp-content]').forEach(function(pg){pg.classList.toggle('active',pg.dataset.dpContent===k)});
     }
     document.querySelectorAll('[data-dp-page]').forEach(function(b){
-      b.onclick=function(e){if(e)e.preventDefault();switchDpTab(b.dataset.dpPage);window.scrollTo(0,0)};
+      b.onclick=function(e){if(e)e.preventDefault();try{history.replaceState(null,'','#'+b.dataset.dpPage)}catch(err){}switchDpTab(b.dataset.dpPage);window.scrollTo(0,0)};
     });
-    var h=(location.hash||'').replace('#','').toLowerCase();
-    if(['about','portfolio','resume','contact'].indexOf(h)!==-1){switchDpTab(h);}
+    function syncHash(){
+      var h=(location.hash||'').replace('#','').toLowerCase();
+      if(['about','portfolio','resume','contact'].indexOf(h)!==-1){switchDpTab(h);}
+    }
+    window.addEventListener('hashchange',syncHash);
+    syncHash();
     </script>` : '';
     return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}>${hero}${foot(p)}${dpScript}</body></html>`;
   }
