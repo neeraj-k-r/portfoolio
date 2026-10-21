@@ -1518,8 +1518,12 @@ body[data-template="fullpage"] .fp-contact-links{display:flex;gap:12px;flex-wrap
 body[data-template="fullpage"] .fp-dots{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:40}
 body[data-template="fullpage"] .fp-dots i{width:9px;height:9px;border-radius:50%;background:#e5e5e5;display:block}
 /* Footer contrast for the new themes */
-body[data-template="fullpage"] .foot,body[data-template="fullpage"] footer .wrap.foot b{color:#484848}
-body[data-template="darkpro"] .foot,body[data-template="darkpro"] footer .wrap.foot b{color:#8b8b86}
+body[data-template="fullpage"] .foot,body[data-template="fullpage"] footer .wrap.foot b{color:#484848!important}
+body[data-template="fullpage"] footer .socials a{color:#484848!important}
+body[data-template="fullpage"] footer .socials a:hover{color:#ff6363!important}
+body[data-template="darkpro"] .foot,body[data-template="darkpro"] footer .wrap.foot b{color:#8b8b86!important}
+body[data-template="darkpro"] footer .socials a{color:#8b8b86!important}
+body[data-template="darkpro"] footer .socials a:hover{color:#fbbf24!important}
 @media(max-width:720px){body[data-template="fullpage"] .fp-links li:nth-child(2){display:none}}
 
 /* Dark Pro: subdomain pages */
@@ -1542,6 +1546,16 @@ body[data-template="fullpage"] .work-card b{font-size:15px;font-weight:700;color
 body[data-template="fullpage"] .work-card small{display:block;margin-top:4px;font-size:12px;color:#78716c}
 body[data-template="fullpage"] .btn-primary{background:#ff6363;color:#fff;border:none}
 body[data-template="fullpage"] .btn-primary:hover{background:#e04e4a}
+body[data-template="fullpage"] .btn-ghost{background:#fff;border:1.5px solid #d4d2cb;color:#1c1917;box-shadow:0 1px 3px rgba(0,0,0,.06);font-weight:600;transition:all .2s var(--ease)}
+body[data-template="fullpage"] .btn-ghost:hover{background:#ff6363;border-color:#ff6363;color:#fff;box-shadow:0 4px 14px rgba(255,99,99,.35)}
+body[data-template="fullpage"] .btn-ghost i,body[data-template="fullpage"] .btn-primary i{color:inherit}
+body[data-template="fullpage"] .fp-slide .btn-ghost{background:#fff;border:1.5px solid #ff6363;color:#ff6363;font-weight:700}
+body[data-template="fullpage"] .fp-slide .btn-ghost:hover{background:#ff6363;border-color:#ff6363;color:#fff;box-shadow:0 4px 12px rgba(255,99,99,.3)}
+body[data-template="fullpage"] .card{background:#fff;border:1px solid #e5e5e5;box-shadow:0 10px 30px rgba(0,0,0,.06);color:#1c1917}
+body[data-template="fullpage"] .card h3{color:#1c1917}
+body[data-template="fullpage"] .card p{color:#484848}
+body[data-template="fullpage"] .eyebrow{color:#ff6363;background:#fff1f1;border-color:rgba(255,99,99,.25)}
+body[data-template="fullpage"] .grad{color:#ff6363;background:none;-webkit-text-fill-color:#ff6363}
 body[data-template="fullpage"] #app h1{color:#ff6363}
 
 /* Fullpage: horizontal slider for portfolio section */

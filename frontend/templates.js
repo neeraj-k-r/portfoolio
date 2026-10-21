@@ -52,8 +52,8 @@ function renderMinimal(p) {
   const skills = (p.skills || []).map((s) => `<a href="${skillLink(s)}" style="text-decoration:none"><span class="badge">${tplEsc(s)}</span></a>`).join('');
   const projects = (p.projects || []).map((pr) => `
     <div class="card"><h3>${tplEsc(pr.title)}</h3><p>${tplEsc(pr.desc)}</p>
-    <div class="tags">${(pr.tags || []).map((t) => `<span>${tplEsc(t)}</span>`).join('')}</div>
-    <div style="margin-top:10px"><a class="btn btn-ghost btn-sm" href="${tplEsc(pr.url)}" target="_blank">View project →</a></div></div>`).join('');
+    <div class="tags">${((pr.technologies || pr.tags) || []).map((t) => `<span>${tplEsc(t)}</span>`).join('')}</div>
+    <div style="margin-top:10px"><a class="btn btn-ghost btn-sm" href="${tplEsc(pr.url)}" target="_blank">View project →</a>${pr.demoUrl ? ` <a class="btn btn-ghost btn-sm" href="${tplEsc(pr.demoUrl)}" target="_blank">Demo →</a>` : ''}</div></div>`).join('');
   document.getElementById('app').innerHTML = `${tplNav(p)}
   <section class="wrap" style="padding:140px 0 30px"><div class="card">
     <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
@@ -532,7 +532,10 @@ function renderFullpage(p) {
     <div class="fp-slide">
       <h3>${tplEsc(pr.title)}</h3>
       <p>${tplEsc(pr.desc || pr.title || '')}</p>
-      <a class="btn btn-ghost btn-sm" href="${tplEsc(pr.url || '#')}" target="_blank" rel="noopener">View →</a>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn btn-ghost btn-sm" href="${tplEsc(pr.url || '#')}" target="_blank" rel="noopener">View →</a>
+        ${pr.demoUrl ? `<a class="btn btn-primary btn-sm" href="${tplEsc(pr.demoUrl)}" target="_blank" rel="noopener">Demo →</a>` : ''}
+      </div>
     </div>`).join('');
   const skills = (p.skills || []).map((s) => `<span class="fp-skill">${tplEsc(s)}</span>`).join('');
 
@@ -541,7 +544,7 @@ function renderFullpage(p) {
   const app = document.getElementById('app');
   app.innerHTML = `
   <div class="fp-nav">
-    <a class="fp-logo" href="/"><img class="brand-logo" src="favicon.png" alt="portfoolio.me" width="30" height="30">${tplEsc(p.name)}</a>
+    <a class="fp-logo" href="/"><img class="brand-logo" src="/favicon.png" alt="portfoolio.me" width="30" height="30">${tplEsc(p.name)}</a>
     <ul class="fp-links">
       <li><a href="#fp-about">ABOUT</a></li>
       <li><a href="#fp-work">PORTFOLIO</a></li>

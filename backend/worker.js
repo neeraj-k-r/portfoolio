@@ -145,7 +145,7 @@ function nav(p) {
   ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Hire ${esc((p.name || '').split(' ')[0])}</a>` : ''}</div></nav>`;
 }
 function foot(p) {
-  return `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b style="color:#fff">${esc(p.name)}</b> via <b style="color:#fff">portfoolio.me</b></div>
+  return `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b>${esc(p.name)}</b> via <b>portfoolio.me</b></div>
   <div class="socials">${p.github ? `<a href="${esc(p.github)}"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${esc(p.linkedin)}"><i class="fa-brands fa-linkedin"></i></a>` : ''}${wShowInsta(p) ? `<a href="${esc(p.instagram)}"><i class="fa-brands fa-instagram"></i></a>` : ''}${p.email ? `<a href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
 }
 function projectsFor(p, tpl) {
@@ -217,7 +217,10 @@ function projectsFor(p, tpl) {
   if (tpl === 'fullpage') {
     return (p.projects || []).map((pr) => `
     <div class="fp-slide"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc || pr.title || '')}</p>
-      <a class="btn btn-ghost btn-sm" href="${esc(pr.url || '#')}" target="_blank" rel="noopener">View →</a></div>`).join('');
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <a class="btn btn-ghost btn-sm" href="${esc(pr.url || '#')}" target="_blank" rel="noopener">View →</a>
+        ${pr.demoUrl ? `<a class="btn btn-primary btn-sm" href="${esc(pr.demoUrl)}" target="_blank" rel="noopener">Demo →</a>` : ''}
+      </div></div>`).join('');
   }
   return cards(p);
 }

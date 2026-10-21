@@ -205,5 +205,23 @@ body[data-template="afterglow"] h1,body[data-template="afterglow"] h2,body[data-
 .ag-sunring-empty{background:conic-gradient(from 200deg,#ffd166,#ff6b6b,#ff4d8d,#b22c86,#ffd166);min-height:min(300px,70vw)}
 .ag-row{display:flex;gap:18px;align-items:center;background:linear-gradient(90deg,rgba(255,255,255,.07),rgba(255,255,255,.02));border:1px solid rgba(255,107,107,.3);border-left:5px solid #ff6b6b;border-radius:16px;padding:18px 20px;margin-bottom:12px}
 .ag-num{font-family:'Space Grotesk';font-size:34px;font-weight:700;color:transparent;-webkit-text-stroke:1.5px #ffd166;flex-shrink:0}
-.ag-row h3{font-size:19px}
 @media(max-width:820px){.ag-split{grid-template-columns:1fr}.ag-sunring{order:-1;width:min(220px,60vw)}}
+
+/* ---- Template: fullpage (bold scroll, red accent) ---- */
+body[data-template="fullpage"]{background:#fff;color:#1c1917}
+body[data-template="fullpage"] .btn-primary{background:#ff6363;color:#fff;border:none}
+body[data-template="fullpage"] .btn-primary:hover{background:#e04e4a}
+body[data-template="fullpage"] .btn-ghost{background:#fff;border:1.5px solid #d4d2cb;color:#1c1917;box-shadow:0 1px 3px rgba(0,0,0,.06);font-weight:600}
+body[data-template="fullpage"] .btn-ghost:hover{background:#ff6363;border-color:#ff6363;color:#fff;box-shadow:0 4px 14px rgba(255,99,99,.35)}
+body[data-template="fullpage"] .btn-ghost i,body[data-template="fullpage"] .btn-primary i{color:inherit}
+body[data-template="fullpage"] .fp-slide .btn-ghost{background:#fff;border:1.5px solid #ff6363;color:#ff6363;font-weight:700}
+body[data-template="fullpage"] .fp-slide .btn-ghost:hover{background:#ff6363;border-color:#ff6363;color:#fff;box-shadow:0 4px 12px rgba(255,99,99,.3)}
+body[data-template="fullpage"] .card{background:#fff;border:1px solid #e5e5e5;box-shadow:0 10px 30px rgba(0,0,0,.06);color:#1c1917}
+body[data-template="fullpage"] .card h3{color:#1c1917}
+body[data-template="fullpage"] .card p{color:#484848}
+body[data-template="fullpage"] .eyebrow{color:#ff6363;background:#fff1f1;border-color:rgba(255,99,99,.25)}
+body[data-template="fullpage"] .grad{color:#ff6363;background:none;-webkit-text-fill-color:#ff6363}
+body[data-template="fullpage"] footer .wrap.foot,body[data-template="fullpage"] footer .wrap.foot b{color:#484848!important}
+body[data-template="fullpage"] footer .socials a{color:#484848!important}
+body[data-template="fullpage"] footer .socials a:hover{color:#ff6363!important}
+
