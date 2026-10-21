@@ -1254,9 +1254,12 @@ function setupUserDashboardView(profile) {
       if (dashApp) dashApp.style.marginLeft = '0';
     }
 
-    // Live-site links are set before any pane painting so a paint error can
-    // never leave the buttons pointing at nothing.
-    const livePath = `${location.origin}/?u=${encodeURIComponent(profile.username)}`;
+    // Live-site links: on portfoolio.me, points to the live subdomain (https://username.portfoolio.me).
+    // In local development, points to the direct parameter link (?u=username).
+    const isProd = location.hostname === 'portfoolio.me' || location.hostname.endsWith('.portfoolio.me');
+    const liveSub = `https://${encodeURIComponent(profile.username)}.portfoolio.me`;
+    const liveDirect = `${location.origin}/?u=${encodeURIComponent(profile.username)}`;
+    const livePath = isProd ? liveSub : liveDirect;
     if ($('edPreviewBtn')) { $('edPreviewBtn').href = livePath; $('edPreviewBtn').target = '_blank'; }
     if ($('dashViewLive')) { $('dashViewLive').href = livePath; $('dashViewLive').style.display = 'inline-flex'; }
 
@@ -1598,12 +1601,14 @@ function refreshRowChips(p) { paintUserProjects(p); }
 
 function paintShareSection(p) {
   const sub = `https://${p.username}.portfoolio.me`, path = `${location.origin}/?u=${encodeURIComponent(p.username)}`;
+  const isProd = location.hostname === 'portfoolio.me' || location.hostname.endsWith('.portfoolio.me');
+  const liveUrl = isProd ? sub : path;
   if($('shareSub')) $('shareSub').textContent = sub;
   if($('sharePath')) $('sharePath').textContent = 'Direct link: ' + path;
-  if($('shareResume')) $('shareResume').textContent = (p.track === 'visual') ? '' : 'Resume: ' + `${location.origin}/?u=${encodeURIComponent(p.username)}&resume=1`;
+  if($('shareResume')) $('shareResume').textContent = (p.track === 'visual') ? '' : 'Resume: ' + (isProd ? `${sub}/resume` : `${path}&resume=1`);
   if($('shareViews')) $('shareViews').textContent = '👁 ' + getProfileViews(p.username) + ' views this week';
-  if($('edPreviewBtn')) $('edPreviewBtn').href = path;
-  if($('dashViewLive')) { $('dashViewLive').href = path; $('dashViewLive').style.display = 'inline-flex'; }
+  if($('edPreviewBtn')) $('edPreviewBtn').href = liveUrl;
+  if($('dashViewLive')) { $('dashViewLive').href = liveUrl; $('dashViewLive').style.display = 'inline-flex'; }
 
   const text = encodeURIComponent(`Check out my portfolio: ${p.name} — ${p.title}`);
   if($('shareCopy')) $('shareCopy').onclick = () => navigator.clipboard.writeText(sub).then(() => toast('✅ Link copied!')).catch(() => toast(sub));

@@ -344,8 +344,9 @@ function pageGallery(p, wIdx) {
       <div class="work-meta"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}</div></a>`).join('') || emptyMsg}</div></section>`;
   return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div>${nav(p)}${body}${foot(p)}</body></html>`;
 }
-function page(p) {
-  const tpl = (p.template || 'midnight').toLowerCase();
+function page(p, url) {
+  const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
+  const tpl = String(qTpl || p.template || 'midnight').toLowerCase();
   const skills = (p.skills || []).map((s) => `<span class="badge">${esc(s)}</span>`).join('');
   const bodyAttr = ` class="portfolio-view" data-template="${tpl}"`;
   const hero = tpl === 'afterglow'
@@ -411,16 +412,17 @@ function page(p) {
          <div class="scroll rv" style="--d:900ms"><i></i>Scroll</div></div></div>
        <section class="pad" id="work"><p class="eyebrow rv">Selected work</p>
          <ul class="work-rows">${projectsFor(p, tpl) || '<li class="rv">No projects yet.</li>'}</ul></section>
+       ${resumeTeaser(p)}
        <section class="pad" id="about"><p class="eyebrow rv">About</p>
          <p class="lead rv">${esc(p.tagline || p.title || '')}</p>
          ${(p.skills || []).length ? `<div class="skills rv">${(p.skills || []).map((s) => `<span class="skill">${esc(s)}</span>`).join('')}</div>` : ''}</section>
        <section class="pad contact" id="contact"><p class="eyebrow rv">Say hello</p>
           <a class="big rv" href="mailto:${esc(p.email || '')}">${esc(p.name || 'Get in touch')}</a>
           <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
-            ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Email</a>` : ''}
-            ${p.github ? `<a class="btn btn-ghost btn-sm" href="${esc(p.github)}" target="_blank" rel="noopener">GitHub</a>` : ''}
-            ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${esc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
-            ${wShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${esc(p.instagram)}" target="_blank" rel="noopener">Instagram</a>` : ''}
+            ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i> Email</a>` : ''}
+            ${p.github ? `<a class="btn btn-ghost btn-sm" href="${esc(p.github)}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
+            ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${esc(p.linkedin)}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+            ${wShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${esc(p.instagram)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
           </div></section>
        </main>
        <footer class="pad"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span><span>Built with portfoolio.me</span></footer>`
@@ -446,14 +448,23 @@ function page(p) {
        <div class="dp-main">
          <nav class="dp-nav"><ul><li><button class="dp-nav-link active" data-dp-page="about">About</button></li>
            <li><button class="dp-nav-link" data-dp-page="portfolio">Portfolio</button></li>
+           <li><button class="dp-nav-link" data-dp-page="resume">Resume</button></li>
            <li><button class="dp-nav-link" data-dp-page="contact">Contact</button></li></ul></nav>
          <article class="dp-page active" data-dp-content="about"><h2 class="dp-h2">About me</h2>
            <p class="dp-text">${esc(p.tagline || p.title || '')}</p>
            ${(p.skills || []).length ? `<h3 class="dp-h3">My Skills</h3><ul class="dp-skills">${(p.skills || []).map((s) => `<li><span class="skill-name">${esc(s)}</span></li>`).join('')}</ul>` : ''}</article>
          <article class="dp-page" data-dp-content="portfolio"><h2 class="dp-h2">Portfolio</h2>
            <ul class="dp-projects">${projectsFor(p, tpl) || '<li class="dp-text">No projects yet.</li>'}</ul></article>
+         <article class="dp-page" data-dp-content="resume">
+           ${resumeTeaser(p)}
+         </article>
          <article class="dp-page" data-dp-content="contact"><h2 class="dp-h2">Contact</h2>
-           <p class="dp-text">${p.email ? `Reach me at <a href="mailto:${esc(p.email)}" style="color:#fbbf24">${esc(p.email)}</a>` : 'Get in touch via any link in the sidebar.'}</p></article>
+           <div class="dp-contact-links">
+             ${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">SEND MESSAGE</a>` : ''}
+             ${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
+             ${p.linkedin ? `<a class="btn btn-ghost" href="${esc(p.linkedin)}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+             ${wShowInsta(p) ? `<a class="btn btn-ghost" href="${esc(p.instagram)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
+           </div></article>
        </div></main>`
     : tpl === 'fullpage'
     ? `<div class="fp-nav"><a class="fp-logo" href="/"><img class="brand-logo" src="/favicon.png" alt="portfoolio.me" width="30" height="30">${esc(p.name)}</a>
@@ -463,6 +474,7 @@ function page(p) {
          <p class="fp-typed">${esc(p.title || '')}</p><a class="fp-scroll" href="#fp-work"><i class="fa-solid fa-chevron-down"></i></a></section>
        <section class="fp-section" id="fp-work"><h2 class="fp-h2">PROJECTS</h2>
          <div class="fp-slider">${projectsFor(p, tpl) || '<p class="fp-text">No projects yet.</p>'}</div></section>
+       ${resumeTeaser(p)}
        <section class="fp-section" id="fp-about2"><h2 class="fp-h2">ABOUT ME</h2>
          <p class="fp-text">${esc(p.tagline || p.title || '')}</p>
          ${(p.skills || []).length ? `<div class="fp-skills">${(p.skills || []).map((s) => `<span class="fp-skill">${esc(s)}</span>`).join('')}</div>` : ''}</section>
@@ -708,7 +720,7 @@ export default {
       });
     }
     const m = url.pathname.match(/^\/skills\/([^/]+)\/?$/);
-    const html = m ? pageSkill(p, decodeURIComponent(m[1])) : page(p);
+    const html = m ? pageSkill(p, decodeURIComponent(m[1])) : page(p, url);
     return new Response(html, {
       headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
     });
