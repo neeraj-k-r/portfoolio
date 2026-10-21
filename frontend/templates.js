@@ -209,7 +209,10 @@ function renderMotion(p) {
         <span>${pr.repo && pr.repo.updatedAt ? new Date(pr.repo.updatedAt).getFullYear() : new Date().getFullYear()}</span>
       </a>
     </li>`).join('');
-  const contact = p.email || p.github || p.linkedin || p.phone;
+  const heroWords = (p.title || p.name || 'Portfolio').split(' ');
+  const heroMid = Math.max(1, Math.ceil(heroWords.length / 2));
+  const heroL1 = heroWords.slice(0, heroMid).join(' ');
+  const heroL2 = heroWords.slice(heroMid).join(' ');
 
   document.body.dataset.template = 'motion';
   document.title = `${p.name} — ${p.title} | portfoolio.me`;
@@ -227,23 +230,10 @@ function renderMotion(p) {
     </nav>
   </nav>
   <main id="top">
-    <div id="bar" aria-hidden="true"></div>
-    <div class="blob" aria-hidden="true"></div>
-    <div class="pv" aria-hidden="true"><i></i></div>
-    <section class="lx-motion-stats" id="stats">
-      <p class="lx-logos-label">Performance, measured live on this page</p>
-      <p class="lead" style="max-width: 28ch; margin: 0 0 48px;">One file. Zero dependencies. Only transform and opacity animate.</p>
-      <div class="stats">
-        <div class="stat"><strong id="s-fcp">…</strong><span>First contentful paint</span></div>
-        <div class="stat"><strong id="s-load">…</strong><span>Load complete</span></div>
-        <div class="stat"><strong id="s-dom">…</strong><span>DOM elements</span></div>
-        <div class="stat"><strong id="s-fps">…</strong><span>Frames per second</span></div>
-      </div>
-    </section>
-    <nav class="motion-nav pad">
-      <h1 aria-label="${tplEsc(p.title || p.name)}">
-        <span class="w"><span style="--i:0">${tplEsc((p.title || p.name || 'Portfolio').split(' ').slice(0, 2).join(' '))}</span></span>
-        <span class="w"><span style="--i:1">${tplEsc((p.title || '').split(' ').slice(2).join(' '))}</span></span>
+    <div class="hero pad">
+      <h1 class="lx-title" aria-label="${tplEsc(p.title || p.name || 'Portfolio')}">
+        <span class="w"><span style="--i:0">${tplEsc(heroL1)}</span></span>
+        ${heroL2 ? `<span class="w"><span style="--i:1">${tplEsc(heroL2)}</span></span>` : ''}
       </h1>
       <div class="hero-meta">
         <p class="rv" style="--d:700ms">${tplEsc(p.tagline || p.title || '')}</p>
@@ -254,20 +244,30 @@ function renderMotion(p) {
       <p class="eyebrow rv">Selected work</p>
       <ul class="work-rows">${rows || '<li class="rv">No projects yet.</li>'}</ul>
     </section>
+    ${rsSec(p)}
     <section class="pad" id="about">
       <p class="eyebrow rv">About</p>
       <p class="lead rv">${tplEsc(p.tagline || p.title || '')}</p>
       ${skills ? `<div class="skills rv">${skills}</div>` : ''}
     </section>
-    <section class="pad" id="contact">
+    <section class="pad contact" id="contact">
       <p class="eyebrow rv">Say hello</p>
       <a class="big rv" href="mailto:${tplEsc(p.email || '')}">${tplEsc(p.email || p.phone || 'Get in touch')}</a>
+      <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
+        ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${tplEsc(p.email)}">Email</a>` : ''}
+        ${p.github ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.github)}" target="_blank" rel="noopener">GitHub</a>` : ''}
+        ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
+        ${tplShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${tplEsc(p.instagram)}" target="_blank" rel="noopener">Instagram</a>` : ''}
+      </div>
     </section>
   </main>
   <footer class="pad">
-    <span>© <span class="yr"></span> ${tplEsc(p.name)}</span>
+    <span>© <span id="yr"></span> ${tplEsc(p.name)}</span>
     <span>Built with portfoolio.me</span>
   </footer>`;
+  if (typeof window.initMotionTheme === 'function') {
+    window.initMotionTheme();
+  }
   window.scrollTo(0, 0);
 }
 

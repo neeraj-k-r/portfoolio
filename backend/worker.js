@@ -404,9 +404,9 @@ function page(p) {
        <nav class="motion-nav pad"><a class="logo" href="/">${esc(p.name)}</a>
        <nav><a class="hide" href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav></nav>
        <main id="top">
-       <div class="hero pad"><h1 aria-label="${esc(p.title || p.name)}">
-         <span class="w"><span style="--i:0">${esc((p.title || p.name || 'Portfolio').split(' ').slice(0, 2).join(' '))}</span></span>
-         <span class="w"><span style="--i:1">${esc((p.title || '').split(' ').slice(2).join(' '))}</span></span></h1>
+       <div class="hero pad"><h1 class="lx-title" aria-label="${esc(p.title || p.name || 'Portfolio')}">
+         <span class="w"><span style="--i:0">${esc((p.title || p.name || 'Portfolio').split(' ').slice(0, Math.max(1, Math.ceil((p.title || p.name || 'Portfolio').split(' ').length / 2))).join(' '))}</span></span>
+         ${(p.title || p.name || 'Portfolio').split(' ').slice(Math.max(1, Math.ceil((p.title || p.name || 'Portfolio').split(' ').length / 2))).length ? `<span class="w"><span style="--i:1">${esc((p.title || p.name || 'Portfolio').split(' ').slice(Math.max(1, Math.ceil((p.title || p.name || 'Portfolio').split(' ').length / 2))).join(' '))}</span></span>` : ''}</h1>
          <div class="hero-meta"><p class="rv" style="--d:700ms">${esc(p.tagline || p.title || '')}</p>
          <div class="scroll rv" style="--d:900ms"><i></i>Scroll</div></div></div>
        <section class="pad" id="work"><p class="eyebrow rv">Selected work</p>
@@ -415,7 +415,13 @@ function page(p) {
          <p class="lead rv">${esc(p.tagline || p.title || '')}</p>
          ${(p.skills || []).length ? `<div class="skills rv">${(p.skills || []).map((s) => `<span class="skill">${esc(s)}</span>`).join('')}</div>` : ''}</section>
        <section class="pad contact" id="contact"><p class="eyebrow rv">Say hello</p>
-         <a class="big rv" href="mailto:${esc(p.email || '')}">${esc(p.email || p.phone || 'Get in touch')}</a></section>
+          <a class="big rv" href="mailto:${esc(p.email || '')}">${esc(p.email || p.phone || 'Get in touch')}</a>
+          <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
+            ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Email</a>` : ''}
+            ${p.github ? `<a class="btn btn-ghost btn-sm" href="${esc(p.github)}" target="_blank" rel="noopener">GitHub</a>` : ''}
+            ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${esc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
+            ${wShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${esc(p.instagram)}" target="_blank" rel="noopener">Instagram</a>` : ''}
+          </div></section>
        </main>
        <footer class="pad"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span><span>Built with portfoolio.me</span></footer>`
     : tpl === 'darkpro'
@@ -491,7 +497,46 @@ function page(p) {
   const gridCls = (tpl === 'minimal' || tpl === 'terminal' || tpl === 'brutalist') ? 'dir-grid' : (tpl === 'tidepool' ? 'proj-grid tp-zig' : 'proj-grid');
   // These three templates render their own full page layout (no standard sections)
   if (tpl === 'motion') {
-    return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}>${hero}</body></html>`;
+    const motionScript = `<script>
+    (function(){
+      var bar=document.getElementById('bar');
+      function onScroll(){
+        var max=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+        if(max>0&&bar)bar.style.transform='scaleX('+(window.scrollY/max)+')';
+      }
+      window.addEventListener('scroll',onScroll,{passive:true});
+      onScroll();
+      var obs=new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){e.target.classList.add('in');obs.unobserve(e.target);}
+        });
+      },{rootMargin:'0px 0px -8% 0px'});
+      document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
+      if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+        var blob=document.querySelector('.blob');
+        var pv=document.querySelector('.pv');
+        var pi=pv?pv.firstElementChild:null;
+        var tx=window.innerWidth/2,ty=window.innerHeight/3;
+        var bx=tx,by=ty,px=tx,py=ty,raf=0;
+        function loop(){
+          bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;
+          if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';
+          if(pv){
+            px+=(tx-px)*0.12;py+=(ty-py)*0.12;
+            pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)';
+          }
+          raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0;
+        }
+        raf=requestAnimationFrame(loop);
+        window.addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});
+        document.querySelectorAll('.row').forEach(function(a){
+          a.addEventListener('pointerenter',function(){if(pi&&a.dataset.g)pi.style.background=a.dataset.g;if(pv)pv.classList.add('on');});
+          a.addEventListener('pointerleave',function(){if(pv)pv.classList.remove('on');});
+        });
+      }
+    })();
+    </script>`;
+    return `<!DOCTYPE html><html lang="en">${head(p, tpl)}<body${bodyAttr}>${hero}${motionScript}</body></html>`;
   }
   if (tpl === 'darkpro' || tpl === 'fullpage') {
     const dpScript = tpl === 'darkpro' ? `<script>

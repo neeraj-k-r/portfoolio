@@ -925,14 +925,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const isMotion = document.body.dataset.template === 'motion';
     if (!isMotion) return;
 
-    const root = document.documentElement;
-    const bar = document.getElementById('scrollProgress');
-    const stats = document.querySelectorAll('.stat strong');
+    const bar = document.getElementById('bar') || document.getElementById('scrollProgress');
 
     /* Scroll progress bar */
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (max > 0 && bar) bar.style.width = (scrollY / max) * 100 + '%';
+      if (max > 0 && bar) bar.style.transform = `scaleX(${scrollY / max})`;
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -966,10 +964,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (t - t0 >= 1000) { setStat('s-fps', Math.round(frames * 1000 / (t - t0))); frames = 0; t0 = t; }
       requestAnimationFrame(tick);
     };
-    new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !onFPS) { onFPS = true; frames = 0; t0 = performance.now(); requestAnimationFrame(tick); }
-      else if (!e.isIntersecting) onFPS = false;
-    }).observe(document.getElementById('stats'));
+    const statsEl = document.getElementById('stats');
+    if (statsEl) {
+      new IntersectionObserver(([e]) => {
+        if (e.isIntersecting && !onFPS) { onFPS = true; frames = 0; t0 = performance.now(); requestAnimationFrame(tick); }
+        else if (!e.isIntersecting) onFPS = false;
+      }).observe(statsEl);
+    }
 
     /* Pointer-following blob & preview */
     if (matchMedia('(hover:hover) and (pointer:fine)').matches) {
@@ -977,18 +978,23 @@ document.addEventListener('DOMContentLoaded', async () => {
       const pv = document.querySelector('.pv');
       const pi = pv?.firstElementChild;
       let tx = innerWidth / 2, ty = innerHeight / 3;
-      let bx = tx, by = ty, px = 0, py = 0, raf = 0;
+      let bx = tx, by = ty, px = tx, py = ty, raf = 0;
       const loop = () => {
         bx += (tx - bx) * 0.06;
         by += (ty - by) * 0.06;
-        blob.style.transform = `translate3d(${bx - blob.offsetWidth / 2}px,${by - blob.offsetHeight / 2}px,0)`;
+        if (blob) blob.style.transform = `translate3d(${bx - blob.offsetWidth / 2}px,${by - blob.offsetHeight / 2}px,0)`;
+        if (pv) {
+          px += (tx - px) * 0.12;
+          py += (ty - py) * 0.12;
+          pv.style.transform = `translate3d(${px + 24}px,${py - 90}px,0)`;
+        }
         raf = (Math.abs(tx - bx) + Math.abs(ty - by) > 0.5) ? requestAnimationFrame(loop) : 0;
       };
       raf = requestAnimationFrame(loop);
       addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; if (!raf) raf = requestAnimationFrame(loop); }, { passive: true });
       document.querySelectorAll('.row').forEach(a => {
-        a.addEventListener('pointerenter', () => { if (pi) pi.style.background = a.dataset.g; pv.classList.add('on'); });
-        a.addEventListener('pointerleave', () => pv.classList.remove('on'));
+        a.addEventListener('pointerenter', () => { if (pi) pi.style.background = a.dataset.g; if (pv) pv.classList.add('on'); });
+        a.addEventListener('pointerleave', () => { if (pv) pv.classList.remove('on'); });
       });
     }
 
@@ -1003,9 +1009,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     /* Year in footer */
-    const yr = document.getElementById('yr');
+    const yr = document.getElementById('yr') || document.querySelector('.yr');
     if (yr) yr.textContent = new Date().getFullYear();
   };
+  window.initMotionTheme = initMotionTheme;
 
   initMotionTheme();
   initHeroThemeSwitcher();
