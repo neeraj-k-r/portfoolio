@@ -316,7 +316,8 @@ function renderWorkDetail(p, idx) {
 }
 function renderPortfolio(p) {
   p = normLocalProfile(p) || p;
-  const tpl = String(p.template || 'midnight').toLowerCase();
+  const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
+  const tpl = String(qTpl || p.template || 'midnight').toLowerCase();
   if (tpl !== 'midnight' && window.PortfoolioTemplates && window.PortfoolioTemplates[tpl]) {
     window.PortfoolioTemplates[tpl](p); return;
   }

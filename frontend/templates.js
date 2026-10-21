@@ -405,21 +405,37 @@ function renderTidepool(p) {
   window.scrollTo(0, 0);
 }
 
+function dpProjectIcon(pr) {
+  const t = (((pr.title || '') + ' ' + (pr.tags || []).join(' ') + ' ' + (pr.technologies || []).join(' '))).toLowerCase();
+  if (/campus|college|student|school|education/.test(t)) return '<i class="fa-solid fa-graduation-cap"></i>';
+  if (/ai|interview|bot|agent|robot|brain|llm|gpt/.test(t)) return '<i class="fa-solid fa-robot"></i>';
+  if (/dash|lead|analy|chart|crm|sales|finance|stock/.test(t)) return '<i class="fa-solid fa-chart-line"></i>';
+  if (/health|med|fit|hospital|care/.test(t)) return '<i class="fa-solid fa-heart-pulse"></i>';
+  if (/whatsapp|chat|support|message|social/.test(t)) return '<i class="fa-solid fa-comments"></i>';
+  if (/game|monopoly|play|fun|arcade/.test(t)) return '<i class="fa-solid fa-gamepad"></i>';
+  if (/web|app|site|frontend|design|ui/.test(t)) return '<i class="fa-solid fa-laptop-code"></i>';
+  return '<i class="fa-solid fa-code"></i>';
+}
+
 // Dark Pro (Dark portfolio style) — sticky sidebar nav, gold accent, dark cards
 function renderDarkpro(p) {
   normTpl(p);
   const skills = (p.skills || []).map((s) => `<li><span class="skill-name">${tplEsc(s)}</span></li>`).join('');
-  const projects = (p.projects || []).map((pr) => `
+  const projects = (p.projects || []).map((pr) => {
+    const screenshot = pr.image || pr.imageUrl || pr.screenshot || (pr.repo && pr.repo.screenshot ? pr.repo.screenshot : '');
+    return `
     <li class="proj-item">
       <a href="${tplEsc(pr.url || '#')}" target="_blank" rel="noopener">
         <figure class="proj-img">
-          <div class="proj-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-          <img src="${tplEsc((pr.repo && pr.repo.screenshot) || p.avatarUrl || '')}" alt="${tplEsc(pr.title)}" loading="lazy" onerror="this.style.display='none'">
+          ${screenshot
+            ? `<div class="proj-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div><img src="${tplEsc(screenshot)}" alt="${tplEsc(pr.title)}" loading="lazy" onerror="this.style.display='none'">`
+            : `<div class="proj-placeholder"><div class="proj-placeholder-icon">${dpProjectIcon(pr)}</div><span class="proj-placeholder-title">${tplEsc(pr.title)}</span></div><div class="proj-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>`}
         </figure>
         <h3 class="proj-title">${tplEsc(pr.title)}</h3>
-        <p class="proj-cat">${tplEsc((pr.technologies || pr.tags || []).slice(0, 2).join(' • '))}</p>
+        <p class="proj-cat">${tplEsc((pr.technologies || pr.tags || []).slice(0, 2).join(' • ') || 'Project')}</p>
       </a>
-    </li>`).join('');
+    </li>`;
+  }).join('');
 
   document.body.dataset.template = 'darkpro';
   document.title = `${p.name} — ${p.title} | portfoolio.me`;
@@ -457,6 +473,7 @@ function renderDarkpro(p) {
         <ul>
           <li><button class="dp-nav-link active" data-dp-page="about">About</button></li>
           <li><button class="dp-nav-link" data-dp-page="portfolio">Portfolio</button></li>
+          <li><button class="dp-nav-link" data-dp-page="resume">Resume</button></li>
           <li><button class="dp-nav-link" data-dp-page="contact">Contact</button></li>
         </ul>
       </nav>
@@ -470,19 +487,36 @@ function renderDarkpro(p) {
         <h2 class="dp-h2">Portfolio</h2>
         <ul class="dp-projects">${projects || '<li class="dp-text">No projects yet.</li>'}</ul>
       </article>
+      <article class="dp-page" data-dp-content="resume">
+        ${rsSec(p)}
+      </article>
       <article class="dp-page" data-dp-content="contact">
         <h2 class="dp-h2">Contact</h2>
-        <p class="dp-text">${p.email ? `Reach me at <a href="mailto:${tplEsc(p.email)}" style="color:#fbbf24">${tplEsc(p.email)}</a>` : 'Get in touch via any link in the sidebar.'}</p>
+        <div class="dp-contact-links">
+          ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">SEND MESSAGE</a>` : ''}
+          ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
+          ${p.linkedin ? `<a class="btn btn-ghost" href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+          ${tplShowInsta(p) ? `<a class="btn btn-ghost" href="${tplEsc(p.instagram)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
+        </div>
       </article>
     </div>
   </main>
   ${tplFoot(p)}`;
-  app.querySelectorAll('[data-dp-page]').forEach(b => b.onclick = () => {
-    const key = b.dataset.dpPage;
-    app.querySelectorAll('[data-dp-page]').forEach(x => x.classList.toggle('active', x === b));
+  function switchDpTab(key) {
+    app.querySelectorAll('[data-dp-page]').forEach(x => x.classList.toggle('active', x.dataset.dpPage === key));
     app.querySelectorAll('[data-dp-content]').forEach(pg => pg.classList.toggle('active', pg.dataset.dpContent === key));
-    window.scrollTo(0, 0);
+  }
+  app.querySelectorAll('[data-dp-page]').forEach(b => {
+    b.onclick = (e) => {
+      if (e) e.preventDefault();
+      switchDpTab(b.dataset.dpPage);
+      window.scrollTo(0, 0);
+    };
   });
+  const hash = (location.hash || '').replace('#', '').toLowerCase();
+  if (['about', 'portfolio', 'resume', 'contact'].includes(hash)) {
+    switchDpTab(hash);
+  }
   window.scrollTo(0, 0);
 }
 
@@ -520,6 +554,7 @@ function renderFullpage(p) {
       <h2 class="fp-h2">PROJECTS</h2>
       <div class="fp-slider">${slides || '<p class="fp-text">No projects yet.</p>'}</div>
     </section>
+    ${rsSec(p)}
     <section class="fp-section" id="fp-about2">
       <h2 class="fp-h2">ABOUT ME</h2>
       <p class="fp-text">${tplEsc(p.tagline || p.title || '')}</p>
@@ -533,6 +568,7 @@ function renderFullpage(p) {
         ${p.email ? `<a class="btn btn-primary" href="mailto:${tplEsc(p.email)}">SEND MESSAGE</a>` : ''}
         ${p.github ? `<a class="btn btn-ghost" href="${tplEsc(p.github)}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
         ${p.linkedin ? `<a class="btn btn-ghost" href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+        ${tplShowInsta(p) ? `<a class="btn btn-ghost" href="${tplEsc(p.instagram)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
       </div>
     </section>
   </div>

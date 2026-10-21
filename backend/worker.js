@@ -36,6 +36,17 @@ function iconFor(pr) {
   if (/dash|lead|analy|chart|crm|sales/.test(t)) return ICONS.chart;
   return ICONS.code;
 }
+function dpProjectIcon(pr) {
+  const t = (((pr.title || '') + ' ' + (pr.tags || []).join(' ') + ' ' + techsOf(pr).join(' '))).toLowerCase();
+  if (/campus|college|student|school|education/.test(t)) return '<i class="fa-solid fa-graduation-cap"></i>';
+  if (/ai|interview|bot|agent|robot|brain|llm|gpt/.test(t)) return '<i class="fa-solid fa-robot"></i>';
+  if (/dash|lead|analy|chart|crm|sales|finance|stock/.test(t)) return '<i class="fa-solid fa-chart-line"></i>';
+  if (/health|med|fit|hospital|care/.test(t)) return '<i class="fa-solid fa-heart-pulse"></i>';
+  if (/whatsapp|chat|support|message|social/.test(t)) return '<i class="fa-solid fa-comments"></i>';
+  if (/game|monopoly|play|fun|arcade/.test(t)) return '<i class="fa-solid fa-gamepad"></i>';
+  if (/web|app|site|frontend|design|ui/.test(t)) return '<i class="fa-solid fa-laptop-code"></i>';
+  return '<i class="fa-solid fa-code"></i>';
+}
 
 async function getProfile(sub) {
   // 1) Supabase: approved rows are publicly readable
@@ -193,7 +204,7 @@ function projectsFor(p, tpl) {
     return (p.projects || []).map((pr) => `
     <li class="proj-item"><a href="${esc(pr.url || '#')}" target="_blank" rel="noopener">
       <figure class="proj-img"><div class="proj-icon"><i class="fa-solid fa-arrow-up-right-from-square"></i></div>
-      ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${esc(pr.title)}" loading="lazy">` : ''}</figure>
+      ${pr.repo && pr.repo.screenshot ? `<img src="${esc(pr.repo.screenshot)}" alt="${esc(pr.title)}" loading="lazy">` : ''}</figure>
       <h3 class="proj-title">${esc(pr.title)}</h3>
       <p class="proj-cat">${techsOf(pr).slice(0, 2).map(esc).join(' • ')}</p></a></li>`).join('');
   }
