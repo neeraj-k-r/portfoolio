@@ -1498,41 +1498,98 @@ body[data-template="moderncv"] .contact-value:hover {
     color: var(--cyan);
 }
 
+body[data-template="moderncv"] form.contact-form,
 body[data-template="moderncv"] .contact-form {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
 }
 
-body[data-template="moderncv"] .form-group {
+body[data-template="moderncv"] .contact-form .form-group {
     position: relative;
-}
-
-body[data-template="moderncv"] .form-input {
     width: 100%;
-    padding: 1rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    color: var(--text-primary);
-    font-family: var(--font-primary);
-    font-size: 1rem;
-    transition: all var(--transition);
 }
 
-body[data-template="moderncv"] .form-input:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(255,107,157,0.1);
+body[data-template="moderncv"] .contact-form .form-input,
+body[data-template="moderncv"] input.form-input,
+body[data-template="moderncv"] textarea.form-input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1rem 1.25rem !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary) !important;
+    font-family: var(--font-primary) !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    transition: all var(--transition) !important;
+    box-shadow: none !important;
 }
 
-body[data-template="moderncv"] .form-textarea {
-    resize: vertical;
-    min-height: 150px;
+body[data-template="moderncv"] .contact-form .form-input::placeholder,
+body[data-template="moderncv"] input.form-input::placeholder,
+body[data-template="moderncv"] textarea.form-input::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.7 !important;
+}
+
+body[data-template="moderncv"] .contact-form .form-input:focus,
+body[data-template="moderncv"] input.form-input:focus,
+body[data-template="moderncv"] textarea.form-input:focus {
+    outline: none !important;
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.25) !important;
+    background: var(--bg-card) !important;
+    color: var(--text-primary) !important;
+}
+
+body[data-template="moderncv"] .contact-form input:-webkit-autofill,
+body[data-template="moderncv"] .contact-form input:-webkit-autofill:hover, 
+body[data-template="moderncv"] .contact-form input:-webkit-autofill:focus, 
+body[data-template="moderncv"] .contact-form textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px var(--bg-card) inset !important;
+    -webkit-text-fill-color: var(--text-primary) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+body[data-template="moderncv"] .contact-form .form-textarea,
+body[data-template="moderncv"] textarea.form-textarea {
+    resize: vertical !important;
+    min-height: 150px !important;
 }
 
 body[data-template="moderncv"] .btn-submit {
-    align-self: flex-start;
+    align-self: flex-start !important;
+    cursor: pointer !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+}
+
+body[data-template="moderncv"] .contact-status {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    color: #4ade80;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-primary);
+    line-height: 1.5;
+}
+
+body[data-template="moderncv"] .contact-status a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 600;
 }
 
 /* Footer */

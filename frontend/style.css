@@ -369,9 +369,8 @@ h2.title:hover + p.lead, .eyebrow:hover + h2.title + p.lead{color:#b6c2ba}
 .c-row{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:14px 16px;margin-bottom:12px}
 .c-row i{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(135deg,#6c6cf5,#22d3ee);font-size:18px;flex-shrink:0}
 .c-row small{color:var(--muted);font-size:12px;font-weight:700;letter-spacing:.6px;text-transform:uppercase}
-.c-row b{font-size:15.5px;display:block;word-break:break-all}
-form.contact-form{background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:22px;display:grid;gap:12px}
-input,textarea{background:rgba(0,0,0,.35);border:1px solid var(--stroke);border-radius:12px;padding:13px 14px;color:#fff;font-family:inherit;font-size:14.5px;width:100%}
+body:not([data-template="moderncv"]) form.contact-form{background:var(--card);border:1px solid var(--stroke);border-radius:20px;padding:22px;display:grid;gap:12px}
+body[data-template="moderncv"] form.contact-form{background:transparent !important;border:none !important;border-radius:0 !important;padding:0 !important;display:flex !important;flex-direction:column !important;gap:1.5rem !important;box-shadow:none !important}
 input:focus,textarea:focus{outline:none;border-color:#6c6cf5;box-shadow:0 0 0 3px rgba(108,108,245,.25)}
 textarea{min-height:120px;resize:vertical}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}

@@ -809,9 +809,43 @@ function pageModerncv(p) {
       if (contactForm) {
         contactForm.onsubmit = function(e) {
           e.preventDefault();
-          var msg = AppState.currentLang === 'ar' ? 'تم إرسال الرسالة بنجاح!' : 'Message sent successfully!';
-          alert(msg);
-          contactForm.reset();
+          var nameInput = document.getElementById('contactName') || contactForm.querySelector('input[type="text"]');
+          var emailInput = document.getElementById('contactEmail') || contactForm.querySelector('input[type="email"]');
+          var subjInput = document.getElementById('contactSubject') || contactForm.querySelectorAll('input[type="text"]')[1];
+          var msgInput = document.getElementById('contactMessage') || contactForm.querySelector('textarea');
+          var statusEl = document.getElementById('contactStatus');
+          var submitBtn = document.getElementById('contactSubmitBtn') || contactForm.querySelector('button[type="submit"]');
+
+          var senderName = nameInput ? nameInput.value.trim() : '';
+          var senderEmail = emailInput ? emailInput.value.trim() : '';
+          var subjectVal = subjInput ? subjInput.value.trim() : '';
+          var messageVal = msgInput ? msgInput.value.trim() : '';
+
+          var targetEmail = "${esc(p.email || '')}";
+          var mailSubject = encodeURIComponent(subjectVal || ('Portfolio Message from ' + senderName));
+          var mailBody = encodeURIComponent(
+            messageVal + '\n\n---\nFrom: ' + senderName + '\nEmail: ' + senderEmail + '\nSent via portfoolio.me'
+          );
+          var mailtoUrl = 'mailto:' + (targetEmail || 'contact@portfoolio.me') + '?subject=' + mailSubject + '&body=' + mailBody;
+
+          if (statusEl) {
+            statusEl.style.display = 'flex';
+            var successText = AppState.currentLang === 'ar'
+              ? 'جارٍ فتح تطبيق البريد لإرسال رسالتك... إذا لم يفتح تلقائياً، <a href="' + mailtoUrl + '">انقر هنا</a>'
+              : 'Opening your email client to send your message... If it doesn\'t open, <a href="' + mailtoUrl + '">click here</a>.';
+            statusEl.innerHTML = '<i class="fas fa-check-circle" style="color:#4ade80"></i> <span>' + successText + '</span>';
+          }
+
+          window.location.href = mailtoUrl;
+
+          if (submitBtn) {
+            var span = submitBtn.querySelector('span');
+            var origText = span ? span.innerText : 'Send Message';
+            if (span) span.innerText = (AppState.currentLang === 'ar' ? 'تم الإرسال!' : 'Message Ready!');
+            setTimeout(function() {
+              if (span) span.innerText = origText;
+            }, 4000);
+          }
         };
       }
 
@@ -1052,11 +1086,12 @@ ${head(p, 'moderncv')}
             </div>
           </div>
           <form class="contact-form" id="contactForm">
-            <div class="form-group"><input type="text" class="form-input" placeholder="Name" data-placeholder-en="Name" data-placeholder-ar="الاسم" required></div>
-            <div class="form-group"><input type="email" class="form-input" placeholder="Email" data-placeholder-en="Email" data-placeholder-ar="البريد الإلكتروني" required></div>
-            <div class="form-group"><input type="text" class="form-input" placeholder="Subject" data-placeholder-en="Subject" data-placeholder-ar="الموضوع" required></div>
-            <div class="form-group"><textarea class="form-input form-textarea" rows="5" placeholder="Message" data-placeholder-en="Message" data-placeholder-ar="الرسالة" required></textarea></div>
-            <button type="submit" class="btn btn-primary btn-submit"><span data-text-en="Send Message" data-text-ar="إرسال الرسالة">Send Message</span><i class="fas fa-paper-plane"></i></button>
+            <div class="form-group"><input type="text" name="name" id="contactName" class="form-input" placeholder="Name" data-placeholder-en="Name" data-placeholder-ar="الاسم" required></div>
+            <div class="form-group"><input type="email" name="email" id="contactEmail" class="form-input" placeholder="Email" data-placeholder-en="Email" data-placeholder-ar="البريد الإلكتروني" required></div>
+            <div class="form-group"><input type="text" name="subject" id="contactSubject" class="form-input" placeholder="Subject" data-placeholder-en="Subject" data-placeholder-ar="الموضوع" required></div>
+            <div class="form-group"><textarea name="message" id="contactMessage" class="form-input form-textarea" rows="5" placeholder="Message" data-placeholder-en="Message" data-placeholder-ar="الرسالة" required></textarea></div>
+            <div id="contactStatus" class="contact-status" style="display:none"></div>
+            <button type="submit" class="btn btn-primary btn-submit" id="contactSubmitBtn"><span data-text-en="Send Message" data-text-ar="إرسال الرسالة">Send Message</span><i class="fas fa-paper-plane"></i></button>
           </form>
         </div>
       </div>
