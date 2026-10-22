@@ -2280,8 +2280,24 @@ body[data-template="ultracode"] .nav-logo { position: absolute; left: 0; right: 
 body[data-template="ultracode"] .nav-logo-text { font-size: 1.125rem; color: var(--title-color); font-weight: var(--font-bold); line-height: 40px; }
 body[data-template="ultracode"] .nav-menu { position: fixed; transform: rotate(-90deg) translateX(-100%); transform-origin: left top; width: 100vh; }
 body[data-template="ultracode"] .menu { display: flex; }
-body[data-template="ultracode"] .nav-list { display: flex; flex-direction: row-reverse; margin: -2px auto 0 auto; }
-body[data-template="ultracode"] .nav-link { float: right; height: 100%; line-height: 100px; padding: 0 1rem; color: var(--title-color); font-weight: var(--font-medium); position: relative; transition: .4s; }
+body[data-template="ultracode"] .nav-list { 
+    display: flex; 
+    flex-direction: row-reverse; 
+    margin: -2px auto 0 auto; 
+    padding: 0 5.5rem;
+    justify-content: center;
+}
+body[data-template="ultracode"] .nav-link { 
+    float: right; 
+    height: 100%; 
+    line-height: 100px; 
+    padding: 0 0.75rem; 
+    color: var(--title-color); 
+    font-weight: var(--font-medium); 
+    position: relative; 
+    transition: .4s; 
+    white-space: nowrap;
+}
 body[data-template="ultracode"] .nav-toggle {
     height: 36px;
     width: 40px;

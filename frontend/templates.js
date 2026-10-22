@@ -1704,13 +1704,13 @@ function renderUltracode(p) {
         <div class="nav-menu">
           <div class="menu">
             <ul class="nav-list">
-              <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-              <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-              <li class="nav-item"><a href="#work" class="nav-link">Work</a></li>
-              <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
-              <li class="nav-item"><a href="#qualification" class="nav-link">Qualifications</a></li>
-              <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
               <li class="nav-item"><a href="#home" class="nav-link active-link">Home</a></li>
+              <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+              <li class="nav-item"><a href="#qualification" class="nav-link">Qualifications</a></li>
+              <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+              <li class="nav-item"><a href="#work" class="nav-link">Work</a></li>
+              <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+              <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
           </div>
         </div>
