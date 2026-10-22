@@ -129,6 +129,72 @@ async function serveUploadedSite(sub, pathname) {
 }
 
 function head(p, tpl) {
+  const isMcv = tpl === 'moderncv';
+  const mcvStyle = isMcv ? `
+<style id="moderncv-contact-fix">
+  body[data-template="moderncv"] form.contact-form,
+  body[data-template="moderncv"] .contact-form,
+  form.contact-form {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.5rem !important;
+  }
+  body[data-template="moderncv"] .contact-form .form-group {
+    position: relative !important;
+    width: 100% !important;
+  }
+  body[data-template="moderncv"] .contact-form .form-input,
+  body[data-template="moderncv"] input.form-input,
+  body[data-template="moderncv"] textarea.form-input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 1rem 1.25rem !important;
+    background: var(--bg-card, #131625) !important;
+    border: 1px solid var(--border, rgba(255,255,255,0.08)) !important;
+    border-radius: 12px !important;
+    color: var(--text-primary, #ffffff) !important;
+    font-family: var(--font-primary) !important;
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    transition: all var(--transition) !important;
+    box-shadow: none !important;
+  }
+  body[data-template="moderncv"] .contact-form .form-input:focus,
+  body[data-template="moderncv"] input.form-input:focus,
+  body[data-template="moderncv"] textarea.form-input:focus {
+    outline: none !important;
+    border-color: var(--primary, #c084fc) !important;
+    box-shadow: 0 0 0 3px rgba(192, 132, 252, 0.25) !important;
+    background: var(--bg-card, #131625) !important;
+  }
+  body[data-template="moderncv"] .contact-form input:-webkit-autofill,
+  body[data-template="moderncv"] .contact-form textarea:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #131625 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+  }
+  body[data-template="moderncv"] .contact-status {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.35);
+    color: #4ade80;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    line-height: 1.5;
+  }
+  body[data-template="moderncv"] .contact-status a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 600;
+  }
+</style>` : '';
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
 <meta name="description" content="${esc(p.tagline || p.title || '')}">
@@ -138,7 +204,8 @@ function head(p, tpl) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/templates.css"><link rel="stylesheet" href="/resume.css">
+<link rel="stylesheet" href="/style.css?v=mc2"><link rel="stylesheet" href="/templates.css?v=mc2"><link rel="stylesheet" href="/resume.css?v=mc2">
+${mcvStyle}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script></head>`;
 }
 function nav(p) {
@@ -1483,7 +1550,7 @@ export default {
           status: assetRes.status,
           headers: {
             'content-type': ct,
-            'cache-control': 'public, max-age=86400',
+            'cache-control': url.pathname.endsWith('.css') ? 'public, max-age=60' : 'public, max-age=86400',
             'access-control-allow-origin': '*',
             ...SEC_HEADERS,
           },
