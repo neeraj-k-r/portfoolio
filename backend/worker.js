@@ -499,27 +499,73 @@ function pageModerncv(p) {
     ? `<img src="${esc(p.avatarUrl || p.avatar_url)}" alt="${name}" class="profile-img" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
     : `<div class="profile-placeholder"><i class="fas fa-code"></i></div>`;
 
-  const userSkills = Array.isArray(p.skills) && p.skills.length ? p.skills : ['React', 'Node.js', 'TypeScript'];
-  const codeSkills = userSkills.slice(0, 3).map((s) => `'${esc(s)}'`).join(', ');
+  // --- REAL SKILLS DERIVATION (from user dashboard & projects) ---
+  const skillMap = new Map();
 
-  const feDefaults = [
-    { name: 'React', pct: 95 },
-    { name: 'Vue.js', pct: 85 },
-    { name: 'TypeScript', pct: 90 },
-    { name: 'Next.js', pct: 88 }
-  ];
-  const beDefaults = [
-    { name: 'Node.js', pct: 92 },
-    { name: 'Express', pct: 90 },
-    { name: 'MongoDB', pct: 85 },
-    { name: 'PostgreSQL', pct: 80 }
-  ];
-  const toolDefaults = [
-    { name: 'Git', pct: 95 },
-    { name: 'Docker', pct: 75 },
-    { name: 'AWS', pct: 70 },
-    { name: 'Figma', pct: 88 }
-  ];
+  function addSkill(raw, bonusCount, isUserExplicit) {
+    let name = String(raw || '').trim();
+    if (!name || name.toLowerCase() === 'fork') return;
+    const lower = name.toLowerCase();
+    let canonical = name;
+    let normKey = lower;
+    if (lower === 'js') { normKey = 'javascript'; canonical = 'JavaScript'; }
+    else if (lower === 'ts') { normKey = 'typescript'; canonical = 'TypeScript'; }
+    else if (lower === 'react' || lower === 'reactjs') { normKey = 'react'; canonical = 'React'; }
+    else if (lower === 'node' || lower === 'nodejs' || lower === 'node.js') { normKey = 'nodejs'; canonical = 'Node.js'; }
+    else if (lower === 'next' || lower === 'nextjs' || lower === 'next.js') { normKey = 'nextjs'; canonical = 'Next.js'; }
+    else if (lower === 'vue' || lower === 'vuejs' || lower === 'vue.js') { normKey = 'vuejs'; canonical = 'Vue.js'; }
+    else if (lower === 'html' || lower === 'html5') { normKey = 'html'; canonical = 'HTML5'; }
+    else if (lower === 'css' || lower === 'css3') { normKey = 'css'; canonical = 'CSS3'; }
+    else if (lower === 'aws') { normKey = 'aws'; canonical = 'AWS'; }
+    else if (lower === 'github' || lower === 'git') { normKey = 'git'; canonical = 'Git / GitHub'; }
+
+    if (!skillMap.has(normKey)) {
+      skillMap.set(normKey, { name: canonical, count: bonusCount, isExplicit: isUserExplicit });
+    } else {
+      const existing = skillMap.get(normKey);
+      existing.count += bonusCount;
+      if (isUserExplicit) existing.isExplicit = true;
+    }
+  }
+
+  // 1. User Dashboard Skills (p.skills)
+  (Array.isArray(p.skills) ? p.skills : []).forEach((s) => addSkill(s, 3, true));
+
+  // 2. Project Technologies & Tags (p.projects)
+  (Array.isArray(p.projects) ? p.projects : []).forEach((pr) => {
+    const prTechs = Array.isArray(pr.technologies || pr.tags) ? (pr.technologies || pr.tags) : [];
+    if (pr.repo && pr.repo.language) prTechs.push(pr.repo.language);
+    prTechs.forEach((t) => addSkill(t, 1, false));
+  });
+
+  // 3. Resume Skills if present (p.resume.skills)
+  if (p.resume && Array.isArray(p.resume.skills)) {
+    p.resume.skills.forEach((s) => addSkill(s, 2, true));
+  }
+
+  const allSkillsList = Array.from(skillMap.values()).sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+
+  // Categorize real skills
+  const feKeywords = ['html', 'css', 'javascript', 'typescript', 'react', 'vuejs', 'angular', 'nextjs', 'svelte', 'tailwind', 'bootstrap', 'sass', 'redux', 'jquery'];
+  const beKeywords = ['nodejs', 'express', 'python', 'django', 'flask', 'fastapi', 'java', 'spring', 'go', 'golang', 'rust', 'c#', 'c++', '.net', 'php', 'laravel', 'ruby', 'rails', 'aws', 'gcp', 'azure', 'firebase', 'supabase', 'mongodb', 'postgres', 'mysql', 'sql', 'redis', 'graphql', 'api'];
+
+  const feSkills = [];
+  const beSkills = [];
+  const toolSkills = [];
+
+  allSkillsList.forEach((sk) => {
+    const k = sk.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const pct = Math.min(95, 80 + Math.min(15, sk.count * 4));
+    const item = { name: sk.name, pct: pct, count: sk.count };
+
+    if (feKeywords.some((w) => k.includes(w))) {
+      feSkills.push(item);
+    } else if (beKeywords.some((w) => k.includes(w))) {
+      beSkills.push(item);
+    } else {
+      toolSkills.push(item);
+    }
+  });
 
   function renderSkillCategory(items) {
     return items.map((s) => `
@@ -533,6 +579,69 @@ function pageModerncv(p) {
         </div>
       </div>`).join('');
   }
+
+  const categoryCards = [];
+  if (feSkills.length) {
+    categoryCards.push(`
+      <div class="skill-category">
+        <h3 class="category-title" data-text-en="Frontend" data-text-ar="الواجهة الأمامية">Frontend</h3>
+        <div class="skill-items">${renderSkillCategory(feSkills)}</div>
+      </div>`);
+  }
+  if (beSkills.length) {
+    categoryCards.push(`
+      <div class="skill-category">
+        <h3 class="category-title" data-text-en="Backend & Cloud" data-text-ar="الخلفية والسحابة">Backend & Cloud</h3>
+        <div class="skill-items">${renderSkillCategory(beSkills)}</div>
+      </div>`);
+  }
+  if (toolSkills.length) {
+    categoryCards.push(`
+      <div class="skill-category">
+        <h3 class="category-title" data-text-en="Tools & Others" data-text-ar="الأدوات وغيرها">Tools & Others</h3>
+        <div class="skill-items">${renderSkillCategory(toolSkills)}</div>
+      </div>`);
+  }
+
+  const skillsHtml = categoryCards.length
+    ? `<div class="skills-grid">${categoryCards.join('')}</div>`
+    : `<div class="skills-empty" style="text-align:center;padding:3rem 1.5rem;background:var(--bg-card);border:1px dashed var(--border);border-radius:16px;max-width:600px;margin:0 auto">
+        <i class="fas fa-code" style="font-size:2.5rem;color:var(--text-muted);margin-bottom:1rem;display:block"></i>
+        <h3 style="font-size:1.2rem;color:var(--text-primary);margin-bottom:0.5rem;font-family:var(--font-code)" data-text-en="No skills added yet" data-text-ar="لا توجد مهارات مضافة بعد">No skills added yet</h3>
+        <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.6" data-text-en="Add skills in your user dashboard or tag projects to display them here." data-text-ar="أضف مهاراتك من لوحة التحكم أو اربط المشاريع لعرضها هنا.">Add skills in your user dashboard or tag projects to display them here.</p>
+      </div>`;
+
+  function skillBadgeIcon(name) {
+    const s = String(name || '').toLowerCase();
+    if (s.includes('react')) return 'fab fa-react';
+    if (s.includes('vue')) return 'fab fa-vuejs';
+    if (s.includes('node')) return 'fab fa-node-js';
+    if (s.includes('js') || s.includes('javascript')) return 'fab fa-js';
+    if (s.includes('ts') || s.includes('typescript')) return 'fas fa-code';
+    if (s.includes('python')) return 'fab fa-python';
+    if (s.includes('html')) return 'fab fa-html5';
+    if (s.includes('css')) return 'fab fa-css3-alt';
+    if (s.includes('aws')) return 'fab fa-aws';
+    if (s.includes('docker')) return 'fab fa-docker';
+    if (s.includes('git')) return 'fab fa-git-alt';
+    if (s.includes('figma')) return 'fab fa-figma';
+    return 'fas fa-laptop-code';
+  }
+
+  const topSkills = allSkillsList.slice(0, 3);
+  const floatingBadgesHtml = topSkills.map((sk, idx) => `
+    <div class="floating-badge badge-${idx + 1}">
+      <i class="${skillBadgeIcon(sk.name)}"></i>
+      <div class="badge-content">
+        <span class="badge-title">${esc(sk.name)}</span>
+        <span class="badge-libs">${sk.count > 1 ? `${sk.count} projects` : 'Verified Skill'}</span>
+      </div>
+    </div>
+  `).join('');
+
+  const codeSkills = allSkillsList.length
+    ? allSkillsList.slice(0, 4).map((s) => `'${esc(s.name)}'`).join(', ')
+    : `'Coding'`;
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length)
     ? p.experience
@@ -625,7 +734,7 @@ function pageModerncv(p) {
 
   const projCount = (Array.isArray(p.projects) ? p.projects.length : 0);
   const expCount = rawExp.length;
-  const skillsCount = (Array.isArray(p.skills) ? p.skills.length : 0);
+  const skillsCount = allSkillsList.length;
 
   const moderncvScript = `<script>
   (function(){
@@ -1026,9 +1135,7 @@ ${head(p, 'moderncv')}
                 ${avatarHtml}
               </div>
             </div>
-            <div class="floating-badge badge-1"><i class="fab fa-react"></i><div class="badge-content"><span class="badge-title">React</span><span class="badge-libs">Redux, Router, Hooks</span></div></div>
-            <div class="floating-badge badge-2"><i class="fab fa-node-js"></i><div class="badge-content"><span class="badge-title">Node.js</span><span class="badge-libs">Express, Socket.io, MongoDB</span></div></div>
-            <div class="floating-badge badge-3"><i class="fab fa-js"></i><div class="badge-content"><span class="badge-title">JavaScript</span><span class="badge-libs">ES6+, TypeScript, jQuery</span></div></div>
+            ${floatingBadgesHtml}
           </div>
         </div>
       </div>
@@ -1079,20 +1186,7 @@ ${head(p, 'moderncv')}
           <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Skills" data-text-ar="المهارات">Skills</span><span class="title-bracket">/&gt;</span></h2>
           <div class="section-line"></div>
         </div>
-        <div class="skills-grid">
-          <div class="skill-category">
-            <h3 class="category-title" data-text-en="Frontend" data-text-ar="الواجهة الأمامية">Frontend</h3>
-            <div class="skill-items">${renderSkillCategory(feDefaults)}</div>
-          </div>
-          <div class="skill-category">
-            <h3 class="category-title" data-text-en="Backend" data-text-ar="الخلفية">Backend</h3>
-            <div class="skill-items">${renderSkillCategory(beDefaults)}</div>
-          </div>
-          <div class="skill-category">
-            <h3 class="category-title" data-text-en="Tools & Others" data-text-ar="الأدوات وغيرها">Tools & Others</h3>
-            <div class="skill-items">${renderSkillCategory(toolDefaults)}</div>
-          </div>
-        </div>
+        ${skillsHtml}
       </div>
     </section>
 
