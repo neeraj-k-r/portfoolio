@@ -645,112 +645,76 @@ function renderModerncv(p) {
       </div>`).join('');
   }
 
-  // Experience
-  let expList = [];
-  if (Array.isArray(p.experience) && p.experience.length) {
-    expList = p.experience.map(e => ({
-      year: `${tplEsc(e.start || '2022')} - ${e.current ? 'Present' : tplEsc(e.end || 'Present')}`,
-      isCurrent: Boolean(e.current),
-      title: tplEsc(e.role || e.title || 'Developer'),
-      company: tplEsc(e.company || 'Tech Company Inc.'),
-      desc: tplEsc(e.desc || 'Developed and maintained modern web applications.'),
-      achievements: Array.isArray(e.achievements) ? e.achievements.map(a => tplEsc(a)) : [],
-      tags: Array.isArray(e.tags) ? e.tags.map(t => tplEsc(t)) : (Array.isArray(e.technologies) ? e.technologies.map(t => tplEsc(t)) : ['React', 'Node.js', 'TypeScript'])
-    }));
-  } else {
-    expList = [
-      {
-        year: '2022 - Present',
-        isCurrent: true,
-        title: 'Senior Full Stack Developer',
-        company: 'Tech Company Inc.',
-        desc: 'Leading a team of developers in building complex web applications using React and Node.js. Developing advanced user interfaces and optimizing performance. Implementing microservices architecture and CI/CD pipelines.',
-        achievements: ['Led team of 5 developers', 'Improved performance by 40%', 'Deployed 20+ production apps'],
-        tags: ['React', 'Node.js', 'TypeScript', 'MongoDB', 'Docker', 'AWS']
-      },
-      {
-        year: '2020 - 2022',
-        isCurrent: false,
-        title: 'Frontend Developer',
-        company: 'Digital Solutions',
-        desc: 'Developed interactive user interfaces using React and Vue.js. Worked on improving user experience and performance optimization. Collaborated with designers to implement pixel-perfect designs.',
-        achievements: ['Built 15+ responsive websites', 'Reduced load time by 50%'],
-        tags: ['React', 'Vue.js', 'JavaScript', 'SASS', 'Webpack']
-      },
-      {
-        year: '2018 - 2020',
-        isCurrent: false,
-        title: 'Junior Developer',
-        company: 'Creative Studio',
-        desc: 'Developed websites using HTML, CSS, and JavaScript. Learned best practices in web development. Worked on various client projects and gained experience in modern web technologies.',
-        achievements: ['Completed 30+ projects', 'Learned modern frameworks'],
-        tags: ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Bootstrap']
-      }
-    ];
-  }
+  // Experience (taken strictly from profile/resume data)
+  const rawExp = (Array.isArray(p.experience) && p.experience.length)
+    ? p.experience
+    : (p.resume && Array.isArray(p.resume.experience) && p.resume.experience.length)
+      ? p.resume.experience
+      : [];
 
-  const expHtml = expList.map(e => `
-    <div class="timeline-item">
-      <div class="timeline-marker"></div>
-      <div class="timeline-content">
-        <div class="timeline-header">
-          <div class="timeline-year">${e.year}</div>
-          ${e.isCurrent ? '<div class="timeline-badge">Current</div>' : ''}
-        </div>
-        <h3 class="timeline-title">${e.title}</h3>
-        <div class="timeline-company"><i class="fas fa-building"></i> ${e.company}</div>
-        <p class="timeline-description">${e.desc}</p>
-        ${e.achievements.length ? `
-        <div class="timeline-achievements">
-          ${e.achievements.map(a => `<div class="achievement-item"><i class="fas fa-check-circle"></i><span>${a}</span></div>`).join('')}
-        </div>` : ''}
-        <div class="timeline-tags">
-          ${e.tags.map(t => `<span class="tag">${t}</span>`).join('')}
-        </div>
-      </div>
-    </div>`).join('');
+  const expList = rawExp.map((e) => ({
+    year: [e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || (e.year || 'Present'),
+    isCurrent: Boolean(e.current || String(e.end || '').toLowerCase() === 'present'),
+    title: tplEsc(e.role || e.title || 'Developer'),
+    company: tplEsc(e.company || ''),
+    desc: tplEsc(e.desc || ''),
+    achievements: Array.isArray(e.achievements)
+      ? e.achievements.map((a) => tplEsc(String(a).trim())).filter(Boolean)
+      : String(e.desc || '').split('\n').map((s) => tplEsc(s.trim().replace(/^[-•*]\s*/, ''))).filter((s) => s.length > 5),
+    tags: Array.isArray(e.tags) ? e.tags.map(t => tplEsc(t)) : (Array.isArray(e.technologies) ? e.technologies.map(t => tplEsc(t)) : [])
+  }));
+
+  const expHtml = expList.length
+    ? `<div class="timeline">${expList.map((e) => `
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <div class="timeline-year">${e.year}</div>
+              ${e.isCurrent ? '<div class="timeline-badge">Current</div>' : ''}
+            </div>
+            <h3 class="timeline-title">${e.title}</h3>
+            ${e.company ? `<div class="timeline-company"><i class="fas fa-building"></i> ${e.company}</div>` : ''}
+            ${e.desc ? `<p class="timeline-description">${e.desc}</p>` : ''}
+            ${e.achievements.length ? `
+            <div class="timeline-achievements">
+              ${e.achievements.map((a) => `<div class="achievement-item"><i class="fas fa-check-circle"></i><span>${a}</span></div>`).join('')}
+            </div>` : ''}
+            ${e.tags.length ? `
+            <div class="timeline-tags">
+              ${e.tags.map((t) => `<span class="tag">${t}</span>`).join('')}
+            </div>` : ''}
+          </div>
+        </div>`).join('')}</div>`
+    : `<div class="timeline-empty" style="text-align:center;padding:3rem 1.5rem;background:var(--bg-card);border:1px dashed var(--border);border-radius:16px;max-width:600px;margin:0 auto">
+        <i class="fas fa-briefcase" style="font-size:2.5rem;color:var(--text-muted);margin-bottom:1rem;display:block"></i>
+        <h3 style="font-size:1.2rem;color:var(--text-primary);margin-bottom:0.5rem;font-family:var(--font-code)" data-text-en="No experience added yet" data-text-ar="لا توجد خبرات مضافة بعد">No experience added yet</h3>
+        <p style="color:var(--text-secondary);font-size:0.95rem;line-height:1.6" data-text-en="Experience entries from resume will appear here once added." data-text-ar="ستظهر الخبرات من السيرة الذاتية هنا بمجرد إضافتها.">Experience entries from resume will appear here once added.</p>
+      </div>`;
 
   // Projects
   let projList = [];
   if (Array.isArray(p.projects) && p.projects.length) {
-    projList = p.projects.map((pr, i) => ({
-      title: tplEsc(pr.title || `Project ${i + 1}`),
-      desc: tplEsc(pr.desc || 'A modern web application built with clean architecture and cutting-edge technologies.'),
-      tags: Array.isArray(pr.technologies || pr.tags) ? (pr.technologies || pr.tags).map(t => tplEsc(t)) : ['React', 'TypeScript', 'Node.js'],
-      url: pr.demoUrl || pr.url || '#',
-      repo: pr.repo?.url || (pr.url && pr.url.includes('github') ? pr.url : '#'),
-      icon: pr.icon || (i % 3 === 0 ? 'fa-shopping-cart' : i % 3 === 1 ? 'fa-tasks' : 'fa-blog')
-    }));
+    projList = p.projects.map((pr, i) => {
+      const repoUrl = (pr.repo && pr.repo.fullName)
+        ? `https://github.com/${pr.repo.fullName}`
+        : (pr.repo?.url || (pr.url && pr.url.includes('github') ? pr.url : '#'));
+      const liveUrl = pr.demoUrl || pr.url || repoUrl;
+      return {
+        title: tplEsc(pr.title || `Project ${i + 1}`),
+        desc: tplEsc(pr.desc || 'A web project showcasing development skills and clean architecture.'),
+        tags: Array.isArray(pr.technologies || pr.tags) ? (pr.technologies || pr.tags).map(t => tplEsc(t)) : ['JavaScript'],
+        url: liveUrl,
+        repo: repoUrl,
+        icon: pr.icon || (i % 3 === 0 ? 'fa-code' : i % 3 === 1 ? 'fa-laptop-code' : 'fa-rocket')
+      };
+    });
   } else {
-    projList = [
-      {
-        title: 'E-Commerce Platform',
-        desc: 'A complete e-commerce platform with payment integration and advanced inventory management.',
-        tags: ['React', 'Node.js', 'MongoDB'],
-        url: '#',
-        repo: '#',
-        icon: 'fa-shopping-cart'
-      },
-      {
-        title: 'Task Management App',
-        desc: 'A web application for task management with real-time synchronization and modern design.',
-        tags: ['React', 'Firebase', 'TypeScript'],
-        url: '#',
-        repo: '#',
-        icon: 'fa-tasks'
-      },
-      {
-        title: 'Blog Platform',
-        desc: 'A modern blog platform with CMS features and beautiful UI design.',
-        tags: ['Next.js', 'Prisma', 'PostgreSQL'],
-        url: '#',
-        repo: '#',
-        icon: 'fa-blog'
-      }
-    ];
+    projList = [];
   }
 
-  const projHtml = projList.map(pr => `
+  const projHtml = projList.length
+    ? projList.map((pr) => `
     <div class="project-card">
       <div class="project-image">
         <div class="project-overlay">
@@ -764,13 +728,18 @@ function renderModerncv(p) {
       <div class="project-content">
         <h3 class="project-title">${pr.title}</h3>
         <p class="project-description">${pr.desc}</p>
-        <div class="project-tags">${pr.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+        <div class="project-tags">${pr.tags.map((t) => `<span class="tag">${t}</span>`).join('')}</div>
       </div>
-    </div>`).join('');
+    </div>`).join('')
+    : `<div style="text-align:center;padding:3rem 1.5rem;background:var(--bg-card);border:1px dashed var(--border);border-radius:16px;max-width:600px;margin:0 auto;grid-column:1/-1">
+        <i class="fas fa-rocket" style="font-size:2.5rem;color:var(--text-muted);margin-bottom:1rem;display:block"></i>
+        <h3 style="font-size:1.2rem;color:var(--text-primary);margin-bottom:0.5rem;font-family:var(--font-code)" data-text-en="No projects added yet" data-text-ar="لا توجد مشاريع مضافة بعد">No projects added yet</h3>
+      </div>`;
 
   // Stats
-  const projCount = (p.projects && p.projects.length) || 50;
-  const expCount = (p.experience && p.experience.length ? (p.experience.length + 2) : 5);
+  const projCount = (Array.isArray(p.projects) ? p.projects.length : 0);
+  const expCount = rawExp.length;
+  const skillsCount = (Array.isArray(p.skills) ? p.skills.length : 0);
 
   const app = document.getElementById('app');
   app.innerHTML = `
@@ -893,7 +862,7 @@ function renderModerncv(p) {
               <div class="about-stats">
                 <div class="stat-item"><div class="stat-number" data-count="${projCount}">0</div><div class="stat-label" data-text-en="Projects" data-text-ar="مشروع">Projects</div></div>
                 <div class="stat-item"><div class="stat-number" data-count="${expCount}">0</div><div class="stat-label" data-text-en="Years Experience" data-text-ar="سنوات خبرة">Years Experience</div></div>
-                <div class="stat-item"><div class="stat-number" data-count="30">0</div><div class="stat-label" data-text-en="Happy Clients" data-text-ar="عميل سعيد">Happy Clients</div></div>
+                <div class="stat-item"><div class="stat-number" data-count="${skillsCount}">0</div><div class="stat-label" data-text-en="Skills" data-text-ar="المهارات">Skills</div></div>
               </div>
             </div>
             <div class="about-image-wrapper">
@@ -944,7 +913,7 @@ function renderModerncv(p) {
             <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Experience" data-text-ar="الخبرة">Experience</span><span class="title-bracket">/&gt;</span></h2>
             <div class="section-line"></div>
           </div>
-          <div class="timeline">${expHtml}</div>
+          ${expHtml}
         </div>
       </section>
 
