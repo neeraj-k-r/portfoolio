@@ -275,7 +275,7 @@ function skillsSection(p) {
     </a>`).join('')}</div></section>`;
 }
 function pageGallery(p, wIdx) {
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(p.template || '').toLowerCase()) ? String(p.template).toLowerCase() : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(String(p.template || '').toLowerCase()) ? String(p.template).toLowerCase() : 'gallery';
   const works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   const i = parseInt(wIdx, 10);
   const w = (!isNaN(i) && works[i]) ? works[i] : null;
@@ -337,6 +337,37 @@ function pageGallery(p, wIdx) {
         <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
         <div class="bloom-cap"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}</div>
       </a>`).join('') || emptyMsg}</section>`
+    : vtpl === 'motion'
+    ? `<div id="bar" aria-hidden="true"></div><div class="blob" aria-hidden="true"></div><div class="pv" aria-hidden="true"><i></i></div>
+       <nav class="motion-nav pad"><a class="logo" href="/">${esc(p.name)}</a>
+       <nav><a class="hide" href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav></nav>
+       <main id="top">
+       <div class="hero pad"><h1 class="lx-title" aria-label="${esc(p.name || p.title || 'Portfolio')}">
+         <span class="w"><span style="--i:0">${esc((p.name || p.title || 'Portfolio').split(' ').slice(0, Math.max(1, Math.ceil((p.name || p.title || 'Portfolio').split(' ').length / 2))).join(' '))}</span></span>
+         ${(p.name || p.title || 'Portfolio').split(' ').slice(Math.max(1, Math.ceil((p.name || p.title || 'Portfolio').split(' ').length / 2))).length ? `<span class="w"><span style="--i:1">${esc((p.name || p.title || 'Portfolio').split(' ').slice(Math.max(1, Math.ceil((p.name || p.title || 'Portfolio').split(' ').length / 2))).join(' '))}</span></span>` : ''}</h1>
+         <div class="hero-meta"><p class="rv" style="--d:700ms">${esc(p.title ? `${p.title}${p.tagline ? ' — ' + p.tagline : ''}` : (p.tagline || ''))}</p>
+         <div class="scroll rv" style="--d:900ms"><i></i>Scroll</div></div></div>
+       <section class="pad" id="work"><p class="eyebrow rv">Selected work</p>
+         <ul class="work-rows">${works.map((k, n) => `
+           <li class="work-row rv">
+             <a href="/?w=${n}" class="row" data-g="${esc(k.imageUrl)}">
+               <span class="work-title">${esc(k.title || 'Untitled')}</span>
+               <span class="work-category">${k.category ? esc(k.category) : ''}</span>
+             </a>
+           </li>`).join('') || '<li class="rv">No works yet.</li>'}</ul></section>
+       ${avatar ? `<section class="pad" id="about"><p class="eyebrow rv">About</p>
+         <p class="lead rv">${esc(p.tagline || p.title || '')}</p>
+         <img src="${esc(avatar)}" alt="${esc(p.name)}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:20px 0;border:3px solid rgba(255,255,255,.2)">
+         <p class="rv">${esc(p.tagline || p.title || '')}</p></section>` : ''}
+       <section class="pad contact" id="contact"><p class="eyebrow rv">Say hello</p>
+         <a class="big rv" href="mailto:${esc(p.email || '')}">${esc(p.name || 'Get in touch')}</a>
+         <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
+           ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i> Email</a>` : ''}
+           ${p.github ? `<a class="btn btn-ghost btn-sm" href="${esc(p.github)}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
+           ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${esc(p.linkedin)}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+           ${wShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${esc(p.instagram)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
+         </div></section>
+       <footer class="pad"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span><span>Built with portfoolio.me</span></footer>`
     : `<header class="wrap" style="padding:140px 0 10px;text-align:center">
       ${face}
       <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
