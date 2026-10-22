@@ -349,16 +349,16 @@ function pageGallery(p, wIdx) {
          <div class="scroll rv" style="--d:900ms"><i></i>Scroll</div></div></div>
        <section class="pad" id="work"><p class="eyebrow rv">Selected work</p>
          <ul class="work-rows">${works.map((k, n) => `
-           <li class="work-row rv">
-             <a href="/?w=${n}" class="row" data-g="${esc(k.imageUrl)}">
-               <span class="work-title">${esc(k.title || 'Untitled')}</span>
-               <span class="work-category">${k.category ? esc(k.category) : ''}</span>
-             </a>
-           </li>`).join('') || '<li class="rv">No works yet.</li>'}</ul></section>
-       ${avatar ? `<section class="pad" id="about"><p class="eyebrow rv">About</p>
+           <li class="rv" style="--d:${n * 60}ms"><a class="row" href="/?w=${n}" data-g="${esc(k.imageUrl)}">
+             <b>${String(n + 1).padStart(2, '0')}</b>
+             <h3>${esc(k.title || 'Untitled')}</h3>
+             <span>${k.category ? esc(k.category) : ''}</span>
+             <span>${k.year ? esc(String(k.year)) : '↗'}</span>
+           </a></li>`).join('') || '<li class="rv">No works yet.</li>'}</ul></section>
+       <section class="pad" id="about"><p class="eyebrow rv">About</p>
          <p class="lead rv">${esc(p.tagline || p.title || '')}</p>
-         <img src="${esc(avatar)}" alt="${esc(p.name)}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:20px 0;border:3px solid rgba(255,255,255,.2)">
-         <p class="rv">${esc(p.tagline || p.title || '')}</p></section>` : ''}
+         ${avatar ? `<img src="${esc(avatar)}" alt="${esc(p.name)}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:20px 0;border:3px solid rgba(255,255,255,.2)">` : ''}
+       </section>
        <section class="pad contact" id="contact"><p class="eyebrow rv">Say hello</p>
          <a class="big rv" href="mailto:${esc(p.email || '')}">${esc(p.name || 'Get in touch')}</a>
          <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
@@ -367,6 +367,7 @@ function pageGallery(p, wIdx) {
            ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${esc(p.linkedin)}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
            ${wShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${esc(p.instagram)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
          </div></section>
+       </main>
        <footer class="pad"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span><span>Built with portfoolio.me</span></footer>`
     : `<header class="wrap" style="padding:140px 0 10px;text-align:center">
       ${face}
@@ -376,7 +377,45 @@ function pageGallery(p, wIdx) {
     <section class="wrap" style="padding-top:10px"><div class="works-grid" style="margin-top:18px">${works.map((k, n) => `
       <a class="work-card" href="/?w=${n}" style="text-decoration:none;color:inherit"><img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
       <div class="work-meta"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}</div></a>`).join('') || emptyMsg}</div></section>`;
-  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" id="scrollProgress" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
+  if (vtpl === 'motion') {
+    return `<!DOCTYPE html><html lang="en">${head(p, 'motion')}<body class="portfolio-view" data-template="motion">${body}<script>
+      (function(){
+        var bar=document.getElementById('bar');
+        function onScroll(){
+          var max=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+          if(max>0&&bar)bar.style.transform='scaleX('+(window.scrollY/max)+')';
+        }
+        window.addEventListener('scroll',onScroll,{passive:true});
+        onScroll();
+        var obs=new IntersectionObserver(function(entries){
+          entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); obs.unobserve(e.target); } });
+        },{rootMargin:'0px 0px -8% 0px'});
+        document.querySelectorAll('.rv').forEach(function(el){ obs.observe(el); });
+        if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+          var blob=document.querySelector('.blob');
+          var pv=document.querySelector('.pv');
+          var pi=pv?pv.firstElementChild:null;
+          var tx=window.innerWidth/2,ty=window.innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;
+          function loop(){
+            bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;
+            if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';
+            if(pv){ px+=(tx-px)*0.12;py+=(ty-py)*0.12; pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'; }
+            raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0;
+          }
+          raf=requestAnimationFrame(loop);
+          window.addEventListener('pointermove',function(e){tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});
+          document.querySelectorAll('.row').forEach(function(a){
+            a.addEventListener('pointerenter',function(){
+              if(pi&&a.dataset.g){ pi.style.backgroundImage='url('+a.dataset.g+')'; pi.style.backgroundSize='cover'; pi.style.backgroundPosition='center'; }
+              if(pv)pv.classList.add('on');
+            });
+            a.addEventListener('pointerleave',function(){ if(pv)pv.classList.remove('on'); });
+          });
+        }
+      })();
+    </script></body></html>`;
+  }
+  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
 }
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
