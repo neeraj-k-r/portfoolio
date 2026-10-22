@@ -589,163 +589,307 @@ function renderFullpage(p) {
 function renderModerncv(p) {
   normTpl(p);
   document.body.dataset.template = 'moderncv';
+  document.body.setAttribute('data-lang', 'en');
+  document.body.setAttribute('data-dir', 'ltr');
   document.title = `${p.name} — ${p.title} | portfoolio.me`;
-  
+
+  const isRTL = false;
+  const tEn = (s) => tplEsc(s || '');
+  const tAr = (s) => tplEsc(s || '');
+
   const skills = (p.skills || []).map((s) => `<span class="skill-badge">${tplEsc(s)}</span>`).join('');
+
   const projects = (p.projects || []).map((pr, i) => `
-    <div class="mc-project">
-      <div class="mc-project-image">
-        <div class="mc-project-placeholder">
-          <i class="${pr.emoji || 'fa-solid fa-code'}"></i>
+    <div class="project-card">
+      <div class="project-image">
+        <div class="project-overlay">
+          <div class="project-links">
+            <a href="${tplEsc(pr.url || '#')}" class="project-link" title="View Project"><i class="fas fa-external-link-alt"></i></a>
+            <a href="#" class="project-link" title="View Code"><i class="fab fa-github"></i></a>
+          </div>
         </div>
+        <div class="project-placeholder"><i class="fas ${pr.emoji ? '' : 'fa-code'}"></i></div>
       </div>
-      <div class="mc-project-content">
-        <h3 class="mc-project-title">${tplEsc(pr.title)}</h3>
-        <p class="mc-project-desc">${tplEsc(pr.desc)}</p>
-        <div class="mc-project-tags">${(pr.tags || []).map(t => `<span class="mc-tag">${tplEsc(t)}</span>`).join('')}</div>
+      <div class="project-content">
+        <h3 class="project-title">${tplEsc(pr.title)}</h3>
+        <p class="project-description">${tplEsc(pr.desc)}</p>
+        <div class="project-tags">${(pr.tags || []).map(t => `<span class="tag">${tplEsc(t)}</span>`).join('')}</div>
       </div>
     </div>`).join('');
-  
-  const experiences = (p.experience || []).map((exp, i) => `
-    <div class="mc-exp">
-      <div class="mc-exp-header">
-        <span class="mc-exp-year">${tplEsc(exp.start)} – ${exp.current ? 'Present' : tplEsc(exp.end)}</span>
-        ${exp.current ? '<span class="mc-exp-badge">Current</span>' : ''}
+
+  const experiences = (p.experience || []).map((exp) => `
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <div class="timeline-year">${tplEsc(exp.start)} — ${exp.current ? 'Present' : tplEsc(exp.end)}</div>
+          ${exp.current ? '<div class="timeline-badge">Current</div>' : ''}
+        </div>
+        <h3 class="timeline-title">${tplEsc(exp.role)}</h3>
+        <div class="timeline-company"><i class="fas fa-building"></i> ${tplEsc(exp.company)}</div>
+        <p class="timeline-description">${tplEsc(exp.desc)}</p>
+        <div class="timeline-achievements">
+          ${(exp.achievements || []).map(a => `<div class="achievement-item"><i class="fas fa-check-circle"></i><span>${tplEsc(a)}</span></div>`).join('')}
+        </div>
+        <div class="timeline-tags">${(exp.tags || []).map(t => `<span class="tag">${tplEsc(t)}</span>`).join('')}</div>
       </div>
-      <h3 class="mc-exp-title">${tplEsc(exp.role)}</h3>
-      <p class="mc-exp-company"><i class="fas fa-building"></i> ${tplEsc(exp.company)}</p>
-      <p class="mc-exp-desc">${tplEsc(exp.desc)}</p>
-      <div class="mc-exp-tags">${(exp.tags || []).map(t => `<span class="mc-tag">${tplEsc(t)}</span>`).join('')}</div>
     </div>`).join('');
-  
+
   const stats = [
     { label: 'Projects', count: p.projects?.length || 0 },
     { label: 'Years Experience', count: p.experience?.length || 0 },
-    { label: 'Skills', count: p.skills?.length || 0 }
-  ].map(s => `<div class="mc-stat"><div class="mc-stat-num" data-count="${s.count}">0</div><div class="mc-stat-label">${tplEsc(s.label)}</div></div>`).join('');
-  
+    { label: 'Happy Clients', count: 30 }
+  ].map(s => `<div class="stat-item"><div class="stat-number" data-count="${s.count}">0</div><div class="stat-label">${tplEsc(s.label)}</div></div>`).join('');
+
   const app = document.getElementById('app');
   app.innerHTML = `
-  <section class="mc-hero" id="home">
-    <div class="mc-grid-bg"></div>
-    <div class="mc-particles" id="mcParticles"></div>
-    <div class="mc-container">
-      <div class="mc-hero-content">
-        <div class="mc-greeting">
-          <span class="mc-greeting-text">Hello, I'm</span>
-          <span class="mc-cursor">|</span>
-        </div>
-        <h1 class="mc-name">
-          <span class="mc-kw">const</span>
-          <span class="mc-op">=</span>
-          <span class="mc-val" id="mcNameVal">${tplEsc(p.name)}</span>
-          <span class="mc-sc">;</span>
-        </h1>
-        <div class="mc-title">
-          <span class="mc-comment">//</span>
-          <span class="mc-title-text">${tplEsc(p.title)}</span>
-        </div>
-        <p class="mc-desc">${tplEsc(p.tagline || 'Passionate developer creating exceptional digital experiences.')}</p>
-        <div class="mc-buttons">
-          <a href="#contact" class="mc-btn mc-btn-primary">Get In Touch <i class="fas fa-arrow-right"></i></a>
-          <a href="#projects" class="mc-btn mc-btn-secondary">View Projects <i class="fas fa-code"></i></a>
-        </div>
-        <div class="mc-social">
-          ${p.github ? `<a href="${tplEsc(p.github)}" class="mc-social-icon" target="_blank"><i class="fab fa-github"></i></a>` : ''}
-          ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" class="mc-social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>` : ''}
-          ${p.twitter ? `<a href="${tplEsc(p.twitter)}" class="mc-social-icon" target="_blank"><i class="fab fa-twitter"></i></a>` : ''}
-          ${p.email ? `<a href="mailto:${tplEsc(p.email)}" class="mc-social-icon"><i class="fas fa-envelope"></i></a>` : ''}
+  <!-- Loading Screen -->
+  <div class="loader-screen" id="loader">
+    <div class="loader-content">
+      <div class="loader-code-text">
+        <div class="code-line" data-line="1">const portfolio = {</div>
+        <div class="code-line" data-line="2">  loading: true,</div>
+        <div class="code-line" data-line="3">  status: 'initializing...'</div>
+        <div class="code-line" data-line="4">};</div>
+      </div>
+      <div class="loader-spinner-wrapper">
+        <div class="loader-spinner"></div>
+      </div>
+      <div class="loader-progress-wrapper">
+        <div class="loader-progress-bar"></div>
+      </div>
+      <div class="loader-percentage" id="loaderPercent">0%</div>
+    </div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="main-header" id="header">
+    <nav class="nav-container">
+      <div class="nav-brand">
+        <div class="brand-logo">
+          <span class="logo-bracket">&lt;</span>
+          <span class="logo-text">Dev</span>
+          <span class="logo-bracket">/&gt;</span>
         </div>
       </div>
-      <div class="mc-hero-image">
-        <div class="mc-profile-frame">
-          ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" class="mc-profile-img">` : `<div class="mc-profile-placeholder"><i class="fas fa-code"></i></div>`}
+      <div class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link active" data-section="home"><i class="fas fa-home"></i><span class="nav-text" data-text-en="Home" data-text-ar="الرئيسية">Home</span></a>
+        <a href="#about" class="nav-link" data-section="about"><i class="fas fa-user"></i><span class="nav-text" data-text-en="About" data-text-ar="عني">About</span></a>
+        <a href="#skills" class="nav-link" data-section="skills"><i class="fas fa-code"></i><span class="nav-text" data-text-en="Skills" data-text-ar="المهارات">Skills</span></a>
+        <a href="#experience" class="nav-link" data-section="experience"><i class="fas fa-briefcase"></i><span class="nav-text" data-text-en="Experience" data-text-ar="الخبرة">Experience</span></a>
+        <a href="#projects" class="nav-link" data-section="projects"><i class="fas fa-rocket"></i><span class="nav-text" data-text-en="Projects" data-text-ar="المشاريع">Projects</span></a>
+        <a href="#contact" class="nav-link" data-section="contact"><i class="fas fa-envelope"></i><span class="nav-text" data-text-en="Contact" data-text-ar="التواصل">Contact</span></a>
+      </div>
+      <div class="nav-controls">
+        <button class="lang-toggle" id="langToggle" title="Toggle Language"><i class="fas fa-language"></i><span class="lang-text">AR</span></button>
+        <button class="theme-toggle" id="themeToggle" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+        <button class="menu-toggle" id="menuToggle" title="Toggle Menu"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-background">
+        <div class="code-grid-bg"></div>
+        <div class="floating-particles" id="particles"></div>
+      </div>
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-greeting">
+            <span class="greeting-text" data-text-en="Hello, I'm" data-text-ar="مرحباً، أنا">Hello, I'm</span>
+            <span class="greeting-cursor">|</span>
+          </div>
+          <h1 class="hero-name" id="heroName">
+            <span class="name-prefix">const</span>
+            <span class="name-operator">=</span>
+            <span class="name-value" id="heroNameVal">${tplEsc(p.name)}</span>
+            <span class="name-suffix">;</span>
+          </h1>
+          <div class="hero-title">
+            <span class="title-prefix">//</span>
+            <span class="title-text" data-text-en="${tplEsc(p.title)}" data-text-ar="${tplEsc(p.title)}">${tplEsc(p.title)}</span>
+          </div>
+          <p class="hero-description" data-text-en="${tplEsc(p.tagline || 'Passionate developer creating exceptional digital experiences with modern technologies.')}" data-text-ar="${tplEsc(p.tagline || 'مطور شغوف بإنشاء تجارب رقمية استثنائية باستخدام التقنيات الحديثة.')}">
+            ${tplEsc(p.tagline || 'Passionate developer creating exceptional digital experiences with modern technologies.')}
+          </p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary"><span data-text-en="Get In Touch" data-text-ar="تواصل معي">Get In Touch</span><i class="fas fa-arrow-right"></i></a>
+            <a href="#projects" class="btn btn-secondary"><span data-text-en="View Projects" data-text-ar="عرض المشاريع">View Projects</span><i class="fas fa-code"></i></a>
+          </div>
+          <div class="hero-social">
+            ${p.github ? `<a href="${tplEsc(p.github)}" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>` : ''}
+            ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : ''}
+            ${p.twitter ? `<a href="${tplEsc(p.twitter)}" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>` : ''}
+            ${p.email ? `<a href="mailto:${tplEsc(p.email)}" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>` : ''}
+          </div>
         </div>
-        <div class="mc-badge mc-badge-1"><i class="fab fa-react"></i><div class="mc-badge-content"><span class="mc-badge-title">React</span><span class="mc-badge-libs">Redux, Router, Hooks</span></div></div>
-        <div class="mc-badge mc-badge-2"><i class="fab fa-node-js"></i><div class="mc-badge-content"><span class="mc-badge-title">Node.js</span><span class="mc-badge-libs">Express, Socket.io</span></div></div>
-        <div class="mc-badge mc-badge-3"><i class="fab fa-js"></i><div class="mc-badge-content"><span class="mc-badge-title">JavaScript</span><span class="mc-badge-libs">ES6+, TypeScript</span></div></div>
+        <div class="hero-image-wrapper">
+          <div class="hero-image-container">
+            <div class="profile-image-glow"></div>
+            <div class="profile-image-frame">
+              <div class="profile-image" id="profileImage">
+                ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" class="profile-img">` : `<div class="profile-placeholder"><i class="fas fa-code"></i></div>`}
+              </div>
+            </div>
+            <div class="floating-badge badge-1"><i class="fab fa-react"></i><div class="badge-content"><span class="badge-title">React</span><span class="badge-libs">Redux, Router, Hooks</span></div></div>
+            <div class="floating-badge badge-2"><i class="fab fa-node-js"></i><div class="badge-content"><span class="badge-title">Node.js</span><span class="badge-libs">Express, Socket.io, MongoDB</span></div></div>
+            <div class="floating-badge badge-3"><i class="fab fa-js"></i><div class="badge-content"><span class="badge-title">JavaScript</span><span class="badge-libs">ES6+, TypeScript, jQuery</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator"><div class="scroll-mouse"><div class="scroll-wheel"></div></div><span class="scroll-text" data-text-en="Scroll Down" data-text-ar="انتقل للأسفل">Scroll Down</span></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="About Me" data-text-ar="عني">About Me</span><span class="title-bracket">/&gt;</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="about-content">
+          <div class="about-text-wrapper">
+            <div class="about-intro">
+              <p class="about-text" data-text-en="${tplEsc(p.tagline || 'I am a passionate Full Stack Developer with over 5 years of experience...')}" data-text-ar="${tplEsc(p.tagline || 'أنا مطور Full Stack شغوف...')}">
+                ${tplEsc(p.tagline || 'I am a passionate Full Stack Developer with over 5 years of experience in building modern web applications.')}
+              </p>
+            </div>
+            <div class="about-stats">${stats}</div>
+          </div>
+          <div class="about-image-wrapper">
+            <div class="about-image-container">
+              <div class="code-block">
+                <div class="code-line"><span class="code-keyword">const</span> <span class="code-variable">developer</span> <span class="code-operator">=</span> <span class="code-brace">{</span></div>
+                <div class="code-line indent"><span class="code-property">name</span><span class="code-operator">:</span> <span class="code-string">'${tplEsc(p.name)}'</span><span class="code-comma">,</span></div>
+                <div class="code-line indent"><span class="code-property">title</span><span class="code-operator">:</span> <span class="code-string">'${tplEsc(p.title)}'</span><span class="code-comma">,</span></div>
+                <div class="code-line indent"><span class="code-property">skills</span><span class="code-operator">:</span> <span class="code-bracket">[</span><span class="code-string">'${(p.skills || []).slice(0,3).join("','")}'</span><span class="code-bracket">]</span><span class="code-comma">,</span></div>
+                <div class="code-line"><span class="code-brace">}</span><span class="code-semicolon">;</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Skills" data-text-ar="المهارات">Skills</span><span class="title-bracket">/&gt;</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3 class="category-title" data-text-en="Frontend" data-text-ar="الواجهة الأمامية">Frontend</h3>
+            <div class="skill-items">
+              ${(['React','Vue.js','TypeScript','Next.js']).map(s => {
+                const has = (p.skills || []).includes(s);
+                return has ? `<div class="skill-item" data-skill="${tplEsc(s)}" data-percent="95"><div class="skill-header"><span class="skill-name">${tplEsc(s)}</span><span class="skill-percent">0%</span></div><div class="skill-bar"><div class="skill-progress"></div></div></div>` : '';
+              }).join('')}
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3 class="category-title" data-text-en="Backend" data-text-ar="الخلفية">Backend</h3>
+            <div class="skill-items">
+              ${(['Node.js','Express','MongoDB','PostgreSQL']).map(s => {
+                const has = (p.skills || []).includes(s);
+                return has ? `<div class="skill-item" data-skill="${tplEsc(s)}" data-percent="92"><div class="skill-header"><span class="skill-name">${tplEsc(s)}</span><span class="skill-percent">0%</span></div><div class="skill-bar"><div class="skill-progress"></div></div></div>` : '';
+              }).join('')}
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3 class="category-title" data-text-en="Tools & Others" data-text-ar="الأدوات وغيرها">Tools & Others</h3>
+            <div class="skill-items">
+              ${(['Git','Docker','AWS','Figma']).map(s => {
+                const has = (p.skills || []).includes(s);
+                return has ? `<div class="skill-item" data-skill="${tplEsc(s)}" data-percent="75"><div class="skill-header"><span class="skill-name">${tplEsc(s)}</span><span class="skill-percent">0%</span></div><div class="skill-bar"><div class="skill-progress"></div></div></div>` : '';
+              }).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Experience" data-text-ar="الخبرة">Experience</span><span class="title-bracket">/&gt;</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="timeline">
+          ${experiences || '<div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><h3 class="timeline-title">No experience yet</h3><p class="timeline-description">Add experience from your dashboard.</p></div></div>'}
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Projects" data-text-ar="المشاريع">Projects</span><span class="title-bracket">/&gt;</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="projects-grid">
+          ${projects || '<p class="empty-msg">No projects yet.</p>'}
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Contact" data-text-ar="التواصل">Contact</span><span class="title-bracket">/&gt;</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="contact-content">
+          <div class="contact-info">
+            ${p.email ? `<div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-details"><h4 class="contact-label" data-text-en="Email" data-text-ar="البريد الإلكتروني">Email</h4><a href="mailto:${tplEsc(p.email)}" class="contact-value">${tplEsc(p.email)}</a></div></div>` : ''}
+            ${p.phone ? `<div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-details"><h4 class="contact-label" data-text-en="Phone" data-text-ar="الهاتف">Phone</h4><a href="tel:${tplEsc(p.phone)}" class="contact-value">${tplEsc(p.phone)}</a></div></div>` : ''}
+            ${p.location ? `<div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-details"><h4 class="contact-label" data-text-en="Location" data-text-ar="الموقع">Location</h4><span class="contact-value">${tplEsc(p.location)}</span></div></div>` : ''}
+          </div>
+          <form class="contact-form" id="contactForm" onsubmit="event.preventDefault();alert('${AppState ? (AppState.currentLang === 'ar' ? 'تم إرسال الرسالة بنجاح!' : 'Message sent successfully!') : 'Message sent successfully!'}');this.reset();">
+            <div class="form-group"><input type="text" class="form-input" placeholder="Name" data-placeholder-en="Name" data-placeholder-ar="الاسم" required></div>
+            <div class="form-group"><input type="email" class="form-input" placeholder="Email" data-placeholder-en="Email" data-placeholder-ar="البريد الإلكتروني" required></div>
+            <div class="form-group"><input type="text" class="form-input" placeholder="Subject" data-placeholder-en="Subject" data-placeholder-ar="الموضوع" required></div>
+            <div class="form-group"><textarea class="form-input form-textarea" rows="5" placeholder="Message" data-placeholder-en="Message" data-placeholder-ar="الرسالة" required></textarea></div>
+            <button type="submit" class="btn btn-primary btn-submit"><span data-text-en="Send Message" data-text-ar="إرسال الرسالة">Send Message</span><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-text-wrapper">
+          <p class="footer-text"><span class="footer-copyright">© 2025 ${tplEsc(p.name)} Portfolio</span> <span class="footer-divider">•</span> <span class="footer-built">Built with passion and code</span></p>
+          <p class="footer-author"><span class="footer-by-text" data-text-en="by" data-text-ar="بواسطة">by</span> <a href="#" class="footer-author-link"><i class="fas fa-code"></i><span>${tplEsc(p.name)}</span></a></p>
+        </div>
+        <div class="footer-social">
+          ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" class="footer-social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>` : ''}
+          ${p.github ? `<a href="${tplEsc(p.github)}" class="footer-social-link" title="GitHub"><i class="fab fa-github"></i></a>` : ''}
+          ${p.twitter ? `<a href="${tplEsc(p.twitter)}" class="footer-social-link" title="Twitter"><i class="fab fa-twitter"></i></a>` : ''}
+        </div>
       </div>
     </div>
-    <div class="mc-scroll-ind"><div class="mc-mouse"><div class="mc-wheel"></div></div><span>Scroll Down</span></div>
-  </section>
-  
-  <section class="mc-section" id="about">
-    <div class="mc-container">
-      <div class="mc-sec-header"><span class="mc-sec-num">01</span><h2 class="mc-sec-title"><span class="mc-br"><</span><span>About Me</span><span class="mc-br">/></span></h2><div class="mc-line"></div></div>
-      <div class="mc-about-grid">
-        <div>
-          <p class="mc-about-text">${tplEsc(p.tagline || 'Experienced developer passionate about building modern web applications.')}</p>
-          <div class="mc-stats">${stats}</div>
-        </div>
-        <div class="mc-code-block">
-          <div class="mc-code-line"><span class="mc-ckw">const</span> <span class="mc-cvar">developer</span> <span class="mc-cop">=</span> <span class="mc-cbr">{</span></div>
-          <div class="mc-code-line indent"><span class="mc-cprop">name</span><span class="mc-cop">:</span> <span class="mc-cstr">'${tplEsc(p.name)}'</span><span class="mc-cca">,</span></div>
-          <div class="mc-code-line indent"><span class="mc-cprop">title</span><span class="mc-cop">:</span> <span class="mc-cstr">'${tplEsc(p.title)}'</span><span class="mc-cca">,</span></div>
-          <div class="mc-code-line indent"><span class="mc-cprop">skills</span><span class="mc-cop">:</span> <span class="mc-cbr">[</span><span class="mc-cstr">'${(p.skills || []).slice(0,3).join("','")}'</span><span class="mc-cbr">]</span><span class="mc-cca">,</span></div>
-          <div class="mc-code-line"><span class="mc-cbr">}</span><span class="mc-csc">;</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="mc-section" id="skills">
-    <div class="mc-container">
-      <div class="mc-sec-header"><span class="mc-sec-num">02</span><h2 class="mc-sec-title"><span class="mc-br"><</span><span>Skills</span><span class="mc-br">/></span></h2><div class="mc-line"></div></div>
-      <div class="mc-skills-grid">
-        <div class="mc-skill-cat">
-          <h3 class="mc-cat-title">Frontend</h3>
-          <div class="mc-skill-items">${['React','Vue','TypeScript','Next.js'].map(s => (p.skills||[]).includes(s) ? `<div class="mc-skill"><div class="mc-skill-head"><span>${s}</span><span class="mc-skill-pct" data-pct="90">0%</span></div><div class="mc-skill-bar"><div class="mc-skill-prog"></div></div></div>` : '').join('')}</div>
-        </div>
-        <div class="mc-skill-cat">
-          <h3 class="mc-cat-title">Backend</h3>
-          <div class="mc-skill-items">${['Node.js','Express','MongoDB','PostgreSQL'].map(s => (p.skills||[]).includes(s) ? `<div class="mc-skill"><div class="mc-skill-head"><span>${s}</span><span class="mc-skill-pct" data-pct="85">0%</span></div><div class="mc-skill-bar"><div class="mc-skill-prog"></div></div></div>` : '').join('')}</div>
-        </div>
-        <div class="mc-skill-cat">
-          <h3 class="mc-cat-title">Tools</h3>
-          <div class="mc-skill-items">${['Git','Docker','AWS','Figma'].map(s => (p.skills||[]).includes(s) ? `<div class="mc-skill"><div class="mc-skill-head"><span>${s}</span><span class="mc-skill-pct" data-pct="80">0%</span></div><div class="mc-skill-bar"><div class="mc-skill-prog"></div></div></div>` : '').join('')}</div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="mc-section" id="experience">
-    <div class="mc-container">
-      <div class="mc-sec-header"><span class="mc-sec-num">03</span><h2 class="mc-sec-title"><span class="mc-br"><</span><span>Experience</span><span class="mc-br">/></span></h2><div class="mc-line"></div></div>
-      <div class="mc-timeline">${experiences || '<p class="mc-empty">No experience data yet.</p>'}</div>
-    </div>
-  </section>
-  
-  <section class="mc-section" id="projects">
-    <div class="mc-container">
-      <div class="mc-sec-header"><span class="mc-sec-num">04</span><h2 class="mc-sec-title"><span class="mc-br"><</span><span>Projects</span><span class="mc-br">/></span></h2><div class="mc-line"></div></div>
-      <div class="mc-projects-grid">${projects || '<p class="mc-empty">No projects yet.</p>'}</div>
-    </div>
-  </section>
-  
-  <section class="mc-section" id="contact">
-    <div class="mc-container">
-      <div class="mc-sec-header"><span class="mc-sec-num">05</span><h2 class="mc-sec-title"><span class="mc-br"><</span><span>Contact</span><span class="mc-br">/></span></h2><div class="mc-line"></div></div>
-      <div class="mc-contact-grid">
-        <div class="mc-contact-info">
-          ${p.email ? `<div class="mc-contact-item"><div class="mc-ci-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:${tplEsc(p.email)}">${tplEsc(p.email)}</a></div></div>` : ''}
-          ${p.phone ? `<div class="mc-contact-item"><div class="mc-ci-icon"><i class="fas fa-phone"></i></div><div><h4>Phone</h4><a href="tel:${tplEsc(p.phone)}">${tplEsc(p.phone)}</a></div></div>` : ''}
-          ${p.location ? `<div class="mc-contact-item"><div class="mc-ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Location</h4><span>${tplEsc(p.location)}</span></div></div>` : ''}
-        </div>
-        <form class="mc-form" onsubmit="event.preventDefault();alert('Message sent!');this.reset()">
-          <input type="text" class="mc-input" placeholder="Name" required>
-          <input type="email" class="mc-input" placeholder="Email" required>
-          <input type="text" class="mc-input" placeholder="Subject" required>
-          <textarea class="mc-input mc-textarea" placeholder="Message" rows="5" required></textarea>
-          <button class="mc-btn mc-btn-primary" type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
-        </form>
-      </div>
-    </div>
-  </section>
-  
+  </footer>
+
   ${tplFoot(p)}`;
-  
+
   window.scrollTo(0, 0);
-  
+
   setTimeout(() => {
     initModerncvAnimations();
   }, 100);
@@ -753,28 +897,28 @@ function renderModerncv(p) {
 
 function initModerncvAnimations() {
   if (typeof anime === 'undefined') return;
-  
-  const nameVal = document.getElementById('mcNameVal');
+
+  const nameVal = document.getElementById('heroNameVal');
   if (nameVal) {
     const txt = nameVal.textContent;
     nameVal.textContent = '';
     anime({ targets: {v:0}, v: txt.length, duration: 1500, delay: 500, easing: 'easeInOutQuad', update: a => nameVal.textContent = txt.substring(0, Math.floor(a.animatables[0].target.v)) });
   }
-  
-  anime({ targets: '.mc-skill-prog', width: el => el.parentElement.previousElementSibling?.querySelector('.mc-skill-pct')?.dataset.pct + '%' || '90%', duration: 2000, delay: anime.stagger(100), easing: 'easeOutExpo' });
-  anime({ targets: '.mc-skill-pct', innerHTML: [0, el => el.dataset.pct], duration: 2000, easing: 'easeOutExpo', round: 1, update: a => a.animatables[0].target.textContent = Math.floor(a.animatables[0].target.innerHTML) + '%' });
-  
-  document.querySelectorAll('.mc-stat-num').forEach(el => {
+
+  anime({ targets: '.skill-progress', width: el => el.parentElement.querySelector('.skill-percent')?.dataset?.pct || '90%', duration: 2000, delay: anime.stagger(100), easing: 'easeOutExpo' });
+  anime({ targets: '.skill-percent', innerHTML: [0, el => el.parentElement?.previousElementSibling?.dataset?.pct || '90'], duration: 2000, easing: 'easeOutExpo', round: 1, update: a => a.animatables[0].target.textContent = Math.floor(a.animatables[0].target.innerHTML) + '%' });
+
+  document.querySelectorAll('.stat-number').forEach(el => {
     const target = parseInt(el.dataset.count || 0);
     anime({ targets: {v:0}, v: target, duration: 2000, easing: 'easeOutExpo', update: a => el.textContent = Math.floor(a.animatables[0].target.v) });
   });
-  
-  const particles = document.getElementById('mcParticles');
+
+  const particles = document.getElementById('particles');
   if (particles) {
-    const symbols = ['{','}','[',']','(',')','<','>','/','*','=','+','-',';',':','&','|'];
+    const symbols = ['{','}','[',']','(',')','<','>','/','*','=','+','-',';',':','&','|','$','#','@'];
     for(let i=0;i<20;i++) {
       const p = document.createElement('div');
-      p.className = 'mc-particle';
+      p.className = 'particle';
       p.textContent = symbols[Math.floor(Math.random()*symbols.length)];
       p.style.left = Math.random()*100+'%';
       p.style.animationDelay = Math.random()*15+'s';
@@ -782,9 +926,18 @@ function initModerncvAnimations() {
       particles.appendChild(p);
     }
   }
-  
-  document.querySelectorAll('.mc-project, .mc-exp, .mc-skill-cat, .mc-contact-item').forEach((el,i) => {
+
+  document.querySelectorAll('.project-card, .timeline-item, .skill-category, .contact-item').forEach((el,i) => {
     anime({ targets: el, opacity: [0,1], translateY: [30,0], delay: i*80, duration: 800, easing: 'easeOutExpo' });
+  });
+
+  document.querySelectorAll('.section').forEach(section => {
+    if (typeof IntersectionObserver !== 'undefined') {
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+      obs.observe(section);
+    }
   });
 }
 
