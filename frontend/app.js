@@ -922,15 +922,24 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Motion Theme (Dominique R. style) initialization
   const initMotionTheme = () => {
-    const isMotion = document.body.dataset.template === 'motion';
-    if (!isMotion) return;
+    const template = document.body.dataset.template;
+    const isMotion = template === 'motion';
+    const isVisual = ['gallery', 'studio', 'noir'].includes(template);
+    if (!isMotion && !isVisual) return;
 
-    const bar = document.getElementById('bar') || document.getElementById('scrollProgress');
+    const bar = document.getElementById('bar');
 
     /* Scroll progress bar */
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      if (max > 0 && bar) bar.style.transform = `scaleX(${scrollY / max})`;
+      if (max > 0 && bar) {
+        bar.style.transform = `scaleX(${scrollY / max})`;
+        // Use indigo for visual themes, orange for motion
+        const template = document.body.dataset.template;
+        const isVisual = ['gallery', 'studio', 'noir'].includes(template);
+        if (isVisual) bar.style.background = '#4f46e5';
+        else bar.style.background = '#ff4d1c';
+      }
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();

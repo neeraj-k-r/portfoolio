@@ -345,7 +345,7 @@ function pageGallery(p, wIdx) {
     <section class="wrap" style="padding-top:10px"><div class="works-grid" style="margin-top:18px">${works.map((k, n) => `
       <a class="work-card" href="/?w=${n}" style="text-decoration:none;color:inherit"><img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
       <div class="work-meta"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}</div></a>`).join('') || emptyMsg}</div></section>`;
-  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div>${nav(p)}${body}${foot(p)}</body></html>`;
+  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" id="scrollProgress" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}</body></html>`;
 }
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
