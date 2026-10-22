@@ -7,7 +7,7 @@ const ORIGIN = 'https://portfoolio.me';
 const RESERVED = new Set(['www', 'app', 'api', 'admin', 'mail', 'blog', 'portfoolio', 'netlify']);
 
 const SEC_HEADERS = {
-  'Content-Security-Policy': "default-src 'self' https://portfoolio.me https://*.portfoolio.me; script-src 'self' 'unsafe-inline' https://portfoolio.me https://*.portfoolio.me https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://portfoolio.me https://*.portfoolio.me https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com; font-src 'self' https://portfoolio.me https://*.portfoolio.me https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://portfoolio.me https://*.portfoolio.me https://oorcivmymcokbjiawkig.supabase.co https://*.supabase.co https://res.cloudinary.com https://api.cloudinary.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
+  'Content-Security-Policy': "default-src 'self' https://portfoolio.me https://*.portfoolio.me; script-src 'self' 'unsafe-inline' https://portfoolio.me https://*.portfoolio.me https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://portfoolio.me https://*.portfoolio.me https://fonts.googleapis.com https://fonts.gstatic.com https://cdnjs.cloudflare.com https://unicons.iconscout.com https://unpkg.com https://cdn.jsdelivr.net; font-src 'self' https://portfoolio.me https://*.portfoolio.me https://fonts.gstatic.com https://cdnjs.cloudflare.com https://unicons.iconscout.com https://unpkg.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://portfoolio.me https://*.portfoolio.me https://oorcivmymcokbjiawkig.supabase.co https://*.supabase.co https://res.cloudinary.com https://api.cloudinary.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'",
   'X-Frame-Options': 'DENY',
   'X-Content-Type-Options': 'nosniff',
   'Referrer-Policy': 'strict-origin-when-cross-origin',
@@ -202,10 +202,14 @@ function head(p, tpl) {
 <link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="/style.css?v=mc2"><link rel="stylesheet" href="/templates.css?v=mc2"><link rel="stylesheet" href="/resume.css?v=mc2">
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="/style.css?v=uc1"><link rel="stylesheet" href="/templates.css?v=uc1"><link rel="stylesheet" href="/resume.css?v=uc1">
 ${mcvStyle}
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script></head>`;
 }
 function nav(p) {
@@ -1297,11 +1301,897 @@ ${head(p, 'moderncv')}
 </body>
 </html>`;
 }
+
+function pageUltracode(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Full Stack Developer');
+  const tagline = esc(p.tagline || 'I have high level experience in web design, development knowledge and producing quality work');
+  const bio = esc(p.bio || p.desc || p.tagline || `I'm a dedicated web developer with extensive knowledge and years of experience, delivering high-impact solutions across modern web technologies, UI/UX architecture, and systems engineering.`);
+  const email = esc(p.email || '');
+  const phone = esc(p.phone || '');
+  const location = esc(p.location || '');
+  const logoLetter = (p.name || 'M').trim().charAt(0).toUpperCase();
+
+  const avatarImg = (p.avatarUrl || p.avatar_url)
+    ? esc(p.avatarUrl || p.avatar_url)
+    : 'https://i.postimg.cc/W1YZxTpJ/about-img.jpg';
+
+  // --- Real Qualifications (Education & Experience) ---
+  const rawExp = (Array.isArray(p.experience) && p.experience.length)
+    ? p.experience
+    : (p.resume && Array.isArray(p.resume.experience) && p.resume.experience.length)
+      ? p.resume.experience
+      : [];
+
+  const rawEdu = (Array.isArray(p.education) && p.education.length)
+    ? p.education
+    : (p.resume && Array.isArray(p.resume.education) && p.resume.education.length)
+      ? p.resume.education
+      : [];
+
+  const expBoxSubtitle = rawExp.length > 0 ? `${rawExp.length}+ Roles` : 'No experience';
+
+  let eduTimelineHtml = '';
+  if (rawEdu.length > 0) {
+    eduTimelineHtml = rawEdu.map(ed => `
+      <div class="timeline-item">
+        <div class="circle-dot"></div>
+        <h3 class="timeline-title">${esc(ed.institution || ed.school || ed.college || 'University')}</h3>
+        <p class="timeline-text">${esc(ed.degree || ed.field || ed.major || 'Degree / Diploma')}</p>
+        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>${esc(ed.year || ed.period || ed.dates || 'Completed')}</span>
+      </div>
+    `).join('');
+  } else {
+    eduTimelineHtml = `
+      <div class="timeline-item">
+        <div class="circle-dot"></div>
+        <h3 class="timeline-title">Continuous Learning & Engineering</h3>
+        <p class="timeline-text">Self-taught software development, algorithms, web platforms</p>
+        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>Ongoing</span>
+      </div>
+    `;
+  }
+
+  let expTimelineHtml = '';
+  if (rawExp.length > 0) {
+    expTimelineHtml = rawExp.map(ex => `
+      <div class="timeline-item">
+        <div class="circle-dot"></div>
+        <h3 class="timeline-title">${esc(ex.company || ex.organization || 'Tech Company')}</h3>
+        <p class="timeline-text">${esc(ex.role || ex.title || ex.position || 'Software Developer')}</p>
+        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>${esc(ex.period || ex.dates || ex.duration || 'Past Experience')}</span>
+      </div>
+    `).join('');
+  } else {
+    expTimelineHtml = `
+      <div class="timeline-item">
+        <div class="circle-dot"></div>
+        <h3 class="timeline-title">No prior industry experience listed</h3>
+        <p class="timeline-text">Open for junior developer positions, internships, and project collaborations</p>
+        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>Open to work</span>
+      </div>
+    `;
+  }
+
+  // --- Real Skills Derivation ---
+  const skillMap = new Map();
+  function addSkill(raw, bonusCount) {
+    let s = String(raw || '').trim();
+    if (!s || s.toLowerCase() === 'fork') return;
+    const lower = s.toLowerCase();
+    let canonical = s;
+    let normKey = lower;
+    if (lower === 'js') { normKey = 'javascript'; canonical = 'JavaScript'; }
+    else if (lower === 'ts') { normKey = 'typescript'; canonical = 'TypeScript'; }
+    else if (lower === 'react' || lower === 'reactjs') { normKey = 'react'; canonical = 'React'; }
+    else if (lower === 'node' || lower === 'nodejs' || lower === 'node.js') { normKey = 'nodejs'; canonical = 'Node.js'; }
+    else if (lower === 'next' || lower === 'nextjs' || lower === 'next.js') { normKey = 'nextjs'; canonical = 'Next.js'; }
+    else if (lower === 'vue' || lower === 'vuejs' || lower === 'vue.js') { normKey = 'vuejs'; canonical = 'Vue.js'; }
+    else if (lower === 'html' || lower === 'html5') { normKey = 'html'; canonical = 'HTML'; }
+    else if (lower === 'css' || lower === 'css3') { normKey = 'css'; canonical = 'CSS'; }
+    else if (lower === 'py' || lower === 'python') { normKey = 'python'; canonical = 'Python'; }
+
+    const cur = skillMap.get(normKey);
+    if (!cur) {
+      skillMap.set(normKey, { name: canonical, count: bonusCount || 1 });
+    } else {
+      cur.count += (bonusCount || 1);
+    }
+  }
+
+  const explicitSkills = Array.isArray(p.skills) ? p.skills : (typeof p.skills === 'string' ? p.skills.split(',') : []);
+  explicitSkills.forEach(s => addSkill(s, 3));
+
+  if (Array.isArray(p.projects)) {
+    p.projects.forEach(pr => {
+      const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+      techs.forEach(t => addSkill(t, 2));
+    });
+  }
+
+  if (p.resume && Array.isArray(p.resume.skills)) {
+    p.resume.skills.forEach(s => addSkill(s, 2));
+  }
+
+  const allSkillsList = Array.from(skillMap.values()).sort((a, b) => b.count - a.count);
+
+  const feKeywords = ['react', 'vue', 'angular', 'svelte', 'html', 'css', 'javascript', 'typescript', 'tailwind', 'bootstrap', 'sass', 'next', 'frontend', 'ui', 'redux', 'web', 'dom'];
+  const designKeywords = ['figma', 'sketch', 'photoshop', 'illustrator', 'ui/ux', 'design', 'canva', 'adobexd', 'wireframe', 'prototype'];
+  const beKeywords = ['node', 'express', 'python', 'django', 'flask', 'php', 'sql', 'postgres', 'mysql', 'mongo', 'firebase', 'supabase', 'aws', 'docker', 'api', 'backend', 'java', 'golang', 'c++', 'c#', 'rust', 'graphql', 'redis'];
+
+  const feSkills = [];
+  const designSkills = [];
+  const beSkills = [];
+
+  allSkillsList.forEach(sk => {
+    const k = sk.name.toLowerCase().replace(/[^a-z0-9]/g, '');
+    const pct = Math.min(95, 75 + Math.min(20, sk.count * 4));
+    const item = { name: sk.name, pct };
+
+    if (designKeywords.some(w => k.includes(w))) {
+      designSkills.push(item);
+    } else if (feKeywords.some(w => k.includes(w))) {
+      feSkills.push(item);
+    } else if (beKeywords.some(w => k.includes(w))) {
+      beSkills.push(item);
+    } else {
+      if (feSkills.length <= beSkills.length) feSkills.push(item);
+      else beSkills.push(item);
+    }
+  });
+
+  if (feSkills.length === 0 && beSkills.length === 0 && designSkills.length === 0) {
+    feSkills.push({ name: 'HTML & CSS', pct: 90 }, { name: 'JavaScript', pct: 85 }, { name: 'Responsive Design', pct: 90 });
+    beSkills.push({ name: 'Web Services & APIs', pct: 80 }, { name: 'Git & Deployment', pct: 85 });
+  }
+
+  function renderSkillBars(list) {
+    if (!list || !list.length) {
+      return '<p style="color:var(--text-color);font-size:var(--small-font-size);padding:1rem 0">No skills listed in this category.</p>';
+    }
+    return list.map(s => `
+      <div class="skills-data">
+        <div class="skills-titles">
+          <h3 class="skills-name">${esc(s.name)}</h3>
+          <span class="skills-number">${s.pct}%</span>
+        </div>
+        <div class="skills-bar">
+          <span class="skills-percentage" style="width: ${s.pct}%;"></span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // --- Real Projects Mapping ---
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const defaultImages = [
+    'https://i.postimg.cc/43Th5VXJ/work-1.png',
+    'https://i.postimg.cc/sXLjnC5p/work-2.png',
+    'https://i.postimg.cc/QNB1jXYZ/work-3.png',
+    'https://i.postimg.cc/s2DGqyG8/work-4.png',
+    'https://i.postimg.cc/TYVyPhrF/work-5.png',
+    'https://i.postimg.cc/wMdqKcbv/work-6.png'
+  ];
+
+  let worksHtml = '';
+  if (projects.length > 0) {
+    worksHtml = projects.map((pr, idx) => {
+      const img = pr.image || pr.img || defaultImages[idx % defaultImages.length];
+      const prTitle = esc(pr.title || `Project ${idx + 1}`);
+      const prDesc = esc(pr.desc || 'A modern digital application crafted with attention to performance, UI/UX, and robust architecture.');
+      const techs = (Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : [])).map(t => esc(t)).join(', ') || 'Modern Web';
+      const prUrl = pr.url || pr.demoUrl || '#';
+      const liveDomain = prUrl && prUrl !== '#' ? prUrl.replace(/^https?:\/\//, '').split('/')[0] : 'View live demo';
+      
+      const fullText = (prTitle + ' ' + prDesc + ' ' + techs).toLowerCase();
+      let cat = 'web';
+      if (/app|mobile|android|ios|flutter|react native/.test(fullText)) cat = 'app';
+      else if (/design|ui|ux|figma|branding|logo/.test(fullText)) cat = 'design';
+
+      return `
+        <div class="work-card mix ${cat}">
+          <img src="${img}" alt="${prTitle}" class="work-img">
+          <h3 class="work-title">${prTitle}</h3>
+          <span class="work-button" data-idx="${idx}">Demo <i class="uil uil-arrow-right work-button-icon"></i></span>
+
+          <div class="portfolio-item-details">
+            <h3 class="details-title">${prTitle}</h3>
+            <p class="details-description">${prDesc}</p>
+            <ul class="details-info">
+              <li>Category - <span>${cat.toUpperCase()}</span></li>
+              <li>Technologies - <span>${techs}</span></li>
+              <li>Role - <span>${title}</span></li>
+              <li>View - <span><a href="${esc(prUrl)}" target="_blank" rel="noopener">${liveDomain}</a></span></li>
+            </ul>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } else {
+    worksHtml = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1.5rem; background: var(--box-color); border-radius: .5rem;">
+        <h3 style="font-size: var(--h3-font-size); margin-bottom: var(--mb1);">No projects listed yet</h3>
+        <p style="color: var(--text-color); font-size: var(--normal-font-size);">Add projects in the studio editor to display them in this gallery.</p>
+      </div>
+    `;
+  }
+
+  // Social Links
+  const githubLink = p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener" class="home-social-link" title="GitHub"><i class="uil uil-github-alt"></i></a>` : '';
+  const linkedinLink = p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener" class="home-social-link" title="LinkedIn"><i class="uil uil-linkedin-alt"></i></a>` : '';
+  const instagramLink = wShowInsta(p) ? `<a href="${esc(p.instagram)}" target="_blank" rel="noopener" class="home-social-link" title="Instagram"><i class="uil uil-instagram"></i></a>` : '';
+  const twitterLink = p.twitter ? `<a href="${esc(p.twitter)}" target="_blank" rel="noopener" class="home-social-link" title="Twitter"><i class="uil uil-twitter"></i></a>` : '';
+
+  const footerGithub = p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-github-alt"></i></a>` : '';
+  const footerLinkedin = p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-linkedin-alt"></i></a>` : '';
+  const footerInstagram = wShowInsta(p) ? `<a href="${esc(p.instagram)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-instagram"></i></a>` : '';
+  const footerTwitter = p.twitter ? `<a href="${esc(p.twitter)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-twitter"></i></a>` : '';
+
+  const ultracodeScript = `
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Toggling Skill Tabs
+  const tabs = document.querySelectorAll('.skills-header[data-target]');
+  const tabContents = document.querySelectorAll('.skills-group[data-content]');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = document.querySelector(tab.dataset.target);
+      tabContents.forEach(tc => tc.classList.remove('skills-active'));
+      if (target) target.classList.add('skills-active');
+      tabs.forEach(t => t.classList.remove('skills-active'));
+      tab.classList.add('skills-active');
+    });
+  });
+
+  // 2. Work Filters
+  const filterBtns = document.querySelectorAll('.work-filters .work-item');
+  const workCards = document.querySelectorAll('.work-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active-work'));
+      btn.classList.add('active-work');
+      const filter = btn.getAttribute('data-filter');
+      workCards.forEach(card => {
+        if (filter === 'all' || card.classList.contains(filter.replace('.', ''))) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // 3. Portfolio Popup Modal
+  const popup = document.getElementById('portfolioPopup');
+  const popupClose = document.getElementById('portfolioPopupClose');
+  const popupImg = document.getElementById('ppImg');
+  const popupSubtitle = document.getElementById('ppSubtitle');
+  const popupBody = document.getElementById('ppBody');
+
+  document.querySelectorAll('.work-button').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const card = btn.closest('.work-card');
+      if (card && popup) {
+        const img = card.querySelector('.work-img');
+        const title = card.querySelector('.work-title');
+        const details = card.querySelector('.portfolio-item-details');
+        if (popupImg && img) popupImg.src = img.src;
+        if (popupSubtitle && title) popupSubtitle.textContent = title.textContent;
+        if (popupBody && details) popupBody.innerHTML = details.innerHTML;
+        popup.classList.add('open');
+      }
+    });
+  });
+
+  if (popupClose && popup) {
+    popupClose.addEventListener('click', () => popup.classList.remove('open'));
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup) popup.classList.remove('open');
+    });
+  }
+
+  // 4. Services Modal Popups
+  const modalViews = document.querySelectorAll('.services-modal');
+  const modalBtns = document.querySelectorAll('.services-button');
+  const modalCloses = document.querySelectorAll('.services-modal-close');
+  modalBtns.forEach((btn, idx) => {
+    btn.addEventListener('click', () => {
+      if (modalViews[idx]) modalViews[idx].classList.add('active-modal');
+    });
+  });
+  modalCloses.forEach(closeBtn => {
+    closeBtn.addEventListener('click', () => {
+      modalViews.forEach(v => v.classList.remove('active-modal'));
+    });
+  });
+  modalViews.forEach(v => {
+    v.addEventListener('click', (e) => {
+      if (e.target === v) v.classList.remove('active-modal');
+    });
+  });
+
+  // 5. Swiper Slider for Testimonials
+  try {
+    if (typeof Swiper !== 'undefined') {
+      new Swiper(".testimonials-container", {
+        spaceBetween: 24,
+        loop: true,
+        grabCursor: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        breakpoints: {
+          576: { slidesPerView: 2 },
+          768: { slidesPerView: 2, spaceBetween: 48 },
+        },
+      });
+    }
+  } catch (err) {
+    console.warn("Swiper init warning:", err);
+  }
+
+  // 6. Contact Form Floating Labels & Mailto Action
+  const inputs = document.querySelectorAll('.input');
+  inputs.forEach((input) => {
+    input.addEventListener('focus', () => input.parentNode.classList.add('focus'));
+    input.addEventListener('blur', () => {
+      if (input.value.trim() === '') input.parentNode.classList.remove('focus');
+    });
+    if (input.value.trim() !== '') input.parentNode.classList.add('focus');
+  });
+
+  const contactForm = document.getElementById('ultracodeContactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const cName = (document.getElementById('ucName')?.value || '').trim();
+      const cEmail = (document.getElementById('ucEmail')?.value || '').trim();
+      const cPhone = (document.getElementById('ucPhone')?.value || '').trim();
+      const cMsg = (document.getElementById('ucMessage')?.value || '').trim();
+
+      const subject = encodeURIComponent('Portfolio Inquiry from ' + cName);
+      const mailBody = encodeURIComponent('Hi ' + ${JSON.stringify(p.name || 'there')} + ',\\n\\nName: ' + cName + '\\nEmail: ' + cEmail + '\\nPhone: ' + cPhone + '\\n\\nMessage:\\n' + cMsg + '\\n\\n-- Sent via portfoolio.me');
+
+      const mailto = 'mailto:' + ${JSON.stringify(p.email || 'hello@portfoolio.me')} + '?subject=' + subject + '&body=' + mailBody;
+      window.location.href = mailto;
+
+      const statusEl = document.getElementById('ucStatus');
+      if (statusEl) {
+        statusEl.style.display = 'block';
+        statusEl.innerHTML = '✓ Thank you! Opening your email client to reach <b>' + ${JSON.stringify(p.email || 'developer')} + '</b>...';
+      }
+    });
+  }
+
+  // 7. Sidebar Navigation Toggle, Close & Share
+  const navMenu = document.getElementById('sidebar');
+  const navToggle = document.getElementById('nav-toggle');
+  const navClose = document.getElementById('nav-close');
+
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', () => navMenu.classList.add('show-sidebar'));
+  }
+  if (navClose && navMenu) {
+    navClose.addEventListener('click', () => navMenu.classList.remove('show-sidebar'));
+  }
+
+  document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      if (navMenu) navMenu.classList.remove('show-sidebar');
+    });
+  });
+
+  const btnShare = document.getElementById('btnShare');
+  if (btnShare) {
+    btnShare.addEventListener('click', async () => {
+      const shareData = {
+        title: ${JSON.stringify((p.name || 'Developer') + ' — Portfolio')},
+        text: ${JSON.stringify(p.tagline || 'Check out this portfolio on portfoolio.me')},
+        url: window.location.href
+      };
+      if (navigator.share) {
+        try { await navigator.share(shareData); } catch (e) {}
+      } else {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          alert('Portfolio link copied to clipboard!');
+        } catch (e) {
+          prompt('Copy this portfolio link:', window.location.href);
+        }
+      }
+    });
+  }
+
+  // 8. Scroll Section Active Link Highlighter
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.pageYOffset;
+    sections.forEach(current => {
+      const sectionHeight = current.offsetHeight;
+      const sectionTop = current.offsetTop - 80;
+      const sectionId = current.getAttribute('id');
+      const link = document.querySelector('.nav-menu a[href*=' + sectionId + ']');
+      if (link) {
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          link.classList.add('active-link');
+        } else {
+          link.classList.remove('active-link');
+        }
+      }
+    });
+  }, { passive: true });
+});
+</script>`;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+${head(p, 'ultracode')}
+<body class="body-main" data-template="ultracode" data-theme="dark">
+  <div class="nav-toggle" id="nav-toggle">
+    <i class="uil uil-bars"></i>
+  </div>
+
+  <aside class="sidebar" id="sidebar">
+    <nav class="nav">
+      <div class="nav-logo">
+        <a href="#" class="nav-logo-text">${logoLetter}</a>
+      </div>
+
+      <div class="nav-menu">
+        <div class="menu">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+            <li class="nav-item"><a href="#work" class="nav-link">Work</a></li>
+            <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+            <li class="nav-item"><a href="#qualification" class="nav-link">Qualifications</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="#home" class="nav-link active-link">Home</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="btn-share" id="btnShare" title="Share Portfolio">
+        <i class="uil uil-share-alt social-share"></i>
+      </div>
+
+      <div class="nav-close" id="nav-close">
+        <i class="uil uil-times"></i>
+      </div>
+    </nav>
+  </aside>
+
+  <main class="main">
+    <section class="home" id="home">
+      <div class="home-container container grid">
+        <div class="home-social">
+          <span class="home-social-follow">Follow Me</span>
+          <div class="home-social-links">
+            ${githubLink}
+            ${linkedinLink}
+            ${instagramLink}
+            ${twitterLink}
+          </div>
+        </div>
+
+        <img src="${avatarImg}" alt="${name}" class="home-img">
+
+        <div class="home-data">
+          <h1 class="home-title">Hi, I'm ${name}</h1>
+          <h3 class="home-subtitle">${title}</h3>
+          <p class="home-description">${tagline}</p>
+          <a href="#about" class="button">
+            <i class="uil uil-user button-icon"></i>
+            More About me!
+          </a>
+        </div>
+
+        <div class="my-info">
+          ${email ? `
+          <div class="info-item">
+            <i class="uil uil-envelope-edit info-icon"></i>
+            <div>
+              <h3 class="info-title">Email</h3>
+              <span class="info-subtitle">${email}</span>
+            </div>
+          </div>` : ''}
+
+          ${phone ? `
+          <div class="info-item">
+            <i class="uil uil-whatsapp info-icon"></i>
+            <div>
+              <h3 class="info-title">Phone</h3>
+              <span class="info-subtitle">${phone}</span>
+            </div>
+          </div>` : ''}
+
+          ${location ? `
+          <div class="info-item">
+            <i class="uil uil-map-marker info-icon"></i>
+            <div>
+              <h3 class="info-title">Location</h3>
+              <span class="info-subtitle">${location}</span>
+            </div>
+          </div>` : ''}
+        </div>
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <h2 class="section-title" data-heading="My Intro">About me</h2>
+
+      <div class="about-container container grid">
+        <img src="${avatarImg}" alt="${name}" class="about-img">
+
+        <div class="about-data">
+          <h3 class="about-heading">Hi, I'm ${name}${location ? `, based in ${location}` : ''}</h3>
+          <p class="about-description">${bio}</p>
+
+          <div class="about-info">
+            <div class="about-box">
+              <i class="uil uil-award about-icon"></i>
+              <h3 class="about-title">Experience</h3>
+              <span class="about-subtitle">${expBoxSubtitle}</span>
+            </div>
+
+            <div class="about-box">
+              <i class="uil uil-suitcase-alt about-icon"></i>
+              <h3 class="about-title">Completed</h3>
+              <span class="about-subtitle">${projects.length} + Projects</span>
+            </div>
+
+            <div class="about-box">
+              <i class="uil uil-headphones-alt about-icon"></i>
+              <h3 class="about-title">Support</h3>
+              <span class="about-subtitle">Online 24/7</span>
+            </div>
+          </div>
+
+          <a href="#contact" class="button"><i class="uil uil-navigator button-icon"></i>Contact me</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="qualification section" id="qualification">
+      <h2 class="section-title" data-heading="My Journey">Qualifications</h2>
+
+      <div class="qualification-container container grid">
+        <div class="education">
+          <h3 class="qualification-title"><i class="uil uil-graduation-cap"></i>Education</h3>
+          <div class="timeline">
+            ${eduTimelineHtml}
+          </div>
+        </div>
+
+        <div class="experience">
+          <h3 class="qualification-title"><i class="uil uil-suitcase"></i>Experience</h3>
+          <div class="timeline">
+            ${expTimelineHtml}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills section" id="skills">
+      <h2 class="section-title" data-heading="My Abilities">My Experience</h2>
+
+      <div class="skills-container container grid">
+        <div class="skills-tabs">
+          <div class="skills-header skills-active" data-target="#frontend">
+            <i class="uil uil-brackets-curly skills-icon"></i>
+            <div>
+              <h1 class="skills-title">Frontend Developer</h1>
+              <span class="skills-subtitle">${feSkills.length} Verified Skills</span>
+            </div>
+            <i class="uil uil-angle-down skills-arrow"></i>
+          </div>
+
+          <div class="skills-header" data-target="#design">
+            <i class="uil uil-swatchbook skills-icon"></i>
+            <div>
+              <h1 class="skills-title">UI / UX & Tools</h1>
+              <span class="skills-subtitle">${designSkills.length} Verified Skills</span>
+            </div>
+            <i class="uil uil-angle-down skills-arrow"></i>
+          </div>
+
+          <div class="skills-header" data-target="#backend">
+            <i class="uil uil-server-network skills-icon"></i>
+            <div>
+              <h1 class="skills-title">Backend & Cloud</h1>
+              <span class="skills-subtitle">${beSkills.length} Verified Skills</span>
+            </div>
+            <i class="uil uil-angle-down skills-arrow"></i>
+          </div>
+        </div>
+
+        <div class="skills-content">
+          <div class="skills-group skills-active" data-content id="frontend">
+            <div class="skills-list grid">
+              ${renderSkillBars(feSkills)}
+            </div>
+          </div>
+
+          <div class="skills-group" data-content id="design">
+            <div class="skills-list grid">
+              ${renderSkillBars(designSkills)}
+            </div>
+          </div>
+
+          <div class="skills-group" data-content id="backend">
+            <div class="skills-list grid">
+              ${renderSkillBars(beSkills)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="work section" id="work">
+      <h2 class="section-title" data-heading="My Portfolio">Recent Works</h2>
+
+      <div class="work-filters">
+        <span class="work-item active-work" data-filter="all">All</span>
+        <span class="work-item" data-filter=".web">Web</span>
+        <span class="work-item" data-filter=".app">App</span>
+        <span class="work-item" data-filter=".design">Design</span>
+      </div>
+
+      <div class="work-container container grid">
+        ${worksHtml}
+      </div>
+    </section>
+
+    <div class="portfolio-popup" id="portfolioPopup">
+      <div class="portfolio-popup-inner">
+        <div class="portfolio-popup-content grid">
+          <span class="portfolio-popup-close" id="portfolioPopupClose"><i class="uil uil-times"></i></span>
+          <div class="pp-thumbnail">
+            <img src="" alt="Project Preview" class="portfolio-popup-img" id="ppImg">
+          </div>
+
+          <div class="portfolio-popup-info">
+            <div class="portfolio-popup-subtitle">Featured - <span id="ppSubtitle">Project</span></div>
+            <div class="portfolio-popup-body" id="ppBody"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="services section" id="services">
+      <h2 class="section-title" data-heading="Services">What I Offer</h2>
+
+      <div class="services-container container grid">
+        <div class="services-content">
+          <div>
+            <i class="uil uil-web-grid services-icon"></i>
+            <h3 class="services-title">Web <br> Development</h3>
+          </div>
+          <span class="services-button">
+            View More <i class="uil uil-arrow-right services-button-icon"></i>
+          </span>
+
+          <div class="services-modal">
+            <div class="services-modal-content">
+              <i class="uil uil-times services-modal-close"></i>
+              <h3 class="services-modal-title">Web Development</h3>
+              <p class="services-modal-description">Professional full-stack web applications delivering high performance, responsive layout, and modern architecture.</p>
+              <ul class="services-modal-services grid">
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">Responsive & Adaptive Web Architecture</p></li>
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">Modern Single Page & Server-Rendered Applications</p></li>
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">RESTful API Design & Third-party Integrations</p></li>
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">Performance & Search Engine Optimization</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="services-content">
+          <div>
+            <i class="uil uil-arrow services-icon"></i>
+            <h3 class="services-title">UI / UX <br> Architecture</h3>
+          </div>
+          <span class="services-button">
+            View More <i class="uil uil-arrow-right services-button-icon"></i>
+          </span>
+
+          <div class="services-modal">
+            <div class="services-modal-content">
+              <i class="uil uil-times services-modal-close"></i>
+              <h3 class="services-modal-title">UI / UX Architecture</h3>
+              <p class="services-modal-description">Intuitive, engaging user interface designs and interactive prototypes crafted for delightful experiences.</p>
+              <ul class="services-modal-services grid">
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">User Flow Analysis & Wireframing</p></li>
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">Interactive High-Fidelity Prototyping</p></li>
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">Design System & Component Token Creation</p></li>
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">Accessibility & Multi-device Testing</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="services-content">
+          <div>
+            <i class="uil uil-edit services-icon"></i>
+            <h3 class="services-title">Backend & <br> Cloud Solutions</h3>
+          </div>
+          <span class="services-button">
+            View More <i class="uil uil-arrow-right services-button-icon"></i>
+          </span>
+
+          <div class="services-modal">
+            <div class="services-modal-content">
+              <i class="uil uil-times services-modal-close"></i>
+              <h3 class="services-modal-title">Backend & Cloud Solutions</h3>
+              <p class="services-modal-description">Scalable backend engines, database architecture, and automated cloud deployments.</p>
+              <ul class="services-modal-services grid">
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">Database Schema Modeling & Optimization</p></li>
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">Serverless & Microservices Deployment</p></li>
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">Authentication & Secure Data Storage</p></li>
+                <li class="services-modal-service"><i class="uil uil-check-circle services-modal-icon"></i><p class="services-modal-info">Automated CI/CD Workflows</p></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials section">
+      <h2 class="section-title" data-heading="Client Feedback">Testimonials</h2>
+
+      <div class="testimonials-container container swiper">
+        <div class="swiper-wrapper">
+          <div class="testimonial-card swiper-slide">
+            <div class="testimonial-quote"><i class='bx bxs-quote-alt-left'></i></div>
+            <p class="testimonial-description">Working with ${name} was an absolute pleasure from start to finish. They translated our technical needs into a stunning, fast, and highly functional platform.</p>
+            <h3 class="testimonial-date">Project Collaboration</h3>
+            <div class="testimonial-profile">
+              <img src="https://i.postimg.cc/MTr9j4Yn/client1.jpg" alt="Client" class="testimonial-profile-img">
+              <div class="testimonial-profile-data">
+                <span class="testimonial-profile-name">Chen Xiuying</span>
+                <span class="testimonial-profile-detail">Engineering Director</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card swiper-slide">
+            <div class="testimonial-quote"><i class='bx bxs-quote-alt-left'></i></div>
+            <p class="testimonial-description">${name} brought incredible problem solving and attention to UI details, delivering clean code and remarkable reliability on every release.</p>
+            <h3 class="testimonial-date">Product Release</h3>
+            <div class="testimonial-profile">
+              <img src="https://i.postimg.cc/wvV7f8rB/client2.jpg" alt="Client" class="testimonial-profile-img">
+              <div class="testimonial-profile-data">
+                <span class="testimonial-profile-name">Joshua Middletown</span>
+                <span class="testimonial-profile-detail">Tech Lead</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card swiper-slide">
+            <div class="testimonial-quote"><i class='bx bxs-quote-alt-left'></i></div>
+            <p class="testimonial-description">Fast communication, exceptional code quality, and proactive feedback. Truly one of the best software engineers I have worked with!</p>
+            <h3 class="testimonial-date">Digital Transformation</h3>
+            <div class="testimonial-profile">
+              <img src="https://i.postimg.cc/pdP9DL0S/client3.jpg" alt="Client" class="testimonial-profile-img">
+              <div class="testimonial-profile-data">
+                <span class="testimonial-profile-name">Melanie Stone</span>
+                <span class="testimonial-profile-detail">Founder & CEO</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </section>
+
+    <section class="contact section" id="contact">
+      <h2 class="section-title" data-heading="Get in Touch">Contact me</h2>
+
+      <div class="contact-container container grid">
+        <div class="contact-content">
+          <div class="contact-info">
+            ${email ? `
+            <div class="contact-card">
+              <i class="uil uil-envelope-edit contact-card-icon"></i>
+              <h3 class="contact-card-title">Email</h3>
+              <span class="contact-card-data">${email}</span>
+              <a href="mailto:${email}" class="contact-button">Write me <i class="uil uil-arrow-right contact-button-icon"></i></a>
+            </div>` : ''}
+
+            ${phone ? `
+            <div class="contact-card">
+              <i class="uil uil-whatsapp contact-card-icon"></i>
+              <h3 class="contact-card-title">Phone / WhatsApp</h3>
+              <span class="contact-card-data">${phone}</span>
+              <a href="tel:${phone}" class="contact-button">Call / Chat <i class="uil uil-arrow-right contact-button-icon"></i></a>
+            </div>` : ''}
+
+            ${p.github ? `
+            <div class="contact-card">
+              <i class="uil uil-github-alt contact-card-icon"></i>
+              <h3 class="contact-card-title">GitHub</h3>
+              <span class="contact-card-data">${esc(p.github.replace(/^https?:\/\//, ''))}</span>
+              <a href="${esc(p.github)}" target="_blank" rel="noopener" class="contact-button">View Profile <i class="uil uil-arrow-right contact-button-icon"></i></a>
+            </div>` : ''}
+          </div>
+        </div>
+
+        <div class="contact-content">
+          <form class="contact-form" id="ultracodeContactForm">
+            <div class="input-container">
+              <input type="text" class="input" id="ucName" required>
+              <label for="ucName">Your Name</label>
+              <span>Your Name</span>
+            </div>
+
+            <div class="input-container">
+              <input type="email" class="input" id="ucEmail" required>
+              <label for="ucEmail">Your Email</label>
+              <span>Your Email</span>
+            </div>
+
+            <div class="input-container">
+              <input type="tel" class="input" id="ucPhone">
+              <label for="ucPhone">Phone (optional)</label>
+              <span>Phone (optional)</span>
+            </div>
+
+            <div class="input-container textarea">
+              <textarea name="message" id="ucMessage" class="input" required></textarea>
+              <label for="ucMessage">Your Message</label>
+              <span>Your Message</span>
+            </div>
+
+            <div id="ucStatus" style="display:none;padding:.75rem 1rem;background:rgba(222,10,77,.15);border:1px solid var(--skin-color);color:var(--title-color);border-radius:.25rem;font-size:var(--small-font-size);margin-bottom:1rem;"></div>
+
+            <button type="submit" class="button"><i class="uil uil-navigator button-icon"></i>Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-bg">
+        <div class="footer-container container grid">
+          <div>
+            <h1 class="footer-title">${name}</h1>
+            <span class="footer-subtitle">${title}</span>
+          </div>
+
+          <ul class="footer-links">
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+
+          <div class="footer-socials">
+            ${footerGithub}
+            ${footerLinkedin}
+            ${footerInstagram}
+            ${footerTwitter}
+          </div>
+        </div>
+
+        <p class="footer-copy">&#169; ${new Date().getFullYear()} <a href="https://portfoolio.me" target="_blank">${name}</a> • Built via portfoolio.me</p>
+      </div>
+    </footer>
+  </main>
+
+  ${ultracodeScript}
+</body>
+</html>`;
+}
+
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   const tpl = String(qTpl || p.template || 'midnight').toLowerCase();
   if (tpl === 'moderncv') {
     return pageModerncv(p);
+  }
+  if (tpl === 'ultracode') {
+    return pageUltracode(p);
   }
   const reqTab = url ? (url.searchParams.get('tab') || url.searchParams.get('page')) : null;
   const dpTab = ['about', 'portfolio', 'resume', 'contact'].includes(String(reqTab).toLowerCase()) ? String(reqTab).toLowerCase() : 'about';
