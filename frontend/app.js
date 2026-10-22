@@ -944,7 +944,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
-    /* Scroll reveal for .rv elements */
+    /* Scroll reveal for .rv and visual theme elements */
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((es) => {
         es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -956,6 +956,18 @@ document.addEventListener('DOMContentLoaded', async () => {
           el.classList.add('in');
         }
       });
+      // Visual theme elements (work cards, museum pieces, catalog rows, bloom tiles)
+      const template = document.body.dataset.template;
+      const isVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(template);
+      if (isVisual) {
+        document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile').forEach(el => {
+          io.observe(el);
+          const r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) {
+            el.classList.add('in');
+          }
+        });
+      }
     } else {
       document.querySelectorAll('.rv').forEach(el => el.classList.add('in'));
     }

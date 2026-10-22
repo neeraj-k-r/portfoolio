@@ -1329,24 +1329,24 @@ body[data-template="motion"] .proj-body p{color:#6d6d68}
 /* Motion: scroll progress bar (top of page) */
 #bar{position:fixed;top:0;left:0;width:100%;height:2px;background:#ff4d1c;transform:scaleX(0);transform-origin:left;z-index:200;display:none}
 body[data-template="motion"] #bar{display:block}
-body[data-template="gallery"] #bar, body[data-template="studio"] #bar, body[data-template="noir"] #bar{display:block}
-body[data-template="gallery"] #bar, body[data-template="studio"] #bar, body[data-template="noir"] #bar{background:#4f46e5}
+body[data-template="gallery"] #bar, body[data-template="studio"] #bar, body[data-template="noir"] #bar, body[data-template="museum"] #bar, body[data-template="catalog"] #bar, body[data-template="bloom"] #bar{display:block}
+body[data-template="gallery"] #bar, body[data-template="studio"] #bar, body[data-template="noir"] #bar, body[data-template="museum"] #bar, body[data-template="catalog"] #bar, body[data-template="bloom"] #bar{background:#4f46e5}
 
 /* Motion: pointer-following blob */
 body[data-template="motion"] .blob{position:fixed;top:0;left:0;width:46vmax;height:46vmax;border-radius:50%;background:radial-gradient(circle,rgba(255,77,28,.16),transparent 62%);pointer-events:none;will-change:transform;z-index:0;display:block}
 body[data-template="motion"] #landing,body[data-template="motion"] #app{position:relative;z-index:1}
-body[data-template="gallery"] .blob, body[data-template="studio"] .blob, body[data-template="noir"] .blob{position:fixed;top:0;left:0;width:46vmax;height:46vmax;border-radius:50%;background:radial-gradient(circle,rgba(79,70,229,.18),transparent 62%);pointer-events:none;will-change:transform;z-index:0;display:block}
-body[data-template="gallery"] #landing,body[data-template="gallery"] #app,body[data-template="studio"] #landing,body[data-template="studio"] #app,body[data-template="noir"] #landing,body[data-template="noir"] #app{position:relative;z-index:1}
+body[data-template="gallery"] .blob, body[data-template="studio"] .blob, body[data-template="noir"] .blob, body[data-template="museum"] .blob, body[data-template="catalog"] .blob, body[data-template="bloom"] .blob{position:fixed;top:0;left:0;width:46vmax;height:46vmax;border-radius:50%;background:radial-gradient(circle,rgba(79,70,229,.18),transparent 62%);pointer-events:none;will-change:transform;z-index:0;display:block}
+body[data-template="gallery"] #landing,body[data-template="gallery"] #app,body[data-template="studio"] #landing,body[data-template="studio"] #app,body[data-template="noir"] #landing,body[data-template="noir"] #app,body[data-template="museum"] #landing,body[data-template="museum"] #app,body[data-template="catalog"] #landing,body[data-template="catalog"] #app,body[data-template="bloom"] #landing,body[data-template="bloom"] #app{position:relative;z-index:1}
 
 /* Motion: pointer-following preview card */
 body[data-template="motion"] .pv{position:fixed;top:0;left:0;width:290px;height:195px;pointer-events:none;z-index:40;will-change:transform;display:none}
 body[data-template="motion"] .pv.on{display:block}
 body[data-template="motion"] .pv i{display:block;width:100%;height:100%;border-radius:14px;opacity:0;transform:scale(.7) rotate(-3deg);transition:opacity .3s,transform .6s var(--ease);box-shadow:0 20px 50px rgba(0,0,0,.18)}
 body[data-template="motion"] .pv.on i{opacity:1;transform:none}
-body[data-template="gallery"] .pv, body[data-template="studio"] .pv, body[data-template="noir"] .pv{position:fixed;top:0;left:0;width:290px;height:195px;pointer-events:none;z-index:40;will-change:transform;display:none}
-body[data-template="gallery"] .pv.on, body[data-template="studio"] .pv.on, body[data-template="noir"] .pv.on{display:block}
-body[data-template="gallery"] .pv i, body[data-template="studio"] .pv i, body[data-template="noir"] .pv i{display:block;width:100%;height:100%;border-radius:14px;opacity:0;transform:scale(.7) rotate(-3deg);transition:opacity .3s,transform .6s var(--ease);box-shadow:0 20px 50px rgba(79,70,229,.18)}
-body[data-template="gallery"] .pv.on i, body[data-template="studio"] .pv.on i, body[data-template="noir"] .pv.on i{opacity:1;transform:none}
+body[data-template="gallery"] .pv, body[data-template="studio"] .pv, body[data-template="noir"] .pv, body[data-template="museum"] .pv, body[data-template="catalog"] .pv, body[data-template="bloom"] .pv{position:fixed;top:0;left:0;width:290px;height:195px;pointer-events:none;z-index:40;will-change:transform;display:none}
+body[data-template="gallery"] .pv.on, body[data-template="studio"] .pv.on, body[data-template="noir"] .pv.on, body[data-template="museum"] .pv.on, body[data-template="catalog"] .pv.on, body[data-template="bloom"] .pv.on{display:block}
+body[data-template="gallery"] .pv i, body[data-template="studio"] .pv i, body[data-template="noir"] .pv i, body[data-template="museum"] .pv i, body[data-template="catalog"] .pv i, body[data-template="bloom"] .pv i{display:block;width:100%;height:100%;border-radius:14px;opacity:0;transform:scale(.7) rotate(-3deg);transition:opacity .3s,transform .6s var(--ease);box-shadow:0 20px 50px rgba(79,70,229,.18)}
+body[data-template="gallery"] .pv.on i, body[data-template="studio"] .pv.on i, body[data-template="noir"] .pv.on i, body[data-template="museum"] .pv.on i, body[data-template="catalog"] .pv.on i, body[data-template="bloom"] .pv.on i{opacity:1;transform:none}
 
 /* Motion: hero word-by-word reveal */
 body[data-template="motion"] .lx-title{color:#121212;-webkit-text-fill-color:#121212}
@@ -1369,13 +1369,22 @@ body[data-template="motion"] .rv{opacity:0;transform:translateY(26px);transition
 body[data-template="motion"] .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){body[data-template="motion"] .rv{opacity:1;transform:none}}
 
-/* Motion scroll reveal for visual themes (gallery, studio, noir) */
+/* Motion scroll reveal for visual themes (gallery, studio, noir, museum, catalog, bloom) */
 body[data-template="gallery"] .rv,
 body[data-template="studio"] .rv,
 body[data-template="noir"] .rv,
+body[data-template="museum"] .rv,
+body[data-template="catalog"] .rv,
+body[data-template="bloom"] .rv,
 body[data-template="gallery"] .work-card,
 body[data-template="studio"] .work-card,
-body[data-template="noir"] .work-card {
+body[data-template="noir"] .work-card,
+body[data-template="museum"] .work-card,
+body[data-template="catalog"] .work-card,
+body[data-template="bloom"] .work-card,
+body[data-template="gallery"] .museum-piece,
+body[data-template="gallery"] .cat-row,
+body[data-template="gallery"] .bloom-tile {
   opacity: 0;
   transform: translateY(26px);
   transition: opacity .9s var(--ease), transform .9s var(--ease);
@@ -1384,15 +1393,25 @@ body[data-template="noir"] .work-card {
 body[data-template="gallery"] .rv.in,
 body[data-template="studio"] .rv.in,
 body[data-template="noir"] .rv.in,
+body[data-template="museum"] .rv.in,
+body[data-template="catalog"] .rv.in,
+body[data-template="bloom"] .rv.in,
 body[data-template="gallery"] .work-card.in,
 body[data-template="studio"] .work-card.in,
-body[data-template="noir"] .work-card.in {
+body[data-template="noir"] .work-card.in,
+body[data-template="museum"] .work-card.in,
+body[data-template="catalog"] .work-card.in,
+body[data-template="bloom"] .work-card.in,
+body[data-template="gallery"] .museum-piece.in,
+body[data-template="gallery"] .cat-row.in,
+body[data-template="gallery"] .bloom-tile.in {
   opacity: 1;
   transform: none;
 }
 @media (prefers-reduced-motion:reduce){
-  body[data-template="gallery"] .rv, body[data-template="studio"] .rv, body[data-template="noir"] .rv,
-  body[data-template="gallery"] .work-card, body[data-template="studio"] .work-card, body[data-template="noir"] .work-card {
+  body[data-template="gallery"] .rv, body[data-template="studio"] .rv, body[data-template="noir"] .rv, body[data-template="museum"] .rv, body[data-template="catalog"] .rv, body[data-template="bloom"] .rv,
+  body[data-template="gallery"] .work-card, body[data-template="studio"] .work-card, body[data-template="noir"] .work-card, body[data-template="museum"] .work-card, body[data-template="catalog"] .work-card, body[data-template="bloom"] .work-card,
+  body[data-template="gallery"] .museum-piece, body[data-template="gallery"] .cat-row, body[data-template="gallery"] .bloom-tile {
     opacity: 1; transform: none;
   }
 }
