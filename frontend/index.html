@@ -1181,10 +1181,10 @@ function setupUserDashboardView(profile) {
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
       return 'visual';
     }
-    // Self-heal legacy rows: a visual-only template implies the visual track
-    // (e.g. claims stored before the track column existed). Heal in memory +
-    // localStorage now; the next Save Changes persists it to the cloud.
-    if (profile && profile.username && VISUAL_THEMES.includes(String(profile.template || '').toLowerCase())) {
+    // Self-heal legacy rows ONLY when no explicit track is set:
+    // a visual-only template implies the visual track (e.g. claims stored before the track column existed).
+    // But if the user explicitly set a track, respect it — don't force-heal.
+    if (profile && profile.username && VISUAL_THEMES.includes(String(profile.template || '').toLowerCase()) && !profile.track) {
       profile.track = 'visual';
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
       return 'visual';
