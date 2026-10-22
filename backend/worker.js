@@ -869,13 +869,20 @@ function pageModerncv(p) {
           setTimeout(function() {
             if (loader) {
               loader.style.opacity = '0';
-              setTimeout(function() { loader.classList.add('hidden'); }, 500);
+              setTimeout(function() { loader.classList.add('hidden'); loader.style.display = 'none'; }, 400);
             }
             playHeroAnimations();
-          }, 300);
+          }, 250);
         }
         if (loaderPercent) loaderPercent.textContent = Math.floor(progress) + '%';
-      }, 80);
+      }, 50);
+      setTimeout(function() {
+        if (loader && !loader.classList.contains('hidden')) {
+          loader.classList.add('hidden');
+          loader.style.display = 'none';
+          playHeroAnimations();
+        }
+      }, 1500);
     }
 
     function playHeroAnimations() {
