@@ -1020,7 +1020,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       raf = requestAnimationFrame(loop);
       addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; if (!raf) raf = requestAnimationFrame(loop); }, { passive: true });
       document.querySelectorAll('.row').forEach(a => {
-        a.addEventListener('pointerenter', () => { if (pi) pi.style.background = a.dataset.g; if (pv) pv.classList.add('on'); });
+        a.addEventListener('pointerenter', () => { if (pi) { pi.style.backgroundImage = 'url(' + a.dataset.g + ')'; pi.style.backgroundSize = 'cover'; pi.style.backgroundPosition = 'center'; } if (pv) pv.classList.add('on'); });
         a.addEventListener('pointerleave', () => { if (pv) pv.classList.remove('on'); });
       });
     }
