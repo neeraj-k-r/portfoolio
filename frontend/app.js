@@ -211,7 +211,7 @@ function galleryWorks(p) {
 function renderGallery(p) {
   p = normLocalProfile(p) || p;
   const vtpl = String(p.template || 'gallery').toLowerCase();
-  document.body.dataset.template = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(vtpl) ? vtpl : 'gallery';
+  document.body.dataset.template = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(vtpl) ? vtpl : 'gallery';
   document.title = `${p.name} — visual portfolio | portfoolio.me`;
   const app = document.getElementById('app');
   const works = galleryWorks(p);
@@ -220,6 +220,69 @@ function renderGallery(p) {
   const srcAvatar = avatar || (cover ? cover.imageUrl : '');
   const letter = esc((p.name || '?').trim().charAt(0).toUpperCase());
   const countLabel = `${works.length} work${works.length === 1 ? '' : 's'}`;
+
+  if (vtpl === 'motion') {
+    const words = (p.name || p.title || 'Portfolio').split(' ');
+    const mid = Math.max(1, Math.ceil(words.length / 2));
+    const line1 = words.slice(0, mid).join(' ');
+    const line2 = words.slice(mid).join(' ');
+    const rows = works.map((w, i) => `
+      <li class="rv" style="--d:${i * 60}ms"><a class="row" href="?u=${encodeURIComponent(p.username)}&w=${i}" data-gal="${i}" data-g="${esc(w.imageUrl)}">
+        <b>${String(i + 1).padStart(2, '0')}</b>
+        <h3>${esc(w.title || 'Untitled')}</h3>
+        <span>${w.category ? esc(w.category) : ''}</span>
+        <span>${w.year ? esc(String(w.year)) : '↗'}</span>
+      </a></li>`).join('');
+    app.innerHTML = `
+    <div id="bar" aria-hidden="true"></div>
+    <div class="blob" aria-hidden="true"></div>
+    <div class="pv" aria-hidden="true"><i></i></div>
+    <nav class="motion-nav pad">
+      <a class="logo" href="/">${esc(p.name)}</a>
+      <nav><a class="hide" href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    </nav>
+    <main id="top">
+      <div class="hero pad">
+        <h1 class="lx-title" aria-label="${esc(p.name || p.title || 'Portfolio')}">
+          <span class="w"><span style="--i:0">${esc(line1)}</span></span>
+          ${line2 ? `<span class="w"><span style="--i:1">${esc(line2)}</span></span>` : ''}
+        </h1>
+        <div class="hero-meta">
+          <p class="rv" style="--d:700ms">${esc(p.title ? `${p.title}${p.tagline ? ' — ' + p.tagline : ''}` : (p.tagline || ''))}</p>
+          <div class="scroll rv" style="--d:900ms"><i></i>Scroll</div>
+        </div>
+      </div>
+      <section class="pad" id="work">
+        <p class="eyebrow rv">Selected work</p>
+        <ul class="work-rows">${rows || '<li class="rv">No works yet.</li>'}</ul>
+      </section>
+      <section class="pad" id="about">
+        <p class="eyebrow rv">About</p>
+        <p class="lead rv">${esc(p.tagline || p.title || '')}</p>
+        ${srcAvatar ? `<img src="${esc(srcAvatar)}" alt="${esc(p.name)}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:20px 0;border:3px solid rgba(255,255,255,.2)">` : ''}
+      </section>
+      <section class="pad contact" id="contact">
+        <p class="eyebrow rv">Say hello</p>
+        <a class="big rv" href="mailto:${esc(p.email || '')}">${esc(p.name || 'Get in touch')}</a>
+        <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap">
+          ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i> Email</a>` : ''}
+          ${p.github ? `<a class="btn btn-ghost btn-sm" href="${esc(p.github)}" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>` : ''}
+          ${p.linkedin ? `<a class="btn btn-ghost btn-sm" href="${esc(p.linkedin)}" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>` : ''}
+          ${p.instagram ? `<a class="btn btn-ghost btn-sm" href="${esc(p.instagram)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
+        </div>
+      </section>
+    </main>
+    <footer class="pad"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span><span>Built with portfoolio.me</span></footer>`;
+    app.querySelectorAll('[data-gal]').forEach(el => el.onclick = (e) => {
+      e.preventDefault();
+      history.pushState({ view: 'work', username: p.username, idx: +el.dataset.gal }, '', `${location.origin}/?u=${encodeURIComponent(p.username)}`);
+      renderWorkDetail(p, +el.dataset.gal);
+    });
+    if (typeof window.initMotionTheme === 'function') window.initMotionTheme();
+    window.scrollTo(0, 0);
+    return;
+  }
+
   const navHtml = `
   <nav>
     <a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
@@ -1020,7 +1083,20 @@ document.addEventListener('DOMContentLoaded', async () => {
       raf = requestAnimationFrame(loop);
       addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; if (!raf) raf = requestAnimationFrame(loop); }, { passive: true });
       document.querySelectorAll('.row').forEach(a => {
-        a.addEventListener('pointerenter', () => { if (pi) { pi.style.backgroundImage = 'url(' + a.dataset.g + ')'; pi.style.backgroundSize = 'cover'; pi.style.backgroundPosition = 'center'; } if (pv) pv.classList.add('on'); });
+        a.addEventListener('pointerenter', () => {
+          const g = a.dataset.g || '';
+          if (pi && g) {
+            if (g.includes('gradient(')) {
+              pi.style.background = g;
+            } else {
+              pi.style.background = '';
+              pi.style.backgroundImage = 'url(' + g + ')';
+              pi.style.backgroundSize = 'cover';
+              pi.style.backgroundPosition = 'center';
+            }
+          }
+          if (pv) pv.classList.add('on');
+        });
         a.addEventListener('pointerleave', () => { if (pv) pv.classList.remove('on'); });
       });
     }

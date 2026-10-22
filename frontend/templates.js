@@ -585,360 +585,772 @@ function renderFullpage(p) {
   window.scrollTo(0, 0);
 }
 
-// Modern CV — Interactive developer portfolio with animations, RTL support, bilingual
+// Modern CV — Interactive Developer CV Portfolio (Bilingual AR/EN, Dark/Light, Animated)
 function renderModerncv(p) {
   normTpl(p);
   document.body.dataset.template = 'moderncv';
+  document.body.className = 'body-main';
+  document.body.setAttribute('data-theme', 'dark');
   document.body.setAttribute('data-lang', 'en');
   document.body.setAttribute('data-dir', 'ltr');
-  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  document.title = `${p.name || 'Developer'} — ${p.title || 'Developer CV'} | portfoolio.me`;
 
-  const isRTL = false;
-  const tEn = (s) => tplEsc(s || '');
-  const tAr = (s) => tplEsc(s || '');
+  const name = tplEsc(p.name || 'Developer');
+  const title = tplEsc(p.title || 'Full Stack Developer & UI/UX Designer');
+  const desc = tplEsc(p.tagline || 'Passionate developer creating exceptional digital experiences with modern technologies.');
+  const aboutText = tplEsc(p.bio || p.desc || p.tagline || "I'm a passionate Full Stack Developer with over 5 years of experience in building modern web applications and mobile solutions. I specialize in JavaScript technologies, React, Node.js, and creating beautiful user interfaces.");
+  const email = tplEsc(p.email || 'developer@example.com');
+  const phone = tplEsc(p.phone || '+966 50 123 4567');
+  const location = tplEsc(p.location || 'Riyadh, Saudi Arabia');
 
-  const skills = (p.skills || []).map((s) => `<span class="skill-badge">${tplEsc(s)}</span>`).join('');
+  // Avatar
+  const avatarHtml = (p.avatarUrl || p.avatar_url)
+    ? `<img src="${tplEsc(p.avatarUrl || p.avatar_url)}" alt="${name}" class="profile-img" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
+    : `<div class="profile-placeholder"><i class="fas fa-code"></i></div>`;
 
-  const projects = (p.projects || []).map((pr, i) => `
-    <div class="project-card">
-      <div class="project-image">
-        <div class="project-overlay">
-          <div class="project-links">
-            <a href="${tplEsc(pr.url || '#')}" class="project-link" title="View Project"><i class="fas fa-external-link-alt"></i></a>
-            <a href="#" class="project-link" title="View Code"><i class="fab fa-github"></i></a>
-          </div>
+  // Code block skills
+  const userSkills = Array.isArray(p.skills) && p.skills.length ? p.skills : ['React', 'Node.js', 'TypeScript'];
+  const codeSkills = userSkills.slice(0, 3).map(s => `'${tplEsc(s)}'`).join(', ');
+
+  // Skills Categories
+  const feDefaults = [
+    { name: 'React', pct: 95 },
+    { name: 'Vue.js', pct: 85 },
+    { name: 'TypeScript', pct: 90 },
+    { name: 'Next.js', pct: 88 }
+  ];
+  const beDefaults = [
+    { name: 'Node.js', pct: 92 },
+    { name: 'Express', pct: 90 },
+    { name: 'MongoDB', pct: 85 },
+    { name: 'PostgreSQL', pct: 80 }
+  ];
+  const toolDefaults = [
+    { name: 'Git', pct: 95 },
+    { name: 'Docker', pct: 75 },
+    { name: 'AWS', pct: 70 },
+    { name: 'Figma', pct: 88 }
+  ];
+
+  function renderSkillCategory(items) {
+    return items.map(s => `
+      <div class="skill-item" data-skill="${tplEsc(s.name)}" data-percent="${s.pct}">
+        <div class="skill-header">
+          <span class="skill-name">${tplEsc(s.name)}</span>
+          <span class="skill-percent">0%</span>
         </div>
-        <div class="project-placeholder"><i class="fas ${pr.emoji ? '' : 'fa-code'}"></i></div>
-      </div>
-      <div class="project-content">
-        <h3 class="project-title">${tplEsc(pr.title)}</h3>
-        <p class="project-description">${tplEsc(pr.desc)}</p>
-        <div class="project-tags">${(pr.tags || []).map(t => `<span class="tag">${tplEsc(t)}</span>`).join('')}</div>
-      </div>
-    </div>`).join('');
+        <div class="skill-bar">
+          <div class="skill-progress"></div>
+        </div>
+      </div>`).join('');
+  }
 
-  const experiences = (p.experience || []).map((exp) => `
+  // Experience
+  let expList = [];
+  if (Array.isArray(p.experience) && p.experience.length) {
+    expList = p.experience.map(e => ({
+      year: `${tplEsc(e.start || '2022')} - ${e.current ? 'Present' : tplEsc(e.end || 'Present')}`,
+      isCurrent: Boolean(e.current),
+      title: tplEsc(e.role || e.title || 'Developer'),
+      company: tplEsc(e.company || 'Tech Company Inc.'),
+      desc: tplEsc(e.desc || 'Developed and maintained modern web applications.'),
+      achievements: Array.isArray(e.achievements) ? e.achievements.map(a => tplEsc(a)) : [],
+      tags: Array.isArray(e.tags) ? e.tags.map(t => tplEsc(t)) : (Array.isArray(e.technologies) ? e.technologies.map(t => tplEsc(t)) : ['React', 'Node.js', 'TypeScript'])
+    }));
+  } else {
+    expList = [
+      {
+        year: '2022 - Present',
+        isCurrent: true,
+        title: 'Senior Full Stack Developer',
+        company: 'Tech Company Inc.',
+        desc: 'Leading a team of developers in building complex web applications using React and Node.js. Developing advanced user interfaces and optimizing performance. Implementing microservices architecture and CI/CD pipelines.',
+        achievements: ['Led team of 5 developers', 'Improved performance by 40%', 'Deployed 20+ production apps'],
+        tags: ['React', 'Node.js', 'TypeScript', 'MongoDB', 'Docker', 'AWS']
+      },
+      {
+        year: '2020 - 2022',
+        isCurrent: false,
+        title: 'Frontend Developer',
+        company: 'Digital Solutions',
+        desc: 'Developed interactive user interfaces using React and Vue.js. Worked on improving user experience and performance optimization. Collaborated with designers to implement pixel-perfect designs.',
+        achievements: ['Built 15+ responsive websites', 'Reduced load time by 50%'],
+        tags: ['React', 'Vue.js', 'JavaScript', 'SASS', 'Webpack']
+      },
+      {
+        year: '2018 - 2020',
+        isCurrent: false,
+        title: 'Junior Developer',
+        company: 'Creative Studio',
+        desc: 'Developed websites using HTML, CSS, and JavaScript. Learned best practices in web development. Worked on various client projects and gained experience in modern web technologies.',
+        achievements: ['Completed 30+ projects', 'Learned modern frameworks'],
+        tags: ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Bootstrap']
+      }
+    ];
+  }
+
+  const expHtml = expList.map(e => `
     <div class="timeline-item">
       <div class="timeline-marker"></div>
       <div class="timeline-content">
         <div class="timeline-header">
-          <div class="timeline-year">${tplEsc(exp.start)} — ${exp.current ? 'Present' : tplEsc(exp.end)}</div>
-          ${exp.current ? '<div class="timeline-badge">Current</div>' : ''}
+          <div class="timeline-year">${e.year}</div>
+          ${e.isCurrent ? '<div class="timeline-badge">Current</div>' : ''}
         </div>
-        <h3 class="timeline-title">${tplEsc(exp.role)}</h3>
-        <div class="timeline-company"><i class="fas fa-building"></i> ${tplEsc(exp.company)}</div>
-        <p class="timeline-description">${tplEsc(exp.desc)}</p>
+        <h3 class="timeline-title">${e.title}</h3>
+        <div class="timeline-company"><i class="fas fa-building"></i> ${e.company}</div>
+        <p class="timeline-description">${e.desc}</p>
+        ${e.achievements.length ? `
         <div class="timeline-achievements">
-          ${(exp.achievements || []).map(a => `<div class="achievement-item"><i class="fas fa-check-circle"></i><span>${tplEsc(a)}</span></div>`).join('')}
+          ${e.achievements.map(a => `<div class="achievement-item"><i class="fas fa-check-circle"></i><span>${a}</span></div>`).join('')}
+        </div>` : ''}
+        <div class="timeline-tags">
+          ${e.tags.map(t => `<span class="tag">${t}</span>`).join('')}
         </div>
-        <div class="timeline-tags">${(exp.tags || []).map(t => `<span class="tag">${tplEsc(t)}</span>`).join('')}</div>
       </div>
     </div>`).join('');
 
-  const stats = [
-    { label: 'Projects', count: p.projects?.length || 0 },
-    { label: 'Years Experience', count: p.experience?.length || 0 },
-    { label: 'Happy Clients', count: 30 }
-  ].map(s => `<div class="stat-item"><div class="stat-number" data-count="${s.count}">0</div><div class="stat-label">${tplEsc(s.label)}</div></div>`).join('');
+  // Projects
+  let projList = [];
+  if (Array.isArray(p.projects) && p.projects.length) {
+    projList = p.projects.map((pr, i) => ({
+      title: tplEsc(pr.title || `Project ${i + 1}`),
+      desc: tplEsc(pr.desc || 'A modern web application built with clean architecture and cutting-edge technologies.'),
+      tags: Array.isArray(pr.technologies || pr.tags) ? (pr.technologies || pr.tags).map(t => tplEsc(t)) : ['React', 'TypeScript', 'Node.js'],
+      url: pr.demoUrl || pr.url || '#',
+      repo: pr.repo?.url || (pr.url && pr.url.includes('github') ? pr.url : '#'),
+      icon: pr.icon || (i % 3 === 0 ? 'fa-shopping-cart' : i % 3 === 1 ? 'fa-tasks' : 'fa-blog')
+    }));
+  } else {
+    projList = [
+      {
+        title: 'E-Commerce Platform',
+        desc: 'A complete e-commerce platform with payment integration and advanced inventory management.',
+        tags: ['React', 'Node.js', 'MongoDB'],
+        url: '#',
+        repo: '#',
+        icon: 'fa-shopping-cart'
+      },
+      {
+        title: 'Task Management App',
+        desc: 'A web application for task management with real-time synchronization and modern design.',
+        tags: ['React', 'Firebase', 'TypeScript'],
+        url: '#',
+        repo: '#',
+        icon: 'fa-tasks'
+      },
+      {
+        title: 'Blog Platform',
+        desc: 'A modern blog platform with CMS features and beautiful UI design.',
+        tags: ['Next.js', 'Prisma', 'PostgreSQL'],
+        url: '#',
+        repo: '#',
+        icon: 'fa-blog'
+      }
+    ];
+  }
+
+  const projHtml = projList.map(pr => `
+    <div class="project-card">
+      <div class="project-image">
+        <div class="project-overlay">
+          <div class="project-links">
+            <a href="${tplEsc(pr.url)}" target="_blank" rel="noopener" class="project-link" title="View Project"><i class="fas fa-external-link-alt"></i></a>
+            <a href="${tplEsc(pr.repo)}" target="_blank" rel="noopener" class="project-link" title="View Code"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="project-placeholder"><i class="fas ${pr.icon || 'fa-code'}"></i></div>
+      </div>
+      <div class="project-content">
+        <h3 class="project-title">${pr.title}</h3>
+        <p class="project-description">${pr.desc}</p>
+        <div class="project-tags">${pr.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    </div>`).join('');
+
+  // Stats
+  const projCount = (p.projects && p.projects.length) || 50;
+  const expCount = (p.experience && p.experience.length ? (p.experience.length + 2) : 5);
 
   const app = document.getElementById('app');
   app.innerHTML = `
-  <!-- Loading Screen -->
-  <div class="loader-screen" id="loader">
-    <div class="loader-content">
-      <div class="loader-code-text">
-        <div class="code-line" data-line="1">const portfolio = {</div>
-        <div class="code-line" data-line="2">  loading: true,</div>
-        <div class="code-line" data-line="3">  status: 'initializing...'</div>
-        <div class="code-line" data-line="4">};</div>
-      </div>
-      <div class="loader-spinner-wrapper">
-        <div class="loader-spinner"></div>
-      </div>
-      <div class="loader-progress-wrapper">
-        <div class="loader-progress-bar"></div>
-      </div>
-      <div class="loader-percentage" id="loaderPercent">0%</div>
-    </div>
-  </div>
-
-  <!-- Navigation Header -->
-  <header class="main-header" id="header">
-    <nav class="nav-container">
-      <div class="nav-brand">
-        <div class="brand-logo">
-          <span class="logo-bracket">&lt;</span>
-          <span class="logo-text">Dev</span>
-          <span class="logo-bracket">/&gt;</span>
+    <!-- Loading Screen -->
+    <div class="loader-screen" id="loader">
+      <div class="loader-content">
+        <div class="loader-code-text">
+          <div class="code-line" data-line="1">const portfolio = {</div>
+          <div class="code-line" data-line="2">  loading: true,</div>
+          <div class="code-line" data-line="3">  status: 'initializing...'</div>
+          <div class="code-line" data-line="4">};</div>
         </div>
-      </div>
-      <div class="nav-menu" id="navMenu">
-        <a href="#home" class="nav-link active" data-section="home"><i class="fas fa-home"></i><span class="nav-text" data-text-en="Home" data-text-ar="الرئيسية">Home</span></a>
-        <a href="#about" class="nav-link" data-section="about"><i class="fas fa-user"></i><span class="nav-text" data-text-en="About" data-text-ar="عني">About</span></a>
-        <a href="#skills" class="nav-link" data-section="skills"><i class="fas fa-code"></i><span class="nav-text" data-text-en="Skills" data-text-ar="المهارات">Skills</span></a>
-        <a href="#experience" class="nav-link" data-section="experience"><i class="fas fa-briefcase"></i><span class="nav-text" data-text-en="Experience" data-text-ar="الخبرة">Experience</span></a>
-        <a href="#projects" class="nav-link" data-section="projects"><i class="fas fa-rocket"></i><span class="nav-text" data-text-en="Projects" data-text-ar="المشاريع">Projects</span></a>
-        <a href="#contact" class="nav-link" data-section="contact"><i class="fas fa-envelope"></i><span class="nav-text" data-text-en="Contact" data-text-ar="التواصل">Contact</span></a>
-      </div>
-      <div class="nav-controls">
-        <button class="lang-toggle" id="langToggle" title="Toggle Language"><i class="fas fa-language"></i><span class="lang-text">AR</span></button>
-        <button class="theme-toggle" id="themeToggle" title="Toggle Theme"><i class="fas fa-moon"></i></button>
-        <button class="menu-toggle" id="menuToggle" title="Toggle Menu"><span></span><span></span><span></span></button>
-      </div>
-    </nav>
-  </header>
-
-  <!-- Main Content -->
-  <main class="main-content">
-    <!-- Hero Section -->
-    <section id="home" class="hero-section">
-      <div class="hero-background">
-        <div class="code-grid-bg"></div>
-        <div class="floating-particles" id="particles"></div>
-      </div>
-      <div class="hero-container">
-        <div class="hero-content">
-          <div class="hero-greeting">
-            <span class="greeting-text" data-text-en="Hello, I'm" data-text-ar="مرحباً، أنا">Hello, I'm</span>
-            <span class="greeting-cursor">|</span>
-          </div>
-          <h1 class="hero-name" id="heroName">
-            <span class="name-prefix">const</span>
-            <span class="name-operator">=</span>
-            <span class="name-value" id="heroNameVal">${tplEsc(p.name)}</span>
-            <span class="name-suffix">;</span>
-          </h1>
-          <div class="hero-title">
-            <span class="title-prefix">//</span>
-            <span class="title-text" data-text-en="${tplEsc(p.title)}" data-text-ar="${tplEsc(p.title)}">${tplEsc(p.title)}</span>
-          </div>
-          <p class="hero-description" data-text-en="${tplEsc(p.tagline || 'Passionate developer creating exceptional digital experiences with modern technologies.')}" data-text-ar="${tplEsc(p.tagline || 'مطور شغوف بإنشاء تجارب رقمية استثنائية باستخدام التقنيات الحديثة.')}">
-            ${tplEsc(p.tagline || 'Passionate developer creating exceptional digital experiences with modern technologies.')}
-          </p>
-          <div class="hero-buttons">
-            <a href="#contact" class="btn btn-primary"><span data-text-en="Get In Touch" data-text-ar="تواصل معي">Get In Touch</span><i class="fas fa-arrow-right"></i></a>
-            <a href="#projects" class="btn btn-secondary"><span data-text-en="View Projects" data-text-ar="عرض المشاريع">View Projects</span><i class="fas fa-code"></i></a>
-          </div>
-          <div class="hero-social">
-            ${p.github ? `<a href="${tplEsc(p.github)}" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>` : ''}
-            ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : ''}
-            ${p.twitter ? `<a href="${tplEsc(p.twitter)}" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>` : ''}
-            ${p.email ? `<a href="mailto:${tplEsc(p.email)}" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>` : ''}
-          </div>
+        <div class="loader-spinner-wrapper">
+          <div class="loader-spinner"></div>
         </div>
-        <div class="hero-image-wrapper">
-          <div class="hero-image-container">
-            <div class="profile-image-glow"></div>
-            <div class="profile-image-frame">
-              <div class="profile-image" id="profileImage">
-                ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" class="profile-img">` : `<div class="profile-placeholder"><i class="fas fa-code"></i></div>`}
-              </div>
-            </div>
-            <div class="floating-badge badge-1"><i class="fab fa-react"></i><div class="badge-content"><span class="badge-title">React</span><span class="badge-libs">Redux, Router, Hooks</span></div></div>
-            <div class="floating-badge badge-2"><i class="fab fa-node-js"></i><div class="badge-content"><span class="badge-title">Node.js</span><span class="badge-libs">Express, Socket.io, MongoDB</span></div></div>
-            <div class="floating-badge badge-3"><i class="fab fa-js"></i><div class="badge-content"><span class="badge-title">JavaScript</span><span class="badge-libs">ES6+, TypeScript, jQuery</span></div></div>
-          </div>
+        <div class="loader-progress-wrapper">
+          <div class="loader-progress-bar"></div>
         </div>
-      </div>
-      <div class="scroll-indicator"><div class="scroll-mouse"><div class="scroll-wheel"></div></div><span class="scroll-text" data-text-en="Scroll Down" data-text-ar="انتقل للأسفل">Scroll Down</span></div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="section about-section">
-      <div class="section-container">
-        <div class="section-header">
-          <span class="section-number">01</span>
-          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="About Me" data-text-ar="عني">About Me</span><span class="title-bracket">/&gt;</span></h2>
-          <div class="section-line"></div>
-        </div>
-        <div class="about-content">
-          <div class="about-text-wrapper">
-            <div class="about-intro">
-              <p class="about-text" data-text-en="${tplEsc(p.tagline || 'I am a passionate Full Stack Developer with over 5 years of experience...')}" data-text-ar="${tplEsc(p.tagline || 'أنا مطور Full Stack شغوف...')}">
-                ${tplEsc(p.tagline || 'I am a passionate Full Stack Developer with over 5 years of experience in building modern web applications.')}
-              </p>
-            </div>
-            <div class="about-stats">${stats}</div>
-          </div>
-          <div class="about-image-wrapper">
-            <div class="about-image-container">
-              <div class="code-block">
-                <div class="code-line"><span class="code-keyword">const</span> <span class="code-variable">developer</span> <span class="code-operator">=</span> <span class="code-brace">{</span></div>
-                <div class="code-line indent"><span class="code-property">name</span><span class="code-operator">:</span> <span class="code-string">'${tplEsc(p.name)}'</span><span class="code-comma">,</span></div>
-                <div class="code-line indent"><span class="code-property">title</span><span class="code-operator">:</span> <span class="code-string">'${tplEsc(p.title)}'</span><span class="code-comma">,</span></div>
-                <div class="code-line indent"><span class="code-property">skills</span><span class="code-operator">:</span> <span class="code-bracket">[</span><span class="code-string">'${(p.skills || []).slice(0,3).join("','")}'</span><span class="code-bracket">]</span><span class="code-comma">,</span></div>
-                <div class="code-line"><span class="code-brace">}</span><span class="code-semicolon">;</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="section skills-section">
-      <div class="section-container">
-        <div class="section-header">
-          <span class="section-number">02</span>
-          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Skills" data-text-ar="المهارات">Skills</span><span class="title-bracket">/&gt;</span></h2>
-          <div class="section-line"></div>
-        </div>
-        <div class="skills-grid">
-          <div class="skill-category">
-            <h3 class="category-title" data-text-en="Frontend" data-text-ar="الواجهة الأمامية">Frontend</h3>
-            <div class="skill-items">
-              ${(['React','Vue.js','TypeScript','Next.js']).map(s => {
-                const has = (p.skills || []).includes(s);
-                return has ? `<div class="skill-item" data-skill="${tplEsc(s)}" data-percent="95"><div class="skill-header"><span class="skill-name">${tplEsc(s)}</span><span class="skill-percent">0%</span></div><div class="skill-bar"><div class="skill-progress"></div></div></div>` : '';
-              }).join('')}
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3 class="category-title" data-text-en="Backend" data-text-ar="الخلفية">Backend</h3>
-            <div class="skill-items">
-              ${(['Node.js','Express','MongoDB','PostgreSQL']).map(s => {
-                const has = (p.skills || []).includes(s);
-                return has ? `<div class="skill-item" data-skill="${tplEsc(s)}" data-percent="92"><div class="skill-header"><span class="skill-name">${tplEsc(s)}</span><span class="skill-percent">0%</span></div><div class="skill-bar"><div class="skill-progress"></div></div></div>` : '';
-              }).join('')}
-            </div>
-          </div>
-          <div class="skill-category">
-            <h3 class="category-title" data-text-en="Tools & Others" data-text-ar="الأدوات وغيرها">Tools & Others</h3>
-            <div class="skill-items">
-              ${(['Git','Docker','AWS','Figma']).map(s => {
-                const has = (p.skills || []).includes(s);
-                return has ? `<div class="skill-item" data-skill="${tplEsc(s)}" data-percent="75"><div class="skill-header"><span class="skill-name">${tplEsc(s)}</span><span class="skill-percent">0%</span></div><div class="skill-bar"><div class="skill-progress"></div></div></div>` : '';
-              }).join('')}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Experience Section -->
-    <section id="experience" class="section experience-section">
-      <div class="section-container">
-        <div class="section-header">
-          <span class="section-number">03</span>
-          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Experience" data-text-ar="الخبرة">Experience</span><span class="title-bracket">/&gt;</span></h2>
-          <div class="section-line"></div>
-        </div>
-        <div class="timeline">
-          ${experiences || '<div class="timeline-item"><div class="timeline-marker"></div><div class="timeline-content"><h3 class="timeline-title">No experience yet</h3><p class="timeline-description">Add experience from your dashboard.</p></div></div>'}
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="section projects-section">
-      <div class="section-container">
-        <div class="section-header">
-          <span class="section-number">04</span>
-          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Projects" data-text-ar="المشاريع">Projects</span><span class="title-bracket">/&gt;</span></h2>
-          <div class="section-line"></div>
-        </div>
-        <div class="projects-grid">
-          ${projects || '<p class="empty-msg">No projects yet.</p>'}
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="section contact-section">
-      <div class="section-container">
-        <div class="section-header">
-          <span class="section-number">05</span>
-          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Contact" data-text-ar="التواصل">Contact</span><span class="title-bracket">/&gt;</span></h2>
-          <div class="section-line"></div>
-        </div>
-        <div class="contact-content">
-          <div class="contact-info">
-            ${p.email ? `<div class="contact-item"><div class="contact-icon"><i class="fas fa-envelope"></i></div><div class="contact-details"><h4 class="contact-label" data-text-en="Email" data-text-ar="البريد الإلكتروني">Email</h4><a href="mailto:${tplEsc(p.email)}" class="contact-value">${tplEsc(p.email)}</a></div></div>` : ''}
-            ${p.phone ? `<div class="contact-item"><div class="contact-icon"><i class="fas fa-phone"></i></div><div class="contact-details"><h4 class="contact-label" data-text-en="Phone" data-text-ar="الهاتف">Phone</h4><a href="tel:${tplEsc(p.phone)}" class="contact-value">${tplEsc(p.phone)}</a></div></div>` : ''}
-            ${p.location ? `<div class="contact-item"><div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div><div class="contact-details"><h4 class="contact-label" data-text-en="Location" data-text-ar="الموقع">Location</h4><span class="contact-value">${tplEsc(p.location)}</span></div></div>` : ''}
-          </div>
-          <form class="contact-form" id="contactForm" onsubmit="event.preventDefault();alert('${AppState ? (AppState.currentLang === 'ar' ? 'تم إرسال الرسالة بنجاح!' : 'Message sent successfully!') : 'Message sent successfully!'}');this.reset();">
-            <div class="form-group"><input type="text" class="form-input" placeholder="Name" data-placeholder-en="Name" data-placeholder-ar="الاسم" required></div>
-            <div class="form-group"><input type="email" class="form-input" placeholder="Email" data-placeholder-en="Email" data-placeholder-ar="البريد الإلكتروني" required></div>
-            <div class="form-group"><input type="text" class="form-input" placeholder="Subject" data-placeholder-en="Subject" data-placeholder-ar="الموضوع" required></div>
-            <div class="form-group"><textarea class="form-input form-textarea" rows="5" placeholder="Message" data-placeholder-en="Message" data-placeholder-ar="الرسالة" required></textarea></div>
-            <button type="submit" class="btn btn-primary btn-submit"><span data-text-en="Send Message" data-text-ar="إرسال الرسالة">Send Message</span><i class="fas fa-paper-plane"></i></button>
-          </form>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="main-footer">
-    <div class="footer-container">
-      <div class="footer-content">
-        <div class="footer-text-wrapper">
-          <p class="footer-text"><span class="footer-copyright">© 2025 ${tplEsc(p.name)} Portfolio</span> <span class="footer-divider">•</span> <span class="footer-built">Built with passion and code</span></p>
-          <p class="footer-author"><span class="footer-by-text" data-text-en="by" data-text-ar="بواسطة">by</span> <a href="#" class="footer-author-link"><i class="fas fa-code"></i><span>${tplEsc(p.name)}</span></a></p>
-        </div>
-        <div class="footer-social">
-          ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" class="footer-social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>` : ''}
-          ${p.github ? `<a href="${tplEsc(p.github)}" class="footer-social-link" title="GitHub"><i class="fab fa-github"></i></a>` : ''}
-          ${p.twitter ? `<a href="${tplEsc(p.twitter)}" class="footer-social-link" title="Twitter"><i class="fab fa-twitter"></i></a>` : ''}
-        </div>
+        <div class="loader-percentage" id="loaderPercent">0%</div>
       </div>
     </div>
-  </footer>
 
-  ${tplFoot(p)}`;
+    <!-- Navigation Header -->
+    <header class="main-header" id="header">
+      <nav class="nav-container">
+        <div class="nav-brand">
+          <div class="brand-logo">
+            <span class="logo-bracket">&lt;</span>
+            <span class="logo-text">Dev</span>
+            <span class="logo-bracket">/&gt;</span>
+          </div>
+        </div>
+        <div class="nav-menu" id="navMenu">
+          <a href="#home" class="nav-link active" data-section="home"><i class="fas fa-home"></i><span class="nav-text" data-text-en="Home" data-text-ar="الرئيسية">Home</span></a>
+          <a href="#about" class="nav-link" data-section="about"><i class="fas fa-user"></i><span class="nav-text" data-text-en="About" data-text-ar="عني">About</span></a>
+          <a href="#skills" class="nav-link" data-section="skills"><i class="fas fa-code"></i><span class="nav-text" data-text-en="Skills" data-text-ar="المهارات">Skills</span></a>
+          <a href="#experience" class="nav-link" data-section="experience"><i class="fas fa-briefcase"></i><span class="nav-text" data-text-en="Experience" data-text-ar="الخبرة">Experience</span></a>
+          <a href="#projects" class="nav-link" data-section="projects"><i class="fas fa-rocket"></i><span class="nav-text" data-text-en="Projects" data-text-ar="المشاريع">Projects</span></a>
+          <a href="#contact" class="nav-link" data-section="contact"><i class="fas fa-envelope"></i><span class="nav-text" data-text-en="Contact" data-text-ar="التواصل">Contact</span></a>
+        </div>
+        <div class="nav-controls">
+          <button class="lang-toggle" id="langToggle" title="Toggle Language"><i class="fas fa-language"></i><span class="lang-text">AR</span></button>
+          <button class="theme-toggle" id="themeToggle" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+          <button class="menu-toggle" id="menuToggle" title="Toggle Menu"><span></span><span></span><span></span></button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section id="home" class="hero-section">
+        <div class="hero-background">
+          <div class="code-grid-bg"></div>
+          <div class="floating-particles" id="particles"></div>
+        </div>
+        <div class="hero-container">
+          <div class="hero-content">
+            <div class="hero-greeting">
+              <span class="greeting-text" data-text-en="Hello, I'm" data-text-ar="مرحباً، أنا">Hello, I'm</span>
+              <span class="greeting-cursor">|</span>
+            </div>
+            <h1 class="hero-name" id="heroName">
+              <span class="name-prefix">const</span>
+              <span class="name-operator">=</span>
+              <span class="name-value" id="heroNameVal">${name}</span>
+              <span class="name-suffix">;</span>
+            </h1>
+            <div class="hero-title">
+              <span class="title-prefix">//</span>
+              <span class="title-text" data-text-en="${title}" data-text-ar="${title}">${title}</span>
+            </div>
+            <p class="hero-description" data-text-en="${desc}" data-text-ar="${desc}">
+              ${desc}
+            </p>
+            <div class="hero-buttons">
+              <a href="#contact" class="btn btn-primary"><span data-text-en="Get In Touch" data-text-ar="تواصل معي">Get In Touch</span><i class="fas fa-arrow-right"></i></a>
+              <a href="#projects" class="btn btn-secondary"><span data-text-en="View Projects" data-text-ar="عرض المشاريع">View Projects</span><i class="fas fa-code"></i></a>
+            </div>
+            <div class="hero-social">
+              ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>` : ''}
+              ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : ''}
+              ${p.twitter ? `<a href="${tplEsc(p.twitter)}" target="_blank" rel="noopener" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>` : ''}
+              ${tplShowInsta(p) ? `<a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>` : ''}
+              ${p.email ? `<a href="mailto:${email}" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>` : ''}
+            </div>
+          </div>
+          <div class="hero-image-wrapper">
+            <div class="hero-image-container">
+              <div class="profile-image-glow"></div>
+              <div class="profile-image-frame">
+                <div class="profile-image" id="profileImage">
+                  ${avatarHtml}
+                </div>
+              </div>
+              <div class="floating-badge badge-1"><i class="fab fa-react"></i><div class="badge-content"><span class="badge-title">React</span><span class="badge-libs">Redux, Router, Hooks</span></div></div>
+              <div class="floating-badge badge-2"><i class="fab fa-node-js"></i><div class="badge-content"><span class="badge-title">Node.js</span><span class="badge-libs">Express, Socket.io, MongoDB</span></div></div>
+              <div class="floating-badge badge-3"><i class="fab fa-js"></i><div class="badge-content"><span class="badge-title">JavaScript</span><span class="badge-libs">ES6+, TypeScript, jQuery</span></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-indicator"><div class="scroll-mouse"><div class="scroll-wheel"></div></div><span class="scroll-text" data-text-en="Scroll Down" data-text-ar="انتقل للأسفل">Scroll Down</span></div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="section about-section">
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-number">01</span>
+            <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="About Me" data-text-ar="عني">About Me</span><span class="title-bracket">/&gt;</span></h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="about-content">
+            <div class="about-text-wrapper">
+              <div class="about-intro">
+                <p class="about-text" data-text-en="${aboutText}" data-text-ar="${aboutText}">
+                  ${aboutText}
+                </p>
+              </div>
+              <div class="about-stats">
+                <div class="stat-item"><div class="stat-number" data-count="${projCount}">0</div><div class="stat-label" data-text-en="Projects" data-text-ar="مشروع">Projects</div></div>
+                <div class="stat-item"><div class="stat-number" data-count="${expCount}">0</div><div class="stat-label" data-text-en="Years Experience" data-text-ar="سنوات خبرة">Years Experience</div></div>
+                <div class="stat-item"><div class="stat-number" data-count="30">0</div><div class="stat-label" data-text-en="Happy Clients" data-text-ar="عميل سعيد">Happy Clients</div></div>
+              </div>
+            </div>
+            <div class="about-image-wrapper">
+              <div class="about-image-container">
+                <div class="code-block">
+                  <div class="code-line"><span class="code-keyword">const</span> <span class="code-variable">developer</span> <span class="code-operator">=</span> <span class="code-brace">{</span></div>
+                  <div class="code-line indent"><span class="code-property">name</span><span class="code-operator">:</span> <span class="code-string">'${name}'</span><span class="code-comma">,</span></div>
+                  <div class="code-line indent"><span class="code-property">skills</span><span class="code-operator">:</span> <span class="code-bracket">[</span><span class="code-string">${codeSkills}</span><span class="code-bracket">]</span><span class="code-comma">,</span></div>
+                  <div class="code-line indent"><span class="code-property">passion</span><span class="code-operator">:</span> <span class="code-string">'Coding'</span></div>
+                  <div class="code-line"><span class="code-brace">}</span><span class="code-semicolon">;</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Section -->
+      <section id="skills" class="section skills-section">
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-number">02</span>
+            <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Skills" data-text-ar="المهارات">Skills</span><span class="title-bracket">/&gt;</span></h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="skills-grid">
+            <div class="skill-category">
+              <h3 class="category-title" data-text-en="Frontend" data-text-ar="الواجهة الأمامية">Frontend</h3>
+              <div class="skill-items">${renderSkillCategory(feDefaults)}</div>
+            </div>
+            <div class="skill-category">
+              <h3 class="category-title" data-text-en="Backend" data-text-ar="الخلفية">Backend</h3>
+              <div class="skill-items">${renderSkillCategory(beDefaults)}</div>
+            </div>
+            <div class="skill-category">
+              <h3 class="category-title" data-text-en="Tools & Others" data-text-ar="الأدوات وغيرها">Tools & Others</h3>
+              <div class="skill-items">${renderSkillCategory(toolDefaults)}</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section id="experience" class="section experience-section">
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-number">03</span>
+            <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Experience" data-text-ar="الخبرة">Experience</span><span class="title-bracket">/&gt;</span></h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="timeline">${expHtml}</div>
+        </div>
+      </section>
+
+      <!-- Projects Section -->
+      <section id="projects" class="section projects-section">
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-number">04</span>
+            <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Projects" data-text-ar="المشاريع">Projects</span><span class="title-bracket">/&gt;</span></h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="projects-grid">${projHtml}</div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="section contact-section">
+        <div class="section-container">
+          <div class="section-header">
+            <span class="section-number">05</span>
+            <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Contact" data-text-ar="التواصل">Contact</span><span class="title-bracket">/&gt;</span></h2>
+            <div class="section-line"></div>
+          </div>
+          <div class="contact-content">
+            <div class="contact-info">
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <div class="contact-details">
+                  <h4 class="contact-label" data-text-en="Email" data-text-ar="البريد الإلكتروني">Email</h4>
+                  <a href="mailto:${email}" class="contact-value">${email}</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                <div class="contact-details">
+                  <h4 class="contact-label" data-text-en="Phone" data-text-ar="الهاتف">Phone</h4>
+                  <a href="tel:${phone}" class="contact-value">${phone}</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="contact-details">
+                  <h4 class="contact-label" data-text-en="Location" data-text-ar="الموقع">Location</h4>
+                  <span class="contact-value" data-text-en="${location}" data-text-ar="${location}">${location}</span>
+                </div>
+              </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+              <div class="form-group"><input type="text" class="form-input" placeholder="Name" data-placeholder-en="Name" data-placeholder-ar="الاسم" required></div>
+              <div class="form-group"><input type="email" class="form-input" placeholder="Email" data-placeholder-en="Email" data-placeholder-ar="البريد الإلكتروني" required></div>
+              <div class="form-group"><input type="text" class="form-input" placeholder="Subject" data-placeholder-en="Subject" data-placeholder-ar="الموضوع" required></div>
+              <div class="form-group"><textarea class="form-input form-textarea" rows="5" placeholder="Message" data-placeholder-en="Message" data-placeholder-ar="الرسالة" required></textarea></div>
+              <button type="submit" class="btn btn-primary btn-submit"><span data-text-en="Send Message" data-text-ar="إرسال الرسالة">Send Message</span><i class="fas fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="footer-container">
+        <div class="footer-content">
+          <div class="footer-text-wrapper">
+            <p class="footer-text">
+              <span class="footer-copyright">© ${new Date().getFullYear()} ${name} Portfolio</span>
+              <span class="footer-divider">•</span>
+              <span class="footer-built">Built with passion and code</span>
+            </p>
+            <p class="footer-author">
+              <span class="footer-by-text" data-text-en="by" data-text-ar="بواسطة">by</span>
+              <a href="${tplEsc(p.linkedin || '#')}" target="_blank" rel="noopener noreferrer" class="footer-author-link">
+                <i class="fas fa-code"></i>
+                <span>${name}</span>
+              </a>
+            </p>
+          </div>
+          <div class="footer-social">
+            ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener noreferrer" class="footer-social-link"><i class="fab fa-linkedin-in"></i></a>` : ''}
+            ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="GitHub"><i class="fab fa-github"></i></a>` : ''}
+            ${p.twitter ? `<a href="${tplEsc(p.twitter)}" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Twitter"><i class="fab fa-twitter"></i></a>` : ''}
+          </div>
+        </div>
+      </div>
+    </footer>
+  `;
 
   window.scrollTo(0, 0);
 
-  setTimeout(() => {
-    initModerncvAnimations();
-  }, 100);
+  // Initialize interactive logic and animations
+  initModerncvRuntime();
 }
 
-function initModerncvAnimations() {
-  if (typeof anime === 'undefined') return;
+function initModerncvRuntime() {
+  const AppState = {
+    currentLang: 'en',
+    currentTheme: 'dark',
+    currentSection: 'home',
+    isMenuOpen: false,
+    isLoaded: false
+  };
 
-  const nameVal = document.getElementById('heroNameVal');
-  if (nameVal) {
-    const txt = nameVal.textContent;
-    nameVal.textContent = '';
-    anime({ targets: {v:0}, v: txt.length, duration: 1500, delay: 500, easing: 'easeInOutQuad', update: a => nameVal.textContent = txt.substring(0, Math.floor(a.animatables[0].target.v)) });
+  function setLanguage(lang) {
+    AppState.currentLang = lang;
+    document.body.setAttribute('data-lang', lang);
+    document.body.setAttribute('data-dir', lang === 'ar' ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', lang);
+    document.documentElement.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
+
+    document.querySelectorAll('[data-text-en], [data-text-ar]').forEach(el => {
+      const en = el.getAttribute('data-text-en');
+      const ar = el.getAttribute('data-text-ar');
+      if (lang === 'ar' && ar) el.textContent = ar;
+      else if (en) el.textContent = en;
+    });
+
+    document.querySelectorAll('[data-placeholder-en], [data-placeholder-ar]').forEach(el => {
+      const en = el.getAttribute('data-placeholder-en');
+      const ar = el.getAttribute('data-placeholder-ar');
+      if (lang === 'ar' && ar) el.setAttribute('placeholder', ar);
+      else if (en) el.setAttribute('placeholder', en);
+    });
+
+    const langToggle = document.getElementById('langToggle');
+    if (langToggle) {
+      const txt = langToggle.querySelector('.lang-text');
+      if (txt) txt.textContent = lang === 'en' ? 'AR' : 'EN';
+    }
   }
 
-  anime({ targets: '.skill-progress', width: el => el.parentElement.querySelector('.skill-percent')?.dataset?.pct || '90%', duration: 2000, delay: anime.stagger(100), easing: 'easeOutExpo' });
-  anime({ targets: '.skill-percent', innerHTML: [0, el => el.parentElement?.previousElementSibling?.dataset?.pct || '90'], duration: 2000, easing: 'easeOutExpo', round: 1, update: a => a.animatables[0].target.textContent = Math.floor(a.animatables[0].target.innerHTML) + '%' });
+  function toggleLanguage() {
+    setLanguage(AppState.currentLang === 'en' ? 'ar' : 'en');
+  }
 
-  document.querySelectorAll('.stat-number').forEach(el => {
-    const target = parseInt(el.dataset.count || 0);
-    anime({ targets: {v:0}, v: target, duration: 2000, easing: 'easeOutExpo', update: a => el.textContent = Math.floor(a.animatables[0].target.v) });
+  function setTheme(theme) {
+    AppState.currentTheme = theme;
+    document.body.setAttribute('data-theme', theme);
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      const icon = themeToggle.querySelector('i');
+      if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+  }
+
+  function toggleTheme() {
+    setTheme(AppState.currentTheme === 'dark' ? 'light' : 'dark');
+  }
+
+  function toggleMobileMenu() {
+    AppState.isMenuOpen = !AppState.isMenuOpen;
+    const navMenu = document.getElementById('navMenu');
+    const menuToggle = document.getElementById('menuToggle');
+    if (navMenu) navMenu.classList.toggle('active', AppState.isMenuOpen);
+    if (menuToggle) menuToggle.classList.toggle('active', AppState.isMenuOpen);
+  }
+
+  // Bind controls
+  const langToggle = document.getElementById('langToggle');
+  if (langToggle) langToggle.onclick = toggleLanguage;
+
+  const themeToggle = document.getElementById('themeToggle');
+  if (themeToggle) themeToggle.onclick = toggleTheme;
+
+  const menuToggle = document.getElementById('menuToggle');
+  if (menuToggle) menuToggle.onclick = toggleMobileMenu;
+
+  // Nav links smooth scroll & active tracking
+  const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+  navLinks.forEach(link => {
+    link.onclick = (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href');
+      const targetSection = document.querySelector(targetId);
+      if (targetSection) {
+        const header = document.querySelector('.main-header');
+        const headerHeight = header ? header.offsetHeight : 80;
+        window.scrollTo({
+          top: targetSection.offsetTop - headerHeight,
+          behavior: 'smooth'
+        });
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        if (AppState.isMenuOpen) toggleMobileMenu();
+      }
+    };
   });
 
+  // Scroll listener for sticky header & section spying
+  function onScroll() {
+    const header = document.querySelector('.main-header');
+    if (header) {
+      if (window.scrollY > 50) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
+    }
+    const scrollPos = window.scrollY + 120;
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(s => {
+      if (scrollPos >= s.offsetTop && scrollPos < s.offsetTop + s.offsetHeight) {
+        const id = s.getAttribute('id');
+        navLinks.forEach(l => {
+          l.classList.toggle('active', l.getAttribute('href') === `#${id}`);
+        });
+      }
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Floating particles
   const particles = document.getElementById('particles');
   if (particles) {
-    const symbols = ['{','}','[',']','(',')','<','>','/','*','=','+','-',';',':','&','|','$','#','@'];
-    for(let i=0;i<20;i++) {
+    particles.innerHTML = '';
+    const symbols = ['{', '}', '[', ']', '(', ')', '<', '>', '/', '*', '=', '+', '-', ';', ':', '&', '|', '%', '$', '#', '@'];
+    for (let i = 0; i < 20; i++) {
       const p = document.createElement('div');
       p.className = 'particle';
-      p.textContent = symbols[Math.floor(Math.random()*symbols.length)];
-      p.style.left = Math.random()*100+'%';
-      p.style.animationDelay = Math.random()*15+'s';
-      p.style.animationDuration = (10+Math.random()*10)+'s';
+      p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDelay = Math.random() * 15 + 's';
+      p.style.animationDuration = (10 + Math.random() * 10) + 's';
       particles.appendChild(p);
     }
   }
 
-  document.querySelectorAll('.project-card, .timeline-item, .skill-category, .contact-item').forEach((el,i) => {
-    anime({ targets: el, opacity: [0,1], translateY: [30,0], delay: i*80, duration: 800, easing: 'easeOutExpo' });
-  });
+  // Contact form
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.onsubmit = (e) => {
+      e.preventDefault();
+      const msg = AppState.currentLang === 'ar' ? 'تم إرسال الرسالة بنجاح!' : 'Message sent successfully!';
+      alert(msg);
+      contactForm.reset();
+    };
+  }
 
-  document.querySelectorAll('.section').forEach(section => {
-    if (typeof IntersectionObserver !== 'undefined') {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-      }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
-      obs.observe(section);
+  // Loader animation
+  const loader = document.getElementById('loader');
+  const loaderPercent = document.getElementById('loaderPercent');
+  if (loader && loaderPercent) {
+    let progress = 0;
+    const iv = setInterval(() => {
+      progress += Math.random() * 20 + 5;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(iv);
+        loaderPercent.textContent = '100%';
+        setTimeout(() => {
+          if (typeof anime !== 'undefined') {
+            anime({
+              targets: loader,
+              opacity: [1, 0],
+              duration: 500,
+              easing: 'easeInOutQuad',
+              complete: () => {
+                loader.classList.add('hidden');
+                triggerAnimations();
+              }
+            });
+          } else {
+            loader.classList.add('hidden');
+            triggerAnimations();
+          }
+        }, 250);
+      } else {
+        loaderPercent.textContent = Math.floor(progress) + '%';
+      }
+    }, 60);
+  } else {
+    triggerAnimations();
+  }
+
+  function triggerAnimations() {
+    if (typeof anime === 'undefined') {
+      // Dynamic fallback load if anime is not available
+      const script = document.createElement('script');
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
+      script.onload = () => runAnimeAnimations();
+      document.head.appendChild(script);
+      return;
     }
-  });
+    runAnimeAnimations();
+  }
+
+  function runAnimeAnimations() {
+    if (typeof anime === 'undefined') return;
+
+    // Typing effect on name
+    const heroNameVal = document.getElementById('heroNameVal');
+    if (heroNameVal) {
+      const fullText = heroNameVal.textContent;
+      heroNameVal.textContent = '';
+      anime({
+        targets: { v: 0 },
+        v: fullText.length,
+        duration: 1500,
+        delay: 300,
+        easing: 'easeInOutQuad',
+        update: anim => {
+          heroNameVal.textContent = fullText.substring(0, Math.floor(anim.animatables[0].target.v));
+        }
+      });
+    }
+
+    // Hero title & description
+    anime({ targets: '.hero-title', opacity: [0, 1], translateX: [-30, 0], delay: 600, duration: 800, easing: 'easeOutExpo' });
+    anime({ targets: '.hero-description', opacity: [0, 1], translateY: [20, 0], delay: 900, duration: 800, easing: 'easeOutExpo' });
+    anime({ targets: '.hero-buttons .btn', opacity: [0, 1], scale: [0.8, 1], delay: anime.stagger(100, { start: 1100 }), duration: 600, easing: 'easeOutBack' });
+    anime({ targets: '.hero-social .social-icon', opacity: [0, 1], scale: [0, 1], delay: anime.stagger(80, { start: 1300 }), duration: 600, easing: 'easeOutBack' });
+    anime({ targets: '#profileImage', opacity: [0, 1], scale: [0.8, 1], delay: 800, duration: 1200, easing: 'easeOutElastic(1, .8)' });
+    anime({ targets: '.floating-badge', opacity: [0, 1], scale: [0, 1], delay: anime.stagger(150, { start: 1200 }), duration: 800, easing: 'easeOutBack' });
+
+    // Intersection observer for scroll animations
+    if ('IntersectionObserver' in window) {
+      // Skill bars
+      const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const item = entry.target;
+            const bar = item.querySelector('.skill-progress');
+            const pctEl = item.querySelector('.skill-percent');
+            const targetPct = parseInt(item.getAttribute('data-percent') || 85, 10);
+            if (bar) {
+              anime({ targets: bar, width: ['0%', targetPct + '%'], duration: 1800, easing: 'easeOutExpo' });
+            }
+            if (pctEl) {
+              anime({
+                targets: { v: 0 },
+                v: targetPct,
+                duration: 1800,
+                easing: 'easeOutExpo',
+                update: anim => {
+                  pctEl.textContent = Math.floor(anim.animatables[0].target.v) + '%';
+                }
+              });
+            }
+            skillObserver.unobserve(item);
+          }
+        });
+      }, { threshold: 0.3 });
+      document.querySelectorAll('.skill-item').forEach(el => skillObserver.observe(el));
+
+      // Stats counters
+      const statObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const el = entry.target;
+            const targetVal = parseInt(el.getAttribute('data-count') || 0, 10);
+            anime({
+              targets: { v: 0 },
+              v: targetVal,
+              duration: 2000,
+              easing: 'easeOutExpo',
+              update: anim => {
+                el.textContent = Math.floor(anim.animatables[0].target.v);
+              }
+            });
+            statObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.stat-number').forEach(el => statObserver.observe(el));
+
+      // Cards & Timelines
+      const cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            anime({
+              targets: entry.target,
+              opacity: [0, 1],
+              translateY: [35, 0],
+              duration: 700,
+              easing: 'easeOutExpo'
+            });
+            cardObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.project-card, .timeline-item, .skill-category, .contact-item').forEach(el => cardObserver.observe(el));
+    } else {
+      // Fallback
+      document.querySelectorAll('.skill-progress').forEach(el => {
+        const pct = el.closest('.skill-item')?.getAttribute('data-percent') || '85';
+        el.style.width = pct + '%';
+      });
+      document.querySelectorAll('.skill-percent').forEach(el => {
+        const pct = el.closest('.skill-item')?.getAttribute('data-percent') || '85';
+        el.textContent = pct + '%';
+      });
+      document.querySelectorAll('.stat-number').forEach(el => {
+        el.textContent = el.getAttribute('data-count') || '0';
+      });
+    }
+
+    // Parallax on profile image & grid
+    const profileImg = document.getElementById('profileImage');
+    const gridBg = document.querySelector('.code-grid-bg');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      if (profileImg && scrolled < 800) {
+        profileImg.style.transform = `translateY(${scrolled * 0.15}px)`;
+      }
+      if (gridBg && scrolled < 1200) {
+        gridBg.style.transform = `translateY(${scrolled * 0.1}px)`;
+      }
+    }, { passive: true });
+  }
 }
 
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv };

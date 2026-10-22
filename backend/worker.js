@@ -135,9 +135,11 @@ function head(p, tpl) {
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/templates.css"><link rel="stylesheet" href="/resume.css"></head>`;
+<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/templates.css"><link rel="stylesheet" href="/resume.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script></head>`;
 }
 function nav(p) {
   return `<nav><a class="logo" href="${ORIGIN}/"><img class="brand-logo" src="/favicon.png" alt="portfoolio logo" width="24" height="24" style="vertical-align:middle"><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
@@ -417,9 +419,718 @@ function pageGallery(p, wIdx) {
   }
   return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
 }
+function pageModerncv(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Full Stack Developer & UI/UX Designer');
+  const desc = esc(p.tagline || 'Passionate developer creating exceptional digital experiences with modern technologies.');
+  const aboutText = esc(p.bio || p.desc || p.tagline || "I'm a passionate Full Stack Developer with over 5 years of experience in building modern web applications and mobile solutions. I specialize in JavaScript technologies, React, Node.js, and creating beautiful user interfaces.");
+  const email = esc(p.email || 'developer@example.com');
+  const phone = esc(p.phone || '+966 50 123 4567');
+  const location = esc(p.location || 'Riyadh, Saudi Arabia');
+
+  const avatarHtml = (p.avatarUrl || p.avatar_url)
+    ? `<img src="${esc(p.avatarUrl || p.avatar_url)}" alt="${name}" class="profile-img" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`
+    : `<div class="profile-placeholder"><i class="fas fa-code"></i></div>`;
+
+  const userSkills = Array.isArray(p.skills) && p.skills.length ? p.skills : ['React', 'Node.js', 'TypeScript'];
+  const codeSkills = userSkills.slice(0, 3).map((s) => `'${esc(s)}'`).join(', ');
+
+  const feDefaults = [
+    { name: 'React', pct: 95 },
+    { name: 'Vue.js', pct: 85 },
+    { name: 'TypeScript', pct: 90 },
+    { name: 'Next.js', pct: 88 }
+  ];
+  const beDefaults = [
+    { name: 'Node.js', pct: 92 },
+    { name: 'Express', pct: 90 },
+    { name: 'MongoDB', pct: 85 },
+    { name: 'PostgreSQL', pct: 80 }
+  ];
+  const toolDefaults = [
+    { name: 'Git', pct: 95 },
+    { name: 'Docker', pct: 75 },
+    { name: 'AWS', pct: 70 },
+    { name: 'Figma', pct: 88 }
+  ];
+
+  function renderSkillCategory(items) {
+    return items.map((s) => `
+      <div class="skill-item" data-skill="${esc(s.name)}" data-percent="${s.pct}">
+        <div class="skill-header">
+          <span class="skill-name">${esc(s.name)}</span>
+          <span class="skill-percent">0%</span>
+        </div>
+        <div class="skill-bar">
+          <div class="skill-progress"></div>
+        </div>
+      </div>`).join('');
+  }
+
+  let expList = [];
+  if (Array.isArray(p.experience) && p.experience.length) {
+    expList = p.experience.map((e) => ({
+      year: `${esc(e.start || '2022')} - ${e.current ? 'Present' : esc(e.end || 'Present')}`,
+      isCurrent: Boolean(e.current),
+      title: esc(e.role || e.title || 'Developer'),
+      company: esc(e.company || 'Tech Company Inc.'),
+      desc: esc(e.desc || 'Developed and maintained modern web applications.'),
+      achievements: Array.isArray(e.achievements) ? e.achievements.map((a) => esc(a)) : [],
+      tags: Array.isArray(e.tags) ? e.tags.map((t) => esc(t)) : (Array.isArray(e.technologies) ? e.technologies.map((t) => esc(t)) : ['React', 'Node.js', 'TypeScript'])
+    }));
+  } else {
+    expList = [
+      {
+        year: '2022 - Present',
+        isCurrent: true,
+        title: 'Senior Full Stack Developer',
+        company: 'Tech Company Inc.',
+        desc: 'Leading a team of developers in building complex web applications using React and Node.js. Developing advanced user interfaces and optimizing performance. Implementing microservices architecture and CI/CD pipelines.',
+        achievements: ['Led team of 5 developers', 'Improved performance by 40%', 'Deployed 20+ production apps'],
+        tags: ['React', 'Node.js', 'TypeScript', 'MongoDB', 'Docker', 'AWS']
+      },
+      {
+        year: '2020 - 2022',
+        isCurrent: false,
+        title: 'Frontend Developer',
+        company: 'Digital Solutions',
+        desc: 'Developed interactive user interfaces using React and Vue.js. Worked on improving user experience and performance optimization. Collaborated with designers to implement pixel-perfect designs.',
+        achievements: ['Built 15+ responsive websites', 'Reduced load time by 50%'],
+        tags: ['React', 'Vue.js', 'JavaScript', 'SASS', 'Webpack']
+      },
+      {
+        year: '2018 - 2020',
+        isCurrent: false,
+        title: 'Junior Developer',
+        company: 'Creative Studio',
+        desc: 'Developed websites using HTML, CSS, and JavaScript. Learned best practices in web development. Worked on various client projects and gained experience in modern web technologies.',
+        achievements: ['Completed 30+ projects', 'Learned modern frameworks'],
+        tags: ['HTML', 'CSS', 'JavaScript', 'jQuery', 'Bootstrap']
+      }
+    ];
+  }
+
+  const expHtml = expList.map((e) => `
+    <div class="timeline-item">
+      <div class="timeline-marker"></div>
+      <div class="timeline-content">
+        <div class="timeline-header">
+          <div class="timeline-year">${e.year}</div>
+          ${e.isCurrent ? '<div class="timeline-badge">Current</div>' : ''}
+        </div>
+        <h3 class="timeline-title">${e.title}</h3>
+        <div class="timeline-company"><i class="fas fa-building"></i> ${e.company}</div>
+        <p class="timeline-description">${e.desc}</p>
+        ${e.achievements.length ? `
+        <div class="timeline-achievements">
+          ${e.achievements.map((a) => `<div class="achievement-item"><i class="fas fa-check-circle"></i><span>${a}</span></div>`).join('')}
+        </div>` : ''}
+        <div class="timeline-tags">
+          ${e.tags.map((t) => `<span class="tag">${t}</span>`).join('')}
+        </div>
+      </div>
+    </div>`).join('');
+
+  let projList = [];
+  if (Array.isArray(p.projects) && p.projects.length) {
+    projList = p.projects.map((pr, i) => ({
+      title: esc(pr.title || `Project ${i + 1}`),
+      desc: esc(pr.desc || 'A modern web application built with clean architecture and cutting-edge technologies.'),
+      tags: Array.isArray(pr.technologies || pr.tags) ? (pr.technologies || pr.tags).map((t) => esc(t)) : ['React', 'TypeScript', 'Node.js'],
+      url: pr.demoUrl || pr.url || '#',
+      repo: (pr.repo && pr.repo.url) || (pr.url && pr.url.includes('github') ? pr.url : '#'),
+      icon: pr.icon || (i % 3 === 0 ? 'fa-shopping-cart' : i % 3 === 1 ? 'fa-tasks' : 'fa-blog')
+    }));
+  } else {
+    projList = [
+      {
+        title: 'E-Commerce Platform',
+        desc: 'A complete e-commerce platform with payment integration and advanced inventory management.',
+        tags: ['React', 'Node.js', 'MongoDB'],
+        url: '#',
+        repo: '#',
+        icon: 'fa-shopping-cart'
+      },
+      {
+        title: 'Task Management App',
+        desc: 'A web application for task management with real-time synchronization and modern design.',
+        tags: ['React', 'Firebase', 'TypeScript'],
+        url: '#',
+        repo: '#',
+        icon: 'fa-tasks'
+      },
+      {
+        title: 'Blog Platform',
+        desc: 'A modern blog platform with CMS features and beautiful UI design.',
+        tags: ['Next.js', 'Prisma', 'PostgreSQL'],
+        url: '#',
+        repo: '#',
+        icon: 'fa-blog'
+      }
+    ];
+  }
+
+  const projHtml = projList.map((pr) => `
+    <div class="project-card">
+      <div class="project-image">
+        <div class="project-overlay">
+          <div class="project-links">
+            <a href="${esc(pr.url)}" target="_blank" rel="noopener" class="project-link" title="View Project"><i class="fas fa-external-link-alt"></i></a>
+            <a href="${esc(pr.repo)}" target="_blank" rel="noopener" class="project-link" title="View Code"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="project-placeholder"><i class="fas ${pr.icon || 'fa-code'}"></i></div>
+      </div>
+      <div class="project-content">
+        <h3 class="project-title">${pr.title}</h3>
+        <p class="project-description">${pr.desc}</p>
+        <div class="project-tags">${pr.tags.map((t) => `<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    </div>`).join('');
+
+  const projCount = (p.projects && p.projects.length) || 50;
+  const expCount = (p.experience && p.experience.length ? (p.experience.length + 2) : 5);
+
+  const moderncvScript = `<script>
+  (function(){
+    var AppState = {
+      currentLang: 'en',
+      currentTheme: 'dark',
+      currentSection: 'home',
+      isMenuOpen: false,
+      isLoaded: false
+    };
+
+    function setLanguage(lang) {
+      AppState.currentLang = lang;
+      var html = document.documentElement;
+      var body = document.body;
+      if (lang === 'ar') {
+        html.setAttribute('lang', 'ar');
+        html.setAttribute('dir', 'rtl');
+        body.setAttribute('data-lang', 'ar');
+        body.setAttribute('data-dir', 'rtl');
+      } else {
+        html.setAttribute('lang', 'en');
+        html.setAttribute('dir', 'ltr');
+        body.setAttribute('data-lang', 'en');
+        body.setAttribute('data-dir', 'ltr');
+      }
+      var textElements = document.querySelectorAll('[data-text-en], [data-text-ar]');
+      textElements.forEach(function(el) {
+        var en = el.getAttribute('data-text-en');
+        var ar = el.getAttribute('data-text-ar');
+        if (AppState.currentLang === 'ar' && ar) el.textContent = ar;
+        else if (AppState.currentLang === 'en' && en) el.textContent = en;
+      });
+      var placeholderElements = document.querySelectorAll('[data-placeholder-en], [data-placeholder-ar]');
+      placeholderElements.forEach(function(el) {
+        var enP = el.getAttribute('data-placeholder-en');
+        var arP = el.getAttribute('data-placeholder-ar');
+        if (AppState.currentLang === 'ar' && arP) el.setAttribute('placeholder', arP);
+        else if (AppState.currentLang === 'en' && enP) el.setAttribute('placeholder', enP);
+      });
+      var langToggle = document.getElementById('langToggle');
+      if (langToggle) {
+        var langText = langToggle.querySelector('.lang-text');
+        if (langText) langText.textContent = AppState.currentLang === 'en' ? 'AR' : 'EN';
+      }
+    }
+
+    function setTheme(theme) {
+      AppState.currentTheme = theme;
+      document.body.setAttribute('data-theme', theme);
+      var themeToggle = document.getElementById('themeToggle');
+      if (themeToggle) {
+        var icon = themeToggle.querySelector('i');
+        if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+      }
+    }
+
+    function initNavigation() {
+      var navLinks = document.querySelectorAll('.nav-link[href^="#"]');
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          var targetId = link.getAttribute('href');
+          var targetSection = document.querySelector(targetId);
+          if (targetSection) {
+            var header = document.querySelector('.main-header');
+            var headerHeight = header ? header.offsetHeight : 80;
+            var targetPosition = targetSection.offsetTop - headerHeight;
+            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+            navLinks.forEach(function(l) { l.classList.remove('active'); });
+            link.classList.add('active');
+            if (AppState.isMenuOpen) toggleMobileMenu();
+          }
+        });
+      });
+
+      window.addEventListener('scroll', function() {
+        var sections = document.querySelectorAll('section[id]');
+        var scrollPosition = window.scrollY + 120;
+        sections.forEach(function(section) {
+          var top = section.offsetTop;
+          var height = section.offsetHeight;
+          var id = section.getAttribute('id');
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            navLinks.forEach(function(l) {
+              if (l.getAttribute('data-section') === id) l.classList.add('active');
+              else l.classList.remove('active');
+            });
+          }
+        });
+
+        var header = document.querySelector('.main-header');
+        if (header) {
+          if (window.scrollY > 50) header.classList.add('scrolled');
+          else header.classList.remove('scrolled');
+        }
+      });
+    }
+
+    function toggleMobileMenu() {
+      AppState.isMenuOpen = !AppState.isMenuOpen;
+      var navMenu = document.getElementById('navMenu');
+      var menuToggle = document.getElementById('menuToggle');
+      if (navMenu) navMenu.classList.toggle('active', AppState.isMenuOpen);
+      if (menuToggle) menuToggle.classList.toggle('active', AppState.isMenuOpen);
+    }
+
+    function generateParticles() {
+      var container = document.getElementById('particles');
+      if (!container) return;
+      var symbols = ['{', '}', '[', ']', '(', ')', '<', '>', '/', '*', '=', '+', '-', ';', ':', '&', '|', '%', '$', '#', '@'];
+      for (var i = 0; i < 20; i++) {
+        var p = document.createElement('div');
+        p.className = 'particle';
+        p.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        p.style.left = (Math.random() * 100) + '%';
+        p.style.animationDelay = (Math.random() * 15) + 's';
+        p.style.animationDuration = (10 + Math.random() * 10) + 's';
+        container.appendChild(p);
+      }
+    }
+
+    function initAnimations() {
+      var loader = document.getElementById('loader');
+      var loaderPercent = document.getElementById('loaderPercent');
+      var progress = 0;
+      var progressInterval = setInterval(function() {
+        progress += Math.random() * 18;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(progressInterval);
+          setTimeout(function() {
+            if (loader) {
+              loader.style.opacity = '0';
+              setTimeout(function() { loader.classList.add('hidden'); }, 500);
+            }
+            playHeroAnimations();
+          }, 300);
+        }
+        if (loaderPercent) loaderPercent.textContent = Math.floor(progress) + '%';
+      }, 80);
+    }
+
+    function playHeroAnimations() {
+      if (typeof anime === 'undefined') {
+        var heroDesc = document.querySelector('.hero-description');
+        if (heroDesc) heroDesc.style.opacity = '1';
+        return;
+      }
+      var nameVal = document.getElementById('heroNameVal');
+      if (nameVal) {
+        var fullText = nameVal.textContent;
+        nameVal.textContent = '';
+        anime({
+          targets: { value: 0 },
+          value: fullText.length,
+          duration: 1400,
+          delay: 400,
+          easing: 'easeInOutQuad',
+          update: function(anim) {
+            var len = Math.floor(anim.animatables[0].target.value);
+            nameVal.textContent = fullText.substring(0, len);
+          }
+        });
+      }
+      anime({ targets: '.hero-title', opacity: [0, 1], translateX: [-30, 0], delay: 700, duration: 900, easing: 'easeOutExpo' });
+      anime({ targets: '.hero-description', opacity: [0, 1], translateY: [20, 0], delay: 1000, duration: 900, easing: 'easeOutExpo' });
+      anime({ targets: '.hero-buttons .btn', opacity: [0, 1], scale: [0.85, 1], delay: anime.stagger(120, {start: 1300}), duration: 700, easing: 'easeOutBack' });
+      anime({ targets: '.hero-social .social-icon', opacity: [0, 1], scale: [0, 1], rotate: [90, 0], delay: anime.stagger(80, {start: 1600}), duration: 600, easing: 'easeOutBack' });
+      anime({ targets: '#profileImage', opacity: [0, 1], scale: [0.85, 1], delay: 800, duration: 1200, easing: 'easeOutElastic(1, .8)' });
+      anime({ targets: '.floating-badge', opacity: [0, 1], scale: [0, 1], delay: anime.stagger(200, {start: 1200}), duration: 700, easing: 'easeOutBack' });
+    }
+
+    function initObservers() {
+      var skillItems = document.querySelectorAll('.skill-item');
+      if (skillItems.length) {
+        var skillObs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var item = entry.target;
+              var bar = item.querySelector('.skill-progress');
+              var pctEl = item.querySelector('.skill-percent');
+              var pct = parseInt(item.getAttribute('data-percent') || 0, 10);
+              if (bar) {
+                if (typeof anime !== 'undefined') {
+                  anime({ targets: bar, width: ['0%', pct + '%'], duration: 1800, easing: 'easeOutExpo', delay: 200 });
+                  anime({ targets: { v: 0 }, v: pct, duration: 1800, easing: 'easeOutExpo', delay: 200, update: function(a) { if (pctEl) pctEl.textContent = Math.floor(a.animatables[0].target.v) + '%'; } });
+                } else {
+                  bar.style.width = pct + '%';
+                  if (pctEl) pctEl.textContent = pct + '%';
+                }
+              }
+              skillObs.unobserve(item);
+            }
+          });
+        }, { threshold: 0.3 });
+        skillItems.forEach(function(i) { skillObs.observe(i); });
+      }
+
+      var stats = document.querySelectorAll('.stat-number');
+      if (stats.length) {
+        var statObs = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              var el = entry.target;
+              var count = parseInt(el.getAttribute('data-count') || 0, 10);
+              if (typeof anime !== 'undefined') {
+                anime({ targets: { v: 0 }, v: count, duration: 1800, easing: 'easeOutExpo', update: function(a) { el.textContent = Math.floor(a.animatables[0].target.v); } });
+              } else {
+                el.textContent = count;
+              }
+              statObs.unobserve(el);
+            }
+          });
+        }, { threshold: 0.4 });
+        stats.forEach(function(s) { statObs.observe(s); });
+      }
+    }
+
+    function init() {
+      var savedLang = localStorage.getItem('portfolio-lang');
+      var savedTheme = localStorage.getItem('portfolio-theme');
+      if (savedLang) setLanguage(savedLang);
+      if (savedTheme) setTheme(savedTheme);
+
+      var langBtn = document.getElementById('langToggle');
+      if (langBtn) {
+        langBtn.onclick = function() {
+          var nl = AppState.currentLang === 'en' ? 'ar' : 'en';
+          setLanguage(nl);
+          localStorage.setItem('portfolio-lang', nl);
+        };
+      }
+
+      var themeBtn = document.getElementById('themeToggle');
+      if (themeBtn) {
+        themeBtn.onclick = function() {
+          var nt = AppState.currentTheme === 'dark' ? 'light' : 'dark';
+          setTheme(nt);
+          localStorage.setItem('portfolio-theme', nt);
+        };
+      }
+
+      var menuBtn = document.getElementById('menuToggle');
+      if (menuBtn) menuBtn.onclick = toggleMobileMenu;
+
+      var contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.onsubmit = function(e) {
+          e.preventDefault();
+          var msg = AppState.currentLang === 'ar' ? 'تم إرسال الرسالة بنجاح!' : 'Message sent successfully!';
+          alert(msg);
+          contactForm.reset();
+        };
+      }
+
+      initNavigation();
+      generateParticles();
+      initAnimations();
+      initObservers();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+  </script>`;
+
+  return `<!DOCTYPE html>
+<html lang="en" dir="ltr">
+${head(p, 'moderncv')}
+<body class="body-main" data-template="moderncv" data-theme="dark" data-lang="en" data-dir="ltr">
+  <!-- Loading Screen -->
+  <div class="loader-screen" id="loader">
+    <div class="loader-content">
+      <div class="loader-code-text">
+        <div class="code-line" data-line="1">const portfolio = {</div>
+        <div class="code-line" data-line="2">  loading: true,</div>
+        <div class="code-line" data-line="3">  status: 'initializing...'</div>
+        <div class="code-line" data-line="4">};</div>
+      </div>
+      <div class="loader-spinner-wrapper">
+        <div class="loader-spinner"></div>
+      </div>
+      <div class="loader-progress-wrapper">
+        <div class="loader-progress-bar"></div>
+      </div>
+      <div class="loader-percentage" id="loaderPercent">0%</div>
+    </div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="main-header" id="header">
+    <nav class="nav-container">
+      <div class="nav-brand">
+        <div class="brand-logo">
+          <span class="logo-bracket">&lt;</span>
+          <span class="logo-text">Dev</span>
+          <span class="logo-bracket">/&gt;</span>
+        </div>
+      </div>
+      <div class="nav-menu" id="navMenu">
+        <a href="#home" class="nav-link active" data-section="home"><i class="fas fa-home"></i><span class="nav-text" data-text-en="Home" data-text-ar="الرئيسية">Home</span></a>
+        <a href="#about" class="nav-link" data-section="about"><i class="fas fa-user"></i><span class="nav-text" data-text-en="About" data-text-ar="عني">About</span></a>
+        <a href="#skills" class="nav-link" data-section="skills"><i class="fas fa-code"></i><span class="nav-text" data-text-en="Skills" data-text-ar="المهارات">Skills</span></a>
+        <a href="#experience" class="nav-link" data-section="experience"><i class="fas fa-briefcase"></i><span class="nav-text" data-text-en="Experience" data-text-ar="الخبرة">Experience</span></a>
+        <a href="#projects" class="nav-link" data-section="projects"><i class="fas fa-rocket"></i><span class="nav-text" data-text-en="Projects" data-text-ar="المشاريع">Projects</span></a>
+        <a href="#contact" class="nav-link" data-section="contact"><i class="fas fa-envelope"></i><span class="nav-text" data-text-en="Contact" data-text-ar="التواصل">Contact</span></a>
+      </div>
+      <div class="nav-controls">
+        <button class="lang-toggle" id="langToggle" title="Toggle Language"><i class="fas fa-language"></i><span class="lang-text">AR</span></button>
+        <button class="theme-toggle" id="themeToggle" title="Toggle Theme"><i class="fas fa-moon"></i></button>
+        <button class="menu-toggle" id="menuToggle" title="Toggle Menu"><span></span><span></span><span></span></button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+      <div class="hero-background">
+        <div class="code-grid-bg"></div>
+        <div class="floating-particles" id="particles"></div>
+      </div>
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-greeting">
+            <span class="greeting-text" data-text-en="Hello, I'm" data-text-ar="مرحباً، أنا">Hello, I'm</span>
+            <span class="greeting-cursor">|</span>
+          </div>
+          <h1 class="hero-name" id="heroName">
+            <span class="name-prefix">const</span>
+            <span class="name-operator">=</span>
+            <span class="name-value" id="heroNameVal">${name}</span>
+            <span class="name-suffix">;</span>
+          </h1>
+          <div class="hero-title">
+            <span class="title-prefix">//</span>
+            <span class="title-text" data-text-en="${title}" data-text-ar="${title}">${title}</span>
+          </div>
+          <p class="hero-description" data-text-en="${desc}" data-text-ar="${desc}">
+            ${desc}
+          </p>
+          <div class="hero-buttons">
+            <a href="#contact" class="btn btn-primary"><span data-text-en="Get In Touch" data-text-ar="تواصل معي">Get In Touch</span><i class="fas fa-arrow-right"></i></a>
+            <a href="#projects" class="btn btn-secondary"><span data-text-en="View Projects" data-text-ar="عرض المشاريع">View Projects</span><i class="fas fa-code"></i></a>
+          </div>
+          <div class="hero-social">
+            ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener" class="social-icon" title="GitHub"><i class="fab fa-github"></i></a>` : ''}
+            ${p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener" class="social-icon" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>` : ''}
+            ${p.twitter ? `<a href="${esc(p.twitter)}" target="_blank" rel="noopener" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>` : ''}
+            ${wShowInsta(p) ? `<a href="${esc(p.instagram)}" target="_blank" rel="noopener" class="social-icon" title="Instagram"><i class="fab fa-instagram"></i></a>` : ''}
+            ${p.email ? `<a href="mailto:${email}" class="social-icon" title="Email"><i class="fas fa-envelope"></i></a>` : ''}
+          </div>
+        </div>
+        <div class="hero-image-wrapper">
+          <div class="hero-image-container">
+            <div class="profile-image-glow"></div>
+            <div class="profile-image-frame">
+              <div class="profile-image" id="profileImage">
+                ${avatarHtml}
+              </div>
+            </div>
+            <div class="floating-badge badge-1"><i class="fab fa-react"></i><div class="badge-content"><span class="badge-title">React</span><span class="badge-libs">Redux, Router, Hooks</span></div></div>
+            <div class="floating-badge badge-2"><i class="fab fa-node-js"></i><div class="badge-content"><span class="badge-title">Node.js</span><span class="badge-libs">Express, Socket.io, MongoDB</span></div></div>
+            <div class="floating-badge badge-3"><i class="fab fa-js"></i><div class="badge-content"><span class="badge-title">JavaScript</span><span class="badge-libs">ES6+, TypeScript, jQuery</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-indicator"><div class="scroll-mouse"><div class="scroll-wheel"></div></div><span class="scroll-text" data-text-en="Scroll Down" data-text-ar="انتقل للأسفل">Scroll Down</span></div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="About Me" data-text-ar="عني">About Me</span><span class="title-bracket">/&gt;</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="about-content">
+          <div class="about-text-wrapper">
+            <div class="about-intro">
+              <p class="about-text" data-text-en="${aboutText}" data-text-ar="${aboutText}">
+                ${aboutText}
+              </p>
+            </div>
+            <div class="about-stats">
+              <div class="stat-item"><div class="stat-number" data-count="${projCount}">0</div><div class="stat-label" data-text-en="Projects" data-text-ar="مشروع">Projects</div></div>
+              <div class="stat-item"><div class="stat-number" data-count="${expCount}">0</div><div class="stat-label" data-text-en="Years Experience" data-text-ar="سنوات خبرة">Years Experience</div></div>
+              <div class="stat-item"><div class="stat-number" data-count="30">0</div><div class="stat-label" data-text-en="Happy Clients" data-text-ar="عميل سعيد">Happy Clients</div></div>
+            </div>
+          </div>
+          <div class="about-image-wrapper">
+            <div class="about-image-container">
+              <div class="code-block">
+                <div class="code-line"><span class="code-keyword">const</span> <span class="code-variable">developer</span> <span class="code-operator">=</span> <span class="code-brace">{</span></div>
+                <div class="code-line indent"><span class="code-property">name</span><span class="code-operator">:</span> <span class="code-string">'${name}'</span><span class="code-comma">,</span></div>
+                <div class="code-line indent"><span class="code-property">skills</span><span class="code-operator">:</span> <span class="code-bracket">[</span><span class="code-string">${codeSkills}</span><span class="code-bracket">]</span><span class="code-comma">,</span></div>
+                <div class="code-line indent"><span class="code-property">passion</span><span class="code-operator">:</span> <span class="code-string">'Coding'</span></div>
+                <div class="code-line"><span class="code-brace">}</span><span class="code-semicolon">;</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section skills-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Skills" data-text-ar="المهارات">Skills</span><span class="title-bracket">/&gt;</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3 class="category-title" data-text-en="Frontend" data-text-ar="الواجهة الأمامية">Frontend</h3>
+            <div class="skill-items">${renderSkillCategory(feDefaults)}</div>
+          </div>
+          <div class="skill-category">
+            <h3 class="category-title" data-text-en="Backend" data-text-ar="الخلفية">Backend</h3>
+            <div class="skill-items">${renderSkillCategory(beDefaults)}</div>
+          </div>
+          <div class="skill-category">
+            <h3 class="category-title" data-text-en="Tools & Others" data-text-ar="الأدوات وغيرها">Tools & Others</h3>
+            <div class="skill-items">${renderSkillCategory(toolDefaults)}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Experience" data-text-ar="الخبرة">Experience</span><span class="title-bracket">/&gt;</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="timeline">${expHtml}</div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Projects" data-text-ar="المشاريع">Projects</span><span class="title-bracket">/&gt;</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="projects-grid">${projHtml}</div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact-section">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h2 class="section-title"><span class="title-bracket">&lt;</span><span class="title-text" data-text-en="Contact" data-text-ar="التواصل">Contact</span><span class="title-bracket">/&gt;</span></h2>
+          <div class="section-line"></div>
+        </div>
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+              <div class="contact-details">
+                <h4 class="contact-label" data-text-en="Email" data-text-ar="البريد الإلكتروني">Email</h4>
+                <a href="mailto:${email}" class="contact-value">${email}</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-phone"></i></div>
+              <div class="contact-details">
+                <h4 class="contact-label" data-text-en="Phone" data-text-ar="الهاتف">Phone</h4>
+                <a href="tel:${phone}" class="contact-value">${phone}</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+              <div class="contact-details">
+                <h4 class="contact-label" data-text-en="Location" data-text-ar="الموقع">Location</h4>
+                <span class="contact-value" data-text-en="${location}" data-text-ar="${location}">${location}</span>
+              </div>
+            </div>
+          </div>
+          <form class="contact-form" id="contactForm">
+            <div class="form-group"><input type="text" class="form-input" placeholder="Name" data-placeholder-en="Name" data-placeholder-ar="الاسم" required></div>
+            <div class="form-group"><input type="email" class="form-input" placeholder="Email" data-placeholder-en="Email" data-placeholder-ar="البريد الإلكتروني" required></div>
+            <div class="form-group"><input type="text" class="form-input" placeholder="Subject" data-placeholder-en="Subject" data-placeholder-ar="الموضوع" required></div>
+            <div class="form-group"><textarea class="form-input form-textarea" rows="5" placeholder="Message" data-placeholder-en="Message" data-placeholder-ar="الرسالة" required></textarea></div>
+            <button type="submit" class="btn btn-primary btn-submit"><span data-text-en="Send Message" data-text-ar="إرسال الرسالة">Send Message</span><i class="fas fa-paper-plane"></i></button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="footer-text-wrapper">
+          <p class="footer-text">
+            <span class="footer-copyright">© ${new Date().getFullYear()} ${name} Portfolio</span>
+            <span class="footer-divider">•</span>
+            <span class="footer-built">Built with passion and code</span>
+          </p>
+          <p class="footer-author">
+            <span class="footer-by-text" data-text-en="by" data-text-ar="بواسطة">by</span>
+            <a href="${esc(p.linkedin || '#')}" target="_blank" rel="noopener noreferrer" class="footer-author-link">
+              <i class="fas fa-code"></i>
+              <span>${name}</span>
+            </a>
+          </p>
+        </div>
+        <div class="footer-social">
+          ${p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener noreferrer" class="footer-social-link"><i class="fab fa-linkedin-in"></i></a>` : ''}
+          ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="GitHub"><i class="fab fa-github"></i></a>` : ''}
+          ${p.twitter ? `<a href="${esc(p.twitter)}" target="_blank" rel="noopener noreferrer" class="footer-social-link" title="Twitter"><i class="fab fa-twitter"></i></a>` : ''}
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  ${moderncvScript}
+</body>
+</html>`;
+}
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   const tpl = String(qTpl || p.template || 'midnight').toLowerCase();
+  if (tpl === 'moderncv') {
+    return pageModerncv(p);
+  }
   const reqTab = url ? (url.searchParams.get('tab') || url.searchParams.get('page')) : null;
   const dpTab = ['about', 'portfolio', 'resume', 'contact'].includes(String(reqTab).toLowerCase()) ? String(reqTab).toLowerCase() : 'about';
   const skills = (p.skills || []).map((s) => `<span class="badge">${esc(s)}</span>`).join('');
