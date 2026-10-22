@@ -1007,7 +1007,7 @@ function pageModerncv(p) {
           var targetEmail = "${esc(p.email || '')}";
           var mailSubject = encodeURIComponent(subjectVal || ('Portfolio Message from ' + senderName));
           var mailBody = encodeURIComponent(
-            messageVal + '\n\n---\nFrom: ' + senderName + '\nEmail: ' + senderEmail + '\nSent via portfoolio.me'
+            messageVal + '\\n\\n---\\nFrom: ' + senderName + '\\nEmail: ' + senderEmail + '\\nSent via portfoolio.me'
           );
           var mailtoUrl = 'mailto:' + (targetEmail || 'contact@portfoolio.me') + '?subject=' + mailSubject + '&body=' + mailBody;
 
@@ -1015,7 +1015,7 @@ function pageModerncv(p) {
             statusEl.style.display = 'flex';
             var successText = AppState.currentLang === 'ar'
               ? 'جارٍ فتح تطبيق البريد لإرسال رسالتك... إذا لم يفتح تلقائياً، <a href="' + mailtoUrl + '">انقر هنا</a>'
-              : 'Opening your email client to send your message... If it doesn\'t open, <a href="' + mailtoUrl + '">click here</a>.';
+              : 'Opening your email client to send your message... If it does not open, <a href="' + mailtoUrl + '">click here</a>.';
             statusEl.innerHTML = '<i class="fas fa-check-circle" style="color:#4ade80"></i> <span>' + successText + '</span>';
           }
 
