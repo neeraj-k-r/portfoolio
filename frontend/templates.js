@@ -13,6 +13,7 @@ const TEMPLATES = [
   { id: 'motion', name: 'Motion Flow', desc: 'Light cream, animated word reveal, work rows', emoji: '⚡', best: 'Designers • Motion lovers' },
   { id: 'darkpro', name: 'Dark Pro', desc: 'Dark sidebar nav with gold accent', emoji: '🌑', best: 'Product designers • Dark UI' },
   { id: 'fullpage', name: 'Fullpage Scroll', desc: 'Full-height sections, red accent, slider', emoji: '📄', best: 'Agencies • Bold presentation' },
+  { id: 'moderncv', name: 'Modern CV', desc: 'Interactive dev portfolio with animations, RTL support', emoji: '💼', best: 'Full Stack • UI/UX • Bilingual' },
 ];
 
 function tplEsc(s) {
@@ -584,5 +585,208 @@ function renderFullpage(p) {
   window.scrollTo(0, 0);
 }
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage };
+// Modern CV — Interactive developer portfolio with animations, RTL support, bilingual
+function renderModerncv(p) {
+  normTpl(p);
+  document.body.dataset.template = 'moderncv';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  
+  const skills = (p.skills || []).map((s) => `<span class="skill-badge">${tplEsc(s)}</span>`).join('');
+  const projects = (p.projects || []).map((pr, i) => `
+    <div class="mc-project">
+      <div class="mc-project-image">
+        <div class="mc-project-placeholder">
+          <i class="${pr.emoji || 'fa-solid fa-code'}"></i>
+        </div>
+      </div>
+      <div class="mc-project-content">
+        <h3 class="mc-project-title">${tplEsc(pr.title)}</h3>
+        <p class="mc-project-desc">${tplEsc(pr.desc)}</p>
+        <div class="mc-project-tags">${(pr.tags || []).map(t => `<span class="mc-tag">${tplEsc(t)}</span>`).join('')}</div>
+      </div>
+    </div>`).join('');
+  
+  const experiences = (p.experience || []).map((exp, i) => `
+    <div class="mc-exp">
+      <div class="mc-exp-header">
+        <span class="mc-exp-year">${tplEsc(exp.start)} – ${exp.current ? 'Present' : tplEsc(exp.end)}</span>
+        ${exp.current ? '<span class="mc-exp-badge">Current</span>' : ''}
+      </div>
+      <h3 class="mc-exp-title">${tplEsc(exp.role)}</h3>
+      <p class="mc-exp-company"><i class="fas fa-building"></i> ${tplEsc(exp.company)}</p>
+      <p class="mc-exp-desc">${tplEsc(exp.desc)}</p>
+      <div class="mc-exp-tags">${(exp.tags || []).map(t => `<span class="mc-tag">${tplEsc(t)}</span>`).join('')}</div>
+    </div>`).join('');
+  
+  const stats = [
+    { label: 'Projects', count: p.projects?.length || 0 },
+    { label: 'Years Experience', count: p.experience?.length || 0 },
+    { label: 'Skills', count: p.skills?.length || 0 }
+  ].map(s => `<div class="mc-stat"><div class="mc-stat-num" data-count="${s.count}">0</div><div class="mc-stat-label">${tplEsc(s.label)}</div></div>`).join('');
+  
+  const app = document.getElementById('app');
+  app.innerHTML = `
+  <section class="mc-hero" id="home">
+    <div class="mc-grid-bg"></div>
+    <div class="mc-particles" id="mcParticles"></div>
+    <div class="mc-container">
+      <div class="mc-hero-content">
+        <div class="mc-greeting">
+          <span class="mc-greeting-text">Hello, I'm</span>
+          <span class="mc-cursor">|</span>
+        </div>
+        <h1 class="mc-name">
+          <span class="mc-kw">const</span>
+          <span class="mc-op">=</span>
+          <span class="mc-val" id="mcNameVal">${tplEsc(p.name)}</span>
+          <span class="mc-sc">;</span>
+        </h1>
+        <div class="mc-title">
+          <span class="mc-comment">//</span>
+          <span class="mc-title-text">${tplEsc(p.title)}</span>
+        </div>
+        <p class="mc-desc">${tplEsc(p.tagline || 'Passionate developer creating exceptional digital experiences.')}</p>
+        <div class="mc-buttons">
+          <a href="#contact" class="mc-btn mc-btn-primary">Get In Touch <i class="fas fa-arrow-right"></i></a>
+          <a href="#projects" class="mc-btn mc-btn-secondary">View Projects <i class="fas fa-code"></i></a>
+        </div>
+        <div class="mc-social">
+          ${p.github ? `<a href="${tplEsc(p.github)}" class="mc-social-icon" target="_blank"><i class="fab fa-github"></i></a>` : ''}
+          ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" class="mc-social-icon" target="_blank"><i class="fab fa-linkedin-in"></i></a>` : ''}
+          ${p.twitter ? `<a href="${tplEsc(p.twitter)}" class="mc-social-icon" target="_blank"><i class="fab fa-twitter"></i></a>` : ''}
+          ${p.email ? `<a href="mailto:${tplEsc(p.email)}" class="mc-social-icon"><i class="fas fa-envelope"></i></a>` : ''}
+        </div>
+      </div>
+      <div class="mc-hero-image">
+        <div class="mc-profile-frame">
+          ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${tplEsc(p.name)}" class="mc-profile-img">` : `<div class="mc-profile-placeholder"><i class="fas fa-code"></i></div>`}
+        </div>
+        <div class="mc-badge mc-badge-1"><i class="fab fa-react"></i><div class="mc-badge-content"><span class="mc-badge-title">React</span><span class="mc-badge-libs">Redux, Router, Hooks</span></div></div>
+        <div class="mc-badge mc-badge-2"><i class="fab fa-node-js"></i><div class="mc-badge-content"><span class="mc-badge-title">Node.js</span><span class="mc-badge-libs">Express, Socket.io</span></div></div>
+        <div class="mc-badge mc-badge-3"><i class="fab fa-js"></i><div class="mc-badge-content"><span class="mc-badge-title">JavaScript</span><span class="mc-badge-libs">ES6+, TypeScript</span></div></div>
+      </div>
+    </div>
+    <div class="mc-scroll-ind"><div class="mc-mouse"><div class="mc-wheel"></div></div><span>Scroll Down</span></div>
+  </section>
+  
+  <section class="mc-section" id="about">
+    <div class="mc-container">
+      <div class="mc-sec-header"><span class="mc-sec-num">01</span><h2 class="mc-sec-title"><span class="mc-br"><</span><span>About Me</span><span class="mc-br">/></span></h2><div class="mc-line"></div></div>
+      <div class="mc-about-grid">
+        <div>
+          <p class="mc-about-text">${tplEsc(p.tagline || 'Experienced developer passionate about building modern web applications.')}</p>
+          <div class="mc-stats">${stats}</div>
+        </div>
+        <div class="mc-code-block">
+          <div class="mc-code-line"><span class="mc-ckw">const</span> <span class="mc-cvar">developer</span> <span class="mc-cop">=</span> <span class="mc-cbr">{</span></div>
+          <div class="mc-code-line indent"><span class="mc-cprop">name</span><span class="mc-cop">:</span> <span class="mc-cstr">'${tplEsc(p.name)}'</span><span class="mc-cca">,</span></div>
+          <div class="mc-code-line indent"><span class="mc-cprop">title</span><span class="mc-cop">:</span> <span class="mc-cstr">'${tplEsc(p.title)}'</span><span class="mc-cca">,</span></div>
+          <div class="mc-code-line indent"><span class="mc-cprop">skills</span><span class="mc-cop">:</span> <span class="mc-cbr">[</span><span class="mc-cstr">'${(p.skills || []).slice(0,3).join("','")}'</span><span class="mc-cbr">]</span><span class="mc-cca">,</span></div>
+          <div class="mc-code-line"><span class="mc-cbr">}</span><span class="mc-csc">;</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="mc-section" id="skills">
+    <div class="mc-container">
+      <div class="mc-sec-header"><span class="mc-sec-num">02</span><h2 class="mc-sec-title"><span class="mc-br"><</span><span>Skills</span><span class="mc-br">/></span></h2><div class="mc-line"></div></div>
+      <div class="mc-skills-grid">
+        <div class="mc-skill-cat">
+          <h3 class="mc-cat-title">Frontend</h3>
+          <div class="mc-skill-items">${['React','Vue','TypeScript','Next.js'].map(s => (p.skills||[]).includes(s) ? `<div class="mc-skill"><div class="mc-skill-head"><span>${s}</span><span class="mc-skill-pct" data-pct="90">0%</span></div><div class="mc-skill-bar"><div class="mc-skill-prog"></div></div></div>` : '').join('')}</div>
+        </div>
+        <div class="mc-skill-cat">
+          <h3 class="mc-cat-title">Backend</h3>
+          <div class="mc-skill-items">${['Node.js','Express','MongoDB','PostgreSQL'].map(s => (p.skills||[]).includes(s) ? `<div class="mc-skill"><div class="mc-skill-head"><span>${s}</span><span class="mc-skill-pct" data-pct="85">0%</span></div><div class="mc-skill-bar"><div class="mc-skill-prog"></div></div></div>` : '').join('')}</div>
+        </div>
+        <div class="mc-skill-cat">
+          <h3 class="mc-cat-title">Tools</h3>
+          <div class="mc-skill-items">${['Git','Docker','AWS','Figma'].map(s => (p.skills||[]).includes(s) ? `<div class="mc-skill"><div class="mc-skill-head"><span>${s}</span><span class="mc-skill-pct" data-pct="80">0%</span></div><div class="mc-skill-bar"><div class="mc-skill-prog"></div></div></div>` : '').join('')}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="mc-section" id="experience">
+    <div class="mc-container">
+      <div class="mc-sec-header"><span class="mc-sec-num">03</span><h2 class="mc-sec-title"><span class="mc-br"><</span><span>Experience</span><span class="mc-br">/></span></h2><div class="mc-line"></div></div>
+      <div class="mc-timeline">${experiences || '<p class="mc-empty">No experience data yet.</p>'}</div>
+    </div>
+  </section>
+  
+  <section class="mc-section" id="projects">
+    <div class="mc-container">
+      <div class="mc-sec-header"><span class="mc-sec-num">04</span><h2 class="mc-sec-title"><span class="mc-br"><</span><span>Projects</span><span class="mc-br">/></span></h2><div class="mc-line"></div></div>
+      <div class="mc-projects-grid">${projects || '<p class="mc-empty">No projects yet.</p>'}</div>
+    </div>
+  </section>
+  
+  <section class="mc-section" id="contact">
+    <div class="mc-container">
+      <div class="mc-sec-header"><span class="mc-sec-num">05</span><h2 class="mc-sec-title"><span class="mc-br"><</span><span>Contact</span><span class="mc-br">/></span></h2><div class="mc-line"></div></div>
+      <div class="mc-contact-grid">
+        <div class="mc-contact-info">
+          ${p.email ? `<div class="mc-contact-item"><div class="mc-ci-icon"><i class="fas fa-envelope"></i></div><div><h4>Email</h4><a href="mailto:${tplEsc(p.email)}">${tplEsc(p.email)}</a></div></div>` : ''}
+          ${p.phone ? `<div class="mc-contact-item"><div class="mc-ci-icon"><i class="fas fa-phone"></i></div><div><h4>Phone</h4><a href="tel:${tplEsc(p.phone)}">${tplEsc(p.phone)}</a></div></div>` : ''}
+          ${p.location ? `<div class="mc-contact-item"><div class="mc-ci-icon"><i class="fas fa-map-marker-alt"></i></div><div><h4>Location</h4><span>${tplEsc(p.location)}</span></div></div>` : ''}
+        </div>
+        <form class="mc-form" onsubmit="event.preventDefault();alert('Message sent!');this.reset()">
+          <input type="text" class="mc-input" placeholder="Name" required>
+          <input type="email" class="mc-input" placeholder="Email" required>
+          <input type="text" class="mc-input" placeholder="Subject" required>
+          <textarea class="mc-input mc-textarea" placeholder="Message" rows="5" required></textarea>
+          <button class="mc-btn mc-btn-primary" type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  ${tplFoot(p)}`;
+  
+  window.scrollTo(0, 0);
+  
+  setTimeout(() => {
+    initModerncvAnimations();
+  }, 100);
+}
+
+function initModerncvAnimations() {
+  if (typeof anime === 'undefined') return;
+  
+  const nameVal = document.getElementById('mcNameVal');
+  if (nameVal) {
+    const txt = nameVal.textContent;
+    nameVal.textContent = '';
+    anime({ targets: {v:0}, v: txt.length, duration: 1500, delay: 500, easing: 'easeInOutQuad', update: a => nameVal.textContent = txt.substring(0, Math.floor(a.animatables[0].target.v)) });
+  }
+  
+  anime({ targets: '.mc-skill-prog', width: el => el.parentElement.previousElementSibling?.querySelector('.mc-skill-pct')?.dataset.pct + '%' || '90%', duration: 2000, delay: anime.stagger(100), easing: 'easeOutExpo' });
+  anime({ targets: '.mc-skill-pct', innerHTML: [0, el => el.dataset.pct], duration: 2000, easing: 'easeOutExpo', round: 1, update: a => a.animatables[0].target.textContent = Math.floor(a.animatables[0].target.innerHTML) + '%' });
+  
+  document.querySelectorAll('.mc-stat-num').forEach(el => {
+    const target = parseInt(el.dataset.count || 0);
+    anime({ targets: {v:0}, v: target, duration: 2000, easing: 'easeOutExpo', update: a => el.textContent = Math.floor(a.animatables[0].target.v) });
+  });
+  
+  const particles = document.getElementById('mcParticles');
+  if (particles) {
+    const symbols = ['{','}','[',']','(',')','<','>','/','*','=','+','-',';',':','&','|'];
+    for(let i=0;i<20;i++) {
+      const p = document.createElement('div');
+      p.className = 'mc-particle';
+      p.textContent = symbols[Math.floor(Math.random()*symbols.length)];
+      p.style.left = Math.random()*100+'%';
+      p.style.animationDelay = Math.random()*15+'s';
+      p.style.animationDuration = (10+Math.random()*10)+'s';
+      particles.appendChild(p);
+    }
+  }
+  
+  document.querySelectorAll('.mc-project, .mc-exp, .mc-skill-cat, .mc-contact-item').forEach((el,i) => {
+    anime({ targets: el, opacity: [0,1], translateY: [30,0], delay: i*80, duration: 800, easing: 'easeOutExpo' });
+  });
+}
+
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv };
 window.PortfoolioTemplateList = TEMPLATES;
