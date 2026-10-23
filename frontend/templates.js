@@ -2047,55 +2047,6 @@ function renderUltracode(p) {
         </div>
       </section>
 
-      <!-- Testimonials Section -->
-      <section class="testimonials section">
-        <h2 class="section-title" data-heading="Client Feedback">Testimonials</h2>
-
-        <div class="testimonials-container container swiper">
-          <div class="swiper-wrapper">
-            <div class="testimonial-card swiper-slide">
-              <div class="testimonial-quote"><i class='bx bxs-quote-alt-left'></i></div>
-              <p class="testimonial-description">Working with ${name} was an absolute pleasure from start to finish. They translated our technical needs into a stunning, fast, and highly functional platform.</p>
-              <h3 class="testimonial-date">Project Collaboration</h3>
-              <div class="testimonial-profile">
-                <img src="https://i.postimg.cc/MTr9j4Yn/client1.jpg" alt="Client" class="testimonial-profile-img">
-                <div class="testimonial-profile-data">
-                  <span class="testimonial-profile-name">Chen Xiuying</span>
-                  <span class="testimonial-profile-detail">Engineering Director</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card swiper-slide">
-              <div class="testimonial-quote"><i class='bx bxs-quote-alt-left'></i></div>
-              <p class="testimonial-description">${name} brought incredible problem solving and attention to UI details, delivering clean code and remarkable reliability on every release.</p>
-              <h3 class="testimonial-date">Product Release</h3>
-              <div class="testimonial-profile">
-                <img src="https://i.postimg.cc/wvV7f8rB/client2.jpg" alt="Client" class="testimonial-profile-img">
-                <div class="testimonial-profile-data">
-                  <span class="testimonial-profile-name">Joshua Middletown</span>
-                  <span class="testimonial-profile-detail">Tech Lead</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="testimonial-card swiper-slide">
-              <div class="testimonial-quote"><i class='bx bxs-quote-alt-left'></i></div>
-              <p class="testimonial-description">Fast communication, exceptional code quality, and proactive feedback. Truly one of the best software engineers I have worked with!</p>
-              <h3 class="testimonial-date">Digital Transformation</h3>
-              <div class="testimonial-profile">
-                <img src="https://i.postimg.cc/pdP9DL0S/client3.jpg" alt="Client" class="testimonial-profile-img">
-                <div class="testimonial-profile-data">
-                  <span class="testimonial-profile-name">Melanie Stone</span>
-                  <span class="testimonial-profile-detail">Founder & CEO</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-      </section>
-
       <!-- Contact Section -->
       <section class="contact section" id="contact">
         <h2 class="section-title" data-heading="Get in Touch">Contact me</h2>
@@ -2286,28 +2237,7 @@ function initUltracodeRuntime(p) {
     });
   });
 
-  // 5. Swiper Slider for Testimonials
-  try {
-    if (typeof Swiper !== 'undefined') {
-      new Swiper(".testimonials-container", {
-        spaceBetween: 24,
-        loop: true,
-        grabCursor: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          576: { slidesPerView: 2 },
-          768: { slidesPerView: 2, spaceBetween: 48 },
-        },
-      });
-    }
-  } catch (err) {
-    console.warn("Swiper init warning:", err);
-  }
-
-  // 6. Contact Form Floating Labels & Mailto Action
+  // 5. Contact Form Floating Labels & Mailto Action
   const inputs = document.querySelectorAll('body[data-template="ultracode"] .input');
   inputs.forEach((input) => {
     input.addEventListener('focus', () => {

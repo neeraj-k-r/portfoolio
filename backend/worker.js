@@ -206,10 +206,8 @@ function head(p, tpl) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <link rel="stylesheet" href="/style.css?v=uc1"><link rel="stylesheet" href="/templates.css?v=uc1"><link rel="stylesheet" href="/resume.css?v=uc1">
 ${mcvStyle}
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script></head>`;
 }
 function nav(p) {
@@ -1611,28 +1609,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 5. Swiper Slider for Testimonials
-  try {
-    if (typeof Swiper !== 'undefined') {
-      new Swiper(".testimonials-container", {
-        spaceBetween: 24,
-        loop: true,
-        grabCursor: true,
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          576: { slidesPerView: 2 },
-          768: { slidesPerView: 2, spaceBetween: 48 },
-        },
-      });
-    }
-  } catch (err) {
-    console.warn("Swiper init warning:", err);
-  }
-
-  // 6. Contact Form Floating Labels & Mailto Action
+  // 5. Contact Form Floating Labels & Mailto Action
   const inputs = document.querySelectorAll('.input');
   inputs.forEach((input) => {
     input.addEventListener('focus', () => input.parentNode.classList.add('focus'));
@@ -2035,54 +2012,6 @@ ${head(p, 'ultracode')}
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section class="testimonials section">
-      <h2 class="section-title" data-heading="Client Feedback">Testimonials</h2>
-
-      <div class="testimonials-container container swiper">
-        <div class="swiper-wrapper">
-          <div class="testimonial-card swiper-slide">
-            <div class="testimonial-quote"><i class='bx bxs-quote-alt-left'></i></div>
-            <p class="testimonial-description">Working with ${name} was an absolute pleasure from start to finish. They translated our technical needs into a stunning, fast, and highly functional platform.</p>
-            <h3 class="testimonial-date">Project Collaboration</h3>
-            <div class="testimonial-profile">
-              <img src="https://i.postimg.cc/MTr9j4Yn/client1.jpg" alt="Client" class="testimonial-profile-img">
-              <div class="testimonial-profile-data">
-                <span class="testimonial-profile-name">Chen Xiuying</span>
-                <span class="testimonial-profile-detail">Engineering Director</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-card swiper-slide">
-            <div class="testimonial-quote"><i class='bx bxs-quote-alt-left'></i></div>
-            <p class="testimonial-description">${name} brought incredible problem solving and attention to UI details, delivering clean code and remarkable reliability on every release.</p>
-            <h3 class="testimonial-date">Product Release</h3>
-            <div class="testimonial-profile">
-              <img src="https://i.postimg.cc/wvV7f8rB/client2.jpg" alt="Client" class="testimonial-profile-img">
-              <div class="testimonial-profile-data">
-                <span class="testimonial-profile-name">Joshua Middletown</span>
-                <span class="testimonial-profile-detail">Tech Lead</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-card swiper-slide">
-            <div class="testimonial-quote"><i class='bx bxs-quote-alt-left'></i></div>
-            <p class="testimonial-description">Fast communication, exceptional code quality, and proactive feedback. Truly one of the best software engineers I have worked with!</p>
-            <h3 class="testimonial-date">Digital Transformation</h3>
-            <div class="testimonial-profile">
-              <img src="https://i.postimg.cc/pdP9DL0S/client3.jpg" alt="Client" class="testimonial-profile-img">
-              <div class="testimonial-profile-data">
-                <span class="testimonial-profile-name">Melanie Stone</span>
-                <span class="testimonial-profile-detail">Founder & CEO</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
       </div>
     </section>
 

@@ -2489,20 +2489,6 @@ body[data-template="ultracode"] .services-modal-service { display: flex; align-i
 body[data-template="ultracode"] .services-modal-icon { color: var(--skin-color); font-size: 1.2rem; }
 body[data-template="ultracode"] .services-modal-info { font-size: var(--small-font-size); color: var(--text-color); }
 
-/* Main - Testimonials */
-body[data-template="ultracode"] .testimonials-container { width: 100%; max-width: 800px; margin: 0 auto; overflow: hidden; }
-body[data-template="ultracode"] .testimonial-card { background-color: var(--box-color); padding: 2rem 2.5rem; border-radius: .5rem; margin-bottom: 3rem; border: 1px solid rgba(255,255,255,0.05); }
-body[data-template="ultracode"] .testimonial-quote { display: inline-flex; font-size: 1.8rem; color: var(--skin-color); margin-bottom: var(--mb1); }
-body[data-template="ultracode"] .testimonial-description { margin-bottom: var(--mb15); font-size: var(--normal-font-size); color: var(--text-color); line-height: 1.8; }
-body[data-template="ultracode"] .testimonial-date { font-size: var(--smaller-font-size); margin-bottom: var(--mb1); color: var(--skin-color); font-weight: normal; }
-body[data-template="ultracode"] .testimonial-profile { display: flex; align-items: center; column-gap: 1.2rem; }
-body[data-template="ultracode"] .testimonial-profile-img { width: 55px; height: 55px; border-radius: 50%; object-fit: cover; }
-body[data-template="ultracode"] .testimonial-profile-name { font-size: var(--normal-font-size); font-weight: var(--font-medium); color: var(--title-color); }
-body[data-template="ultracode"] .testimonial-profile-detail { font-size: var(--smaller-font-size); color: var(--text-color); }
-body[data-template="ultracode"] .testimonial-profile-data { display: flex; flex-direction: column; }
-body[data-template="ultracode"] .swiper-pagination-bullet { background-color: var(--scroll-box-color); opacity: 0.6; }
-body[data-template="ultracode"] .swiper-pagination-bullet-active { background-color: var(--skin-color); opacity: 1; }
-
 /* Main - Contact */
 body[data-template="ultracode"] .contact-container { grid-template-columns: 320px 420px; column-gap: 4rem; justify-content: center; align-items: flex-start; }
 body[data-template="ultracode"] .contact-info { display: grid; row-gap: 1.5rem; }
