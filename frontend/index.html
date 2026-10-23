@@ -26,6 +26,8 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="ui.css?v=20261018c">
@@ -222,6 +224,14 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <button class="lx-theme-card" data-theme="tidepool" data-name="Tidepool" aria-label="Preview Tidepool theme">
         <span class="lx-tp lx-tp-tidepool"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Tidepool <em>Abyss glow</em></span>
+      </button>
+      <button class="lx-theme-card" data-theme="ultracode" data-name="Ultra Code" aria-label="Preview Ultra Code theme">
+        <span class="lx-tp lx-tp-ultracode"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Ultra Code <em>Dark crimson</em></span>
+      </button>
+      <button class="lx-theme-card" data-theme="devblue" data-name="Dev Blue" aria-label="Preview Dev Blue theme">
+        <span class="lx-tp lx-tp-devblue"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Dev Blue <em>Clean royal blue</em></span>
       </button>
     </div>
   </section>
@@ -424,6 +434,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <button class="footer-theme-btn" data-theme="terminal">Terminal</button>
           <button class="footer-theme-btn" data-theme="creative">Creative</button>
           <button class="footer-theme-btn" data-theme="aurora">Aurora</button>
+          <button class="footer-theme-btn" data-theme="ultracode">Ultra Code</button>
+          <button class="footer-theme-btn" data-theme="devblue">Dev Blue</button>
         </div>
       </div>
     </div>
@@ -564,6 +576,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="tpl-card"><input type="radio" name="tpl" value="fullpage"><div class="tpl-preview fullpage">📄</div><div class="tpl-meta"><b>Fullpage Scroll</b><span>Red Accent • Fullpage</span></div></label>
               <label class="tpl-card"><input type="radio" name="tpl" value="moderncv"><div class="tpl-preview moderncv">💼</div><div class="tpl-meta"><b>Modern CV</b><span>Interactive • Bilingual</span></div></label>
               <label class="tpl-card"><input type="radio" name="tpl" value="ultracode"><div class="tpl-preview ultracode">🔴</div><div class="tpl-meta"><b>Ultra Code</b><span>Dark · Crimson · Sidebar</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="devblue"><div class="tpl-preview devblue">🔷</div><div class="tpl-meta"><b>Dev Blue</b><span>Clean · Royal blue · Modern</span></div></label>
             </div>
           </div>
 
@@ -706,6 +719,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="tpl-card"><input type="radio" name="edtpl" value="fullpage"><div class="tpl-preview fullpage">📄</div><div class="tpl-meta"><b>Fullpage Scroll</b><span>Red Accent · Fullpage</span></div></label>
               <label class="tpl-card"><input type="radio" name="edtpl" value="moderncv"><div class="tpl-preview moderncv">💼</div><div class="tpl-meta"><b>Modern CV</b><span>Interactive · Bilingual</span></div></label>
               <label class="tpl-card"><input type="radio" name="edtpl" value="ultracode"><div class="tpl-preview ultracode">🔴</div><div class="tpl-meta"><b>Ultra Code</b><span>Dark · Crimson · Sidebar</span></div></label>
+              <label class="tpl-card"><input type="radio" name="edtpl" value="devblue"><div class="tpl-preview devblue">🔷</div><div class="tpl-meta"><b>Dev Blue</b><span>Clean · Royal blue · Modern</span></div></label>
             </div>
           <button class="btn btn-primary btn-sm" id="edSaveThemeBtn" style="margin-top:12px"><i class="fa-solid fa-floppy-disk"></i> Save theme</button>
         </div>

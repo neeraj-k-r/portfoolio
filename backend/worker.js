@@ -207,7 +207,8 @@ function head(p, tpl) {
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <link rel="stylesheet" href="/style.css?v=uc1"><link rel="stylesheet" href="/templates.css?v=uc1"><link rel="stylesheet" href="/resume.css?v=uc1">
-${mcvStyle}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
+<script src="https://unpkg.com/scrollreveal"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script></head>`;
 }
 function nav(p) {
@@ -1343,9 +1344,21 @@ function pageUltracode(p) {
     eduTimelineHtml = `
       <div class="timeline-item">
         <div class="circle-dot"></div>
-        <h3 class="timeline-title">Continuous Learning & Engineering</h3>
-        <p class="timeline-text">Self-taught software development, algorithms, web platforms</p>
-        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>Ongoing</span>
+        <h3 class="timeline-title">XYZ University (Sometown, NJ)</h3>
+        <p class="timeline-text">BFA in Graphic Design</p>
+        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2011 - 2013</span>
+      </div>
+      <div class="timeline-item">
+        <div class="circle-dot"></div>
+        <h3 class="timeline-title">ABC University (Sometown, NJ)</h3>
+        <p class="timeline-text">Diploma in Web Design</p>
+        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2013 - 2015</span>
+      </div>
+      <div class="timeline-item">
+        <div class="circle-dot"></div>
+        <h3 class="timeline-title">KLM University (Sometown, NJ)</h3>
+        <p class="timeline-text">BS in Web Development</p>
+        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2015 - 2017</span>
       </div>
     `;
   }
@@ -1364,9 +1377,21 @@ function pageUltracode(p) {
     expTimelineHtml = `
       <div class="timeline-item">
         <div class="circle-dot"></div>
-        <h3 class="timeline-title">No prior industry experience listed</h3>
-        <p class="timeline-text">Open for junior developer positions, internships, and project collaborations</p>
-        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>Open to work</span>
+        <h3 class="timeline-title">Copalopa Inc. (Sometown, NJ)</h3>
+        <p class="timeline-text">Lead / Senior UX Designer</p>
+        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2018 - Present</span>
+      </div>
+      <div class="timeline-item">
+        <div class="circle-dot"></div>
+        <h3 class="timeline-title">Gabogle Inc. (Sometown, NJ)</h3>
+        <p class="timeline-text">Web site / UX Designer</p>
+        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2015 - 2018</span>
+      </div>
+      <div class="timeline-item">
+        <div class="circle-dot"></div>
+        <h3 class="timeline-title">Copalopa Inc. (Sometown, NJ)</h3>
+        <p class="timeline-text">Junior UX Designer</p>
+        <span class="timeline-date"><i class="uil uil-calendar-alt"></i>2013 - 2015</span>
       </div>
     `;
   }
@@ -1506,12 +1531,33 @@ function pageUltracode(p) {
       `;
     }).join('');
   } else {
-    worksHtml = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1.5rem; background: var(--box-color); border-radius: .5rem;">
-        <h3 style="font-size: var(--h3-font-size); margin-bottom: var(--mb1);">No projects listed yet</h3>
-        <p style="color: var(--text-color); font-size: var(--normal-font-size);">Add projects in the studio editor to display them in this gallery.</p>
+    const sampleProjects = [
+      { title: 'Web Design', cat: 'web', img: 'https://i.postimg.cc/43Th5VXJ/work-1.png', desc: 'Two smartphones displaying a sleek, dark-themed dashboard interface', detailTitle: 'The services we provide for design', tech: 'HTML, CSS', role: 'Frontend', domain: 'www.domain.com' },
+      { title: 'App Design', cat: 'app', img: 'https://i.postimg.cc/sXLjnC5p/work-2.png', desc: 'A stylish burger restaurant mobile app interface displayed on two smartphones', detailTitle: 'Mobile App Landing Design & App Maintain', tech: 'HTML, CSS', role: 'Frontend', domain: 'www.domain.com' },
+      { title: 'Brand Design', cat: 'design', img: 'https://i.postimg.cc/QNB1jXYZ/work-3.png', desc: 'Three smartphone screens displaying a beautifully designed travel booking application interface', detailTitle: 'Logo Design Creativity & Application', tech: 'HTML, CSS', role: 'Frontend', domain: 'www.domain.com' },
+      { title: 'App Design', cat: 'app', img: 'https://i.postimg.cc/s2DGqyG8/work-4.png', desc: 'Modern workout website interface design featuring a bold and energetic visual layout', detailTitle: 'Mobile App Landing Design & Services', tech: 'HTML, CSS', role: 'Frontend', domain: 'www.domain.com' },
+      { title: 'Brand Design', cat: 'web', img: 'https://i.postimg.cc/TYVyPhrF/work-5.png', desc: 'An app design that is clean, functional, and ideal for gamers looking to manage their digital assets and purchases', detailTitle: 'Design for Technology & Services', tech: 'HTML, CSS', role: 'Frontend', domain: 'www.domain.com' },
+      { title: 'Web Design', cat: 'design', img: 'https://i.postimg.cc/wMdqKcbv/work-6.png', desc: 'An app design that is clean and modern, making food browsing and ordering easy', detailTitle: 'App for Technology & Services', tech: 'HTML, CSS', role: 'Frontend', domain: 'www.domain.com' }
+    ];
+
+    worksHtml = sampleProjects.map((sp, idx) => `
+      <div class="work-card mix ${sp.cat}">
+        <img src="${sp.img}" alt="${sp.title}" class="work-img">
+        <h3 class="work-title">${sp.title}</h3>
+        <span class="work-button" data-idx="${idx}">Demo <i class="uil uil-arrow-right work-button-icon"></i></span>
+
+        <div class="portfolio-item-details">
+          <h3 class="details-title">${sp.detailTitle}</h3>
+          <p class="details-description">${sp.desc}</p>
+          <ul class="details-info">
+            <li>Created - <span>Featured Project</span></li>
+            <li>Technologies - <span>${sp.tech}</span></li>
+            <li>Role - <span>${sp.role}</span></li>
+            <li>View - <span><a href="#">${sp.domain}</a></span></li>
+          </ul>
+        </div>
       </div>
-    `;
+    `).join('');
   }
 
   // Social Links
@@ -1541,21 +1587,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 2. Work Filters
+  // 2. Work Filters & MixItUp
   const filterBtns = document.querySelectorAll('.work-filters .work-item');
   const workCards = document.querySelectorAll('.work-card');
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active-work'));
-      btn.classList.add('active-work');
-      const filter = btn.getAttribute('data-filter');
-      workCards.forEach(card => {
-        if (filter === 'all' || card.classList.contains(filter.replace('.', ''))) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
+  const workContainer = document.querySelector('.work-container');
+
+  let mixer = null;
+  if (typeof mixitup !== 'undefined' && workContainer) {
+    try {
+      mixer = mixitup(workContainer, {
+        selectors: {
+          target: '.work-card'
+        },
+        animation: {
+          duration: 300
         }
       });
+    } catch (err) {
+      console.warn('MixItUp init warning:', err);
+    }
+  }
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      filterBtns.forEach(b => b.classList.remove('active-work'));
+      this.classList.add('active-work');
+
+      if (!mixer) {
+        const filter = this.getAttribute('data-filter');
+        workCards.forEach(card => {
+          if (filter === 'all' || card.classList.contains(filter.replace('.', ''))) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
     });
   });
 
@@ -2113,6 +2180,378 @@ ${head(p, 'ultracode')}
 </html>`;
 }
 
+function devblueSkillIconWorker(name) {
+  const s = String(name || '').toLowerCase();
+  if (/html/.test(s)) return 'bx bxl-html5';
+  if (/css|style|tailwind|sass|bootstrap/.test(s)) return 'bx bxl-css3';
+  if (/js|javascript/.test(s)) return 'bx bxl-javascript';
+  if (/ts|typescript/.test(s)) return 'bx bxl-typescript';
+  if (/react/.test(s)) return 'bx bxl-react';
+  if (/vue/.test(s)) return 'bx bxl-vuejs';
+  if (/node/.test(s)) return 'bx bxl-nodejs';
+  if (/python/.test(s)) return 'bx bxl-python';
+  if (/design|ui|ux|figma/.test(s)) return 'bx bxs-paint';
+  if (/git|github/.test(s)) return 'bx bxl-git';
+  if (/docker|container|aws|cloud/.test(s)) return 'bx bxl-aws';
+  if (/sql|db|mongo|postgres|database/.test(s)) return 'bx bx-data';
+  return 'bx bx-code-alt';
+}
+
+function pageDevblue(p) {
+  const name = esc(p.name || 'Marlon');
+  const title = esc(p.title || 'Web Designer');
+  const bio = esc(p.bio || p.desc || p.tagline || `As a passionate web designer, I thrive on creating visually appealing and user-friendly websites. My journey in web design began with a fascination for how design can enhance user experience.`);
+  const email = esc(p.email || '');
+
+  const avatarImg = (p.avatarUrl || p.avatar_url)
+    ? esc(p.avatarUrl || p.avatar_url)
+    : `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="%234070F4"/><text x="50%" y="54%" font-size="140" font-family="system-ui,sans-serif" font-weight="bold" fill="%23ffffff" dominant-baseline="middle" text-anchor="middle">${encodeURIComponent((p.name || 'U').charAt(0).toUpperCase())}</text></svg>`;
+
+  // --- Real Skills Derivation ---
+  const skillMap = new Map();
+  function addSkill(raw, bonusCount) {
+    let s = String(raw || '').trim();
+    if (!s || s.toLowerCase() === 'fork') return;
+    const lower = s.toLowerCase();
+    let canonical = s;
+    let normKey = lower;
+    if (lower === 'js') { normKey = 'javascript'; canonical = 'JavaScript'; }
+    else if (lower === 'ts') { normKey = 'typescript'; canonical = 'TypeScript'; }
+    else if (lower === 'react' || lower === 'reactjs') { normKey = 'react'; canonical = 'React'; }
+    else if (lower === 'node' || lower === 'nodejs' || lower === 'node.js') { normKey = 'nodejs'; canonical = 'Node.js'; }
+    else if (lower === 'html' || lower === 'html5') { normKey = 'html'; canonical = 'HTML5'; }
+    else if (lower === 'css' || lower === 'css3') { normKey = 'css'; canonical = 'CSS3'; }
+    else if (lower === 'py' || lower === 'python') { normKey = 'python'; canonical = 'Python'; }
+
+    const cur = skillMap.get(normKey);
+    if (!cur) {
+      skillMap.set(normKey, { name: canonical, count: bonusCount || 1 });
+    } else {
+      cur.count += (bonusCount || 1);
+    }
+  }
+
+  const explicitSkills = Array.isArray(p.skills) ? p.skills : (typeof p.skills === 'string' ? p.skills.split(',') : []);
+  explicitSkills.forEach(s => addSkill(s, 3));
+
+  if (Array.isArray(p.projects)) {
+    p.projects.forEach(pr => {
+      const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+      techs.forEach(t => addSkill(t, 2));
+    });
+  }
+
+  if (p.resume && Array.isArray(p.resume.skills)) {
+    p.resume.skills.forEach(s => addSkill(s, 2));
+  }
+
+  const allSkillsList = Array.from(skillMap.values()).sort((a, b) => b.count - a.count);
+
+  let skillsHtml = '';
+  if (allSkillsList.length > 0) {
+    skillsHtml = allSkillsList.slice(0, 6).map(sk => {
+      const pct = Math.min(95, 65 + Math.min(30, sk.count * 6));
+      const icon = devblueSkillIconWorker(sk.name);
+      return `
+        <div class="skills-data">
+          <div class="skills-names">
+            <i class='${icon} skills-icon'></i>
+            <span class="skills-name">${esc(sk.name.toUpperCase())}</span>
+          </div>
+          <div>
+            <span class="skills-percentage">${pct}%</span>
+          </div>
+          <div class="skills-bar" style="width: ${pct}%;"></div>
+        </div>
+      `;
+    }).join('');
+  } else {
+    const defaultSkills = [
+      { name: 'HTML5', pct: 95, icon: 'bx bxl-html5' },
+      { name: 'CSS3', pct: 85, icon: 'bx bxl-css3' },
+      { name: 'JAVASCRIPT', pct: 65, icon: 'bx bxl-javascript' },
+      { name: 'UX/UI', pct: 85, icon: 'bx bxs-paint' }
+    ];
+    skillsHtml = defaultSkills.map(s => `
+      <div class="skills-data">
+        <div class="skills-names">
+          <i class='${s.icon} skills-icon'></i>
+          <span class="skills-name">${s.name}</span>
+        </div>
+        <div>
+          <span class="skills-percentage">${s.pct}%</span>
+        </div>
+        <div class="skills-bar" style="width: ${s.pct}%;"></div>
+      </div>
+    `).join('');
+  }
+
+  // --- Real Projects Mapping (No random stock photos) ---
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  let worksHtml = '';
+  if (projects.length > 0) {
+    worksHtml = projects.map((pr, idx) => {
+      const prTitle = esc(pr.title || `Project ${idx + 1}`);
+      const prDesc = esc(pr.desc || pr.description || 'Web development project built with modern best practices.');
+      const prUrl = pr.url || pr.demoUrl || '#';
+      const prDemo = pr.demoUrl ? esc(pr.demoUrl) : '';
+      const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+      const hasRealImg = Boolean(pr.image || pr.img) && !/postimg\.cc/.test(pr.image || pr.img || '');
+      const imgHtml = hasRealImg ? `<img src="${esc(pr.image || pr.img)}" alt="${prTitle}" class="work-card-img">` : '';
+
+      const isGithub = pr.repo || /github\.com/.test(pr.url || '');
+      const ghLink = isGithub && pr.url ? `<a href="${esc(pr.url)}" target="_blank" rel="noopener" class="work-card-link" title="Source Code"><i class='bx bxl-github'></i></a>` : '';
+      const demoLink = prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener" class="work-card-link" title="Live Preview"><i class='bx bx-link-external'></i></a>` : (!isGithub && prUrl !== '#' ? `<a href="${esc(prUrl)}" target="_blank" rel="noopener" class="work-card-link" title="Open Link"><i class='bx bx-link-external'></i></a>` : '');
+
+      const tagsHtml = techs.length
+        ? `<div class="work-card-tags">${techs.slice(0, 4).map(t => `<span class="work-tag">${esc(t)}</span>`).join('')}</div>`
+        : '';
+
+      return `
+        <article class="work-card">
+          ${imgHtml}
+          <div>
+            <div class="work-card-top">
+              <i class='bx bx-folder work-card-icon'></i>
+              <div class="work-card-links">
+                ${ghLink}
+                ${demoLink}
+              </div>
+            </div>
+            <h3 class="work-card-title"><a href="${esc(prUrl)}" ${prUrl !== '#' ? 'target="_blank" rel="noopener"' : ''}>${prTitle}</a></h3>
+            <p class="work-card-desc">${prDesc}</p>
+          </div>
+          ${tagsHtml}
+        </article>
+      `;
+    }).join('');
+  } else {
+    worksHtml = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--second-color);">
+        <i class='bx bx-code-block' style="font-size: 3rem; color: var(--first-color); margin-bottom: 1rem; display: block;"></i>
+        <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: .5rem;">Projects in progress</h3>
+        <p style="color: #64748b;">Projects will be showcased here once added.</p>
+      </div>
+    `;
+  }
+
+  // Social Links
+  const linkedinIcon = p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener" class="home-social-icon"><i class='bx bxl-linkedin'></i></a>` : '';
+  const instagramIcon = wShowInsta(p) ? `<a href="${esc(p.instagram)}" target="_blank" rel="noopener" class="home-social-icon"><i class='bx bxl-instagram'></i></a>` : '';
+  const githubIcon = p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener" class="home-social-icon"><i class='bx bxl-github'></i></a>` : '';
+  const twitterIcon = p.twitter ? `<a href="${esc(p.twitter)}" target="_blank" rel="noopener" class="home-social-icon"><i class='bx bxl-twitter'></i></a>` : '';
+
+  const footerLinkedin = p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener" class="footer-icon"><i class='bx bxl-linkedin'></i></a>` : '';
+  const footerInstagram = wShowInsta(p) ? `<a href="${esc(p.instagram)}" target="_blank" rel="noopener" class="footer-icon"><i class='bx bxl-instagram'></i></a>` : '';
+  const footerGithub = p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener" class="footer-icon"><i class='bx bxl-github'></i></a>` : '';
+  const footerTwitter = p.twitter ? `<a href="${esc(p.twitter)}" target="_blank" rel="noopener" class="footer-icon"><i class='bx bxl-twitter'></i></a>` : '';
+
+  const devblueScript = `
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Toggling Mobile Menu
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('nav-menu');
+  if (toggle && nav) {
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('show');
+    });
+  }
+
+  // 2. Active Link on Click & Auto Close Mobile Menu
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+      navLinks.forEach(n => n.classList.remove('active'));
+      this.classList.add('active');
+      if (nav) nav.classList.remove('show');
+    });
+  });
+
+  // 3. Scroll Section Active Link Highlighter
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.pageYOffset;
+    sections.forEach(current => {
+      const sectionHeight = current.offsetHeight;
+      const sectionTop = current.offsetTop - 58;
+      const sectionId = current.getAttribute('id');
+      const link = document.querySelector('.nav-menu a[href*=' + sectionId + ']');
+      if (link) {
+        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      }
+    });
+  }, { passive: true });
+
+  // 4. Contact Form Action
+  const contactForm = document.getElementById('devblueContactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const cName = (document.getElementById('dbName')?.value || '').trim();
+      const cEmail = (document.getElementById('dbEmail')?.value || '').trim();
+      const cMsg = (document.getElementById('dbMessage')?.value || '').trim();
+
+      const subject = encodeURIComponent('Portfolio Inquiry from ' + cName);
+      const body = encodeURIComponent('Hi ${name},\\n\\nName: ' + cName + '\\nEmail: ' + cEmail + '\\n\\nMessage:\\n' + cMsg + '\\n\\n-- Sent via portfoolio.me');
+      window.location.href = 'mailto:${p.email || 'hello@portfoolio.me'}?subject=' + subject + '&body=' + body;
+
+      const statusEl = document.getElementById('dbStatus');
+      if (statusEl) {
+        statusEl.style.display = 'block';
+        statusEl.textContent = '✓ Opening email client...';
+      }
+    });
+  }
+
+  // 5. ScrollReveal Animations
+  try {
+    if (typeof ScrollReveal !== 'undefined') {
+      const sr = ScrollReveal({
+        origin: 'top',
+        distance: '80px',
+        duration: 1800,
+        reset: false
+      });
+
+      sr.reveal('.home-title', {});
+      sr.reveal('.button', { delay: 150 });
+      sr.reveal('.home-img', { delay: 300 });
+      sr.reveal('.home-social', { delay: 300 });
+
+      sr.reveal('.about-data', {});
+      sr.reveal('.about-subtitle', { delay: 150 });
+      sr.reveal('.about-text', { delay: 250 });
+
+      sr.reveal('.skills-header-block', { delay: 100 });
+      sr.reveal('.skills-data', { interval: 100 });
+
+      sr.reveal('.work-card', { interval: 100 });
+      sr.reveal('.contact-input', { interval: 150 });
+    }
+  } catch (err) {
+    console.warn('ScrollReveal warning:', err);
+  }
+});
+</script>
+`;
+
+  return `<!DOCTYPE html>
+<html lang="en">
+${head(p, 'devblue')}
+<body class="body-main" data-template="devblue">
+  <header class="l-header">
+    <nav class="nav bd-grid">
+      <div>
+        <a href="#home" class="nav-logo">${name}</a>
+      </div>
+
+      <div class="nav-menu" id="nav-menu">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#home" class="nav-link active">Home</a></li>
+          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+          <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+          <li class="nav-item"><a href="#work" class="nav-link">Work</a></li>
+          <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-toggle" id="nav-toggle">
+        <i class='bx bx-menu'></i>
+      </div>
+    </nav>
+  </header>
+
+  <main class="l-main">
+    <section class="home bd-grid" id="home">
+      <div class="home-data">
+        <h1 class="home-title">Hi, <br>I'm <span class="home-title-color">${name}</span><br> ${title}</h1>
+        <a href="#contact" class="button">Contact</a>
+      </div>
+
+      <div class="home-social">
+        ${linkedinIcon || `<a href="#" class="home-social-icon"><i class='bx bxl-linkedin'></i></a>`}
+        ${instagramIcon || `<a href="#" class="home-social-icon"><i class='bx bxl-instagram'></i></a>`}
+        ${githubIcon || `<a href="#" class="home-social-icon"><i class='bx bxl-github'></i></a>`}
+        ${twitterIcon}
+      </div>
+
+      <div class="home-img">
+        <img src="${avatarImg}" alt="${name}">
+      </div>
+    </section>
+
+    <section class="about section" id="about">
+      <h2 class="section-title">About</h2>
+
+      <div class="about-container bd-grid">
+        <div class="about-data">
+          <h2 class="about-subtitle">I'm ${name}</h2>
+          <p class="about-text">${bio}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="skills section" id="skills">
+      <h2 class="section-title">Skills</h2>
+
+      <div class="skills-container bd-grid">
+        <div class="skills-header-block">
+          <h2 class="skills-subtitle">Professional Skills</h2>
+          <p class="skills-text">Proficiencies developed across software engineering, architecture, and design.</p>
+        </div>
+
+        <div class="skills-grid">
+          ${skillsHtml}
+        </div>
+      </div>
+    </section>
+
+    <section class="work section" id="work">
+      <h2 class="section-title">Work</h2>
+
+      <div class="work-container bd-grid">
+        ${worksHtml}
+      </div>
+    </section>
+
+    <section class="contact section" id="contact">
+      <h2 class="section-title">Contact</h2>
+
+      <div class="contact-container bd-grid">
+        <form class="contact-form" id="devblueContactForm">
+          <input type="text" placeholder="Name" class="contact-input" id="dbName" required>
+          <input type="email" placeholder="Email" class="contact-input" id="dbEmail" required>
+          <textarea placeholder="Message" cols="0" rows="10" class="contact-input" id="dbMessage" required></textarea>
+          <div id="dbStatus" style="display:none;margin-bottom:1rem;color:var(--first-color);font-weight:600;"></div>
+          <input type="submit" value="Send" class="contact-button button">
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer-title">${name}</p>
+
+    <div class="footer-social">
+      ${footerGithub}
+      ${footerLinkedin}
+      ${footerInstagram}
+      ${footerTwitter}
+    </div>
+
+    <p>&#169; ${new Date().getFullYear()} ${name} • Built via <a href="https://portfoolio.me" style="color:#ffffff;text-decoration:underline">portfoolio.me</a></p>
+  </footer>
+
+  ${devblueScript}
+</body>
+</html>`;
+}
+
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   const tpl = String(qTpl || p.template || 'midnight').toLowerCase();
@@ -2121,6 +2560,9 @@ function page(p, url) {
   }
   if (tpl === 'ultracode') {
     return pageUltracode(p);
+  }
+  if (tpl === 'devblue' || tpl === 'marlon') {
+    return pageDevblue(p);
   }
   const reqTab = url ? (url.searchParams.get('tab') || url.searchParams.get('page')) : null;
   const dpTab = ['about', 'portfolio', 'resume', 'contact'].includes(String(reqTab).toLowerCase()) ? String(reqTab).toLowerCase() : 'about';

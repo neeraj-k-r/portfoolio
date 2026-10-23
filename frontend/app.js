@@ -326,6 +326,21 @@ function renderGallery(p) {
         <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
         <figcaption><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small>${esc(w.category)}</small>` : ''}</figcaption>
       </figure>`).join('') || emptyMsg}</section>`;
+  } else if (document.body.dataset.template === 'catalog') {
+    headHtml = `<header class="wrap gal-catalog-head">
+      <p class="cat-kicker">— CATALOGUE —</p>
+      <h1>${esc(p.name)}</h1>
+      <p class="cat-sub">${esc(p.title || '')}</p>
+      <p class="cat-meta">${esc(p.location || '')} · ${countLabel}</p>
+      ${srcAvatar ? `<img class="cat-portrait" src="${esc(srcAvatar)}" alt="${esc(p.name || '')}">` : ''}
+    </header>`;
+    gridHtml = `<section class="wrap cat-index">${works.map((w, i) => `
+      <article class="cat-row" data-gal="${i}">
+        <span class="cat-no">${String(i + 1).padStart(2, '0')}</span>
+        <div class="cat-thumb"><img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy"></div>
+        <div class="cat-text"><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small>${esc(w.category)}</small>` : ''}${w.desc ? `<p>${esc(w.desc)}</p>` : ''}</div>
+        <span class="cat-arrow">→</span>
+      </article>`).join('') || emptyMsg}</section>`;
   } else {
     const face = srcAvatar
       ? `<img src="${esc(srcAvatar)}" alt="${esc(p.name || '')}" style="width:120px;height:120px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:3px solid rgba(255,255,255,.2)">`
@@ -829,6 +844,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         title: 'Cloud Architect',
         desc: 'Designing resilient cloud platforms, serverless microservices & DevOps pipelines.',
         skills: ['AWS', 'Terraform', 'Docker', 'CI/CD', 'Python', 'Prometheus']
+      },
+      ultracode: {
+        name: 'Mariam Wallas',
+        title: 'Full-Stack Developer',
+        desc: 'I have high level experience in web design, development knowledge and producing quality work.',
+        skills: ['JavaScript', 'React', 'CSS', 'Node.js', 'UI/UX', 'Figma']
+      },
+      devblue: {
+        name: 'Marlon',
+        title: 'Web Designer',
+        desc: 'As a passionate web designer, I thrive on creating visually appealing and user-friendly websites.',
+        skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI', 'Figma', 'Web Design']
+      },
+      marlon: {
+        name: 'Marlon',
+        title: 'Web Designer',
+        desc: 'As a passionate web designer, I thrive on creating visually appealing and user-friendly websites.',
+        skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI', 'Figma', 'Web Design']
       }
     };
 
@@ -839,22 +872,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       themeBtns.forEach(btn => {
         if (btn.dataset.theme === themeName) {
           btn.classList.add('active');
-  } else if (document.body.dataset.template === 'catalog') {
-    headHtml = `<header class="wrap gal-catalog-head">
-      <p class="cat-kicker">— CATALOGUE —</p>
-      <h1>${esc(p.name)}</h1>
-      <p class="cat-sub">${esc(p.title || '')}</p>
-      <p class="cat-meta">${esc(p.location || '')} · ${countLabel}</p>
-      ${srcAvatar ? `<img class="cat-portrait" src="${esc(srcAvatar)}" alt="${esc(p.name || '')}">` : ''}
-    </header>`;
-    gridHtml = `<section class="wrap cat-index">${works.map((w, i) => `
-      <article class="cat-row" data-gal="${i}">
-        <span class="cat-no">${String(i + 1).padStart(2, '0')}</span>
-        <div class="cat-thumb"><img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy"></div>
-        <div class="cat-text"><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small>${esc(w.category)}</small>` : ''}${w.desc ? `<p>${esc(w.desc)}</p>` : ''}</div>
-        <span class="cat-arrow">→</span>
-      </article>`).join('') || emptyMsg}</section>`;
-  } else {
+        } else {
           btn.classList.remove('active');
         }
       });
@@ -899,7 +917,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       minimal: { name: 'Alex Morgan', title: 'Product Engineer', desc: 'Crafting thoughtful digital interfaces with clean architecture.', skills: ['UI/UX', 'Next.js', 'Tailwind'] },
       terminal: { name: 'dev@root:~$', title: 'Systems & Backend Engineer', desc: 'Kernel hacker, Rust enthusiast, distributed systems builder.', skills: ['Rust', 'Go', 'Kubernetes'] },
       creative: { name: 'Maya Lin', title: 'Creative Technologist', desc: 'Blending generative art, WebGL, and interactive 3D experiences.', skills: ['Three.js', 'WebGL', 'GLSL'] },
-      aurora: { name: 'Jordan Kai', title: 'Cloud Architect', desc: 'Designing resilient cloud platforms, serverless microservices & DevOps pipelines.', skills: ['AWS', 'Terraform', 'Docker'] }
+      aurora: { name: 'Jordan Kai', title: 'Cloud Architect', desc: 'Designing resilient cloud platforms, serverless microservices & DevOps pipelines.', skills: ['AWS', 'Terraform', 'Docker'] },
+      ultracode: { name: 'Mariam Wallas', title: 'Full-Stack Developer', desc: 'I have high level experience in web design, development knowledge and producing quality work.', skills: ['JavaScript', 'React', 'CSS'] },
+      devblue: { name: 'Marlon', title: 'Web Designer', desc: 'As a passionate web designer, I thrive on creating visually appealing and user-friendly websites.', skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI'] },
+      marlon: { name: 'Marlon', title: 'Web Designer', desc: 'As a passionate web designer, I thrive on creating visually appealing and user-friendly websites.', skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI'] }
     };
     let lastFocus = null;
     const openModal = (theme, name) => {
