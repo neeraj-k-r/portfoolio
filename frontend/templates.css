@@ -246,6 +246,14 @@ body[data-template="fullpage"] footer .socials a:hover{color:#ff6363!important}
     border-bottom: 2px solid #4070f4;
 }
 
+.tpl-preview.cube,
+.tpl-preview.cubegreen,
+.tpl-preview.muzammal {
+    background: linear-gradient(135deg, #212529, #343a40);
+    color: #80ed99;
+    border-bottom: 2px solid #80ed99;
+}
+
 body[data-template="moderncv"],
 body.body-main[data-template="moderncv"] {
     --primary: #c084fc;
@@ -3399,6 +3407,1146 @@ body[data-template="marlon"] .footer p {
         color: #ffffff;
         display: block;
         padding: 0.5rem 0;
+    }
+}
+
+/* ==========================================================================
+   CUBE / MUZAMMAL TEMPLATE — 3D Cube Swiper with Charcoal & Mint Green Theme
+   ========================================================================== */
+
+body[data-template="cube"],
+body[data-template="cubegreen"],
+body[data-template="muzammal"] {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #343a40;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    --cube-aside: #212529;
+    --cube-bg: #343a40;
+    --cube-primary: #80ed99;
+    --cube-primary-hover: #85f69f;
+    --cube-btn-bg: #1d8637;
+    --cube-btn-hover: #176d2d;
+    --cube-card: rgba(0, 0, 0, 0.44);
+    --cube-text: #ffffff;
+    --cube-muted: #adb5bd;
+}
+
+body[data-template="cube"] *,
+body[data-template="cubegreen"] *,
+body[data-template="muzammal"] * {
+    box-sizing: border-box;
+}
+
+body[data-template="cube"] #app,
+body[data-template="cubegreen"] #app,
+body[data-template="muzammal"] #app {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+body[data-template="cube"] .cube-main,
+body[data-template="cubegreen"] .cube-main,
+body[data-template="muzammal"] .cube-main {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* Sidebar Navigation */
+body[data-template="cube"] .cube-aside,
+body[data-template="cubegreen"] .cube-aside,
+body[data-template="muzammal"] .cube-aside {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-size: 1.05rem;
+    background-color: var(--cube-aside);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+    z-index: 50;
+    padding: 24px 0;
+    justify-content: space-between;
+}
+
+body[data-template="cube"] .cube-brand,
+body[data-template="cubegreen"] .cube-brand,
+body[data-template="muzammal"] .cube-brand {
+    padding: 0 24px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body[data-template="cube"] .cube-logo,
+body[data-template="cubegreen"] .cube-logo,
+body[data-template="muzammal"] .cube-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+
+body[data-template="cube"] .cube-dot,
+body[data-template="cubegreen"] .cube-dot,
+body[data-template="muzammal"] .cube-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--cube-primary);
+    box-shadow: 0 0 10px var(--cube-primary);
+}
+
+body[data-template="cube"] .Links,
+body[data-template="cubegreen"] .Links,
+body[data-template="muzammal"] .Links {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: auto 0;
+    width: 100%;
+}
+
+body[data-template="cube"] .cube-aside li,
+body[data-template="cubegreen"] .cube-aside li,
+body[data-template="muzammal"] .cube-aside li {
+    list-style-type: none;
+    display: flex;
+    padding: 16px 24px;
+    gap: 14px;
+    color: #ffffff;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s ease, background 0.2s ease;
+    user-select: none;
+}
+
+body[data-template="cube"] .cube-aside li:hover,
+body[data-template="cubegreen"] .cube-aside li:hover,
+body[data-template="muzammal"] .cube-aside li:hover {
+    color: var(--cube-primary);
+    background: rgba(128, 237, 153, 0.05);
+}
+
+body[data-template="cube"] .cube-aside li::after,
+body[data-template="cubegreen"] .cube-aside li::after,
+body[data-template="muzammal"] .cube-aside li::after {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    content: '';
+    bottom: 0;
+}
+
+body[data-template="cube"] .cube-aside li i,
+body[data-template="cubegreen"] .cube-aside li i,
+body[data-template="muzammal"] .cube-aside li i {
+    font-size: 1.25rem;
+    width: 24px;
+    text-align: center;
+}
+
+body[data-template="cube"] .cube-aside li p,
+body[data-template="cubegreen"] .cube-aside li p,
+body[data-template="muzammal"] .cube-aside li p {
+    margin: 0;
+    font-weight: 500;
+}
+
+body[data-template="cube"] .activeLink,
+body[data-template="cubegreen"] .activeLink,
+body[data-template="muzammal"] .activeLink {
+    color: var(--cube-primary) !important;
+    background: rgba(128, 237, 153, 0.08);
+    border-left: 3px solid var(--cube-primary);
+}
+
+body[data-template="cube"] .cube-aside-foot,
+body[data-template="cubegreen"] .cube-aside-foot,
+body[data-template="muzammal"] .cube-aside-foot {
+    padding: 16px 24px 0;
+    font-size: 0.8rem;
+    color: var(--cube-muted);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Swiper Container */
+body[data-template="cube"] .mySwiper,
+body[data-template="cubegreen"] .mySwiper,
+body[data-template="muzammal"] .mySwiper {
+    flex: 1;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--cube-bg);
+}
+
+body[data-template="cube"] .swiper-slide,
+body[data-template="cubegreen"] .swiper-slide,
+body[data-template="muzammal"] .swiper-slide {
+    width: 100%;
+    height: 100%;
+    background-color: var(--cube-bg);
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Slide 1: Home */
+body[data-template="cube"] .home-slide,
+body[data-template="cubegreen"] .home-slide,
+body[data-template="muzammal"] .home-slide {
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    background-color: var(--cube-bg);
+    position: relative;
+    padding: 0 40px;
+}
+
+body[data-template="cube"] .HomeContent,
+body[data-template="cubegreen"] .HomeContent,
+body[data-template="muzammal"] .HomeContent {
+    flex: 1;
+    padding: 60px 40px;
+}
+
+body[data-template="cube"] .HomeContent h1,
+body[data-template="cubegreen"] .HomeContent h1,
+body[data-template="muzammal"] .HomeContent h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.2;
+}
+
+body[data-template="cube"] .HomeContent h2,
+body[data-template="cubegreen"] .HomeContent h2,
+body[data-template="muzammal"] .HomeContent h2 {
+    font-size: 2.1rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+body[data-template="cube"] .stylized-name,
+body[data-template="cubegreen"] .stylized-name,
+body[data-template="muzammal"] .stylized-name {
+    font-weight: 700;
+    color: var(--cube-primary);
+}
+
+body[data-template="cube"] .proffesions,
+body[data-template="cubegreen"] .proffesions,
+body[data-template="muzammal"] .proffesions {
+    color: var(--cube-primary-hover);
+}
+
+body[data-template="cube"] .HomeContent .heroline,
+body[data-template="cubegreen"] .HomeContent .heroline,
+body[data-template="muzammal"] .HomeContent .heroline {
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #e9ecef;
+    max-width: 650px;
+    margin-bottom: 24px;
+}
+
+body[data-template="cube"] .buttonGroup,
+body[data-template="cubegreen"] .buttonGroup,
+body[data-template="muzammal"] .buttonGroup {
+    display: flex;
+    gap: 14px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+}
+
+body[data-template="cube"] .cube-btn,
+body[data-template="cubegreen"] .cube-btn,
+body[data-template="muzammal"] .cube-btn {
+    padding: 12px 28px;
+    border: none;
+    outline: none;
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    background-color: var(--cube-btn-bg);
+    color: #ffffff;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+body[data-template="cube"] .cube-btn:hover,
+body[data-template="cubegreen"] .cube-btn:hover,
+body[data-template="muzammal"] .cube-btn:hover {
+    background-color: var(--cube-btn-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(29, 134, 55, 0.4);
+}
+
+body[data-template="cube"] .cube-btn.secondary,
+body[data-template="cubegreen"] .cube-btn.secondary,
+body[data-template="muzammal"] .cube-btn.secondary {
+    background-color: transparent;
+    border: 1px solid var(--cube-primary);
+    color: var(--cube-primary);
+}
+
+body[data-template="cube"] .cube-btn.secondary:hover,
+body[data-template="cubegreen"] .cube-btn.secondary:hover,
+body[data-template="muzammal"] .cube-btn.secondary:hover {
+    background-color: rgba(128, 237, 153, 0.15);
+    color: #ffffff;
+}
+
+body[data-template="cube"] .SideImg,
+body[data-template="cubegreen"] .SideImg,
+body[data-template="muzammal"] .SideImg {
+    width: 280px;
+    margin: auto 40px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+body[data-template="cube"] .SideImg img,
+body[data-template="cubegreen"] .SideImg img,
+body[data-template="muzammal"] .SideImg img {
+    width: 280px;
+    height: 280px;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+body[data-template="cube"] .top-right-corner,
+body[data-template="cube"] .bottom-left-corner,
+body[data-template="cubegreen"] .top-right-corner,
+body[data-template="cubegreen"] .bottom-left-corner,
+body[data-template="muzammal"] .top-right-corner,
+body[data-template="muzammal"] .bottom-left-corner {
+    position: absolute;
+    pointer-events: none;
+}
+
+body[data-template="cube"] .bottom-left-corner,
+body[data-template="cubegreen"] .bottom-left-corner,
+body[data-template="muzammal"] .bottom-left-corner {
+    left: -20px;
+    bottom: -20px;
+    transform: rotate(-90deg);
+}
+
+body[data-template="cube"] .top-right-corner,
+body[data-template="cubegreen"] .top-right-corner,
+body[data-template="muzammal"] .top-right-corner {
+    right: -20px;
+    top: -20px;
+    transform: rotate(90deg);
+}
+
+body[data-template="cube"] .hr1,
+body[data-template="cubegreen"] .hr1,
+body[data-template="muzammal"] .hr1 {
+    width: 90px;
+    height: 6px;
+    border: none;
+    background: var(--cube-primary);
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    margin: 0;
+}
+
+body[data-template="cube"] .hr2,
+body[data-template="cubegreen"] .hr2,
+body[data-template="muzammal"] .hr2 {
+    width: 6px;
+    height: 80px;
+    background: var(--cube-primary);
+    border: none;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    margin: 0;
+}
+
+body[data-template="cube"] .slide-help,
+body[data-template="cubegreen"] .slide-help,
+body[data-template="muzammal"] .slide-help {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-weight: 400;
+    font-size: 1rem;
+    color: var(--cube-primary);
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+}
+
+/* Slide 2: About Me */
+body[data-template="cube"] .about-us,
+body[data-template="cubegreen"] .about-us,
+body[data-template="muzammal"] .about-us {
+    width: 100%;
+    min-height: 100%;
+    padding: 60px 80px;
+    color: #ffffff;
+}
+
+body[data-template="cube"] .heading,
+body[data-template="cubegreen"] .heading,
+body[data-template="muzammal"] .heading {
+    padding: 0 0 10px 0;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: var(--cube-primary);
+    margin-bottom: 8px;
+}
+
+body[data-template="cube"] .sub-heading,
+body[data-template="cubegreen"] .sub-heading,
+body[data-template="muzammal"] .sub-heading {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+body[data-template="cube"] .aboutme-deatils,
+body[data-template="cubegreen"] .aboutme-deatils,
+body[data-template="muzammal"] .aboutme-deatils {
+    padding: 0 0 24px 0;
+    font-weight: 300;
+    line-height: 1.8;
+    color: #ced4da;
+    max-width: 920px;
+    font-size: 1.05rem;
+}
+
+body[data-template="cube"] .about-me-divison,
+body[data-template="cubegreen"] .about-me-divison,
+body[data-template="muzammal"] .about-me-divison {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+body[data-template="cube"] .about-me-table,
+body[data-template="cubegreen"] .about-me-table,
+body[data-template="muzammal"] .about-me-table {
+    width: 55%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+body[data-template="cube"] .about-me-table li,
+body[data-template="cubegreen"] .about-me-table li,
+body[data-template="muzammal"] .about-me-table li {
+    padding: 14px 18px;
+    position: relative;
+    list-style: none;
+    font-size: 0.95rem;
+    color: #e9ecef;
+}
+
+body[data-template="cube"] .about-me-table li::after,
+body[data-template="cubegreen"] .about-me-table li::after,
+body[data-template="muzammal"] .about-me-table li::after {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+    content: '';
+    bottom: 0;
+}
+
+body[data-template="cube"] .about-me-table span,
+body[data-template="cubegreen"] .about-me-table span,
+body[data-template="muzammal"] .about-me-table span {
+    color: var(--cube-primary);
+    font-weight: 600;
+    margin-right: 6px;
+}
+
+body[data-template="cube"] .about-me-table .buttonGroup,
+body[data-template="cubegreen"] .about-me-table .buttonGroup,
+body[data-template="muzammal"] .about-me-table .buttonGroup {
+    grid-column: 1 / span 2;
+    justify-content: flex-start;
+    padding: 18px;
+    margin: 0;
+}
+
+body[data-template="cube"] .skill-bar,
+body[data-template="cubegreen"] .skill-bar,
+body[data-template="muzammal"] .skill-bar {
+    width: 45%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+body[data-template="cube"] .skill-bar li,
+body[data-template="cubegreen"] .skill-bar li,
+body[data-template="muzammal"] .skill-bar li {
+    width: 100%;
+    padding: 8px 0;
+    list-style: none;
+}
+
+body[data-template="cube"] .skill-bar-head,
+body[data-template="cubegreen"] .skill-bar-head,
+body[data-template="muzammal"] .skill-bar-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+body[data-template="cube"] .skill-bar p,
+body[data-template="cubegreen"] .skill-bar p,
+body[data-template="muzammal"] .skill-bar p {
+    color: var(--cube-primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+body[data-template="cube"] .skill-pct,
+body[data-template="cubegreen"] .skill-pct,
+body[data-template="muzammal"] .skill-pct {
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+body[data-template="cube"] .skill-bar .bar,
+body[data-template="cubegreen"] .skill-bar .bar,
+body[data-template="muzammal"] .skill-bar .bar {
+    width: 100%;
+    height: 12px;
+    background-color: #212529;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+}
+
+body[data-template="cube"] .active-bar,
+body[data-template="cubegreen"] .active-bar,
+body[data-template="muzammal"] .active-bar {
+    background-color: var(--cube-primary);
+    height: 100%;
+    border-radius: 20px;
+    transition: width 1s ease-in-out;
+}
+
+/* Slide 3: Services */
+body[data-template="cube"] .services,
+body[data-template="cubegreen"] .services,
+body[data-template="muzammal"] .services {
+    color: #ffffff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 60px 80px;
+    box-sizing: border-box;
+}
+
+body[data-template="cube"] .services .heading,
+body[data-template="cubegreen"] .services .heading,
+body[data-template="muzammal"] .services .heading {
+    grid-column: 1 / span 3;
+    margin-bottom: 10px;
+}
+
+body[data-template="cube"] .services .service,
+body[data-template="cubegreen"] .services .service,
+body[data-template="muzammal"] .services .service {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    padding: 24px;
+    background-color: var(--cube-card);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+body[data-template="cube"] .services .service:hover,
+body[data-template="cubegreen"] .services .service:hover,
+body[data-template="muzammal"] .services .service:hover {
+    background-color: var(--cube-primary);
+    color: #176d2d;
+    transform: translateY(-4px);
+}
+
+body[data-template="cube"] .services .service i,
+body[data-template="cubegreen"] .services .service i,
+body[data-template="muzammal"] .services .service i {
+    font-size: 2.8rem;
+    color: var(--cube-primary);
+    margin-bottom: 16px;
+    transition: color 0.25s ease;
+}
+
+body[data-template="cube"] .services .service:hover i,
+body[data-template="cubegreen"] .services .service:hover i,
+body[data-template="muzammal"] .services .service:hover i {
+    color: #176d2d;
+}
+
+body[data-template="cube"] .service h2,
+body[data-template="cubegreen"] .service h2,
+body[data-template="muzammal"] .service h2 {
+    color: var(--cube-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    transition: color 0.25s ease;
+}
+
+body[data-template="cube"] .services .service:hover h2,
+body[data-template="cubegreen"] .services .service:hover h2,
+body[data-template="muzammal"] .services .service:hover h2 {
+    color: #176d2d;
+}
+
+body[data-template="cube"] .service p,
+body[data-template="cubegreen"] .service p,
+body[data-template="muzammal"] .service p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Slide 4: Gallery / Projects */
+body[data-template="cube"] .gallery,
+body[data-template="cubegreen"] .gallery,
+body[data-template="muzammal"] .gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 60px 80px;
+}
+
+body[data-template="cube"] .gallery .heading,
+body[data-template="cubegreen"] .gallery .heading,
+body[data-template="muzammal"] .gallery .heading {
+    grid-column: 1 / span 3;
+    margin-bottom: 10px;
+}
+
+body[data-template="cube"] .gallery .cube-project,
+body[data-template="cubegreen"] .gallery .cube-project,
+body[data-template="muzammal"] .gallery .cube-project {
+    background: #212529;
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+body[data-template="cube"] .gallery .cube-project:hover,
+body[data-template="cubegreen"] .gallery .cube-project:hover,
+body[data-template="muzammal"] .gallery .cube-project:hover {
+    transform: translateY(-4px);
+    border-color: var(--cube-primary);
+    box-shadow: 0 8px 24px rgba(128, 237, 153, 0.15);
+}
+
+body[data-template="cube"] .cube-project-top,
+body[data-template="cubegreen"] .cube-project-top,
+body[data-template="muzammal"] .cube-project-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+body[data-template="cube"] .cube-project-icon,
+body[data-template="cubegreen"] .cube-project-icon,
+body[data-template="muzammal"] .cube-project-icon {
+    font-size: 1.8rem;
+    color: var(--cube-primary);
+}
+
+body[data-template="cube"] .cube-project-links,
+body[data-template="cubegreen"] .cube-project-links,
+body[data-template="muzammal"] .cube-project-links {
+    display: flex;
+    gap: 10px;
+}
+
+body[data-template="cube"] .cube-project-link,
+body[data-template="cubegreen"] .cube-project-link,
+body[data-template="muzammal"] .cube-project-link {
+    font-size: 1.2rem;
+    color: #ced4da;
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+body[data-template="cube"] .cube-project-link:hover,
+body[data-template="cubegreen"] .cube-project-link:hover,
+body[data-template="muzammal"] .cube-project-link:hover {
+    color: var(--cube-primary);
+    transform: scale(1.15);
+}
+
+body[data-template="cube"] .cube-project-title,
+body[data-template="cubegreen"] .cube-project-title,
+body[data-template="muzammal"] .cube-project-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+body[data-template="cube"] .cube-project-title a,
+body[data-template="cubegreen"] .cube-project-title a,
+body[data-template="muzammal"] .cube-project-title a {
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+body[data-template="cube"] .cube-project-title a:hover,
+body[data-template="cubegreen"] .cube-project-title a:hover,
+body[data-template="muzammal"] .cube-project-title a:hover {
+    color: var(--cube-primary);
+}
+
+body[data-template="cube"] .cube-project-desc,
+body[data-template="cubegreen"] .cube-project-desc,
+body[data-template="muzammal"] .cube-project-desc {
+    font-size: 0.9rem;
+    color: #adb5bd;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    flex-grow: 1;
+}
+
+body[data-template="cube"] .cube-project-tags,
+body[data-template="cubegreen"] .cube-project-tags,
+body[data-template="muzammal"] .cube-project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: auto;
+}
+
+body[data-template="cube"] .cube-tag,
+body[data-template="cubegreen"] .cube-tag,
+body[data-template="muzammal"] .cube-tag {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--cube-primary);
+    background: rgba(128, 237, 153, 0.1);
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+/* Slide 5: Contact Me */
+body[data-template="cube"] .contactMe,
+body[data-template="cubegreen"] .contactMe,
+body[data-template="muzammal"] .contactMe {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+    padding: 60px 80px;
+    position: relative;
+    min-height: 100%;
+}
+
+body[data-template="cube"] .contactMe .heading,
+body[data-template="cubegreen"] .contactMe .heading,
+body[data-template="muzammal"] .contactMe .heading {
+    grid-column: 1 / span 2;
+    margin-bottom: 0;
+}
+
+body[data-template="cube"] .contact-info-list,
+body[data-template="cubegreen"] .contact-info-list,
+body[data-template="muzammal"] .contact-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+body[data-template="cube"] .contactinfo,
+body[data-template="cubegreen"] .contactinfo,
+body[data-template="muzammal"] .contactinfo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: left;
+}
+
+body[data-template="cube"] .contactinfo i,
+body[data-template="cubegreen"] .contactinfo i,
+body[data-template="muzammal"] .contactinfo i {
+    font-size: 1.8rem;
+    color: var(--cube-primary);
+    width: 36px;
+    text-align: center;
+    margin: 0;
+}
+
+body[data-template="cube"] .contactinfo h3,
+body[data-template="cubegreen"] .contactinfo h3,
+body[data-template="muzammal"] .contactinfo h3 {
+    color: var(--cube-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 4px 0;
+}
+
+body[data-template="cube"] .contactinfo p,
+body[data-template="cubegreen"] .contactinfo p,
+body[data-template="muzammal"] .contactinfo p {
+    font-size: 0.9rem;
+    color: #ced4da;
+    margin: 0;
+    word-break: break-word;
+}
+
+body[data-template="cube"] .contactMe form,
+body[data-template="cubegreen"] .contactMe form,
+body[data-template="muzammal"] .contactMe form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body[data-template="cube"] .contactMe form h2,
+body[data-template="cubegreen"] .contactMe form h2,
+body[data-template="muzammal"] .contactMe form h2 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+body[data-template="cube"] .SocialLinks,
+body[data-template="cubegreen"] .SocialLinks,
+body[data-template="muzammal"] .SocialLinks {
+    display: flex;
+    gap: 8px;
+    background-color: var(--cube-aside);
+    padding: 6px 14px;
+    border-radius: 30px;
+}
+
+body[data-template="cube"] .SocialLinks a,
+body[data-template="cubegreen"] .SocialLinks a,
+body[data-template="muzammal"] .SocialLinks a {
+    color: #ffffff;
+    font-size: 1.1rem;
+    padding: 6px;
+    border-radius: 50%;
+    transition: background-color 0.25s, color 0.25s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body[data-template="cube"] .SocialLinks a:hover,
+body[data-template="cubegreen"] .SocialLinks a:hover,
+body[data-template="muzammal"] .SocialLinks a:hover {
+    background-color: var(--cube-btn-hover);
+    color: var(--cube-primary);
+}
+
+body[data-template="cube"] .contactMe form input,
+body[data-template="cubegreen"] .contactMe form input,
+body[data-template="muzammal"] .contactMe form input {
+    padding: 14px 18px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    background-color: var(--cube-aside);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+body[data-template="cube"] .contactMe form input:focus,
+body[data-template="cubegreen"] .contactMe form input:focus,
+body[data-template="muzammal"] .contactMe form input:focus {
+    border-color: var(--cube-primary);
+}
+
+body[data-template="cube"] .contactMe form textarea,
+body[data-template="cubegreen"] .contactMe form textarea,
+body[data-template="muzammal"] .contactMe form textarea {
+    padding: 16px 18px;
+    font-size: 1rem;
+    font-family: inherit;
+    border-radius: 8px;
+    resize: vertical;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    background-color: var(--cube-aside);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+body[data-template="cube"] .contactMe form textarea:focus,
+body[data-template="cubegreen"] .contactMe form textarea:focus,
+body[data-template="muzammal"] .contactMe form textarea:focus {
+    border-color: var(--cube-primary);
+}
+
+body[data-template="cube"] .contactMe footer,
+body[data-template="cubegreen"] .contactMe footer,
+body[data-template="muzammal"] .contactMe footer {
+    grid-column: 1 / span 2;
+    text-align: center;
+    color: var(--cube-muted);
+    font-size: 0.85rem;
+    padding-top: 20px;
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 992px) {
+    body[data-template="cube"] .services,
+    body[data-template="cubegreen"] .services,
+    body[data-template="muzammal"] .services,
+    body[data-template="cube"] .gallery,
+    body[data-template="cubegreen"] .gallery,
+    body[data-template="muzammal"] .gallery {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 40px;
+    }
+
+    body[data-template="cube"] .about-us,
+    body[data-template="cubegreen"] .about-us,
+    body[data-template="muzammal"] .about-us,
+    body[data-template="cube"] .contactMe,
+    body[data-template="cubegreen"] .contactMe,
+    body[data-template="muzammal"] .contactMe {
+        padding: 40px;
+    }
+
+    body[data-template="cube"] .contactMe,
+    body[data-template="cubegreen"] .contactMe,
+    body[data-template="muzammal"] .contactMe {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body[data-template="cube"] .cube-main,
+    body[data-template="cubegreen"] .cube-main,
+    body[data-template="muzammal"] .cube-main {
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    body[data-template="cube"] .cube-aside,
+    body[data-template="cubegreen"] .cube-aside,
+    body[data-template="muzammal"] .cube-aside {
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        padding: 0;
+        border-right: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        order: 2;
+        overflow-x: auto;
+    }
+
+    body[data-template="cube"] .cube-brand,
+    body[data-template="cubegreen"] .cube-brand,
+    body[data-template="muzammal"] .cube-brand,
+    body[data-template="cube"] .cube-aside-foot,
+    body[data-template="cubegreen"] .cube-aside-foot,
+    body[data-template="muzammal"] .cube-aside-foot {
+        display: none;
+    }
+
+    body[data-template="cube"] .Links,
+    body[data-template="cubegreen"] .Links,
+    body[data-template="muzammal"] .Links {
+        flex-direction: row;
+        justify-content: space-around;
+        width: 100%;
+        margin: 0;
+    }
+
+    body[data-template="cube"] .cube-aside li,
+    body[data-template="cubegreen"] .cube-aside li,
+    body[data-template="muzammal"] .cube-aside li {
+        padding: 8px 12px;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 0.72rem;
+        border-left: none;
+        border-top: 2px solid transparent;
+    }
+
+    body[data-template="cube"] .cube-aside li i,
+    body[data-template="cubegreen"] .cube-aside li i,
+    body[data-template="muzammal"] .cube-aside li i {
+        font-size: 1.1rem;
+    }
+
+    body[data-template="cube"] .activeLink,
+    body[data-template="cubegreen"] .activeLink,
+    body[data-template="muzammal"] .activeLink {
+        border-left: none !important;
+        border-top: 2px solid var(--cube-primary) !important;
+    }
+
+    body[data-template="cube"] .mySwiper,
+    body[data-template="cubegreen"] .mySwiper,
+    body[data-template="muzammal"] .mySwiper {
+        height: calc(100vh - 60px);
+        width: 100vw;
+        order: 1;
+    }
+
+    body[data-template="cube"] .home-slide,
+    body[data-template="cubegreen"] .home-slide,
+    body[data-template="muzammal"] .home-slide {
+        flex-direction: column-reverse;
+        padding: 30px 20px;
+        text-align: center;
+        overflow-y: auto;
+    }
+
+    body[data-template="cube"] .HomeContent,
+    body[data-template="cubegreen"] .HomeContent,
+    body[data-template="muzammal"] .HomeContent {
+        padding: 20px 0;
+    }
+
+    body[data-template="cube"] .HomeContent h1,
+    body[data-template="cubegreen"] .HomeContent h1,
+    body[data-template="muzammal"] .HomeContent h1 {
+        font-size: 2.1rem;
+    }
+
+    body[data-template="cube"] .HomeContent h2,
+    body[data-template="cubegreen"] .HomeContent h2,
+    body[data-template="muzammal"] .HomeContent h2 {
+        font-size: 1.5rem;
+    }
+
+    body[data-template="cube"] .HomeContent .heroline,
+    body[data-template="cubegreen"] .HomeContent .heroline,
+    body[data-template="muzammal"] .HomeContent .heroline {
+        font-size: 1rem;
+    }
+
+    body[data-template="cube"] .buttonGroup,
+    body[data-template="cubegreen"] .buttonGroup,
+    body[data-template="muzammal"] .buttonGroup {
+        justify-content: center;
+    }
+
+    body[data-template="cube"] .SideImg,
+    body[data-template="cubegreen"] .SideImg,
+    body[data-template="muzammal"] .SideImg {
+        width: 180px;
+        margin: 20px auto;
+    }
+
+    body[data-template="cube"] .SideImg img,
+    body[data-template="cubegreen"] .SideImg img,
+    body[data-template="muzammal"] .SideImg img {
+        width: 180px;
+        height: 180px;
+    }
+
+    body[data-template="cube"] .about-us,
+    body[data-template="cubegreen"] .about-us,
+    body[data-template="muzammal"] .about-us,
+    body[data-template="cube"] .services,
+    body[data-template="cubegreen"] .services,
+    body[data-template="muzammal"] .services,
+    body[data-template="cube"] .gallery,
+    body[data-template="cubegreen"] .gallery,
+    body[data-template="muzammal"] .gallery,
+    body[data-template="cube"] .contactMe,
+    body[data-template="cubegreen"] .contactMe,
+    body[data-template="muzammal"] .contactMe {
+        padding: 24px 16px;
+    }
+
+    body[data-template="cube"] .about-me-divison,
+    body[data-template="cubegreen"] .about-me-divison,
+    body[data-template="muzammal"] .about-me-divison {
+        flex-direction: column;
+    }
+
+    body[data-template="cube"] .about-me-table,
+    body[data-template="cubegreen"] .about-me-table,
+    body[data-template="muzammal"] .about-me-table {
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    body[data-template="cube"] .skill-bar,
+    body[data-template="cubegreen"] .skill-bar,
+    body[data-template="muzammal"] .skill-bar {
+        width: 100%;
+    }
+
+    body[data-template="cube"] .services,
+    body[data-template="cubegreen"] .services,
+    body[data-template="muzammal"] .services,
+    body[data-template="cube"] .gallery,
+    body[data-template="cubegreen"] .gallery,
+    body[data-template="muzammal"] .gallery {
+        grid-template-columns: 1fr;
+    }
+
+    body[data-template="cube"] .contactMe form,
+    body[data-template="cubegreen"] .contactMe form,
+    body[data-template="muzammal"] .contactMe form {
+        padding: 16px;
     }
 }
 

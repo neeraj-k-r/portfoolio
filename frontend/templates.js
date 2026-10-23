@@ -16,6 +16,7 @@ const TEMPLATES = [
   { id: 'moderncv', name: 'Modern CV', desc: 'Interactive dev portfolio with animations, RTL support', emoji: '💼', best: 'Full Stack • UI/UX • Bilingual' },
   { id: 'ultracode', name: 'Ultra Code', desc: 'Dark crimson theme with vertical sidebar, qualification timelines, skills tabs, work filters & modals', emoji: '🔴', best: 'Developers • Designers • Modern portfolio' },
   { id: 'devblue', name: 'Dev Blue', desc: 'Royal blue clean portfolio with smooth ScrollReveal, skill progress bars & work showcase', emoji: '🔷', best: 'Web Designers • Frontend • Clean UI' },
+  { id: 'cube', name: '3D Cube', desc: 'Interactive 3D cube swiper in charcoal & mint green', emoji: '🟩', best: 'Web Developers • Modern 3D' },
 ];
 
 function tplEsc(s) {
@@ -2775,6 +2776,282 @@ function initDevblueRuntime(p) {
   }
 }
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue };
+function renderCube(p) {
+  normTpl(p);
+  document.body.dataset.template = 'cube';
+  document.body.className = 'body-main';
+  document.title = `${p.name || 'Developer'} — ${p.title || 'Personal Portfolio'} | portfoolio.me`;
+
+  const name = tplEsc(p.name || 'Muzammal');
+  const title = tplEsc(p.title || 'Web Developer');
+  const bio = tplEsc(p.bio || p.desc || p.tagline || 'Passionate web developer specializing in building modern, interactive, and high-performance digital experiences.');
+  const email = tplEsc(p.email || '');
+  const phone = tplEsc(p.phone || '');
+  const location = tplEsc(p.location || 'Worldwide / Remote');
+  const username = tplEsc(p.username || 'user');
+
+  const avatarImg = (p.avatarUrl || p.avatar_url)
+    ? tplEsc(p.avatarUrl || p.avatar_url)
+    : `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400"><rect width="400" height="400" fill="%23212529"/><circle cx="200" cy="200" r="160" fill="%23343a40" stroke="%2380ed99" stroke-width="6"/><text x="50%" y="54%" font-size="140" font-family="system-ui,sans-serif" font-weight="bold" fill="%2380ed99" dominant-baseline="middle" text-anchor="middle">${encodeURIComponent((p.name || 'M').charAt(0).toUpperCase())}</text></svg>`;
+
+  const explicitSkills = Array.isArray(p.skills) ? p.skills : (typeof p.skills === 'string' ? p.skills.split(',') : []);
+  const skillList = explicitSkills.map(s => String(s || '').trim()).filter(Boolean);
+  if (!skillList.length) {
+    skillList.push('HTML', 'CSS', 'JavaScript', 'Python', 'React');
+  }
+  const pctValues = [95, 88, 85, 78, 75, 70];
+  const skillsBars = skillList.slice(0, 6).map((sk, idx) => {
+    const pct = pctValues[idx] || (70 - (idx * 5));
+    return `
+      <li>
+        <div class="skill-bar-head">
+          <p>${tplEsc(sk)}</p>
+          <span class="skill-pct">${pct}%</span>
+        </div>
+        <div class="bar">
+          <div class="active-bar" style="width:${pct}%"></div>
+        </div>
+      </li>
+    `;
+  }).join('');
+
+  const expYears = (p.experience && p.experience.length) ? `${p.experience.length}+ yrs` : '3+ years';
+  const projectCount = (p.projects && p.projects.length) ? `${p.projects.length}+` : '10+';
+
+  const servicesData = [
+    { icon: 'fa-solid fa-pen-ruler', title: 'Web Design', desc: 'Crafting responsive, intuitive, and modern user interfaces with attention to detail.' },
+    { icon: 'fa-solid fa-globe', title: 'Web Development', desc: 'Building fast, clean, and scalable web applications using modern web standards.' },
+    { icon: 'fa-solid fa-magnifying-glass', title: 'SEO & Performance', desc: 'Optimizing accessibility, speed, and search visibility for high rankings.' },
+    { icon: 'fa-solid fa-image', title: 'UI/UX Design', desc: 'Designing user-friendly prototypes, wireframes, and memorable visual identities.' },
+    { icon: 'fa-solid fa-mobile-screen-button', title: 'Responsive Apps', desc: 'Ensuring seamless cross-device compatibility across desktop, tablet, and mobile.' },
+    { icon: 'fa-solid fa-database', title: 'Backend & APIs', desc: 'Developing secure, reliable APIs and database architectures to power modern platforms.' }
+  ];
+  const serviceCards = servicesData.map(s => `
+    <div class="service">
+      <div class="service-icon"><i class="${s.icon}"></i></div>
+      <h2>${tplEsc(s.title)}</h2>
+      <p>${tplEsc(s.desc)}</p>
+    </div>
+  `).join('');
+
+  const projectsData = Array.isArray(p.projects) && p.projects.length ? p.projects : [
+    { title: 'Modern Web Platform', desc: 'Interactive full-stack web application with responsive UI and real-time state management.', tags: ['React', 'Node.js', 'CSS3'] },
+    { title: 'Interactive Portfolio', desc: 'Personal branding portal showcasing skills, works, and instant contact workflows.', tags: ['JavaScript', 'HTML5', 'Swiper'] },
+    { title: 'Cloud API Service', desc: 'High-availability backend service with RESTful endpoints and optimized data pipelines.', tags: ['Node.js', 'Express', 'Database'] }
+  ];
+  const projectCards = projectsData.slice(0, 6).map((pr) => {
+    const iconClass = (pr.title.toLowerCase().includes('design') || pr.title.toLowerCase().includes('ui'))
+      ? 'fa-solid fa-palette'
+      : (pr.title.toLowerCase().includes('mobile') || pr.title.toLowerCase().includes('app'))
+      ? 'fa-solid fa-mobile-screen'
+      : (pr.title.toLowerCase().includes('cloud') || pr.title.toLowerCase().includes('api'))
+      ? 'fa-solid fa-server'
+      : 'fa-solid fa-code';
+    const tags = ((pr.technologies || pr.tags) || []).map(t => `<span class="cube-tag">${tplEsc(t)}</span>`).join('');
+    return `
+      <div class="cube-project">
+        <div class="cube-project-top">
+          <div class="cube-project-icon"><i class="${iconClass}"></i></div>
+          <div class="cube-project-links">
+            ${pr.url ? `<a class="cube-project-link" href="${tplEsc(pr.url)}" target="_blank" title="View Source"><i class="fa-brands fa-github"></i></a>` : ''}
+            ${pr.demoUrl ? `<a class="cube-project-link" href="${tplEsc(pr.demoUrl)}" target="_blank" title="Live Demo"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : ''}
+          </div>
+        </div>
+        <h3 class="cube-project-title"><a href="${tplEsc(pr.url || pr.demoUrl || '#')}" target="_blank">${tplEsc(pr.title)}</a></h3>
+        <p class="cube-project-desc">${tplEsc(pr.desc || 'A featured software project demonstrating technical craftsmanship.')}</p>
+        <div class="cube-project-tags">${tags}</div>
+      </div>
+    `;
+  }).join('');
+
+  document.getElementById('app').innerHTML = `
+    <main class="cube-main">
+      <aside class="cube-aside">
+        <div class="cube-brand">
+          <a class="cube-logo" href="/"><span class="cube-dot"></span><span>PORTFOOLIO</span></a>
+        </div>
+        <ul class="Links">
+          <li onclick="window.cubeNavigate(0)" class="activeLink" data-slide="0"><i class="fa-solid fa-house"></i><p>Home</p></li>
+          <li onclick="window.cubeNavigate(1)" data-slide="1"><i class="fa-solid fa-user"></i><p>About Me</p></li>
+          <li onclick="window.cubeNavigate(2)" data-slide="2"><i class="fa-solid fa-list"></i><p>Services</p></li>
+          <li onclick="window.cubeNavigate(3)" data-slide="3"><i class="fa-solid fa-images"></i><p>Gallery</p></li>
+          <li onclick="window.cubeNavigate(4)" data-slide="4"><i class="fa-solid fa-comments"></i><p>Contact Me</p></li>
+        </ul>
+        <div class="cube-aside-foot">
+          <span>${username}.portfoolio.me</span>
+        </div>
+      </aside>
+
+      <div class="swiper mySwiper">
+        <div class="SlideContainer swiper-wrapper">
+          <!-- Slide 0: Home -->
+          <div class="swiper-slide home-slide">
+            <div class="HomeContent">
+              <h1>Hi! I'm <span class="stylized-name">${name}</span>,</h1>
+              <h2>A <span class="proffesions">${title}</span></h2>
+              <p class="heroline">${bio}</p>
+              <div class="buttonGroup">
+                ${email ? `<a class="cube-btn" href="mailto:${email}">Hire Me</a>` : ''}
+                <button class="cube-btn secondary" onclick="window.cubeNavigate(4)">Contact Me</button>
+              </div>
+            </div>
+            <div class="SideImg">
+              <div class="top-right-corner">
+                <hr class="hr1">
+                <hr class="hr2">
+              </div>
+              <img src="${avatarImg}" alt="${name}">
+              <div class="bottom-left-corner">
+                <hr class="hr1">
+                <hr class="hr2">
+              </div>
+            </div>
+            <p class="slide-help" onclick="window.cubeNavigate(1)">Scroll for next slide <i class="fa-solid fa-chevron-right fa-shake"></i></p>
+          </div>
+
+          <!-- Slide 1: About Me -->
+          <div class="swiper-slide">
+            <div class="about-us">
+              <h1 class="heading">About Me</h1>
+              <h3 class="sub-heading">I'm ${name}, <span class="proffesions">A ${title}</span></h3>
+              <p class="aboutme-deatils">${bio}</p>
+              <div class="about-me-divison">
+                <div class="about-me-table">
+                  <li><span>Experience:</span> ${expYears}</li>
+                  <li><span>Location:</span> ${location}</li>
+                  <li><span>Availability:</span> Open for hire</li>
+                  <li><span>Projects:</span> ${projectCount}</li>
+                  <li><span>Role:</span> ${title}</li>
+                  <li><span>Email:</span> ${email || 'Available on request'}</li>
+                  <li><span>Focus:</span> Full-Stack &amp; Web</li>
+                  <li><span>Platform:</span> portfoolio.me</li>
+                  <div class="buttonGroup">
+                    ${email ? `<a class="cube-btn" href="mailto:${email}">Hire Me</a>` : ''}
+                    <button class="cube-btn secondary" onclick="window.cubeNavigate(4)">Contact Me</button>
+                  </div>
+                </div>
+
+                <ul class="skill-bar">
+                  ${skillsBars}
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 2: Services -->
+          <div class="swiper-slide services">
+            <h1 class="heading">Services</h1>
+            ${serviceCards}
+          </div>
+
+          <!-- Slide 3: Gallery -->
+          <div class="swiper-slide gallery">
+            <h1 class="heading">Gallery</h1>
+            ${projectCards}
+          </div>
+
+          <!-- Slide 4: Contact Me -->
+          <div class="swiper-slide contactMe">
+            <h1 class="heading">Contact Me</h1>
+            <div class="contact-info-list">
+              ${phone ? `<div class="contactinfo"><i class="fa-solid fa-phone"></i><div><h3>Mobile</h3><p>${phone}</p></div></div>` : ''}
+              <div class="contactinfo"><i class="fa-solid fa-location-dot"></i><div><h3>Location</h3><p>${location}</p></div></div>
+              ${email ? `<div class="contactinfo"><i class="fa-regular fa-envelope"></i><div><h3>Email</h3><p>${email}</p></div></div>` : ''}
+              <div class="contactinfo"><i class="fa-solid fa-globe"></i><div><h3>Website</h3><p>${username}.portfoolio.me</p></div></div>
+            </div>
+
+            <form id="cubeContactForm">
+              <h2>Send Me A Message
+                <div class="SocialLinks">
+                  ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>` : ''}
+                  ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>` : ''}
+                  ${tplShowInsta(p) ? `<a href="${tplEsc(p.instagram)}" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>` : ''}
+                  ${email ? `<a href="mailto:${email}" title="Email"><i class="fa-solid fa-envelope"></i></a>` : ''}
+                </div>
+              </h2>
+              <input type="text" id="cubeName" placeholder="Name" required>
+              <input type="email" id="cubeEmail" placeholder="Email" required>
+              <textarea id="cubeMsg" rows="5" placeholder="Type your Message Here..." required></textarea>
+              <button type="submit" class="cube-btn">Send Message</button>
+              <div id="cubeStatus" style="display:none;color:var(--cube-primary);font-size:0.95rem;padding:8px 0;"></div>
+            </form>
+
+            <footer>
+              <p>© ${new Date().getFullYear()} ${name} • Powered by <a href="https://portfoolio.me" style="color:#ffffff;text-decoration:underline" target="_blank">portfoolio.me</a></p>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </main>
+  `;
+
+  window.scrollTo(0, 0);
+  initCubeRuntime(p);
+}
+
+function initCubeRuntime(p) {
+  if (typeof Swiper !== 'undefined') {
+    if (window.cubeSwiper && typeof window.cubeSwiper.destroy === 'function') {
+      try { window.cubeSwiper.destroy(true, true); } catch {}
+    }
+    try {
+      window.cubeSwiper = new Swiper(".mySwiper", {
+        effect: "cube",
+        allowTouchMove: true,
+        grabCursor: true,
+        cubeEffect: {
+          shadow: true,
+          slideShadows: true,
+          shadowOffset: 20,
+          shadowScale: 0.94,
+        },
+        mousewheel: true,
+        speed: 800
+      });
+      window.cubeSwiper.on('slideChange', function () {
+        const links = document.querySelectorAll(".cube-aside .Links li");
+        links.forEach(l => l.classList.remove("activeLink"));
+        if (links[window.cubeSwiper.activeIndex]) {
+          links[window.cubeSwiper.activeIndex].classList.add("activeLink");
+        }
+      });
+    } catch (e) {
+      console.warn('Swiper init warning:', e);
+    }
+  }
+
+  window.cubeNavigate = function(indx) {
+    const links = document.querySelectorAll(".cube-aside .Links li");
+    links.forEach(l => l.classList.remove("activeLink"));
+    if (links[indx]) links[indx].classList.add("activeLink");
+    if (window.cubeSwiper) {
+      window.cubeSwiper.slideTo(indx, 800, true);
+    }
+  };
+  window.Navigate = window.cubeNavigate;
+
+  const contactForm = document.getElementById('cubeContactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const cName = (document.getElementById('cubeName')?.value || '').trim();
+      const cEmail = (document.getElementById('cubeEmail')?.value || '').trim();
+      const cMsg = (document.getElementById('cubeMsg')?.value || '').trim();
+
+      const subject = encodeURIComponent(`Portfolio Inquiry from ${cName}`);
+      const body = encodeURIComponent(`Hi ${p.name || 'there'},\n\nName: ${cName}\nEmail: ${cEmail}\n\nMessage:\n${cMsg}\n\n-- Sent via portfoolio.me`);
+      window.location.href = `mailto:${p.email || 'hello@portfoolio.me'}?subject=${subject}&body=${body}`;
+
+      const statusEl = document.getElementById('cubeStatus');
+      if (statusEl) {
+        statusEl.style.display = 'block';
+        statusEl.textContent = `✓ Opening your email client to reach ${p.name || 'developer'}...`;
+      }
+    });
+  }
+}
+
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube };
 window.PortfoolioTemplateList = TEMPLATES;
+
 

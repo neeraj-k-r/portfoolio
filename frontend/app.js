@@ -862,6 +862,24 @@ document.addEventListener('DOMContentLoaded', async () => {
         title: 'Web Designer',
         desc: 'As a passionate web designer, I thrive on creating visually appealing and user-friendly websites.',
         skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI', 'Figma', 'Web Design']
+      },
+      cube: {
+        name: 'Muzammal',
+        title: 'Web Developer',
+        desc: 'Passionate developer crafting modern, fast, and interactive web experiences with 3D cube slides.',
+        skills: ['HTML5', 'CSS3', 'JavaScript', 'Python', 'React', 'Swiper']
+      },
+      cubegreen: {
+        name: 'Muzammal',
+        title: 'Web Developer',
+        desc: 'Passionate developer crafting modern, fast, and interactive web experiences with 3D cube slides.',
+        skills: ['HTML5', 'CSS3', 'JavaScript', 'Python', 'React', 'Swiper']
+      },
+      muzammal: {
+        name: 'Muzammal',
+        title: 'Web Developer',
+        desc: 'Passionate developer crafting modern, fast, and interactive web experiences with 3D cube slides.',
+        skills: ['HTML5', 'CSS3', 'JavaScript', 'Python', 'React', 'Swiper']
       }
     };
 
@@ -920,7 +938,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       aurora: { name: 'Jordan Kai', title: 'Cloud Architect', desc: 'Designing resilient cloud platforms, serverless microservices & DevOps pipelines.', skills: ['AWS', 'Terraform', 'Docker'] },
       ultracode: { name: 'Mariam Wallas', title: 'Full-Stack Developer', desc: 'I have high level experience in web design, development knowledge and producing quality work.', skills: ['JavaScript', 'React', 'CSS'] },
       devblue: { name: 'Marlon', title: 'Web Designer', desc: 'As a passionate web designer, I thrive on creating visually appealing and user-friendly websites.', skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI'] },
-      marlon: { name: 'Marlon', title: 'Web Designer', desc: 'As a passionate web designer, I thrive on creating visually appealing and user-friendly websites.', skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI'] }
+      marlon: { name: 'Marlon', title: 'Web Designer', desc: 'As a passionate web designer, I thrive on creating visually appealing and user-friendly websites.', skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI'] },
+      cube: { name: 'Muzammal', title: 'Web Developer', desc: 'Passionate developer crafting modern, fast, and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] },
+      cubegreen: { name: 'Muzammal', title: 'Web Developer', desc: 'Passionate developer crafting modern, fast, and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] },
+      muzammal: { name: 'Muzammal', title: 'Web Developer', desc: 'Passionate developer crafting modern, fast, and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] }
     };
     let lastFocus = null;
     const openModal = (theme, name) => {
