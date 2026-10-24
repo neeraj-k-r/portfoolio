@@ -1661,6 +1661,7 @@ function paintUserProjects(p) {
   const list = $('edProjList');
   if(!list) return;
   list.innerHTML = asArray(p.projects).map((pr, i) => {
+    const isVisible = pr.selected !== false && !pr.hidden;
     const badges = `${pr.repo ? '<span class="badge" style="font-size:11px" title="Repository retrieved from GitHub">✓ GitHub</span>' : ''}${pr.demoUrl ? '<span class="badge" style="font-size:11px">↗ Live</span>' : ''}`;
     const open = projEditOpen === i ? `
       <div style="grid-column:1/-1;background:rgba(0,0,0,.25);border:1px solid var(--stroke);border-radius:12px;padding:12px;margin-top:8px">
@@ -1670,12 +1671,33 @@ function paintUserProjects(p) {
         <label class="flabel" style="margin-top:8px">Live demo URL</label>
         <input id="peDemo${i}" placeholder="https://…" value="${pr.demoUrl || ''}">
       </div>` : '';
-    return `<div class="proj-row" style="display:grid;grid-template-columns:1fr;gap:6px"><div style="display:flex;gap:10px;align-items:center">
-      <b>${pr.title}</b><small style="color:var(--muted)">${pr.stars || ''}</small>
-      <span style="margin-left:auto;display:flex;gap:6px"><button data-ev="${i}">Evidence</button><button data-rm="${i}">Remove</button></span></div>
-      <div style="display:flex;gap:6px;flex-wrap:wrap">${techChipsHTML(pr)}${badges}</div>${open}</div>`;
+    return `<div class="proj-row" style="display:grid;grid-template-columns:1fr;gap:6px;${isVisible ? '' : 'opacity:0.6;background:rgba(255,255,255,0.02);'}">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+        <label style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:${isVisible ? 'var(--lime,#80ed99)' : 'var(--muted)'};background:rgba(0,0,0,0.2);padding:2px 8px;border-radius:6px;border:1px solid var(--stroke)" title="Toggle project visibility on your live portfolio">
+          <input type="checkbox" data-vis="${i}" ${isVisible ? 'checked' : ''}>
+          <span>${isVisible ? 'Visible' : 'Hidden'}</span>
+        </label>
+        <b>${pr.title}</b><small style="color:var(--muted)">${pr.stars || ''}</small>
+        <span style="margin-left:auto;display:flex;gap:6px">
+          <button type="button" class="btn btn-ghost btn-xs" data-ev="${i}">Evidence</button>
+          <button type="button" class="btn btn-ghost btn-xs" data-rm="${i}" style="color:#ff6b6b">Remove</button>
+        </span>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${techChipsHTML(pr)}${badges}</div>${open}
+    </div>`;
   }).join('') || '<p style="color:var(--muted);font-size:13px">No projects added yet — use the GitHub section below.</p>';
-  list.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { p.projects.splice(+b.dataset.rm, 1); if (projEditOpen === +b.dataset.rm) projEditOpen = -1; paintUserProjects(p); });
+  list.querySelectorAll('[data-vis]').forEach(chk => {
+    chk.onchange = () => {
+      const idx = +chk.dataset.vis;
+      if (p.projects[idx]) {
+        p.projects[idx].selected = chk.checked;
+        p.projects[idx].hidden = !chk.checked;
+        paintUserProjects(p);
+        toast(chk.checked ? 'Project marked visible — click Save Changes' : 'Project hidden from portfolio — click Save Changes');
+      }
+    };
+  });
+  list.querySelectorAll('[data-rm]').forEach(b => b.onclick = () => { p.projects.splice(+b.dataset.rm, 1); if (projEditOpen === +b.dataset.rm) projEditOpen = -1; paintUserProjects(p); toast('Project removed — click Save Changes'); });
   list.querySelectorAll('[data-ev]').forEach(b => b.onclick = () => { projEditOpen = projEditOpen === +b.dataset.ev ? -1 : +b.dataset.ev; paintUserProjects(p); });
   if (projEditOpen >= 0 && p.projects[projEditOpen]) {
     const i = projEditOpen, pr = p.projects[i];

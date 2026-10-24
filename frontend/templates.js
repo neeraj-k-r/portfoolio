@@ -2840,11 +2840,13 @@ function renderCube(p) {
     </div>
   `).join('');
 
-  const projectsData = Array.isArray(p.projects) && p.projects.length ? p.projects : [
+  const allProjects = Array.isArray(p.projects) ? p.projects : [];
+  const selectedProjects = allProjects.filter(pr => pr.selected !== false && !pr.hidden);
+  const projectsData = selectedProjects.length ? selectedProjects : (allProjects.length ? allProjects : [
     { title: 'Modern Web Platform', desc: 'Interactive full-stack web application with responsive UI and real-time state management.', tags: ['React', 'Node.js', 'CSS3'] },
     { title: 'Interactive Portfolio', desc: 'Personal branding portal showcasing skills, works, and instant contact workflows.', tags: ['JavaScript', 'HTML5', 'Swiper'] },
     { title: 'Cloud API Service', desc: 'High-availability backend service with RESTful endpoints and optimized data pipelines.', tags: ['Node.js', 'Express', 'Database'] }
-  ];
+  ]);
   const projectCards = projectsData.map((pr) => {
     const iconClass = (pr.title.toLowerCase().includes('design') || pr.title.toLowerCase().includes('ui'))
       ? 'fa-solid fa-palette'

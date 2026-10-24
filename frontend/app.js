@@ -117,20 +117,8 @@ async function loadProfile(username) {
             c.services = seed.services;
             if (c.resume && typeof c.resume === 'object') c.resume.services = seed.services;
           }
-          if (Array.isArray(seed.projects) && seed.projects.length) {
-            const normUrl = (url) => String(url || '').toLowerCase().replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '');
-            const have = new Set((c.projects || []).map(p => normUrl(p.url)));
-            const haveTitles = new Set((c.projects || []).map(p => String(p.title || '').toLowerCase().trim()));
-            if (!Array.isArray(c.projects)) c.projects = [];
-            for (const sp of seed.projects) {
-              const uKey = normUrl(sp.url);
-              const tKey = String(sp.title || '').toLowerCase().trim();
-              if (!have.has(uKey) && !haveTitles.has(tKey)) {
-                c.projects.push(sp);
-                have.add(uKey);
-                haveTitles.add(tKey);
-              }
-            }
+          if ((!c.projects || !c.projects.length) && Array.isArray(seed.projects) && seed.projects.length) {
+            c.projects = seed.projects;
           }
         }
         return c;

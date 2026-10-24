@@ -87,20 +87,8 @@ async function getProfile(sub) {
               row.services = seed.services;
               if (row.resume && typeof row.resume === 'object') row.resume.services = seed.services;
             }
-            if (Array.isArray(seed.projects) && seed.projects.length) {
-              const normUrl = (url) => String(url || '').toLowerCase().replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '');
-              const have = new Set((row.projects || []).map(p => normUrl(p.url)));
-              const haveTitles = new Set((row.projects || []).map(p => String(p.title || '').toLowerCase().trim()));
-              if (!Array.isArray(row.projects)) row.projects = [];
-              for (const sp of seed.projects) {
-                const uKey = normUrl(sp.url);
-                const tKey = String(sp.title || '').toLowerCase().trim();
-                if (!have.has(uKey) && !haveTitles.has(tKey)) {
-                  row.projects.push(sp);
-                  have.add(uKey);
-                  haveTitles.add(tKey);
-                }
-              }
+            if ((!row.projects || !row.projects.length) && Array.isArray(seed.projects) && seed.projects.length) {
+              row.projects = seed.projects;
             }
           }
         }
@@ -2649,11 +2637,13 @@ function pageCube(p) {
     </div>
   `).join('');
 
-  const projectsData = Array.isArray(p.projects) && p.projects.length ? p.projects : [
+  const allProjects = Array.isArray(p.projects) ? p.projects : [];
+  const selectedProjects = allProjects.filter(pr => pr.selected !== false && !pr.hidden);
+  const projectsData = selectedProjects.length ? selectedProjects : (allProjects.length ? allProjects : [
     { title: 'Modern Web Platform', desc: 'Interactive full-stack web application with responsive UI and real-time state management.', tags: ['React', 'Node.js', 'CSS3'] },
     { title: 'Interactive Portfolio', desc: 'Personal branding portal showcasing skills, works, and instant contact workflows.', tags: ['JavaScript', 'HTML5', 'Swiper'] },
     { title: 'Cloud API Service', desc: 'High-availability backend service with RESTful endpoints and optimized data pipelines.', tags: ['Node.js', 'Express', 'Database'] }
-  ];
+  ]);
   const projectCards = projectsData.map((pr) => {
     const iconClass = (pr.title.toLowerCase().includes('design') || pr.title.toLowerCase().includes('ui'))
       ? 'fa-solid fa-palette'
