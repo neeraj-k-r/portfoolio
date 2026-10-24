@@ -3970,16 +3970,16 @@ body[data-template="cubegreen"] .services,
 body[data-template="muzammal"] .services {
     color: #ffffff;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 20px;
-    padding: 60px 80px;
+    padding: 60px 80px 100px;
     box-sizing: border-box;
 }
 
 body[data-template="cube"] .services .heading,
 body[data-template="cubegreen"] .services .heading,
 body[data-template="muzammal"] .services .heading {
-    grid-column: 1 / span 3;
+    grid-column: 1 / -1;
     margin-bottom: 10px;
 }
 
@@ -4050,15 +4050,15 @@ body[data-template="cube"] .gallery,
 body[data-template="cubegreen"] .gallery,
 body[data-template="muzammal"] .gallery {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 20px;
-    padding: 60px 80px;
+    padding: 60px 80px 100px;
 }
 
 body[data-template="cube"] .gallery .heading,
 body[data-template="cubegreen"] .gallery .heading,
 body[data-template="muzammal"] .gallery .heading {
-    grid-column: 1 / span 3;
+    grid-column: 1 / -1;
     margin-bottom: 10px;
 }
 

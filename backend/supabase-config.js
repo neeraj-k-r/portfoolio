@@ -27,6 +27,9 @@ function normRow(r) {
   if (r.avatarUrl && !r.avatar_url) r.avatar_url = r.avatarUrl || '';
   if (typeof r.show_instagram === 'boolean' && typeof r.showInstagram === 'undefined') r.showInstagram = r.show_instagram;
   if (typeof r.showInstagram === 'boolean' && typeof r.show_instagram === 'undefined') r.show_instagram = r.showInstagram;
+  if (r.resume && typeof r.resume === 'object' && Array.isArray(r.resume.services) && (!r.services || !r.services.length)) {
+    r.services = r.resume.services;
+  }
   // Self-heal legacy rows: a visual-only template implies the visual track
   // (e.g. claims stored before the track column existed). Every reader routes
   // on track, so heal here to fix dashboards, portfolios and galleries at once.
@@ -86,7 +89,9 @@ async function cloudSaveProfile(p) {
     certifications: Array.isArray(p.certifications) ? p.certifications.slice(0, 10) : [],
     track: (p.track === 'visual' || (existing && existing.track === 'visual')) ? 'visual' : 'tech',
     works: Array.isArray(p.works) ? p.works.slice(0, 30) : [],
-    resume: (p.resume && typeof p.resume === 'object') ? p.resume : {},
+    resume: (p.resume && typeof p.resume === 'object')
+      ? { ...p.resume, services: Array.isArray(p.services) ? p.services.slice(0, 20) : (p.resume.services || []) }
+      : (Array.isArray(p.services) ? { services: p.services.slice(0, 20) } : {}),
     status: (existing && existing.status) || 'approved',
     // prebuilt-upload hosting: explicit value on p wins, else keep what is live
     site_type: p.site_type || (existing && existing.site_type) || 'builder',

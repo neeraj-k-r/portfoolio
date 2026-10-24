@@ -70,9 +70,42 @@ async function getProfile(sub) {
       if (row.avatarUrl && !row.avatar_url) row.avatar_url = row.avatarUrl;
       if (typeof row.show_instagram === 'boolean' && typeof row.showInstagram === 'undefined') row.showInstagram = row.show_instagram;
       if (typeof row.showInstagram === 'boolean' && typeof row.show_instagram === 'undefined') row.show_instagram = row.showInstagram;
+      if (row.resume && typeof row.resume === 'object' && Array.isArray(row.resume.services) && (!row.services || !row.services.length)) {
+        row.services = row.resume.services;
+      }
       // Self-heal legacy rows: a visual-only template implies the visual track
       if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
       if (row.track !== 'visual') row.track = 'tech';
+
+      // Check seed profile to backfill custom services or extra repos
+      try {
+        const sr = await fetch(`${ORIGIN}/profiles/${encodeURIComponent(sub)}.json`);
+        if (sr.ok) {
+          const seed = await sr.json();
+          if (seed) {
+            if ((!row.services || !row.services.length) && Array.isArray(seed.services) && seed.services.length) {
+              row.services = seed.services;
+              if (row.resume && typeof row.resume === 'object') row.resume.services = seed.services;
+            }
+            if (Array.isArray(seed.projects) && seed.projects.length) {
+              const normUrl = (url) => String(url || '').toLowerCase().replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '');
+              const have = new Set((row.projects || []).map(p => normUrl(p.url)));
+              const haveTitles = new Set((row.projects || []).map(p => String(p.title || '').toLowerCase().trim()));
+              if (!Array.isArray(row.projects)) row.projects = [];
+              for (const sp of seed.projects) {
+                const uKey = normUrl(sp.url);
+                const tKey = String(sp.title || '').toLowerCase().trim();
+                if (!have.has(uKey) && !haveTitles.has(tKey)) {
+                  row.projects.push(sp);
+                  have.add(uKey);
+                  haveTitles.add(tKey);
+                }
+              }
+            }
+          }
+        }
+      } catch {}
+
       return row;
     }
   } catch {}
@@ -86,6 +119,9 @@ async function getProfile(sub) {
         if (seed.avatarUrl && !seed.avatar_url) seed.avatar_url = seed.avatarUrl;
         if (typeof seed.show_instagram === 'boolean' && typeof seed.showInstagram === 'undefined') seed.showInstagram = seed.show_instagram;
         if (typeof seed.showInstagram === 'boolean' && typeof seed.show_instagram === 'undefined') seed.show_instagram = seed.showInstagram;
+        if (seed.resume && typeof seed.resume === 'object' && Array.isArray(seed.resume.services) && (!seed.services || !seed.services.length)) {
+          seed.services = seed.resume.services;
+        }
       }
       return seed;
     }
@@ -2591,7 +2627,13 @@ function pageCube(p) {
   const expYears = (p.experience && p.experience.length) ? `${p.experience.length}+ yrs` : '3+ years';
   const projectCount = (p.projects && p.projects.length) ? `${p.projects.length}+` : '10+';
 
-  const servicesData = [
+  const userServices = (Array.isArray(p.services) && p.services.length)
+    ? p.services
+    : (p.resume && Array.isArray(p.resume.services) && p.resume.services.length)
+    ? p.resume.services
+    : null;
+
+  const servicesData = userServices || [
     { icon: 'fa-solid fa-pen-ruler', title: 'Web Design', desc: 'Crafting responsive, intuitive, and modern user interfaces with attention to detail.' },
     { icon: 'fa-solid fa-globe', title: 'Web Development', desc: 'Building fast, clean, and scalable web applications using modern web standards.' },
     { icon: 'fa-solid fa-magnifying-glass', title: 'SEO & Performance', desc: 'Optimizing accessibility, speed, and search visibility for high rankings.' },
@@ -2601,7 +2643,7 @@ function pageCube(p) {
   ];
   const serviceCards = servicesData.map(s => `
     <div class="service">
-      <div class="service-icon"><i class="${s.icon}"></i></div>
+      <div class="service-icon"><i class="${esc(s.icon || 'fa-solid fa-code')}"></i></div>
       <h2>${esc(s.title)}</h2>
       <p>${esc(s.desc)}</p>
     </div>
@@ -2612,7 +2654,7 @@ function pageCube(p) {
     { title: 'Interactive Portfolio', desc: 'Personal branding portal showcasing skills, works, and instant contact workflows.', tags: ['JavaScript', 'HTML5', 'Swiper'] },
     { title: 'Cloud API Service', desc: 'High-availability backend service with RESTful endpoints and optimized data pipelines.', tags: ['Node.js', 'Express', 'Database'] }
   ];
-  const projectCards = projectsData.slice(0, 6).map((pr) => {
+  const projectCards = projectsData.map((pr) => {
     const iconClass = (pr.title.toLowerCase().includes('design') || pr.title.toLowerCase().includes('ui'))
       ? 'fa-solid fa-palette'
       : (pr.title.toLowerCase().includes('mobile') || pr.title.toLowerCase().includes('app'))
@@ -2653,7 +2695,10 @@ function pageCube(p) {
               shadowOffset: 20,
               shadowScale: 0.94,
             },
-            mousewheel: true,
+            mousewheel: {
+              releaseOnEdges: true,
+              sensitivity: 0.8,
+            },
             speed: 800
           });
           window.cubeSwiper.on('slideChange', function () {

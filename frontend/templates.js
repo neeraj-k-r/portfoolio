@@ -2818,7 +2818,13 @@ function renderCube(p) {
   const expYears = (p.experience && p.experience.length) ? `${p.experience.length}+ yrs` : '3+ years';
   const projectCount = (p.projects && p.projects.length) ? `${p.projects.length}+` : '10+';
 
-  const servicesData = [
+  const userServices = (Array.isArray(p.services) && p.services.length)
+    ? p.services
+    : (p.resume && Array.isArray(p.resume.services) && p.resume.services.length)
+    ? p.resume.services
+    : null;
+
+  const servicesData = userServices || [
     { icon: 'fa-solid fa-pen-ruler', title: 'Web Design', desc: 'Crafting responsive, intuitive, and modern user interfaces with attention to detail.' },
     { icon: 'fa-solid fa-globe', title: 'Web Development', desc: 'Building fast, clean, and scalable web applications using modern web standards.' },
     { icon: 'fa-solid fa-magnifying-glass', title: 'SEO & Performance', desc: 'Optimizing accessibility, speed, and search visibility for high rankings.' },
@@ -2828,7 +2834,7 @@ function renderCube(p) {
   ];
   const serviceCards = servicesData.map(s => `
     <div class="service">
-      <div class="service-icon"><i class="${s.icon}"></i></div>
+      <div class="service-icon"><i class="${tplEsc(s.icon || 'fa-solid fa-code')}"></i></div>
       <h2>${tplEsc(s.title)}</h2>
       <p>${tplEsc(s.desc)}</p>
     </div>
@@ -2839,7 +2845,7 @@ function renderCube(p) {
     { title: 'Interactive Portfolio', desc: 'Personal branding portal showcasing skills, works, and instant contact workflows.', tags: ['JavaScript', 'HTML5', 'Swiper'] },
     { title: 'Cloud API Service', desc: 'High-availability backend service with RESTful endpoints and optimized data pipelines.', tags: ['Node.js', 'Express', 'Database'] }
   ];
-  const projectCards = projectsData.slice(0, 6).map((pr) => {
+  const projectCards = projectsData.map((pr) => {
     const iconClass = (pr.title.toLowerCase().includes('design') || pr.title.toLowerCase().includes('ui'))
       ? 'fa-solid fa-palette'
       : (pr.title.toLowerCase().includes('mobile') || pr.title.toLowerCase().includes('app'))
@@ -3005,7 +3011,10 @@ function initCubeRuntime(p) {
           shadowOffset: 20,
           shadowScale: 0.94,
         },
-        mousewheel: true,
+        mousewheel: {
+          releaseOnEdges: true,
+          sensitivity: 0.8,
+        },
         speed: 800
       });
       window.cubeSwiper.on('slideChange', function () {

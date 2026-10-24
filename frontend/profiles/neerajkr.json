@@ -1,1 +1,159 @@
-{"available": true, "email": "neerajkr101010@gmail.com", "github": "https://github.com/neeraj-k-r", "linkedin": "https://www.linkedin.com/in/neeraj--k-r", "location": "Kerala, India", "name": "Neeraj K R", "phone": "+91 9446962841", "projects": [{"desc": "College campus collaboration platform — resources, events, student network. Most starred + forked.", "stars": "★ 2 · 2 forks", "tags": ["JavaScript", "Full-Stack"], "title": "CampusBridge", "url": "https://github.com/neeraj-k-r/campusbridge", "technologies": ["JavaScript", "Full-Stack"]}, {"desc": "Citizen-service helper inspired by Kerala Akshaya centres — simpler access to services and info.", "stars": "★ 2", "tags": ["JavaScript", "Social Impact"], "title": "AKSHAYA-SAHAYI", "url": "https://github.com/neeraj-k-r/AKSHAYA-SAHAYI", "technologies": ["JavaScript", "Social Impact"]}, {"desc": "AI mock-interview coach on IBM Cloud — agentic Q&A, feedback scoring, role-wise practice.", "stars": "★ 1 · IBM Cloud", "tags": ["AI Agents", "JavaScript"], "title": "Agentic AI Interview Trainer", "url": "https://github.com/neeraj-k-r/Agentic-AI-Interview-Trainer", "technologies": ["AI Agents", "JavaScript"]}, {"desc": "Sales CRM dashboard in TypeScript — lead tracking, filters, analytics views.", "stars": "★ 1", "tags": ["TypeScript", "Dashboard"], "title": "Smart Leads Dashboard", "url": "https://github.com/neeraj-k-r/smart-leads-dashboard", "technologies": ["TypeScript", "Dashboard"]}, {"desc": "Developer helper tool — fix, format and ship cleaner code faster.", "stars": "★ 1", "tags": ["JavaScript", "DevTools"], "title": "KODEFIX", "url": "https://github.com/neeraj-k-r/KODEFIX", "technologies": ["JavaScript", "DevTools"]}, {"desc": "Sample AI support agent for WhatsApp — auto-replies, intent routing, business-ready automation.", "stars": "★ 1", "tags": ["WhatsApp API", "AI"], "title": "WhatsApp Support Agent", "url": "https://github.com/neeraj-k-r/whatsapp-support-agent", "technologies": ["WhatsApp API", "AI"]}, {"desc": "DBMS-powered hostel ops — student records, room allocation, staff management with real schema and CRUD flows.", "stars": "JavaScript · DBMS", "tags": ["JavaScript", "SQL", "CRUD"], "title": "Hostel Management System", "url": "https://github.com/neeraj-k-r/hostel-mgmt", "technologies": ["JavaScript", "SQL", "CRUD"]}, {"desc": "Health assistant concept in TypeScript — symptom guidance and wellness UX.", "stars": "TypeScript", "tags": ["TypeScript", "HealthTech", "AI"], "title": "HealthAI", "url": "https://github.com/neeraj-k-r/healthai", "technologies": ["TypeScript", "HealthTech", "AI"]}, {"desc": "Multiplayer Monopoly-style board game in JS — dice, trading, game-state logic.", "stars": "JavaScript", "tags": ["JavaScript", "Game Dev"], "title": "MONOPOLYYYY", "url": "https://github.com/neeraj-k-r/MONOPOLYYYY", "technologies": ["JavaScript", "Game Dev"]}, {"desc": "TypeScript web build — experiments with modern UI and tooling.", "stars": "TypeScript", "tags": ["TypeScript", "Web App"], "title": "VELICHAM-THARAM", "url": "https://github.com/neeraj-k-r/VELICHAM-THARAM", "technologies": ["TypeScript", "Web App"]}, {"desc": "TypeScript project — ideas, prototypes and frontend explorations.", "stars": "TypeScript", "tags": ["TypeScript", "Web App"], "title": "naatukavala", "url": "https://github.com/neeraj-k-r/naatukavala", "technologies": ["TypeScript", "Web App"]}, {"desc": "Fork from TinkerHub — hackathon-style fun build, utensils of useless ideas.", "stars": "Fork · Hackathon", "tags": ["TypeScript", "Fork"], "title": "useless_project_temp", "url": "https://github.com/neeraj-k-r/useless_project_temp", "technologies": ["TypeScript"]}, {"desc": "Personal site source — the code behind my GitHub Pages presence.", "stars": "Portfolio", "tags": ["Web", "GitHub Pages"], "title": "neeraj-k-r.github.io", "url": "https://github.com/neeraj-k-r/neeraj-k-r.github.io", "technologies": ["Web", "GitHub Pages"]}], "skills": ["React", "TypeScript", "JavaScript", "Node.js", "AI Agents", "MongoDB / SQL"], "tagline": "I build web apps & AI that wow. From CampusBridge to IBM Cloud interview agents — 13 repos and counting.", "template": "midnight", "title": "Full-Stack Developer & AI Engineer", "username": "neerajkr", "avatarUrl": "https://avatars.githubusercontent.com/u/183535209?v=4"}
+{
+  "name": "Neeraj K R",
+  "title": "Full-Stack Developer & AI Engineer",
+  "tagline": "I build web apps & AI that wow. From CampusBridge to IBM Cloud interview agents — 15 repos and counting.",
+  "email": "neerajkr101010@gmail.com",
+  "phone": "+91 9446962841",
+  "location": "Kerala, India",
+  "github": "https://github.com/neeraj-k-r",
+  "linkedin": "https://www.linkedin.com/in/neeraj--k-r",
+  "available": true,
+  "template": "midnight",
+  "username": "neerajkr",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/183535209?v=4",
+  "skills": ["React", "TypeScript", "JavaScript", "Node.js", "AI Agents", "MongoDB / SQL"],
+  "services": [
+    {
+      "title": "Full-Stack Web Development",
+      "desc": "Architecting and engineering responsive, high-performance web applications using React, TypeScript, and modern ecosystems.",
+      "icon": "fa-solid fa-code"
+    },
+    {
+      "title": "AI & Agentic Systems",
+      "desc": "Building custom AI interviewers, autonomous bots, and intelligent workflow automations leveraging LLMs and cloud APIs.",
+      "icon": "fa-solid fa-robot"
+    },
+    {
+      "title": "Backend & Database Architecture",
+      "desc": "Designing resilient RESTful services, database schemas (SQL & NoSQL), and secure serverless microservice architectures.",
+      "icon": "fa-solid fa-database"
+    },
+    {
+      "title": "Cloud & Edge Deployment",
+      "desc": "Deploying scalable global platforms on Cloudflare Workers, IBM Cloud, Docker, and streamlined CI/CD pipelines.",
+      "icon": "fa-solid fa-cloud"
+    }
+  ],
+  "projects": [
+    {
+      "title": "portfoolio",
+      "desc": "Ultra-fast, beautiful developer portfolio generator and wildcard subdomain hosting platform.",
+      "url": "https://github.com/neeraj-k-r/portfoolio",
+      "stars": "★ 1",
+      "tags": ["JavaScript", "Full-Stack", "Cloudflare"],
+      "technologies": ["JavaScript", "Cloudflare Workers", "HTML5", "CSS3"]
+    },
+    {
+      "title": "CampusBridge",
+      "desc": "College campus collaboration platform — resources, events, student network. Most starred + forked.",
+      "url": "https://github.com/neeraj-k-r/campusbridge",
+      "stars": "★ 2 · 2 forks",
+      "tags": ["JavaScript", "Full-Stack"],
+      "technologies": ["JavaScript", "Full-Stack"]
+    },
+    {
+      "title": "AKSHAYA-SAHAYI",
+      "desc": "Citizen-service helper inspired by Kerala Akshaya centres — simpler access to services and info.",
+      "url": "https://github.com/neeraj-k-r/AKSHAYA-SAHAYI",
+      "stars": "★ 2",
+      "tags": ["JavaScript", "Social Impact"],
+      "technologies": ["JavaScript", "Social Impact"]
+    },
+    {
+      "title": "Agentic AI Interview Trainer",
+      "desc": "AI mock-interview coach on IBM Cloud — agentic Q&A, feedback scoring, role-wise practice.",
+      "url": "https://github.com/neeraj-k-r/Agentic-AI-Interview-Trainer",
+      "stars": "★ 1 · IBM Cloud",
+      "tags": ["AI Agents", "JavaScript"],
+      "technologies": ["AI Agents", "JavaScript"]
+    },
+    {
+      "title": "Smart Leads Dashboard",
+      "desc": "Sales CRM dashboard in TypeScript — lead tracking, filters, analytics views.",
+      "url": "https://github.com/neeraj-k-r/smart-leads-dashboard",
+      "stars": "★ 1",
+      "tags": ["TypeScript", "Dashboard"],
+      "technologies": ["TypeScript", "Dashboard"]
+    },
+    {
+      "title": "KODEFIX",
+      "desc": "Developer helper tool — fix, format and ship cleaner code faster.",
+      "url": "https://github.com/neeraj-k-r/KODEFIX",
+      "stars": "★ 1",
+      "tags": ["JavaScript", "DevTools"],
+      "technologies": ["JavaScript", "DevTools"]
+    },
+    {
+      "title": "WhatsApp Support Agent",
+      "desc": "Sample AI support agent for WhatsApp — auto-replies, intent routing, business-ready automation.",
+      "url": "https://github.com/neeraj-k-r/whatsapp-support-agent",
+      "stars": "★ 1",
+      "tags": ["WhatsApp API", "AI"],
+      "technologies": ["WhatsApp API", "AI"]
+    },
+    {
+      "title": "Hostel Management System",
+      "desc": "DBMS-powered hostel ops — student records, room allocation, staff management with real schema and CRUD flows.",
+      "url": "https://github.com/neeraj-k-r/hostel-mgmt",
+      "stars": "JavaScript · DBMS",
+      "tags": ["JavaScript", "SQL", "CRUD"],
+      "technologies": ["JavaScript", "SQL", "CRUD"]
+    },
+    {
+      "title": "HealthAI",
+      "desc": "Health assistant concept in TypeScript — symptom guidance and wellness UX.",
+      "url": "https://github.com/neeraj-k-r/healthai",
+      "stars": "TypeScript",
+      "tags": ["TypeScript", "HealthTech", "AI"],
+      "technologies": ["TypeScript", "HealthTech", "AI"]
+    },
+    {
+      "title": "MONOPOLYYYY",
+      "desc": "Multiplayer Monopoly-style board game in JS — dice, trading, game-state logic.",
+      "url": "https://github.com/neeraj-k-r/MONOPOLYYYY",
+      "stars": "JavaScript",
+      "tags": ["JavaScript", "Game Dev"],
+      "technologies": ["JavaScript", "Game Dev"]
+    },
+    {
+      "title": "VELICHAM-THARAM",
+      "desc": "TypeScript web build — experiments with modern UI and tooling.",
+      "url": "https://github.com/neeraj-k-r/VELICHAM-THARAM",
+      "stars": "TypeScript",
+      "tags": ["TypeScript", "Web App"],
+      "technologies": ["TypeScript", "Web App"]
+    },
+    {
+      "title": "naatukavala",
+      "desc": "TypeScript project — ideas, prototypes and frontend explorations.",
+      "url": "https://github.com/neeraj-k-r/naatukavala",
+      "stars": "TypeScript",
+      "tags": ["TypeScript", "Web App"],
+      "technologies": ["TypeScript", "Web App"]
+    },
+    {
+      "title": "useless_project_temp",
+      "desc": "Fork from TinkerHub — hackathon-style fun build, utensils of useless ideas.",
+      "url": "https://github.com/neeraj-k-r/useless_project_temp",
+      "stars": "Fork · Hackathon",
+      "tags": ["TypeScript", "Fork"],
+      "technologies": ["TypeScript"]
+    },
+    {
+      "title": "neeraj-k-r.github.io",
+      "desc": "Personal site source — the code behind my GitHub Pages presence.",
+      "url": "https://github.com/neeraj-k-r/neeraj-k-r.github.io",
+      "stars": "Portfolio",
+      "tags": ["Web", "GitHub Pages"],
+      "technologies": ["Web", "GitHub Pages"]
+    },
+    {
+      "title": "neeraj-k-r",
+      "desc": "Special GitHub profile repository containing personal README showcase and developer bio.",
+      "url": "https://github.com/neeraj-k-r/neeraj-k-r",
+      "stars": "Config",
+      "tags": ["Markdown", "Profile"],
+      "technologies": ["Markdown"]
+    }
+  ]
+}

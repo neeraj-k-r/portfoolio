@@ -86,6 +86,9 @@ function normLocalProfile(p) {
   if (p.avatarUrl && !p.avatar_url) p.avatar_url = p.avatarUrl || '';
   if (typeof p.show_instagram === 'boolean' && typeof p.showInstagram === 'undefined') p.showInstagram = p.show_instagram;
   if (typeof p.showInstagram === 'boolean' && typeof p.show_instagram === 'undefined') p.show_instagram = p.showInstagram;
+  if (p.resume && typeof p.resume === 'object' && Array.isArray(p.resume.services) && (!p.services || !p.services.length)) {
+    p.services = p.resume.services;
+  }
   return p;
 }
 function showInsta(p) {
@@ -97,21 +100,54 @@ function showInsta(p) {
 }
 async function loadProfile(username) {
   const u = username.toLowerCase();
+  let seed = null;
+  try {
+    const r = await fetch(`profiles/${encodeURIComponent(u)}.json`, { cache: 'no-store' });
+    if (r.ok) seed = await r.json();
+  } catch {}
+
   // 1. cloud (Supabase) — live on every device, when owner connects it
   try {
     if (typeof cloudEnabled === 'function' && cloudEnabled()) {
-      const c = await cloudGetProfile(u);
-      if (c) return normLocalProfile(c);
+      let c = await cloudGetProfile(u);
+      if (c) {
+        c = normLocalProfile(c);
+        if (seed) {
+          if ((!c.services || !c.services.length) && Array.isArray(seed.services) && seed.services.length) {
+            c.services = seed.services;
+            if (c.resume && typeof c.resume === 'object') c.resume.services = seed.services;
+          }
+          if (Array.isArray(seed.projects) && seed.projects.length) {
+            const normUrl = (url) => String(url || '').toLowerCase().replace(/^https?:\/\/(www\.)?github\.com\//, '').replace(/\/$/, '');
+            const have = new Set((c.projects || []).map(p => normUrl(p.url)));
+            const haveTitles = new Set((c.projects || []).map(p => String(p.title || '').toLowerCase().trim()));
+            if (!Array.isArray(c.projects)) c.projects = [];
+            for (const sp of seed.projects) {
+              const uKey = normUrl(sp.url);
+              const tKey = String(sp.title || '').toLowerCase().trim();
+              if (!have.has(uKey) && !haveTitles.has(tKey)) {
+                c.projects.push(sp);
+                have.add(uKey);
+                haveTitles.add(tKey);
+              }
+            }
+          }
+        }
+        return c;
+      }
     }
   } catch {}
   // 2. localStorage (user-created, this browser)
   const local = store.get(u);
-  if (local) return normLocalProfile(local);
-  // 2. seed JSON files
-  try {
-    const r = await fetch(`profiles/${encodeURIComponent(u)}.json`, { cache: 'no-store' });
-    if (r.ok) return normLocalProfile(await r.json());
-  } catch {}
+  if (local) {
+    const lp = normLocalProfile(local);
+    if (seed && (!lp.services || !lp.services.length) && Array.isArray(seed.services) && seed.services.length) {
+      lp.services = seed.services;
+    }
+    return lp;
+  }
+  // 3. seed JSON files
+  if (seed) return normLocalProfile(seed);
   return null;
 }
 
