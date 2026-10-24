@@ -1732,7 +1732,35 @@ function renderUltracode(p) {
   const footerGithub = p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-github-alt"></i></a>` : '';
   const footerLinkedin = p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-linkedin-alt"></i></a>` : '';
   const footerInstagram = tplShowInsta(p) ? `<a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-instagram"></i></a>` : '';
-  const footerTwitter = p.twitter ? `<a href="${tplEsc(p.twitter)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-twitter"></i></a>` : '';
+  const userServices = (Array.isArray(p.services) && p.services.length)
+    ? p.services
+    : (p.resume && Array.isArray(p.resume.services) && p.resume.services.length)
+    ? p.resume.services
+    : null;
+
+  const hasServices = Boolean(userServices && userServices.length);
+  const servicesHtml = hasServices ? userServices.map(s => `
+    <div class="services-content">
+      <div>
+        <i class="${tplEsc(s.icon || 'uil uil-code-branch')} services-icon"></i>
+        <h3 class="services-title">${tplEsc(s.title || 'Service')}</h3>
+      </div>
+      <p class="services-modal-description" style="margin-top:12px;font-size:0.92rem;color:var(--text-color);line-height:1.6">${tplEsc(s.desc || '')}</p>
+    </div>
+  `).join('') : '';
+
+  const servicesSection = hasServices ? `
+    <!-- Services Section -->
+    <section class="services section" id="services">
+      <h2 class="section-title" data-heading="Services">What I Offer</h2>
+      <div class="services-container container grid">
+        ${servicesHtml}
+      </div>
+    </section>
+  ` : '';
+
+  const servicesNavLink = hasServices ? `<li class="nav-item"><a href="#services" class="nav-link">Services</a></li>` : '';
+  const servicesFooterLink = hasServices ? `<li><a href="#services">Services</a></li>` : '';
 
   const app = document.getElementById('app');
   app.innerHTML = `
@@ -1756,7 +1784,7 @@ function renderUltracode(p) {
               <li class="nav-item"><a href="#qualification" class="nav-link">Qualifications</a></li>
               <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
               <li class="nav-item"><a href="#work" class="nav-link">Work</a></li>
-              <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+              ${servicesNavLink}
               <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
           </div>
@@ -1976,123 +2004,7 @@ function renderUltracode(p) {
         </div>
       </div>
 
-      <!-- Services Section -->
-      <section class="services section" id="services">
-        <h2 class="section-title" data-heading="Services">What I Offer</h2>
-
-        <div class="services-container container grid">
-          <!-- Web Development Service -->
-          <div class="services-content">
-            <div>
-              <i class="uil uil-web-grid services-icon"></i>
-              <h3 class="services-title">Web <br> Development</h3>
-            </div>
-            <span class="services-button">
-              View More <i class="uil uil-arrow-right services-button-icon"></i>
-            </span>
-
-            <div class="services-modal">
-              <div class="services-modal-content">
-                <i class="uil uil-times services-modal-close"></i>
-                <h3 class="services-modal-title">Web Development</h3>
-                <p class="services-modal-description">Professional full-stack web applications delivering high performance, responsive layout, and modern architecture.</p>
-                <ul class="services-modal-services grid">
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">Responsive & Adaptive Web Architecture</p>
-                  </li>
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">Modern Single Page & Server-Rendered Applications</p>
-                  </li>
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">RESTful API Design & Third-party Integrations</p>
-                  </li>
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">Performance & Search Engine Optimization</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- UI/UX Design Service -->
-          <div class="services-content">
-            <div>
-              <i class="uil uil-arrow services-icon"></i>
-              <h3 class="services-title">UI / UX <br> Architecture</h3>
-            </div>
-            <span class="services-button">
-              View More <i class="uil uil-arrow-right services-button-icon"></i>
-            </span>
-
-            <div class="services-modal">
-              <div class="services-modal-content">
-                <i class="uil uil-times services-modal-close"></i>
-                <h3 class="services-modal-title">UI / UX Architecture</h3>
-                <p class="services-modal-description">Intuitive, engaging user interface designs and interactive prototypes crafted for delightful experiences.</p>
-                <ul class="services-modal-services grid">
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">User Flow Analysis & Wireframing</p>
-                  </li>
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">Interactive High-Fidelity Prototyping</p>
-                  </li>
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">Design System & Component Token Creation</p>
-                  </li>
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">Accessibility & Multi-device Testing</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Systems & Cloud Service -->
-          <div class="services-content">
-            <div>
-              <i class="uil uil-edit services-icon"></i>
-              <h3 class="services-title">Backend & <br> Cloud Solutions</h3>
-            </div>
-            <span class="services-button">
-              View More <i class="uil uil-arrow-right services-button-icon"></i>
-            </span>
-
-            <div class="services-modal">
-              <div class="services-modal-content">
-                <i class="uil uil-times services-modal-close"></i>
-                <h3 class="services-modal-title">Backend & Cloud Solutions</h3>
-                <p class="services-modal-description">Scalable backend engines, database architecture, and automated cloud deployments.</p>
-                <ul class="services-modal-services grid">
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">Database Schema Modeling & Optimization</p>
-                  </li>
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">Serverless & Microservices Deployment</p>
-                  </li>
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">Authentication & Secure Data Storage</p>
-                  </li>
-                  <li class="services-modal-service">
-                    <i class="uil uil-check-circle services-modal-icon"></i>
-                    <p class="services-modal-info">Automated CI/CD Workflows</p>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      ${servicesSection}
 
       <!-- Contact Section -->
       <section class="contact section" id="contact">
@@ -2171,7 +2083,7 @@ function renderUltracode(p) {
             </div>
 
             <ul class="footer-links">
-              <li><a href="#services">Services</a></li>
+              ${servicesFooterLink}
               <li><a href="#work">Work</a></li>
               <li><a href="#contact">Contact</a></li>
             </ul>
@@ -2824,21 +2736,36 @@ function renderCube(p) {
     ? p.resume.services
     : null;
 
-  const servicesData = userServices || [
-    { icon: 'fa-solid fa-pen-ruler', title: 'Web Design', desc: 'Crafting responsive, intuitive, and modern user interfaces with attention to detail.' },
-    { icon: 'fa-solid fa-globe', title: 'Web Development', desc: 'Building fast, clean, and scalable web applications using modern web standards.' },
-    { icon: 'fa-solid fa-magnifying-glass', title: 'SEO & Performance', desc: 'Optimizing accessibility, speed, and search visibility for high rankings.' },
-    { icon: 'fa-solid fa-image', title: 'UI/UX Design', desc: 'Designing user-friendly prototypes, wireframes, and memorable visual identities.' },
-    { icon: 'fa-solid fa-mobile-screen-button', title: 'Responsive Apps', desc: 'Ensuring seamless cross-device compatibility across desktop, tablet, and mobile.' },
-    { icon: 'fa-solid fa-database', title: 'Backend & APIs', desc: 'Developing secure, reliable APIs and database architectures to power modern platforms.' }
-  ];
-  const serviceCards = servicesData.map(s => `
+  const hasServices = Boolean(userServices && userServices.length);
+  const serviceCards = hasServices ? userServices.map(s => `
     <div class="service">
       <div class="service-icon"><i class="${tplEsc(s.icon || 'fa-solid fa-code')}"></i></div>
       <h2>${tplEsc(s.title)}</h2>
       <p>${tplEsc(s.desc)}</p>
     </div>
-  `).join('');
+  `).join('') : '';
+
+  const servicesSlideHtml = hasServices ? `
+    <!-- Slide: Services -->
+    <div class="swiper-slide services">
+      <h1 class="heading">Services</h1>
+      ${serviceCards}
+    </div>
+  ` : '';
+
+  const homeIdx = 0;
+  const aboutIdx = 1;
+  const servicesIdx = hasServices ? 2 : -1;
+  const galleryIdx = hasServices ? 3 : 2;
+  const contactIdx = hasServices ? 4 : 3;
+
+  const navLinks = [
+    `<li onclick="window.cubeNavigate(${homeIdx})" class="activeLink" data-slide="${homeIdx}"><i class="fa-solid fa-house"></i><p>Home</p></li>`,
+    `<li onclick="window.cubeNavigate(${aboutIdx})" data-slide="${aboutIdx}"><i class="fa-solid fa-user"></i><p>About Me</p></li>`,
+    hasServices ? `<li onclick="window.cubeNavigate(${servicesIdx})" data-slide="${servicesIdx}"><i class="fa-solid fa-list"></i><p>Services</p></li>` : '',
+    `<li onclick="window.cubeNavigate(${galleryIdx})" data-slide="${galleryIdx}"><i class="fa-solid fa-images"></i><p>Gallery</p></li>`,
+    `<li onclick="window.cubeNavigate(${contactIdx})" data-slide="${contactIdx}"><i class="fa-solid fa-comments"></i><p>Contact Me</p></li>`
+  ].filter(Boolean).join('');
 
   const allProjects = Array.isArray(p.projects) ? p.projects : [];
   const selectedProjects = allProjects.filter(pr => pr.selected !== false && !pr.hidden);
@@ -2879,11 +2806,7 @@ function renderCube(p) {
           <a class="cube-logo" href="/"><span class="cube-dot"></span><span>PORTFOOLIO</span></a>
         </div>
         <ul class="Links">
-          <li onclick="window.cubeNavigate(0)" class="activeLink" data-slide="0"><i class="fa-solid fa-house"></i><p>Home</p></li>
-          <li onclick="window.cubeNavigate(1)" data-slide="1"><i class="fa-solid fa-user"></i><p>About Me</p></li>
-          <li onclick="window.cubeNavigate(2)" data-slide="2"><i class="fa-solid fa-list"></i><p>Services</p></li>
-          <li onclick="window.cubeNavigate(3)" data-slide="3"><i class="fa-solid fa-images"></i><p>Gallery</p></li>
-          <li onclick="window.cubeNavigate(4)" data-slide="4"><i class="fa-solid fa-comments"></i><p>Contact Me</p></li>
+          ${navLinks}
         </ul>
         <div class="cube-aside-foot">
           <span>${username}.portfoolio.me</span>
@@ -2900,7 +2823,7 @@ function renderCube(p) {
               <p class="heroline">${bio}</p>
               <div class="buttonGroup">
                 ${email ? `<a class="cube-btn" href="mailto:${email}">Hire Me</a>` : ''}
-                <button class="cube-btn secondary" onclick="window.cubeNavigate(4)">Contact Me</button>
+                <button class="cube-btn secondary" onclick="window.cubeNavigate(${contactIdx})">Contact Me</button>
               </div>
             </div>
             <div class="SideImg">
@@ -2935,7 +2858,7 @@ function renderCube(p) {
                   <li><span>Platform:</span> portfoolio.me</li>
                   <div class="buttonGroup">
                     ${email ? `<a class="cube-btn" href="mailto:${email}">Hire Me</a>` : ''}
-                    <button class="cube-btn secondary" onclick="window.cubeNavigate(4)">Contact Me</button>
+                    <button class="cube-btn secondary" onclick="window.cubeNavigate(${contactIdx})">Contact Me</button>
                   </div>
                 </div>
 
@@ -2946,19 +2869,15 @@ function renderCube(p) {
             </div>
           </div>
 
-          <!-- Slide 2: Services -->
-          <div class="swiper-slide services">
-            <h1 class="heading">Services</h1>
-            ${serviceCards}
-          </div>
+          ${servicesSlideHtml}
 
-          <!-- Slide 3: Gallery -->
+          <!-- Slide: Gallery -->
           <div class="swiper-slide gallery">
             <h1 class="heading">Gallery</h1>
             ${projectCards}
           </div>
 
-          <!-- Slide 4: Contact Me -->
+          <!-- Slide: Contact Me -->
           <div class="swiper-slide contactMe">
             <h1 class="heading">Contact Me</h1>
             <div class="contact-info-list">
