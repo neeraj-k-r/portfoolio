@@ -166,5 +166,388 @@ ${o.bare ? '' : `<div class="no-print" style="text-align:center;padding:0 0 40px
 </body></html>`;
   }
 
-  return { THEMES, get, expOf, eduOf, certOf, resumeURL, docBody, sectionHTML, fullDoc, esc };
+  // ============================================================
+  // ATS SCORE ANALYZER — evaluates resume against ATS criteria
+  // ============================================================
+  const atsKeywordWeights = {
+    // High-weight core skills (appear in most job descriptions)
+    'javascript': 8, 'typescript': 8, 'python': 8, 'java': 8, 'c++': 7, 'c#': 7, 'go': 7, 'ruby': 7,
+    'react': 9, 'node.js': 8, 'next.js': 7, 'angular': 7, 'vue.js': 6, 'html': 8, 'css': 8,
+    'sql': 8, 'aws': 8, 'docker': 7, 'kubernetes': 9, 'git': 8, 'github': 7,
+
+    // Middle-weight specialized skills
+    'machine learning': 6, 'ai': 6, 'data structures': 7, 'algorithms': 7,
+    'microservices': 6, 'ci/cd': 6, 'rest api': 6, 'graphql': 6,
+    'tensorflow': 5, 'pytorch': 5, 'redis': 5, 'postgresql': 5, 'mongodb': 5,
+
+    // Foundational
+    'linux': 5, 'ubuntu': 4, 'windows': 4, 'macos': 4,
+    'agile': 6, 'scrum': 5, 'project management': 5,
+  };
+
+  function computeATSScore(p) {
+    const r = get(p);
+    const theme = r.theme;
+    const summary = r.summary || (p.tagline || '').trim();
+    const exps = expOf(p);
+    const edus = eduOf(p);
+    const certs = certOf(p);
+    const skills = (p.skills || []).filter(Boolean);
+    const { hard, soft } = splitSkills(skills);
+    const projs = (p.projects || []).slice(0, 6);
+
+    let score = 0;
+    const maxScore = 100;
+    const feedback = {
+      sections: [],
+      formatting: [],
+      keywords: [],
+      suggestions: []
+    };
+
+    // 1. Section presence (30 points max)
+    let sectionScore = 0;
+    const hasContact = !!(p.email || p.phone || p.location);
+    const hasSummary = !!summary;
+    const hasExperience = exps.length > 0;
+    const hasEducation = edus.length > 0;
+    const hasSkills = skills.length > 0;
+
+    // Contact section
+    if (hasContact) { sectionScore += 6; feedback.sections.push({ name: 'Contact Info', present: true, score: 6 }); }
+    else { feedback.sections.push({ name: 'Contact Info', present: false, score: 0, suggestion: 'Add email, phone, or location' }); }
+
+    // Professional Summary
+    if (hasSummary) { sectionScore += 8; feedback.sections.push({ name: 'Professional Summary', present: true, score: 8 }); }
+    else { feedback.sections.push({ name: 'Professional Summary', present: false, score: 0, suggestion: 'Add 2-3 line summary of your experience and goals' }); }
+
+    // Experience
+    if (hasExperience) { sectionScore += 10; feedback.sections.push({ name: 'Experience', present: true, score: 10 }); }
+    else { feedback.sections.push({ name: 'Experience', present: false, score: 0, suggestion: 'Add work experience roles with company, dates, and achievements' }); }
+
+    // Education
+    if (hasEducation) { sectionScore += 4; feedback.sections.push({ name: 'Education', present: true, score: 4 }); }
+    else { feedback.sections.push({ name: 'Education', present: false, score: 0, suggestion: 'Add education background (school, degree, field)' }); }
+
+    // Skills
+    if (hasSkills) { sectionScore += 6; feedback.sections.push({ name: 'Skills Section', present: true, score: 6 }); }
+    else { feedback.sections.push({ name: 'Skills Section', present: false, score: 0, suggestion: 'Add technical and soft skills' }); }
+
+    score += sectionScore;
+    feedback.sections.forEach(s => { if (!s.present) feedback.suggestions.push(`Add ${s.suggestion}`); });
+
+    // 2. Formatting checks (20 points max)
+    let formattingScore = 0;
+
+    // Single-column layout (ATS-friendly)
+    formattingScore += 5;
+    feedback.formatting.push({ name: 'Single-column layout', present: true, score: 5, note: 'ATS-friendly: print output normalizes to single column' });
+
+    // Standard section headings
+    formattingScore += 5;
+    feedback.formatting.push({ name: 'Standard section headings', present: true, score: 5, note: 'h2 headings used for all major sections' });
+
+    // No tables/graphics for layout
+    formattingScore += 5;
+    feedback.formatting.push({ name: 'No tables/graphics for layout', present: true, score: 5, note: 'Resume built as pure text/HTML, no layout tables' });
+
+    // Readable system fonts
+    formattingScore += 5;
+    feedback.formatting.push({ name: 'Readable system fonts', present: true, score: 5, note: 'Print CSS uses system fonts, ATS-parsable' });
+
+    score += formattingScore;
+
+    // 3. Keyword match (35 points max)
+    let keywordScore = 0;
+    let foundKeywords = [];
+    let missingKeywords = [];
+
+    // Build a set of user's skills (lowercased)
+    const userSkillsSet = new Set();
+    skills.forEach(s => userSkillsSet.add(String(s).trim().toLowerCase()));
+    hard.forEach(s => userSkillsSet.add(String(s).trim().toLowerCase()));
+    soft.forEach(s => userSkillsSet.add(String(s).trim().toLowerCase()));
+
+    // Also check project technologies
+    const projTechs = new Set();
+    projs.forEach(pr => {
+      const t = techsOf(pr);
+      t.forEach(tt => projTechs.add(String(tt).trim().toLowerCase()));
+    });
+    projTechs.forEach(t => userSkillsSet.add(t));
+
+    // Check each weighted keyword
+    Object.entries(atsKeywordWeights).forEach(([keyword, weight]) => {
+      const lower = keyword.toLowerCase();
+      if (userSkillsSet.has(lower)) {
+        keywordScore += weight;
+        foundKeywords.push({ name: keyword, weight });
+      } else {
+        missingKeywords.push({ name: keyword, weight });
+      }
+    });
+
+    // Normalize keyword score to max 35
+    keywordScore = Math.min(35, keywordScore);
+    score += keywordScore;
+
+    // Record keyword feedback
+    if (foundKeywords.length > 0) {
+      feedback.keywords.push({ type: 'found', count: foundKeywords.length, message: `Found ${foundKeywords.length} relevant tech skills` });
+      const topFound = foundKeywords.sort((a, b) => b.weight - a.weight).slice(0, 5);
+      topFound.forEach(kw => {
+        feedback.keywords.push({ name: kw.name, status: 'present', score: kw.weight });
+      });
+    }
+
+    if (missingKeywords.length > 0) {
+      const weightedMissing = missingKeywords.reduce((sum, kw) => sum + kw.weight, 0);
+      feedback.suggestions.push(`Consider adding these high-impact skills: ${missingKeywords.slice(0, 5).map(kw => kw.name).join(', ')} (potential +${Math.min(15, Math.ceil(weightedMissing / 2))} points if added)`);
+    }
+
+    // Normalize total score to 100
+    score = Math.min(100, score);
+
+    // Grade letter
+    let grade;
+    if (score >= 90) grade = 'A+';
+    else if (score >= 80) grade = 'A';
+    else if (score >= 70) grade = 'B';
+    else if (score >= 60) grade = 'C';
+    else if (score >= 50) grade = 'D';
+    else grade = 'F';
+
+    return {
+      score,
+      maxScore,
+      grade,
+      sectionScore,
+      formattingScore,
+      keywordScore,
+      foundKeywords,
+      missingKeywords,
+      feedback,
+      hasContact, hasSummary, hasExperience, hasEducation, hasSkills,
+      skillCount: skills.length,
+      hardSkillCount: hard.length,
+      softSkillCount: soft.length,
+      projectCount: projs.length
+    };
+  }
+
+  function atsScoreClass(score) {
+    if (score >= 90) return 'ats-excellent';
+    if (score >= 80) return 'ats-good';
+    if (score >= 70) return 'ats-fair';
+    if (score >= 60) return 'ats-poor';
+    return 'ats-failing';
+  }
+
+  function atsGradeClass(grade) {
+    if (grade === 'A+' || grade === 'A') return 'ats-excellent';
+    if (grade === 'B') return 'ats-good';
+    if (grade === 'C') return 'ats-fair';
+    if (grade === 'D') return 'ats-poor';
+    return 'ats-failing';
+  }
+
+  // ============================================================
+  // SKILLS GAP ANALYSIS — compares user skills against common role requirements
+  // ============================================================
+  const roleSkillRequirements = {
+    'software engineer': {
+      title: 'Software Engineer',
+      core: ['javascript', 'python', 'java', 'c++', 'git', 'sql'],
+      desired: ['react', 'node.js', 'docker', 'kubernetes', 'aws', 'rest api'],
+      niceToHave: ['typescript', 'machine learning', 'graphql', 'microservices'],
+      weightCore: 4, weightDesired: 3, weightNice: 1
+    },
+    'senior software engineer': {
+      title: 'Senior Software Engineer',
+      core: ['javascript', 'system design', 'architecture', 'git', 'sql'],
+      desired: ['kubernetes', 'docker', 'aws/gcp/azure', 'terraform', 'ci/cd'],
+      niceToHave: ['machine learning', 'graphql', 'async messaging', 'performance optimization'],
+      weightCore: 5, weightDesired: 4, weightNice: 2
+    },
+    'frontend engineer': {
+      title: 'Frontend Engineer',
+      core: ['html', 'css', 'javascript', 'react', 'typescript'],
+      desired: ['redux', 'state management', 'testing', 'webpack', 'vite'],
+      niceToHave: ['graphql', 'progressive web apps', 'accessibility (a11y)'],
+      weightCore: 4, weightDesired: 3, weightNice: 1
+    },
+    'full stack engineer': {
+      title: 'Full Stack Engineer',
+      core: ['javascript', 'node.js', 'python', 'sql', 'git'],
+      desired: ['react', 'express', 'rest api', 'docker', 'aws'],
+      niceToHave: ['graphql', 'microservices', 'typescript', 'ci/cd'],
+      weightCore: 4, weightDesired: 3, weightNice: 1
+    },
+    'devops engineer': {
+      title: 'DevOps Engineer',
+      core: ['docker', 'kubernetes', 'aws', 'ci/cd', 'linux'],
+      desired: ['terraform', 'ansible', 'monitoring', 'microservices'],
+      niceToHave: ['helm', 'prometheus', 'grafana', 'infrastructure as code'],
+      weightCore: 5, weightDesired: 4, weightNice: 2
+    },
+    'data scientist': {
+      title: 'Data Scientist',
+      core: ['python', 'statistics', 'machine learning', 'data analysis'],
+      desired: ['pandas', 'numpy', 'scikit-learn', 'tensorflow', 'pytorch'],
+      niceToHave: ['sql', 'aws', 'gcp', 'docker', 'data visualization'],
+      weightCore: 5, weightDesired: 4, weightNice: 2
+    },
+    'product manager': {
+      title: 'Product Manager',
+      core: ['product strategy', 'roadmapping', 'analytics', 'stakeholder management'],
+      desired: ['jira', 'sql', 'A/B testing', 'user research', 'figma'],
+      niceToHave: ['sql', 'python', 'data analysis', 'market research'],
+      weightCore: 4, weightDesired: 3, weightNice: 1
+    }
+  };
+
+  function computeSkillsGap(p) {
+    const r = get(p);
+    const skills = (p.skills || []).filter(Boolean);
+    const { hard, soft } = splitSkills(skills);
+    const projs = (p.projects || []).slice(0, 6);
+
+    // Build user skill set (lowercased)
+    const userSkillsSet = new Set();
+    skills.forEach(s => userSkillsSet.add(String(s).trim().toLowerCase()));
+    hard.forEach(s => userSkillsSet.add(String(s).trim().toLowerCase()));
+    soft.forEach(s => userSkillsSet.add(String(s).trim().toLowerCase()));
+
+    // Also add project technologies
+    projs.forEach(pr => {
+      const t = techsOf(pr);
+      t.forEach(tt => userSkillsSet.add(String(tt).trim().toLowerCase()));
+    });
+
+    // Evaluate against each role
+    const roleResults = [];
+    const allMissing = [];
+
+    Object.entries(roleSkillRequirements).forEach(([roleKey, role]) => {
+      let score = 0;
+      let foundCore = 0, foundDesired = 0, foundNice = 0;
+      let missingCore = 0, missingDesired = 0, missingNice = 0;
+
+      // Check core skills
+      role.core.forEach(coreSkill => {
+        const lower = coreSkill.toLowerCase();
+        if (userSkillsSet.has(lower)) {
+          foundCore++;
+          score += role.weightCore;
+        } else {
+          missingCore++;
+          allMissing.push({ role: role.title, category: 'core', skill: coreSkill, weight: role.weightCore });
+        }
+      });
+
+      // Check desired skills
+      role.desired.forEach(desiredSkill => {
+        const lower = desiredSkill.toLowerCase();
+        if (userSkillsSet.has(lower)) {
+          foundDesired++;
+          score += role.weightDesired;
+        } else {
+          missingDesired++;
+          allMissing.push({ role: role.title, category: 'desired', skill: desiredSkill, weight: role.weightDesired });
+        }
+      });
+
+      // Check nice-to-have skills
+      role.niceToHave.forEach(niceSkill => {
+        const lower = niceSkill.toLowerCase();
+        if (userSkillsSet.has(lower)) {
+          foundNice++;
+          score += role.weightNice;
+        } else {
+          missingNice++;
+          allMissing.push({ role: role.title, category: 'nice', skill: niceSkill, weight: role.weightNice });
+        }
+      });
+
+      // Cap score at 100 and compute percentage
+      const maxPossible = role.core.length * role.weightCore + role.desired.length * role.weightDesired + role.niceToHave.length * role.weightNice;
+      const normalizedScore = Math.min(100, score);
+      const pct = Math.round((normalizedScore / Math.max(1, maxPossible)) * 100);
+
+      roleResults.push({
+        role: role.title,
+        core: { found: foundCore, total: role.core.length, missing: missingCore },
+        desired: { found: foundDesired, total: role.desired.length, missing: missingDesired },
+        nice: { found: foundNice, total: role.niceToHave.length, missing: missingNice },
+        score: normalizedScore,
+        maxScore: 100,
+        grade: normalizedScore >= 80 ? 'A' : normalizedScore >= 70 ? 'B' : normalizedScore >= 60 ? 'C' : 'D',
+        pct,
+        suggestions: []
+      });
+
+      // Generate suggestions for this role
+      const suggestions = [];
+      if (missingCore > 0) {
+        suggestions.push(`Priority: Add ${missingCore} core skill${missingCore > 1 ? 's' : ''} (${role.core.slice(0, missingCore).join(', ')})`);
+      }
+      if (missingDesired > 0) {
+        suggestions.push(`Recommended: Add ${missingDesired} desired skill${missingDesired > 1 ? 's' : ''} (${role.desired.slice(0, missingDesired).join(', ')})`);
+      }
+      if (missingNice > 0) {
+        suggestions.push(`Consider: Add ${missingNice} nice-to-have skill${missingNice > 1 ? 's' : ''} (${role.niceToHave.slice(0, missingNice).join(', ')})`);
+      }
+      if (suggestions.length === 0) {
+        suggestions.push('You meet most requirements for this role!');
+      }
+      roleResults[roleResults.length - 1].suggestions = suggestions;
+    });
+
+    // Sort missing skills by potential impact (highest weight first)
+    allMissing.sort((a, b) => b.weight - a.weight);
+
+    // Generate overall recommendations
+    const overallRecommendations = [];
+    const coreMissingCount = allMissing.filter(m => m.category === 'core').length;
+    const desiredMissingCount = allMissing.filter(m => m.category === 'desired').length;
+
+    if (coreMissingCount > 0) {
+      overallRecommendations.push(`Add ${coreMissingCount} core skill${coreMissingCount > 1 ? 's' : ''} for maximum impact`);
+    }
+    if (desiredMissingCount > 0) {
+      overallRecommendations.push(`Consider adding ${desiredMissingCount} desired skill${desiredMissingCount > 1 ? 's' : ''} for role flexibility`);
+    }
+
+    // Find the best matching role (highest score)
+    const bestRole = roleResults.reduce((best, current) => (current.score > best.score ? current : best), { role: '', score: -1 });
+
+    return {
+      roleResults,
+      allMissing,
+      overallRecommendations,
+      bestRole,
+      skillCount: skills.length,
+      hardSkillCount: hard.length,
+      softSkillCount: soft.length,
+      projectCount: projs.length
+    };
+  }
+
+  function skillsGapClass(score) {
+    if (score >= 80) return 'skills-gap-excellent';
+    if (score >= 70) return 'skills-gap-good';
+    if (score >= 60) return 'skills-gap-fair';
+    if (score >= 50) return 'skills-gap-poor';
+    return 'skills-gap-failing';
+  }
+
+  function skillsGapGrade(score) {
+    if (score >= 80) return 'A';
+    if (score >= 70) return 'B';
+    if (score >= 60) return 'C';
+    if (score >= 50) return 'D';
+    return 'F';
+  }
+
+  return { THEMES, get, expOf, eduOf, certOf, resumeURL, docBody, sectionHTML, fullDoc, esc, computeATSScore, atsScoreClass, atsGradeClass, computeSkillsGap, skillsGapClass, skillsGapGrade };
 })();

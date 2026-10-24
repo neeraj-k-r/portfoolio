@@ -611,11 +611,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           </div>
           <div class="full"><label class="flabel">Featured Project Live Demo URL (optional)</label><input id="inP1demo" placeholder="https://myapp.vercel.app"></div>
           </div>
+        </div><!-- /.form-grid -->
 
         <button class="btn btn-primary" type="submit" style="margin-top:14px"><i class="fa-solid fa-rocket"></i> Submit Portfolio & Claim Subdomain</button>
         <div class="success" id="successBox"></div>
       </form>
-    </div>
     </div><!-- /#subdomainWizardCard -->
 
     <!-- STATE B: claimed subdomain -> per-track studio (own tabs, shared panes below) -->
@@ -862,6 +862,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           </div>
           <div class="full"><label class="flabel">Live preview</label>
             <iframe id="rsPreview" title="resume preview" style="width:100%;height:380px;border:1px solid var(--stroke);border-radius:12px;background:#fff"></iframe>
+            <div id="rsAtsScore" style="display:none;margin:16px 0;padding:12px 16px;background:var(--bg-card);border:1px solid var(--stroke);border-radius:12px"></div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
               <button type="button" class="btn btn-primary btn-sm" id="rsSaveBtn"><i class="fa-solid fa-floppy-disk"></i> Save changes</button>
               <a class="btn btn-ghost btn-sm" id="rsViewBtn" target="_blank"><i class="fa-solid fa-eye"></i> Open full resume</a>
@@ -870,6 +871,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <p class="mono" style="font-size:11.5px;color:var(--muted);margin-top:8px">Hit <b>Save Changes</b> below to publish — your portfolio also gains a Resume section linking to this page.</p>
           </div>
         </div>
+        <div id="rsSkillsGap" style="display:none;margin:16px 0;padding:12px 16px;background:var(--bg-card);border:1px solid var(--stroke);border-radius:12px"></div>
       </div>
 
       <!-- User Studio Tab: Upload prebuilt site -->
@@ -2296,6 +2298,90 @@ function paintResumeTab() {
       prev.srcdoc = R.fullDoc(draft);
     }
   }
+
+  // ATS SCORE CARD — new feature
+  const atsScore = R ? R.computeATSScore(p) : null;
+  let atsHtml = '';
+  if (atsScore) {
+    const scoreClass = R.atsScoreClass(atsScore.score);
+    const gradeClass = R.atsGradeClass(atsScore.grade);
+    atsHtml = `
+    <div class="rs-ats-score-card" style="background:var(--bg-card);border:1px solid var(--stroke);border-radius:12px;padding:16px 20px;margin:16px 0;max-width:720px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span class="lx-kicker" style="font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)">ATS Score</span>
+          <span class="keybox" style="background:rgba(0,0,0,.5);color:#fff;padding:4px 8px;border-radius:6px;font-size:14px;font-weight:700">${atsScore.score}%</span>
+        </div>
+        <span class="${gradeClass}" style="font-size:12px;padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.1);color:#fff">${atsScore.grade}</span>
+      </div>
+      <div style="margin-top:10px;font-size:13px;color:var(--muted)">
+        <div style="margin-top:6px">
+          <span style="color:var(--muted);font-weight:700">Sections:</span> ${atsScore.sectionScore} pts
+        </div>
+        <div style="margin-top:6px">
+          <span style="color:var(--muted);font-weight:700">Formatting:</span> ${atsScore.formattingScore} pts
+        </div>
+        <div style="margin-top:6px">
+          <span style="color:var(--muted);font-weight:700">Keywords:</span> ${atsScore.keywordScore} pts
+        </div>
+      </div>
+      ${atsScore.feedback.suggestions.length > 0 ? `
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--stroke)">
+        <span style="color:var(--muted);font-weight:700;font-size:12px">Suggestions:</span>
+        <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.4">
+          ${atsScore.feedback.suggestions.slice(0, 5).map(s => `<li style="margin:2px 0">${s}</li>`).join('')}
+        </ul>
+      </div>` : ''}
+      ${atsScore.keywordScore > 0 ? `
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--stroke);margin-bottom:-10px">
+        <span style="color:var(--muted);font-weight:700;font-size:12px">Top found skills:</span>
+        <span style="color:var(--muted);font-size:12px;margin-left:8px">${atsScore.foundKeywords.slice(0, 5).map(k => `'${k.name}'`).join(', ') || 'None'}</span>
+      </div>` : ''}
+    </div>`;
+  }
+
+  // SKILLS GAP CARD — new feature
+  const gap = R ? R.computeSkillsGap(p) : null;
+  let gapHtml = '';
+  if (gap && gap.roleResults) {
+    const bestRole = gap.bestRole;
+    const gradeClass = gap.skillsGapClass(bestRole.score);
+    const gradeText = gap.skillsGapGrade(bestRole.score);
+    const topSkills = gap.allMissing.slice(0, 6).map(m => m.skill);
+    gapHtml = `
+    <div class="rs-skills-gap-card" style="background:var(--bg-card);border:1px solid var(--stroke);border-radius:12px;padding:16px 20px;margin:16px 0;max-width:720px">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:12px">
+        <div>
+          <span class="lx-kicker" style="font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)">Skills Gap</span>
+          <span class="keybox" style="background:rgba(0,0,0,.5);color:#fff;padding:4px 8px;border-radius:6px;font-size:14px;font-weight:700">${bestRole.score}%</span>
+        </div>
+        <span class="${gradeClass}" style="font-size:12px;padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.1);color: #fff">${gradeText}</span>
+      </div>
+      <div style="margin-top:10px;font-size:13px;color:var(--muted)">
+        <div style="margin-top:6px">
+          <span style="color:var(--muted);font-weight:700">Best Match:</span> ${bestRole.role || '—'}
+        </div>
+        <div style="margin-top:6px">
+          <span style="color:var(--muted);font-weight:700">Score:</span> ${bestRole.score}% (Grade: ${bestRole.grade})
+        </div>
+      </div>
+      <div style="margin-top:10px">
+        <span class="lx-kicker" style="font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)">Top Role Recommendations:</span>
+        <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.4">
+          ${gap.roleResults.slice(0, 3).map(r => `<li style="margin:2px 0"><b>${r.role}:</b> ${r.pct}% — ${r.suggestions[0] || 'No specific feedback'}</li>`).join('')}
+        </ul>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--stroke)">
+        <span class="lx-kicker" style="font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)">Skills to Focus On:</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">
+          ${topSkills.map(skill => `<span style="background:var(--bg);border:1px solid var(--stroke);border-radius:100px;padding:4px 8px;font-size:12px;color:var(--muted)">${skill.split(' ').map(w => w[0]).join('')}</span>`).join('')}
+        </div>
+      </div>
+    </div>`;
+  }
+  if ($('rsAtsScore')) $('rsAtsScore').innerHTML = atsHtml;
+  if ($('rsSkillsGap')) $('rsSkillsGap').innerHTML = gapHtml;
+
   const url = R ? R.resumeURL(p.username) : `/?u=${encodeURIComponent(p.username)}`;
   if ($('rsViewBtn')) $('rsViewBtn').href = url;
 }
