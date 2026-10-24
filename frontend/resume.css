@@ -92,8 +92,9 @@ body.rs-page.rs-terminal{background:#050805;color:#d1fae5}
 .rs-skills-gap-card.skills-gap-poor .keybox{background:rgba(239,68,68,.8);color:#fff}
 .rs-skills-gap-card.skills-gap-failing .keybox{background:rgba(185,28,28,.8);color:#fff}
 
-/* Print: hide ATS score card */
-@media print{.rs-ats-score-card{display:none !important}}
+/* Print: hide ATS score card and chrome */
+@media print{
+  .rs-ats-score-card, .rs-skills-gap-card{display:none !important}
   body{background:#fff !important}
   .no-print,nav,.bg-fx,.grid-overlay,#toast{display:none !important}
   .rs-doc{box-shadow:none !important;border:none !important;border-radius:0 !important;max-width:100% !important;margin:0 !important;padding:0 !important;background:#fff !important;color:#111 !important}
