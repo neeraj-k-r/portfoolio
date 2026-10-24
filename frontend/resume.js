@@ -8,6 +8,13 @@ window.PortfoolioResume = (() => {
     { id: 'modern', name: 'Modern', desc: 'Light card, soft + clean', emoji: '✨', best: 'General use' },
     { id: 'midnight', name: 'Midnight', desc: 'Dark neon, on-brand', emoji: '🌌', best: 'Match portfolio' },
     { id: 'terminal', name: 'Terminal', desc: 'Mono green, dev cred', emoji: '💻', best: 'Backend • OSS' },
+    // New themes inspired by TailorCV
+    { id: 'executive', name: 'Executive Edge', desc: 'Bold serif headers, premium feel', emoji: '🎩', best: 'Senior leaders, Directors, VPs' },
+    { id: 'creative', name: 'Creative Balance', desc: 'Gradient accents, playful yet professional', emoji: '🎨', best: 'Designers, Creative roles' },
+    { id: 'datasci', name: 'Data Analyst Pro', desc: 'Structured, metrics-focused layout', emoji: '📊', best: 'Data, Analytics, BI roles' },
+    { id: 'product', name: 'Product Manager Fit', desc: 'Outcome-oriented, stakeholder-ready', emoji: '📦', best: 'Product, Strategy, PM roles' },
+    { id: 'compact', name: 'Compact One-Page', desc: 'Dense, single-page optimized', emoji: '📃', best: '0–5 yrs experience, strict 1-page' },
+    { id: 'academic', name: 'LaTeX Academic', desc: 'Serif, publication-style, research-ready', emoji: '🎓', best: 'Academia, Research, PhD' },
   ];
   const VALID = new Set(THEMES.map((t) => t.id));
 

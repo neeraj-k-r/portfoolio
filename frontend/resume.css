@@ -50,11 +50,97 @@ body.rs-page.rs-terminal{background:#050805;color:#d1fae5}
 .rs-terminal .rs-p,.rs-terminal .rs-ul{font-size:13.5px}
 .rs-terminal a{color:#4ade80}
 
+/* Executive Edge — bold serif, premium feel */
+.rs-executive{background:#fff;color:#1a1a2e;border:1px solid #e8d5b7;box-shadow:0 20px 60px rgba(139,115,78,.15)}
+body.rs-page.rs-executive{background:#faf8f3}
+.rs-executive .rs-name{font-family:'Instrument Serif',Georgia,serif;font-size:36px;letter-spacing:-1.5px;color:#1a1a2e}
+.rs-executive .rs-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;color:#8b7355;font-size:18px}
+.rs-executive .rs-contact{color:#6b5b4a;font-family:Arial,Helvetica,sans-serif}
+.rs-executive .rs-sec-h{font-family:'Instrument Serif',Georgia,serif;color:#8b7355;border-bottom-color:#d4c4a8;letter-spacing:2px}
+.rs-executive .rs-sec-h::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:#8b7355;margin-right:10px;vertical-align:middle}
+.rs-executive .rs-item-top b{font-family:'Instrument Serif',Georgia,serif}
+.rs-executive a{color:#8b7355}
+.rs-executive .rs-foot{color:#9a8a7a}
+
+/* Creative Balance — gradient accents, playful yet professional */
+.rs-creative{background:linear-gradient(135deg,#fef3f7 0%,#fdf4ff 50%,#f0f9ff 100%);color:#1f1f3f;border:1px solid rgba(236,72,153,.2);box-shadow:0 20px 60px rgba(236,72,153,.08)}
+body.rs-page.rs-creative{background:linear-gradient(135deg,#fdf2f8,#ede9fe)}
+.rs-creative .rs-name{font-family:'Space Grotesk',sans-serif;font-size:36px;background:linear-gradient(135deg,#ec4899,#8b5cf6,#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-1px}
+.rs-creative .rs-title{color:#ec4899;font-weight:600}
+.rs-creative .rs-contact{color:#7c3aed}
+.rs-creative .rs-sec-h{background:linear-gradient(90deg,#ec4899,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent;border-bottom:3px solid;border-image:linear-gradient(90deg,#ec4899,#8b5cf6,#06b6d4) 1}
+.rs-creative .rs-item-top b{color:#1f1f3f}
+.rs-creative a{color:#8b5cf6}
+.rs-creative .rs-foot{color:#a855f7}
+
+/* Data Analyst Pro — structured, metrics-focused */
+.rs-datasci{background:#fff;color:#0f172a;border:1px solid #e2e8f0;box-shadow:0 10px 40px rgba(15,23,42,.08)}
+body.rs-page.rs-datasci{background:#f8fafc}
+.rs-datasci .rs-name{font-family:'JetBrains Mono',monospace;font-size:30px;letter-spacing:0;color:#0f172a}
+.rs-datasci .rs-title{font-family:'JetBrains Mono',monospace;font-size:14px;color:#3b82f6;font-weight:500}
+.rs-datasci .rs-contact{font-family:'JetBrains Mono',monospace;color:#64748b;font-size:12.5px}
+.rs-datasci .rs-sec-h{font-family:'JetBrains Mono',monospace;font-size:13px;color:#3b82f6;border-bottom:2px solid #3b82f6;letter-spacing:1px}
+.rs-datasci .rs-sec-h::after{content:'';display:inline-block;width:24px;height:2px;background:#3b82f6;margin-left:10px;vertical-align:middle}
+.rs-datasci .rs-item-top b{font-family:'JetBrains Mono',monospace;color:#1e293b}
+.rs-datasci .rs-dates{font-family:'JetBrains Mono',monospace;color:#3b82f6}
+.rs-datasci .rs-p,.rs-datasci .rs-ul{font-family:'Plus Jakarta Sans',sans-serif;color:#334155}
+.rs-datasci a{color:#3b82f6}
+.rs-datasci .rs-foot{color:#94a3b8}
+
+/* Product Manager Fit — outcome-oriented */
+.rs-product{background:#fff;color:#0f172a;border:1px solid #e2e8f0;box-shadow:0 15px 50px rgba(14,116,144,.1)}
+body.rs-page.rs-product{background:#f0f9ff}
+.rs-product .rs-name{font-family:'Space Grotesk',sans-serif;font-size:34px;letter-spacing:-1px;color:#0e7490}
+.rs-product .rs-title{color:#0891b2;font-weight:600}
+.rs-product .rs-contact{color:#0369a1}
+.rs-product .rs-sec-h{color:#0e7490;border-bottom-color:#06b6d4}
+.rs-product .rs-sec-h::before{content:'🎯';margin-right:8px}
+.rs-product .rs-item-top b{color:#0c4a6e}
+.rs-product .rs-dates{color:#0891b2}
+.rs-product a{color:#0e7490}
+.rs-product .rs-foot{color:#64748b}
+
+/* Compact One-Page — dense, single-page optimized */
+.rs-compact{background:#fff;color:#111;border:none;padding:24px 28px;max-width:860px}
+body.rs-page.rs-compact{background:#f5f5f5}
+.rs-compact .rs-name{font-family:Arial,Helvetica,sans-serif;font-size:26px;margin-bottom:2px}
+.rs-compact .rs-title{font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#333;margin:2px 0}
+.rs-compact .rs-contact{font-family:Arial,Helvetica,sans-serif;font-size:11px;color:#444;margin:4px 0}
+.rs-compact .rs-sec-h{font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:1px;margin:16px 0 6px;padding-bottom:3px;border-bottom:1px solid #111}
+.rs-compact .rs-item{margin:0 0 8px}
+.rs-compact .rs-item-top{font-size:13px;gap:8px}
+.rs-compact .rs-dates{font-size:11px;font-family:Arial,Helvetica,sans-serif}
+.rs-compact .rs-p{font-size:12.5px;line-height:1.45;margin:2px 0}
+.rs-compact .rs-ul{margin:2px 0 2px 18px;font-size:12.5px;line-height:1.45}
+.rs-compact .rs-foot{font-size:10px;margin-top:16px}
+
+/* LaTeX Academic — serif, publication-style */
+.rs-academic{background:#fff;color:#1a1a1a;border:none;padding:40px 48px;font-family:'Instrument Serif',Georgia,'Times New Roman',serif}
+body.rs-page.rs-academic{background:#fafafa}
+.rs-academic .rs-name{font-size:32px;font-weight:400;letter-spacing:0.5px;margin-bottom:4px;color:#1a1a1a}
+.rs-academic .rs-title{font-size:16px;font-weight:400;color:#444;margin:0 0 8px;font-style:italic}
+.rs-academic .rs-contact{font-size:12px;color:#666;font-style:italic;margin-bottom:12px}
+.rs-academic .rs-sec-h{font-size:14px;letter-spacing:2px;text-transform:uppercase;margin:28px 0 10px;padding-bottom:4px;border-bottom:1px solid #1a1a1a;font-weight:400}
+.rs-academic .rs-item{margin:0 0 10px}
+.rs-academic .rs-item-top{font-style:italic;color:#333}
+.rs-academic .rs-item-top b{font-weight:600;font-style:normal}
+.rs-academic .rs-dates{font-size:11.5px;color:#666;font-style:italic}
+.rs-academic .rs-p{font-size:13.5px;line-height:1.7;color:#222}
+.rs-academic .rs-ul{margin:4px 0 4px 22px;font-size:13.5px;line-height:1.7}
+.rs-academic a{color:#1a1a1a;text-decoration:underline}
+.rs-academic .rs-foot{font-size:10.5px;color:#999;margin-top:30px;font-style:italic}
+
 /* embedded portfolio section card tint per resume theme */
 .rs-embed-card.rs-ats{border-left:4px solid #fff}
 .rs-embed-card.rs-modern{border-left:4px solid #4f46e5}
 .rs-embed-card.rs-midnight{border-left:4px solid #22d3ee}
 .rs-embed-card.rs-terminal{border-left:4px solid #4ade80}
+.rs-embed-card.rs-executive{border-left:4px solid #8b7355}
+.rs-embed-card.rs-creative{border-left:4px solid #ec4899}
+.rs-embed-card.rs-datasci{border-left:4px solid #3b82f6}
+.rs-embed-card.rs-product{border-left:4px solid #0e7490}
+.rs-embed-card.rs-compact{border-left:4px solid #111}
+.rs-embed-card.rs-academic{border-left:4px solid #1a1a1a}
 
 @media(max-width:640px){.rs-doc{padding:22px 18px;margin:16px 12px 30px}.rs-item-top{flex-direction:column;gap:2px}}
 

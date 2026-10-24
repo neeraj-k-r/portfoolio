@@ -181,61 +181,109 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 
   <!-- Theme Gallery -->
   <section id="themes" class="lx-section rv">
-    <p class="lx-kicker">10 themes</p>
+    <p class="lx-kicker">23 handcrafted themes</p>
     <h2 class="lx-h2">Pick a look. <span class="lx-lime">Preview them all.</span></h2>
     <p class="lx-lead">Click any preview to see it larger — every theme is one tap away in your dashboard.</p>
+    <div class="lx-theme-filters">
+      <button type="button" class="lx-filter-btn active" data-filter="all" onclick="filterLandingThemes('all', this)">All Themes (23)</button>
+      <button type="button" class="lx-filter-btn" data-filter="tech" onclick="filterLandingThemes('tech', this)"><i class="fa-solid fa-code"></i> Developer (16)</button>
+      <button type="button" class="lx-filter-btn" data-filter="visual" onclick="filterLandingThemes('visual', this)"><i class="fa-solid fa-palette"></i> Visual Artist (7)</button>
+    </div>
     <div class="lx-gallery">
-      <button class="lx-theme-card" data-theme="midnight" data-name="Midnight Wow" aria-label="Preview Midnight Wow theme">
+      <!-- Developer Themes (16) -->
+      <button class="lx-theme-card" data-track="tech" data-theme="midnight" data-name="Midnight Wow" aria-label="Preview Midnight Wow theme">
         <span class="lx-tp lx-tp-midnight"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Midnight <em>Dark neon</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="minimal" data-name="Minimal Clean" aria-label="Preview Minimal Clean theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="minimal" data-name="Minimal Clean" aria-label="Preview Minimal Clean theme">
         <span class="lx-tp lx-tp-minimal"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Minimal <em>ATS clean</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="terminal" data-name="Terminal Hacker" aria-label="Preview Terminal Hacker theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="terminal" data-name="Terminal Hacker" aria-label="Preview Terminal Hacker theme">
         <span class="lx-tp lx-tp-terminal"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Terminal <em>Mono green</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="creative" data-name="Creative Pop" aria-label="Preview Creative Pop theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="creative" data-name="Creative Pop" aria-label="Preview Creative Pop theme">
         <span class="lx-tp lx-tp-creative"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Creative <em>Playful</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="aurora" data-name="Aurora Glass" aria-label="Preview Aurora Glass theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="aurora" data-name="Aurora Glass" aria-label="Preview Aurora Glass theme">
         <span class="lx-tp lx-tp-aurora"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Aurora <em>Glass pastel</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="editorial" data-name="Editorial Serif" aria-label="Preview Editorial Serif theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="editorial" data-name="Editorial Serif" aria-label="Preview Editorial Serif theme">
         <span class="lx-tp lx-tp-editorial"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Editorial <em>Print calm</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="brutalist" data-name="Neo-Brutalist" aria-label="Preview Neo-Brutalist theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="brutalist" data-name="Neo-Brutalist" aria-label="Preview Neo-Brutalist theme">
         <span class="lx-tp lx-tp-brutalist"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Brutalist <em>Bold loud</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="afterglow" data-name="Afterglow" aria-label="Preview Afterglow theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="afterglow" data-name="Afterglow" aria-label="Preview Afterglow theme">
         <span class="lx-tp lx-tp-afterglow"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Afterglow <em>Sunset neon</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="ultraviolet" data-name="Ultraviolet" aria-label="Preview Ultraviolet theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="ultraviolet" data-name="Ultraviolet" aria-label="Preview Ultraviolet theme">
         <span class="lx-tp lx-tp-ultraviolet"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Ultraviolet <em>Violet haze</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="tidepool" data-name="Tidepool" aria-label="Preview Tidepool theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="tidepool" data-name="Tidepool" aria-label="Preview Tidepool theme">
         <span class="lx-tp lx-tp-tidepool"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Tidepool <em>Abyss glow</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="ultracode" data-name="Ultra Code" aria-label="Preview Ultra Code theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="darkpro" data-name="Dark Pro" aria-label="Preview Dark Pro theme">
+        <span class="lx-tp lx-tp-darkpro"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Dark Pro <em>Charcoal &amp; yellow</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="tech" data-theme="fullpage" data-name="Fullpage Scroll" aria-label="Preview Fullpage Scroll theme">
+        <span class="lx-tp lx-tp-fullpage"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Fullpage <em>Red fullpage</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="tech" data-theme="moderncv" data-name="Modern CV" aria-label="Preview Modern CV theme">
+        <span class="lx-tp lx-tp-moderncv"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Modern CV <em>Bilingual CV</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="tech" data-theme="ultracode" data-name="Ultra Code" aria-label="Preview Ultra Code theme">
         <span class="lx-tp lx-tp-ultracode"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Ultra Code <em>Dark crimson</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="devblue" data-name="Dev Blue" aria-label="Preview Dev Blue theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="devblue" data-name="Dev Blue" aria-label="Preview Dev Blue theme">
         <span class="lx-tp lx-tp-devblue"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Dev Blue <em>Clean royal blue</em></span>
       </button>
-      <button class="lx-theme-card" data-theme="cube" data-name="3D Cube" aria-label="Preview 3D Cube theme">
+      <button class="lx-theme-card" data-track="tech" data-theme="cube" data-name="3D Cube" aria-label="Preview 3D Cube theme">
         <span class="lx-tp lx-tp-cube"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">3D Cube <em>Charcoal &amp; mint</em></span>
+      </button>
+
+      <!-- Visual Artist Themes (7) -->
+      <button class="lx-theme-card" data-track="visual" data-theme="gallery" data-name="Gallery" aria-label="Preview Gallery theme">
+        <span class="lx-tp lx-tp-gallery"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Gallery <em>Visual masonry</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="studio" data-name="Studio" aria-label="Preview Studio theme">
+        <span class="lx-tp lx-tp-studio"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Studio <em>Editorial covers</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="noir" data-name="Noir" aria-label="Preview Noir theme">
+        <span class="lx-tp lx-tp-noir"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Noir <em>Dark full-bleed</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="museum" data-name="Museum" aria-label="Preview Museum theme">
+        <span class="lx-tp lx-tp-museum"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Museum <em>Framed walls</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="catalog" data-name="Catalog" aria-label="Preview Catalog theme">
+        <span class="lx-tp lx-tp-catalog"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Catalog <em>Art-book plates</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="bloom" data-name="Bloom" aria-label="Preview Bloom theme">
+        <span class="lx-tp lx-tp-bloom"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Bloom <em>Soft pastel dream</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="motion" data-name="Motion Flow" aria-label="Preview Motion Flow theme">
+        <span class="lx-tp lx-tp-motion"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Motion Flow <em>Kinetic gradients</em></span>
       </button>
     </div>
   </section>
@@ -438,9 +486,24 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <button class="footer-theme-btn" data-theme="terminal">Terminal</button>
           <button class="footer-theme-btn" data-theme="creative">Creative</button>
           <button class="footer-theme-btn" data-theme="aurora">Aurora</button>
+          <button class="footer-theme-btn" data-theme="editorial">Editorial</button>
+          <button class="footer-theme-btn" data-theme="brutalist">Brutalist</button>
+          <button class="footer-theme-btn" data-theme="afterglow">Afterglow</button>
+          <button class="footer-theme-btn" data-theme="ultraviolet">Ultraviolet</button>
+          <button class="footer-theme-btn" data-theme="tidepool">Tidepool</button>
+          <button class="footer-theme-btn" data-theme="darkpro">Dark Pro</button>
+          <button class="footer-theme-btn" data-theme="fullpage">Fullpage</button>
+          <button class="footer-theme-btn" data-theme="moderncv">Modern CV</button>
           <button class="footer-theme-btn" data-theme="ultracode">Ultra Code</button>
           <button class="footer-theme-btn" data-theme="devblue">Dev Blue</button>
           <button class="footer-theme-btn" data-theme="cube">3D Cube</button>
+          <button class="footer-theme-btn" data-theme="gallery">Gallery</button>
+          <button class="footer-theme-btn" data-theme="studio">Studio</button>
+          <button class="footer-theme-btn" data-theme="noir">Noir</button>
+          <button class="footer-theme-btn" data-theme="museum">Museum</button>
+          <button class="footer-theme-btn" data-theme="catalog">Catalog</button>
+          <button class="footer-theme-btn" data-theme="bloom">Bloom</button>
+          <button class="footer-theme-btn" data-theme="motion">Motion</button>
         </div>
       </div>
     </div>
@@ -555,22 +618,37 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="modern"> <span><b>✨ Modern</b></span></label>
               <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="midnight"> <span><b>🌌 Midnight</b></span></label>
               <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="terminal"> <span><b>💻 Terminal</b></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="executive"> <span><b>🎩 Executive</b></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="creative"> <span><b>🎨 Creative</b></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="datasci"> <span><b>📊 Data Sci</b></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="product"> <span><b>📦 Product</b></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="compact"> <span><b>📃 Compact</b></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstpl" value="academic"> <span><b>🎓 Academic</b></span></label>
             </div>
           </div>
 
           <div class="full">
             <label class="flabel">Pick your portfolio theme *</label>
             <div class="tpl-grid" id="tplGrid">
+              <!-- Developer Themes (16) -->
               <label class="tpl-card selected"><input type="radio" name="tpl" value="midnight" checked><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight Wow</b><span>Dark + neon • Dev/AI</span></div></label>
               <label class="tpl-card"><input type="radio" name="tpl" value="minimal"><div class="tpl-preview minimal">📄</div><div class="tpl-meta"><b>Minimal Clean</b><span>Light • ATS friendly</span></div></label>
               <label class="tpl-card"><input type="radio" name="tpl" value="terminal"><div class="tpl-preview terminal">>_</div><div class="tpl-meta"><b>Terminal Hacker</b><span>Mono • Backend/OSS</span></div></label>
               <label class="tpl-card"><input type="radio" name="tpl" value="creative"><div class="tpl-preview creative">🎨</div><div class="tpl-meta"><b>Creative Pop</b><span>Gradient • Frontend</span></div></label>
-            <label class="tpl-card"><input type="radio" name="tpl" value="aurora"><div class="tpl-preview aurora">🔮</div><div class="tpl-meta"><b>Aurora Glass</b><span>Glass • Pastel</span></div></label>
-            <label class="tpl-card"><input type="radio" name="tpl" value="editorial"><div class="tpl-preview editorial">Ag</div><div class="tpl-meta"><b>Editorial Serif</b><span>Print • Calm</span></div></label>
-            <label class="tpl-card"><input type="radio" name="tpl" value="brutalist"><div class="tpl-preview brutalist">🧱</div><div class="tpl-meta"><b>Neo-Brutalist</b><span>Bold • Loud</span></div></label>
-            <label class="tpl-card"><input type="radio" name="tpl" value="afterglow"><div class="tpl-preview afterglow">🌇</div><div class="tpl-meta"><b>Afterglow *</b><span>Sunset neon</span></div></label>
-            <label class="tpl-card"><input type="radio" name="tpl" value="ultraviolet"><div class="tpl-preview ultraviolet">🟣</div><div class="tpl-meta"><b>Ultraviolet *</b><span>Haze neon</span></div></label>
-              <label class="tpl-card"><input type="radio" name="tpl" value="tidepool"><div class="tpl-preview tidepool">🪼</div><div class="tpl-meta"><b>Tidepool *</b><span>Abyss glow</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="aurora"><div class="tpl-preview aurora">🔮</div><div class="tpl-meta"><b>Aurora Glass</b><span>Glass • Pastel</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="editorial"><div class="tpl-preview editorial">Ag</div><div class="tpl-meta"><b>Editorial Serif</b><span>Print • Calm</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="brutalist"><div class="tpl-preview brutalist">🧱</div><div class="tpl-meta"><b>Neo-Brutalist</b><span>Bold • Loud</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="afterglow"><div class="tpl-preview afterglow">🌇</div><div class="tpl-meta"><b>Afterglow</b><span>Sunset neon</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="ultraviolet"><div class="tpl-preview ultraviolet">🟣</div><div class="tpl-meta"><b>Ultraviolet</b><span>Haze neon</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="tidepool"><div class="tpl-preview tidepool">🪼</div><div class="tpl-meta"><b>Tidepool</b><span>Abyss glow</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="darkpro"><div class="tpl-preview darkpro">🌑</div><div class="tpl-meta"><b>Dark Pro</b><span>Dark • Yellow Accent</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="fullpage"><div class="tpl-preview fullpage">📄</div><div class="tpl-meta"><b>Fullpage Scroll</b><span>Red Accent • Fullpage</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="moderncv"><div class="tpl-preview moderncv">💼</div><div class="tpl-meta"><b>Modern CV</b><span>Interactive • Bilingual</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="ultracode"><div class="tpl-preview ultracode">🔴</div><div class="tpl-meta"><b>Ultra Code</b><span>Dark · Crimson · Sidebar</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="devblue"><div class="tpl-preview devblue">🔷</div><div class="tpl-meta"><b>Dev Blue</b><span>Clean · Royal blue · Modern</span></div></label>
+              <label class="tpl-card"><input type="radio" name="tpl" value="cube"><div class="tpl-preview cube">🟩</div><div class="tpl-meta"><b>3D Cube</b><span>Charcoal · Mint · 3D Swiper</span></div></label>
+
+              <!-- Visual Artist Themes (7) -->
               <label class="tpl-card" data-vtrack="visual"><input type="radio" name="tpl" value="gallery"><div class="tpl-preview gallery">🖼️</div><div class="tpl-meta"><b>Gallery</b><span>Visual masonry grid</span></div></label>
               <label class="tpl-card" data-vtrack="visual"><input type="radio" name="tpl" value="studio"><div class="tpl-preview studio">☀️</div><div class="tpl-meta"><b>Studio</b><span>Light editorial covers</span></div></label>
               <label class="tpl-card" data-vtrack="visual"><input type="radio" name="tpl" value="noir"><div class="tpl-preview noir">🌙</div><div class="tpl-meta"><b>Noir</b><span>Dark full-bleed</span></div></label>
@@ -578,12 +656,6 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="tpl-card" data-vtrack="visual"><input type="radio" name="tpl" value="catalog"><div class="tpl-preview catalog">📖</div><div class="tpl-meta"><b>Catalog</b><span>Print art-book plates</span></div></label>
               <label class="tpl-card" data-vtrack="visual"><input type="radio" name="tpl" value="bloom"><div class="tpl-preview bloom">🌸</div><div class="tpl-meta"><b>Bloom</b><span>Soft pastel dream</span></div></label>
               <label class="tpl-card" data-vtrack="visual"><input type="radio" name="tpl" value="motion"><div class="tpl-preview motion">⚡</div><div class="tpl-meta"><b>Motion Flow</b><span>Light • Motion • Gradients</span></div></label>
-              <label class="tpl-card"><input type="radio" name="tpl" value="darkpro"><div class="tpl-preview darkpro">🌑</div><div class="tpl-meta"><b>Dark Pro</b><span>Dark • Yellow Accent</span></div></label>
-              <label class="tpl-card"><input type="radio" name="tpl" value="fullpage"><div class="tpl-preview fullpage">📄</div><div class="tpl-meta"><b>Fullpage Scroll</b><span>Red Accent • Fullpage</span></div></label>
-              <label class="tpl-card"><input type="radio" name="tpl" value="moderncv"><div class="tpl-preview moderncv">💼</div><div class="tpl-meta"><b>Modern CV</b><span>Interactive • Bilingual</span></div></label>
-              <label class="tpl-card"><input type="radio" name="tpl" value="ultracode"><div class="tpl-preview ultracode">🔴</div><div class="tpl-meta"><b>Ultra Code</b><span>Dark · Crimson · Sidebar</span></div></label>
-              <label class="tpl-card"><input type="radio" name="tpl" value="devblue"><div class="tpl-preview devblue">🔷</div><div class="tpl-meta"><b>Dev Blue</b><span>Clean · Royal blue · Modern</span></div></label>
-              <label class="tpl-card"><input type="radio" name="tpl" value="cube"><div class="tpl-preview cube">🟩</div><div class="tpl-meta"><b>3D Cube</b><span>Charcoal · Mint · 3D Swiper</span></div></label>
             </div>
           </div>
 
@@ -707,30 +779,33 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <div style="margin-top:16px">
           <label class="flabel">Select Portfolio Theme</label>
           <div class="tpl-grid" id="edTplGrid">
+            <!-- Developer Themes (16) -->
             <label class="tpl-card"><input type="radio" name="edtpl" value="midnight"><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight Wow</b><span>Dark neon theme</span></div></label>
             <label class="tpl-card"><input type="radio" name="edtpl" value="minimal"><div class="tpl-preview minimal">📄</div><div class="tpl-meta"><b>Minimal Clean</b><span>Light ATS design</span></div></label>
             <label class="tpl-card"><input type="radio" name="edtpl" value="terminal"><div class="tpl-preview terminal">>_</div><div class="tpl-meta"><b>Terminal Hacker</b><span>Hacker green mono</span></div></label>
             <label class="tpl-card"><input type="radio" name="edtpl" value="creative"><div class="tpl-preview creative">🎨</div><div class="tpl-meta"><b>Creative Pop</b><span>Playful gradient</span></div></label>
             <label class="tpl-card"><input type="radio" name="edtpl" value="aurora"><div class="tpl-preview aurora">🔮</div><div class="tpl-meta"><b>Aurora Glass</b><span>Frosted pastel</span></div></label>
             <label class="tpl-card"><input type="radio" name="edtpl" value="editorial"><div class="tpl-preview editorial">Ag</div><div class="tpl-meta"><b>Editorial Serif</b><span>Print calm</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="brutalist"><div class="tpl-preview brutalist">🧱</div><div class="tpl-meta"><b>Neo-Brutalist</b><span>Bold loud</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="afterglow"><div class="tpl-preview afterglow">🌇</div><div class="tpl-meta"><b>Afterglow</b><span>Sunset neon</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="ultraviolet"><div class="tpl-preview ultraviolet">🟣</div><div class="tpl-meta"><b>Ultraviolet</b><span>Haze neon</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="tidepool"><div class="tpl-preview tidepool">🪼</div><div class="tpl-meta"><b>Tidepool</b><span>Abyss glow</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="darkpro"><div class="tpl-preview darkpro">🌑</div><div class="tpl-meta"><b>Dark Pro</b><span>Dark · Yellow Accent</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="fullpage"><div class="tpl-preview fullpage">📄</div><div class="tpl-meta"><b>Fullpage Scroll</b><span>Red Accent · Fullpage</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="moderncv"><div class="tpl-preview moderncv">💼</div><div class="tpl-meta"><b>Modern CV</b><span>Interactive · Bilingual</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="ultracode"><div class="tpl-preview ultracode">🔴</div><div class="tpl-meta"><b>Ultra Code</b><span>Dark · Crimson · Sidebar</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="devblue"><div class="tpl-preview devblue">🔷</div><div class="tpl-meta"><b>Dev Blue</b><span>Clean · Royal blue · Modern</span></div></label>
+            <label class="tpl-card"><input type="radio" name="edtpl" value="cube"><div class="tpl-preview cube">🟩</div><div class="tpl-meta"><b>3D Cube</b><span>Charcoal · Mint · 3D Swiper</span></div></label>
+
+            <!-- Visual Artist Themes (7) -->
             <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="gallery"><div class="tpl-preview gallery">🖼️</div><div class="tpl-meta"><b>Gallery</b><span>Visual masonry grid</span></div></label>
             <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="studio"><div class="tpl-preview studio">☀️</div><div class="tpl-meta"><b>Studio</b><span>Light editorial covers</span></div></label>
             <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="noir"><div class="tpl-preview noir">🌙</div><div class="tpl-meta"><b>Noir</b><span>Dark full-bleed</span></div></label>
             <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="museum"><div class="tpl-preview museum">🏛️</div><div class="tpl-meta"><b>Museum</b><span>Framed gallery walls</span></div></label>
             <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="catalog"><div class="tpl-preview catalog">📖</div><div class="tpl-meta"><b>Catalog</b><span>Print art-book plates</span></div></label>
             <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="bloom"><div class="tpl-preview bloom">🌸</div><div class="tpl-meta"><b>Bloom</b><span>Soft pastel dream</span></div></label>
-            <label class="tpl-card"><input type="radio" name="edtpl" value="brutalist"><div class="tpl-preview brutalist">🧱</div><div class="tpl-meta"><b>Neo-Brutalist</b><span>Bold loud</span></div></label>
-            <label class="tpl-card"><input type="radio" name="edtpl" value="afterglow"><div class="tpl-preview afterglow">🌇</div><div class="tpl-meta"><b>Afterglow *</b><span>Sunset neon</span></div></label>
-            <label class="tpl-card"><input type="radio" name="edtpl" value="ultraviolet"><div class="tpl-preview ultraviolet">🟣</div><div class="tpl-meta"><b>Ultraviolet *</b><span>Haze neon</span></div></label>
-<label class="tpl-card"><input type="radio" name="edtpl" value="tidepool"><div class="tpl-preview tidepool">🪼</div><div class="tpl-meta"><b>Tidepool *</b><span>Abyss glow</span></div></label>
-              <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="motion"><div class="tpl-preview motion">⚡</div><div class="tpl-meta"><b>Motion Flow</b><span>Light · Motion · Gradients</span></div></label>
-              <label class="tpl-card"><input type="radio" name="edtpl" value="darkpro"><div class="tpl-preview darkpro">🌑</div><div class="tpl-meta"><b>Dark Pro</b><span>Dark · Yellow Accent</span></div></label>
-              <label class="tpl-card"><input type="radio" name="edtpl" value="fullpage"><div class="tpl-preview fullpage">📄</div><div class="tpl-meta"><b>Fullpage Scroll</b><span>Red Accent · Fullpage</span></div></label>
-              <label class="tpl-card"><input type="radio" name="edtpl" value="moderncv"><div class="tpl-preview moderncv">💼</div><div class="tpl-meta"><b>Modern CV</b><span>Interactive · Bilingual</span></div></label>
-              <label class="tpl-card"><input type="radio" name="edtpl" value="ultracode"><div class="tpl-preview ultracode">🔴</div><div class="tpl-meta"><b>Ultra Code</b><span>Dark · Crimson · Sidebar</span></div></label>
-              <label class="tpl-card"><input type="radio" name="edtpl" value="devblue"><div class="tpl-preview devblue">🔷</div><div class="tpl-meta"><b>Dev Blue</b><span>Clean · Royal blue · Modern</span></div></label>
-              <label class="tpl-card"><input type="radio" name="edtpl" value="cube"><div class="tpl-preview cube">🟩</div><div class="tpl-meta"><b>3D Cube</b><span>Charcoal · Mint · 3D Swiper</span></div></label>
-            </div>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="motion"><div class="tpl-preview motion">⚡</div><div class="tpl-meta"><b>Motion Flow</b><span>Light · Motion · Gradients</span></div></label>
+          </div>
           <button class="btn btn-primary btn-sm" id="edSaveThemeBtn" style="margin-top:12px"><i class="fa-solid fa-floppy-disk"></i> Save theme</button>
         </div>
       </div>
@@ -824,6 +899,12 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="modern"> <span><b>✨ Modern</b> <small>light card</small></span></label>
               <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="midnight"> <span><b>🌌 Midnight</b> <small>dark neon</small></span></label>
               <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="terminal"> <span><b>💻 Terminal</b> <small>mono green</small></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="executive"> <span><b>🎩 Executive</b> <small>serif • premium</small></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="creative"> <span><b>🎨 Creative</b> <small>gradient • playful</small></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="datasci"> <span><b>📊 Data Sci</b> <small>mono • metrics</small></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="product"> <span><b>📦 Product</b> <small>outcome-focused</small></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="compact"> <span><b>📃 Compact</b> <small>dense • 1-page</small></span></label>
+              <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="academic"> <span><b>🎓 Academic</b> <small>serif • research</small></span></label>
             </div>
           </div>
           <div class="full"><label class="flabel">Experience</label>
@@ -1443,10 +1524,10 @@ async function paintFeaturedPortfolios() {
     </div>`).join('');
 }
 function paintTrackTabs(profile) {
-  const visual = (profile && profile.track) === 'visual';
+  const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String((profile && profile.template) || '').toLowerCase());
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
     const v = (c.querySelector('input') || {}).value || '';
-const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(v);
+    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(v);
     c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
   });
   if (visual) { paintWorks(); switchUserTab('works'); }
@@ -1748,6 +1829,15 @@ if ($('builderForm')) {
     }
     document.body.dataset.template = (v && v !== 'midnight') ? v : '';
   }
+  // Landing Theme Showcase filter: toggle between All (23), Developer (16), and Visual Artist (7)
+  window.filterLandingThemes = function(track, btn) {
+    document.querySelectorAll('.lx-filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    document.querySelectorAll('.lx-gallery .lx-theme-card').forEach(card => {
+      const cardTrack = card.dataset.track || 'tech';
+      card.style.display = (track === 'all' || cardTrack === track) ? '' : 'none';
+    });
+  };
   // Theme picker thumbnails: swap emoji placeholders for live mini-previews
   function paintThemeThumbs() {
     document.querySelectorAll('.tpl-card').forEach(c => {
@@ -1856,10 +1946,15 @@ if ($('builderForm')) {
     if ($('inTag')) $('inTag').placeholder = visual ? 'Painting stories in color and form. Open for commissions.' : 'Building web apps & AI solutions that scale.';
     document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
       const v = (c.querySelector('input') || {}).value || '';
-const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(v);
+      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(v);
       c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
     });
-    const wantTpl = visual ? 'gallery' : 'midnight';
+    const curChecked = document.querySelector('#tplGrid input[name=tpl]:checked');
+    const curVal = curChecked ? curChecked.value : '';
+    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(curVal);
+    let wantTpl = curVal;
+    if (visual && !curIsVisual) wantTpl = 'gallery';
+    else if (!visual && curIsVisual) wantTpl = 'midnight';
     const wantInp = document.querySelector(`#tplGrid input[value="${wantTpl}"]`);
     if (wantInp) {
       document.querySelectorAll('#tplGrid .tpl-card').forEach(x => x.classList.remove('selected'));
@@ -1875,7 +1970,7 @@ const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'
     const username = $('inUser').value.toLowerCase().trim().replace(/[^a-z0-9-]+/g,'');
     if(!/^[a-z0-9][a-z0-9-]{2,29}$/.test(username)) return toast('❌ 3-30 chars: lowercase letters, numbers, hyphens');
 
-    const template = claimTrack() === 'visual' ? 'gallery' : ((document.querySelector('input[name=tpl]:checked') || {}).value || 'midnight');
+    const template = (document.querySelector('#tplGrid input[name=tpl]:checked') || {}).value || (claimTrack() === 'visual' ? 'gallery' : 'midnight');
     const manual = $('inP1t').value.trim() ? [{ title: $('inP1t').value.trim(), desc: $('inP1d').value.trim() || 'Featured build.', url: $('inP1u').value.trim() || '#', stars: 'Featured',
       technologies: readTechGrid($('inP1techGrid'), $('inP1techCustom')), demoUrl: $('inP1demo').value.trim() }] : [];
     const picked = [...$('ghRepoList').querySelectorAll('input:checked')].map(c => repoToProject(wizardGhRepos[+c.dataset.i]));

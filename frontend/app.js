@@ -960,12 +960,27 @@ document.addEventListener('DOMContentLoaded', async () => {
       terminal: { name: 'dev@root:~$', title: 'Systems & Backend Engineer', desc: 'Kernel hacker, Rust enthusiast, distributed systems builder.', skills: ['Rust', 'Go', 'Kubernetes'] },
       creative: { name: 'Maya Lin', title: 'Creative Technologist', desc: 'Blending generative art, WebGL, and interactive 3D experiences.', skills: ['Three.js', 'WebGL', 'GLSL'] },
       aurora: { name: 'Jordan Kai', title: 'Cloud Architect', desc: 'Designing resilient cloud platforms, serverless microservices & DevOps pipelines.', skills: ['AWS', 'Terraform', 'Docker'] },
+      editorial: { name: 'Elena Vance', title: 'Technical Writer & Consultant', desc: 'Writing thoughtful long-form essays, documentation systems, and software architectural reviews.', skills: ['Architecture', 'Docs', 'Essays'] },
+      brutalist: { name: 'Niko Bell', title: 'Indie Hacker & Builder', desc: 'Shipping fast, breaking things, and building high-impact digital tools with radical transparency.', skills: ['Full-Stack', 'Fast Ship', 'SaaS'] },
+      afterglow: { name: 'Sora Tanaka', title: 'Full-Stack Creative', desc: 'Crafting vivid evening aesthetics and responsive web applications at the edge of color and code.', skills: ['Vue.js', 'Vite', 'GraphQL'] },
+      ultraviolet: { name: 'Zara Chen', title: 'AI & Graphics Engineer', desc: 'Pushing boundaries in neural rendering, shader pipelines, and real-time GPU applications.', skills: ['Python', 'PyTorch', 'CUDA'] },
+      tidepool: { name: 'Kai Sterling', title: 'Distributed Systems Engineer', desc: 'Diving deep into bioluminescent telemetry, low-latency queues, and fault-tolerant backends.', skills: ['Go', 'Kafka', 'PostgreSQL'] },
+      darkpro: { name: 'Marcus Brody', title: 'Staff Product Designer', desc: 'Dark-mode specialist building enterprise design systems and high-converting product dashboards.', skills: ['Figma', 'Design Systems', 'React'] },
+      fullpage: { name: 'Lia Romero', title: 'Creative Director & Dev', desc: 'Bold presentation agency lead crafting unforgettable full-height kinetic scroll portfolios.', skills: ['GSAP', 'Next.js', 'Motion UI'] },
+      moderncv: { name: 'Sami Al-Mansoor', title: 'Full Stack & UI/UX Engineer', desc: 'Interactive developer portfolio with animations, bilingual RTL support, and multi-lingual reach.', skills: ['Full Stack', 'UI/UX', 'Next.js'] },
       ultracode: { name: 'Mariam Wallas', title: 'Full-Stack Developer', desc: 'I have high level experience in web design, development knowledge and producing quality work.', skills: ['JavaScript', 'React', 'CSS'] },
-      devblue: { name: 'Marlon', title: 'Web Designer', desc: 'As a passionate web designer, I thrive on creating visually appealing and user-friendly websites.', skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI'] },
-      marlon: { name: 'Marlon', title: 'Web Designer', desc: 'As a passionate web designer, I thrive on creating visually appealing and user-friendly websites.', skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI'] },
-      cube: { name: 'Muzammal', title: 'Web Developer', desc: 'Passionate developer crafting modern, fast, and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] },
-      cubegreen: { name: 'Muzammal', title: 'Web Developer', desc: 'Passionate developer crafting modern, fast, and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] },
-      muzammal: { name: 'Muzammal', title: 'Web Developer', desc: 'Passionate developer crafting modern, fast, and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] }
+      devblue: { name: 'Marlon Vance', title: 'Modern Web Designer', desc: 'Clean royal blue developer portfolio with smooth ScrollReveal, skill progress bars & work showcase.', skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI'] },
+      marlon: { name: 'Marlon Vance', title: 'Modern Web Designer', desc: 'Clean royal blue developer portfolio with smooth ScrollReveal, skill progress bars & work showcase.', skills: ['HTML5', 'CSS3', 'JavaScript', 'UX/UI'] },
+      cube: { name: 'Muzammal', title: 'Interactive 3D Developer', desc: 'Interactive 3D cube swiper in charcoal & mint green, crafting modern and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] },
+      cubegreen: { name: 'Muzammal', title: 'Interactive 3D Developer', desc: 'Interactive 3D cube swiper in charcoal & mint green, crafting modern and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] },
+      muzammal: { name: 'Muzammal', title: 'Interactive 3D Developer', desc: 'Interactive 3D cube swiper in charcoal & mint green, crafting modern and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] },
+      gallery: { name: 'Camila Reyes', title: 'Visual Artist & Photographer', desc: 'Curating dynamic masonry galleries, editorial imagery, and print-inspired collections.', skills: ['Photography', 'Editorial', 'Art'] },
+      studio: { name: 'Julian Gray', title: 'Brand & Graphic Designer', desc: 'Minimal light editorial covers, refined type specimens, and bespoke visual identity projects.', skills: ['Branding', 'Typography', 'Print'] },
+      noir: { name: 'Kaelen Thorne', title: 'Cinematographer & 3D Artist', desc: 'Deep monochrome visuals, cinematic lighting studies, and full-bleed visual narratives.', skills: ['Cinema 4D', 'Blender', 'Lighting'] },
+      museum: { name: 'Astrid Lind', title: 'Fine Artist & Painter', desc: 'Framed gallery walls showcasing textured acrylic, oil on canvas, and museum installations.', skills: ['Fine Art', 'Oil Painting', 'Exhibits'] },
+      catalog: { name: 'David Park', title: 'Book Designer & Printmaker', desc: 'Editorial art-book plates, tactile catalog layouts, and archival typography.', skills: ['Editorial', 'Printmaking', 'Archival'] },
+      bloom: { name: 'Hana Mori', title: 'Digital Illustrator & Concept Artist', desc: 'Soft pastel dreamscapes, gentle gradients, and whimsical visual world-building.', skills: ['Illustration', 'Concept Art', 'Color'] },
+      motion: { name: 'Dominique Roy', title: 'Motion Designer & Art Director', desc: 'Kinetic typography, cream-and-orange motion gradients, and fluid scroll interactions.', skills: ['After Effects', 'Kinetic Type', 'Motion'] }
     };
     let lastFocus = null;
     const openModal = (theme, name) => {
@@ -998,6 +1013,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         const theme = btn.dataset.theme;
         modalBody.setAttribute('data-theme', theme);
         modalName.textContent = btn.textContent;
+        const preset = modalPresets[theme] || modalPresets.midnight;
+        if (modalAvatar) modalAvatar.textContent = (preset.name || 'Y').trim().charAt(0).toUpperCase();
+        if (modalTitle) modalTitle.textContent = preset.title;
+        if (modalDesc) modalDesc.textContent = preset.desc;
+        if (modalSkills) modalSkills.innerHTML = preset.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
         modalThemeBtns.forEach(b => b.classList.toggle('active', b === btn));
       });
     });
@@ -1206,7 +1226,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   trackProfileView(requested);
   if (resumeUser) { renderResumePage(p); return; }
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
-  if (p.track === 'visual') { renderGallery(p); initMotionTheme(); return; }
+  if (p.track === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(p.template || '').toLowerCase())) { renderGallery(p); initMotionTheme(); return; }
   const skill = new URLSearchParams(location.search).get('skill');
   if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
   initMotionTheme();
@@ -1217,7 +1237,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (s.view === 'work' && requested) {
       const pp = await loadProfile(requested);
       if (!pp) return;
-      if (pp.track === 'visual') { renderGallery(pp); return; }
+      if (pp.track === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(pp.template || '').toLowerCase())) { renderGallery(pp); return; }
       renderPortfolio(pp);
     }
   });

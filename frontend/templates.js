@@ -10,13 +10,19 @@ const TEMPLATES = [
   { id: 'afterglow', name: 'Afterglow', desc: 'Sunset neon over plum dusk', emoji: '🌇', best: 'Original • Warm neon' },
   { id: 'ultraviolet', name: 'Ultraviolet', desc: 'Violet haze, electric glow', emoji: '🟣', best: 'Original • Haze neon' },
   { id: 'tidepool', name: 'Tidepool', desc: 'Bioluminescent deep-teal abyss', emoji: '🪼', best: 'Original • Abyss glow' },
-  { id: 'motion', name: 'Motion Flow', desc: 'Light cream, animated word reveal, work rows', emoji: '⚡', best: 'Designers • Motion lovers' },
   { id: 'darkpro', name: 'Dark Pro', desc: 'Dark sidebar nav with gold accent', emoji: '🌑', best: 'Product designers • Dark UI' },
   { id: 'fullpage', name: 'Fullpage Scroll', desc: 'Full-height sections, red accent, slider', emoji: '📄', best: 'Agencies • Bold presentation' },
   { id: 'moderncv', name: 'Modern CV', desc: 'Interactive dev portfolio with animations, RTL support', emoji: '💼', best: 'Full Stack • UI/UX • Bilingual' },
   { id: 'ultracode', name: 'Ultra Code', desc: 'Dark crimson theme with vertical sidebar, qualification timelines, skills tabs, work filters & modals', emoji: '🔴', best: 'Developers • Designers • Modern portfolio' },
   { id: 'devblue', name: 'Dev Blue', desc: 'Royal blue clean portfolio with smooth ScrollReveal, skill progress bars & work showcase', emoji: '🔷', best: 'Web Designers • Frontend • Clean UI' },
   { id: 'cube', name: '3D Cube', desc: 'Interactive 3D cube swiper in charcoal & mint green', emoji: '🟩', best: 'Web Developers • Modern 3D' },
+  { id: 'gallery', name: 'Gallery', desc: 'Visual masonry grid for artists and photographers', emoji: '🖼️', best: 'Photographers • Visual Artists', track: 'visual' },
+  { id: 'studio', name: 'Studio', desc: 'Light editorial covers with refined typography', emoji: '☀️', best: 'Brand Designers • Art Directors', track: 'visual' },
+  { id: 'noir', name: 'Noir', desc: 'Dark full-bleed visual showcases with deep shadows', emoji: '🌙', best: 'Cinematographers • 3D Artists', track: 'visual' },
+  { id: 'museum', name: 'Museum', desc: 'Framed gallery walls with classic museum aesthetics', emoji: '🏛️', best: 'Fine Artists • Painters', track: 'visual' },
+  { id: 'catalog', name: 'Catalog', desc: 'Print art-book plates and archival layouts', emoji: '📖', best: 'Book Designers • Printmakers', track: 'visual' },
+  { id: 'bloom', name: 'Bloom', desc: 'Soft pastel dreamscapes with delicate color palettes', emoji: '🌸', best: 'Illustrators • Concept Artists', track: 'visual' },
+  { id: 'motion', name: 'Motion Flow', desc: 'Light cream, kinetic word reveal, motion gradients', emoji: '⚡', best: 'Motion Designers • Animators', track: 'visual' }
 ];
 
 function tplEsc(s) {

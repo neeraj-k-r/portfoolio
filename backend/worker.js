@@ -3216,7 +3216,7 @@ export default {
       // storage empty / deleted → fall through to builder theme instead of 404
     }
     // visual track renders the gallery, not the code portfolio
-    if (p.track === 'visual') {
+    if (p.track === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(p.template || '').toLowerCase())) {
       const html = pageGallery(p, url.searchParams.get('w'));
       return new Response(html, {
         headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
