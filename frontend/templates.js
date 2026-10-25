@@ -529,7 +529,7 @@ function renderDarkpro(p) {
     if (['about', 'portfolio', 'resume', 'contact'].includes(h)) switchDpTab(h);
   });
   const hash = (location.hash || '').replace('#', '').toLowerCase();
-  const qTab = (new URL(location.href).searchParams.get('tab') || new URL(location.href).searchParams.get('page') || '').toLowerCase();
+  const qTab = (new URLSearchParams(location.search).get('tab') || new URLSearchParams(location.search).get('page') || '').toLowerCase();
   const startTab = ['about', 'portfolio', 'resume', 'contact'].includes(hash) ? hash : (['about', 'portfolio', 'resume', 'contact'].includes(qTab) ? qTab : 'about');
   switchDpTab(startTab);
   window.scrollTo(0, 0);
@@ -1326,7 +1326,8 @@ function initModerncvRuntime(p) {
       const script = document.createElement('script');
       script.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
       script.onload = () => runAnimeAnimations();
-      document.head.appendChild(script);
+      const targetHead = document.head || document.body || document.documentElement;
+      if (targetHead && targetHead.appendChild) targetHead.appendChild(script);
       return;
     }
     runAnimeAnimations();
@@ -1738,6 +1739,7 @@ function renderUltracode(p) {
   const footerGithub = p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-github-alt"></i></a>` : '';
   const footerLinkedin = p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-linkedin-alt"></i></a>` : '';
   const footerInstagram = tplShowInsta(p) ? `<a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-instagram"></i></a>` : '';
+  const footerTwitter = p.twitter ? `<a href="${tplEsc(p.twitter)}" target="_blank" rel="noopener" class="footer-social"><i class="uil uil-twitter"></i></a>` : '';
   const userServices = (Array.isArray(p.services) && p.services.length)
     ? p.services
     : (p.resume && Array.isArray(p.resume.services) && p.resume.services.length)

@@ -419,7 +419,11 @@ function renderWorkDetail(p, idx) {
 function renderPortfolio(p) {
   p = normLocalProfile(p) || p;
   const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
-  const tpl = String(qTpl || p.template || 'midnight').toLowerCase();
+  let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'];
+  if (visualOnly.includes(tpl)) {
+    tpl = 'midnight';
+  }
   if (tpl !== 'midnight' && window.PortfoolioTemplates && window.PortfoolioTemplates[tpl]) {
     window.PortfoolioTemplates[tpl](p); return;
   }
@@ -1226,7 +1230,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   trackProfileView(requested);
   if (resumeUser) { renderResumePage(p); return; }
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
-  if (p.track === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(p.template || '').toLowerCase())) { renderGallery(p); initMotionTheme(); return; }
+  const isVisualTrack = p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(p.template || '').toLowerCase()));
+  if (isVisualTrack) { renderGallery(p); initMotionTheme(); return; }
   const skill = new URLSearchParams(location.search).get('skill');
   if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
   initMotionTheme();
@@ -1237,7 +1242,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (s.view === 'work' && requested) {
       const pp = await loadProfile(requested);
       if (!pp) return;
-      if (pp.track === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(pp.template || '').toLowerCase())) { renderGallery(pp); return; }
+      const isPpVisual = pp.track === 'visual' || (pp.track !== 'tech' && Array.isArray(pp.works) && pp.works.length > 0 && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(pp.template || '').toLowerCase()));
+      if (isPpVisual) { renderGallery(pp); return; }
       renderPortfolio(pp);
     }
   });

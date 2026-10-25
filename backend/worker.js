@@ -2831,7 +2831,11 @@ ${head(p, 'cube')}
 
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
-  const tpl = String(qTpl || p.template || 'midnight').toLowerCase();
+  let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'];
+  if (visualOnly.includes(tpl)) {
+    tpl = 'midnight';
+  }
   if (tpl === 'moderncv') {
     return pageModerncv(p);
   }
@@ -3216,7 +3220,8 @@ export default {
       // storage empty / deleted → fall through to builder theme instead of 404
     }
     // visual track renders the gallery, not the code portfolio
-    if (p.track === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(p.template || '').toLowerCase())) {
+    const isVisualTrack = p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(p.template || '').toLowerCase()));
+    if (isVisualTrack) {
       const html = pageGallery(p, url.searchParams.get('w'));
       return new Response(html, {
         headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
