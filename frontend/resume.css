@@ -433,7 +433,7 @@ body.rs-page.rs-academic{background:#fafafa}
   font-weight: 700;
 }
 
-/* TailorCV Role Selector & Switcher Toolbar */
+/* Target Role Selector & Switcher Toolbar */
 .rs-role-switcher-wrap {
   background: var(--bg2, #f8fafc);
   border: 1px solid var(--stroke, #e2e8f0);
@@ -519,7 +519,7 @@ body.rs-page.rs-academic{background:#fafafa}
   color: #ffffff;
 }
 
-/* 1-Click TailorCV Add Button Chip */
+/* 1-Click Skill Add Button Chip */
 .rs-chip-add-btn {
   background: rgba(124, 58, 237, 0.08);
   color: #6d28d9;
@@ -575,7 +575,7 @@ body.rs-page.rs-academic{background:#fafafa}
   color: #ffffff;
 }
 
-.rs-tailor-box {
+.rs-opt-box {
   background: linear-gradient(180deg, rgba(124, 58, 237, 0.04) 0%, rgba(248, 250, 252, 0.5) 100%);
   border: 1px solid rgba(124, 58, 237, 0.2);
   border-radius: 12px;

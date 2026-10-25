@@ -82,7 +82,7 @@ assert.equal(typeof gap.gradeText, 'string', 'gap.gradeText is precalculated');
 assert.equal(typeof fullScore.scoreClass, 'string', 'fullScore.scoreClass is precalculated');
 assert.equal(typeof fullScore.gradeClass, 'string', 'fullScore.gradeClass is precalculated');
 
-// 4b. TailorCV Target Role Selection & Dynamic Recalculation
+// 4b. Target Role Selection & Dynamic Recalculation
 assert.ok(Array.isArray(gap.availableRoles), 'Available roles returned');
 assert.ok(gap.availableRoles.length >= 10, 'At least 10 role benchmarks available');
 
@@ -107,7 +107,7 @@ const gapDevops = computeSkillsGap(profileWithTarget);
 assert.equal(gapDevops.selectedRole.key, 'devops engineer');
 assert.equal(gapDevops.selectedRole.role, 'DevOps & Cloud Engineer');
 
-// Test skill addition simulation (TailorCV 1-click optimization)
+// Test skill addition simulation (1-click optimization)
 const initialScore = gapBackend.selectedRole.score;
 const missingSkill = gapBackend.targetMissing[0]?.skill;
 if (missingSkill) {

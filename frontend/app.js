@@ -663,7 +663,7 @@ function renderResumePage(p) {
   <div id="rsAtsDrawer" class="no-print" style="display:none;background:rgba(15,23,42,.96);border-bottom:1px solid rgba(34,211,238,.3);padding:18px 24px;color:#fff">
     <div style="max-width:860px;margin:0 auto">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <h4 style="margin:0;font-size:15px;display:flex;align-items:center;gap:8px"><i class="fa-solid fa-shield-halved" style="color:#22d3ee"></i> TailorCV ATS Score &amp; Target Role Match</h4>
+        <h4 style="margin:0;font-size:15px;display:flex;align-items:center;gap:8px"><i class="fa-solid fa-shield-halved" style="color:#22d3ee"></i> ATS Score &amp; Target Role Match</h4>
         <button class="btn btn-ghost btn-sm" style="padding:2px 8px;font-size:11px" onclick="document.getElementById('rsAtsDrawer').style.display='none'">✕ Close</button>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:12px;font-size:13px">

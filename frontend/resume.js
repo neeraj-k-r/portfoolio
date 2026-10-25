@@ -12,7 +12,7 @@
     { id: 'modern', name: 'Modern', desc: 'Light card, soft + clean', emoji: '✨', best: 'General use' },
     { id: 'midnight', name: 'Midnight', desc: 'Dark neon, on-brand', emoji: '🌌', best: 'Match portfolio' },
     { id: 'terminal', name: 'Terminal', desc: 'Mono green, dev cred', emoji: '💻', best: 'Backend • OSS' },
-    // New themes inspired by TailorCV
+    // Additional professional resume themes
     { id: 'executive', name: 'Executive Edge', desc: 'Bold serif headers, premium feel', emoji: '🎩', best: 'Senior leaders, Directors, VPs' },
     { id: 'creative', name: 'Creative Balance', desc: 'Gradient accents, playful yet professional', emoji: '🎨', best: 'Designers, Creative roles' },
     { id: 'datasci', name: 'Data Analyst Pro', desc: 'Structured, metrics-focused layout', emoji: '📊', best: 'Data, Analytics, BI roles' },

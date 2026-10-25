@@ -2473,7 +2473,7 @@ function paintResumeTab() {
     </div>`;
   }
 
-  // SKILLS GAP CARD — target role matching (TailorCV clone engine)
+  // SKILLS GAP CARD — target role matching
   const userTarget = (p.resume && p.resume.targetRole) || 'auto';
   const gap = R ? R.computeSkillsGap(p, userTarget) : null;
   let gapHtml = '';
@@ -2492,7 +2492,7 @@ function paintResumeTab() {
         <div class="rs-header-left">
           <div class="rs-icon-badge rs-icon-purple"><i class="fa-solid fa-bullseye"></i></div>
           <div>
-            <span class="rs-card-tag rs-tag-purple"><i class="fa-solid fa-wand-magic-sparkles"></i> TailorCV · Target Role Match</span>
+            <span class="rs-card-tag rs-tag-purple"><i class="fa-solid fa-crosshairs"></i> Target Role Match</span>
             <div class="rs-card-title-row">
               <span class="rs-score-num">${target.score}%</span>
               <span class="rs-score-label">Target: <b class="rs-role-highlight">${esc(target.role || '—')}</b></span>
@@ -2505,7 +2505,7 @@ function paintResumeTab() {
         </div>
       </div>
 
-      <!-- Target Role Switcher (TailorCV Clone) -->
+      <!-- Target Role Switcher -->
       <div class="rs-role-switcher-wrap">
         <div class="rs-role-selector-row">
           <label for="rsTargetRoleSelect" class="rs-subhead" style="margin-bottom:0;display:flex;align-items:center;gap:6px">
@@ -2555,11 +2555,11 @@ function paintResumeTab() {
         </div>
       </div>
 
-      <!-- 1-Click TailorCV Skill Optimizer -->
+      <!-- 1-Click Skill Optimizer -->
       ${missingSkills.length > 0 ? `
-      <div class="rs-tailor-box">
-        <div class="rs-tailor-head">
-          <span class="rs-subhead" style="margin-bottom:2px"><i class="fa-solid fa-wand-magic-sparkles" style="color:#7c3aed"></i> 1-Click Tailor — Missing Skills for ${esc(target.role)}:</span>
+      <div class="rs-opt-box">
+        <div class="rs-opt-head">
+          <span class="rs-subhead" style="margin-bottom:2px"><i class="fa-solid fa-circle-plus" style="color:#7c3aed"></i> Missing Skills for ${esc(target.role)} (Click to Add):</span>
           <p style="font-size:12px;color:var(--muted);margin:2px 0 8px">Click any missing skill below to immediately add it to your profile and boost your target match score live:</p>
         </div>
         <div class="rs-chips-wrap">
@@ -2587,7 +2587,7 @@ function paintResumeTab() {
       <!-- Role-Specific Actionable Recommendations -->
       ${target.suggestions && target.suggestions.length > 0 ? `
       <div class="rs-recommendations" style="margin-top:14px">
-        <div class="rs-rec-head"><i class="fa-solid fa-lightbulb"></i> Tailored Recommendations for ${esc(target.role)}:</div>
+        <div class="rs-rec-head"><i class="fa-solid fa-lightbulb"></i> Recommendations for ${esc(target.role)}:</div>
         <ul class="rs-rec-list">
           ${target.suggestions.map(s => `<li>${esc(s)}</li>`).join('')}
         </ul>
@@ -2621,7 +2621,7 @@ function paintResumeTab() {
     $('rsSkillsGap').innerHTML = gapHtml;
     $('rsSkillsGap').style.display = gapHtml ? 'block' : 'none';
 
-    // Wire Target Role Switcher & 1-Click Skill Add (TailorCV Engine)
+    // Wire Target Role Switcher & 1-Click Skill Add
     const roleSelect = $('rsTargetRoleSelect');
     if (roleSelect) {
       roleSelect.onchange = (e) => {
@@ -2662,7 +2662,7 @@ function paintResumeTab() {
           if (edSkills) edSkills.value = p.skills.join(', ');
           draftResume();
           paintResumeTab();
-          toast(`✨ Tailored! Added "${formatted}" — Match score recalculated!`);
+          toast(`✨ Added "${formatted}" — Match score recalculated!`);
         };
       });
     }
