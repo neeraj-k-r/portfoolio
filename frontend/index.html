@@ -2412,43 +2412,63 @@ function paintResumeTab() {
     }
   }
 
-  // ATS SCORE CARD — new feature
+  // ATS SCORE CARD — recruiter readiness
   const atsScore = R ? R.computeATSScore(p) : null;
   let atsHtml = '';
   if (atsScore) {
     const scoreClass = atsScore.scoreClass || (R && R.atsScoreClass ? R.atsScoreClass(atsScore.score) : 'ats-good');
     const gradeClass = atsScore.gradeClass || (R && R.atsGradeClass ? R.atsGradeClass(atsScore.grade) : 'ats-good');
     atsHtml = `
-    <div class="rs-ats-score-card ${scoreClass}" style="background:var(--bg-card);border:1px solid var(--stroke);border-radius:12px;padding:16px 20px;margin:16px 0;max-width:720px">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-        <div style="display:flex;align-items:center;gap:10px">
-          <span style="font-size:20px">🎯</span>
+    <div class="rs-ats-score-card ${scoreClass}">
+      <div class="rs-card-header">
+        <div class="rs-header-left">
+          <div class="rs-icon-badge"><i class="fa-solid fa-bullseye"></i></div>
           <div>
-            <span class="lx-kicker" style="font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--cyan,#22d3ee)">ATS Score Scanner</span>
-            <div style="display:flex;align-items:center;gap:8px;margin-top:2px">
-              <span class="keybox" style="background:rgba(0,0,0,.5);color:#fff;padding:4px 8px;border-radius:6px;font-size:15px;font-weight:800">${atsScore.score}%</span>
-              <span style="font-size:13px;color:var(--muted)">Recruiter ATS compatibility</span>
+            <span class="rs-card-tag"><i class="fa-solid fa-shield-halved"></i> ATS Score Scanner</span>
+            <div class="rs-card-title-row">
+              <span class="rs-score-num">${atsScore.score}%</span>
+              <span class="rs-score-label">Recruiter ATS compatibility score</span>
             </div>
           </div>
         </div>
-        <span class="${gradeClass}" style="font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.1);color:#fff">Grade: ${atsScore.grade}</span>
+        <div class="rs-grade-badge ${gradeClass}">
+          <span class="rs-grade-label">Grade</span>
+          <span class="rs-grade-val">${atsScore.grade}</span>
+        </div>
       </div>
-      <div style="margin-top:10px;font-size:13px;color:var(--muted);display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px">
-        <div><span style="color:var(--muted);font-weight:700">Sections:</span> ${atsScore.sectionScore} / 30 pts</div>
-        <div><span style="color:var(--muted);font-weight:700">Formatting:</span> ${atsScore.formattingScore} / 20 pts</div>
-        <div><span style="color:var(--muted);font-weight:700">Keywords:</span> ${atsScore.keywordScore} / 35 pts</div>
+
+      <div class="rs-metrics-grid">
+        <div class="rs-metric-pill">
+          <div class="rs-metric-title"><i class="fa-solid fa-list-check"></i> Sections</div>
+          <div class="rs-metric-val"><b>${atsScore.sectionScore}</b> / 34 pts</div>
+          <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${Math.min(100, Math.round((atsScore.sectionScore / 34) * 100))}%"></div></div>
+        </div>
+        <div class="rs-metric-pill">
+          <div class="rs-metric-title"><i class="fa-solid fa-align-left"></i> Formatting</div>
+          <div class="rs-metric-val"><b>${atsScore.formattingScore}</b> / 20 pts</div>
+          <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${Math.min(100, Math.round((atsScore.formattingScore / 20) * 100))}%"></div></div>
+        </div>
+        <div class="rs-metric-pill">
+          <div class="rs-metric-title"><i class="fa-solid fa-key"></i> Keywords</div>
+          <div class="rs-metric-val"><b>${atsScore.keywordScore}</b> / 35 pts</div>
+          <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${Math.min(100, Math.round((atsScore.keywordScore / 35) * 100))}%"></div></div>
+        </div>
       </div>
+
       ${atsScore.feedback.suggestions.length > 0 ? `
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--stroke)">
-        <span style="color:var(--muted);font-weight:700;font-size:12px">Recommendations to reach 90+ (A+):</span>
-        <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.4">
-          ${atsScore.feedback.suggestions.slice(0, 5).map(s => `<li style="margin:2px 0">${s}</li>`).join('')}
+      <div class="rs-recommendations">
+        <div class="rs-rec-head"><i class="fa-solid fa-wand-magic-sparkles"></i> Recommendations to reach 90+ (A+):</div>
+        <ul class="rs-rec-list">
+          ${atsScore.feedback.suggestions.slice(0, 4).map(s => `<li>${esc(s)}</li>`).join('')}
         </ul>
       </div>` : ''}
+
       ${atsScore.keywordScore > 0 ? `
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--stroke)">
-        <span style="color:var(--muted);font-weight:700;font-size:12px">Matched high-weight tech skills:</span>
-        <span style="color:var(--muted);font-size:12px;margin-left:8px">${atsScore.foundKeywords.slice(0, 6).map(k => `'${k.name}'`).join(', ') || 'None'}</span>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--stroke,#e2e8f0)">
+        <span class="rs-subhead">Matched High-Weight Tech Skills:</span>
+        <div class="rs-chips-wrap">
+          ${atsScore.foundKeywords.slice(0, 8).map(k => `<span class="rs-chip rs-chip-success"><i class="fa-solid fa-check"></i> ${esc(k.name)}</span>`).join('')}
+        </div>
       </div>` : ''}
     </div>`;
   }
@@ -2462,31 +2482,45 @@ function paintResumeTab() {
     const gradeText = gap.gradeText || (R && R.skillsGapGrade ? R.skillsGapGrade(bestRole.score) : (typeof gap.skillsGapGrade === 'function' ? gap.skillsGapGrade(bestRole.score) : (bestRole.grade || '—')));
     const topSkills = gap.allMissing.slice(0, 6).map(m => m.skill);
     gapHtml = `
-    <div class="rs-skills-gap-card ${gradeClass}" style="background:var(--bg-card);border:1px solid var(--stroke);border-radius:12px;padding:16px 20px;margin:16px 0;max-width:720px">
-      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:12px">
-        <div style="display:flex;align-items:center;gap:10px">
-          <span style="font-size:20px">📊</span>
+    <div class="rs-skills-gap-card ${gradeClass}">
+      <div class="rs-card-header">
+        <div class="rs-header-left">
+          <div class="rs-icon-badge rs-icon-purple"><i class="fa-solid fa-chart-column"></i></div>
           <div>
-            <span class="lx-kicker" style="font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)">Target Role Match &amp; Skills Gap</span>
-            <div style="display:flex;align-items:center;gap:8px;margin-top:2px">
-              <span class="keybox" style="background:rgba(0,0,0,.5);color:#fff;padding:4px 8px;border-radius:6px;font-size:15px;font-weight:800">${bestRole.score}%</span>
-              <span style="font-size:13px;color:var(--muted)">Best match: <b style="color:#fff">${bestRole.role || '—'}</b></span>
+            <span class="rs-card-tag rs-tag-purple"><i class="fa-solid fa-chart-pie"></i> Target Role Match &amp; Skills Gap</span>
+            <div class="rs-card-title-row">
+              <span class="rs-score-num">${bestRole.score}%</span>
+              <span class="rs-score-label">Best match: <b class="rs-role-highlight">${esc(bestRole.role || '—')}</b></span>
             </div>
           </div>
         </div>
-        <span class="${gradeClass}" style="font-size:12px;font-weight:700;padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.1);color:#fff">Match: ${gradeText}</span>
+        <div class="rs-grade-badge ${gradeClass}">
+          <span class="rs-grade-label">Match</span>
+          <span class="rs-grade-val">${gradeText}</span>
+        </div>
       </div>
-      <div style="margin-top:10px">
-        <span class="lx-kicker" style="font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)">Role Benchmark Breakdown:</span>
-        <ul style="margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.4">
-          ${gap.roleResults.slice(0, 3).map(r => `<li style="margin:2px 0"><b>${r.role}:</b> ${r.pct}% — ${r.suggestions[0] || 'Good alignment'}</li>`).join('')}
-        </ul>
+
+      <div style="margin:16px 0">
+        <span class="rs-subhead">Role Benchmark Breakdown</span>
+        <div class="rs-role-list">
+          ${gap.roleResults.slice(0, 3).map(r => `
+            <div class="rs-role-row">
+              <div class="rs-role-meta">
+                <span class="rs-role-name">${esc(r.role)}</span>
+                <span class="rs-role-pct">${r.pct}%</span>
+              </div>
+              <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${r.pct}%"></div></div>
+              <div class="rs-role-sug">${esc(r.suggestions[0] || 'Good alignment with requirements')}</div>
+            </div>
+          `).join('')}
+        </div>
       </div>
+
       ${topSkills.length > 0 ? `
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--stroke)">
-        <span class="lx-kicker" style="font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)">High-Priority Skills to Add:</span>
-        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px">
-          ${topSkills.map(skill => `<span style="background:rgba(255,255,255,.05);border:1px solid var(--stroke);border-radius:100px;padding:4px 10px;font-size:12px;color:var(--cyan,#22d3ee)">+ ${esc(skill)}</span>`).join('')}
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--stroke,#e2e8f0)">
+        <span class="rs-subhead">High-Priority Skills to Add:</span>
+        <div class="rs-chips-wrap">
+          ${topSkills.map(skill => `<span class="rs-chip rs-chip-add"><i class="fa-solid fa-plus"></i> ${esc(skill)}</span>`).join('')}
         </div>
       </div>` : ''}
     </div>`;

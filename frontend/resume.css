@@ -144,39 +144,334 @@ body.rs-page.rs-academic{background:#fafafa}
 
 @media(max-width:640px){.rs-doc{padding:22px 18px;margin:16px 12px 30px}.rs-item-top{flex-direction:column;gap:2px}}
 
-/* ATS Score Card — dashboard resume tab */
-.rs-ats-score-card{background:var(--bg-card);border:1px solid var(--stroke);border-radius:12px;padding:16px 20px;margin:16px 0;max-width:720px}
-.rs-ats-score-card .lx-kicker{font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
-.rs-ats-score-card .keybox{background:rgba(0,0,0,.5);color:#fff;padding:4px 8px;border-radius:6px;font-size:14px;font-weight:700}
-.rs-ats-score-card span[class*="ats-"]{font-size:12px;padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.1);color:#fff}
-.rs-ats-score-card div[style*="Sections:"],.rs-ats-score-card div[style*="Formatting:"],.rs-ats-score-card div[style*="Keywords:"]{margin-top:6px;font-size:13px;color:var(--muted)}
-.rs-ats-score-card ul{margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.4;color:var(--muted)}
-.rs-ats-score-card li{margin:2px 0}
+/* ============================================================
+   ATS Score Card & Skills Gap Card — Studio Dashboard Styling
+   ============================================================ */
+.rs-ats-score-card,
+.rs-skills-gap-card {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--stroke, #e2e8f0);
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin: 16px 0;
+  max-width: 820px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  color: var(--txt, #0f172a);
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
 
-/* High contrast variants for A+ / A grades */
-.rs-ats-score-card.ats-excellent .keybox{background:rgba(34,211,238,.8);color:#fff}
-.rs-ats-score-card.ats-good .keybox{background:rgba(79,70,229,.8);color:#fff}
-.rs-ats-score-card.ats-fair .keybox{background:rgba(245,158,11,.8);color:#111}
-.rs-ats-score-card.ats-poor .keybox{background:rgba(239,68,68,.8);color:#fff}
-.rs-ats-score-card.ats-failing .keybox{background:rgba(185,28,28,.8);color:#fff}
+.rs-ats-score-card:hover,
+.rs-skills-gap-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
 
-/* Skills Gap Card — dashboard resume tab */
-.rs-skills-gap-card{background:var(--bg-card);border:1px solid var(--stroke);border-radius:12px;padding:16px 20px;margin:16px 0;max-width:720px}
-.rs-skills-gap-card .lx-kicker{font-size:12px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
-.rs-skills-gap-card .keybox{background:rgba(0,0,0,.5);color:#fff;padding:4px 8px;border-radius:6px;font-size:14px;font-weight:700}
-.rs-skills-gap-card span[class*="skills-gap-"]{font-size:12px;padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.1);color:#fff}
-.rs-skills-gap-card div[style*="Best Match:"],.rs-skills-gap-card div[style*="Score:"]{margin-top:6px;font-size:13px;color:var(--muted)}
-.rs-skills-gap-card ul{margin:6px 0 0 16px;padding:0;font-size:13px;line-height:1.4;color:var(--muted)}
-.rs-skills-gap-card li{margin:2px 0}
-.rs-skills-gap-card .skills-to-focus-on{margin-top:10px}
-.rs-skills-gap-card .skills-to-focus-on span{background:var(--bg);border:1px solid var(--stroke);border-radius:100px;padding:4px 8px;font-size:12px;color:var(--muted)}
+/* Header */
+.rs-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--stroke, #e2e8f0);
+}
 
-/* High contrast variants for skills gap grades */
-.rs-skills-gap-card.skills-gap-excellent .keybox{background:rgba(34,211,238,.8);color:#fff}
-.rs-skills-gap-card.skills-gap-good .keybox{background:rgba(79,70,229,.8);color:#fff}
-.rs-skills-gap-card.skills-gap-fair .keybox{background:rgba(245,158,11,.8);color:#111}
-.rs-skills-gap-card.skills-gap-poor .keybox{background:rgba(239,68,68,.8);color:#fff}
-.rs-skills-gap-card.skills-gap-failing .keybox{background:rgba(185,28,28,.8);color:#fff}
+.rs-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.rs-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.15), rgba(79, 70, 229, 0.12));
+  color: #0891b2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.rs-icon-badge.rs-icon-purple {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(244, 114, 182, 0.12));
+  color: #7c3aed;
+}
+
+.rs-card-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #0891b2;
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  padding: 3px 8px;
+  border-radius: 6px;
+  margin-bottom: 4px;
+}
+.rs-card-tag::before { content: none !important; }
+
+.rs-card-tag.rs-tag-purple {
+  color: #7c3aed;
+  background: rgba(124, 58, 237, 0.08);
+  border-color: rgba(124, 58, 237, 0.25);
+}
+
+.rs-card-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.rs-score-num {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--txt, #0f172a);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.rs-score-label {
+  font-size: 13px;
+  color: var(--muted, #64748b);
+  font-weight: 500;
+}
+
+.rs-role-highlight {
+  color: #4f46e5 !important;
+  font-weight: 800;
+}
+
+/* Grade Badge */
+.rs-grade-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+
+.rs-grade-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.8;
+}
+
+.rs-grade-val {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.rs-grade-badge.ats-excellent,
+.rs-grade-badge.skills-gap-excellent {
+  background: rgba(16, 185, 129, 0.12);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.rs-grade-badge.ats-good,
+.rs-grade-badge.skills-gap-good {
+  background: rgba(79, 70, 229, 0.12);
+  color: #4338ca;
+  border: 1px solid rgba(79, 70, 229, 0.3);
+}
+
+.rs-grade-badge.ats-fair,
+.rs-grade-badge.skills-gap-fair {
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.rs-grade-badge.ats-poor,
+.rs-grade-badge.skills-gap-poor,
+.rs-grade-badge.ats-failing,
+.rs-grade-badge.skills-gap-failing {
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Metric Pills Grid */
+.rs-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.rs-metric-pill {
+  background: var(--bg2, #f1f5f9);
+  border: 1px solid var(--stroke, #e2e8f0);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.rs-metric-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted, #64748b);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.rs-metric-val {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--txt, #0f172a);
+  margin-bottom: 8px;
+}
+
+.rs-metric-val b {
+  font-weight: 800;
+  color: #4f46e5;
+}
+
+.rs-progress-bar {
+  height: 6px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.rs-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #06b6d4, #4f46e5);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+/* Subheadings */
+.rs-subhead {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--muted, #64748b);
+  margin-bottom: 8px;
+}
+.rs-subhead::before { content: none !important; }
+
+/* Recommendations Alert Box */
+.rs-recommendations {
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 14px 0;
+}
+
+.rs-rec-head {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #b45309;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.rs-rec-list {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--txt, #0f172a);
+}
+
+.rs-rec-list li {
+  margin: 4px 0;
+}
+
+/* Chips / Pills Wrap */
+.rs-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.rs-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 100px;
+  line-height: 1;
+}
+
+.rs-chip-success {
+  background: rgba(16, 185, 129, 0.08);
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.rs-chip-add {
+  background: rgba(79, 70, 229, 0.08);
+  color: #4338ca;
+  border: 1px solid rgba(79, 70, 229, 0.25);
+  font-weight: 700;
+}
+
+/* Role Benchmark Breakdown Rows */
+.rs-role-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.rs-role-row {
+  background: var(--bg2, #f1f5f9);
+  border: 1px solid var(--stroke, #e2e8f0);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+
+.rs-role-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.rs-role-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--txt, #0f172a);
+}
+
+.rs-role-pct {
+  font-size: 13px;
+  font-weight: 800;
+  color: #4f46e5;
+}
+
+.rs-role-sug {
+  font-size: 12px;
+  color: var(--muted, #64748b);
+  margin-top: 6px;
+}
 
 /* Print: hide ATS score card and chrome */
 @media print{
