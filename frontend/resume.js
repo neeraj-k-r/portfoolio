@@ -380,72 +380,160 @@ ${o.bare ? '' : `<div class="no-print" style="text-align:center;padding:0 0 40px
   const roleSkillRequirements = {
     'software engineer': {
       title: 'Software Engineer',
+      icon: '💻',
       core: ['javascript', 'python', 'java', 'c++', 'git', 'sql'],
       desired: ['react', 'node.js', 'docker', 'kubernetes', 'aws', 'rest api'],
       niceToHave: ['typescript', 'machine learning', 'graphql', 'microservices'],
       weightCore: 4, weightDesired: 3, weightNice: 1
     },
-    'senior software engineer': {
-      title: 'Senior Software Engineer',
-      core: ['javascript', 'system design', 'architecture', 'git', 'sql'],
-      desired: ['kubernetes', 'docker', 'aws/gcp/azure', 'terraform', 'ci/cd'],
-      niceToHave: ['machine learning', 'graphql', 'async messaging', 'performance optimization'],
-      weightCore: 5, weightDesired: 4, weightNice: 2
-    },
     'frontend engineer': {
       title: 'Frontend Engineer',
+      icon: '⚡',
       core: ['html', 'css', 'javascript', 'react', 'typescript'],
-      desired: ['redux', 'state management', 'testing', 'webpack', 'vite'],
-      niceToHave: ['graphql', 'progressive web apps', 'accessibility (a11y)'],
+      desired: ['next.js', 'redux', 'tailwind', 'vue.js', 'vite', 'rest api'],
+      niceToHave: ['graphql', 'progressive web apps', 'accessibility (a11y)', 'testing'],
+      weightCore: 4, weightDesired: 3, weightNice: 1
+    },
+    'backend engineer': {
+      title: 'Backend Engineer',
+      icon: '🛠️',
+      core: ['python', 'node.js', 'sql', 'postgresql', 'rest api', 'git'],
+      desired: ['docker', 'redis', 'microservices', 'aws', 'mongodb', 'graphql'],
+      niceToHave: ['kubernetes', 'ci/cd', 'system design', 'go', 'kafka'],
       weightCore: 4, weightDesired: 3, weightNice: 1
     },
     'full stack engineer': {
       title: 'Full Stack Engineer',
-      core: ['javascript', 'node.js', 'python', 'sql', 'git'],
-      desired: ['react', 'express', 'rest api', 'docker', 'aws'],
-      niceToHave: ['graphql', 'microservices', 'typescript', 'ci/cd'],
+      icon: '🌐',
+      core: ['javascript', 'typescript', 'react', 'node.js', 'sql', 'git'],
+      desired: ['next.js', 'docker', 'aws', 'rest api', 'postgresql', 'tailwind'],
+      niceToHave: ['graphql', 'microservices', 'ci/cd', 'redis', 'python'],
       weightCore: 4, weightDesired: 3, weightNice: 1
     },
+    'senior software engineer': {
+      title: 'Senior Software Engineer',
+      icon: '👔',
+      core: ['system design', 'architecture', 'git', 'sql', 'microservices', 'leadership'],
+      desired: ['kubernetes', 'docker', 'aws', 'ci/cd', 'performance optimization'],
+      niceToHave: ['distributed systems', 'kafka', 'terraform', 'mentorship'],
+      weightCore: 5, weightDesired: 4, weightNice: 2
+    },
     'devops engineer': {
-      title: 'DevOps Engineer',
-      core: ['docker', 'kubernetes', 'aws', 'ci/cd', 'linux'],
-      desired: ['terraform', 'ansible', 'monitoring', 'microservices'],
-      niceToHave: ['helm', 'prometheus', 'grafana', 'infrastructure as code'],
+      title: 'DevOps & Cloud Engineer',
+      icon: '☁️',
+      core: ['docker', 'kubernetes', 'aws', 'ci/cd', 'linux', 'git'],
+      desired: ['terraform', 'ansible', 'monitoring', 'bash', 'prometheus'],
+      niceToHave: ['grafana', 'helm', 'python', 'security', 'gcp'],
+      weightCore: 5, weightDesired: 4, weightNice: 2
+    },
+    'ai ml engineer': {
+      title: 'AI / ML Engineer',
+      icon: '🤖',
+      core: ['python', 'machine learning', 'deep learning', 'pytorch', 'tensorflow', 'math'],
+      desired: ['llms', 'nlp', 'scikit-learn', 'data analysis', 'numpy', 'pandas'],
+      niceToHave: ['huggingface', 'vector dbs', 'docker', 'mlops', 'langchain'],
       weightCore: 5, weightDesired: 4, weightNice: 2
     },
     'data scientist': {
-      title: 'Data Scientist',
-      core: ['python', 'statistics', 'machine learning', 'data analysis'],
-      desired: ['pandas', 'numpy', 'scikit-learn', 'tensorflow', 'pytorch'],
-      niceToHave: ['sql', 'aws', 'gcp', 'docker', 'data visualization'],
+      title: 'Data Scientist & Analyst',
+      icon: '📊',
+      core: ['python', 'statistics', 'machine learning', 'data analysis', 'sql'],
+      desired: ['pandas', 'numpy', 'scikit-learn', 'data visualization', 'tableau'],
+      niceToHave: ['tensorflow', 'r', 'power bi', 'aws', 'bigquery'],
       weightCore: 5, weightDesired: 4, weightNice: 2
     },
-    'product manager': {
-      title: 'Product Manager',
-      core: ['product strategy', 'roadmapping', 'analytics', 'stakeholder management'],
-      desired: ['jira', 'sql', 'A/B testing', 'user research', 'figma'],
-      niceToHave: ['sql', 'python', 'data analysis', 'market research'],
+    'mobile developer': {
+      title: 'Mobile App Developer',
+      icon: '📱',
+      core: ['react native', 'flutter', 'javascript', 'mobile development', 'git'],
+      desired: ['typescript', 'swift', 'kotlin', 'rest api', 'ios', 'android'],
+      niceToHave: ['graphql', 'firebase', 'app store deployment', 'state management'],
       weightCore: 4, weightDesired: 3, weightNice: 1
+    },
+    'cloud architect': {
+      title: 'Cloud Solutions Architect',
+      icon: '🏛️',
+      core: ['aws', 'cloud architecture', 'system design', 'security', 'networking'],
+      desired: ['kubernetes', 'docker', 'terraform', 'microservices', 'azure'],
+      niceToHave: ['gcp', 'disaster recovery', 'cost optimization', 'ci/cd'],
+      weightCore: 5, weightDesired: 4, weightNice: 2
+    },
+    'ui ux designer': {
+      title: 'UI/UX & Product Designer',
+      icon: '🎨',
+      core: ['figma', 'ui design', 'ux research', 'wireframing', 'prototyping'],
+      desired: ['design systems', 'user testing', 'interaction design', 'html', 'css'],
+      niceToHave: ['information architecture', 'adobe xd', 'typography', 'accessibility (a11y)'],
+      weightCore: 4, weightDesired: 3, weightNice: 1
+    },
+    'product manager': {
+      title: 'Technical Product Manager',
+      icon: '🎯',
+      core: ['product strategy', 'roadmapping', 'analytics', 'stakeholder management', 'agile'],
+      desired: ['jira', 'sql', 'A/B testing', 'user research', 'user stories'],
+      niceToHave: ['python', 'data analysis', 'market research', 'scrum'],
+      weightCore: 4, weightDesired: 3, weightNice: 1
+    },
+    'cybersecurity analyst': {
+      title: 'Cybersecurity Analyst',
+      icon: '🔒',
+      core: ['network security', 'cybersecurity', 'vulnerability assessment', 'linux', 'siem'],
+      desired: ['incident response', 'penetration testing', 'firewalls', 'owasp', 'python'],
+      niceToHave: ['cryptography', 'wireshark', 'compliance', 'cloud security'],
+      weightCore: 5, weightDesired: 4, weightNice: 2
     }
   };
 
-  function computeSkillsGap(p) {
+  function checkSkillMatch(skillName, userSkillsSet, userSkillsList) {
+    const s = String(skillName).trim().toLowerCase();
+    if (userSkillsSet.has(s)) return true;
+    for (let i = 0; i < userSkillsList.length; i++) {
+      const u = userSkillsList[i];
+      if (u === s) return true;
+      if (s.length >= 3 && (u.includes(s) || s.includes(u))) return true;
+      if ((s === 'k8s' && u === 'kubernetes') || (s === 'kubernetes' && u === 'k8s')) return true;
+      if ((s === 'js' && u === 'javascript') || (s === 'javascript' && (u === 'js' || u === 'vanilla js'))) return true;
+      if ((s === 'ts' && u === 'typescript') || (s === 'typescript' && u === 'ts')) return true;
+      if (s === 'node.js' && (u === 'node' || u === 'nodejs')) return true;
+      if (s === 'react' && (u === 'reactjs' || u === 'react.js')) return true;
+      if (s === 'vue.js' && (u === 'vue' || u === 'vuejs')) return true;
+      if (s === 'next.js' && (u === 'nextjs' || u === 'next')) return true;
+      if (s === 'rest api' && (u === 'rest' || u === 'apis' || u === 'api' || u === 'restful')) return true;
+      if (s === 'ci/cd' && (u === 'cicd' || u === 'continuous integration')) return true;
+      if (s === 'machine learning' && (u === 'ml' || u === 'ai/ml')) return true;
+      if (s === 'deep learning' && (u === 'dl' || u === 'neural networks')) return true;
+    }
+    return false;
+  }
+
+  function computeSkillsGap(p, targetRoleKey = null) {
     const r = get(p);
     const skills = (p.skills || []).filter(Boolean);
     const { hard, soft } = splitSkills(skills);
     const projs = (p.projects || []).slice(0, 6);
 
-    // Build user skill set (lowercased)
+    // Build user skill set and list (lowercased)
     const userSkillsSet = new Set();
-    skills.forEach(s => userSkillsSet.add(String(s).trim().toLowerCase()));
-    hard.forEach(s => userSkillsSet.add(String(s).trim().toLowerCase()));
-    soft.forEach(s => userSkillsSet.add(String(s).trim().toLowerCase()));
+    const userSkillsList = [];
+    const addSkill = (s) => {
+      if (!s) return;
+      const str = String(s).trim().toLowerCase();
+      if (!str) return;
+      userSkillsSet.add(str);
+      if (!userSkillsList.includes(str)) userSkillsList.push(str);
+    };
+
+    skills.forEach(addSkill);
+    hard.forEach(addSkill);
+    soft.forEach(addSkill);
 
     // Also add project technologies
     projs.forEach(pr => {
       const t = techsOf(pr);
-      t.forEach(tt => userSkillsSet.add(String(tt).trim().toLowerCase()));
+      t.forEach(addSkill);
     });
+
+    const activeRoleKey = (targetRoleKey || (p.resume && p.resume.targetRole) || 'auto').trim().toLowerCase();
 
     // Evaluate against each role
     const roleResults = [];
@@ -453,42 +541,47 @@ ${o.bare ? '' : `<div class="no-print" style="text-align:center;padding:0 0 40px
 
     Object.entries(roleSkillRequirements).forEach(([roleKey, role]) => {
       let score = 0;
-      let foundCore = 0, foundDesired = 0, foundNice = 0;
-      let missingCore = 0, missingDesired = 0, missingNice = 0;
+      const matchedCore = [], missingCore = [];
+      const matchedDesired = [], missingDesired = [];
+      const matchedNice = [], missingNice = [];
+      const roleMissing = [];
 
       // Check core skills
       role.core.forEach(coreSkill => {
-        const lower = coreSkill.toLowerCase();
-        if (userSkillsSet.has(lower)) {
-          foundCore++;
+        if (checkSkillMatch(coreSkill, userSkillsSet, userSkillsList)) {
+          matchedCore.push(coreSkill);
           score += role.weightCore;
         } else {
-          missingCore++;
-          allMissing.push({ role: role.title, category: 'core', skill: coreSkill, weight: role.weightCore });
+          missingCore.push(coreSkill);
+          const item = { role: role.title, category: 'core', skill: coreSkill, weight: role.weightCore };
+          roleMissing.push(item);
+          allMissing.push(item);
         }
       });
 
       // Check desired skills
       role.desired.forEach(desiredSkill => {
-        const lower = desiredSkill.toLowerCase();
-        if (userSkillsSet.has(lower)) {
-          foundDesired++;
+        if (checkSkillMatch(desiredSkill, userSkillsSet, userSkillsList)) {
+          matchedDesired.push(desiredSkill);
           score += role.weightDesired;
         } else {
-          missingDesired++;
-          allMissing.push({ role: role.title, category: 'desired', skill: desiredSkill, weight: role.weightDesired });
+          missingDesired.push(desiredSkill);
+          const item = { role: role.title, category: 'desired', skill: desiredSkill, weight: role.weightDesired };
+          roleMissing.push(item);
+          allMissing.push(item);
         }
       });
 
       // Check nice-to-have skills
       role.niceToHave.forEach(niceSkill => {
-        const lower = niceSkill.toLowerCase();
-        if (userSkillsSet.has(lower)) {
-          foundNice++;
+        if (checkSkillMatch(niceSkill, userSkillsSet, userSkillsList)) {
+          matchedNice.push(niceSkill);
           score += role.weightNice;
         } else {
-          missingNice++;
-          allMissing.push({ role: role.title, category: 'nice', skill: niceSkill, weight: role.weightNice });
+          missingNice.push(niceSkill);
+          const item = { role: role.title, category: 'nice', skill: niceSkill, weight: role.weightNice };
+          roleMissing.push(item);
+          allMissing.push(item);
         }
       });
 
@@ -497,60 +590,79 @@ ${o.bare ? '' : `<div class="no-print" style="text-align:center;padding:0 0 40px
       const normalizedScore = Math.min(100, score);
       const pct = Math.round((normalizedScore / Math.max(1, maxPossible)) * 100);
 
+      // Suggestions for this role
+      const suggestions = [];
+      if (missingCore.length > 0) {
+        suggestions.push(`Priority: Add ${missingCore.length} core skill${missingCore.length > 1 ? 's' : ''} (${missingCore.slice(0, 3).join(', ')})`);
+      }
+      if (missingDesired.length > 0) {
+        suggestions.push(`Recommended: Add ${missingDesired.length} desired skill${missingDesired.length > 1 ? 's' : ''} (${missingDesired.slice(0, 3).join(', ')})`);
+      }
+      if (missingNice.length > 0) {
+        suggestions.push(`Bonus: Add nice-to-have skill${missingNice.length > 1 ? 's' : ''} (${missingNice.slice(0, 2).join(', ')})`);
+      }
+      if (suggestions.length === 0) {
+        suggestions.push('You meet 100% of the benchmark requirements for this role!');
+      }
+
       roleResults.push({
+        key: roleKey,
         role: role.title,
-        core: { found: foundCore, total: role.core.length, missing: missingCore },
-        desired: { found: foundDesired, total: role.desired.length, missing: missingDesired },
+        icon: role.icon || '💼',
+        core: { found: matchedCore.length, total: role.core.length, missing: missingCore.length, matchedList: matchedCore, missingList: missingCore },
+        desired: { found: matchedDesired.length, total: role.desired.length, missing: missingDesired.length, matchedList: matchedDesired, missingList: missingDesired },
+        niceToHave: { found: matchedNice.length, total: role.niceToHave.length, missing: missingNice.length, matchedList: matchedNice, missingList: missingNice },
+        allRoleMissing: roleMissing.sort((a, b) => b.weight - a.weight),
         score: pct,
         rawScore: normalizedScore,
         maxScore: 100,
-        grade: pct >= 80 ? 'A' : pct >= 70 ? 'B' : pct >= 60 ? 'C' : 'D',
+        grade: pct >= 85 ? 'A+' : pct >= 75 ? 'A' : pct >= 65 ? 'B' : pct >= 50 ? 'C' : 'D',
+        gradeClass: skillsGapClass(pct),
         pct,
-        suggestions: []
+        suggestions
       });
-
-      // Generate suggestions for this role
-      const suggestions = [];
-      if (missingCore > 0) {
-        suggestions.push(`Priority: Add ${missingCore} core skill${missingCore > 1 ? 's' : ''} (${role.core.slice(0, missingCore).join(', ')})`);
-      }
-      if (missingDesired > 0) {
-        suggestions.push(`Recommended: Add ${missingDesired} desired skill${missingDesired > 1 ? 's' : ''} (${role.desired.slice(0, missingDesired).join(', ')})`);
-      }
-      if (missingNice > 0) {
-        suggestions.push(`Consider: Add ${missingNice} nice-to-have skill${missingNice > 1 ? 's' : ''} (${role.niceToHave.slice(0, missingNice).join(', ')})`);
-      }
-      if (suggestions.length === 0) {
-        suggestions.push('You meet most requirements for this role!');
-      }
-      roleResults[roleResults.length - 1].suggestions = suggestions;
     });
 
     // Sort missing skills by potential impact (highest weight first)
     allMissing.sort((a, b) => b.weight - a.weight);
 
-    // Generate overall recommendations
-    const overallRecommendations = [];
-    const coreMissingCount = allMissing.filter(m => m.category === 'core').length;
-    const desiredMissingCount = allMissing.filter(m => m.category === 'desired').length;
-
-    if (coreMissingCount > 0) {
-      overallRecommendations.push(`Add ${coreMissingCount} core skill${coreMissingCount > 1 ? 's' : ''} for maximum impact`);
-    }
-    if (desiredMissingCount > 0) {
-      overallRecommendations.push(`Consider adding ${desiredMissingCount} desired skill${desiredMissingCount > 1 ? 's' : ''} for role flexibility`);
-    }
-
     // Find the best matching role (highest score)
-    const bestRole = roleResults.reduce((best, current) => (current.score > best.score ? current : best), { role: '', score: -1 });
+    const bestRole = roleResults.reduce((best, current) => (current.score > best.score ? current : best), roleResults[0] || { role: '', score: -1, pct: 0 });
+
+    // Determine selected role based on targetRoleKey
+    let selectedRole = null;
+    if (activeRoleKey && activeRoleKey !== 'auto') {
+      selectedRole = roleResults.find(r => r.key === activeRoleKey || r.role.toLowerCase() === activeRoleKey || r.key.replace(/\s+/g, '') === activeRoleKey.replace(/\s+/g, ''));
+    }
+    if (!selectedRole) {
+      selectedRole = bestRole;
+    }
+
+    const targetMissing = selectedRole.allRoleMissing || [];
+    const targetMatched = [...(selectedRole.core.matchedList || []), ...(selectedRole.desired.matchedList || [])];
+
+    // Generate overall recommendations for the selected role
+    const overallRecommendations = [...selectedRole.suggestions];
 
     return {
       roleResults,
       allMissing,
       overallRecommendations,
       bestRole,
-      gradeClass: skillsGapClass(bestRole.score),
-      gradeText: skillsGapGrade(bestRole.score),
+      selectedRole,
+      targetRoleKey: (selectedRole && activeRoleKey !== 'auto') ? selectedRole.key : 'auto',
+      targetMissing,
+      targetMatched,
+      availableRoles: roleResults.map(r => ({
+        key: r.key,
+        title: r.role,
+        icon: r.icon,
+        score: r.score,
+        grade: r.grade,
+        gradeClass: r.gradeClass
+      })),
+      gradeClass: skillsGapClass(selectedRole.score),
+      gradeText: skillsGapGrade(selectedRole.score),
       skillsGapClass,
       skillsGapGrade,
       skillCount: skills.length,
@@ -576,5 +688,5 @@ ${o.bare ? '' : `<div class="no-print" style="text-align:center;padding:0 0 40px
     return 'F';
   }
 
-  return { THEMES, get, expOf, eduOf, certOf, resumeURL, docBody, sectionHTML, fullDoc, esc, computeATSScore, atsScoreClass, atsGradeClass, computeSkillsGap, skillsGapClass, skillsGapGrade };
+  return { THEMES, get, expOf, eduOf, certOf, resumeURL, docBody, sectionHTML, fullDoc, esc, computeATSScore, atsScoreClass, atsGradeClass, computeSkillsGap, skillsGapClass, skillsGapGrade, roleSkillRequirements };
 });

@@ -82,6 +82,46 @@ assert.equal(typeof gap.gradeText, 'string', 'gap.gradeText is precalculated');
 assert.equal(typeof fullScore.scoreClass, 'string', 'fullScore.scoreClass is precalculated');
 assert.equal(typeof fullScore.gradeClass, 'string', 'fullScore.gradeClass is precalculated');
 
+// 4b. TailorCV Target Role Selection & Dynamic Recalculation
+assert.ok(Array.isArray(gap.availableRoles), 'Available roles returned');
+assert.ok(gap.availableRoles.length >= 10, 'At least 10 role benchmarks available');
+
+// Test selecting Frontend Engineer
+const gapFrontend = computeSkillsGap(fullProfile, 'frontend engineer');
+assert.equal(gapFrontend.selectedRole.key, 'frontend engineer');
+assert.equal(gapFrontend.selectedRole.role, 'Frontend Engineer');
+assert.ok(gapFrontend.selectedRole.score > 0);
+assert.ok(Array.isArray(gapFrontend.targetMissing));
+
+// Test selecting Backend Engineer
+const gapBackend = computeSkillsGap(fullProfile, 'backend engineer');
+assert.equal(gapBackend.selectedRole.key, 'backend engineer');
+assert.equal(gapBackend.selectedRole.role, 'Backend Engineer');
+
+// Test profile with saved targetRole
+const profileWithTarget = {
+  ...fullProfile,
+  resume: { ...fullProfile.resume, targetRole: 'devops engineer' }
+};
+const gapDevops = computeSkillsGap(profileWithTarget);
+assert.equal(gapDevops.selectedRole.key, 'devops engineer');
+assert.equal(gapDevops.selectedRole.role, 'DevOps & Cloud Engineer');
+
+// Test skill addition simulation (TailorCV 1-click optimization)
+const initialScore = gapBackend.selectedRole.score;
+const missingSkill = gapBackend.targetMissing[0]?.skill;
+if (missingSkill) {
+  const optimizedProfile = {
+    ...fullProfile,
+    skills: [...fullProfile.skills, missingSkill]
+  };
+  const gapOptimized = computeSkillsGap(optimizedProfile, 'backend engineer');
+  assert.ok(
+    gapOptimized.selectedRole.score >= initialScore,
+    `Adding missing skill ${missingSkill} should improve or maintain match score (was ${initialScore}, now ${gapOptimized.selectedRole.score})`
+  );
+}
+
 // 5. Resume URL generation
 assert.equal(resumeURL(''), '#');
 assert.equal(resumeURL('neeraj-k-r'), '/?u=neeraj-k-r&resume=1');

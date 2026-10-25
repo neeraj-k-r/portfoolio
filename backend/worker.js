@@ -3138,6 +3138,7 @@ function computeWorkerATS(p) {
 function pageResume(p) {
   const theme = resumeTheme(p);
   const ats = computeWorkerATS(p);
+  const targetRole = (p.resume && p.resume.targetRole && p.resume.targetRole !== 'auto') ? p.resume.targetRole : '';
   return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Resume — ${esc(p.name)} | portfoolio.me</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -3147,6 +3148,7 @@ function pageResume(p) {
 <a href="/" style="font-weight:800">← ${esc(p.name)}</a>
 <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.35);font-size:12.5px;font-weight:700;color:var(--cyan,#22d3ee)">
   <span>🎯 ATS Score:</span> <span style="background:rgba(0,0,0,.4);color:#fff;padding:2px 6px;border-radius:4px">${ats.score}%</span> <span>Grade ${ats.grade}</span>
+  ${targetRole ? `<span style="color:#a78bfa;border-left:1px solid rgba(255,255,255,.2);padding-left:6px">${esc(targetRole)}</span>` : ''}
 </div>
 <span style="margin-left:auto;display:flex;gap:10px"><a href="/" style="font-weight:700">Portfolio</a><a href="javascript:window.print()" style="font-weight:800">⬇ Print / PDF</a></span></div>
 <main class="rs-doc rs-${theme}">${resumeBody(p)}

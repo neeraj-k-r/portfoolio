@@ -2473,56 +2473,144 @@ function paintResumeTab() {
     </div>`;
   }
 
-  // SKILLS GAP CARD — target role matching
-  const gap = R ? R.computeSkillsGap(p) : null;
+  // SKILLS GAP CARD — target role matching (TailorCV clone engine)
+  const userTarget = (p.resume && p.resume.targetRole) || 'auto';
+  const gap = R ? R.computeSkillsGap(p, userTarget) : null;
   let gapHtml = '';
   if (gap && gap.roleResults) {
-    const bestRole = gap.bestRole || {};
-    const gradeClass = gap.gradeClass || (R && R.skillsGapClass ? R.skillsGapClass(bestRole.score) : (typeof gap.skillsGapClass === 'function' ? gap.skillsGapClass(bestRole.score) : 'skills-gap-good'));
-    const gradeText = gap.gradeText || (R && R.skillsGapGrade ? R.skillsGapGrade(bestRole.score) : (typeof gap.skillsGapGrade === 'function' ? gap.skillsGapGrade(bestRole.score) : (bestRole.grade || '—')));
-    const topSkills = gap.allMissing.slice(0, 6).map(m => m.skill);
+    const target = gap.selectedRole || gap.bestRole || {};
+    const isAuto = gap.targetRoleKey === 'auto';
+    const gradeClass = gap.gradeClass || (R && R.skillsGapClass ? R.skillsGapClass(target.score) : 'skills-gap-good');
+    const gradeText = gap.gradeText || (R && R.skillsGapGrade ? R.skillsGapGrade(target.score) : (target.grade || '—'));
+    const missingSkills = gap.targetMissing || [];
+    const matchedSkills = gap.targetMatched || [];
+    const quickRoleKeys = ['auto', 'full stack engineer', 'frontend engineer', 'backend engineer', 'devops engineer', 'ai ml engineer', 'data scientist'];
+
     gapHtml = `
     <div class="rs-skills-gap-card ${gradeClass}">
       <div class="rs-card-header">
         <div class="rs-header-left">
-          <div class="rs-icon-badge rs-icon-purple"><i class="fa-solid fa-chart-column"></i></div>
+          <div class="rs-icon-badge rs-icon-purple"><i class="fa-solid fa-bullseye"></i></div>
           <div>
-            <span class="rs-card-tag rs-tag-purple"><i class="fa-solid fa-chart-pie"></i> Target Role Match &amp; Skills Gap</span>
+            <span class="rs-card-tag rs-tag-purple"><i class="fa-solid fa-wand-magic-sparkles"></i> TailorCV · Target Role Match</span>
             <div class="rs-card-title-row">
-              <span class="rs-score-num">${bestRole.score}%</span>
-              <span class="rs-score-label">Best match: <b class="rs-role-highlight">${esc(bestRole.role || '—')}</b></span>
+              <span class="rs-score-num">${target.score}%</span>
+              <span class="rs-score-label">Target: <b class="rs-role-highlight">${esc(target.role || '—')}</b></span>
             </div>
           </div>
         </div>
         <div class="rs-grade-badge ${gradeClass}">
-          <span class="rs-grade-label">Match</span>
+          <span class="rs-grade-label">Role Match</span>
           <span class="rs-grade-val">${gradeText}</span>
         </div>
       </div>
 
-      <div style="margin:16px 0">
-        <span class="rs-subhead">Role Benchmark Breakdown</span>
+      <!-- Target Role Switcher (TailorCV Clone) -->
+      <div class="rs-role-switcher-wrap">
+        <div class="rs-role-selector-row">
+          <label for="rsTargetRoleSelect" class="rs-subhead" style="margin-bottom:0;display:flex;align-items:center;gap:6px">
+            <i class="fa-solid fa-crosshairs" style="color:#7c3aed"></i> Target Job Role:
+          </label>
+          <select id="rsTargetRoleSelect" class="rs-role-select" title="Change target position to re-evaluate your resume">
+            <option value="auto" ${isAuto ? 'selected' : ''}>⚡ Auto-Detect Best Match (${gap.bestRole.role} — ${gap.bestRole.score}%)</option>
+            ${gap.availableRoles.map(r => `
+              <option value="${r.key}" ${!isAuto && gap.targetRoleKey === r.key ? 'selected' : ''}>
+                ${r.icon} ${esc(r.title)} (${r.score}% match · Grade ${r.grade})
+              </option>
+            `).join('')}
+          </select>
+        </div>
+        <div class="rs-quick-roles">
+          <span style="font-size:11px;font-weight:700;color:var(--muted);margin-right:2px">Quick Switch:</span>
+          ${quickRoleKeys.map(k => {
+            if (k === 'auto') {
+              return `<button type="button" class="rs-role-chip-btn ${isAuto ? 'active' : ''}" data-targetrole="auto">⚡ Auto</button>`;
+            }
+            const rObj = gap.availableRoles.find(x => x.key === k);
+            if (!rObj) return '';
+            const isActive = !isAuto && gap.targetRoleKey === k;
+            return `<button type="button" class="rs-role-chip-btn ${isActive ? 'active' : ''}" data-targetrole="${k}">
+              ${rObj.icon} ${esc(rObj.title.split(' ')[0])} <span class="rs-role-chip-score">${rObj.score}%</span>
+            </button>`;
+          }).join('')}
+        </div>
+      </div>
+
+      <!-- Metrics Breakdown for Selected Target Role -->
+      <div class="rs-metrics-grid">
+        <div class="rs-metric-pill">
+          <div class="rs-metric-title"><i class="fa-solid fa-shield-halved"></i> Core Requirements</div>
+          <div class="rs-metric-val"><b>${target.core ? target.core.found : 0}</b> / ${target.core ? target.core.total : 0} matched</div>
+          <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${target.core ? Math.min(100, Math.round((target.core.found / Math.max(1, target.core.total)) * 100)) : 0}%"></div></div>
+        </div>
+        <div class="rs-metric-pill">
+          <div class="rs-metric-title"><i class="fa-solid fa-layer-group"></i> Desired Tech Stack</div>
+          <div class="rs-metric-val"><b>${target.desired ? target.desired.found : 0}</b> / ${target.desired ? target.desired.total : 0} matched</div>
+          <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${target.desired ? Math.min(100, Math.round((target.desired.found / Math.max(1, target.desired.total)) * 100)) : 0}%"></div></div>
+        </div>
+        <div class="rs-metric-pill">
+          <div class="rs-metric-title"><i class="fa-solid fa-star"></i> Bonus / Nice-to-Have</div>
+          <div class="rs-metric-val"><b>${target.niceToHave ? target.niceToHave.found : 0}</b> / ${target.niceToHave ? target.niceToHave.total : 0} matched</div>
+          <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${target.niceToHave ? Math.min(100, Math.round((target.niceToHave.found / Math.max(1, target.niceToHave.total)) * 100)) : 0}%"></div></div>
+        </div>
+      </div>
+
+      <!-- 1-Click TailorCV Skill Optimizer -->
+      ${missingSkills.length > 0 ? `
+      <div class="rs-tailor-box">
+        <div class="rs-tailor-head">
+          <span class="rs-subhead" style="margin-bottom:2px"><i class="fa-solid fa-wand-magic-sparkles" style="color:#7c3aed"></i> 1-Click Tailor — Missing Skills for ${esc(target.role)}:</span>
+          <p style="font-size:12px;color:var(--muted);margin:2px 0 8px">Click any missing skill below to immediately add it to your profile and boost your target match score live:</p>
+        </div>
+        <div class="rs-chips-wrap">
+          ${missingSkills.slice(0, 10).map(m => `
+            <button type="button" class="rs-chip rs-chip-add-btn" data-addskill="${esc(m.skill)}" title="Click to add ${esc(m.skill)} to your resume">
+              <i class="fa-solid fa-plus"></i> ${esc(m.skill)}
+              <span class="rs-chip-category ${m.category}">${m.category === 'core' ? 'CORE' : 'DESIRED'}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>` : `
+      <div style="margin:12px 0;padding:12px;background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);border-radius:10px;color:#047857;font-size:13px;font-weight:700">
+        <i class="fa-solid fa-circle-check"></i> Perfect Match! Your profile satisfies all benchmark requirements for ${esc(target.role)}.
+      </div>`}
+
+      <!-- Matched Skills on Resume -->
+      ${matchedSkills.length > 0 ? `
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--stroke,#e2e8f0)">
+        <span class="rs-subhead"><i class="fa-solid fa-circle-check" style="color:#047857"></i> Skills Already Matched for ${esc(target.role)}:</span>
+        <div class="rs-chips-wrap">
+          ${matchedSkills.map(s => `<span class="rs-chip rs-chip-success"><i class="fa-solid fa-check"></i> ${esc(s)}</span>`).join('')}
+        </div>
+      </div>` : ''}
+
+      <!-- Role-Specific Actionable Recommendations -->
+      ${target.suggestions && target.suggestions.length > 0 ? `
+      <div class="rs-recommendations" style="margin-top:14px">
+        <div class="rs-rec-head"><i class="fa-solid fa-lightbulb"></i> Tailored Recommendations for ${esc(target.role)}:</div>
+        <ul class="rs-rec-list">
+          ${target.suggestions.map(s => `<li>${esc(s)}</li>`).join('')}
+        </ul>
+      </div>` : ''}
+
+      <!-- Benchmark Market Comparison -->
+      <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--stroke,#e2e8f0)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span class="rs-subhead" style="margin-bottom:0"><i class="fa-solid fa-scale-balanced"></i> Benchmark Fit Across Other Roles:</span>
+          <small style="color:var(--muted)">Click any role to target it</small>
+        </div>
         <div class="rs-role-list">
-          ${gap.roleResults.slice(0, 3).map(r => `
-            <div class="rs-role-row">
+          ${gap.roleResults.filter(r => r.key !== target.key).slice(0, 3).map(r => `
+            <div class="rs-role-row" style="cursor:pointer" data-targetrole="${r.key}" title="Click to target ${esc(r.role)}">
               <div class="rs-role-meta">
-                <span class="rs-role-name">${esc(r.role)}</span>
-                <span class="rs-role-pct">${r.pct}%</span>
+                <span class="rs-role-name">${r.icon} ${esc(r.role)}</span>
+                <span class="rs-role-pct">${r.pct}% (${r.grade}) <small style="color:#6366f1;text-decoration:underline;margin-left:4px">Target this →</small></span>
               </div>
               <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${r.pct}%"></div></div>
-              <div class="rs-role-sug">${esc(r.suggestions[0] || 'Good alignment with requirements')}</div>
             </div>
           `).join('')}
         </div>
       </div>
-
-      ${topSkills.length > 0 ? `
-      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--stroke,#e2e8f0)">
-        <span class="rs-subhead">High-Priority Skills to Add:</span>
-        <div class="rs-chips-wrap">
-          ${topSkills.map(skill => `<span class="rs-chip rs-chip-add"><i class="fa-solid fa-plus"></i> ${esc(skill)}</span>`).join('')}
-        </div>
-      </div>` : ''}
     </div>`;
   }
   if ($('rsAtsScore')) {
@@ -2532,6 +2620,52 @@ function paintResumeTab() {
   if ($('rsSkillsGap')) {
     $('rsSkillsGap').innerHTML = gapHtml;
     $('rsSkillsGap').style.display = gapHtml ? 'block' : 'none';
+
+    // Wire Target Role Switcher & 1-Click Skill Add (TailorCV Engine)
+    const roleSelect = $('rsTargetRoleSelect');
+    if (roleSelect) {
+      roleSelect.onchange = (e) => {
+        const newRole = e.target.value;
+        if (!p.resume) p.resume = {};
+        p.resume.targetRole = newRole;
+        draftResume();
+        paintResumeTab();
+        toast(`🎯 Target role updated to "${roleSelect.options[roleSelect.selectedIndex].text.split('(')[0].trim()}"`);
+      };
+    }
+    const gapContainer = $('rsSkillsGap');
+    if (gapContainer) {
+      gapContainer.querySelectorAll('[data-targetrole]').forEach(el => {
+        el.onclick = (e) => {
+          e.preventDefault();
+          const newRole = el.dataset.targetrole;
+          if (!p.resume) p.resume = {};
+          p.resume.targetRole = newRole;
+          draftResume();
+          paintResumeTab();
+          toast(`🎯 Switched target role to ${newRole === 'auto' ? 'Auto-Detect' : newRole}`);
+        };
+      });
+
+      gapContainer.querySelectorAll('[data-addskill]').forEach(btn => {
+        btn.onclick = (e) => {
+          e.preventDefault();
+          const skill = btn.dataset.addskill;
+          if (!p.skills) p.skills = [];
+          const lower = skill.toLowerCase();
+          if (p.skills.some(s => String(s).toLowerCase() === lower)) {
+            return toast(`ℹ️ "${skill}" is already in your skills`);
+          }
+          const formatted = skill.length <= 3 ? skill.toUpperCase() : (skill.charAt(0).toUpperCase() + skill.slice(1));
+          p.skills.push(formatted);
+          const edSkills = $('edSkills');
+          if (edSkills) edSkills.value = p.skills.join(', ');
+          draftResume();
+          paintResumeTab();
+          toast(`✨ Tailored! Added "${formatted}" — Match score recalculated!`);
+        };
+      });
+    }
   }
 
   const isProd = location.hostname.endsWith('portfoolio.me');

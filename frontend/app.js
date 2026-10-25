@@ -638,8 +638,10 @@ function renderResumePage(p) {
   if (dash) dash.style.display = 'none';
   if (app) app.style.display = '';
   if (!R) { renderPortfolio(p); return; }
+  const userTarget = (p.resume && p.resume.targetRole) || 'auto';
   const ats = R.computeATSScore ? R.computeATSScore(p) : null;
-  const gap = R.computeSkillsGap ? R.computeSkillsGap(p) : null;
+  const gap = R.computeSkillsGap ? R.computeSkillsGap(p, userTarget) : null;
+  const targetRoleObj = gap ? (gap.selectedRole || gap.bestRole) : null;
   const back = `/?u=${encodeURIComponent(p.username)}`;
   app.innerHTML = `
   <nav class="no-print" style="position:sticky;top:0;z-index:50;background:rgba(11,18,38,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;padding:12px 20px;flex-wrap:wrap;gap:10px">
@@ -650,6 +652,7 @@ function renderResumePage(p) {
         <span>🎯 ATS Score:</span>
         <span style="background:rgba(0,0,0,.4);color:#fff;padding:2px 8px;border-radius:6px">${ats.score}%</span>
         <span style="color:#fff">Grade ${ats.grade}</span>
+        ${targetRoleObj ? `<span style="color:#a78bfa;border-left:1px solid rgba(255,255,255,.2);padding-left:8px">${targetRoleObj.role}: ${targetRoleObj.score}%</span>` : ''}
         <small style="color:var(--cyan,#22d3ee);text-decoration:underline;margin-left:4px">View breakdown ▾</small>
       </div>` : ''}
       <a class="btn btn-ghost btn-sm" href="${back}">← Portfolio</a>
@@ -660,14 +663,14 @@ function renderResumePage(p) {
   <div id="rsAtsDrawer" class="no-print" style="display:none;background:rgba(15,23,42,.96);border-bottom:1px solid rgba(34,211,238,.3);padding:18px 24px;color:#fff">
     <div style="max-width:860px;margin:0 auto">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <h4 style="margin:0;font-size:15px;display:flex;align-items:center;gap:8px"><i class="fa-solid fa-shield-halved" style="color:#22d3ee"></i> Real-Time ATS Score Checker & Recruiter Analysis</h4>
+        <h4 style="margin:0;font-size:15px;display:flex;align-items:center;gap:8px"><i class="fa-solid fa-shield-halved" style="color:#22d3ee"></i> TailorCV ATS Score &amp; Target Role Match</h4>
         <button class="btn btn-ghost btn-sm" style="padding:2px 8px;font-size:11px" onclick="document.getElementById('rsAtsDrawer').style.display='none'">✕ Close</button>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:12px;font-size:13px">
-        <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>Sections:</b> ${ats.sectionScore} / 30 pts</div>
+        <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>Sections:</b> ${ats.sectionScore} / 34 pts</div>
         <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>Formatting:</b> ${ats.formattingScore} / 20 pts</div>
         <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>Keywords:</b> ${ats.keywordScore} / 35 pts</div>
-        ${gap && gap.bestRole ? `<div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>Best Role Match:</b> ${esc(gap.bestRole.role)} (${gap.bestRole.score}%)</div>` : ''}
+        ${targetRoleObj ? `<div style="background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);padding:10px 14px;border-radius:8px"><b>${esc(targetRoleObj.role)}:</b> ${targetRoleObj.score}% (Grade ${targetRoleObj.grade})</div>` : ''}
       </div>
       ${ats.feedback.suggestions.length ? `
       <div style="font-size:12.5px;color:#cbd5e1">
@@ -675,6 +678,10 @@ function renderResumePage(p) {
         <ul style="margin:4px 0 0 18px;padding:0">
           ${ats.feedback.suggestions.slice(0, 4).map(s => `<li>${esc(s)}</li>`).join('')}
         </ul>
+      </div>` : ''}
+      ${gap && gap.targetMissing && gap.targetMissing.length ? `
+      <div style="font-size:12px;color:#94a3b8;margin-top:10px;padding-top:8px;border-top:1px solid rgba(255,255,255,.08)">
+        <b style="color:#a78bfa">Top missing skills for ${esc(targetRoleObj ? targetRoleObj.role : '')}:</b> ${gap.targetMissing.slice(0, 5).map(m => esc(m.skill)).join(', ')}
       </div>` : ''}
     </div>
   </div>` : ''}

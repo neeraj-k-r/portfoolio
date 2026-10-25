@@ -433,6 +433,156 @@ body.rs-page.rs-academic{background:#fafafa}
   font-weight: 700;
 }
 
+/* TailorCV Role Selector & Switcher Toolbar */
+.rs-role-switcher-wrap {
+  background: var(--bg2, #f8fafc);
+  border: 1px solid var(--stroke, #e2e8f0);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 14px 0 16px;
+}
+
+.rs-role-selector-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.rs-role-select {
+  flex: 1;
+  min-width: 220px;
+  padding: 9px 14px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: var(--card, #ffffff);
+  color: var(--txt, #0f172a);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.rs-role-select:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.rs-quick-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.rs-role-chip-btn {
+  background: var(--card, #ffffff);
+  border: 1px solid var(--stroke, #cbd5e1);
+  color: var(--txt, #334155);
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 100px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+  line-height: 1.4;
+}
+
+.rs-role-chip-btn:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+.rs-role-chip-btn.active {
+  background: linear-gradient(135deg, #7c3aed, #4f46e5);
+  border-color: #6366f1;
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.25);
+}
+
+.rs-role-chip-score {
+  font-size: 10px;
+  opacity: 0.85;
+  background: rgba(0, 0, 0, 0.08);
+  padding: 1px 5px;
+  border-radius: 10px;
+}
+.rs-role-chip-btn.active .rs-role-chip-score {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+/* 1-Click TailorCV Add Button Chip */
+.rs-chip-add-btn {
+  background: rgba(124, 58, 237, 0.08);
+  color: #6d28d9;
+  border: 1px solid rgba(124, 58, 237, 0.28);
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  padding: 6px 12px;
+}
+
+.rs-chip-add-btn:hover {
+  background: #7c3aed;
+  color: #ffffff;
+  border-color: #7c3aed;
+  box-shadow: 0 2px 8px rgba(124, 58, 237, 0.3);
+  transform: translateY(-1px);
+}
+
+.rs-chip-category {
+  font-size: 9.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+.rs-chip-category.core {
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+}
+.rs-chip-add-btn:hover .rs-chip-category.core {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.rs-chip-category.desired {
+  background: rgba(245, 158, 11, 0.12);
+  color: #b45309;
+}
+.rs-chip-add-btn:hover .rs-chip-category.desired {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.rs-chip-category.nice {
+  background: rgba(100, 116, 139, 0.12);
+  color: #475569;
+}
+.rs-chip-add-btn:hover .rs-chip-category.nice {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+.rs-tailor-box {
+  background: linear-gradient(180deg, rgba(124, 58, 237, 0.04) 0%, rgba(248, 250, 252, 0.5) 100%);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin: 14px 0;
+}
+
 /* Role Benchmark Breakdown Rows */
 .rs-role-list {
   display: flex;
