@@ -2,7 +2,11 @@
    Data: name/title/tagline/contact + skills + experience[] + education[] + projects[] + certifications[]
    Theme: profile.resume.theme — 'ats' (default, recruiter/ATS clean) | 'modern' | 'midnight' | 'terminal'
    Old profiles without experience/education/resume still render (empty states everywhere). */
-window.PortfoolioResume = (() => {
+(function (root, factory) {
+  const api = factory();
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else root.PortfoolioResume = api;
+})(typeof self !== 'undefined' ? self : this, () => {
   const THEMES = [
     { id: 'ats', name: 'ATS Clean', desc: 'Black on white, parser-safe, standard headings', emoji: '📄', best: 'Job applications' },
     { id: 'modern', name: 'Modern', desc: 'Light card, soft + clean', emoji: '✨', best: 'General use' },
@@ -68,7 +72,15 @@ window.PortfoolioResume = (() => {
     });
     return out;
   }
-  function resumeURL(username) { return `/?u=${encodeURIComponent(username)}&resume=1`; }
+  function resumeURL(username) {
+    if (!username) return '#';
+    try {
+      if (typeof location !== 'undefined' && location.hostname && location.hostname.endsWith('portfoolio.me')) {
+        return `https://${encodeURIComponent(username)}.portfoolio.me/resume`;
+      }
+    } catch {}
+    return `/?u=${encodeURIComponent(username)}&resume=1`;
+  }
 
   function bullets(desc) {
     const lines = String(desc || '').split('\n').map((s) => s.trim()).filter(Boolean);
@@ -485,10 +497,10 @@ ${o.bare ? '' : `<div class="no-print" style="text-align:center;padding:0 0 40px
         role: role.title,
         core: { found: foundCore, total: role.core.length, missing: missingCore },
         desired: { found: foundDesired, total: role.desired.length, missing: missingDesired },
-        nice: { found: foundNice, total: role.niceToHave.length, missing: missingNice },
-        score: normalizedScore,
+        score: pct,
+        rawScore: normalizedScore,
         maxScore: 100,
-        grade: normalizedScore >= 80 ? 'A' : normalizedScore >= 70 ? 'B' : normalizedScore >= 60 ? 'C' : 'D',
+        grade: pct >= 80 ? 'A' : pct >= 70 ? 'B' : pct >= 60 ? 'C' : 'D',
         pct,
         suggestions: []
       });
@@ -557,4 +569,4 @@ ${o.bare ? '' : `<div class="no-print" style="text-align:center;padding:0 0 40px
   }
 
   return { THEMES, get, expOf, eduOf, certOf, resumeURL, docBody, sectionHTML, fullDoc, esc, computeATSScore, atsScoreClass, atsGradeClass, computeSkillsGap, skillsGapClass, skillsGapGrade };
-})();
+});

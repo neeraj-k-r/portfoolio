@@ -12,7 +12,7 @@ const store = {
 };
 
 function slugify(s) {
-  return (s || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '').slice(0, 30);
+  return (s || '').toLowerCase().trim().replace(/[^a-z0-9-]+/g, '').slice(0, 30);
 }
 function validUsername(u) { return /^[a-z0-9][a-z0-9-]{2,29}$/.test(u) && !RESERVED.has(u); }
 const TAKEN_USERNAMES = ['nkr3037','neerajkr-dev','nithin','athukovil','ashmith','neerajkr'];
@@ -627,11 +627,17 @@ function getResumeUser() {
 }
 function renderResumePage(p) {
   const R = window.PortfoolioResume;
+  const theme = (R && R.get(p).theme) || ((p.resume && p.resume.theme) || 'ats');
+  document.body.className = `portfolio-view rs-page rs-${theme}`;
   document.body.dataset.template = '';
   document.title = `Resume — ${p.name || p.username} | portfoolio.me`;
   const app = document.getElementById('app');
+  const landing = document.getElementById('landing');
+  if (landing) landing.style.display = 'none';
+  const dash = document.getElementById('dashboardApp');
+  if (dash) dash.style.display = 'none';
+  if (app) app.style.display = '';
   if (!R) { renderPortfolio(p); return; }
-  const theme = R.get(p).theme;
   const back = `/?u=${encodeURIComponent(p.username)}`;
   app.innerHTML = `
   <nav class="no-print">
