@@ -2416,8 +2416,8 @@ function paintResumeTab() {
   const atsScore = R ? R.computeATSScore(p) : null;
   let atsHtml = '';
   if (atsScore) {
-    const scoreClass = R.atsScoreClass(atsScore.score);
-    const gradeClass = R.atsGradeClass(atsScore.grade);
+    const scoreClass = atsScore.scoreClass || (R && R.atsScoreClass ? R.atsScoreClass(atsScore.score) : 'ats-good');
+    const gradeClass = atsScore.gradeClass || (R && R.atsGradeClass ? R.atsGradeClass(atsScore.grade) : 'ats-good');
     atsHtml = `
     <div class="rs-ats-score-card ${scoreClass}" style="background:var(--bg-card);border:1px solid var(--stroke);border-radius:12px;padding:16px 20px;margin:16px 0;max-width:720px">
       <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
@@ -2457,9 +2457,9 @@ function paintResumeTab() {
   const gap = R ? R.computeSkillsGap(p) : null;
   let gapHtml = '';
   if (gap && gap.roleResults) {
-    const bestRole = gap.bestRole;
-    const gradeClass = gap.skillsGapClass(bestRole.score);
-    const gradeText = gap.skillsGapGrade(bestRole.score);
+    const bestRole = gap.bestRole || {};
+    const gradeClass = gap.gradeClass || (R && R.skillsGapClass ? R.skillsGapClass(bestRole.score) : (typeof gap.skillsGapClass === 'function' ? gap.skillsGapClass(bestRole.score) : 'skills-gap-good'));
+    const gradeText = gap.gradeText || (R && R.skillsGapGrade ? R.skillsGapGrade(bestRole.score) : (typeof gap.skillsGapGrade === 'function' ? gap.skillsGapGrade(bestRole.score) : (bestRole.grade || '—')));
     const topSkills = gap.allMissing.slice(0, 6).map(m => m.skill);
     gapHtml = `
     <div class="rs-skills-gap-card ${gradeClass}" style="background:var(--bg-card);border:1px solid var(--stroke);border-radius:12px;padding:16px 20px;margin:16px 0;max-width:720px">

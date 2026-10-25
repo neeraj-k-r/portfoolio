@@ -75,6 +75,12 @@ assert.ok(gap.bestRole.score > 50, 'Best role has reasonable match');
 assert.ok(gap.bestRole.role, 'Best role has title');
 assert.equal(typeof skillsGapClass(gap.bestRole.score), 'string');
 assert.equal(typeof skillsGapGrade(gap.bestRole.score), 'string');
+assert.equal(typeof gap.skillsGapClass, 'function', 'gap.skillsGapClass is exposed as function');
+assert.equal(typeof gap.skillsGapGrade, 'function', 'gap.skillsGapGrade is exposed as function');
+assert.equal(typeof gap.gradeClass, 'string', 'gap.gradeClass is precalculated');
+assert.equal(typeof gap.gradeText, 'string', 'gap.gradeText is precalculated');
+assert.equal(typeof fullScore.scoreClass, 'string', 'fullScore.scoreClass is precalculated');
+assert.equal(typeof fullScore.gradeClass, 'string', 'fullScore.gradeClass is precalculated');
 
 // 5. Resume URL generation
 assert.equal(resumeURL(''), '#');
