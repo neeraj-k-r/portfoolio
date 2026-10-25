@@ -3117,6 +3117,8 @@ function resumeBody(p) {
   ${edus.length ? edus.map((e) => `<div class="rs-item"><div class="rs-item-top"><b>${esc(e.school || '')}</b><span class="rs-dates">${esc([e.start, e.end].filter(Boolean).join(' – '))}</span></div><p class="rs-p">${esc([e.degree, e.field].filter(Boolean).join(', '))}</p></div>`).join('')
     : '<p class="rs-p rs-dim">No education listed yet.</p>'}
   ${projs.length ? `${sec('Projects')}${projs.map((pr) => `<div class="rs-item"><div class="rs-item-top"><b>${esc(pr.title)}</b>${pr.url && pr.url !== '#' ? `<a href="${esc(pr.url)}">Code →</a>` : ''}</div><p class="rs-p">${esc(pr.desc || '')}</p></div>`).join('')}` : ''}`;
+}
+
 function computeWorkerATS(p) {
   let score = 20; // baseline formatting
   if (p.email || p.phone || p.location) score += 6;
