@@ -1022,6 +1022,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       cube: { name: 'Muzammal', title: 'Interactive 3D Developer', desc: 'Interactive 3D cube swiper in charcoal & mint green, crafting modern and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] },
       cubegreen: { name: 'Muzammal', title: 'Interactive 3D Developer', desc: 'Interactive 3D cube swiper in charcoal & mint green, crafting modern and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] },
       muzammal: { name: 'Muzammal', title: 'Interactive 3D Developer', desc: 'Interactive 3D cube swiper in charcoal & mint green, crafting modern and interactive web experiences.', skills: ['HTML', 'CSS', 'JavaScript', 'Python'] },
+      nova: { name: 'Elena Rostova', title: 'Cosmology & Data Scientist', desc: 'Analyzing cosmic deep space arrays, neural simulations and planetary physics.', skills: ['Python', 'Astronomy', 'TensorFlow', 'WebGL'] },
+      codeflow: { name: 'Devon Miles', title: 'Systems & Infrastructure Architect', desc: 'Crafting resilient distributed message queues, microservices, and observability telemetry.', skills: ['Go', 'Rust', 'Kubernetes', 'Docker'] },
+      wave: { name: 'Cipher Wave', title: 'Cybersecurity & Low-Level Dev', desc: 'Reverse engineering, penetration testing, kernel security, and cyber defense pipelines.', skills: ['C++', 'Assembly', 'Linux', 'Security'] },
+      assistant: { name: 'AI Nexus', title: 'AI Applications & LLM Engineer', desc: 'Fine-tuning foundation models, agentic workflows, and conversational interfaces.', skills: ['LangChain', 'Python', 'OpenAI API', 'PyTorch'] },
+      console: { name: 'Alex Root', title: 'DevOps & Site Reliability Engineer', desc: 'Automating multi-cloud deployments, CI/CD orchestration, and shell automation scripts.', skills: ['Bash', 'Terraform', 'CI/CD', 'Linux'] },
+      snowcard: { name: 'Chloe Vance', title: 'Creative Frontend Engineer', desc: 'Bold neo-brutalist digital interfaces, fluid micro-interactions, and high-performance apps.', skills: ['Vue.js', 'TypeScript', 'CSS/SVG', 'Figma'] },
+      parchment: { name: 'Arthur Pendelton', title: 'Classical Scholar & Humanities Tech', desc: 'Archiving historic manuscripts, classical linguistics, digital typography, and epigraphy.', skills: ['Latin', 'Digital Archives', 'LaTeX', 'Serif'] },
+      cloud: { name: 'Sunny Cloud', title: 'Friendly UI/UX Developer', desc: 'Building delightful, accessible, and cloud-native human-friendly web applications.', skills: ['React', 'Accessibility', 'Figma', 'Node.js'] },
       gallery: { name: 'Camila Reyes', title: 'Visual Artist & Photographer', desc: 'Curating dynamic masonry galleries, editorial imagery, and print-inspired collections.', skills: ['Photography', 'Editorial', 'Art'] },
       studio: { name: 'Julian Gray', title: 'Brand & Graphic Designer', desc: 'Minimal light editorial covers, refined type specimens, and bespoke visual identity projects.', skills: ['Branding', 'Typography', 'Print'] },
       noir: { name: 'Kaelen Thorne', title: 'Cinematographer & 3D Artist', desc: 'Deep monochrome visuals, cinematic lighting studies, and full-bleed visual narratives.', skills: ['Cinema 4D', 'Blender', 'Lighting'] },
@@ -1047,6 +1055,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const closeBtn = themeModal.querySelector('.lx-modal-close');
       if (closeBtn) closeBtn.focus();
     };
+    window.openThemePreviewModal = openModal;
     const closeModal = () => {
       themeModal.classList.remove('open');
       themeModal.setAttribute('aria-hidden', 'true');
