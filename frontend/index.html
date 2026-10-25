@@ -879,6 +879,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <span style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 8px;border-radius:100px;background:rgba(34,211,238,.12);color:var(--cyan,#22d3ee);border:1px solid rgba(34,211,238,.3)"><i class="fa-solid fa-shield-halved"></i> Live ATS Scanner</span>
         </div>
         <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Auto-built recruiter-ready resume + real-time <b>ATS Score Scanner &amp; Skills Gap Checker</b>. Add summary, experience &amp; education, choose a theme, test your ATS score, and share your live resume link.</p>
+        <div id="rsAtsScore" style="margin:16px 0"></div>
+        <div id="rsSkillsGap" style="margin:16px 0"></div>
         <div style="background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.3);border-radius:12px;padding:12px 14px;margin-bottom:14px">
           <label class="flabel"><i class="fa-solid fa-paste"></i> Quick fill from pasted text</label>
           <p style="color:var(--muted);font-size:12.5px;margin-bottom:8px">Paste your About + Experience + Education text from anywhere (resume, profile or portfolio doc) below, and hit Parse &amp; Fill. Review the preview, then Save Changes to publish.</p>
@@ -946,7 +948,6 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           </div>
           <div class="full"><label class="flabel">Live preview</label>
             <iframe id="rsPreview" title="resume preview" style="width:100%;height:380px;border:1px solid var(--stroke);border-radius:12px;background:#fff"></iframe>
-            <div id="rsAtsScore" style="margin:16px 0"></div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
               <button type="button" class="btn btn-primary btn-sm" id="rsSaveBtn"><i class="fa-solid fa-floppy-disk"></i> Save changes</button>
               <a class="btn btn-ghost btn-sm" id="rsViewBtn" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open full resume</a>
@@ -955,7 +956,6 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <p class="mono" style="font-size:11.5px;color:var(--muted);margin-top:8px">Hit <b>Save Changes</b> below to publish — your portfolio also gains a Resume section linking to this page.</p>
           </div>
         </div>
-        <div id="rsSkillsGap" style="margin:16px 0"></div>
       </div>
 
       <!-- User Studio Tab: Upload prebuilt site -->
@@ -1284,6 +1284,9 @@ function switchUserTab(tabName) {
   });
   if (tabName === 'theme' && typeof paintTrackTabs === 'function' && activeUserProfile) {
     paintTrackTabs(activeUserProfile);
+  }
+  if (tabName === 'resume' && typeof paintResumeTab === 'function') {
+    paintResumeTab();
   }
   const shown = $('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
   if (shown && shown.scrollIntoView) shown.scrollIntoView({ block: 'nearest' });

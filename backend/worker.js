@@ -3117,20 +3117,39 @@ function resumeBody(p) {
   ${edus.length ? edus.map((e) => `<div class="rs-item"><div class="rs-item-top"><b>${esc(e.school || '')}</b><span class="rs-dates">${esc([e.start, e.end].filter(Boolean).join(' – '))}</span></div><p class="rs-p">${esc([e.degree, e.field].filter(Boolean).join(', '))}</p></div>`).join('')
     : '<p class="rs-p rs-dim">No education listed yet.</p>'}
   ${projs.length ? `${sec('Projects')}${projs.map((pr) => `<div class="rs-item"><div class="rs-item-top"><b>${esc(pr.title)}</b>${pr.url && pr.url !== '#' ? `<a href="${esc(pr.url)}">Code →</a>` : ''}</div><p class="rs-p">${esc(pr.desc || '')}</p></div>`).join('')}` : ''}`;
+function computeWorkerATS(p) {
+  let score = 20; // baseline formatting
+  if (p.email || p.phone || p.location) score += 6;
+  if ((p.resume && p.resume.summary) || p.tagline) score += 8;
+  if (Array.isArray(p.experience) && p.experience.length) score += 10;
+  if (Array.isArray(p.education) && p.education.length) score += 4;
+  if (Array.isArray(p.skills) && p.skills.length) score += 6;
+  const keySkills = ['javascript', 'typescript', 'react', 'node.js', 'python', 'sql', 'aws', 'docker', 'git', 'html', 'css'];
+  const userSkills = (p.skills || []).map((s) => String(s).toLowerCase());
+  let kwScore = 0;
+  keySkills.forEach((k) => { if (userSkills.some((s) => s.includes(k))) kwScore += 4; });
+  score = Math.min(100, score + Math.min(35, kwScore));
+  const grade = score >= 90 ? 'A+' : score >= 80 ? 'A' : score >= 70 ? 'B' : score >= 60 ? 'C' : 'D';
+  return { score, grade };
 }
+
 function pageResume(p) {
   const theme = resumeTheme(p);
+  const ats = computeWorkerATS(p);
   return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Resume — ${esc(p.name)} | portfoolio.me</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/resume.css"></head>
 <body class="portfolio-view rs-page rs-${theme}"><div class="bg-fx"></div>${nav(p)}
-<div style="max-width:860px;margin:0 auto;padding:120px 16px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+<div class="no-print" style="max-width:860px;margin:0 auto;padding:120px 16px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
 <a href="/" style="font-weight:800">← ${esc(p.name)}</a>
+<div style="display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.35);font-size:12.5px;font-weight:700;color:var(--cyan,#22d3ee)">
+  <span>🎯 ATS Score:</span> <span style="background:rgba(0,0,0,.4);color:#fff;padding:2px 6px;border-radius:4px">${ats.score}%</span> <span>Grade ${ats.grade}</span>
+</div>
 <span style="margin-left:auto;display:flex;gap:10px"><a href="/" style="font-weight:700">Portfolio</a><a href="javascript:window.print()" style="font-weight:800">⬇ Print / PDF</a></span></div>
 <main class="rs-doc rs-${theme}">${resumeBody(p)}
 <p class="rs-foot">Resume auto-built from <b>portfoolio.me</b> profile · ${esc(p.username)}.portfoolio.me</p></main>
-<div style="text-align:center;padding:0 0 40px"><a href="javascript:window.print()" style="font-weight:800">⬇ Print / Save as PDF</a></div>${foot(p)}</body></html>`;
+<div class="no-print" style="text-align:center;padding:0 0 40px"><a href="javascript:window.print()" style="font-weight:800">⬇ Print / Save as PDF</a></div>${foot(p)}</body></html>`;
 }
 function resumeTeaser(p) {
   const exps = Array.isArray(p.experience) ? p.experience : [];
