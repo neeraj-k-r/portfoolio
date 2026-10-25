@@ -16,6 +16,15 @@ const TEMPLATES = [
   { id: 'ultracode', name: 'Ultra Code', desc: 'Dark crimson theme with vertical sidebar, qualification timelines, skills tabs, work filters & modals', emoji: '🔴', best: 'Developers • Designers • Modern portfolio' },
   { id: 'devblue', name: 'Dev Blue', desc: 'Royal blue clean portfolio with smooth ScrollReveal, skill progress bars & work showcase', emoji: '🔷', best: 'Web Designers • Frontend • Clean UI' },
   { id: 'cube', name: '3D Cube', desc: 'Interactive 3D cube swiper in charcoal & mint green', emoji: '🟩', best: 'Web Developers • Modern 3D' },
+  { id: 'nova', name: 'Nova Galaxy', desc: 'Deep space navy & teal particle network', emoji: '🌌', best: 'Full Stack • AI / ML • Modern' },
+  { id: 'codeflow', name: 'Codeflow', desc: 'Deep-navy dev with live scroll code tab', emoji: '⚡', best: 'Software Engineers • Systems' },
+  { id: 'wave', name: 'Neon Wave', desc: 'Emerald neon frequency lines on pitch black', emoji: '🌊', best: 'Creative Devs • High Contrast' },
+  { id: 'assistant', name: 'AI Assistant', desc: 'ChatGPT-style conversational portfolio chat', emoji: '🤖', best: 'AI Engineers • Data • Interactive' },
+  { id: 'console', name: 'Dev Console', desc: 'Developer terminal window with live shell', emoji: '🖥️', best: 'Backend • DevOps • Terminal Devs' },
+  { id: 'snowcard', name: 'Snowcard', desc: 'Dotted canvas with brutalist yellow stickers', emoji: '❄️', best: 'Designers • Frontend • Memorable' },
+  { id: 'parchment', name: 'Parchment Scroll', desc: 'Antique scroll letter with wax seal & serif', emoji: '📜', best: 'Writers • Scholars • Academics' },
+  { id: 'cloud', name: 'Cloud Blue', desc: 'Airy sky blue cloudscape with soft cards', emoji: '☁️', best: 'Web Dev • Clean • Friendly UI' },
+
   { id: 'gallery', name: 'Gallery', desc: 'Visual masonry grid for artists and photographers', emoji: '🖼️', best: 'Photographers • Visual Artists', track: 'visual' },
   { id: 'studio', name: 'Studio', desc: 'Light editorial covers with refined typography', emoji: '☀️', best: 'Brand Designers • Art Directors', track: 'visual' },
   { id: 'noir', name: 'Noir', desc: 'Dark full-bleed visual showcases with deep shadows', emoji: '🌙', best: 'Cinematographers • 3D Artists', track: 'visual' },
@@ -2989,7 +2998,1349 @@ function initCubeRuntime(p) {
   }
 }
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube };
+
+/* ==========================================================================
+   REVERSE-ENGINEERED PORTFOLIO TEMPLATES (from thetailorcv.com/portfolio)
+   Nova, Codeflow, Wave, Assistant, Console, Snowcard, Parchment, Cloud
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. NOVA GALAXY — Deep space navy & teal constellation particles
+   -------------------------------------------------------------------------- */
+function renderNova(p) {
+  normTpl(p);
+  document.body.dataset.template = 'nova';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const name = tplEsc(p.name || 'Developer');
+  const title = tplEsc(p.title || 'Full Stack Engineer');
+  const tagline = tplEsc(p.tagline || 'Building impactful digital solutions with modern technology.');
+  const bio = tplEsc(p.bio || p.summary || p.tagline || `I'm ${name}, a dedicated technologist passionate about engineering scalable, elegant, and reliable systems.`);
+  const location = tplEsc(p.location || 'Remote / Worldwide');
+  const email = tplEsc(p.email || '');
+  const firstName = (p.name || '').trim().split(' ')[0] || 'developer';
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const expHtml = rawExp.map(e => `
+    <div class="nv-card">
+      <div class="nv-card-top">
+        <div>
+          <h3 class="nv-card-role">${tplEsc(e.role || e.title || 'Software Engineer')}</h3>
+          <div class="nv-card-org">${tplEsc(e.company || e.organization || '')}</div>
+        </div>
+        <div class="nv-card-meta">
+          <span>${tplEsc(e.location || '')}</span>
+          <span class="pill">${tplEsc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent')}</span>
+        </div>
+      </div>
+      ${e.desc ? `<p class="nv-card-desc">${tplEsc(e.desc)}</p>` : ''}
+      ${(e.bullets || e.achievements || []).length ? `
+        <div class="nv-keyh">Key Contributions</div>
+        <ul class="nv-dots">${(e.bullets || e.achievements).map(b => `<li>${tplEsc(b)}</li>`).join('')}</ul>
+      ` : ''}
+    </div>
+  `).join('');
+
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = tplEsc(pr.title || `Project ${i+1}`);
+    const prDesc = tplEsc(pr.desc || pr.description || 'Full stack engineering project built with modern best practices.');
+    const prUrl = pr.url || pr.demoUrl || '#';
+    const prDemo = pr.demoUrl ? tplEsc(pr.demoUrl) : '';
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    const img = pr.image || pr.img || '';
+    return `
+      <div class="nv-projx">
+        <div class="nv-projx-shot">
+          ${img ? `<img src="${tplEsc(img)}" alt="${prTitle}">` : `<div class="ph">${prTitle.slice(0, 2).toUpperCase()}</div>`}
+        </div>
+        <div class="nv-projx-info">
+          <h3>${prTitle} ${prUrl !== '#' ? `<a href="${tplEsc(prUrl)}" target="_blank" rel="noopener" class="nv-checkout">Code ↗</a>` : ''}${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener" class="nv-checkout">Live Demo ↗</a>` : ''}</h3>
+          <p>${prDesc}</p>
+          <div class="nv-pill-tags">
+            ${techs.map(t => `<span class="nv-ptag">✦ ${tplEsc(t)}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const skillsHtml = `
+    <div class="nv-stack">
+      <div class="nv-stack-card" style="grid-column: 1 / -1;">
+        <div class="nv-stack-grid" style="grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));">
+          ${skills.map(s => `
+            <div class="nv-stack-item">
+              <span class="nv-glyph" style="display:block">✦</span>
+              <span class="nm">${tplEsc(s)}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('app').innerHTML = `
+    <canvas id="nv-canvas"></canvas>
+    <nav class="nv-nav">
+      <div class="nv-nav-in">
+        <a href="#home" class="nv-brand">&lt;${tplEsc(firstName.toLowerCase())} /&gt;</a>
+        <div class="nv-links" id="nv-links">
+          <a href="#home" class="on">Home</a>
+          <a href="#about">About</a>
+          ${expHtml ? `<a href="#experience">Experience</a>` : ''}
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <a class="btn btn-ghost btn-sm" href="/" style="font-size:12px;padding:6px 12px">Make yours</a>
+          ${email ? `<a class="btn btn-primary btn-sm" href="mailto:${email}" style="font-size:12px;padding:6px 14px">Hire ${tplEsc(firstName)}</a>` : ''}
+        </div>
+      </div>
+    </nav>
+    <header class="nv-hero" id="home">
+      <div class="nv-avatar-ring">
+        ${p.avatarUrl ? `<img class="nv-avatar" src="${tplEsc(p.avatarUrl)}" alt="${name}">` : `<div class="nv-avatar ph">${name.charAt(0)}</div>`}
+        <span class="nv-avatar-dot"></span>
+      </div>
+      <h1>Hi! I'm <span class="g">${name}</span>.</h1>
+      <div class="nv-type"><span class="a">A </span><span class="t" id="nv-typed">${title}</span><span class="cur">|</span></div>
+      <p class="nv-quote">"${tagline}"</p>
+      <div class="nv-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;vertical-align:-2px"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> ${location}</div>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="#projects" class="nv-btn nv-btn-teal">View My Work →</a>
+        ${email ? `<a href="mailto:${email}" class="nv-btn nv-btn-ghost">Contact Me</a>` : ''}
+      </div>
+    </header>
+    <section class="nv-section" id="about">
+      <div class="nv-wrap nv-about">
+        <h2 class="nv-title">About <span class="g">Me</span></h2>
+        <div class="nv-rule"></div>
+        <div class="nv-about-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 9-3 3 3 3M16 9l3 3-3 3"/></svg></div>
+        <p>${bio}</p>
+      </div>
+    </section>
+    ${expHtml ? `
+      <section class="nv-section" id="experience">
+        <div class="nv-wrap">
+          <h2 class="nv-title">Professional <span class="g">Experience</span></h2>
+          <div class="nv-rule"></div>
+          ${expHtml}
+        </div>
+      </section>
+    ` : ''}
+    <section class="nv-section" id="projects">
+      <div class="nv-wrap">
+        <h2 class="nv-title">Featured <span class="g">Projects</span></h2>
+        <div class="nv-rule"></div>
+        <p class="nv-lead">Selected systems, applications, and tools crafted with attention to performance and detail.</p>
+        ${projectsHtml || '<p style="text-align:center;color:var(--nv-dim)">Projects coming soon.</p>'}
+      </div>
+    </section>
+    <section class="nv-section" id="skills">
+      <div class="nv-wrap">
+        <h2 class="nv-title">Skills &amp; <span class="g">Stack</span></h2>
+        <div class="nv-rule"></div>
+        ${skillsHtml}
+      </div>
+    </section>
+    <section class="nv-section" id="contact">
+      <div class="nv-wrap">
+        <h2 class="nv-title">Let's <span class="g">Connect</span></h2>
+        <div class="nv-rule"></div>
+        <p class="nv-lead">Interested in collaboration, opportunities, or discussing ideas? Let's connect.</p>
+        <div class="nv-connect" style="max-width:760px;margin:0 auto">
+          ${email ? `<div class="nv-card" style="text-align:center"><h3 class="nv-card-role" style="margin-bottom:8px">Email</h3><p class="nv-card-desc" style="margin:0 0 14px"><a href="mailto:${email}" style="color:var(--nv-teal)">${email}</a></p><a href="mailto:${email}" class="nv-btn nv-btn-teal" style="font-size:0.85rem;padding:8px 20px">Send Message</a></div>` : ''}
+          ${p.github ? `<div class="nv-card" style="text-align:center"><h3 class="nv-card-role" style="margin-bottom:8px">GitHub</h3><p class="nv-card-desc" style="margin:0 0 14px"><a href="${tplEsc(p.github)}" target="_blank" rel="noopener" style="color:var(--nv-teal)">GitHub Profile</a></p><a href="${tplEsc(p.github)}" target="_blank" rel="noopener" class="nv-btn nv-btn-ghost" style="font-size:0.85rem;padding:8px 20px">View Code</a></div>` : ''}
+          ${p.linkedin ? `<div class="nv-card" style="text-align:center"><h3 class="nv-card-role" style="margin-bottom:8px">LinkedIn</h3><p class="nv-card-desc" style="margin:0 0 14px"><a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener" style="color:var(--nv-teal)">LinkedIn Network</a></p><a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener" class="nv-btn nv-btn-ghost" style="font-size:0.85rem;padding:8px 20px">Connect</a></div>` : ''}
+          ${tplShowInsta(p) ? `<div class="nv-card" style="text-align:center"><h3 class="nv-card-role" style="margin-bottom:8px">Instagram</h3><p class="nv-card-desc" style="margin:0 0 14px"><a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener" style="color:var(--nv-teal)">Instagram Feed</a></p><a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener" class="nv-btn nv-btn-ghost" style="font-size:0.85rem;padding:8px 20px">Follow</a></div>` : ''}
+        </div>
+      </div>
+    </section>
+    ${tplFoot(p)}
+  `;
+
+  window.scrollTo(0, 0);
+  initNovaRuntime(p);
+}
+
+function initNovaRuntime(p) {
+  const canvas = document.getElementById('nv-canvas');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let W, H, pts = [];
+    const resize = () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+      const count = Math.min(85, Math.round(W * H / 18000));
+      pts = [];
+      for (let i = 0; i < count; i++) {
+        pts.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          vx: (Math.random() - 0.5) * 0.45,
+          vy: (Math.random() - 0.5) * 0.45
+        });
+      }
+    };
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    const draw = () => {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < pts.length; i++) {
+        const pt = pts[i];
+        pt.x += pt.vx;
+        pt.y += pt.vy;
+        if (pt.x < 0 || pt.x > W) pt.vx *= -1;
+        if (pt.y < 0 || pt.y > H) pt.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, 1.8, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(45,212,191,0.75)';
+        ctx.fill();
+        for (let j = i + 1; j < pts.length; j++) {
+          const pt2 = pts[j];
+          const dx = pt.x - pt2.x, dy = pt.y - pt2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.moveTo(pt.x, pt.y);
+            ctx.lineTo(pt2.x, pt2.y);
+            ctx.strokeStyle = `rgba(45,212,191,${(1 - dist / 120) * 0.22})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+      if (typeof window !== 'undefined' && window.requestAnimationFrame) window.requestAnimationFrame(draw);
+      else if (typeof requestAnimationFrame !== 'undefined') requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  const roles = [p.title || 'Developer', 'Full Stack Engineer', 'Creative Problem Solver'].filter(Boolean);
+  const typedEl = document.getElementById('nv-typed');
+  if (typedEl && roles.length) {
+    let rIdx = 0, cIdx = 0, deleting = false;
+    const tick = () => {
+      const cur = roles[rIdx % roles.length];
+      typedEl.textContent = deleting ? cur.slice(0, cIdx--) : cur.slice(0, cIdx++);
+      if (!deleting && cIdx > cur.length) {
+        deleting = true;
+        setTimeout(tick, 1500);
+        return;
+      }
+      if (deleting && cIdx < 0) {
+        deleting = false;
+        cIdx = 0;
+        rIdx++;
+      }
+      setTimeout(tick, deleting ? 45 : 95);
+    };
+    tick();
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. CODEFLOW — Deep navy / blue dev with live scroll code progress
+   -------------------------------------------------------------------------- */
+function renderCodeflow(p) {
+  normTpl(p);
+  document.body.dataset.template = 'codeflow';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const name = tplEsc(p.name || 'Developer');
+  const title = tplEsc(p.title || 'Software Engineer');
+  const tagline = tplEsc(p.tagline || 'Building production-ready software with modern engineering principles.');
+  const bio = tplEsc(p.bio || p.summary || p.tagline || `I'm ${name}, a software engineer specializing in scalable systems and robust digital products.`);
+  const email = tplEsc(p.email || '');
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const expHtml = rawExp.map(e => `
+    <div class="cf-card" style="margin-bottom:18px">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div>
+          <h3 style="margin:0 0 4px;color:#fff;font-size:1.25rem">${tplEsc(e.role || e.title || 'Role')}</h3>
+          <p style="margin:0;color:var(--cf-cyan);font-weight:600">${tplEsc(e.company || e.organization || '')}</p>
+        </div>
+        <span class="cf-tag">${tplEsc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent')}</span>
+      </div>
+      ${e.desc ? `<p style="margin:14px 0 0;color:var(--cf-dim)">${tplEsc(e.desc)}</p>` : ''}
+      ${(e.bullets || e.achievements || []).length ? `
+        <ul style="margin:12px 0 0;padding-left:20px;color:var(--cf-dim)">${(e.bullets || e.achievements).map(b => `<li style="margin-bottom:6px">${tplEsc(b)}</li>`).join('')}</ul>
+      ` : ''}
+    </div>
+  `).join('');
+
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = tplEsc(pr.title || `Project ${i+1}`);
+    const prDesc = tplEsc(pr.desc || pr.description || 'Full stack software solution.');
+    const prUrl = pr.url || pr.demoUrl || '#';
+    const prDemo = pr.demoUrl ? tplEsc(pr.demoUrl) : '';
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    const img = pr.image || pr.img || '';
+    return `
+      <div class="cf-card" style="margin-bottom:24px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+          <div>
+            <h3 style="color:#fff;font-size:1.4rem;margin:0 0 6px">${prTitle}</h3>
+            <p style="color:var(--cf-dim);margin:0 0 14px;max-width:640px">${prDesc}</p>
+          </div>
+          <div style="display:flex;gap:10px">
+            ${prUrl !== '#' ? `<a href="${tplEsc(prUrl)}" target="_blank" rel="noopener" class="cf-btn cf-btn-outline" style="padding:8px 16px;font-size:0.85rem">Code ↗</a>` : ''}
+            ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener" class="cf-btn cf-btn-blue" style="padding:8px 16px;font-size:0.85rem">Live Demo ↗</a>` : ''}
+          </div>
+        </div>
+        <div class="cf-tags" style="margin-top:12px">
+          ${techs.map(t => `<span class="cf-tag">${tplEsc(t)}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const skillsHtml = `
+    <div class="cf-stack">
+      <div class="cf-stack-card" style="grid-column: 1 / -1;">
+        <div class="cf-tags" style="justify-content:center;gap:12px">
+          ${skills.map(s => `<span class="cf-tag" style="font-size:0.95rem;padding:8px 18px">✦ ${tplEsc(s)}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('app').innerHTML = `
+    <div class="cf-prog">
+      <span class="pct" id="cfPct">→ 0%</span>
+      <div class="cf-keys">
+        <div class="cf-keys-fill" id="cfFill"></div>
+        <div class="cf-keys-text"><span class="cf-key on">const</span> dev = { name: "${name}", status: "building" };<span class="cf-cursor"></span></div>
+      </div>
+      <span class="cf-remain" id="cfRemain">portfolio flow</span>
+    </div>
+    <div class="cf-wrap">
+      <nav class="cf-nav">
+        <div class="cf-brand">${name}</div>
+        <div class="cf-navlinks">
+          <a href="#about" class="on">About</a>
+          ${expHtml ? `<a href="#experience">Experience</a>` : ''}
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div>
+          <a class="cf-btn cf-btn-ghost" href="/" style="font-size:0.85rem;padding:8px 14px">Make yours</a>
+        </div>
+      </nav>
+      <header class="cf-hero" style="min-height:70vh">
+        <div>
+          <div class="cf-hey">⚡ Hey there, I'm</div>
+          <h1 class="cf-type">${name}</h1>
+          <div class="cf-headline"><span id="cfTyped">${title}</span><span class="cur">|</span></div>
+          <p class="cf-lead">${tagline}</p>
+          <div class="cf-actions">
+            <a href="#projects" class="cf-btn cf-btn-blue">Explore Projects →</a>
+            ${email ? `<a href="mailto:${email}" class="cf-btn cf-btn-outline">Say Hello</a>` : ''}
+          </div>
+          <div class="cf-hero-socials">
+            ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener" title="GitHub"><i class="fa-brands fa-github"></i></a>` : ''}
+            ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>` : ''}
+            ${tplShowInsta(p) ? `<a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener" title="Instagram"><i class="fa-brands fa-instagram"></i></a>` : ''}
+            ${email ? `<a href="mailto:${email}" title="Email"><i class="fa-solid fa-envelope"></i></a>` : ''}
+          </div>
+        </div>
+        <div style="text-align:center">
+          ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${name}" class="cf-hero-photo">` : `<div class="cf-hero-photo ph">${name.charAt(0)}</div>`}
+        </div>
+      </header>
+      <section class="cf-section" id="about">
+        <h2 class="cf-title">About Overview</h2>
+        <p class="cf-sub">Core background, mindset, and experience.</p>
+        <div class="cf-card" style="max-width:820px;margin:0 auto;text-align:center">
+          <p style="font-size:1.1rem;line-height:1.8">${bio}</p>
+          ${p.location ? `<p style="color:var(--cf-cyan);font-weight:600;margin-top:14px">📍 Based in ${tplEsc(p.location)}</p>` : ''}
+        </div>
+      </section>
+      ${expHtml ? `
+        <section class="cf-section" id="experience">
+          <h2 class="cf-title">Experience &amp; Track Record</h2>
+          <p class="cf-sub">Roles and accomplishments.</p>
+          <div style="max-width:820px;margin:0 auto">${expHtml}</div>
+        </section>
+      ` : ''}
+      <section class="cf-section" id="skills">
+        <h2 class="cf-title">Core Technologies</h2>
+        <p class="cf-sub">Languages, frameworks, and engineering tools.</p>
+        ${skillsHtml}
+      </section>
+      <section class="cf-section" id="projects">
+        <h2 class="cf-title">Featured Work</h2>
+        <p class="cf-sub">Selected applications and development highlights.</p>
+        <div style="max-width:860px;margin:0 auto">${projectsHtml || '<p style="text-align:center;color:var(--cf-faint)">No projects listed yet.</p>'}</div>
+      </section>
+      <section class="cf-section" id="contact" style="text-align:center">
+        <h2 class="cf-title">Get in Touch</h2>
+        <p class="cf-sub">Let's discuss new opportunities, contracts, or engineering challenges.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+          ${email ? `<a href="mailto:${email}" class="cf-btn cf-btn-blue">Email Me (${email})</a>` : ''}
+          ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener" class="cf-btn cf-btn-outline">LinkedIn Message</a>` : ''}
+        </div>
+      </section>
+    </div>
+    ${tplFoot(p)}
+  `;
+
+  window.scrollTo(0, 0);
+  initCodeflowRuntime(p);
+}
+
+function initCodeflowRuntime(p) {
+  const pctEl = document.getElementById('cfPct');
+  const fillEl = document.getElementById('cfFill');
+  const onScroll = () => {
+    const docEl = document.documentElement || document.body || {};
+    const st = window.scrollY || docEl.scrollTop || 0;
+    const h = (docEl.scrollHeight || 1000) - (window.innerHeight || 800);
+    const pct = h > 0 ? Math.min(100, Math.max(0, Math.round((st / h) * 100))) : 0;
+    if (pctEl) pctEl.textContent = `→ ${pct}%`;
+    if (fillEl) fillEl.style.width = `${pct}%`;
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const typedEl = document.getElementById('cfTyped');
+  const roles = [p.title || 'Software Developer', 'System Architect', 'Full Stack Builder'].filter(Boolean);
+  if (typedEl && roles.length) {
+    let rIdx = 0, cIdx = 0, del = false;
+    const tick = () => {
+      const cur = roles[rIdx % roles.length];
+      typedEl.textContent = del ? cur.slice(0, cIdx--) : cur.slice(0, cIdx++);
+      if (!del && cIdx > cur.length) { del = true; setTimeout(tick, 1400); return; }
+      if (del && cIdx < 0) { del = false; cIdx = 0; rIdx++; }
+      setTimeout(tick, del ? 45 : 95);
+    };
+    tick();
+  }
+}
+
+/* --------------------------------------------------------------------------
+   3. NEON WAVE — Emerald neon frequency lines on black
+   -------------------------------------------------------------------------- */
+function renderWave(p) {
+  normTpl(p);
+  document.body.dataset.template = 'wave';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const name = tplEsc(p.name || 'Developer');
+  const title = tplEsc(p.title || 'Creative Technologist');
+  const tagline = tplEsc(p.tagline || 'Designing high-performance systems with digital elegance.');
+  const bio = tplEsc(p.bio || p.summary || p.tagline || `I'm ${name}, creating digital products at the intersection of robust backend architecture and striking visual aesthetics.`);
+  const email = tplEsc(p.email || '');
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const expHtml = rawExp.map(e => `
+    <div class="w-tl">
+      <div class="w-tl-dot"></div>
+      <div class="w-tl-card">
+        <h3>${tplEsc(e.role || e.title || 'Role')}</h3>
+        <div class="w-tl-date">${tplEsc(e.company || '')} • ${tplEsc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent')}</div>
+        ${e.desc ? `<p>${tplEsc(e.desc)}</p>` : ''}
+        ${(e.bullets || e.achievements || []).length ? `
+          <ul>${(e.bullets || e.achievements).map(b => `<li>${tplEsc(b)}</li>`).join('')}</ul>
+        ` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = tplEsc(pr.title || `Project ${i+1}`);
+    const prDesc = tplEsc(pr.desc || pr.description || 'Modern web software showcase.');
+    const prUrl = pr.url || pr.demoUrl || '#';
+    const prDemo = pr.demoUrl ? tplEsc(pr.demoUrl) : '';
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    const img = pr.image || pr.img || '';
+    return `
+      <div class="w-show">
+        <div class="w-show-media">
+          ${img ? `<img src="${tplEsc(img)}" alt="${prTitle}">` : `<div class="w-show-ph">${prTitle.slice(0, 2).toUpperCase()}</div>`}
+        </div>
+        <div class="w-show-info">
+          <h3>${prTitle}</h3>
+          <p style="color:var(--w-dim);line-height:1.7">${prDesc}</p>
+          <div class="w-tags">
+            ${techs.map(t => `<span class="w-tag">✦ ${tplEsc(t)}</span>`).join('')}
+          </div>
+          <div style="display:flex;gap:12px;margin-top:14px">
+            ${prUrl !== '#' ? `<a href="${tplEsc(prUrl)}" target="_blank" rel="noopener" class="w-btn w-btn-green" style="padding:8px 18px">Code →</a>` : ''}
+            ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener" class="w-btn w-btn-blue" style="padding:8px 18px">Live Demo →</a>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const skillsHtml = `
+    <div class="w-chips">
+      ${skills.map(s => `<span class="w-chip">✦ ${tplEsc(s)}</span>`).join('')}
+    </div>
+  `;
+
+  document.getElementById('app').innerHTML = `
+    ${email ? `<div class="w-rail">${email}</div>` : ''}
+    <div class="w-hero">
+      <canvas id="w-canvas"></canvas>
+      <div class="w-hero-inner">
+        <div class="w-hello">
+          <div class="bar"></div>
+          <div>
+            <div class="hi">HELLO WORLD, I'M</div>
+            <div class="w-name">${name.toUpperCase()}</div>
+          </div>
+        </div>
+        <p class="w-tagline">${tagline}</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <a href="#projects" class="w-btn w-btn-green">View Projects</a>
+          ${email ? `<a href="mailto:${email}" class="w-btn w-btn-blue">Contact Me</a>` : ''}
+        </div>
+      </div>
+    </div>
+    <section class="w-section" id="about">
+      <div class="w-wrap">
+        <div class="w-head">
+          <h2>About Me</h2>
+          <p>Creative drive, software focus, execution.</p>
+        </div>
+        <div class="w-about">
+          ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${name}" class="w-about-photo">` : `<div class="w-about-photo ph">${name.charAt(0)}</div>`}
+          <div class="w-about-text">
+            <p>${bio}</p>
+            ${p.location ? `<p><b>Location:</b> ${tplEsc(p.location)}</p>` : ''}
+            <div class="w-socials">
+              ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener" class="w-soc"><i class="fa-brands fa-github"></i></a>` : ''}
+              ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener" class="w-soc"><i class="fa-brands fa-linkedin"></i></a>` : ''}
+              ${tplShowInsta(p) ? `<a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener" class="w-soc"><i class="fa-brands fa-instagram"></i></a>` : ''}
+              ${email ? `<a href="mailto:${email}" class="w-soc"><i class="fa-solid fa-envelope"></i></a>` : ''}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    ${expHtml ? `
+      <section class="w-section" id="journey">
+        <div class="w-wrap">
+          <div class="w-head">
+            <h2>Journey &amp; Experience</h2>
+            <p>Milestones and professional path.</p>
+          </div>
+          <div class="w-timeline">${expHtml}</div>
+        </div>
+      </section>
+    ` : ''}
+    <section class="w-section" id="skills">
+      <div class="w-wrap">
+        <div class="w-head">
+          <h2>Capabilities &amp; Skills</h2>
+          <p>Technologies used to bring ideas to reality.</p>
+        </div>
+        ${skillsHtml}
+      </div>
+    </section>
+    <section class="w-section" id="projects">
+      <div class="w-wrap">
+        <div class="w-head">
+          <h2>Selected Work</h2>
+          <p>Highlighted engineering builds and applications.</p>
+        </div>
+        <div class="w-showcase">${projectsHtml || '<p style="text-align:center;color:var(--w-faint)">Projects coming soon.</p>'}</div>
+      </div>
+    </section>
+    <section class="w-section" id="contact" style="text-align:center">
+      <div class="w-wrap">
+        <div class="w-head">
+          <h2>Get in Touch</h2>
+          <p>Open for contracts, full-time roles, and technical advisory.</p>
+        </div>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+          ${email ? `<a href="mailto:${email}" class="w-btn w-btn-green">Email: ${email}</a>` : ''}
+          ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener" class="w-btn w-btn-dark">GitHub</a>` : ''}
+        </div>
+      </div>
+    </section>
+    ${tplFoot(p)}
+  `;
+
+  window.scrollTo(0, 0);
+  initWaveRuntime(p);
+}
+
+function initWaveRuntime(p) {
+  const canvas = document.getElementById('w-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  const resize = () => {
+    const parent = canvas.parentElement || {};
+    W = canvas.width = parent.offsetWidth || window.innerWidth || 1200;
+    H = canvas.height = parent.offsetHeight || window.innerHeight || 800;
+  };
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+  const LINES = 120;
+  const draw = () => {
+    ctx.clearRect(0, 0, W, H);
+    const t = Date.now() * 0.0006;
+    for (let i = 0; i < LINES; i++) {
+      const prog = i / LINES;
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 10) {
+        const nx = x / W;
+        const y = H * (0.2 + 0.6 * prog)
+          + Math.sin(nx * 5 + t + prog * 4) * 50 * Math.sin(t * 0.4 + prog * 2)
+          + Math.sin(nx * 10 - t * 1.2 + prog * 2) * 20;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      const alpha = 0.04 + 0.18 * Math.pow(Math.sin(t * 0.6 + prog * Math.PI), 2);
+      ctx.strokeStyle = `rgba(46,230,166,${alpha})`;
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    if (typeof window !== 'undefined' && window.requestAnimationFrame) window.requestAnimationFrame(draw);
+    else if (typeof requestAnimationFrame !== 'undefined') requestAnimationFrame(draw);
+  };
+  draw();
+}
+
+/* --------------------------------------------------------------------------
+   4. AI ASSISTANT — ChatGPT-style conversational portfolio chat
+   -------------------------------------------------------------------------- */
+function renderAssistant(p) {
+  normTpl(p);
+  document.body.dataset.template = 'assistant';
+  document.title = `${p.name} — AI Assistant Portfolio | portfoolio.me`;
+  const name = tplEsc(p.name || 'Developer');
+  const title = tplEsc(p.title || 'Software Engineer');
+  const firstName = (p.name || '').trim().split(' ')[0] || 'the candidate';
+
+  document.getElementById('app').innerHTML = `
+    <div class="as-app" id="asApp">
+      <div class="as-backdrop" onclick="document.getElementById('asApp').classList.remove('nav-open')"></div>
+      <aside class="as-side">
+        <button type="button" class="as-newchat" id="asNewChat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          New Portfolio Chat
+        </button>
+        <div class="as-side-label">QUICK PROMPTS</div>
+        <div class="as-side-list">
+          <button type="button" class="as-side-item" data-q="Tell me about yourself"><span class="ic">👤</span> About ${tplEsc(firstName)}</button>
+          <button type="button" class="as-side-item" data-q="Show me your projects"><span class="ic">💻</span> Featured Projects</button>
+          <button type="button" class="as-side-item" data-q="What are your skills?"><span class="ic">⚡</span> Technical Skills</button>
+          <button type="button" class="as-side-item" data-q="What is your experience?"><span class="ic">💼</span> Work Experience</button>
+          <button type="button" class="as-side-item" data-q="How can I contact or hire you?"><span class="ic">📬</span> Contact &amp; Hire</button>
+        </div>
+        <div class="as-side-foot">
+          ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${name}" class="av">` : `<div class="av">${name.charAt(0)}</div>`}
+          <div class="meta">
+            <b>${name}</b>
+            <span>${title}</span>
+          </div>
+        </div>
+      </aside>
+      <main class="as-main">
+        <div class="as-top">
+          <button type="button" class="as-burger" onclick="document.getElementById('asApp').classList.toggle('nav-open')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+          </button>
+          <div class="pill">
+            <span>${name} AI Assistant</span>
+          </div>
+          <span class="badge">Model: Portfoolio-4.5</span>
+          <div style="margin-left:auto;display:flex;gap:8px;align-items:center">
+            <a href="/" class="btn btn-ghost btn-sm" style="font-size:12px;padding:4px 10px">Make yours</a>
+            <button type="button" class="as-theme-btn" id="asThemeToggle" title="Toggle Theme">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ic-sun"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="as-scroll" id="asScroll">
+          <div class="as-thread" id="asThread">
+            <div class="as-msg bot">
+              <div class="av"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></div>
+              <div class="body">
+                <p>Hello! 👋 I'm <b>${name}</b>'s AI assistant. I can answer questions about their work experience, key projects, technical skills, or how to get in touch.</p>
+                <p>What would you like to explore?</p>
+              </div>
+            </div>
+          </div>
+          <div class="as-suggest" id="asSuggest">
+            <button type="button" class="as-chip" data-q="Tell me about yourself">
+              <span class="t">About ${tplEsc(firstName)}</span>
+              <span class="d">Bio, role, and summary</span>
+            </button>
+            <button type="button" class="as-chip" data-q="Show me your projects">
+              <span class="t">Projects</span>
+              <span class="d">What they've built &amp; shipped</span>
+            </button>
+            <button type="button" class="as-chip" data-q="What are your skills?">
+              <span class="t">Skills &amp; Stack</span>
+              <span class="d">Languages, tools &amp; frameworks</span>
+            </button>
+            <button type="button" class="as-chip" data-q="What is your experience?">
+              <span class="t">Experience</span>
+              <span class="d">Career history &amp; roles</span>
+            </button>
+            <button type="button" class="as-chip" data-q="How can I contact or hire you?">
+              <span class="t">Contact</span>
+              <span class="d">Email, socials &amp; hire details</span>
+            </button>
+          </div>
+        </div>
+        <div class="as-composer">
+          <div class="as-composer-inner">
+            <div class="as-inputbar">
+              <textarea id="asInput" rows="1" placeholder="Message ${tplEsc(firstName)}'s AI Assistant..."></textarea>
+              <button type="button" class="as-send" id="asSend" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+            <div class="as-disclaimer">Powered by portfoolio.me • Interactive conversational portfolio</div>
+          </div>
+        </div>
+      </main>
+    </div>
+  `;
+
+  initAssistantRuntime(p);
+}
+
+function initAssistantRuntime(p) {
+  const name = tplEsc(p.name || 'Developer');
+  const firstName = (p.name || '').trim().split(' ')[0] || 'the candidate';
+  const thread = document.getElementById('asThread');
+  const scroll = document.getElementById('asScroll');
+  const input = document.getElementById('asInput');
+  const send = document.getElementById('asSend');
+  const suggest = document.getElementById('asSuggest');
+  const newChat = document.getElementById('asNewChat');
+  const themeToggle = document.getElementById('asThemeToggle');
+
+  const scrollToBottom = () => {
+    if (scroll) scroll.scrollTop = scroll.scrollHeight;
+  };
+
+  const addUserMsg = (text) => {
+    const div = document.createElement('div');
+    div.className = 'as-msg user';
+    div.innerHTML = `<div class="bubble">${tplEsc(text)}</div>`;
+    thread.appendChild(div);
+    scrollToBottom();
+  };
+
+  const addBotMsg = (html) => {
+    const div = document.createElement('div');
+    div.className = 'as-msg bot';
+    div.innerHTML = `
+      <div class="av"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></div>
+      <div class="body">${html}</div>
+    `;
+    thread.appendChild(div);
+    scrollToBottom();
+  };
+
+  const answerQuestion = (q) => {
+    const query = q.toLowerCase();
+    if (/skill|tech|stack|language|framework|tool/.test(query)) {
+      const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+      if (!skills.length) return `<p>${name} hasn't listed skills yet.</p>`;
+      return `
+        <p>${name} works proficiently with the following technologies:</p>
+        <div class="tags">${skills.map(s => `<span class="tag">${tplEsc(s)}</span>`).join('')}</div>
+      `;
+    }
+    if (/project|built|built|code|app|work|portfolio/.test(query)) {
+      const prs = p.projects || [];
+      if (!prs.length) return `<p>${name} has not added specific project showcases yet.</p>`;
+      return `
+        <p>Here are key projects shipped by ${name}:</p>
+        <ul>
+          ${prs.map(pr => `
+            <li>
+              <b>${tplEsc(pr.title)}</b> - ${tplEsc(pr.desc || '')}
+              <div class="card-links">
+                ${pr.url ? `<a href="${tplEsc(pr.url)}" target="_blank" rel="noopener">Code Repo ↗</a>` : ''}
+                ${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank" rel="noopener">Live Demo ↗</a>` : ''}
+              </div>
+            </li>
+          `).join('')}
+        </ul>
+      `;
+    }
+    if (/experience|job|career|role|company|employ/.test(query)) {
+      const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+      if (!rawExp.length) return `<p>Work experience has not been populated yet.</p>`;
+      return `
+        <p>Career highlights for ${name}:</p>
+        <ul>
+          ${rawExp.map(e => `
+            <li>
+              <b>${tplEsc(e.role || e.title)}</b> @ ${tplEsc(e.company || '')} <span class="sub">(${tplEsc(e.year || e.dates || 'Recent')})</span>
+              ${e.desc ? `<br><span class="sub">${tplEsc(e.desc)}</span>` : ''}
+            </li>
+          `).join('')}
+        </ul>
+      `;
+    }
+    if (/contact|email|reach|hire|touch|phone|talk/.test(query)) {
+      return `
+        <p>You can connect with ${name} directly:</p>
+        <div class="card-links">
+          ${p.email ? `<a href="mailto:${tplEsc(p.email)}">✉️ Email ${tplEsc(p.email)}</a>` : ''}
+          ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener">💼 LinkedIn Profile</a>` : ''}
+          ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener">🐙 GitHub Profile</a>` : ''}
+          ${tplShowInsta(p) ? `<a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener">📷 Instagram</a>` : ''}
+        </div>
+      `;
+    }
+    if (/about|who|bio|summary|intro/.test(query)) {
+      return `
+        <p><b>${name}</b> — ${tplEsc(p.title || 'Developer')}</p>
+        <p>${tplEsc(p.bio || p.summary || p.tagline || 'Dedicated software engineer crafting modern web applications.')}</p>
+        ${p.location ? `<p>📍 Based in <b>${tplEsc(p.location)}</b></p>` : ''}
+      `;
+    }
+    if (/hi|hello|hey|yo/.test(query)) {
+      return `<p>Hey! Feel free to ask about ${name}'s skills, projects, work experience, or how to get in touch!</p>`;
+    }
+    return `
+      <p>I can tell you all about ${name} across these topics:</p>
+      <div class="tags">
+        <span class="tag">Projects</span>
+        <span class="tag">Technical Skills</span>
+        <span class="tag">Work Experience</span>
+        <span class="tag">Contact Info</span>
+      </div>
+      <p>What would you like to know more about?</p>
+    `;
+  };
+
+  const handleAsk = (q) => {
+    if (!q || !q.trim()) return;
+    if (suggest) suggest.style.display = 'none';
+    addUserMsg(q.trim());
+    setTimeout(() => {
+      addBotMsg(answerQuestion(q));
+    }, 280);
+    const appEl = document.getElementById('asApp');
+    if (appEl) appEl.classList.remove('nav-open');
+  };
+
+  const submitInput = () => {
+    const val = (input?.value || '').trim();
+    if (!val) return;
+    input.value = '';
+    send.disabled = true;
+    handleAsk(val);
+  };
+
+  if (input) {
+    input.addEventListener('input', () => {
+      send.disabled = !input.value.trim();
+    });
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        submitInput();
+      }
+    });
+  }
+  if (send) send.addEventListener('click', submitInput);
+
+  document.querySelectorAll('[data-q]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      handleAsk(btn.getAttribute('data-q'));
+    });
+  });
+
+  if (newChat) {
+    newChat.addEventListener('click', () => {
+      thread.innerHTML = `
+        <div class="as-msg bot">
+          <div class="av"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></div>
+          <div class="body">
+            <p>Chat reset! Ask me anything about <b>${name}</b>'s work, experience, or skills.</p>
+          </div>
+        </div>
+      `;
+      if (suggest) suggest.style.display = '';
+      const appEl = document.getElementById('asApp');
+      if (appEl) appEl.classList.remove('nav-open');
+    });
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('as-light');
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. DEV CONSOLE — Terminal window with command shell & tabs
+   -------------------------------------------------------------------------- */
+function renderConsole(p) {
+  normTpl(p);
+  document.body.dataset.template = 'console';
+  document.title = `${p.name} ~ $ console | portfoolio.me`;
+  const name = tplEsc(p.name || 'Developer');
+  const title = tplEsc(p.title || 'Systems Engineer');
+  const email = tplEsc(p.email || '');
+
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+
+  document.getElementById('app').innerHTML = `
+    <div class="cs-top">
+      <a href="/" class="cs-brand"><span class="cs-logo">&lt;/&gt;</span>${name}</a>
+      <div class="cs-nav">
+        <a href="#whoami">whoami</a>
+        <a href="#skills">skills</a>
+        <a href="#projects">projects</a>
+        <a href="#contact">contact</a>
+      </div>
+      <div>
+        <a href="/" class="btn btn-ghost btn-sm" style="font-size:12px">Make yours</a>
+      </div>
+    </div>
+    <main style="max-width:1100px;margin:20px auto;padding:0 20px 60px">
+      <div class="cs-hero" id="whoami">
+        <div class="cs-mini-term">
+          <div class="cs-mini-line">user@portfoolio:~$ whoami</div>
+          <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);margin:14px 0 6px">${name}</h1>
+          <p style="color:var(--cs-muted);font-size:1.1rem">${title}</p>
+          <div class="cs-mini-meta">
+            <span>● Status: Available for hire</span><br>
+            <span>● Tagline: ${tplEsc(p.tagline || 'Building high-performance software')}</span>
+          </div>
+          <div class="cs-progress"><i style="width: 88%;"></i></div>
+        </div>
+      </div>
+
+      <div class="cs-section" id="skills">
+        <h2>$ cat skills.json</h2>
+        <div class="cs-pills">
+          ${skills.map(s => `<span>✦ ${tplEsc(s)}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="cs-section" id="projects">
+        <h2>$ ls -la ./projects/</h2>
+        <div class="cs-grid">
+          ${projects.map((pr, i) => `
+            <div class="cs-card">
+              <h3>${tplEsc(pr.title)}</h3>
+              <p>${tplEsc(pr.desc || 'Software repository')}</p>
+              <div class="cs-links">
+                ${pr.url ? `<a href="${tplEsc(pr.url)}" target="_blank" rel="noopener">source</a>` : ''}
+                ${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank" rel="noopener">live-demo</a>` : ''}
+              </div>
+            </div>
+          `).join('') || '<p class="cs-muted">No projects found.</p>'}
+        </div>
+      </div>
+
+      <div class="cs-section" id="terminal-window">
+        <h2>$ bash --interactive</h2>
+        <div class="cs-window">
+          <div class="cs-win-head">
+            <span style="color:#ff5f56">●</span>
+            <span style="color:#ffbd2e">●</span>
+            <span style="color:#27c93f">●</span>
+            <div class="cs-tab">portfoolio-shell</div>
+            <div class="cs-window-actions">_ □ ×</div>
+          </div>
+          <div class="cs-terminal">
+            <div id="csTerminalOutput">
+              <div class="cs-command-card">
+                <h3>System Initialized: Portfoolio Shell v2.4</h3>
+                <p class="cs-muted">Available commands: <b>skills</b>, <b>projects</b>, <b>exp</b>, <b>contact</b>, <b>clear</b>, <b>help</b></p>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:14px">
+              <span style="color:var(--cs-green)">$</span>
+              <input type="text" id="csInput" placeholder="Type a command (e.g. 'skills' or 'contact')..." style="flex:1;background:transparent;border:none;color:#fff;font-family:inherit;outline:none;font-size:0.95rem">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-section cs-contact" id="contact">
+        <h2>$ ping contact</h2>
+        <p>Reach out to discuss engineering roles or projects.</p>
+        <div class="cs-contact-row">
+          ${email ? `<a href="mailto:${email}">✉️ ${email}</a>` : ''}
+          ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener">GitHub</a>` : ''}
+          ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
+        </div>
+      </div>
+    </main>
+    ${tplFoot(p)}
+  `;
+
+  initConsoleRuntime(p);
+}
+
+function initConsoleRuntime(p) {
+  const input = document.getElementById('csInput');
+  const output = document.getElementById('csTerminalOutput');
+  if (!input || !output) return;
+
+  const runCommand = (cmd) => {
+    const c = cmd.trim().toLowerCase();
+    const entry = document.createElement('div');
+    entry.className = 'cs-command-card';
+
+    if (c === 'clear') {
+      output.innerHTML = '';
+      return;
+    }
+    if (c === 'skills') {
+      const s = (p.skills || []).map(x => typeof x === 'string' ? x : x.name).join(', ');
+      entry.innerHTML = `<h3>$ skills</h3><p>${tplEsc(s || 'None listed')}</p>`;
+    } else if (c === 'projects') {
+      const prs = (p.projects || []).map(pr => pr.title).join(' | ');
+      entry.innerHTML = `<h3>$ projects</h3><p>${tplEsc(prs || 'No projects listed')}</p>`;
+    } else if (c === 'exp') {
+      const rawExp = (p.experience || (p.resume && p.resume.experience) || []).map(e => `${e.role || e.title} @ ${e.company}`).join('; ');
+      entry.innerHTML = `<h3>$ exp</h3><p>${tplEsc(rawExp || 'No experience listed')}</p>`;
+    } else if (c === 'contact') {
+      entry.innerHTML = `<h3>$ contact</h3><p>Email: ${tplEsc(p.email || 'None')} | GitHub: ${tplEsc(p.github || 'None')}</p>`;
+    } else {
+      entry.innerHTML = `<h3>$ ${tplEsc(c)}</h3><p class="cs-muted">Command recognized. Available: <b>skills</b>, <b>projects</b>, <b>exp</b>, <b>contact</b>, <b>clear</b></p>`;
+    }
+    output.appendChild(entry);
+  };
+
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      const v = input.value;
+      input.value = '';
+      runCommand(v);
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   6. SNOWCARD — Light dotted canvas with neo-brutalist yellow stickers
+   -------------------------------------------------------------------------- */
+function renderSnowcard(p) {
+  normTpl(p);
+  document.body.dataset.template = 'snowcard';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const name = tplEsc(p.name || 'Developer');
+  const title = tplEsc(p.title || 'Product Developer');
+  const bio = tplEsc(p.bio || p.summary || p.tagline || `I'm ${name}, crafting memorable web applications with bold design and clean code.`);
+  const email = tplEsc(p.email || '');
+
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const projectsHtml = projects.map((pr, i) => `
+    <div class="sc-card" style="margin-bottom:24px">
+      <h2>${tplEsc(pr.title)}</h2>
+      <p>${tplEsc(pr.desc || 'Project showcase')}</p>
+      <div style="display:flex;gap:12px;margin-top:14px">
+        ${pr.url ? `<a href="${tplEsc(pr.url)}" target="_blank" rel="noopener" style="font-weight:800;text-decoration:underline">Code Repository →</a>` : ''}
+        ${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank" rel="noopener" style="font-weight:800;text-decoration:underline">Live Preview →</a>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+
+  document.getElementById('app').innerHTML = `
+    <button type="button" class="sc-mode" id="scModeBtn" aria-label="Toggle dark mode">
+      <svg viewBox="0 0 24 24" class="sc-sun"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      <svg viewBox="0 0 24 24" class="sc-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+    <div class="sc-page">
+      <div class="sc-date" id="scDate"></div>
+      <div class="sc-hero">
+        <div class="sc-intro">
+          <h1>${name}</h1>
+          <h2>${title}</h2>
+          <div class="sc-socials">
+            ${email ? `<a href="mailto:${email}">Email</a>` : ''}
+            ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener">GitHub</a>` : ''}
+            ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
+          </div>
+        </div>
+        <div class="sc-photo">
+          ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${name}">` : `<span>${name.charAt(0)}</span>`}
+        </div>
+      </div>
+      <nav class="sc-tabs">
+        <a href="#about" class="active">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="sc-card" id="about">
+        <h2>About</h2>
+        <p>${bio}</p>
+        ${p.location ? `<p><b>Location:</b> ${tplEsc(p.location)}</p>` : ''}
+      </div>
+      <div class="sc-card" id="skills">
+        <h2>Skills &amp; Toolkit</h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          ${skills.map(s => `<span style="background:var(--sc-yellow);color:#050505;font-weight:800;padding:6px 14px;border:2px solid #000;border-radius:6px">✦ ${tplEsc(s)}</span>`).join('')}
+        </div>
+      </div>
+      <div id="projects">
+        <div class="sc-section-head" style="margin-bottom:16px"><h2>Selected Projects</h2></div>
+        ${projectsHtml || '<p>No projects listed yet.</p>'}
+      </div>
+      <div class="sc-card" id="contact" style="text-align:center">
+        <h2>Get in Touch</h2>
+        <p>Available for select engineering opportunities and projects.</p>
+        ${email ? `<a href="mailto:${email}" style="display:inline-block;margin-top:12px;background:#000;color:#fff;padding:12px 24px;border-radius:8px;font-weight:800">Email: ${email}</a>` : ''}
+      </div>
+    </div>
+    ${tplFoot(p)}
+  `;
+
+  initSnowcardRuntime(p);
+}
+
+function initSnowcardRuntime(p) {
+  const dEl = document.getElementById('scDate');
+  if (dEl) {
+    dEl.textContent = new Date().toLocaleString(undefined, { weekday:'short', year:'numeric', month:'short', day:'2-digit', hour:'2-digit', minute:'2-digit' });
+  }
+  const modeBtn = document.getElementById('scModeBtn');
+  if (modeBtn) {
+    modeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('sc-dark');
+    });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. PARCHMENT SCROLL — Antique ancient letter on unrolling parchment
+   -------------------------------------------------------------------------- */
+function renderParchment(p) {
+  normTpl(p);
+  document.body.dataset.template = 'parchment';
+  document.title = `${p.name} — Scroll | portfoolio.me`;
+  const name = tplEsc(p.name || 'Scholar');
+  const title = tplEsc(p.title || 'Writer & Technologist');
+  const bio = tplEsc(p.bio || p.summary || p.tagline || `I'm ${name}, crafting enduring works through thoughtful engineering and classical design.`);
+  const email = tplEsc(p.email || '');
+
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const projectsHtml = projects.map(pr => `
+    <div class="pa-work">
+      <h3>${tplEsc(pr.title)}</h3>
+      <p class="pa-prose">${tplEsc(pr.desc || '')}</p>
+      <div class="pa-work-links">
+        ${pr.url ? `<a href="${tplEsc(pr.url)}" target="_blank" rel="noopener">View Work ❧</a>` : ''}
+        ${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank" rel="noopener">Live Demonstration ❧</a>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+
+  document.getElementById('app').innerHTML = `
+    <div class="pa-desk"></div>
+    <div class="pa-scroll">
+      <div class="pa-rod">
+        <span class="knob l"></span>
+        <span class="knob r"></span>
+      </div>
+      <div class="pa-paper">
+        <div class="pa-paper-in">
+          <header class="pa-hero">
+            <div class="pa-salut">To Whom It May Concern</div>
+            <div class="pa-portrait">
+              ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${name}">` : `<span>${name.charAt(0)}</span>`}
+            </div>
+            <h1 class="pa-name">${name}</h1>
+            <div class="pa-flourish"><i></i><span>❦</span><i></i></div>
+            <div class="pa-title">${title}</div>
+            ${p.location ? `<div class="pa-place">Residing in ${tplEsc(p.location)}</div>` : ''}
+            <div class="pa-quote">"${tplEsc(p.tagline || 'In dedication of noble craft and digital excellence.')}"</div>
+            <div class="pa-cta">
+              ${email ? `<a href="mailto:${email}" class="pa-btn">Send Dispatch ✉</a>` : ''}
+              ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener" class="pa-btn pa-btn-ghost">Portfolio Works</a>` : ''}
+            </div>
+          </header>
+
+          <div class="pa-divider"><i></i><span>❧</span><i></i></div>
+
+          <section class="pa-blk">
+            <div class="pa-head">
+              <span class="orn">❦</span>
+              <h2>About the Craftsman</h2>
+              <span class="orn f">❦</span>
+            </div>
+            <p class="pa-prose pa-dropcap">${bio}</p>
+          </section>
+
+          <div class="pa-divider"><i></i><span>❧</span><i></i></div>
+
+          <section class="pa-blk">
+            <div class="pa-head">
+              <span class="orn">❦</span>
+              <h2>Disciplines &amp; Skills</h2>
+              <span class="orn f">❦</span>
+            </div>
+            <div class="pa-tags">
+              ${skills.map(s => `<span class="pa-tag">${tplEsc(s)}</span>`).join('')}
+            </div>
+          </section>
+
+          <div class="pa-divider"><i></i><span>❧</span><i></i></div>
+
+          <section class="pa-blk">
+            <div class="pa-head">
+              <span class="orn">❦</span>
+              <h2>Selected Works</h2>
+              <span class="orn f">❦</span>
+            </div>
+            ${projectsHtml || '<p class="pa-prose" style="text-align:center">Works documented upon inquiry.</p>'}
+          </section>
+
+          <div class="pa-divider"><i></i><span>❧</span><i></i></div>
+
+          <section class="pa-blk" style="text-align:center">
+            <div class="pa-head">
+              <span class="orn">❦</span>
+              <h2>Correspondence</h2>
+              <span class="orn f">❦</span>
+            </div>
+            <p class="pa-prose">For commissions, inquiries, or scholarly correspondence:</p>
+            ${email ? `<p style="margin-top:12px"><a href="mailto:${email}" class="pa-ink" style="font-size:1.1rem">${email}</a></p>` : ''}
+          </section>
+        </div>
+      </div>
+      <div class="pa-rod">
+        <span class="knob l"></span>
+        <span class="knob r"></span>
+      </div>
+    </div>
+    ${tplFoot(p)}
+  `;
+
+  window.scrollTo(0, 0);
+}
+
+/* --------------------------------------------------------------------------
+   8. CLOUD BLUE — Airy sky-blue cloudscape with friendly cards
+   -------------------------------------------------------------------------- */
+function renderCloud(p) {
+  normTpl(p);
+  document.body.dataset.template = 'cloud';
+  document.title = `${p.name} — ${p.title} | portfoolio.me`;
+  const name = tplEsc(p.name || 'Developer');
+  const title = tplEsc(p.title || 'Frontend Engineer');
+  const bio = tplEsc(p.bio || p.summary || p.tagline || `I'm ${name}, creating friendly, accessible, and delightful digital experiences for everyone.`);
+  const email = tplEsc(p.email || '');
+
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const projectsHtml = projects.map(pr => `
+    <div class="cw-card" style="margin-bottom:20px">
+      <h3>${tplEsc(pr.title)}</h3>
+      <p style="color:var(--cw-muted);margin:8px 0 14px">${tplEsc(pr.desc || '')}</p>
+      <div style="display:flex;gap:12px">
+        ${pr.url ? `<a href="${tplEsc(pr.url)}" target="_blank" rel="noopener" style="color:var(--cw-accent);font-weight:700">Code →</a>` : ''}
+        ${pr.demoUrl ? `<a href="${tplEsc(pr.demoUrl)}" target="_blank" rel="noopener" style="color:var(--cw-accent);font-weight:700">Demo →</a>` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+
+  document.getElementById('app').innerHTML = `
+    <div class="cw-bg">
+      <svg class="puff" style="top:15%;left:10%;width:180px;height:70px" viewBox="0 0 100 40"><path d="M10,35 Q20,10 40,20 Q60,5 80,25 Q95,25 95,35 Z"/></svg>
+      <svg class="puff p2" style="top:45%;left:60%;width:240px;height:90px" viewBox="0 0 100 40"><path d="M10,35 Q20,10 40,20 Q60,5 80,25 Q95,25 95,35 Z"/></svg>
+    </div>
+    <div class="cw-main">
+      <nav class="cw-nav">
+        <div class="cw-logo">${name}</div>
+        <div class="cw-links">
+          <a href="#about" class="active">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <a href="/" class="btn btn-ghost btn-sm" style="font-size:12px;padding:4px 10px">Make yours</a>
+          <button type="button" class="cw-theme" id="cwThemeBtn" title="Toggle theme">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="ic-sun"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2"/></svg>
+          </button>
+        </div>
+      </nav>
+      <div class="cw-wrap">
+        <header class="cw-hero">
+          <div>
+            <h1>Hi, I'm ${name}.<br><span class="role" id="cwRole">${title}</span><span class="cw-cursor">|</span></h1>
+            <p>${tplEsc(p.tagline || 'Building welcoming web applications and high-quality software.')}</p>
+            <div style="display:flex;gap:12px;margin-top:24px">
+              <a href="#projects" class="cw-cta">View Projects</a>
+              ${email ? `<a href="mailto:${email}" class="btn btn-ghost" style="padding:15px 32px;border-radius:12px">Email Me</a>` : ''}
+            </div>
+          </div>
+          <div style="text-align:center">
+            ${p.avatarUrl ? `<img src="${tplEsc(p.avatarUrl)}" alt="${name}" style="width:260px;height:260px;border-radius:50%;object-fit:cover;border:6px solid #fff;box-shadow:var(--cw-shadow)">` : `<div style="width:200px;height:200px;border-radius:50%;background:linear-gradient(135deg,var(--cw-accent),#7aa2ff);color:#fff;display:grid;place-items:center;font-size:4rem;font-weight:800;margin:0 auto">${name.charAt(0)}</div>`}
+          </div>
+        </header>
+
+        <section class="cw-section" id="about">
+          <h2 class="cw-h2">About Me</h2>
+          <div class="cw-bar"></div>
+          <div class="cw-card" style="max-width:760px;margin:0 auto;text-align:center">
+            <p style="font-size:1.1rem;line-height:1.8;color:var(--cw-muted)">${bio}</p>
+          </div>
+        </section>
+
+        <section class="cw-section alt" id="skills">
+          <h2 class="cw-h2">Technical Skills</h2>
+          <div class="cw-bar"></div>
+          <div class="cw-skills">
+            ${skills.map(s => `<span class="cw-skill">✦ ${tplEsc(s)}</span>`).join('')}
+          </div>
+        </section>
+
+        <section class="cw-section" id="projects">
+          <h2 class="cw-h2">Featured Projects</h2>
+          <div class="cw-bar"></div>
+          <div style="max-width:820px;margin:0 auto">${projectsHtml || '<p style="text-align:center">Projects coming soon.</p>'}</div>
+        </section>
+
+        <section class="cw-section alt" id="contact" style="text-align:center">
+          <h2 class="cw-h2">Get in Touch</h2>
+          <div class="cw-bar"></div>
+          <p class="cw-sub">Let's talk about new projects, creative roles, or technology.</p>
+          ${email ? `<p style="margin-top:18px"><a href="mailto:${email}" class="cw-cta">Send an Email (${email})</a></p>` : ''}
+        </section>
+      </div>
+    </div>
+    ${tplFoot(p)}
+  `;
+
+  initCloudRuntime(p);
+}
+
+function initCloudRuntime(p) {
+  const btn = document.getElementById('cwThemeBtn');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      document.body.classList.toggle('cloud-dark');
+    });
+  }
+}
+
+
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud };
 window.PortfoolioTemplateList = TEMPLATES;
 
 

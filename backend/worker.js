@@ -2829,6 +2829,686 @@ ${head(p, 'cube')}
 </html>`;
 }
 
+
+/* ==========================================================================
+   REVERSE-ENGINEERED PORTFOLIO TEMPLATES (Worker Subdomain Server Rendering)
+   Nova, Codeflow, Wave, Assistant, Console, Snowcard, Parchment, Cloud
+   ========================================================================== */
+
+function pageNova(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Full Stack Engineer');
+  const tagline = esc(p.tagline || 'Building impactful digital solutions with modern technology.');
+  const bio = esc(p.bio || p.summary || p.tagline || `I'm ${name}, a dedicated technologist passionate about engineering scalable, elegant, and reliable systems.`);
+  const location = esc(p.location || 'Remote / Worldwide');
+  const email = esc(p.email || '');
+  const firstName = (p.name || '').trim().split(' ')[0] || 'developer';
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const expHtml = rawExp.map(e => `
+    <div class="nv-card">
+      <div class="nv-card-top">
+        <div>
+          <h3 class="nv-card-role">${esc(e.role || e.title || 'Software Engineer')}</h3>
+          <div class="nv-card-org">${esc(e.company || e.organization || '')}</div>
+        </div>
+        <div class="nv-card-meta">
+          <span>${esc(e.location || '')}</span>
+          <span class="pill">${esc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent')}</span>
+        </div>
+      </div>
+      ${e.desc ? `<p class="nv-card-desc">${esc(e.desc)}</p>` : ''}
+      ${(e.bullets || e.achievements || []).length ? `
+        <div class="nv-keyh">Key Contributions</div>
+        <ul class="nv-dots">${(e.bullets || e.achievements).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+      ` : ''}
+    </div>
+  `).join('');
+
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = esc(pr.title || `Project ${i+1}`);
+    const prDesc = esc(pr.desc || pr.description || 'Full stack engineering project.');
+    const prUrl = pr.url || pr.demoUrl || '#';
+    const prDemo = pr.demoUrl ? esc(pr.demoUrl) : '';
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    const img = pr.image || pr.img || '';
+    return `
+      <div class="nv-projx">
+        <div class="nv-projx-shot">
+          ${img ? `<img src="${esc(img)}" alt="${prTitle}">` : `<div class="ph">${prTitle.slice(0, 2).toUpperCase()}</div>`}
+        </div>
+        <div class="nv-projx-info">
+          <h3>${prTitle} ${prUrl !== '#' ? `<a href="${esc(prUrl)}" target="_blank" rel="noopener" class="nv-checkout">Code ↗</a>` : ''}${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener" class="nv-checkout">Live Demo ↗</a>` : ''}</h3>
+          <p>${prDesc}</p>
+          <div class="nv-pill-tags">
+            ${techs.map(t => `<span class="nv-ptag">✦ ${esc(t)}</span>`).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const skillsHtml = `
+    <div class="nv-stack">
+      <div class="nv-stack-card" style="grid-column: 1 / -1;">
+        <div class="nv-stack-grid" style="grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));">
+          ${skills.map(s => `
+            <div class="nv-stack-item">
+              <span class="nv-glyph" style="display:block">✦</span>
+              <span class="nm">${esc(s)}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  const script = `<script>
+  (function() {
+    var c = document.getElementById('nv-canvas');
+    if (c) {
+      var ctx = c.getContext('2d'), W, H, pts = [];
+      function resize() {
+        W = c.width = window.innerWidth;
+        H = c.height = window.innerHeight;
+        var n = Math.min(85, Math.round(W * H / 18000));
+        pts = [];
+        for (var i = 0; i < n; i++) {
+          pts.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .45, vy: (Math.random() - .5) * .45 });
+        }
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        for (var i = 0; i < pts.length; i++) {
+          var p = pts[i];
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+          ctx.beginPath(); ctx.arc(p.x, p.y, 1.8, 0, 6.28); ctx.fillStyle = 'rgba(45,212,191,.75)'; ctx.fill();
+          for (var j = i + 1; j < pts.length; j++) {
+            var p2 = pts[j];
+            var dx = p.x - p2.x, dy = p.y - p2.y, d = Math.sqrt(dx*dx + dy*dy);
+            if (d < 120) {
+              ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y);
+              ctx.strokeStyle = 'rgba(45,212,191,' + ((1 - d/120)*.22) + ')'; ctx.lineWidth = .8; ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    }
+    var roles = [${JSON.stringify(p.title || 'Developer')}, 'Full Stack Engineer', 'Software Craftsman'];
+    var el = document.getElementById('nv-typed');
+    if (el && roles.length) {
+      var ri = 0, ci = 0, del = false;
+      function tick() {
+        var cur = roles[ri % roles.length];
+        el.textContent = del ? cur.slice(0, ci--) : cur.slice(0, ci++);
+        if (!del && ci > cur.length) { del = true; setTimeout(tick, 1500); return; }
+        if (del && ci < 0) { del = false; ci = 0; ri++; }
+        setTimeout(tick, del ? 45 : 95);
+      }
+      tick();
+    }
+  })();
+  </script>`;
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'nova')}<body class="portfolio-view" data-template="nova">
+    <canvas id="nv-canvas"></canvas>
+    <nav class="nv-nav">
+      <div class="nv-nav-in">
+        <a href="#home" class="nv-brand">&lt;${esc(firstName.toLowerCase())} /&gt;</a>
+        <div class="nv-links" id="nv-links">
+          <a href="#home" class="on">Home</a>
+          <a href="#about">About</a>
+          ${expHtml ? `<a href="#experience">Experience</a>` : ''}
+          <a href="#projects">Projects</a>
+          <a href="#skills">Skills</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <a class="btn btn-ghost btn-sm" href="${ORIGIN}/" style="font-size:12px;padding:6px 12px">Make yours</a>
+          ${email ? `<a class="btn btn-primary btn-sm" href="mailto:${email}" style="font-size:12px;padding:6px 14px">Hire ${esc(firstName)}</a>` : ''}
+        </div>
+      </div>
+    </nav>
+    <header class="nv-hero" id="home">
+      <div class="nv-avatar-ring">
+        ${p.avatarUrl ? `<img class="nv-avatar" src="${esc(p.avatarUrl)}" alt="${name}">` : `<div class="nv-avatar ph">${name.charAt(0)}</div>`}
+        <span class="nv-avatar-dot"></span>
+      </div>
+      <h1>Hi! I'm <span class="g">${name}</span>.</h1>
+      <div class="nv-type"><span class="a">A </span><span class="t" id="nv-typed">${title}</span><span class="cur">|</span></div>
+      <p class="nv-quote">"${tagline}"</p>
+      <div class="nv-loc">${location}</div>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="#projects" class="nv-btn nv-btn-teal">View My Work →</a>
+        ${email ? `<a href="mailto:${email}" class="nv-btn nv-btn-ghost">Contact Me</a>` : ''}
+      </div>
+    </header>
+    <section class="nv-section" id="about">
+      <div class="nv-wrap nv-about">
+        <h2 class="nv-title">About <span class="g">Me</span></h2>
+        <div class="nv-rule"></div>
+        <div class="nv-about-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:38px;height:38px"><path d="m8 9-3 3 3 3M16 9l3 3-3 3"/></svg></div>
+        <p>${bio}</p>
+      </div>
+    </section>
+    ${expHtml ? `
+      <section class="nv-section" id="experience">
+        <div class="nv-wrap">
+          <h2 class="nv-title">Professional <span class="g">Experience</span></h2>
+          <div class="nv-rule"></div>
+          ${expHtml}
+        </div>
+      </section>
+    ` : ''}
+    <section class="nv-section" id="projects">
+      <div class="nv-wrap">
+        <h2 class="nv-title">Featured <span class="g">Projects</span></h2>
+        <div class="nv-rule"></div>
+        ${projectsHtml || '<p style="text-align:center;color:var(--nv-dim)">Projects coming soon.</p>'}
+      </div>
+    </section>
+    <section class="nv-section" id="skills">
+      <div class="nv-wrap">
+        <h2 class="nv-title">Skills &amp; <span class="g">Stack</span></h2>
+        <div class="nv-rule"></div>
+        ${skillsHtml}
+      </div>
+    </section>
+    <section class="nv-section" id="contact">
+      <div class="nv-wrap">
+        <h2 class="nv-title">Let's <span class="g">Connect</span></h2>
+        <div class="nv-rule"></div>
+        <div class="nv-connect" style="max-width:760px;margin:0 auto">
+          ${email ? `<div class="nv-card" style="text-align:center"><h3 class="nv-card-role" style="margin-bottom:8px">Email</h3><p class="nv-card-desc"><a href="mailto:${email}" style="color:var(--nv-teal)">${email}</a></p></div>` : ''}
+          ${p.github ? `<div class="nv-card" style="text-align:center"><h3 class="nv-card-role" style="margin-bottom:8px">GitHub</h3><p class="nv-card-desc"><a href="${esc(p.github)}" target="_blank" rel="noopener" style="color:var(--nv-teal)">${esc(p.github)}</a></p></div>` : ''}
+          ${p.linkedin ? `<div class="nv-card" style="text-align:center"><h3 class="nv-card-role" style="margin-bottom:8px">LinkedIn</h3><p class="nv-card-desc"><a href="${esc(p.linkedin)}" target="_blank" rel="noopener" style="color:var(--nv-teal)">Connect on LinkedIn</a></p></div>` : ''}
+        </div>
+      </div>
+    </section>
+    ${foot(p)}
+    ${script}
+  </body></html>`;
+}
+
+function pageCodeflow(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Software Engineer');
+  const tagline = esc(p.tagline || 'Building production-ready software with modern engineering principles.');
+  const bio = esc(p.bio || p.summary || p.tagline || `I'm ${name}, specializing in reliable backend systems, cloud architectures, and modern web applications.`);
+  const email = esc(p.email || '');
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const expHtml = rawExp.map(e => `
+    <div class="cf-card" style="margin-bottom:18px">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+        <div>
+          <h3 style="margin:0 0 4px;color:#fff;font-size:1.25rem">${esc(e.role || e.title || 'Role')}</h3>
+          <p style="margin:0;color:var(--cf-cyan);font-weight:600">${esc(e.company || e.organization || '')}</p>
+        </div>
+        <span class="cf-tag">${esc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent')}</span>
+      </div>
+      ${e.desc ? `<p style="margin:14px 0 0;color:var(--cf-dim)">${esc(e.desc)}</p>` : ''}
+    </div>
+  `).join('');
+
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = esc(pr.title || `Project ${i+1}`);
+    const prDesc = esc(pr.desc || pr.description || 'Full stack software solution.');
+    const prUrl = pr.url || pr.demoUrl || '#';
+    const prDemo = pr.demoUrl ? esc(pr.demoUrl) : '';
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    return `
+      <div class="cf-card" style="margin-bottom:24px">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+          <div>
+            <h3 style="color:#fff;font-size:1.4rem;margin:0 0 6px">${prTitle}</h3>
+            <p style="color:var(--cf-dim);margin:0 0 14px">${prDesc}</p>
+          </div>
+          <div style="display:flex;gap:10px">
+            ${prUrl !== '#' ? `<a href="${esc(prUrl)}" target="_blank" rel="noopener" class="cf-btn cf-btn-outline" style="padding:8px 16px;font-size:0.85rem">Code ↗</a>` : ''}
+            ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener" class="cf-btn cf-btn-blue" style="padding:8px 16px;font-size:0.85rem">Live Demo ↗</a>` : ''}
+          </div>
+        </div>
+        <div class="cf-tags" style="margin-top:12px">
+          ${techs.map(t => `<span class="cf-tag">${esc(t)}</span>`).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const skillsHtml = `
+    <div class="cf-tags" style="justify-content:center;gap:12px">
+      ${skills.map(s => `<span class="cf-tag" style="font-size:0.95rem;padding:8px 18px">✦ ${esc(s)}</span>`).join('')}
+    </div>
+  `;
+
+  const script = `<script>
+  (function() {
+    var pEl = document.getElementById('cfPct'), fEl = document.getElementById('cfFill');
+    function onScroll() {
+      var st = window.scrollY || document.documentElement.scrollTop;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = h > 0 ? Math.min(100, Math.max(0, Math.round((st / h) * 100))) : 0;
+      if (pEl) pEl.textContent = '→ ' + pct + '%';
+      if (fEl) fEl.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+  </script>`;
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'codeflow')}<body class="portfolio-view" data-template="codeflow">
+    <div class="cf-prog">
+      <span class="pct" id="cfPct">→ 0%</span>
+      <div class="cf-keys">
+        <div class="cf-keys-fill" id="cfFill"></div>
+        <div class="cf-keys-text"><span class="cf-key on">const</span> dev = { name: "${name}", status: "building" };<span class="cf-cursor"></span></div>
+      </div>
+      <span class="cf-remain">codeflow</span>
+    </div>
+    <div class="cf-wrap">
+      <nav class="cf-nav">
+        <div class="cf-brand">${name}</div>
+        <div class="cf-navlinks">
+          <a href="#about" class="on">About</a>
+          ${expHtml ? `<a href="#experience">Experience</a>` : ''}
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a class="cf-btn cf-btn-ghost" href="${ORIGIN}/" style="font-size:0.85rem;padding:8px 14px">Make yours</a>
+      </nav>
+      <header class="cf-hero">
+        <div>
+          <div class="cf-hey">⚡ Welcome, I'm</div>
+          <h1 class="cf-type">${name}</h1>
+          <div class="cf-headline">${title}</div>
+          <p class="cf-lead">${tagline}</p>
+          <div class="cf-actions">
+            <a href="#projects" class="cf-btn cf-btn-blue">Explore Projects →</a>
+            ${email ? `<a href="mailto:${email}" class="cf-btn cf-btn-outline">Say Hello</a>` : ''}
+          </div>
+        </div>
+        <div style="text-align:center">
+          ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${name}" class="cf-hero-photo">` : `<div class="cf-hero-photo ph">${name.charAt(0)}</div>`}
+        </div>
+      </header>
+      <section class="cf-section" id="about">
+        <h2 class="cf-title">About Overview</h2>
+        <div class="cf-card" style="max-width:820px;margin:0 auto;text-align:center">
+          <p style="font-size:1.1rem;line-height:1.8">${bio}</p>
+        </div>
+      </section>
+      ${expHtml ? `
+        <section class="cf-section" id="experience">
+          <h2 class="cf-title">Professional Experience</h2>
+          <div style="max-width:820px;margin:0 auto">${expHtml}</div>
+        </section>
+      ` : ''}
+      <section class="cf-section" id="skills">
+        <h2 class="cf-title">Technical Skills</h2>
+        ${skillsHtml}
+      </section>
+      <section class="cf-section" id="projects">
+        <h2 class="cf-title">Featured Projects</h2>
+        <div style="max-width:860px;margin:0 auto">${projectsHtml || '<p style="text-align:center;color:var(--cf-faint)">No projects listed yet.</p>'}</div>
+      </section>
+      <section class="cf-section" id="contact" style="text-align:center">
+        <h2 class="cf-title">Get in Touch</h2>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:20px">
+          ${email ? `<a href="mailto:${email}" class="cf-btn cf-btn-blue">Email Me (${email})</a>` : ''}
+          ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener" class="cf-btn cf-btn-outline">GitHub</a>` : ''}
+        </div>
+      </section>
+    </div>
+    ${foot(p)}
+    ${script}
+  </body></html>`;
+}
+
+function pageWave(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Creative Technologist');
+  const tagline = esc(p.tagline || 'Designing high-performance systems with digital elegance.');
+  const bio = esc(p.bio || p.summary || p.tagline || `I'm ${name}, creating digital products at the intersection of robust backend architecture and striking visual aesthetics.`);
+  const email = esc(p.email || '');
+
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = esc(pr.title || `Project ${i+1}`);
+    const prDesc = esc(pr.desc || pr.description || 'Modern software showcase.');
+    const prUrl = pr.url || pr.demoUrl || '#';
+    const prDemo = pr.demoUrl ? esc(pr.demoUrl) : '';
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    return `
+      <div class="w-show">
+        <div class="w-show-media">
+          <div class="w-show-ph">${prTitle.slice(0, 2).toUpperCase()}</div>
+        </div>
+        <div class="w-show-info">
+          <h3>${prTitle}</h3>
+          <p style="color:var(--w-dim);line-height:1.7">${prDesc}</p>
+          <div class="w-tags">
+            ${techs.map(t => `<span class="w-tag">✦ ${esc(t)}</span>`).join('')}
+          </div>
+          <div style="display:flex;gap:12px;margin-top:14px">
+            ${prUrl !== '#' ? `<a href="${esc(prUrl)}" target="_blank" rel="noopener" class="w-btn w-btn-green" style="padding:8px 18px">Code →</a>` : ''}
+            ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener" class="w-btn w-btn-blue" style="padding:8px 18px">Live Demo →</a>` : ''}
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+
+  const script = `<script>
+  (function() {
+    var c = document.getElementById('w-canvas');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W, H;
+    function resize() {
+      W = c.width = c.parentElement.offsetWidth || window.innerWidth;
+      H = c.height = c.parentElement.offsetHeight || window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    var LINES = 100;
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      var t = Date.now() * 0.0006;
+      for (var i = 0; i < LINES; i++) {
+        var prog = i / LINES;
+        ctx.beginPath();
+        for (var x = 0; x <= W; x += 12) {
+          var nx = x / W;
+          var y = H * (0.2 + 0.6 * prog)
+            + Math.sin(nx * 5 + t + prog * 4) * 50 * Math.sin(t * 0.4 + prog * 2)
+            + Math.sin(nx * 10 - t * 1.2 + prog * 2) * 20;
+          x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        var alpha = 0.04 + 0.18 * Math.pow(Math.sin(t * 0.6 + prog * Math.PI), 2);
+        ctx.strokeStyle = 'rgba(46,230,166,' + alpha + ')';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  })();
+  </script>`;
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'wave')}<body class="portfolio-view" data-template="wave">
+    ${email ? `<div class="w-rail">${email}</div>` : ''}
+    <div class="w-hero">
+      <canvas id="w-canvas"></canvas>
+      <div class="w-hero-inner">
+        <div class="w-hello">
+          <div class="bar"></div>
+          <div>
+            <div class="hi">HELLO WORLD, I'M</div>
+            <div class="w-name">${name.toUpperCase()}</div>
+          </div>
+        </div>
+        <p class="w-tagline">${tagline}</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap">
+          <a href="#projects" class="w-btn w-btn-green">View Projects</a>
+          ${email ? `<a href="mailto:${email}" class="w-btn w-btn-blue">Contact Me</a>` : ''}
+        </div>
+      </div>
+    </div>
+    <section class="w-section" id="about">
+      <div class="w-wrap">
+        <div class="w-head">
+          <h2>About Me</h2>
+          <p>Creative drive, software focus, execution.</p>
+        </div>
+        <div class="w-about">
+          ${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${name}" class="w-about-photo">` : `<div class="w-about-photo ph">${name.charAt(0)}</div>`}
+          <div class="w-about-text">
+            <p>${bio}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="w-section" id="skills">
+      <div class="w-wrap">
+        <div class="w-head">
+          <h2>Capabilities &amp; Skills</h2>
+        </div>
+        <div class="w-chips">${skills.map(s => `<span class="w-chip">✦ ${esc(s)}</span>`).join('')}</div>
+      </div>
+    </section>
+    <section class="w-section" id="projects">
+      <div class="w-wrap">
+        <div class="w-head">
+          <h2>Selected Work</h2>
+        </div>
+        <div class="w-showcase">${projectsHtml || '<p style="text-align:center;color:var(--w-faint)">Projects coming soon.</p>'}</div>
+      </div>
+    </section>
+    ${foot(p)}
+    ${script}
+  </body></html>`;
+}
+
+function pageAssistant(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Software Engineer');
+  const firstName = (p.name || '').trim().split(' ')[0] || 'the candidate';
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'assistant')}<body class="portfolio-view" data-template="assistant">
+    <div class="as-app" id="asApp">
+      <aside class="as-side">
+        <button type="button" class="as-newchat" onclick="location.reload()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px"><path d="M12 5v14M5 12h14"/></svg>
+          New Portfolio Chat
+        </button>
+        <div class="as-side-label">QUICK PROMPTS</div>
+        <div class="as-side-list">
+          <button type="button" class="as-side-item" onclick="askPrompt('Tell me about yourself')">👤 About ${esc(firstName)}</button>
+          <button type="button" class="as-side-item" onclick="askPrompt('Show me your projects')">💻 Featured Projects</button>
+          <button type="button" class="as-side-item" onclick="askPrompt('What are your skills?')">⚡ Technical Skills</button>
+          <button type="button" class="as-side-item" onclick="askPrompt('How can I contact or hire you?')">📬 Contact &amp; Hire</button>
+        </div>
+        <div class="as-side-foot">
+          <div class="av">${name.charAt(0)}</div>
+          <div class="meta"><b>${name}</b><span>${title}</span></div>
+        </div>
+      </aside>
+      <main class="as-main">
+        <div class="as-top">
+          <div class="pill"><span>${name} AI Assistant</span></div>
+          <span class="badge">Model: Portfoolio-4.5</span>
+          <a href="${ORIGIN}/" class="btn btn-ghost btn-sm" style="margin-left:auto;font-size:12px">Make yours</a>
+        </div>
+        <div class="as-scroll" id="asScroll">
+          <div class="as-thread" id="asThread">
+            <div class="as-msg bot">
+              <div class="av"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></div>
+              <div class="body">
+                <p>Hello! 👋 I'm <b>${name}</b>'s interactive portfolio assistant. Ask me anything about their background, projects, or how to get in touch!</p>
+              </div>
+            </div>
+          </div>
+          <div class="as-suggest" id="asSuggest">
+            <button type="button" class="as-chip" onclick="askPrompt('Tell me about yourself')"><span class="t">About ${esc(firstName)}</span></button>
+            <button type="button" class="as-chip" onclick="askPrompt('Show me your projects')"><span class="t">Projects</span></button>
+            <button type="button" class="as-chip" onclick="askPrompt('What are your skills?')"><span class="t">Skills</span></button>
+            <button type="button" class="as-chip" onclick="askPrompt('How can I contact or hire you?')"><span class="t">Contact</span></button>
+          </div>
+        </div>
+        <div class="as-composer">
+          <div class="as-composer-inner">
+            <div class="as-inputbar">
+              <textarea id="asInput" rows="1" placeholder="Message ${esc(firstName)}'s AI Assistant..."></textarea>
+              <button type="button" class="as-send" id="asSend" onclick="submitChat()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+    <script>
+    var P_DATA = ${JSON.stringify({ name: p.name, title: p.title, bio: p.bio || p.summary || p.tagline, skills: p.skills, projects: p.projects, email: p.email, github: p.github, linkedin: p.linkedin })};
+    function askPrompt(q) {
+      var th = document.getElementById('asThread');
+      var u = document.createElement('div'); u.className = 'as-msg user';
+      u.innerHTML = '<div class="bubble">' + q + '</div>'; th.appendChild(u);
+      var b = document.createElement('div'); b.className = 'as-msg bot';
+      var ans = 'I can help with that! ';
+      if (/project/i.test(q)) {
+        ans = '<p>Here are projects shipped by ' + P_DATA.name + ':</p><ul>' + (P_DATA.projects || []).map(function(p){ return '<li><b>' + p.title + '</b> - ' + (p.desc || '') + '</li>'; }).join('') + '</ul>';
+      } else if (/skill/i.test(q)) {
+        ans = '<p>Core technical skills:</p><div class="tags">' + (P_DATA.skills || []).map(function(s){ return '<span class="tag">' + s + '</span>'; }).join('') + '</div>';
+      } else if (/contact|hire/i.test(q)) {
+        ans = '<p>Reach out to ' + P_DATA.name + ' directly: <a href="mailto:' + (P_DATA.email || '') + '">' + (P_DATA.email || '') + '</a></p>';
+      } else {
+        ans = '<p><b>' + P_DATA.name + '</b> — ' + (P_DATA.title || '') + '</p><p>' + (P_DATA.bio || '') + '</p>';
+      }
+      b.innerHTML = '<div class="av"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></div><div class="body">' + ans + '</div>';
+      th.appendChild(b);
+      document.getElementById('asScroll').scrollTop = document.getElementById('asScroll').scrollHeight;
+    }
+    function submitChat() {
+      var inp = document.getElementById('asInput');
+      if (inp && inp.value.trim()) { var val = inp.value; inp.value = ''; askPrompt(val); }
+    }
+    </script>
+  </body></html>`;
+}
+
+function pageConsole(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Systems Engineer');
+  const email = esc(p.email || '');
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'console')}<body class="portfolio-view" data-template="console">
+    <div class="cs-top">
+      <a href="/" class="cs-brand"><span class="cs-logo">&lt;/&gt;</span>${name}</a>
+      <a href="${ORIGIN}/" class="btn btn-ghost btn-sm" style="margin-left:auto;font-size:12px">Make yours</a>
+    </div>
+    <main style="max-width:1100px;margin:20px auto;padding:0 20px 60px">
+      <div class="cs-hero" id="whoami">
+        <div class="cs-mini-term">
+          <div class="cs-mini-line">user@portfoolio:~$ whoami</div>
+          <h1 style="font-size:clamp(1.8rem,4vw,2.8rem);margin:14px 0 6px">${name}</h1>
+          <p style="color:var(--cs-muted);font-size:1.1rem">${title}</p>
+        </div>
+      </div>
+      <div class="cs-section">
+        <h2>$ cat skills.json</h2>
+        <div class="cs-pills">${skills.map(s => `<span>✦ ${esc(s)}</span>`).join('')}</div>
+      </div>
+      <div class="cs-section">
+        <h2>$ ls ./projects/</h2>
+        <div class="cs-grid">
+          ${projects.map(pr => `<div class="cs-card"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc || '')}</p></div>`).join('')}
+        </div>
+      </div>
+    </main>
+    ${foot(p)}
+  </body></html>`;
+}
+
+function pageSnowcard(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Product Developer');
+  const bio = esc(p.bio || p.summary || p.tagline || `I'm ${name}, crafting web applications with bold design and clean code.`);
+  const email = esc(p.email || '');
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'snowcard')}<body class="portfolio-view" data-template="snowcard">
+    <div class="sc-page">
+      <div class="sc-hero">
+        <div class="sc-intro">
+          <h1>${name}</h1>
+          <h2>${title}</h2>
+        </div>
+        <div class="sc-photo">${p.avatarUrl ? `<img src="${esc(p.avatarUrl)}" alt="${name}">` : `<span>${name.charAt(0)}</span>`}</div>
+      </div>
+      <div class="sc-card">
+        <h2>About</h2>
+        <p>${bio}</p>
+      </div>
+      <div class="sc-card">
+        <h2>Skills</h2>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          ${skills.map(s => `<span style="background:var(--sc-yellow);color:#050505;font-weight:800;padding:6px 14px;border:2px solid #000;border-radius:6px">✦ ${esc(s)}</span>`).join('')}
+        </div>
+      </div>
+      <div class="sc-card">
+        <h2>Projects</h2>
+        ${projects.map(pr => `<div style="margin-bottom:18px"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc || '')}</p></div>`).join('')}
+      </div>
+    </div>
+    ${foot(p)}
+  </body></html>`;
+}
+
+function pageParchment(p) {
+  const name = esc(p.name || 'Scholar');
+  const title = esc(p.title || 'Writer & Technologist');
+  const bio = esc(p.bio || p.summary || p.tagline || `I'm ${name}, crafting enduring works through thoughtful engineering and classical design.`);
+  const email = esc(p.email || '');
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'parchment')}<body class="portfolio-view" data-template="parchment">
+    <div class="pa-desk"></div>
+    <div class="pa-scroll">
+      <div class="pa-rod"><span class="knob l"></span><span class="knob r"></span></div>
+      <div class="pa-paper"><div class="pa-paper-in">
+        <header class="pa-hero">
+          <h1 class="pa-name">${name}</h1>
+          <div class="pa-title">${title}</div>
+          <p class="pa-quote">${bio}</p>
+        </header>
+        <div class="pa-divider"><i></i><span>❧</span><i></i></div>
+        <div class="pa-tags">${skills.map(s => `<span class="pa-tag">${esc(s)}</span>`).join('')}</div>
+      </div></div>
+      <div class="pa-rod"><span class="knob l"></span><span class="knob r"></span></div>
+    </div>
+    ${foot(p)}
+  </body></html>`;
+}
+
+function pageCloud(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Frontend Engineer');
+  const bio = esc(p.bio || p.summary || p.tagline || `I'm ${name}, creating friendly, accessible digital experiences.`);
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'cloud')}<body class="portfolio-view" data-template="cloud">
+    <div class="cw-wrap" style="padding-top:40px">
+      <header class="cw-hero">
+        <div>
+          <h1>Hi, I'm ${name}.<br><span class="role">${title}</span></h1>
+          <p>${bio}</p>
+        </div>
+      </header>
+      <section class="cw-section alt">
+        <h2 class="cw-h2">Skills</h2>
+        <div class="cw-skills">${skills.map(s => `<span class="cw-skill">✦ ${esc(s)}</span>`).join('')}</div>
+      </section>
+    </div>
+    ${foot(p)}
+  </body></html>`;
+}
+
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
@@ -2848,6 +3528,31 @@ function page(p, url) {
   if (tpl === 'cube' || tpl === 'cubegreen' || tpl === 'muzammal') {
     return pageCube(p);
   }
+  if (tpl === 'nova') {
+    return pageNova(p);
+  }
+  if (tpl === 'codeflow') {
+    return pageCodeflow(p);
+  }
+  if (tpl === 'wave') {
+    return pageWave(p);
+  }
+  if (tpl === 'assistant') {
+    return pageAssistant(p);
+  }
+  if (tpl === 'console') {
+    return pageConsole(p);
+  }
+  if (tpl === 'snowcard') {
+    return pageSnowcard(p);
+  }
+  if (tpl === 'parchment') {
+    return pageParchment(p);
+  }
+  if (tpl === 'cloud') {
+    return pageCloud(p);
+  }
+
   const reqTab = url ? (url.searchParams.get('tab') || url.searchParams.get('page')) : null;
   const dpTab = ['about', 'portfolio', 'resume', 'contact'].includes(String(reqTab).toLowerCase()) ? String(reqTab).toLowerCase() : 'about';
   const skills = (p.skills || []).map((s) => `<span class="badge">${esc(s)}</span>`).join('');

@@ -6,6 +6,6 @@
   "scripts": {
     "dev": "node server.mjs",
     "start": "node server.mjs",
-    "test": "node frontend/evidence.test.mjs && node frontend/linkedin-import.test.mjs && node frontend/resume.test.mjs"
+    "test": "node frontend/evidence.test.mjs && node frontend/linkedin-import.test.mjs && node frontend/resume.test.mjs && node frontend/templates.test.mjs"
   }
 }
