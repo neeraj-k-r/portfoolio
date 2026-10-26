@@ -3487,6 +3487,175 @@ function pageParchment(p) {
 }
 
 
+
+function pageParticle(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Full Stack & AI Engineer');
+  const bio = esc(p.bio || p.summary || p.tagline || 'Transforming complex requirements into elegant, high-impact digital solutions through modern software architecture.');
+  const email = esc(p.email || '');
+  const photo = p.photo || p.avatar || '';
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const mainSkills = skills.slice(0, 12);
+  const extraSkills = skills.slice(12);
+
+  const skillIcons = ['⚡', '🔮', '🚀', '🧠', '🌐', '🛡️', '⚙️', '📦', '💾', '🎨', '🧩', '💎'];
+
+  const skillsHtml = mainSkills.map((s, idx) => `
+    <article class="pt-skill-card">
+      <div class="pt-sk-icon">${skillIcons[idx % skillIcons.length]}</div>
+      <h3>${esc(s)}</h3>
+    </article>
+  `).join('');
+
+  const expHtml = rawExp.map(e => `
+    <article class="pt-exp-card">
+      <h3>${esc(e.company || e.organization || 'Company')}</h3>
+      <h4>${esc(e.role || e.title || 'Engineer')}</h4>
+      ${e.desc ? `<p style="color:var(--pt-muted);margin:0 0 12px">${esc(e.desc)}</p>` : ''}
+      ${(e.bullets || e.achievements || []).length ? `
+        <ul>${(e.bullets || e.achievements).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+      ` : ''}
+      <div class="pt-date">${esc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent')} ${e.location ? `· ${esc(e.location)}` : ''}</div>
+    </article>
+  `).join('');
+
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = esc(pr.title || `Project ${i+1}`);
+    const prDesc = esc(pr.desc || pr.description || 'Full stack engineering project built with scalable architecture and modern standards.');
+    const prUrl = pr.url || pr.demoUrl || '#';
+    const prDemo = pr.demoUrl ? esc(pr.demoUrl) : '';
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    const img = pr.image || pr.img || '';
+
+    return `
+      <article class="pt-project">
+        <div class="pt-project-shot">
+          ${img ? `<img src="${esc(img)}" alt="${prTitle}" loading="lazy">` : `<span>${prTitle.slice(0, 2).toUpperCase()}</span>`}
+        </div>
+        <div class="pt-project-info">
+          <h3>
+            ${prTitle}
+            ${prUrl !== '#' ? `<a href="${esc(prUrl)}" target="_blank" rel="noopener">Code ↗</a>` : ''}
+            ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener">Live Demo ↗</a>` : ''}
+          </h3>
+          ${techs.length ? `<p class="stack">${techs.map(t => esc(t)).join(', ')}</p>` : ''}
+          <p style="color:var(--pt-muted);margin:0 0 12px;line-height:1.6">${prDesc}</p>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'particle')}<body class="portfolio-view" data-template="particle">
+    <canvas id="pt-canvas" aria-hidden="true"></canvas>
+    
+    <header class="pt-nav">
+      <a href="#home" class="pt-brand">${name}</a>
+      <nav>
+        <a href="#home">Home</a>
+        ${skills.length ? '<a href="#skills">Skills</a>' : ''}
+        ${rawExp.length ? '<a href="#experience">Experience</a>' : ''}
+        ${projects.length ? '<a href="#projects">Projects</a>' : ''}
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main class="pt-main">
+      <section class="pt-hero" id="home">
+        <div class="pt-hero-card">
+          <h1>I am<br><span>${title}</span></h1>
+          <p>${bio}</p>
+          <div class="pt-actions">
+            <a class="hot" href="#projects">Projects</a>
+            ${email ? `<a class="cool" href="mailto:${email}">Hire Me</a>` : '<a class="cool" href="#contact">Get in Touch</a>'}
+          </div>
+        </div>
+        <div class="pt-photo-wrap">
+          ${photo ? `<img src="${esc(photo)}" alt="${name}">` : `<span>${name.charAt(0)}</span>`}
+        </div>
+      </section>
+
+      ${skills.length ? `
+        <section class="pt-section" id="skills">
+          <h2>Technical Skills</h2>
+          <div class="pt-skill-grid">${skillsHtml}</div>
+          ${extraSkills.length ? `
+            <div class="pt-extra">
+              <div class="pt-extra-head"><h3>Additional Specialties</h3><span></span></div>
+              <ul>${extraSkills.map(s => `<li>${esc(s)}</li>`).join('')}</ul>
+            </div>
+          ` : ''}
+        </section>
+      ` : ''}
+
+      ${rawExp.length ? `
+        <section class="pt-section" id="experience">
+          <h2>Experience</h2>
+          <div class="pt-exp-list">${expHtml}</div>
+        </section>
+      ` : ''}
+
+      ${projects.length ? `
+        <section class="pt-section" id="projects">
+          <h2>Featured Projects</h2>
+          <div class="pt-projects">${projectsHtml}</div>
+        </section>
+      ` : ''}
+
+      <section class="pt-section pt-contact" id="contact">
+        <h2>Contact Me</h2>
+        <form onsubmit="event.preventDefault(); var em='${email}'; var sub=document.getElementById('pt-sub')?document.getElementById('pt-sub').value:'Portfolio'; var msg=document.getElementById('pt-msg')?document.getElementById('pt-msg').value:''; if(em) location.href='mailto:'+em+'?subject='+encodeURIComponent(sub)+'&body='+encodeURIComponent(msg);">
+          <label>Name<input id="pt-name" placeholder="Enter your name" required></label>
+          <label>Email<input id="pt-email" type="email" placeholder="Enter your email" required></label>
+          <label>Subject<input id="pt-sub" placeholder="Subject"></label>
+          <label>Message<textarea id="pt-msg" placeholder="Your message here..." required></textarea></label>
+          <button type="submit">Send Message</button>
+        </form>
+
+        <div class="pt-socials">
+          ${email ? `<a href="mailto:${email}">✉ ${email}</a>` : ''}
+          ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener">🐙 GitHub</a>` : ''}
+          ${p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener">💼 LinkedIn</a>` : ''}
+          ${p.website ? `<a href="${esc(p.website)}" target="_blank" rel="noopener">🌐 Website</a>` : ''}
+          ${p.twitter ? `<a href="${esc(p.twitter)}" target="_blank" rel="noopener">🐦 Twitter</a>` : ''}
+        </div>
+      </section>
+    </main>
+
+    ${foot(p)}
+
+    <script>
+    (function () {
+      var canvas = document.getElementById('pt-canvas');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d'), w, h, pts = [];
+      var reduce = (typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches);
+      function size() {
+        w = canvas.width = window.innerWidth || 1200;
+        h = canvas.height = window.innerHeight || 800;
+        pts = [];
+        var n = Math.min(80, Math.max(25, Math.round(w * h / 19000)));
+        for (var i = 0; i < n; i++) pts.push({x: Math.random()*w, y: Math.random()*h, vx: (Math.random()-.5)*.35, vy: (Math.random()-.5)*.35});
+      }
+      function draw() {
+        if (!ctx) return;
+        ctx.clearRect(0,0,w,h);
+        for (var i=0;i<pts.length;i++) {
+          var p=pts[i]; if (!reduce) { p.x+=p.vx; p.y+=p.vy; }
+          if (p.x<0 || p.x>w) p.vx *= -1; if (p.y<0 || p.y>h) p.vy *= -1;
+          ctx.beginPath(); ctx.arc(p.x,p.y,2.2,0,6.28); ctx.fillStyle='rgba(107,99,255,.75)'; ctx.fill();
+          for (var j=i+1;j<pts.length;j++) { var q=pts[j], dx=p.x-q.x, dy=p.y-q.y, d=Math.sqrt(dx*dx+dy*dy); if (d<145) { ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.strokeStyle='rgba(125,145,180,'+(0.18*(1-d/145))+')'; ctx.stroke(); } }
+        }
+        if (!reduce) requestAnimationFrame(draw);
+      }
+      size(); window.addEventListener('resize', size); draw();
+    })();
+    </script>
+  </body></html>`;
+}
+
 function pageGithub(p) {
   const name = esc(p.name || 'Developer');
   const title = esc(p.title || 'Software Engineer');
@@ -3742,6 +3911,9 @@ function page(p, url) {
   }
   if (tpl === 'github') {
     return pageGithub(p);
+  }
+  if (tpl === 'particle') {
+    return pageParticle(p);
   }
 
   const reqTab = url ? (url.searchParams.get('tab') || url.searchParams.get('page')) : null;

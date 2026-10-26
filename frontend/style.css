@@ -1206,6 +1206,13 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-tp-github .lx-tp-cards { background: #161b22; border: 1px solid #30363d; border-radius: 6px; }
 .lx-tp-github .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #58a6ff; box-shadow: 10px 0 0 #3fb950; }
 
+.lx-tp-particle { background: #121922; }
+.lx-tp-particle .lx-tp-nav { background: rgba(16,24,39,.94); border-bottom-color: rgba(111,102,255,.28); }
+.lx-tp-particle .lx-tp-hero { background: linear-gradient(90deg, #6c63ff, #22c9ff); border-radius: 8px; box-shadow: 0 4px 14px rgba(108,99,255,.35); }
+.lx-tp-particle .lx-tp-cards { background: rgba(21,29,44,.88); border: 1px solid rgba(108,99,255,.25); border-radius: 8px; }
+.lx-tp-particle .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #22d3ee; box-shadow: 10px 0 0 #ff3d6e; }
+
+
 /* Theme lightbox */
 .lx-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
 .lx-modal.open { display: flex; }
@@ -1445,6 +1452,16 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="github"] .lx-win-line { color: #f0f6fc; background: #161b22; border-color: #30363d; }
 .lx-modal-body[data-theme="github"] .lx-prompt { color: #58a6ff; }
 .lx-modal-body[data-theme="github"] .skill-tag { background: #161b22; border-color: #30363d; color: #3fb950; }
+
+/* Particle Mesh */
+.lx-modal-body[data-theme="particle"] { background: #121922; }
+.lx-modal-body[data-theme="particle"] .preview-name { color: #eef2f8; }
+.lx-modal-body[data-theme="particle"] .preview-title { color: #22d3ee; }
+.lx-modal-body[data-theme="particle"] .preview-desc { color: #9caac0; }
+.lx-modal-body[data-theme="particle"] .lx-win-line { color: #eef2f8; background: #151d2c; border-color: rgba(111,102,255,.28); }
+.lx-modal-body[data-theme="particle"] .lx-prompt { color: #7367ff; }
+.lx-modal-body[data-theme="particle"] .skill-tag { background: #151d2c; border-color: rgba(34,211,238,.35); color: #22d3ee; }
+
 
 
 /* Theme Gallery filter tabs */
