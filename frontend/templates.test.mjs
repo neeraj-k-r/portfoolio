@@ -65,7 +65,7 @@ const { PortfoolioTemplates, PortfoolioTemplateList } = context.window;
 assert.ok(Array.isArray(PortfoolioTemplateList), 'PortfoolioTemplateList must be an array');
 assert.ok(typeof PortfoolioTemplates === 'object', 'PortfoolioTemplates must be an object');
 
-const newTemplateIds = ['nova', 'codeflow', 'wave', 'assistant', 'console', 'snowcard', 'parchment', 'cloud'];
+const newTemplateIds = ['nova', 'codeflow', 'wave', 'assistant', 'console', 'snowcard', 'parchment', 'cloud', 'github'];
 
 for (const id of newTemplateIds) {
   const meta = PortfoolioTemplateList.find(t => t.id === id);
@@ -126,5 +126,5 @@ for (const id of newTemplateIds) {
   console.log(`✓ Template "${id}" rendered cleanly and passed all assertions`);
 }
 
-console.log('\nAll 8 reverse engineered templates passed unit tests successfully!');
+console.log('\nAll 9 reverse engineered templates passed unit tests successfully!');
 process.exit(0);

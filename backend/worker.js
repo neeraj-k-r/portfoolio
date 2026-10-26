@@ -3486,6 +3486,194 @@ function pageParchment(p) {
   </body></html>`;
 }
 
+
+function pageGithub(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Software Engineer');
+  const firstName = (p.name || '').trim().split(' ')[0] || 'developer';
+  const username = esc(p.username || firstName.toLowerCase().replace(/[^a-z0-9]/g, ''));
+  const bio = esc(p.bio || p.summary || p.tagline || 'Building user-centric, high-performance applications and scalable distributed systems.');
+  const location = esc(p.location || '');
+  const email = esc(p.email || '');
+  const photo = p.photo || p.avatar || '';
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const education = (Array.isArray(p.education) && p.education.length) ? p.education : (p.resume && Array.isArray(p.resume.education) ? p.resume.education : []);
+
+  let contribCells = '';
+  let totalContribs = 0;
+  for (let w = 0; w < 53; w++) {
+    for (let d = 0; d < 7; d++) {
+      const seed = ((w * 13 + d * 37 + username.length * 17) % 100) / 100;
+      let lvl = 0;
+      if (seed > 0.85) { lvl = 4; totalContribs += 7; }
+      else if (seed > 0.70) { lvl = 3; totalContribs += 5; }
+      else if (seed > 0.50) { lvl = 2; totalContribs += 3; }
+      else if (seed > 0.30) { lvl = 1; totalContribs += 1; }
+      contribCells += `<i class="gh-cell l${lvl}"></i>`;
+    }
+  }
+  if (totalContribs < 120) totalContribs = 284;
+
+  const langColors = ['#f1e05a', '#3572A5', '#e34c26', '#2b7489', '#41b883', '#00ADD8', '#b07219', '#178600'];
+
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = esc(pr.title || `Repository-${i+1}`);
+    const prDesc = esc(pr.desc || pr.description || 'Public software project developed with modern web standards and high test coverage.');
+    const prUrl = pr.url || pr.demoUrl || p.github || '#';
+    const prDemo = pr.demoUrl ? esc(pr.demoUrl) : '';
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    const mainLang = techs[0] || 'Code';
+    const dotColor = langColors[i % langColors.length];
+
+    return `
+      <article class="gh-pin">
+        <div class="gh-pin-top">
+          <span class="gh-repo-ic">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75H4.5a1 1 0 0 0 0 2h8.75a.75.75 0 0 1 0 1.5H4.5A2.5 2.5 0 0 1 2 15V2.5zm10.5-1H4.5a1 1 0 0 0-1 1v9.05c.3-.1.65-.1 1-.1h8V1.5z"/></svg>
+          </span>
+          <a class="gh-repo-name" href="${esc(prUrl)}" ${prUrl !== '#' ? 'target="_blank" rel="noopener"' : ''}>${prTitle}</a>
+          <span class="gh-pub sm">Public</span>
+        </div>
+        <p class="gh-pin-desc">${prDesc}</p>
+        <div class="gh-pin-foot">
+          <span class="gh-lang"><span class="gh-dot" style="--d:${dotColor}"></span>${esc(mainLang)}</span>
+          ${prUrl !== '#' ? `<a class="gh-pin-link" href="${esc(prUrl)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg> Code</a>` : ''}
+          ${prDemo ? `<a class="gh-pin-link" href="${prDemo}" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M7.78 9.28a.75.75 0 0 1-1.06-1.06l3-3a2.5 2.5 0 0 1 3.54 3.54l-1.5 1.5a.75.75 0 1 1-1.06-1.06l1.5-1.5a1 1 0 1 0-1.42-1.42l-3 3zM8.22 6.72a.75.75 0 0 1 1.06 1.06l-3 3a2.5 2.5 0 0 1-3.54-3.54l1.5-1.5a.75.75 0 0 1 1.06 1.06l-1.5 1.5a1 1 0 1 0 1.42 1.42l3-3z"/></svg> Live</a>` : ''}
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  const expHtml = rawExp.map(e => `
+    <div class="gh-tl">
+      <span class="gh-tl-node">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75H4.5a1 1 0 0 0 0 2h8.75a.75.75 0 0 1 0 1.5H4.5A2.5 2.5 0 0 1 2 15V2.5zm10.5-1H4.5a1 1 0 0 0-1 1v9.05c.3-.1.65-.1 1-.1h8V1.5z"/></svg>
+      </span>
+      <div class="gh-tl-card">
+        <h4>${esc(e.role || e.title || 'Engineer')} <span class="gh-at">@ ${esc(e.company || e.organization || '')}</span></h4>
+        <div class="gh-tl-meta">${esc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent')} ${e.location ? `· ${esc(e.location)}` : ''}</div>
+        ${e.desc ? `<p style="margin:0 0 8px;color:#8b949e">${esc(e.desc)}</p>` : ''}
+        ${(e.bullets || e.achievements || []).length ? `
+          <ul>${(e.bullets || e.achievements).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+        ` : ''}
+      </div>
+    </div>
+  `).join('');
+
+  const eduHtml = education.map(ed => `
+    <div class="gh-card">
+      <h4><svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 3H1v6a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V6z"/></svg> ${esc(ed.institution || ed.school || 'University')}</h4>
+      <div class="gh-card-sub">${esc(ed.degree || ed.area || 'Degree')}</div>
+      <div class="gh-card-meta">${esc(ed.dates || [ed.start, ed.end].filter(Boolean).join(' – ') || ed.year || '')}</div>
+    </div>
+  `).join('');
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'github')}<body class="portfolio-view" data-template="github">
+    <header class="gh-top">
+      <div class="gh-top-in">
+        <span class="gh-mark" aria-label="GitHub"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></span>
+        <div class="gh-search">Search or jump to…</div>
+        <nav class="gh-top-nav">
+          <a href="#readme">Overview</a>
+          <a href="#pinned">Repositories</a>
+          <a href="#langs">Skills</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="gh-page">
+      <aside class="gh-side">
+        <div class="gh-avatar">
+          ${photo ? `<img src="${esc(photo)}" alt="${name}">` : `<span>${name.charAt(0)}</span>`}
+        </div>
+        <h1 class="gh-name">${name}</h1>
+        <div class="gh-login">${username}</div>
+        <div class="gh-headline">${title}</div>
+        <div class="gh-side-actions">
+          ${email ? `<a class="gh-btn gh-btn-primary" href="mailto:${email}">Follow</a>` : `<a class="gh-btn gh-btn-primary" href="#contact">Contact</a>`}
+        </div>
+        <p class="gh-bio">${bio}</p>
+        <div class="gh-followers">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 5.5a3.5 3.5 0 1 1 5.9 2.54A5.01 5.01 0 0 1 11 12.5a.75.75 0 0 1-1.5 0 3.5 3.5 0 0 0-7 0 .75.75 0 0 1-1.5 0 5.01 5.01 0 0 1 3.1-4.46A3.49 3.49 0 0 1 2 5.5z"/></svg>
+          <strong>${projects.length}</strong> repositories · <strong>${skills.length}</strong> skills
+        </div>
+
+        <ul class="gh-meta">
+          ${location ? `<li><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0a5.53 5.53 0 0 0-5.5 5.5c0 2.9 4.6 9.2 5 9.7.27.36.73.36 1 0 .4-.5 5-6.8 5-9.7A5.53 5.53 0 0 0 8 0zm0 8a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg> ${location}</li>` : ''}
+          ${email ? `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> <a href="mailto:${email}">${email}</a></li>` : ''}
+          ${p.linkedin ? `<li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/></svg> <a href="${esc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a></li>` : ''}
+          ${p.github ? `<li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg> <a href="${esc(p.github)}" target="_blank" rel="noopener">GitHub</a></li>` : ''}
+          ${p.website ? `<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg> <a href="${esc(p.website)}" target="_blank" rel="noopener">Website</a></li>` : ''}
+        </ul>
+      </aside>
+
+      <main class="gh-main">
+        <div class="gh-tabs">
+          <a class="gh-tab on"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.5a2.25 2.25 0 0 1 2.25 2.25v9.5A.75.75 0 0 1 6.4 13a2.5 2.5 0 0 0-1.65-.6H1.5v-1.5h3.25c.6 0 1.16.15 1.65.42V3.25a.75.75 0 0 0-.75-.75H1.5V1.75H0zm8.6 11.25a.75.75 0 0 1-.85-.25V3.25A2.25 2.25 0 0 1 10 .999h4.5a.75.75 0 0 1 .75.75v9a.75.75 0 0 1-.75.75h-3.25a2.5 2.5 0 0 0-1.65.6z"/></svg> Overview</a>
+          <a class="gh-tab" href="#pinned"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75H4.5a1 1 0 0 0 0 2h8.75a.75.75 0 0 1 0 1.5H4.5A2.5 2.5 0 0 1 2 15V2.5zm10.5-1H4.5a1 1 0 0 0-1 1v9.05c.3-.1.65-.1 1-.1h8V1.5z"/></svg> Repositories <span class="gh-count">${projects.length}</span></a>
+        </div>
+
+        <section class="gh-readme" id="readme">
+          <div class="gh-readme-head">
+            <span class="gh-file"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.5a2.25 2.25 0 0 1 2.25 2.25v9.5A.75.75 0 0 1 6.4 13a2.5 2.5 0 0 0-1.65-.6H1.5v-1.5h3.25c.6 0 1.16.15 1.65.42V3.25a.75.75 0 0 0-.75-.75H1.5V1.75H0zm8.6 11.25a.75.75 0 0 1-.85-.25V3.25A2.25 2.25 0 0 1 10 .999h4.5a.75.75 0 0 1 .75.75v9a.75.75 0 0 1-.75.75h-3.25a2.5 2.5 0 0 0-1.65.6z"/></svg> ${username} / README.md</span>
+            <span class="gh-pub">Public</span>
+          </div>
+          <div class="gh-readme-body">
+            <h2>Hi 👋, I'm ${name}</h2>
+            <p class="gh-readme-sub">${title}</p>
+            <p>${bio}</p>
+          </div>
+        </section>
+
+        <h3 class="gh-h3" id="pinned">Pinned</h3>
+        <div class="gh-pins">
+          ${projectsHtml || '<div class="gh-pin"><p class="gh-pin-desc">Projects repository coming soon.</p></div>'}
+        </div>
+
+        <section class="gh-contrib">
+          <h3 class="gh-h3"><span id="gh-contrib-count">${totalContribs}</span> contributions in the last year</h3>
+          <div class="gh-graph-wrap"><div class="gh-graph" id="gh-graph" aria-hidden="true">${contribCells}</div></div>
+          <div class="gh-legend">Less <span class="gh-lc l0"></span><span class="gh-lc l1"></span><span class="gh-lc l2"></span><span class="gh-lc l3"></span><span class="gh-lc l4"></span> More</div>
+        </section>
+
+        ${skills.length ? `
+          <h3 class="gh-h3" id="langs">Languages &amp; tools</h3>
+          <div class="gh-langs">
+            ${skills.map((s, idx) => `
+              <span class="gh-lang-chip"><span class="gh-dot" style="--d:${langColors[idx % langColors.length]}"></span>${esc(s)}</span>
+            `).join('')}
+          </div>
+        ` : ''}
+
+        ${rawExp.length ? `
+          <h3 class="gh-h3">Experience</h3>
+          <div class="gh-timeline">${expHtml}</div>
+        ` : ''}
+
+        ${education.length ? `
+          <h3 class="gh-h3">Education</h3>
+          <div class="gh-cards">${eduHtml}</div>
+        ` : ''}
+
+        <section class="gh-contact" id="contact">
+          <h3 class="gh-h3">Get in touch</h3>
+          <div class="gh-contact-row">
+            ${email ? `<a class="gh-btn gh-btn-primary" href="mailto:${email}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Email me</a>` : ''}
+            ${p.linkedin ? `<a class="gh-btn" href="${esc(p.linkedin)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/></svg> LinkedIn</a>` : ''}
+            ${p.github ? `<a class="gh-btn" href="${esc(p.github)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg> GitHub</a>` : ''}
+          </div>
+        </section>
+      </main>
+    </div>
+
+    ${foot(p)}
+  </body></html>`;
+}
+
 function pageCloud(p) {
   const name = esc(p.name || 'Developer');
   const title = esc(p.title || 'Frontend Engineer');
@@ -3551,6 +3739,9 @@ function page(p, url) {
   }
   if (tpl === 'cloud') {
     return pageCloud(p);
+  }
+  if (tpl === 'github') {
+    return pageGithub(p);
   }
 
   const reqTab = url ? (url.searchParams.get('tab') || url.searchParams.get('page')) : null;

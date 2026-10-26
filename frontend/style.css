@@ -1199,6 +1199,13 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-tp-cloud .lx-tp-cards { background: rgba(255,255,255,.9); border: 1px solid #dbeafe; border-radius: 8px; box-shadow: 0 4px 12px rgba(37,99,235,.08); }
 .lx-tp-cloud .lx-tp-cards:nth-child(3)::before { content: ""; position: absolute; left: 8px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: #93c5fd; }
 .lx-tp-cloud .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 5px; height: 5px; border-radius: 50%; background: #3f6bf6; box-shadow: 9px 0 0 #60a5fa, 18px 0 0 #93c5fd; }
+
+.lx-tp-github { background: #0d1117; }
+.lx-tp-github .lx-tp-nav { background: #161b22; border-bottom-color: #30363d; }
+.lx-tp-github .lx-tp-hero { background: #161b22; border: 1px solid #30363d; border-radius: 6px; }
+.lx-tp-github .lx-tp-cards { background: #161b22; border: 1px solid #30363d; border-radius: 6px; }
+.lx-tp-github .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #58a6ff; box-shadow: 10px 0 0 #3fb950; }
+
 /* Theme lightbox */
 .lx-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
 .lx-modal.open { display: flex; }
@@ -1429,6 +1436,16 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="cloud"] .lx-win-line { color: #1e3a8a; background: rgba(255,255,255,.9); border-color: #bfdbfe; }
 .lx-modal-body[data-theme="cloud"] .lx-prompt { color: #2563eb; }
 .lx-modal-body[data-theme="cloud"] .skill-tag { background: #ffffff; border-color: #bfdbfe; color: #2563eb; box-shadow: 0 2px 6px rgba(37,99,235,.1); }
+
+/* GitHub Profile */
+.lx-modal-body[data-theme="github"] { background: #0d1117; }
+.lx-modal-body[data-theme="github"] .preview-name { color: #f0f6fc; }
+.lx-modal-body[data-theme="github"] .preview-title { color: #58a6ff; }
+.lx-modal-body[data-theme="github"] .preview-desc { color: #8b949e; }
+.lx-modal-body[data-theme="github"] .lx-win-line { color: #f0f6fc; background: #161b22; border-color: #30363d; }
+.lx-modal-body[data-theme="github"] .lx-prompt { color: #58a6ff; }
+.lx-modal-body[data-theme="github"] .skill-tag { background: #161b22; border-color: #30363d; color: #3fb950; }
+
 
 /* Theme Gallery filter tabs */
 .lx-theme-filters { display: flex; gap: 10px; justify-content: center; margin: 24px 0 16px; flex-wrap: wrap; }
