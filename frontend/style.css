@@ -1521,6 +1521,16 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="bold"] .lx-prompt { color: #c6fb50; }
 .lx-modal-body[data-theme="bold"] .skill-tag { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: #c6fb50; font-family: ui-monospace, monospace; }
 
+/* Clean Pro */
+.lx-modal-body[data-theme="clean"] { background: #f4f4f0; font-family: Inter, system-ui, sans-serif; }
+.lx-modal-body[data-theme="clean"] .preview-name { color: #18181b; font-weight: 700; letter-spacing: -.02em; }
+.lx-modal-body[data-theme="clean"] .preview-title { color: #6d28d9; font-weight: 600; }
+.lx-modal-body[data-theme="clean"] .preview-desc { color: #52525b; }
+.lx-modal-body[data-theme="clean"] .lx-win-line { color: #18181b; background: #ffffff; border: 1px solid rgba(0,0,0,.08); box-shadow: 0 4px 14px rgba(0,0,0,.04); }
+.lx-modal-body[data-theme="clean"] .lx-prompt { color: #6d28d9; }
+.lx-modal-body[data-theme="clean"] .skill-tag { background: #ffffff; border-color: rgba(0,0,0,.1); color: #6d28d9; box-shadow: 0 2px 6px rgba(0,0,0,.04); font-weight: 500; }
+
+
 
 
 
@@ -2462,4 +2472,11 @@ body.visual-user #tplGrid .tpl-card[data-vtrack="tech"] {
 .lx-tp-bold .lx-tp-hero { background: #18181c; border-left: 2px solid #c6fb50; border-radius: 4px; }
 .lx-tp-bold .lx-tp-cards { background: #141418; border: 1px solid rgba(255,255,255,.1); border-radius: 4px; }
 .lx-tp-bold .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #c6fb50; }
+
+.lx-tp-clean { background: #f4f4f0; }
+.lx-tp-clean .lx-tp-nav { background: #ffffff; border-bottom: 1px solid rgba(0,0,0,.08); border-radius: 999px; margin: 4px; height: 16px; }
+.lx-tp-clean .lx-tp-hero { background: #ffffff; border-left: 2px solid #6d28d9; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+.lx-tp-clean .lx-tp-cards { background: #ffffff; border: 1px solid rgba(0,0,0,.06); border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,.06); }
+.lx-tp-clean .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #6d28d9; }
+
 
