@@ -28,6 +28,7 @@ const TEMPLATES = [
   { id: 'particle', name: 'Particle Mesh', desc: 'Interactive 3D particle mesh with glowing gradients & dual-action hero', emoji: '✨', best: 'Full Stack • AI / ML • Creative Devs' },
   { id: 'panels', name: 'Panels Showcase', desc: 'Sleek tabbed sliding viewport panels with purple gradient hero & dark mode', emoji: '🗂️', best: 'Full Stack • Product Devs • Modern UI' },
   { id: 'monolith', name: 'Monolith Brutalist', desc: 'Heavy editorial typography with brutalist borders & hard drop shadows', emoji: '⬛', best: 'Full Stack • Bold Personalities • Minimal' },
+  { id: 'editor', name: 'VS Code Editor', desc: 'VS Code IDE theme with file explorer, code tabs, and Copilot panel', emoji: '💻', best: 'Full Stack • Systems • Developers' },
 
   { id: 'gallery', name: 'Gallery', desc: 'Visual masonry grid for artists and photographers', emoji: '🖼️', best: 'Photographers • Visual Artists', track: 'visual' },
   { id: 'studio', name: 'Studio', desc: 'Light editorial covers with refined typography', emoji: '☀️', best: 'Brand Designers • Art Directors', track: 'visual' },
@@ -1375,7 +1376,7 @@ function initModerncvRuntime(p) {
     anime({ targets: '.floating-badge', opacity: [0, 1], scale: [0, 1], delay: anime.stagger(150, { start: 1200 }), duration: 800, easing: 'easeOutBack' });
 
     // Intersection observer for scroll animations
-    if ('IntersectionObserver' in window) {
+    if (typeof window !== 'undefined' && 'IntersectionObserver' in window && typeof IntersectionObserver === 'function') {
       // Skill bars
       const skillObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -4338,6 +4339,426 @@ function renderCloud(p) {
 
 
 
+
+function initEditorRuntime(p) {
+  // Live clock
+  const clock = document.getElementById('ed-clock');
+  function tick() {
+    if (clock) {
+      const d = new Date();
+      clock.textContent = String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    }
+  }
+  tick();
+  if (typeof setInterval === 'function') { setInterval(tick, 15000); }
+
+  // File explorer & tab click scrolling
+  const scroller = document.getElementById('ed-scroll');
+  function go(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  document.querySelectorAll('[data-target]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      go(a.getAttribute('data-target'));
+    });
+  });
+
+  // Active file highlight as you scroll
+  const files = {};
+  document.querySelectorAll('.ed-file[data-target]').forEach(f => {
+    files[f.getAttribute('data-target')] = f;
+  });
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(en => {
+        if (en.isIntersecting && files[en.target.id]) {
+          document.querySelectorAll('.ed-file').forEach(f => f.classList.remove('active'));
+          files[en.target.id].classList.add('active');
+        }
+      });
+    }, { root: scroller && scroller.clientHeight ? scroller : null, rootMargin: '-30% 0px -60% 0px' });
+    document.querySelectorAll('.ed-section').forEach(s => {
+      if (files[s.id]) obs.observe(s);
+    });
+  }
+
+  // Copilot Chatbot
+  const chat = document.getElementById('ed-chat');
+  const form = document.getElementById('ed-chat-form');
+  const input = document.getElementById('ed-chat-input');
+  const suggest = document.getElementById('ed-suggest');
+  if (!chat || !form || !input) return;
+
+  const fname = (p.name || 'Developer').trim().split(' ')[0] || 'Developer';
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const education = (Array.isArray(p.education) && p.education.length) ? p.education : (p.resume && Array.isArray(p.resume.education) ? p.resume.education : []);
+
+  function el(cls, html) {
+    const d = document.createElement('div');
+    d.className = cls;
+    if (html != null) d.innerHTML = html;
+    return d;
+  }
+  function escStr(s) {
+    return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  function addUser(t) {
+    const m = el('ed-msg ed-msg-user');
+    m.appendChild(el('tx', escStr(t)));
+    chat.appendChild(m);
+    chat.scrollTop = chat.scrollHeight;
+  }
+  function addBot(t) {
+    const m = el('ed-msg');
+    m.appendChild(el('av'));
+    const tx = el('tx');
+    tx.innerHTML = escStr(t).replace(/\n/g, '<br>');
+    m.appendChild(tx);
+    chat.appendChild(m);
+    chat.scrollTop = chat.scrollHeight;
+  }
+
+  function reply(q) {
+    q = (q || '').toLowerCase();
+    if (/\b(hi|hello|hey|yo|greetings)\b/.test(q)) {
+      return `Hey! 👋 Ask me about ${fname}'s skills, projects, experience, or contact.`;
+    }
+    if (/skill|tech|stack|language|tool|know|expert|proficiency/.test(q)) {
+      if (!skills.length) return "No skills are listed yet.";
+      return `${fname} works with: ${skills.slice(0, 15).join(', ')}.`;
+    }
+    if (/project|built|build|ship|made|app|portfolio/.test(q)) {
+      if (!projects.length) return "No projects are listed yet.";
+      return "Here are some highlights:\n" + projects.slice(0, 4).map(pr => "• " + (pr.title || pr.name || 'Project') + (pr.desc || pr.description ? " — " + (pr.desc || pr.description) : "")).join("\n");
+    }
+    if (/experience|work|job|role|company|career|intern/.test(q)) {
+      if (!rawExp.length) return "No work experience is listed yet.";
+      return rawExp.slice(0, 4).map(e => "• " + (e.role || e.title || 'Role') + (e.company ? " @ " + e.company : "") + (e.dates || e.year ? " (" + (e.dates || e.year) + ")" : "")).join("\n");
+    }
+    if (/education|study|degree|college|university|school|grad/.test(q)) {
+      if (!education.length) return "No education credentials listed yet.";
+      return education.map(e => "• " + (e.institution || e.school || 'University') + (e.degree ? " — " + e.degree : "")).join("\n");
+    }
+    if (/contact|email|reach|hire|touch|connect|phone|message/.test(q)) {
+      const parts = [];
+      if (p.email) parts.push("✉ " + p.email);
+      if (p.phone) parts.push("☎ " + p.phone);
+      if (p.github) parts.push("GitHub: " + p.github);
+      if (p.linkedin) parts.push("LinkedIn: " + p.linkedin);
+      return parts.length ? ("Here is how to reach " + fname + ":\n" + parts.join("\n")) : "Contact details are not listed yet.";
+    }
+    if (/who|about|yourself|summary|intro|bio/.test(q)) {
+      return p.bio || p.summary || p.tagline || (fname + " — explore the tabs for the full story!");
+    }
+    return `I can assist with ${fname}'s skills, projects, experience, education, or contact details. Try clicking one of the chips below 👇`;
+  }
+
+  function ask(q) {
+    if (!q) return;
+    addUser(q);
+    if (typeof setTimeout === 'function') {
+      setTimeout(() => { addBot(reply(q)); }, 350);
+    } else {
+      addBot(reply(q));
+    }
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+    ask(q);
+  });
+
+  if (suggest) {
+    suggest.addEventListener('click', e => {
+      const b = e.target.closest('.ed-chip-q');
+      if (!b) return;
+      ask(b.getAttribute('data-q'));
+    });
+  }
+}
+
+function renderEditor(p) {
+  normTpl(p);
+  document.body.dataset.template = 'editor';
+  const name = tplEsc(p.name || 'Developer');
+  const nameParts = (p.name || 'Developer').trim().split(' ');
+  const firstName = tplEsc(nameParts[0] || 'Developer');
+  const lastName = tplEsc(nameParts.slice(1).join(' ') || '');
+  const title = tplEsc(p.title || 'Software Engineer');
+  document.title = `${name} — ${title} | portfoolio.me`;
+  const bio = tplEsc(p.bio || p.summary || p.tagline || 'Crafting intelligent solutions through modern software engineering and exceptional user experiences.');
+  const location = tplEsc(p.location || 'Worldwide');
+  const email = tplEsc(p.email || '');
+  const phone = tplEsc(p.phone || '');
+  const slug = tplEsc((p.slug || firstName).toLowerCase().replace(/[^a-z0-9]/g, '-'));
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const education = (Array.isArray(p.education) && p.education.length) ? p.education : (p.resume && Array.isArray(p.resume.education) ? p.resume.education : []);
+
+  const ghUser = p.github_username || (p.github ? p.github.replace(/^https?:\/\/github\.com\//, '').replace(/\/.*$/, '') : '');
+
+  const projectsHtml = projects.map((pr, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    const prTitle = tplEsc(pr.title || pr.name || `Project ${i+1}`);
+    const prDesc = tplEsc(pr.desc || pr.description || 'Full stack software engineering project.');
+    const prUrl = pr.url || pr.demoUrl || pr.github || '#';
+    const prDemo = pr.demoUrl ? tplEsc(pr.demoUrl) : '';
+    const prGh = pr.github ? tplEsc(pr.github) : (prUrl.includes('github.com') ? tplEsc(prUrl) : '');
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    const fileName = prTitle.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-') + '.tsx';
+
+    return `
+      <article class="ed-pcard">
+        <div class="ed-pcard-bar">
+          <span class="dots"><i></i><i></i><i></i></span>
+          <span class="fn">${tplEsc(fileName)}</span>
+          <span class="idx">${num}</span>
+        </div>
+        <div class="ed-pcard-body">
+          ${techs.length ? `<div class="ed-cat">${tplEsc(techs[0].toUpperCase())}</div>` : ''}
+          <h3>${prTitle}</h3>
+          <p>${prDesc}</p>
+          ${techs.length ? `<div class="ed-chips" style="margin-bottom:12px">${techs.map(t => `<span class="ed-chip" style="font-size:11px;padding:3px 8px">${tplEsc(t)}</span>`).join('')}</div>` : ''}
+          <div class="ed-pcard-links">
+            ${prGh ? `<a class="ed-plink" href="${prGh}" target="_blank" rel="noopener">GitHub ↗</a>` : ''}
+            ${prDemo ? `<a class="ed-plink primary" href="${prDemo}" target="_blank" rel="noopener">Live Demo ↗</a>` : (prUrl !== '#' && !prGh ? `<a class="ed-plink primary" href="${tplEsc(prUrl)}" target="_blank" rel="noopener">View Project ↗</a>` : '')}
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  const expHtml = rawExp.map(e => {
+    const dateStr = tplEsc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent');
+    const role = tplEsc(e.role || e.title || 'Engineer');
+    const company = tplEsc(e.company || e.organization || '');
+    const bullets = (e.bullets || e.achievements || []);
+    return `
+      <div class="ed-tl-item">
+        <div class="ed-tl-date">${dateStr}</div>
+        <div>
+          <h3>${role} ${company ? `<span class="at">· ${company}</span>` : ''}</h3>
+          ${e.location ? `<div style="color:var(--ed-faint);font-size:12px;margin:2px 0 6px;">${tplEsc(e.location)}</div>` : ''}
+          ${e.desc ? `<p style="color:var(--ed-dim);font-size:13px;line-height:1.6;margin:0 0 6px;">${tplEsc(e.desc)}</p>` : ''}
+          ${bullets.length ? `
+            <ul style="margin:6px 0 0;padding-left:18px;color:var(--ed-dim);font-size:12.5px;line-height:1.6;">
+              ${bullets.map(b => `<li style="margin-bottom:4px">${tplEsc(b)}</li>`).join('')}
+            </ul>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const eduHtml = education.map(ed => `
+    <div class="ed-edu">
+      <h3>${tplEsc(ed.institution || ed.school || 'University')}</h3>
+      <div class="deg">${tplEsc(ed.degree || ed.area || 'Degree')}</div>
+      <div class="meta">${tplEsc(ed.dates || [ed.start, ed.end].filter(Boolean).join(' – ') || ed.year || '')} ${ed.score ? `· ${tplEsc(ed.score)}` : ''}</div>
+    </div>
+  `).join('');
+
+  (document.getElementById('app') || document.body).innerHTML = `
+    <div class="ed-app">
+      <!-- Title bar -->
+      <div class="ed-titlebar">
+        <div class="ed-lights"><span class="r"></span><span class="y"></span><span class="g"></span></div>
+        <div class="ed-menu"><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Run</span><span>Terminal</span><span>Help</span></div>
+        <div class="ed-cmdpill"><span class="dot">●</span> ${slug} : portfolio <span class="kbd">⌘P</span></div>
+      </div>
+
+      <div class="ed-body">
+        <!-- Activity bar -->
+        <div class="ed-activity">
+          <span class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5v7M8.4 7.5 15.6 8.4M8 17l8-6"/></svg></span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg></span>
+        </div>
+
+        <!-- Explorer -->
+        <nav class="ed-explorer">
+          <div class="ed-explorer-title">EXPLORER · PORTFOLIO</div>
+          <a class="ed-file active" data-target="home"><span class="fi fi-tsx">⚛</span> home.tsx</a>
+          <a class="ed-file" data-target="about"><span class="fi fi-html">&lt;&gt;</span> about.html</a>
+          ${projects.length ? '<a class="ed-file" data-target="projects"><span class="fi fi-js">JS</span> projects.js</a>' : ''}
+          ${skills.length ? '<a class="ed-file" data-target="skills"><span class="fi fi-json">{ }</span> skills.json</a>' : ''}
+          ${rawExp.length ? '<a class="ed-file" data-target="experience"><span class="fi fi-ts">TS</span> experience.ts</a>' : ''}
+          ${ghUser ? '<a class="ed-file" data-target="opensource"><span class="fi fi-md">M↓</span> opensource.md</a>' : ''}
+          ${education.length ? '<a class="ed-file" data-target="education"><span class="fi fi-json">🎓</span> education.json</a>' : ''}
+          <a class="ed-file" data-target="contact"><span class="fi fi-css">#</span> contact.css</a>
+          <div class="ed-explorer-spacer"></div>
+          <div class="ed-explorer-foot">
+            <div class="ed-copilot-chip">✦ ${firstName}'s Copilot <span style="margin-left:auto;opacity:.7;">open ✓</span></div>
+          </div>
+        </nav>
+
+        <!-- Editor Area -->
+        <div class="ed-editor">
+          <div class="ed-tabs">
+            <div class="ed-tab active" data-target="home"><span class="fi fi-tsx">⚛</span> home.tsx</div>
+            <div class="ed-tab" data-target="about"><span class="fi fi-html">&lt;&gt;</span> about.html</div>
+            ${projects.length ? '<div class="ed-tab" data-target="projects"><span class="fi fi-js">JS</span> projects.js</div>' : ''}
+          </div>
+          <div class="ed-breadcrumb">${slug} <span class="sep">›</span> src <span class="sep">›</span> home.tsx</div>
+
+          <div class="ed-scroll" id="ed-scroll">
+            <div class="ed-content">
+              <!-- HOME / HERO -->
+              <section class="ed-section" id="home">
+                <div class="ed-comment">// hello world !! Welcome to my portfolio</div>
+                <h1 class="ed-name"><span class="first">${firstName}</span>${lastName ? `<span class="last">${lastName}</span>` : ''}</h1>
+                <div class="ed-pills">
+                  <span class="ed-pill"><span class="d"></span>${title}</span>
+                  <span class="ed-pill accent"><span class="d"></span>${location}</span>
+                </div>
+                <div class="ed-tagline">${bio}</div>
+                <div class="ed-actions">
+                  ${projects.length ? '<a class="ed-btn primary" data-target="projects">📁 Projects</a>' : ''}
+                  <a class="ed-btn" data-target="about">👤 About Me</a>
+                  <a class="ed-btn" data-target="contact">✉ Contact</a>
+                </div>
+
+                <div class="ed-stats">
+                  <div class="ed-stat"><div class="v">${rawExp.length || 1}+</div><div class="l">EXPERIENCES</div></div>
+                  <div class="ed-stat"><div class="v">${projects.length || 1}+</div><div class="l">PROJECTS</div></div>
+                  <div class="ed-stat"><div class="v">${skills.length || 8}+</div><div class="l">SKILLS</div></div>
+                  <div class="ed-stat"><div class="v">∞</div><div class="l">CURIOSITY</div></div>
+                </div>
+              </section>
+
+              <!-- ABOUT -->
+              <section class="ed-section" id="about">
+                <div class="ed-comment">&lt;!-- about.html · ${name} --&gt;</div>
+                <h2 class="ed-h">About Me</h2>
+                <div class="ed-subcomment">// who I am · what I do · where I build</div>
+                <div class="ed-box">${bio}</div>
+              </section>
+
+              <!-- PROJECTS -->
+              ${projects.length ? `
+                <section class="ed-section" id="projects">
+                  <div class="ed-comment">// projects.js : things I've built &amp; shipped</div>
+                  <h2 class="ed-h">Projects</h2>
+                  <div class="ed-subcomment">const projects = [ ...shipped, ...building ]</div>
+                  <div class="ed-cards">${projectsHtml}</div>
+                </section>
+              ` : ''}
+
+              <!-- SKILLS -->
+              ${skills.length ? `
+                <section class="ed-section" id="skills">
+                  <div class="ed-comment">// skills.json</div>
+                  <h2 class="ed-h">Skills</h2>
+                  <div class="ed-subcomment">const proficiency = { ... }</div>
+                  <div class="ed-chips">
+                    ${skills.map(s => `<span class="ed-chip">${tplEsc(s)}</span>`).join('')}
+                  </div>
+                </section>
+              ` : ''}
+
+              <!-- EXPERIENCE -->
+              ${rawExp.length ? `
+                <section class="ed-section" id="experience">
+                  <div class="ed-comment">// experience.ts</div>
+                  <h2 class="ed-h">Experience</h2>
+                  <div class="ed-tl">${expHtml}</div>
+                </section>
+              ` : ''}
+
+              <!-- OPEN SOURCE / GITHUB -->
+              ${ghUser ? `
+                <section class="ed-section" id="opensource">
+                  <div class="ed-comment">// opensource.md : contributions &amp; commits</div>
+                  <h2 class="ed-h">Open Source</h2>
+                  <div class="ed-subcomment">git log --author="${tplEsc(ghUser)}"</div>
+                  <div class="ed-contrib" style="overflow-x:auto;padding:12px 0;">
+                    <img src="https://ghchart.rshah.org/569cd6/${encodeURIComponent(ghUser)}" alt="${name}'s GitHub contributions" loading="lazy" style="max-width:100%;filter:hue-rotate(180deg) saturate(1.8);">
+                  </div>
+                </section>
+              ` : ''}
+
+              <!-- EDUCATION -->
+              ${education.length ? `
+                <section class="ed-section" id="education">
+                  <div class="ed-comment">// education</div>
+                  <h2 class="ed-h">Education</h2>
+                  <div class="ed-edu-grid">${eduHtml}</div>
+                </section>
+              ` : ''}
+
+              <!-- CONTACT -->
+              <section class="ed-section" id="contact">
+                <div class="ed-comment">/* contact.css */</div>
+                <h2 class="ed-h">Get in touch</h2>
+                <div class="ed-subcomment">.contact { display: let's-talk; }</div>
+                <div class="ed-actions">
+                  ${email ? `<a class="ed-btn primary" href="mailto:${email}">✉ ${email}</a>` : ''}
+                  ${phone ? `<a class="ed-btn" href="tel:${phone}">☎ ${phone}</a>` : ''}
+                </div>
+                <div class="ed-socials">
+                  ${p.github ? `<a class="ed-soc" href="${tplEsc(p.github)}" target="_blank" rel="noopener" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>` : ''}
+                  ${p.linkedin ? `<a class="ed-soc" href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/></svg></a>` : ''}
+                  ${p.website ? `<a class="ed-soc" href="${tplEsc(p.website)}" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></a>` : ''}
+                </div>
+                <div style="margin-top:40px;color:var(--ed-faint);font-size:12px;">// Built by ${name} via Portfoolio</div>
+              </section>
+            </div>
+          </div>
+        </div>
+
+        <!-- Copilot panel -->
+        <aside class="ed-copilot">
+          <div class="ed-copilot-head">✦ ${firstName}'s AI Assistant <span class="ed-copilot-live">● online</span></div>
+          <div class="ed-copilot-ws">WORKSPACE<br><span class="b">● portfolio · ${slug}</span></div>
+          <div class="ed-copilot-body" id="ed-chat">
+            <div class="ed-msg">
+              <div class="av"></div>
+              <div class="tx">Hi! I'm ${firstName}'s AI assistant. Ask me about ${firstName}'s <b>skills</b>, <b>projects</b>, <b>experience</b> or how to get in <b>touch</b>. ✨</div>
+            </div>
+          </div>
+          <div class="ed-suggest" id="ed-suggest">
+            <button type="button" class="ed-chip-q" data-q="What are the top skills?">Top skills</button>
+            <button type="button" class="ed-chip-q" data-q="Tell me about the projects">Projects</button>
+            <button type="button" class="ed-chip-q" data-q="What is the work experience?">Experience</button>
+            <button type="button" class="ed-chip-q" data-q="How can I contact?">Contact</button>
+          </div>
+          <form class="ed-copilot-input" id="ed-chat-form" autocomplete="off">
+            <input id="ed-chat-input" placeholder="Ask about ${firstName}…" aria-label="Ask the assistant">
+            <button type="submit" aria-label="Send">➤</button>
+          </form>
+        </aside>
+      </div>
+
+      <!-- Status bar -->
+      <div class="ed-status">
+        <span class="seg">⎇ main</span>
+        <span class="seg">◷ ${name}'s Portfolio</span>
+        <span class="right">
+          <span class="seg">✦ Copilot</span>
+          <span class="seg">UTF-8</span>
+          <span class="seg">Prettier</span>
+          <span class="seg">${firstName} Dark</span>
+          <span class="seg" id="ed-clock">10:50</span>
+        </span>
+      </div>
+    </div>
+  `;
+
+  initEditorRuntime(p);
+}
+
+
 function renderMonolith(p) {
   normTpl(p);
   document.body.dataset.template = 'monolith';
@@ -5146,7 +5567,7 @@ function initCloudRuntime(p) {
 }
 
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith };
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor };
 window.PortfoolioTemplateList = TEMPLATES;
 
 

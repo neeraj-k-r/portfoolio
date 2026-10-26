@@ -1494,6 +1494,16 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="monolith"] .lx-prompt { color: #020202; font-weight: 900; }
 .lx-modal-body[data-theme="monolith"] .skill-tag { background: #fffefa; border: 2px solid #020202; color: #020202; font-weight: 800; box-shadow: 2px 2px 0 #020202; }
 
+/* VS Code Editor */
+.lx-modal-body[data-theme="editor"] { background: #1e1e1e; font-family: ui-monospace, monospace; }
+.lx-modal-body[data-theme="editor"] .preview-name { color: #ffffff; }
+.lx-modal-body[data-theme="editor"] .preview-title { color: #569cd6; }
+.lx-modal-body[data-theme="editor"] .preview-desc { color: #a0a0a0; }
+.lx-modal-body[data-theme="editor"] .lx-win-line { color: #d4d4d4; background: #252526; border-color: #3c3c3c; font-family: ui-monospace, monospace; }
+.lx-modal-body[data-theme="editor"] .lx-prompt { color: #4ec9b0; }
+.lx-modal-body[data-theme="editor"] .skill-tag { background: #252526; border-color: #3c3c3c; color: #9cdcfe; font-family: ui-monospace, monospace; }
+
+
 
 
 
