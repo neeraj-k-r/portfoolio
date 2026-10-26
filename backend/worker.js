@@ -3489,6 +3489,166 @@ function pageParchment(p) {
 
 
 
+
+function pageMonolith(p) {
+  const name = esc(p.name || 'Developer');
+  const nameParts = (p.name || 'Developer').trim().split(' ');
+  const firstName = esc(nameParts[0] || 'DEV');
+  const lastName = esc(nameParts.slice(1).join(' ') || 'ENGINEER');
+  const title = esc(p.title || 'Full Stack Engineer');
+  const bio = esc(p.bio || p.summary || p.tagline || 'Transforming ideas into scalable high-impact digital solutions with modern software architecture.');
+  const location = esc(p.location || 'Worldwide');
+  const email = esc(p.email || '');
+  const photo = p.photo || p.avatar || '';
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const education = (Array.isArray(p.education) && p.education.length) ? p.education : (p.resume && Array.isArray(p.resume.education) ? p.resume.education : []);
+
+  const topSkills = skills.slice(0, 4);
+
+  const skillsHtml = skills.map(s => `
+    <span class="mo-skill">✦ ${esc(s)}</span>
+  `).join('');
+
+  const projectsHtml = projects.map((pr, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    const prTitle = esc(pr.title || `Project ${i+1}`);
+    const prDesc = esc(pr.desc || pr.description || 'Full stack engineering project built with scalable architecture and high performance.');
+    const prUrl = pr.url || pr.demoUrl || '#';
+    const prDemo = pr.demoUrl ? esc(pr.demoUrl) : '';
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+
+    return `
+      <article class="mo-project">
+        <div class="mo-project-num">${num}</div>
+        <div>
+          <h3>${prTitle}</h3>
+          ${techs.length ? `<div class="mo-kicker">${techs.map(t => esc(t)).join(', ')}</div>` : ''}
+          <p>${prDesc}</p>
+        </div>
+        <div class="mo-project-links">
+          ${prUrl !== '#' ? `<a href="${esc(prUrl)}" target="_blank" rel="noopener">Code ↗</a>` : ''}
+          ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener">Live ↗</a>` : ''}
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  const expHtml = rawExp.map(e => `
+    <article class="mo-exp">
+      <div class="mo-exp-date">${esc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent')}</div>
+      <div>
+        <h3>${esc(e.role || e.title || 'Engineer')} / ${esc(e.company || e.organization || '')}</h3>
+        ${e.location ? `<div class="mo-kicker">${esc(e.location)}</div>` : ''}
+        ${e.desc ? `<p style="margin:10px 0 0;color:#4b5563;font-weight:600">${esc(e.desc)}</p>` : ''}
+        ${(e.bullets || e.achievements || []).length ? `
+          <ul>${(e.bullets || e.achievements).map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+        ` : ''}
+      </div>
+    </article>
+  `).join('');
+
+  const eduHtml = education.map(ed => `
+    <article class="mo-card">
+      <div class="mo-card-type">Education</div>
+      <h3>${esc(ed.institution || ed.school || 'University')}</h3>
+      <p style="font-weight:700;color:var(--mo-ink)">${esc(ed.degree || ed.area || 'Degree')}</p>
+      <p>${esc(ed.dates || [ed.start, ed.end].filter(Boolean).join(' – ') || ed.year || '')}</p>
+    </article>
+  `).join('');
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'monolith')}<body class="portfolio-view" data-template="monolith">
+    <header class="mo-nav">
+      <a href="#home" class="mo-mark"><span>${firstName}</span><b>${lastName}</b></a>
+      <nav>
+        ${skills.length ? '<a href="#skills">Skills</a>' : ''}
+        ${projects.length ? '<a href="#projects">Projects</a>' : ''}
+        <a href="#about">About</a>
+        ${rawExp.length ? '<a href="#experience">Experience</a>' : ''}
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="mo-nav-side">
+        ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener">GitHub</a>` : ''}
+        ${p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
+        ${email ? `<a href="mailto:${email}">Email</a>` : ''}
+      </div>
+    </header>
+
+    <main class="mo-main">
+      <section class="mo-hero" id="home">
+        <div class="mo-sideword">Explore Work</div>
+        <div class="mo-hero-copy">
+          <h1><span>${firstName}</span><span>${lastName}</span></h1>
+          <div class="mo-role">${title}</div>
+          <p>${bio}</p>
+          <div class="mo-stats">
+            ${projects.length ? `<span>${projects.length}+ Projects</span>` : ''}
+            ${skills.length ? `<span>${skills.length} Skills</span>` : ''}
+            <span>${location}</span>
+          </div>
+        </div>
+        <div class="mo-portrait">
+          ${photo ? `<img src="${esc(photo)}" alt="${name}">` : `<span>${firstName.charAt(0)}</span>`}
+        </div>
+      </section>
+
+      ${topSkills.length ? `
+        <section class="mo-strip">
+          ${topSkills.map(s => `<span>${esc(s)}</span>`).join('')}
+        </section>
+      ` : ''}
+
+      <section class="mo-section mo-about" id="about">
+        <div class="mo-label">About / Overview</div>
+        <p>${bio}</p>
+      </section>
+
+      ${skills.length ? `
+        <section class="mo-section" id="skills">
+          <div class="mo-head"><span>01</span><h2>Skills &amp; Stack</h2></div>
+          <div class="mo-skills">${skillsHtml}</div>
+        </section>
+      ` : ''}
+
+      ${projects.length ? `
+        <section class="mo-section" id="projects">
+          <div class="mo-head"><span>02</span><h2>Selected Projects</h2></div>
+          <div class="mo-projects">${projectsHtml}</div>
+        </section>
+      ` : ''}
+
+      ${rawExp.length ? `
+        <section class="mo-section" id="experience">
+          <div class="mo-head"><span>03</span><h2>Experience</h2></div>
+          <div class="mo-timeline">${expHtml}</div>
+        </section>
+      ` : ''}
+
+      ${education.length ? `
+        <section class="mo-section">
+          <div class="mo-head"><span>04</span><h2>Credentials</h2></div>
+          <div class="mo-cardgrid">${eduHtml}</div>
+        </section>
+      ` : ''}
+
+      <section class="mo-section mo-contact" id="contact">
+        <div class="mo-head"><span>05</span><h2>Contact</h2></div>
+        <p>Have a role, project, or technical challenge in mind?</p>
+        <div class="mo-contact-links">
+          ${email ? `<a href="mailto:${email}">✉ Email Me (${email})</a>` : ''}
+          ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener">🐙 GitHub</a>` : ''}
+          ${p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener">💼 LinkedIn</a>` : ''}
+          ${p.website ? `<a href="${esc(p.website)}" target="_blank" rel="noopener">🌐 Website</a>` : ''}
+        </div>
+      </section>
+    </main>
+
+    ${foot(p)}
+  </body></html>`;
+}
+
 function pagePanels(p) {
   const name = esc(p.name || 'Developer');
   const title = esc(p.title || 'Full Stack Engineer');
@@ -4131,6 +4291,9 @@ function page(p, url) {
   }
   if (tpl === 'panels') {
     return pagePanels(p);
+  }
+  if (tpl === 'monolith') {
+    return pageMonolith(p);
   }
 
   const reqTab = url ? (url.searchParams.get('tab') || url.searchParams.get('page')) : null;

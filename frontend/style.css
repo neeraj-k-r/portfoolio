@@ -1218,6 +1218,13 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-tp-panels .lx-tp-cards { background: #ffffff; border: 1px solid #e6e8f0; border-radius: 8px; }
 .lx-tp-panels .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #2f6bff; box-shadow: 10px 0 0 #a855f7; }
 
+.lx-tp-monolith { background: #f6f5f0; }
+.lx-tp-monolith .lx-tp-nav { background: #fffefa; border-bottom: 2px solid #020202; }
+.lx-tp-monolith .lx-tp-hero { background: #020202; border-radius: 2px; }
+.lx-tp-monolith .lx-tp-cards { background: #fffefa; border: 2px solid #020202; box-shadow: 2px 2px 0 #020202; border-radius: 2px; }
+.lx-tp-monolith .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: #020202; }
+
+
 
 
 /* Theme lightbox */
@@ -1477,6 +1484,16 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="panels"] .lx-win-line { color: #11151f; background: #ffffff; border-color: #e6e8f0; }
 .lx-modal-body[data-theme="panels"] .lx-prompt { color: #4f3aa0; }
 .lx-modal-body[data-theme="panels"] .skill-tag { background: #ffffff; border-color: #e6e8f0; color: #2f6bff; box-shadow: 0 2px 6px rgba(47,107,255,.12); }
+
+/* Monolith Brutalist */
+.lx-modal-body[data-theme="monolith"] { background: #f6f5f0; }
+.lx-modal-body[data-theme="monolith"] .preview-name { color: #020202; font-weight: 900; text-transform: uppercase; letter-spacing: -0.04em; }
+.lx-modal-body[data-theme="monolith"] .preview-title { color: #020202; font-weight: 900; }
+.lx-modal-body[data-theme="monolith"] .preview-desc { color: #4b4b4b; }
+.lx-modal-body[data-theme="monolith"] .lx-win-line { color: #020202; background: #fffefa; border: 2px solid #020202; box-shadow: 3px 3px 0 #020202; }
+.lx-modal-body[data-theme="monolith"] .lx-prompt { color: #020202; font-weight: 900; }
+.lx-modal-body[data-theme="monolith"] .skill-tag { background: #fffefa; border: 2px solid #020202; color: #020202; font-weight: 800; box-shadow: 2px 2px 0 #020202; }
+
 
 
 
