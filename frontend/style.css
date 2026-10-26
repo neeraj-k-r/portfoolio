@@ -1212,6 +1212,13 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-tp-particle .lx-tp-cards { background: rgba(21,29,44,.88); border: 1px solid rgba(108,99,255,.25); border-radius: 8px; }
 .lx-tp-particle .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #22d3ee; box-shadow: 10px 0 0 #ff3d6e; }
 
+.lx-tp-panels { background: #f5f6fb; }
+.lx-tp-panels .lx-tp-nav { background: linear-gradient(135deg, #2a1d5e, #6b4bb8); border-bottom-color: transparent; }
+.lx-tp-panels .lx-tp-hero { background: #ffffff; border: 1px solid #e6e8f0; border-radius: 8px; box-shadow: 0 4px 12px rgba(31,30,80,.12); }
+.lx-tp-panels .lx-tp-cards { background: #ffffff; border: 1px solid #e6e8f0; border-radius: 8px; }
+.lx-tp-panels .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #2f6bff; box-shadow: 10px 0 0 #a855f7; }
+
+
 
 /* Theme lightbox */
 .lx-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
@@ -1461,6 +1468,16 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="particle"] .lx-win-line { color: #eef2f8; background: #151d2c; border-color: rgba(111,102,255,.28); }
 .lx-modal-body[data-theme="particle"] .lx-prompt { color: #7367ff; }
 .lx-modal-body[data-theme="particle"] .skill-tag { background: #151d2c; border-color: rgba(34,211,238,.35); color: #22d3ee; }
+
+/* Multi-Panel Showcase */
+.lx-modal-body[data-theme="panels"] { background: #f5f6fb; }
+.lx-modal-body[data-theme="panels"] .preview-name { color: #11151f; font-weight: 800; }
+.lx-modal-body[data-theme="panels"] .preview-title { color: #2f6bff; }
+.lx-modal-body[data-theme="panels"] .preview-desc { color: #5b6478; }
+.lx-modal-body[data-theme="panels"] .lx-win-line { color: #11151f; background: #ffffff; border-color: #e6e8f0; }
+.lx-modal-body[data-theme="panels"] .lx-prompt { color: #4f3aa0; }
+.lx-modal-body[data-theme="panels"] .skill-tag { background: #ffffff; border-color: #e6e8f0; color: #2f6bff; box-shadow: 0 2px 6px rgba(47,107,255,.12); }
+
 
 
 

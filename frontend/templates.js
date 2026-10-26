@@ -26,6 +26,7 @@ const TEMPLATES = [
   { id: 'cloud', name: 'Cloud Blue', desc: 'Airy sky blue cloudscape with soft cards', emoji: '☁️', best: 'Web Dev • Clean • Friendly UI' },
   { id: 'github', name: 'GitHub Profile', desc: 'Authentic dark developer profile with pinned repos, README card & contribution graph', emoji: '🐙', best: 'Developers • Open Source • Full Stack' },
   { id: 'particle', name: 'Particle Mesh', desc: 'Interactive 3D particle mesh with glowing gradients & dual-action hero', emoji: '✨', best: 'Full Stack • AI / ML • Creative Devs' },
+  { id: 'panels', name: 'Panels Showcase', desc: 'Sleek tabbed sliding viewport panels with purple gradient hero & dark mode', emoji: '🗂️', best: 'Full Stack • Product Devs • Modern UI' },
 
   { id: 'gallery', name: 'Gallery', desc: 'Visual masonry grid for artists and photographers', emoji: '🖼️', best: 'Photographers • Visual Artists', track: 'visual' },
   { id: 'studio', name: 'Studio', desc: 'Light editorial covers with refined typography', emoji: '☀️', best: 'Brand Designers • Art Directors', track: 'visual' },
@@ -4334,6 +4335,241 @@ function renderCloud(p) {
 
 
 
+
+function renderPanels(p) {
+  normTpl(p);
+  document.body.dataset.template = 'panels';
+  const name = tplEsc(p.name || 'Developer');
+  const title = tplEsc(p.title || 'Full Stack Engineer');
+  document.title = `${name} — ${title} | portfoolio.me`;
+  const tagline = tplEsc(p.tagline || `Crafting clean, accessible, and high-performance digital experiences.`);
+  const bio = tplEsc(p.bio || p.summary || p.tagline || `I'm ${name}, a detail-oriented software developer building scalable digital products and robust modern web architectures.`);
+  const location = tplEsc(p.location || 'Remote / Worldwide');
+  const email = tplEsc(p.email || '');
+  const photo = p.photo || p.avatar || '';
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const education = (Array.isArray(p.education) && p.education.length) ? p.education : (p.resume && Array.isArray(p.resume.education) ? p.resume.education : []);
+
+  const skillPillsHtml = skills.map(s => `
+    <span class="pn-pill">✦ ${tplEsc(s)}</span>
+  `).join('');
+
+  const expHtml = rawExp.map(e => `
+    <div class="pn-exp">
+      <div class="pn-exp-top">
+        <div class="pn-exp-org">
+          <div class="pn-exp-logo">${tplEsc((e.company || e.organization || 'E').slice(0, 2).toUpperCase())}</div>
+          <div>
+            <h3>${tplEsc(e.company || e.organization || '')}</h3>
+            <div class="pn-exp-role">${tplEsc(e.role || e.title || 'Engineer')}</div>
+          </div>
+        </div>
+        <div class="pn-exp-date">${tplEsc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent')}</div>
+      </div>
+      ${e.desc ? `<p style="margin:14px 0 0;color:var(--pn-dim)">${tplEsc(e.desc)}</p>` : ''}
+      ${(e.bullets || e.achievements || []).length ? `
+        <ul class="pn-plus">${(e.bullets || e.achievements).map(b => `<li>${tplEsc(b)}</li>`).join('')}</ul>
+      ` : ''}
+    </div>
+  `).join('');
+
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = tplEsc(pr.title || `Project ${i+1}`);
+    const prDesc = tplEsc(pr.desc || pr.description || 'Full stack application built with modern architecture and best practices.');
+    const prUrl = pr.url || pr.demoUrl || '#';
+    const prDemo = pr.demoUrl ? tplEsc(pr.demoUrl) : '';
+    const img = pr.image || pr.img || '';
+
+    return `
+      <div class="pn-proj">
+        ${img ? `<div class="pn-proj-bg"><img src="${tplEsc(img)}" alt="${prTitle}"></div>` : ''}
+        <div class="pn-proj-links">
+          ${prUrl !== '#' ? `<a href="${tplEsc(prUrl)}" target="_blank" rel="noopener" title="Source Code"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>` : ''}
+          ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener" title="Live Preview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/></svg></a>` : ''}
+        </div>
+        <h3>${prTitle}</h3>
+        <p>${prDesc}</p>
+      </div>
+    `;
+  }).join('');
+
+  const eduHtml = education.map(ed => `
+    <div class="pn-edu">
+      <div class="pn-edu-top">
+        <div>
+          <h3>${tplEsc(ed.institution || ed.school || 'University')}</h3>
+          <div class="deg">${tplEsc(ed.degree || ed.area || 'Degree')}</div>
+        </div>
+        <div class="meta">${tplEsc(ed.dates || [ed.start, ed.end].filter(Boolean).join(' – ') || ed.year || '')}</div>
+      </div>
+    </div>
+  `).join('');
+
+  (document.getElementById('app') || document.body).innerHTML = `
+    <header class="pn-hero">
+      <div class="pn-wrap">
+        <div class="pn-hero-top">
+          <div class="pn-brand">${name}</div>
+          <button type="button" class="pn-hero-badge" id="pnThemeBtn" aria-label="Toggle theme" title="Toggle dark mode">
+            <svg class="pn-i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <svg class="pn-i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </button>
+        </div>
+        <div class="pn-hi">Hello, I'm</div>
+        <h1 class="pn-name">${name}</h1>
+        <div class="pn-tagline">${tagline}</div>
+      </div>
+    </header>
+
+    <div class="pn-shell">
+      <div class="pn-card">
+        <div class="pn-tabs" id="pnTabs">
+          <button class="pn-tab on" data-tab="who"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Who am I?</button>
+          ${skills.length ? '<button class="pn-tab" data-tab="skills"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 9-3 3 3 3M16 9l3 3-3 3"/></svg> Superpowers</button>' : ''}
+          ${rawExp.length ? '<button class="pn-tab" data-tab="exp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg> Experience</button>' : ''}
+          ${projects.length ? '<button class="pn-tab" data-tab="proj"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Projects</button>' : ''}
+          ${education.length ? '<button class="pn-tab" data-tab="edu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg> Academic Path</button>' : ''}
+          <button class="pn-tab" data-tab="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Let's Talk</button>
+        </div>
+
+        <div class="pn-content">
+          <section class="pn-panel on" data-tab="who">
+            <div class="pn-whohead">
+              ${photo ? `<img class="pn-photo" src="${tplEsc(photo)}" alt="${name}">` : `<div class="pn-photo ph">${name.charAt(0)}</div>`}
+              <div>
+                <h2 style="margin:0;font-size:1.7rem;font-weight:800;">Who Am I?</h2>
+                <div style="color:var(--pn-blue);font-weight:600;margin-top:4px">${title}</div>
+              </div>
+            </div>
+            <div class="pn-status">
+              <span class="pn-stat"><span class="dot"></span> Available for work</span>
+              ${location ? `<span class="pn-stat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg> ${location}</span>` : ''}
+            </div>
+            <div class="pn-prose">
+              <p>${bio}</p>
+            </div>
+            <div class="pn-cta">
+              ${email ? `<a class="pn-btn pn-btn-dark" href="mailto:${email}">Get in Touch →</a>` : ''}
+              <button type="button" class="pn-btn pn-btn-light" id="pnWhoProjBtn">View Projects</button>
+            </div>
+          </section>
+
+          ${skills.length ? `
+            <section class="pn-panel" data-tab="skills">
+              <div class="pn-panel-head">
+                <span class="pn-panel-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m8 9-3 3 3 3M16 9l3 3-3 3"/></svg></span>
+                <h2>My Superpowers</h2>
+              </div>
+              <p class="pn-intro">Technologies, tools, and specialized capabilities I use to build scalable products:</p>
+              <div class="pn-skill-pills">${skillPillsHtml}</div>
+            </section>
+          ` : ''}
+
+          ${rawExp.length ? `
+            <section class="pn-panel" data-tab="exp">
+              <div class="pn-panel-head">
+                <span class="pn-panel-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></span>
+                <h2>Work Experience</h2>
+              </div>
+              ${expHtml}
+            </section>
+          ` : ''}
+
+          ${projects.length ? `
+            <section class="pn-panel" data-tab="proj">
+              <div class="pn-panel-head">
+                <span class="pn-panel-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6M15 9l-6 6"/></svg></span>
+                <h2>Featured Projects</h2>
+              </div>
+              <div class="pn-proj-grid">${projectsHtml}</div>
+            </section>
+          ` : ''}
+
+          ${education.length ? `
+            <section class="pn-panel" data-tab="edu">
+              <div class="pn-panel-head">
+                <span class="pn-panel-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c0 1 2.7 2.5 6 2.5s6-1.5 6-2.5v-5"/></svg></span>
+                <h2>Academic Path</h2>
+              </div>
+              ${eduHtml}
+            </section>
+          ` : ''}
+
+          <section class="pn-panel" data-tab="contact">
+            <div class="pn-panel-head">
+              <span class="pn-panel-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+              <h2>Let's Talk</h2>
+            </div>
+            <form class="pn-form" onsubmit="event.preventDefault(); var em='${email}'; var m=document.getElementById('pnMsg')?document.getElementById('pnMsg').value:''; if(em) location.href='mailto:'+em+'?subject=Project%20Inquiry&body='+encodeURIComponent(m);">
+              <div class="field">
+                <label>Your Message <span class="req">*</span></label>
+                <textarea id="pnMsg" class="pn-textarea" placeholder="Tell me about your project, idea, or role..." required></textarea>
+              </div>
+              <button type="submit" class="pn-btn pn-btn-dark">Send Message via Email</button>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <footer class="pn-footer">
+      <div class="pn-wrap">
+        <div class="pn-footer-grid">
+          <div>
+            <h3>${name}</h3>
+            <div class="sub">${title}</div>
+            <div class="pn-footer-socs">
+              ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener">GitHub</a>` : ''}
+              ${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
+              ${p.website ? `<a href="${tplEsc(p.website)}" target="_blank" rel="noopener">Website</a>` : ''}
+              ${email ? `<a href="mailto:${email}">Email</a>` : ''}
+            </div>
+          </div>
+          <div>
+            ${tplFoot(p)}
+          </div>
+        </div>
+        <div class="pn-copy">© ${name} · Built with Portfoolio</div>
+      </div>
+    </footer>
+  `;
+
+  initPanelsRuntime();
+}
+
+function initPanelsRuntime() {
+  const tabsContainer = document.getElementById('pnTabs');
+  if (tabsContainer) {
+    tabsContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('.pn-tab');
+      if (!btn) return;
+      const tabId = btn.getAttribute('data-tab');
+      document.querySelectorAll('.pn-tab').forEach(t => t.classList.toggle('on', t.getAttribute('data-tab') === tabId));
+      document.querySelectorAll('.pn-panel').forEach(p => p.classList.toggle('on', p.getAttribute('data-tab') === tabId));
+    });
+  }
+
+  const themeBtn = document.getElementById('pnThemeBtn');
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('pn-dark');
+      if (document.documentElement) document.documentElement.classList.toggle('pn-dark');
+    });
+  }
+
+  const whoProjBtn = document.getElementById('pnWhoProjBtn');
+  if (whoProjBtn) {
+    whoProjBtn.addEventListener('click', () => {
+      const projTab = document.querySelector('.pn-tab[data-tab="proj"]');
+      if (projTab) projTab.click();
+    });
+  }
+}
+
+
 function renderParticle(p) {
   normTpl(p);
   document.body.dataset.template = 'particle';
@@ -4743,7 +4979,7 @@ function initCloudRuntime(p) {
 }
 
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle };
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels };
 window.PortfoolioTemplateList = TEMPLATES;
 
 
