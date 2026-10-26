@@ -34,6 +34,7 @@ const TEMPLATES = [
   { id: 'clean', name: 'Clean Pro', desc: 'Friendly light mode with pill navigation, royal purple accents, and floating soft-shadow cards', emoji: '🕊️', best: 'SDE • Product Designers • Friendly Clean UI' },
   { id: 'vibrant', name: 'Vibrant Gradient', desc: 'Playful designer portfolio with rainbow gradient typography and lilac radial glows', emoji: '🌈', best: 'Designers • Frontend • Creative Technologists' },
   { id: 'neon', name: 'Neon Cyberpunk', desc: 'Synthwave aesthetic with 3D animated perspective grid floor, Orbitron glitch titles, and laser glow', emoji: '🌆', best: 'Game Devs • Web3 • Cyberpunk • Creative Coders' },
+  { id: 'hacker', name: 'Hacker Terminal', desc: 'Matrix phosphor green, CRT scanlines, and authentic bash command prompt UI', emoji: '💻', best: 'Cybersecurity • Linux • Systems • Terminal Lovers' },
 
   { id: 'gallery', name: 'Gallery', desc: 'Visual masonry grid for artists and photographers', emoji: '🖼️', best: 'Photographers • Visual Artists', track: 'visual' },
   { id: 'studio', name: 'Studio', desc: 'Light editorial covers with refined typography', emoji: '☀️', best: 'Brand Designers • Art Directors', track: 'visual' },
@@ -4621,6 +4622,180 @@ function initNeonRuntime(p) {
   }
 }
 
+
+function initHackerRuntime(p) {
+  if (typeof window !== 'undefined' && 'IntersectionObserver' in window && typeof IntersectionObserver === 'function') {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.hk-reveal').forEach(el => io.observe(el));
+  } else {
+    document.querySelectorAll('.hk-reveal').forEach(el => el.classList.add('in'));
+  }
+}
+
+function renderHacker(p) {
+  normTpl(p);
+  document.body.dataset.template = 'hacker';
+  const name = tplEsc(p.name || 'HACKER / ENGINEER');
+  const title = tplEsc(p.title || 'Machine Learning & Systems');
+  document.title = `${name} — ${title} | portfoolio.me`;
+  const bio = tplEsc(p.bio || p.summary || p.tagline || 'Driving innovation through advanced systems and terminal automation.');
+  const about = tplEsc(p.about || (p.bio && p.bio.length > 60 ? p.bio : 'Passionate about leveraging modern systems and automation to solve complex problems. Focused on high-performance architectures and scalable deployments.'));
+  const email = tplEsc(p.email || '');
+  const github = tplEsc(p.github || '');
+  const linkedin = tplEsc(p.linkedin || '');
+  const twitter = tplEsc(p.twitter || '');
+  const website = tplEsc(p.website || '');
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const education = (Array.isArray(p.education) && p.education.length) ? p.education : (p.resume && Array.isArray(p.resume.education) ? p.resume.education : []);
+
+  const skillsHtml = skills.map(s => `<span>${tplEsc(s)}</span>`).join('');
+
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = tplEsc(pr.title || pr.name || `Build ${i+1}`);
+    const prDesc = tplEsc(pr.desc || pr.description || 'High-performance system architecture engineered for scale.');
+    const prUrl = pr.url || pr.demoUrl || pr.github || '';
+    const prDemo = pr.demoUrl ? tplEsc(pr.demoUrl) : (prUrl && !prUrl.includes('github.com') ? tplEsc(prUrl) : '');
+    const prGh = pr.github ? tplEsc(pr.github) : (prUrl.includes('github.com') ? tplEsc(prUrl) : '');
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    const techStr = techs.length ? tplEsc(techs.join(', ')) : (pr.subtitle ? tplEsc(pr.subtitle) : '');
+    return `
+      <article class="hk-card">
+        <h3>${prTitle}</h3>
+        ${techStr ? `<div class="hk-kick">${techStr}</div>` : ''}
+        <p>${prDesc}</p>
+        <div class="hk-links">
+          ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener">launch</a>` : ''}
+          ${prGh ? `<a href="${prGh}" target="_blank" rel="noopener">code</a>` : ''}
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  const expHtml = rawExp.map(e => {
+    const ePeriod = tplEsc(e.period || e.duration || e.date || [e.startDate, e.endDate].filter(Boolean).join(' – ') || 'Present');
+    const eRole = tplEsc(e.role || e.title || 'Engineer');
+    const eCompany = tplEsc(e.company || e.organization || '');
+    const highlights = Array.isArray(e.highlights) ? e.highlights : (Array.isArray(e.description) ? e.description : (e.desc ? [e.desc] : (e.summary ? [e.summary] : [])));
+    const hlHtml = highlights.length ? `<ul>${highlights.map(h => `<li>${tplEsc(h)}</li>`).join('')}</ul>` : '';
+    return `
+      <div class="hk-exp">
+        <div class="hk-d">${ePeriod}</div>
+        <h3>${eRole}${eCompany ? ` · ${eCompany}` : ''}</h3>
+        ${hlHtml}
+      </div>
+    `;
+  }).join('');
+
+  const eduHtml = education.map(ed => {
+    const deg = tplEsc(ed.degree || ed.area || 'Degree');
+    const inst = tplEsc(ed.institution || ed.school || 'University');
+    const yr = tplEsc(ed.year || ed.date || ed.period || '');
+    return `
+      <article class="hk-card">
+        <div class="hk-kick">${yr || 'credential'}</div>
+        <h3>${deg} · ${inst}</h3>
+        ${ed.description ? `<p>${tplEsc(ed.description)}</p>` : ''}
+      </article>
+    `;
+  }).join('');
+
+  const socials = [];
+  if (github) socials.push(`<a href="${github}" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>`);
+  if (linkedin) socials.push(`<a href="${linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/></svg></a>`);
+  if (twitter) socials.push(`<a href="${twitter}" target="_blank" rel="noopener" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>`);
+  if (website) socials.push(`<a href="${website}" target="_blank" rel="noopener" aria-label="Website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>`);
+  if (email) socials.push(`<a href="mailto:${email}" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>`);
+
+  const app = document.getElementById('app');
+  app.innerHTML = `
+    <nav class="hk-nav">
+      <a href="#top" class="hk-brand">${name}</a>
+      <div class="hk-lk">
+        ${skills.length ? '<a href="#skills">stack</a>' : ''}
+        ${projects.length ? '<a href="#projects">projects</a>' : ''}
+        ${rawExp.length ? '<a href="#exp">history</a>' : ''}
+        <a href="#contact">contact</a>
+      </div>
+    </nav>
+
+    <main class="hk-wrap" id="top">
+      <section class="hk-hero">
+        <div class="hk-term">
+          <div class="hk-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>${name} — bash</span></div>
+          <div class="hk-body">
+            <div class="hk-ln"><span class="hk-pr"></span><span class="hk-out">whoami</span></div>
+            <h1>${name}</h1>
+            <div class="hk-role">${title}</div>
+            <div class="hk-ln" style="margin-top:14px"><span class="hk-pr"></span><span class="hk-out">cat about.txt</span></div>
+            <p>${bio}<span class="hk-cur"></span></p>
+            <div class="hk-cta">
+              ${email ? `<a class="hk-btn" href="mailto:${email}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> contact</a>` : ''}
+              ${github ? `<a class="hk-btn am" href="${github}" target="_blank" rel="noopener">github</a>` : ''}
+              ${linkedin ? `<a class="hk-btn" href="${linkedin}" target="_blank" rel="noopener">linkedin</a>` : ''}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      ${about ? `
+        <section class="hk-about hk-reveal" id="about">
+          <div class="hk-lbl">about</div>
+          <p>${about}</p>
+        </section>
+      ` : ''}
+
+      ${skills.length ? `
+        <section class="hk-reveal" id="skills">
+          <div class="hk-lbl">stack --list</div>
+          <div class="hk-skl">${skillsHtml}</div>
+        </section>
+      ` : ''}
+
+      ${projects.length ? `
+        <section class="hk-reveal" id="projects">
+          <div class="hk-lbl">projects --all</div>
+          <div class="hk-grid hk-g2">${projectsHtml}</div>
+        </section>
+      ` : ''}
+
+      ${rawExp.length ? `
+        <section class="hk-reveal" id="exp">
+          <div class="hk-lbl">history --log</div>
+          ${expHtml}
+        </section>
+      ` : ''}
+
+      ${education.length ? `
+        <section class="hk-reveal">
+          <div class="hk-lbl">credentials</div>
+          <div class="hk-grid hk-g2">${eduHtml}</div>
+        </section>
+      ` : ''}
+
+      <footer class="hk-foot" id="contact">
+        <div class="hk-lbl">contact --connect</div>
+        ${email ? `<a class="hk-email" href="mailto:${email}">${email}</a>` : ''}
+        <div class="hk-s">
+          ${socials.join('')}
+        </div>
+        <p>© ${name} · Built with Portfoolio</p>
+      </footer>
+    </main>
+  `;
+
+  initHackerRuntime(p);
+}
+
 function renderNeon(p) {
   normTpl(p);
   document.body.dataset.template = 'neon';
@@ -6604,7 +6779,7 @@ function initCloudRuntime(p) {
 }
 
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon };
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker };
 window.PortfoolioTemplateList = TEMPLATES;
 
 

@@ -1548,6 +1548,16 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="neon"] .lx-prompt { color: #ff2bd6; }
 .lx-modal-body[data-theme="neon"] .skill-tag { background: rgba(0,240,255,.06); border-color: rgba(0,240,255,.3); color: #00f0ff; font-weight: 600; }
 
+/* Hacker Terminal */
+.lx-modal-body[data-theme="hacker"] { background: #0b0f0b; font-family: 'JetBrains Mono', monospace; }
+.lx-modal-body[data-theme="hacker"] .preview-name { color: #39ff14; text-shadow: 0 0 12px rgba(57,255,20,.4); font-family: 'JetBrains Mono', monospace; font-weight: 700; }
+.lx-modal-body[data-theme="hacker"] .preview-title { color: #ffb000; font-family: 'JetBrains Mono', monospace; font-size: .85rem; }
+.lx-modal-body[data-theme="hacker"] .preview-desc { color: #c9f7c9; }
+.lx-modal-body[data-theme="hacker"] .lx-win-line { color: #c9f7c9; background: rgba(57,255,20,.05); border: 1px solid rgba(57,255,20,.2); font-family: 'JetBrains Mono', monospace; }
+.lx-modal-body[data-theme="hacker"] .lx-prompt { color: #39ff14; }
+.lx-modal-body[data-theme="hacker"] .skill-tag { background: rgba(57,255,20,.06); border-color: rgba(57,255,20,.3); color: #39ff14; font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+
+
 
 
 
@@ -2510,6 +2520,13 @@ body.visual-user #tplGrid .tpl-card[data-vtrack="tech"] {
 .lx-tp-neon .lx-tp-hero { background: #0c0e1a; border-left: 2px solid #ff2bd6; border-radius: 4px; box-shadow: 0 0 10px rgba(0,240,255,.2); }
 .lx-tp-neon .lx-tp-cards { background: #0c0e1a; border: 1px solid rgba(0,240,255,.25); border-radius: 4px; }
 .lx-tp-neon .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #00f0ff; box-shadow: 0 0 8px #00f0ff; }
+
+.lx-tp-hacker { background: #0b0f0b; }
+.lx-tp-hacker .lx-tp-nav { background: #04140a; border-bottom: 1px solid rgba(57,255,20,.3); }
+.lx-tp-hacker .lx-tp-hero { background: #04140a; border: 1px solid #39ff14; border-radius: 4px; box-shadow: 0 0 10px rgba(57,255,20,.2); }
+.lx-tp-hacker .lx-tp-cards { background: #04140a; border: 1px solid rgba(57,255,20,.25); border-radius: 4px; }
+.lx-tp-hacker .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #39ff14; box-shadow: 0 0 8px #39ff14; }
+
 
 
 
