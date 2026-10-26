@@ -1503,6 +1503,16 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="editor"] .lx-prompt { color: #4ec9b0; }
 .lx-modal-body[data-theme="editor"] .skill-tag { background: #252526; border-color: #3c3c3c; color: #9cdcfe; font-family: ui-monospace, monospace; }
 
+/* Editorial Magazine */
+.lx-modal-body[data-theme="magazine"] { background: #f7f4ee; font-family: Georgia, serif; }
+.lx-modal-body[data-theme="magazine"] .preview-name { color: #16140f; font-family: Georgia, serif; font-weight: 900; }
+.lx-modal-body[data-theme="magazine"] .preview-title { color: #c8442b; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; }
+.lx-modal-body[data-theme="magazine"] .preview-desc { color: #6b665b; }
+.lx-modal-body[data-theme="magazine"] .lx-win-line { color: #16140f; background: #ffffff; border: 1px solid #16140f; }
+.lx-modal-body[data-theme="magazine"] .lx-prompt { color: #c8442b; }
+.lx-modal-body[data-theme="magazine"] .skill-tag { background: #f7f4ee; border: 1px solid #16140f; color: #16140f; }
+
+
 
 
 
@@ -2429,3 +2439,10 @@ body.visual-user #tplGrid .tpl-card[data-vtrack="tech"] {
   display: none !important;
 }
 
+
+
+.lx-tp-magazine { background: #f7f4ee; }
+.lx-tp-magazine .lx-tp-nav { background: #f7f4ee; border-bottom: 2px solid #16140f; }
+.lx-tp-magazine .lx-tp-hero { background: #16140f; border-bottom: 2px solid #c8442b; border-radius: 1px; }
+.lx-tp-magazine .lx-tp-cards { background: #f7f4ee; border: 1px solid #16140f; border-radius: 1px; }
+.lx-tp-magazine .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: #c8442b; }

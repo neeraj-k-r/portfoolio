@@ -3491,6 +3491,177 @@ function pageParchment(p) {
 
 
 
+
+function pageMagazine(p) {
+  const name = esc(p.name || 'Developer');
+  const title = esc(p.title || 'Machine Learning Engineer');
+  const bio = esc(p.bio || p.summary || p.tagline || 'Driving innovation with advanced algorithms, scalable system architectures, and human-centered digital experiences.');
+  const location = esc(p.location || 'Global Edition');
+  const email = esc(p.email || '');
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const education = (Array.isArray(p.education) && p.education.length) ? p.education : (p.resume && Array.isArray(p.resume.education) ? p.resume.education : []);
+
+  const projectsHtml = projects.map((pr, i) => {
+    const num = String(i + 1).padStart(2, '0');
+    const prTitle = esc(pr.title || pr.name || `Project ${i+1}`);
+    const prDesc = esc(pr.desc || pr.description || 'Engineered scalable solutions with modern software architectures and high data fidelity.');
+    const prUrl = pr.url || pr.demoUrl || pr.github || '#';
+    const prDemo = pr.demoUrl ? esc(pr.demoUrl) : '';
+    const prGh = pr.github ? esc(pr.github) : (prUrl.includes('github.com') ? esc(prUrl) : '');
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+
+    return `
+      <article class="mz-pj mz-reveal">
+        <div class="mz-no">${num}</div>
+        <div>
+          <h3>${prTitle}</h3>
+          ${techs.length ? `<div class="mz-kick">${techs.map(t => esc(t)).join(', ')}</div>` : ''}
+          <p>${prDesc}</p>
+        </div>
+        <div class="mz-links">
+          ${prGh ? `<a href="${prGh}" target="_blank" rel="noopener">Code Repo ↗</a>` : ''}
+          ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener">Live View ↗</a>` : (prUrl !== '#' && !prGh ? `<a href="${esc(prUrl)}" target="_blank" rel="noopener">Explore ↗</a>` : '')}
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  const expHtml = rawExp.map(e => {
+    const dateStr = esc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent');
+    const role = esc(e.role || e.title || 'Engineer');
+    const company = esc(e.company || e.organization || '');
+    const bullets = (e.bullets || e.achievements || []);
+    return `
+      <div class="mz-exp mz-reveal">
+        <div class="mz-d">${dateStr}</div>
+        <div>
+          <h3>${role} ${company ? `· ${company}` : ''}</h3>
+          ${e.location ? `<div style="color:var(--mz-mut);font-size:13px;margin-bottom:6px">${esc(e.location)}</div>` : ''}
+          ${e.desc ? `<p style="color:var(--mz-mut);font-size:15px;margin:0 0 6px">${esc(e.desc)}</p>` : ''}
+          ${bullets.length ? `
+            <ul>
+              ${bullets.map(b => `<li>${esc(b)}</li>`).join('')}
+            </ul>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const eduHtml = education.map(ed => `
+    <div class="mz-exp mz-reveal">
+      <div class="mz-d">${esc(ed.dates || [ed.start, ed.end].filter(Boolean).join(' – ') || ed.year || 'Credential')}</div>
+      <div>
+        <h3>${esc(ed.institution || ed.school || 'University')}</h3>
+        <p style="font-weight:600;color:var(--mz-ink)">${esc(ed.degree || ed.area || 'Degree')} ${ed.score ? `· ${esc(ed.score)}` : ''}</p>
+      </div>
+    </div>
+  `).join('');
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'magazine')}<body class="portfolio-view" data-template="magazine">
+    <nav class="mz-nav">
+      <a href="#top" class="mz-brand">${name}</a>
+      <div class="mz-lk">
+        ${projects.length ? '<a href="#projects">Work</a>' : ''}
+        ${skills.length ? '<a href="#skills">Skills</a>' : ''}
+        ${rawExp.length ? '<a href="#exp">Career</a>' : ''}
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <main class="mz-wrap" id="top">
+      <div class="mz-mast">
+        <span>The Portfolio</span>
+        <span>${location}</span>
+        <span>Vol. 01</span>
+      </div>
+
+      <section class="mz-hero">
+        <div class="mz-kicker">${title}</div>
+        <h1>${name}</h1>
+        <div class="mz-lead">
+          <div>
+            <div class="mz-dek">${bio}</div>
+            <div class="mz-cta">
+              ${email ? `<a class="mz-btn p" href="mailto:${email}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Get in touch</a>` : ''}
+              ${projects.length ? '<a class="mz-btn s" href="#projects">View Selected Work</a>' : ''}
+            </div>
+          </div>
+          <div class="mz-role">${title}</div>
+        </div>
+      </section>
+
+      <section class="mz-section mz-about mz-reveal" id="about">
+        <div class="mz-lbl"><small>Feature</small>About</div>
+        <div class="mz-cols">
+          <p>${bio}</p>
+        </div>
+      </section>
+
+      ${projects.length ? `
+        <section class="mz-section mz-reveal" id="projects">
+          <div class="mz-lbl"><small>Portfolio</small>Selected Work</div>
+          <div class="mz-projects-grid">${projectsHtml}</div>
+        </section>
+      ` : ''}
+
+      ${skills.length ? `
+        <section class="mz-section mz-reveal" id="skills">
+          <div class="mz-lbl"><small>Toolkit</small>Skills</div>
+          <div class="mz-skl">
+            ${skills.map(s => `<span>${esc(s)}</span>`).join('')}
+          </div>
+        </section>
+      ` : ''}
+
+      ${rawExp.length ? `
+        <section class="mz-section mz-reveal" id="exp">
+          <div class="mz-lbl"><small>Timeline</small>Career</div>
+          <div>${expHtml}</div>
+        </section>
+      ` : ''}
+
+      ${education.length ? `
+        <section class="mz-section mz-reveal">
+          <div class="mz-lbl"><small>Record</small>Credentials</div>
+          <div>${eduHtml}</div>
+        </section>
+      ` : ''}
+
+      <footer class="mz-foot mz-reveal" id="contact">
+        <div class="mz-lbl"><small>Letters</small>Get in touch</div>
+        ${email ? `<a href="mailto:${email}" class="mz-foot-email">${email}</a>` : ''}
+        <div class="mz-socials">
+          ${p.github ? `<a class="mz-soc" href="${esc(p.github)}" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>` : ''}
+          ${p.linkedin ? `<a class="mz-soc" href="${esc(p.linkedin)}" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/></svg></a>` : ''}
+          ${p.website ? `<a class="mz-soc" href="${esc(p.website)}" target="_blank" rel="noopener" aria-label="Website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></a>` : ''}
+        </div>
+        <div style="margin-top:34px;font-size:12px;color:var(--mz-mut);text-transform:uppercase;letter-spacing:.12em">
+          // Published by ${name} via Portfoolio
+        </div>
+      </footer>
+    </main>
+
+    <script>
+    (function(){
+      if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(es){
+          es.forEach(function(e){
+            if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+          });
+        },{threshold:.12});
+        document.querySelectorAll('.mz-reveal').forEach(function(el){ io.observe(el); });
+      }
+    })();
+    </script>
+    ${foot(p)}
+  </body></html>`;
+}
+
+
 function pageEditor(p) {
   const name = esc(p.name || 'Developer');
   const nameParts = (p.name || 'Developer').trim().split(' ');
@@ -4664,6 +4835,9 @@ function page(p, url) {
   }
   if (tpl === 'editor') {
     return pageEditor(p);
+  }
+  if (tpl === 'magazine') {
+    return pageMagazine(p);
   }
 
   const reqTab = url ? (url.searchParams.get('tab') || url.searchParams.get('page')) : null;
