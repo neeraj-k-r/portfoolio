@@ -30,6 +30,7 @@ const TEMPLATES = [
   { id: 'monolith', name: 'Monolith Brutalist', desc: 'Heavy editorial typography with brutalist borders & hard drop shadows', emoji: '⬛', best: 'Full Stack • Bold Personalities • Minimal' },
   { id: 'editor', name: 'VS Code Editor', desc: 'VS Code IDE theme with file explorer, code tabs, and Copilot panel', emoji: '💻', best: 'Full Stack • Systems • Developers' },
   { id: 'magazine', name: 'Editorial Magazine', desc: 'Literary editorial broadsheet with Fraunces drop caps & warm parchment paper', emoji: '📰', best: 'Writers • ML Engineers • Scholars' },
+  { id: 'bold', name: 'Bold Lime', desc: 'High-contrast dark mode with electric lime accents and oversized display typography', emoji: '⚡', best: 'Full Stack • Systems • Bold Personalities' },
 
   { id: 'gallery', name: 'Gallery', desc: 'Visual masonry grid for artists and photographers', emoji: '🖼️', best: 'Photographers • Visual Artists', track: 'visual' },
   { id: 'studio', name: 'Studio', desc: 'Light editorial covers with refined typography', emoji: '☀️', best: 'Brand Designers • Art Directors', track: 'visual' },
@@ -4501,6 +4502,235 @@ function initMagazineRuntime(p) {
   }
 }
 
+
+function initBoldRuntime(p) {
+  if (typeof window !== 'undefined' && 'IntersectionObserver' in window && typeof IntersectionObserver === 'function') {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.pf-reveal').forEach(el => io.observe(el));
+
+    const navLinks = Array.from(document.querySelectorAll('.pf-nav-links a'));
+    if (navLinks.length) {
+      const byId = {};
+      navLinks.forEach(a => { byId[a.getAttribute('data-target')] = a; });
+      const navObs = new IntersectionObserver(entries => {
+        entries.forEach(en => {
+          if (en.isIntersecting) {
+            navLinks.forEach(a => a.classList.remove('active'));
+            const a = byId[en.target.id];
+            if (a) a.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-40% 0px -50% 0px' });
+      document.querySelectorAll('.pf-section').forEach(s => { if (byId[s.id]) navObs.observe(s); });
+    }
+  } else {
+    document.querySelectorAll('.pf-reveal').forEach(el => el.classList.add('in'));
+  }
+}
+
+function renderBold(p) {
+  normTpl(p);
+  document.body.dataset.template = 'bold';
+  const name = tplEsc(p.name || 'Developer');
+  const title = tplEsc(p.title || 'Full Stack Engineer');
+  document.title = `${name} — ${title} | portfoolio.me`;
+  const bio = tplEsc(p.bio || p.summary || p.tagline || 'Building scalable, high-impact software systems with modern web architecture and robust engineering practices.');
+  const location = tplEsc(p.location || 'Remote / Worldwide');
+  const email = tplEsc(p.email || '');
+  const photo = p.photo || p.avatar || '';
+  const firstLetter = (p.name || 'D').trim().charAt(0).toUpperCase();
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const education = (Array.isArray(p.education) && p.education.length) ? p.education : (p.resume && Array.isArray(p.resume.education) ? p.resume.education : []);
+
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = tplEsc(pr.title || pr.name || `Project ${i+1}`);
+    const prDesc = tplEsc(pr.desc || pr.description || 'Full stack engineering project built with scalable architecture and high performance.');
+    const prUrl = pr.url || pr.demoUrl || pr.github || '#';
+    const prDemo = pr.demoUrl ? tplEsc(pr.demoUrl) : '';
+    const prGh = pr.github ? tplEsc(pr.github) : (prUrl.includes('github.com') ? tplEsc(prUrl) : '');
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+
+    return `
+      <article class="pf-card">
+        <div class="pf-card-top">
+          <h3>${prTitle}</h3>
+          <div class="pf-card-links">
+            ${prGh ? `<a href="${prGh}" target="_blank" rel="noopener" title="Code"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>` : ''}
+            ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener" title="Live Demo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>` : (prUrl !== '#' && !prGh ? `<a href="${tplEsc(prUrl)}" target="_blank" rel="noopener" title="Link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>` : '')}
+          </div>
+        </div>
+        ${techs.length ? `<div class="pf-card-meta">${techs.slice(0, 4).map(t => tplEsc(t)).join(' • ')}</div>` : ''}
+        <p style="color:var(--pf-body);font-size:.95rem;line-height:1.6;margin:12px 0 16px;">${prDesc}</p>
+        ${techs.length ? `
+          <div class="pf-chips" style="margin-top:auto;">
+            ${techs.map(t => `<span class="pf-chip" style="font-size:.76rem;padding:4px 10px;">${tplEsc(t)}</span>`).join('')}
+          </div>
+        ` : ''}
+      </article>
+    `;
+  }).join('');
+
+  const expHtml = rawExp.map(e => {
+    const dateStr = tplEsc([e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || e.year || e.dates || 'Recent');
+    const role = tplEsc(e.role || e.title || 'Engineer');
+    const company = tplEsc(e.company || e.organization || '');
+    const bullets = (e.bullets || e.achievements || []);
+    return `
+      <div class="pf-tl-item">
+        <div class="pf-tl-date">${dateStr}</div>
+        <div>
+          <div class="pf-tl-head">
+            <h3>${role} ${company ? `<span class="pf-tl-at">· ${company}</span>` : ''}</h3>
+            ${e.location ? `<div class="pf-tl-loc">${tplEsc(e.location)}</div>` : ''}
+          </div>
+          ${e.desc ? `<p style="color:var(--pf-body);font-size:.95rem;margin:8px 0 6px;">${tplEsc(e.desc)}</p>` : ''}
+          ${bullets.length ? `
+            <ul class="pf-bullets">
+              ${bullets.map(b => `<li>${tplEsc(b)}</li>`).join('')}
+            </ul>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const eduHtml = education.map(ed => `
+    <div class="pf-edu">
+      <h3>${tplEsc(ed.institution || ed.school || 'University')}</h3>
+      <div class="pf-edu-degree">${tplEsc(ed.degree || ed.area || 'Degree')}</div>
+      <div class="pf-edu-meta">${tplEsc(ed.dates || [ed.start, ed.end].filter(Boolean).join(' – ') || ed.year || '')} ${ed.score ? `· ${tplEsc(ed.score)}` : ''}</div>
+    </div>
+  `).join('');
+
+  (document.getElementById('app') || document.body).innerHTML = `
+    <header class="pf-nav" id="top">
+      <a href="#top" class="pf-brand">${name}</a>
+      <nav class="pf-nav-links" id="pf-navlinks">
+        <a href="#about" data-target="about">About</a>
+        ${rawExp.length ? '<a href="#experience" data-target="experience">Experience</a>' : ''}
+        ${projects.length ? '<a href="#projects" data-target="projects">Work</a>' : ''}
+        ${skills.length ? '<a href="#skills" data-target="skills">Skills</a>' : ''}
+        <a href="#contact" data-target="contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="pf-hero">
+      <div class="pf-hero-media">
+        ${photo ? `<img class="pf-photo" src="${tplEsc(photo)}" alt="${name}">` : `<div class="pf-avatar">${firstLetter}</div>`}
+      </div>
+      <div class="pf-hero-text">
+        <div class="pf-eyebrow">// ${title}</div>
+        <h1 class="pf-name">${name}</h1>
+        <div class="pf-tagline">${bio}</div>
+        <div class="pf-loc">📍 ${location}</div>
+        <div class="pf-hero-actions">
+          ${email ? `<a class="pf-btn pf-btn-primary" href="mailto:${email}">Get in touch</a>` : ''}
+          ${projects.length ? '<a class="pf-btn" href="#projects">View Work</a>' : ''}
+        </div>
+        <div class="pf-socials">
+          ${p.github ? `<a class="pf-social" href="${tplEsc(p.github)}" target="_blank" rel="noopener" title="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>` : ''}
+          ${p.linkedin ? `<a class="pf-social" href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener" title="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/></svg></a>` : ''}
+          ${p.website ? `<a class="pf-social" href="${tplEsc(p.website)}" target="_blank" rel="noopener" title="Website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg></a>` : ''}
+        </div>
+      </div>
+    </section>
+
+    <section class="pf-stats pf-reveal">
+      <div class="pf-stat"><span class="pf-stat-num">${projects.length || 1}+</span><span class="pf-stat-lbl">Projects Built</span></div>
+      <div class="pf-stat"><span class="pf-stat-num">${skills.length || 8}+</span><span class="pf-stat-lbl">Skills &amp; Tools</span></div>
+      <div class="pf-stat"><span class="pf-stat-num">${rawExp.length || 1}+</span><span class="pf-stat-lbl">Experiences</span></div>
+      <div class="pf-stat"><span class="pf-stat-num">100%</span><span class="pf-stat-lbl">Code Quality</span></div>
+    </section>
+
+    <main class="pf-main">
+      <section class="pf-section pf-reveal pf-about" id="about">
+        <div class="pf-section-head">
+          <span class="pf-kicker">// 01</span>
+          <h2>About</h2>
+          <div class="pf-rule"></div>
+        </div>
+        <p>${bio}</p>
+      </section>
+
+      ${rawExp.length ? `
+        <section class="pf-section pf-reveal" id="experience">
+          <div class="pf-section-head">
+            <span class="pf-kicker">// 02</span>
+            <h2>Experience</h2>
+            <div class="pf-rule"></div>
+          </div>
+          <div class="pf-timeline">${expHtml}</div>
+        </section>
+      ` : ''}
+
+      ${projects.length ? `
+        <section class="pf-section pf-reveal" id="projects">
+          <div class="pf-section-head">
+            <span class="pf-kicker">// 03</span>
+            <h2>Work</h2>
+            <div class="pf-rule"></div>
+          </div>
+          <div class="pf-cards">${projectsHtml}</div>
+        </section>
+      ` : ''}
+
+      ${skills.length ? `
+        <section class="pf-section pf-reveal" id="skills">
+          <div class="pf-section-head">
+            <span class="pf-kicker">// 04</span>
+            <h2>Skills</h2>
+            <div class="pf-rule"></div>
+          </div>
+          <div class="pf-chips">
+            ${skills.map(s => `<span class="pf-chip">${tplEsc(s)}</span>`).join('')}
+          </div>
+        </section>
+      ` : ''}
+
+      ${education.length ? `
+        <section class="pf-section pf-reveal" id="education">
+          <div class="pf-section-head">
+            <span class="pf-kicker">// 05</span>
+            <h2>Education</h2>
+            <div class="pf-rule"></div>
+          </div>
+          <div class="pf-edu-grid">${eduHtml}</div>
+        </section>
+      ` : ''}
+
+      <section class="pf-section pf-reveal pf-contact" id="contact">
+        <div class="pf-section-head">
+          <h2>Get in Touch</h2>
+        </div>
+        <div class="pf-contact-lead">Have a project, role, or technical challenge in mind? Let's connect and build something extraordinary.</div>
+        <div class="pf-contact-actions">
+          ${email ? `<a class="pf-btn pf-btn-primary" href="mailto:${email}">✉ ${email}</a>` : ''}
+          ${p.github ? `<a class="pf-btn" href="${tplEsc(p.github)}" target="_blank" rel="noopener">GitHub ↗</a>` : ''}
+          ${p.linkedin ? `<a class="pf-btn" href="${tplEsc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn ↗</a>` : ''}
+        </div>
+      </section>
+
+      <footer class="pf-footer">
+        <div>© ${name} · Built with Portfoolio</div>
+        <div>All rights reserved.</div>
+      </footer>
+    </main>
+  `;
+
+  initBoldRuntime(p);
+}
+
+
 function renderMagazine(p) {
   normTpl(p);
   document.body.dataset.template = 'magazine';
@@ -5744,7 +5974,7 @@ function initCloudRuntime(p) {
 }
 
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine };
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold };
 window.PortfoolioTemplateList = TEMPLATES;
 
 

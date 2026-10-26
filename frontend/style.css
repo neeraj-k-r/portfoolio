@@ -1512,6 +1512,16 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="magazine"] .lx-prompt { color: #c8442b; }
 .lx-modal-body[data-theme="magazine"] .skill-tag { background: #f7f4ee; border: 1px solid #16140f; color: #16140f; }
 
+/* Bold Lime */
+.lx-modal-body[data-theme="bold"] { background: #0b0b0d; font-family: 'Space Grotesk', Inter, sans-serif; }
+.lx-modal-body[data-theme="bold"] .preview-name { color: #fafafa; text-transform: uppercase; letter-spacing: -.02em; }
+.lx-modal-body[data-theme="bold"] .preview-title { color: #c6fb50; font-family: ui-monospace, monospace; }
+.lx-modal-body[data-theme="bold"] .preview-desc { color: #a1a1aa; }
+.lx-modal-body[data-theme="bold"] .lx-win-line { color: #f4f4f5; background: #141418; border-color: rgba(255,255,255,.14); font-family: ui-monospace, monospace; }
+.lx-modal-body[data-theme="bold"] .lx-prompt { color: #c6fb50; }
+.lx-modal-body[data-theme="bold"] .skill-tag { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.12); color: #c6fb50; font-family: ui-monospace, monospace; }
+
+
 
 
 
@@ -2446,3 +2456,10 @@ body.visual-user #tplGrid .tpl-card[data-vtrack="tech"] {
 .lx-tp-magazine .lx-tp-hero { background: #16140f; border-bottom: 2px solid #c8442b; border-radius: 1px; }
 .lx-tp-magazine .lx-tp-cards { background: #f7f4ee; border: 1px solid #16140f; border-radius: 1px; }
 .lx-tp-magazine .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; background: #c8442b; }
+
+.lx-tp-bold { background: #0b0b0d; }
+.lx-tp-bold .lx-tp-nav { background: #141418; border-bottom: 1px solid rgba(255,255,255,.12); }
+.lx-tp-bold .lx-tp-hero { background: #18181c; border-left: 2px solid #c6fb50; border-radius: 4px; }
+.lx-tp-bold .lx-tp-cards { background: #141418; border: 1px solid rgba(255,255,255,.1); border-radius: 4px; }
+.lx-tp-bold .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #c6fb50; }
+
