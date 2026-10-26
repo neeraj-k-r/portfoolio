@@ -3495,6 +3495,167 @@ function pageParchment(p) {
 
 
 
+
+function pageNeon(p) {
+  const name = esc(p.name || 'CYBER ARCHITECT');
+  const title = esc(p.title || 'Systems Engineer');
+  const bio = esc(p.bio || p.summary || p.tagline || 'Driving innovation in tech through high-performance systems and cyber architecture.');
+  const about = esc(p.about || (p.bio && p.bio.length > 60 ? p.bio : 'Driving innovation through advanced algorithms, resilient infrastructure, and high-performance engineering.'));
+  const email = esc(p.email || '');
+  const github = esc(p.github || '');
+  const linkedin = esc(p.linkedin || '');
+  const twitter = esc(p.twitter || '');
+  const website = esc(p.website || '');
+
+  const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
+  const projects = Array.isArray(p.projects) ? p.projects : [];
+  const skills = (p.skills || []).map(s => typeof s === 'string' ? s : s.name);
+  const education = (Array.isArray(p.education) && p.education.length) ? p.education : (p.resume && Array.isArray(p.resume.education) ? p.resume.education : []);
+
+  const skillsHtml = skills.map(s => `<span>${esc(s)}</span>`).join('');
+
+  const projectsHtml = projects.map((pr, i) => {
+    const prTitle = esc(pr.title || pr.name || `Build ${i+1}`);
+    const prDesc = esc(pr.desc || pr.description || 'High-performance system architecture engineered for scale.');
+    const prUrl = pr.url || pr.demoUrl || pr.github || '';
+    const prDemo = pr.demoUrl ? esc(pr.demoUrl) : (prUrl && !prUrl.includes('github.com') ? esc(prUrl) : '');
+    const prGh = pr.github ? esc(pr.github) : (prUrl.includes('github.com') ? esc(prUrl) : '');
+    const techs = Array.isArray(pr.technologies) ? pr.technologies : (Array.isArray(pr.tags) ? pr.tags : []);
+    const techStr = techs.length ? esc(techs.join(', ')) : (pr.subtitle ? esc(pr.subtitle) : '');
+    return `
+      <article class="nn-card">
+        <h3>${prTitle}</h3>
+        ${techStr ? `<div class="nn-kick">${techStr}</div>` : ''}
+        <p>${prDesc}</p>
+        <div class="nn-links">
+          ${prDemo ? `<a href="${prDemo}" target="_blank" rel="noopener">Launch ↗</a>` : ''}
+          ${prGh ? `<a href="${prGh}" target="_blank" rel="noopener">Source ↗</a>` : ''}
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  const expHtml = rawExp.map(e => {
+    const ePeriod = esc(e.period || e.duration || e.date || [e.startDate, e.endDate].filter(Boolean).join(' – ') || 'Present');
+    const eRole = esc(e.role || e.title || 'Engineer');
+    const eCompany = esc(e.company || e.organization || '');
+    const highlights = Array.isArray(e.highlights) ? e.highlights : (Array.isArray(e.description) ? e.description : (e.desc ? [e.desc] : (e.summary ? [e.summary] : [])));
+    const hlHtml = highlights.length ? `<ul>${highlights.map(h => `<li>${esc(h)}</li>`).join('')}</ul>` : '';
+    return `
+      <div class="nn-exp">
+        <div class="nn-d">${ePeriod}</div>
+        <h3>${eRole}${eCompany ? ` · ${eCompany}` : ''}</h3>
+        ${hlHtml}
+      </div>
+    `;
+  }).join('');
+
+  const eduHtml = education.map(ed => {
+    const deg = esc(ed.degree || ed.area || 'Degree');
+    const inst = esc(ed.institution || ed.school || 'University');
+    const yr = esc(ed.year || ed.date || ed.period || '');
+    return `
+      <article class="nn-card">
+        <div class="nn-kick">${yr || 'Education'}</div>
+        <h3>${deg} · ${inst}</h3>
+        ${ed.description ? `<p>${esc(ed.description)}</p>` : ''}
+      </article>
+    `;
+  }).join('');
+
+  const socials = [];
+  if (github) socials.push(`<a href="${github}" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>`);
+  if (linkedin) socials.push(`<a href="${linkedin}" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.96-1.8-2.96-1.8 0-2.08 1.4-2.08 2.86V21h-4z"/></svg></a>`);
+  if (twitter) socials.push(`<a href="${twitter}" target="_blank" rel="noopener" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>`);
+  if (website) socials.push(`<a href="${website}" target="_blank" rel="noopener" aria-label="Website"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></a>`);
+  if (email) socials.push(`<a href="mailto:${email}" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>`);
+
+  return `<!DOCTYPE html><html lang="en">${head(p, 'neon')}<body class="portfolio-view" data-template="neon">
+    <div class="nn-grid-floor"></div>
+
+    <nav class="nn-nav">
+      <a href="#top" class="nn-brand">${name}</a>
+      <div class="nn-lk">
+        ${skills.length ? '<a href="#skills">Stack</a>' : ''}
+        ${projects.length ? '<a href="#projects">Builds</a>' : ''}
+        ${rawExp.length ? '<a href="#exp">Log</a>' : ''}
+        <a href="#contact">Ping</a>
+      </div>
+    </nav>
+
+    <main class="nn-wrap" id="top">
+      <section class="nn-hero">
+        <div class="nn-tag">// ${title}</div>
+        <h1>${name}</h1>
+        <div class="nn-role">${title}</div>
+        ${bio ? `<p>${bio}</p>` : ''}
+        <div class="nn-cta">
+          ${email ? `<a class="nn-btn" href="mailto:${email}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Contact</a>` : ''}
+          ${github ? `<a class="nn-btn mg" href="${github}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.7c-2.78.62-3.37-1.22-3.37-1.22-.46-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.74-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.71 1.03 1.62 1.03 2.74 0 3.93-2.34 4.79-4.57 5.05.36.32.68.94.68 1.9v2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg> GitHub</a>` : ''}
+          ${linkedin ? `<a class="nn-btn" href="${linkedin}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
+        </div>
+      </section>
+
+      ${about ? `
+        <section class="nn-about nn-reveal" id="about">
+          <div class="nn-lbl">About</div>
+          <p>${about}</p>
+        </section>
+      ` : ''}
+
+      ${skills.length ? `
+        <section class="nn-reveal" id="skills">
+          <div class="nn-lbl">Tech Stack</div>
+          <div class="nn-skl">${skillsHtml}</div>
+        </section>
+      ` : ''}
+
+      ${projects.length ? `
+        <section class="nn-reveal" id="projects">
+          <div class="nn-lbl">Builds</div>
+          <div class="nn-grid nn-g2">${projectsHtml}</div>
+        </section>
+      ` : ''}
+
+      ${rawExp.length ? `
+        <section class="nn-reveal" id="exp">
+          <div class="nn-lbl">Career Log</div>
+          ${expHtml}
+        </section>
+      ` : ''}
+
+      ${education.length ? `
+        <section class="nn-reveal">
+          <div class="nn-lbl">Credentials</div>
+          <div class="nn-grid nn-g2">${eduHtml}</div>
+        </section>
+      ` : ''}
+
+      <footer class="nn-foot" id="contact">
+        <div class="nn-lbl" style="justify-content:center">Establish Connection</div>
+        <div class="nn-s">
+          ${socials.join('')}
+        </div>
+        <p>© ${name} · Built with Portfoolio</p>
+      </footer>
+    </main>
+
+    <script>
+    (function(){
+      if (typeof window !== 'undefined' && 'IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function(es){
+          es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+        },{threshold:.12});
+        document.querySelectorAll('.nn-reveal').forEach(function(el){ io.observe(el); });
+      } else {
+        document.querySelectorAll('.nn-reveal').forEach(function(el){ el.classList.add('in'); });
+      }
+    })();
+    </script>
+    ${foot(p)}
+  </body></html>`;
+}
+
 function pageVibrant(p) {
   const name = esc(p.name || 'Developer');
   const title = esc(p.title || 'Creative Technologist');
@@ -5504,6 +5665,9 @@ function page(p, url) {
   }
   if (tpl === 'clean') {
     return pageClean(p);
+  }
+  if (tpl === 'neon') {
+    return pageNeon(p);
   }
   if (tpl === 'vibrant') {
     return pageVibrant(p);

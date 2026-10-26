@@ -1539,6 +1539,16 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal-body[data-theme="vibrant"] .lx-prompt { color: #d6308b; }
 .lx-modal-body[data-theme="vibrant"] .skill-tag { background: #ffffff; border-color: rgba(124,58,237,.2); color: #d6308b; box-shadow: 0 2px 8px rgba(124,58,237,.08); font-weight: 600; }
 
+/* Neon Cyberpunk */
+.lx-modal-body[data-theme="neon"] { background: #05060d; font-family: Rajdhani, system-ui, sans-serif; }
+.lx-modal-body[data-theme="neon"] .preview-name { color: #ffffff; text-shadow: 2px 0 #ff2bd6, -2px 0 #00f0ff; font-family: Orbitron, sans-serif; font-weight: 900; }
+.lx-modal-body[data-theme="neon"] .preview-title { color: #00f0ff; font-family: Orbitron, sans-serif; font-size: .85rem; letter-spacing: .08em; }
+.lx-modal-body[data-theme="neon"] .preview-desc { color: #7d8bb0; }
+.lx-modal-body[data-theme="neon"] .lx-win-line { color: #d6e6ff; background: rgba(0,240,255,.05); border: 1px solid rgba(0,240,255,.2); font-family: ui-monospace, monospace; }
+.lx-modal-body[data-theme="neon"] .lx-prompt { color: #ff2bd6; }
+.lx-modal-body[data-theme="neon"] .skill-tag { background: rgba(0,240,255,.06); border-color: rgba(0,240,255,.3); color: #00f0ff; font-weight: 600; }
+
+
 
 
 
@@ -2494,6 +2504,13 @@ body.visual-user #tplGrid .tpl-card[data-vtrack="tech"] {
 .lx-tp-vibrant .lx-tp-hero { background: #ffffff; border-left: 2px solid #d6308b; border-radius: 6px; box-shadow: 0 4px 14px rgba(236,72,153,.14); }
 .lx-tp-vibrant .lx-tp-cards { background: #ffffff; border: 1px solid rgba(124,58,237,.14); border-radius: 6px; box-shadow: 0 4px 14px rgba(124,58,237,.1); }
 .lx-tp-vibrant .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: linear-gradient(135deg,#ec4899,#8b5cf6); }
+
+.lx-tp-neon { background: #05060d; }
+.lx-tp-neon .lx-tp-nav { background: #0c0e1a; border-bottom: 1px solid rgba(0,240,255,.3); }
+.lx-tp-neon .lx-tp-hero { background: #0c0e1a; border-left: 2px solid #ff2bd6; border-radius: 4px; box-shadow: 0 0 10px rgba(0,240,255,.2); }
+.lx-tp-neon .lx-tp-cards { background: #0c0e1a; border: 1px solid rgba(0,240,255,.25); border-radius: 4px; }
+.lx-tp-neon .lx-tp-nav::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); width: 6px; height: 6px; border-radius: 50%; background: #00f0ff; box-shadow: 0 0 8px #00f0ff; }
+
 
 
 
