@@ -1050,6 +1050,150 @@ document.addEventListener('DOMContentLoaded', async () => {
       motion: { name: 'Dominique Roy', title: 'Motion Designer & Art Director', desc: 'Kinetic typography, cream-and-orange motion gradients, and fluid scroll interactions.', skills: ['After Effects', 'Kinetic Type', 'Motion'] }
     };
     let lastFocus = null;
+    let currentModalTheme = 'midnight';
+    const modalPreviewIframe = document.getElementById('modalPreviewIframe');
+    const modalWinUrl = document.getElementById('modalWinUrl');
+    const modalViewport = document.getElementById('modalViewport');
+    const modalOpenFullBtn = document.getElementById('modalOpenFullBtn');
+    const modalUseThemeBtn = document.getElementById('modalUseThemeBtn');
+    const deviceToggleBtns = document.querySelectorAll('#modalDeviceToggles .device-toggle-btn');
+
+    const getThemeDemoProfile = (theme, preset) => {
+      const p = preset || {};
+      const baseUser = (p.name || 'Alex Dev').toLowerCase().replace(/[^a-z0-9]/g, '');
+      return {
+        name: p.name || 'Alex Dev',
+        username: baseUser || 'alexdev',
+        title: p.title || 'Full-Stack Developer',
+        tagline: p.desc || 'Building scalable web software and intelligent digital systems.',
+        bio: p.desc || 'Experienced software engineer dedicated to building high-performance applications, robust backend microservices, and elegant user experiences.',
+        location: 'San Francisco, CA',
+        email: `${baseUser || 'dev'}@portfoolio.me`,
+        github: `https://github.com/${baseUser || 'dev'}`,
+        linkedin: `https://linkedin.com/in/${baseUser || 'dev'}`,
+        website: `https://${baseUser || 'dev'}.portfoolio.me`,
+        skills: p.skills || ['TypeScript', 'React', 'Node.js', 'Python', 'PostgreSQL'],
+        stats: { years: '6+', projects: '24+', clients: '18+' },
+        experience: [
+          {
+            role: 'Senior Staff Engineer',
+            company: 'Vanguard Systems',
+            year: '2023 – Present',
+            dates: '2023 – Present',
+            start: '2023',
+            current: true,
+            desc: 'Leading core platform architecture, distributed data pipelines, and high-throughput real-time APIs.',
+            bullets: [
+              'Architected low-latency microservices handling 40k+ requests/sec with 99.99% uptime',
+              'Spearheaded design system modernization reducing client bundle size by 38%'
+            ]
+          },
+          {
+            role: 'Full Stack Developer',
+            company: 'HyperCloud Labs',
+            year: '2020 – 2023',
+            dates: '2020 – 2023',
+            start: '2020',
+            end: '2023',
+            desc: 'Developed interactive dashboards, automated CI/CD workflows, and scalable REST/GraphQL endpoints.',
+            bullets: [
+              'Implemented end-to-end telemetry and observability for 15+ production services',
+              'Mentored junior engineers and led bi-weekly technical architecture reviews'
+            ]
+          }
+        ],
+        projects: [
+          {
+            title: 'Distributed Neural Engine',
+            name: 'Distributed Neural Engine',
+            desc: 'High-throughput distributed compute platform for neural network inference and parameter synchronization.',
+            url: 'https://github.com',
+            demoUrl: 'https://portfoolio.me',
+            technologies: ['Python', 'PyTorch', 'Rust', 'Docker', 'gRPC'],
+            tags: ['Python', 'PyTorch', 'Rust'],
+            stars: '1.4k'
+          },
+          {
+            title: 'Real-Time Event Gateway',
+            name: 'Real-Time Event Gateway',
+            desc: 'Fault-tolerant publish/subscribe event streaming gateway with sub-millisecond telemetry routing.',
+            url: 'https://github.com',
+            demoUrl: 'https://portfoolio.me',
+            technologies: ['Go', 'Kafka', 'Redis', 'Kubernetes'],
+            tags: ['Go', 'Kafka', 'Redis'],
+            stars: '890'
+          },
+          {
+            title: 'Modern Design System',
+            name: 'Modern Design System',
+            desc: 'Accessible, tokenized UI component framework with dark mode support and fluid kinetic animations.',
+            url: 'https://github.com',
+            demoUrl: 'https://portfoolio.me',
+            technologies: ['TypeScript', 'React', 'Tailwind', 'Storybook'],
+            tags: ['TypeScript', 'React', 'Tailwind'],
+            stars: '2.1k'
+          }
+        ],
+        education: [
+          {
+            institution: 'University of California, Berkeley',
+            school: 'University of California, Berkeley',
+            degree: 'B.S. in Computer Science',
+            year: '2016 – 2020',
+            dates: '2016 – 2020',
+            score: 'Summa Cum Laude'
+          }
+        ]
+      };
+    };
+
+    const updateModalIframe = (theme, preset) => {
+      currentModalTheme = theme;
+      if (!modalPreviewIframe) return;
+      const demoProfile = getThemeDemoProfile(theme, preset);
+      if (modalWinUrl) {
+        modalWinUrl.textContent = `${demoProfile.username}.portfoolio.me • ${theme}`;
+      }
+      const previewHtml = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="${window.location.origin}/frontend/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20261026a">
+  <link rel="stylesheet" href="templates.css?v=20261026a">
+  <style>
+    html, body { min-height: 100%; margin: 0; padding: 0; }
+    nav .logo, header .pf-brand { pointer-events: none; }
+  </style>
+</head>
+<body data-template="${theme}">
+  <div id="app"></div>
+  <script src="templates.js?v=20261026a"><\/script>
+  <script>
+    (function() {
+      const p = ${JSON.stringify(demoProfile)};
+      function render() {
+        if (window.PortfoolioTemplates && typeof window.PortfoolioTemplates['${theme}'] === 'function') {
+          window.PortfoolioTemplates['${theme}'](p);
+        } else {
+          setTimeout(render, 30);
+        }
+      }
+      render();
+    })();
+  <\/script>
+</body>
+</html>`;
+      modalPreviewIframe.srcdoc = previewHtml;
+    };
+
     const openModal = (theme, name) => {
       lastFocus = document.activeElement;
       modalBody.setAttribute('data-theme', theme);
@@ -1060,6 +1204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (modalDesc) modalDesc.textContent = preset.desc;
       if (modalSkills) modalSkills.innerHTML = preset.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
       modalThemeBtns.forEach(b => b.classList.toggle('active', b.dataset.theme === theme));
+      updateModalIframe(theme, preset);
       themeModal.classList.add('open');
       themeModal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
@@ -1087,8 +1232,42 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (modalDesc) modalDesc.textContent = preset.desc;
         if (modalSkills) modalSkills.innerHTML = preset.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
         modalThemeBtns.forEach(b => b.classList.toggle('active', b === btn));
+        updateModalIframe(theme, preset);
       });
     });
+
+    if (deviceToggleBtns.length) {
+      deviceToggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          deviceToggleBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          if (modalViewport) {
+            modalViewport.style.maxWidth = btn.dataset.width;
+          }
+        });
+      });
+    }
+
+    if (modalOpenFullBtn) {
+      modalOpenFullBtn.onclick = () => {
+        window.open(`/?u=demo&t=${encodeURIComponent(currentModalTheme)}&preview=1`, '_blank');
+      };
+    }
+
+    if (modalUseThemeBtn) {
+      modalUseThemeBtn.onclick = () => {
+        const rad = document.querySelector(`#edTplGrid input[value="${currentModalTheme}"]`);
+        if (rad) {
+          rad.checked = true;
+          rad.dispatchEvent(new Event('change', { bubbles: true }));
+          const tplSection = document.getElementById('edTplGrid');
+          if (tplSection) tplSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        closeModal();
+        if (typeof toast === 'function') toast(`🎨 Switched studio theme to ${currentModalTheme}`);
+      };
+    }
+
     themeModal.querySelectorAll('[data-close-modal]').forEach(el => el.addEventListener('click', closeModal));
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && themeModal.classList.contains('open')) closeModal();

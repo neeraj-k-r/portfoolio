@@ -491,9 +491,22 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <div class="lx-modal-frame" id="modalFrame">
         <div class="lx-win-bar">
           <div class="lx-win-dots"><span></span><span></span><span></span></div>
-          <div class="lx-win-url">yourname.portfoolio.me</div>
+          <div class="lx-win-url" id="modalWinUrl">yourname.portfoolio.me</div>
+          <div class="lx-modal-device-toggles" id="modalDeviceToggles">
+            <button class="device-toggle-btn active" data-width="100%" title="Desktop view"><i class="fa-solid fa-desktop"></i> Desktop</button>
+            <button class="device-toggle-btn" data-width="768px" title="Tablet view"><i class="fa-solid fa-tablet-screen-button"></i> Tablet</button>
+            <button class="device-toggle-btn" data-width="390px" title="Mobile view"><i class="fa-solid fa-mobile-screen-button"></i> Mobile</button>
+          </div>
+          <div class="lx-win-actions">
+            <button class="lx-win-act-btn" id="modalOpenFullBtn" type="button" title="Open full live page in new tab"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Live ↗</button>
+            <button class="lx-win-act-btn primary" id="modalUseThemeBtn" type="button" title="Use this theme in Studio"><i class="fa-solid fa-wand-magic-sparkles"></i> Use Theme</button>
+          </div>
         </div>
-        <div class="lx-win-body lx-modal-body" id="modalBody">
+        <div class="lx-modal-viewport" id="modalViewport">
+          <iframe id="modalPreviewIframe" class="lx-modal-preview-iframe" title="Interactive Theme Preview" sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+        </div>
+        <!-- Retained for test assertions and legacy selectors -->
+        <div class="lx-win-body lx-modal-body" id="modalBody" style="display:none">
           <div class="lx-win-side">
             <div class="preview-avatar" id="modalAvatar">Y</div>
             <h2 class="preview-name" id="modalName">Your Name</h2>

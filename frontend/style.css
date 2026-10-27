@@ -1231,13 +1231,24 @@ body.lx .nav-link.active::after { transform: scaleX(1); background: linear-gradi
 .lx-modal { position: fixed; inset: 0; z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
 .lx-modal.open { display: flex; }
 .lx-modal-backdrop { position: absolute; inset: 0; background: rgba(4,7,6,.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
-.lx-modal-panel { position: relative; width: min(860px, 100%); max-height: 92vh; overflow: auto; background: rgba(13,19,18,.96); border: 1px solid rgba(79,70,229,.25); border-radius: 22px; box-shadow: 0 40px 120px rgba(0,0,0,.6); animation: modalIn .3s ease; }
+.lx-modal-panel { position: relative; width: min(1200px, 96vw); max-height: 94vh; overflow: hidden; display: flex; flex-direction: column; background: rgba(13,19,18,.98); border: 1px solid rgba(79,70,229,.35); border-radius: 20px; box-shadow: 0 40px 140px rgba(0,0,0,.75); animation: modalIn .3s ease; }
 @keyframes modalIn { from { opacity: 0; transform: translateY(16px) scale(.98); } }
-.lx-modal-close { position: absolute; top: 14px; right: 14px; z-index: 2; width: 38px; height: 38px; border-radius: 10px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.06); color: #e7ece9; font-size: 16px; cursor: pointer; transition: all .2s ease, transform .15s var(--ease); }
+.lx-modal-close { position: absolute; top: 12px; right: 14px; z-index: 10; width: 36px; height: 36px; border-radius: 10px; border: 1px solid rgba(255,255,255,.14); background: rgba(255,255,255,.06); color: #e7ece9; font-size: 15px; cursor: pointer; transition: all .2s ease, transform .15s var(--ease); }
 .lx-modal-close:hover { border-color: rgba(79,70,229,.5); color: #4f46e5; transform: rotate(90deg); }
-.lx-modal-frame { border-radius: 18px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); }
+.lx-modal-frame { flex: 1; display: flex; flex-direction: column; min-height: 0; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); margin: 14px 14px 0; background: #090d16; }
+.lx-modal-viewport { position: relative; flex: 1; min-height: 480px; height: 65vh; width: 100%; background: #080c14; overflow: hidden; transition: max-width .3s ease, margin .3s ease; margin: 0 auto; box-shadow: 0 0 40px rgba(0,0,0,.5); }
+.lx-modal-preview-iframe { width: 100%; height: 100%; border: 0; display: block; background: #080c14; }
+.lx-modal-device-toggles { display: flex; gap: 4px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 8px; padding: 2px; }
+.device-toggle-btn { background: none; border: 0; color: #94a3b8; font-size: 12px; padding: 5px 8px; border-radius: 6px; cursor: pointer; transition: all .2s ease; }
+.device-toggle-btn:hover { color: #fff; background: rgba(255,255,255,.08); }
+.device-toggle-btn.active { color: #fff; background: #4f46e5; box-shadow: 0 2px 8px rgba(79,70,229,.4); }
+.lx-win-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; margin-right: 48px; }
+.lx-win-act-btn { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); color: #e2e8f0; border-radius: 8px; padding: 6px 12px; font-size: 12px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all .2s ease; text-decoration: none; }
+.lx-win-act-btn:hover { background: rgba(79,70,229,.25); border-color: rgba(79,70,229,.5); color: #fff; transform: translateY(-1px); }
+.lx-win-act-btn.primary { background: linear-gradient(135deg, #4f46e5, #7c3aed); border-color: #6366f1; color: #fff; box-shadow: 0 4px 14px rgba(79,70,229,.35); }
+.lx-win-act-btn.primary:hover { box-shadow: 0 6px 20px rgba(79,70,229,.5); }
 .lx-modal-body { min-height: 380px; }
-.lx-modal-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 16px 20px; border-top: 1px solid rgba(255,255,255,.08); }
+.lx-modal-foot { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding: 14px 20px; border-top: 1px solid rgba(255,255,255,.08); flex-shrink: 0; max-height: 140px; overflow-y: auto; }
 .lx-modal-name { font-family: 'Space Grotesk',sans-serif; font-size: 18px; font-weight: 700; color: #f4f7f3; }
 /* Lightbox: per-theme body retint */
 .lx-modal-body[data-theme="midnight"] { background: linear-gradient(160deg, #0b1226, #131b3a); }
