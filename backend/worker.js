@@ -3896,7 +3896,7 @@ function pageVibrant(p) {
     </div>
   `).join('');
 
-  return `<!DOCTYPE html><html lang="en">${head(p, 'vibrant')}<body class="portfolio-view" data-template="vibrant">
+  return `<!DOCTYPE html><html lang="en">${head(p, 'vibrant')}<body class="portfolio-view pf-theme-vibrant" data-template="vibrant">
     <header class="pf-nav" id="top">
       <a href="#top" class="pf-brand">${name}</a>
       <nav class="pf-nav-links" id="pf-navlinks">
@@ -4115,7 +4115,7 @@ function pageClean(p) {
     </div>
   `).join('');
 
-  return `<!DOCTYPE html><html lang="en">${head(p, 'clean')}<body class="portfolio-view" data-template="clean">
+  return `<!DOCTYPE html><html lang="en">${head(p, 'clean')}<body class="portfolio-view pf-theme-clean" data-template="clean">
     <header class="pf-nav" id="top">
       <a href="#top" class="pf-brand">${name}</a>
       <nav class="pf-nav-links" id="pf-navlinks">
@@ -4334,7 +4334,7 @@ function pageBold(p) {
     </div>
   `).join('');
 
-  return `<!DOCTYPE html><html lang="en">${head(p, 'bold')}<body class="portfolio-view" data-template="bold">
+  return `<!DOCTYPE html><html lang="en">${head(p, 'bold')}<body class="portfolio-view pf-theme-bold" data-template="bold">
     <header class="pf-nav" id="top">
       <a href="#top" class="pf-brand">${name}</a>
       <nav class="pf-nav-links" id="pf-navlinks">
@@ -4548,7 +4548,7 @@ function pageMagazine(p) {
     </div>
   `).join('');
 
-  return `<!DOCTYPE html><html lang="en">${head(p, 'magazine')}<body class="portfolio-view" data-template="magazine">
+  return `<!DOCTYPE html><html lang="en">${head(p, 'magazine')}<body class="portfolio-view pf-theme-editorial" data-template="magazine">
     <nav class="mz-nav">
       <a href="#top" class="mz-brand">${name}</a>
       <div class="mz-lk">

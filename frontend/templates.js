@@ -49,6 +49,9 @@ function tplEsc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 function normTpl(p) {
+  if (typeof document !== 'undefined' && document.body && document.body.classList && typeof document.body.classList.remove === 'function') {
+    document.body.classList.remove('pf-theme-bold', 'pf-theme-vibrant', 'pf-theme-clean', 'pf-theme-editorial');
+  }
   if (p) {
     if (p.avatar_url && !p.avatarUrl) p.avatarUrl = p.avatar_url || '';
     if (p.avatarUrl && !p.avatar_url) p.avatar_url = p.avatarUrl || '';
@@ -4951,6 +4954,7 @@ function renderNeon(p) {
 function renderVibrant(p) {
   normTpl(p);
   document.body.dataset.template = 'vibrant';
+  if (document.body.classList) document.body.classList.add('pf-theme-vibrant');
   const name = tplEsc(p.name || 'Developer');
   const title = tplEsc(p.title || 'Creative Technologist');
   document.title = `${name} — ${title} | portfoolio.me`;
@@ -5147,6 +5151,7 @@ function renderVibrant(p) {
 function renderClean(p) {
   normTpl(p);
   document.body.dataset.template = 'clean';
+  if (document.body.classList) document.body.classList.add('pf-theme-clean');
   const name = tplEsc(p.name || 'Developer');
   const title = tplEsc(p.title || 'Product Software Engineer');
   document.title = `${name} — ${title} | portfoolio.me`;
@@ -5343,6 +5348,7 @@ function renderClean(p) {
 function renderBold(p) {
   normTpl(p);
   document.body.dataset.template = 'bold';
+  if (document.body.classList) document.body.classList.add('pf-theme-bold');
   const name = tplEsc(p.name || 'Developer');
   const title = tplEsc(p.title || 'Full Stack Engineer');
   document.title = `${name} — ${title} | portfoolio.me`;
@@ -5539,6 +5545,7 @@ function renderBold(p) {
 function renderMagazine(p) {
   normTpl(p);
   document.body.dataset.template = 'magazine';
+  if (document.body.classList) document.body.classList.add('pf-theme-editorial');
   const name = tplEsc(p.name || 'Developer');
   const title = tplEsc(p.title || 'Machine Learning Engineer');
   document.title = `${name} — ${title} | portfoolio.me`;
