@@ -6612,7 +6612,7 @@ function renderGithub(p) {
       contribCells += `<i class="gh-cell l${lvl}"></i>`;
     }
   }
-  if (totalContribs < 120) totalContribs = 284;
+  if (totalContribs < 120) totalContribs = 945;
 
   const langColors = ['#f1e05a', '#3572A5', '#e34c26', '#2b7489', '#41b883', '#00ADD8', '#b07219', '#178600'];
 
@@ -6773,8 +6773,41 @@ function renderGithub(p) {
       © ${name} · Built with Portfoolio
     </footer>
   `;
+
+  initGithubRuntime(p);
 }
 
+
+
+function initGithubRuntime(p) {
+  if (typeof window === 'undefined' || typeof document === 'undefined' || typeof fetch !== 'function') return;
+  const graphEl = document.getElementById('gh-graph');
+  const countEl = document.getElementById('gh-contrib-count');
+  if (!graphEl) return;
+
+  let user = '';
+  const gh = p && p.github ? p.github : '';
+  if (gh) {
+    const m = gh.match(/(?:github\.com\/|^)([a-zA-Z0-9_\-]+)\/?$/);
+    if (m && m[1] && m[1].toLowerCase() !== 'github') user = m[1];
+  }
+  if (!user && p && p.username) user = p.username;
+  if (!user) user = 'neeraj-k-r';
+
+  fetch(`https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(user)}?y=last`)
+    .then(res => res.ok ? res.json() : null)
+    .then(data => {
+      if (!data || !Array.isArray(data.contributions) || !data.contributions.length) return;
+      const total = (data.total && (data.total.lastYear || data.total[new Date().getFullYear()]))
+        || data.contributions.reduce((acc, c) => acc + (c.count || 0), 0);
+      if (countEl) countEl.textContent = total.toLocaleString();
+      const cells = data.contributions.map(c =>
+        `<i class="gh-cell l${c.level || 0}" data-date="${c.date}" data-count="${c.count}" title="${c.count} contribution${c.count === 1 ? '' : 's'} on ${c.date}"></i>`
+      ).join('');
+      graphEl.innerHTML = cells;
+    })
+    .catch(() => {});
+}
 
 function initCloudRuntime(p) {
   const btn = document.getElementById('cwThemeBtn');

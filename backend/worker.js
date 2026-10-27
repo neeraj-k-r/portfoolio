@@ -5583,7 +5583,7 @@ function pageGithub(p) {
       contribCells += `<i class="gh-cell l${lvl}"></i>`;
     }
   }
-  if (totalContribs < 120) totalContribs = 284;
+  if (totalContribs < 120) totalContribs = 945;
 
   const langColors = ['#f1e05a', '#3572A5', '#e34c26', '#2b7489', '#41b883', '#00ADD8', '#b07219', '#178600'];
 
@@ -5737,6 +5737,36 @@ function pageGithub(p) {
         </section>
       </main>
     </div>
+
+    <script>
+    (function(){
+      if (typeof window === 'undefined' || typeof fetch !== 'function') return;
+      var graphEl = document.getElementById('gh-graph');
+      var countEl = document.getElementById('gh-contrib-count');
+      if (!graphEl) return;
+      var gh = '${esc(p.github || '')}';
+      var user = '';
+      if (gh) {
+        var m = gh.match(/(?:github\\.com\\/|^)([a-zA-Z0-9_\\-]+)\\/?$/);
+        if (m && m[1] && m[1].toLowerCase() !== 'github') user = m[1];
+      }
+      if (!user && '${esc(p.username || '')}') user = '${esc(p.username || '')}';
+      if (!user) user = 'neeraj-k-r';
+
+      fetch('https://github-contributions-api.jogruber.de/v4/' + encodeURIComponent(user) + '?y=last')
+        .then(function(res){ return res.ok ? res.json() : null; })
+        .then(function(data){
+          if (!data || !Array.isArray(data.contributions) || !data.contributions.length) return;
+          var total = (data.total && (data.total.lastYear || data.total[new Date().getFullYear()]))
+            || data.contributions.reduce(function(acc, c){ return acc + (c.count || 0); }, 0);
+          if (countEl) countEl.textContent = total.toLocaleString();
+          var cells = data.contributions.map(function(c){
+            return '<i class="gh-cell l' + (c.level || 0) + '" data-date="' + c.date + '" data-count="' + c.count + '" title="' + c.count + ' contribution' + (c.count === 1 ? '' : 's') + ' on ' + c.date + '"></i>';
+          }).join('');
+          graphEl.innerHTML = cells;
+        }).catch(function(){});
+    })();
+    </script>
 
     ${foot(p)}
   </body></html>`;
