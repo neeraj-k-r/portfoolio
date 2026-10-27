@@ -1154,12 +1154,17 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (modalWinUrl) {
         modalWinUrl.textContent = `${demoProfile.username}.portfoolio.me • ${theme}`;
       }
+      const basePath = (window.location.pathname.endsWith('/') || window.location.pathname === '')
+        ? window.location.pathname
+        : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+      const baseUrl = `${window.location.origin}${basePath}`;
+      const pfThemeClass = theme === 'bold' ? ' pf-theme-bold' : theme === 'clean' ? ' pf-theme-clean' : theme === 'vibrant' ? ' pf-theme-vibrant' : (theme === 'magazine' || theme === 'editorial') ? ' pf-theme-editorial' : '';
       const previewHtml = `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="${window.location.origin}/frontend/">
+  <base href="${baseUrl}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
@@ -1167,13 +1172,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20261026a">
+  <link rel="stylesheet" href="ui.css?v=20261026a">
   <link rel="stylesheet" href="templates.css?v=20261026a">
   <style>
     html, body { min-height: 100%; margin: 0; padding: 0; }
     nav .logo, header .pf-brand { pointer-events: none; }
   </style>
 </head>
-<body data-template="${theme}">
+<body class="portfolio-view${pfThemeClass}" data-template="${theme}">
   <div id="app"></div>
   <script src="templates.js?v=20261026a"><\/script>
   <script>
