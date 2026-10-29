@@ -3,3 +3,6 @@ portfoolio-me-netlify.zip
 .freebuff/
 node_modules/
 scratch/
+
+# Local Netlify folder
+.netlify
