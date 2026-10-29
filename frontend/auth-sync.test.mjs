@@ -66,5 +66,13 @@ test('Auth state synchronization and configuration tests', async (t) => {
     assert.match(schemaSql, /create or replace function public\.handle_new_user\(\)/);
     assert.match(schemaSql, /create trigger on_auth_user_created/);
   });
+
+  await t.test('index.html inline script compiles cleanly without syntax errors', () => {
+    const scriptMatch = indexHtml.match(/<script>([\s\S]*?)<\/script>\s*<\/body>/);
+    assert.ok(scriptMatch, 'Main script tag found');
+    assert.doesNotThrow(() => {
+      new Function(scriptMatch[1]);
+    }, 'Main script tag must have valid syntax');
+  });
 });
 
