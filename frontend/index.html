@@ -490,7 +490,10 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             </div>
           </div>
           <div class="form-group">
-            <label class="flabel">Password</label>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <label class="flabel" style="margin-bottom:0">Password</label>
+              <button type="button" id="authForgotBtn" class="auth-forgot-link" style="display:none;background:none;border:none;padding:0;font-size:12px;color:#8a8272;text-decoration:underline;cursor:pointer">Forgot password?</button>
+            </div>
             <div class="input-wrapper">
               <input id="authPass" type="password" placeholder="••••••••" autocomplete="current-password">
               <button type="button" id="togglePass" class="toggle-pass" aria-label="Toggle password visibility"><i class="fa-solid fa-eye"></i></button>
@@ -1309,6 +1312,9 @@ function setAuthMode(mode) {
   if (icon) {
     icon.className = currentAuthMode === 'signup' ? 'fa-solid fa-user-plus' : 'fa-solid fa-right-to-bracket';
   }
+  if ($('authForgotBtn')) {
+    $('authForgotBtn').style.display = currentAuthMode === 'login' ? 'inline' : 'none';
+  }
   if ($('authMsg')) {
     $('authMsg').textContent = currentAuthMode === 'signup'
       ? 'New here? Create your account, then claim your subdomain.'
@@ -1366,6 +1372,35 @@ if($('authGoBtn')) $('authGoBtn').addEventListener('click', async () => {
           setAuthMode('login');
           return;
         }
+
+        // Auto-create starter profile in Supabase profiles table so user is in database immediately
+        let p = null;
+        try {
+          p = await cloudMyProfile();
+          if (!p) {
+            let baseUser = email.split('@')[0].toLowerCase().replace(/[^a-z0-9-]+/g, '');
+            if (baseUser.length < 3) baseUser = 'user-' + Math.floor(Math.random() * 10000);
+            if (baseUser.length > 20) baseUser = baseUser.slice(0, 20);
+            const starterProfile = {
+              username: baseUser,
+              name: email.split('@')[0].replace(/[._-]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()),
+              title: 'Creator & Developer',
+              tagline: 'Building my portfolio on portfoolio.me',
+              email: email,
+              status: 'approved',
+              template: 'midnight',
+              track: 'tech'
+            };
+            try {
+              p = await cloudSaveProfile(starterProfile);
+            } catch (saveErr) {
+              starterProfile.username = (baseUser.slice(0, 16)) + '-' + Math.floor(Math.random() * 900 + 100);
+              try { p = await cloudSaveProfile(starterProfile); } catch {}
+            }
+          }
+        } catch (starterErr) {
+          console.warn('Starter profile initialization note:', starterErr);
+        }
       } else {
         await cloudSignIn(email, pass);
       }
@@ -1398,7 +1433,7 @@ if($('authGoBtn')) $('authGoBtn').addEventListener('click', async () => {
       if (currentAuthMode === 'signup') {
         $('authMsg').textContent = '❌ Could not create account: ' + (rawMsg || 'Please try another email or password.');
       } else {
-        $('authMsg').innerHTML = '❌ Invalid email or password.<br><span style="display:inline-block;margin-top:6px">Don\'t have an account yet? <button type="button" onclick="setAuthMode(\'signup\')" class="auth-inline-switch-btn">Click here to Sign Up</button></span>';
+        $('authMsg').innerHTML = '❌ Invalid email or password.<br><span style="display:inline-block;margin-top:6px">Don\'t have an account yet? <button type="button" onclick="setAuthMode(\'signup\')" class="auth-inline-switch-btn">Click here to Sign Up</button> · <button type="button" onclick="const f=$(\'authForgotBtn\');if(f){f.style.display=\'inline\';f.click();}" class="auth-inline-switch-btn">Forgot password?</button></span>';
       }
     } else if (rawMsg.includes('Email not confirmed')) {
       $('authMsg').innerHTML = '❌ Email not confirmed. <strong>Check your inbox</strong> (and spam folder) for the confirmation link, then try again.';
@@ -1415,6 +1450,64 @@ if($('authGoBtn')) $('authGoBtn').addEventListener('click', async () => {
     if (label) label.textContent = currentAuthMode === 'signup' ? 'Create account' : 'Log in';
   }
 });
+
+// Forgot password click handler
+if ($('authForgotBtn')) {
+  $('authForgotBtn').addEventListener('click', async () => {
+    const email = ($('authEmail').value || '').trim();
+    if (!/.+@.+\..+/.test(email)) {
+      toast('❌ Enter your email address above to reset password');
+      $('authEmail').focus();
+      return;
+    }
+    const btn = $('authForgotBtn');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    try {
+      await cloudResetPassword(email);
+      if ($('authMsg')) $('authMsg').innerHTML = '✅ Password reset email sent! <strong>Check your inbox</strong> (and spam folder) for the reset link.';
+      toast('✅ Password reset email sent');
+    } catch (err) {
+      if ($('authMsg')) $('authMsg').textContent = '❌ ' + (err.message || 'Could not send reset email. Try again.');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Forgot password?';
+    }
+  });
+}
+
+// Password recovery detection from email link (#access_token=...&type=recovery)
+(function checkPasswordRecovery() {
+  const hash = window.location.hash || '';
+  if (hash.includes('type=recovery')) {
+    setAuthMode('login');
+    if ($('authMsg')) {
+      $('authMsg').innerHTML = '🔑 <strong>Password recovery active</strong>. Enter your new password above and click <strong>Update Password</strong>.';
+    }
+    const label = $('authGoLabel');
+    if (label) label.textContent = 'Update Password';
+    const btn = $('authGoBtn');
+    if (btn) {
+      btn.onclick = async (e) => {
+        e.preventDefault();
+        const pass = $('authPass').value;
+        if (pass.length < 6) return toast('❌ Password must be at least 6 characters');
+        try {
+          btn.disabled = true;
+          await cloudUpdatePassword(pass);
+          toast('✅ Password updated! Logging you in…');
+          window.location.hash = '';
+          const p = await cloudMyProfile();
+          showAppRole('user', $('authEmail').value || '', p);
+        } catch (err) {
+          toast('❌ ' + (err.message || 'Password update failed'));
+        } finally {
+          btn.disabled = false;
+        }
+      };
+    }
+  }
+})();
 
 // Submit auth form on Enter key
 ['authEmail', 'authPass'].forEach(id => {

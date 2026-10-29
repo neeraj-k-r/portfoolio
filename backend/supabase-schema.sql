@@ -111,3 +111,43 @@ alter table profiles add column if not exists works jsonb default '[]';
 
 -- 8) make yourself admin (run AFTER creating the admin user in Authentication):
 -- insert into admins (user_id) select id from auth.users where email = 'portfoolio.me@gmail.com';
+
+-- 9) auto-create starter profile on signup (ensures every new user is entered into public.profiles immediately)
+create or replace function public.handle_new_user()
+returns trigger language plpgsql security definer as $$
+declare
+  base_u text;
+  final_u text;
+  c int := 0;
+begin
+  base_u := lower(regexp_replace(split_part(new.email, '@', 1), '[^a-z0-9-]', '', 'g'));
+  if length(base_u) < 3 then
+    base_u := 'user-' || substr(new.id::text, 1, 6);
+  end if;
+  base_u := substr(base_u, 1, 24);
+
+  final_u := base_u;
+  while exists (select 1 from public.profiles where username = final_u) loop
+    c := c + 1;
+    final_u := substr(base_u, 1, 20) || '-' || c;
+  end loop;
+
+  insert into public.profiles (user_id, username, name, title, email, status)
+  values (
+    new.id,
+    final_u,
+    initcap(regexp_replace(split_part(new.email, '@', 1), '[^a-zA-Z0-9]', ' ', 'g')),
+    'Creator & Developer',
+    new.email,
+    'approved'
+  )
+  on conflict (user_id) do nothing;
+
+  return new;
+end;
+$$;
+
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();

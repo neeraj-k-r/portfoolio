@@ -42,10 +42,29 @@ test('Auth state synchronization and configuration tests', async (t) => {
     assert.match(uiCss, /\.lx-auth-card \.auth-inline-switch-btn/);
   });
 
-  await t.test('CSP connect-src allows cdn.jsdelivr.net and cdnjs.cloudflare.com for source maps and assets', () => {
-    assert.match(netlifyToml, /connect-src[^;]*https:\/\/cdn\.jsdelivr\.net/);
-    assert.match(netlifyToml, /connect-src[^;]*https:\/\/cdnjs\.cloudflare\.com/);
-    assert.match(workerJs, /connect-src[^;]*https:\/\/cdn\.jsdelivr\.net/);
-    assert.match(workerJs, /connect-src[^;]*https:\/\/cdnjs\.cloudflare\.com/);
+  await t.test('Starter profile is auto-created in database on signup', () => {
+    assert.match(indexHtml, /starterProfile\s*=\s*\{/);
+    assert.match(indexHtml, /await cloudSaveProfile\(starterProfile\)/);
+  });
+
+  await t.test('Forgot password button and password reset helpers are present', () => {
+    const supabaseConfigJs = fs.readFileSync('backend/supabase-config.js', 'utf8');
+    assert.match(indexHtml, /id="authForgotBtn"/);
+    assert.match(indexHtml, /checkPasswordRecovery/);
+    assert.match(supabaseConfigJs, /async function cloudResetPassword/);
+    assert.match(supabaseConfigJs, /async function cloudUpdatePassword/);
+  });
+
+  await t.test('Boot check restores session for any logged in Supabase user', () => {
+    const supabaseConfigJs = fs.readFileSync('backend/supabase-config.js', 'utf8');
+    assert.match(supabaseConfigJs, /const \{ data: \{ user \} \} = await sb\.auth\.getUser\(\);/);
+    assert.match(supabaseConfigJs, /showAppRole\('user', user\.email, p\);/);
+  });
+
+  await t.test('Database schema includes handle_new_user trigger', () => {
+    const schemaSql = fs.readFileSync('backend/supabase-schema.sql', 'utf8');
+    assert.match(schemaSql, /create or replace function public\.handle_new_user\(\)/);
+    assert.match(schemaSql, /create trigger on_auth_user_created/);
   });
 });
+

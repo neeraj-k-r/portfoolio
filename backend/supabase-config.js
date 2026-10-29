@@ -223,6 +223,21 @@ async function cloudSignIn(email, password) {
   if (error) throw error;
   return data;
 }
+async function cloudResetPassword(email) {
+  const sb = cloud(); if (!sb) throw new Error('cloud-off');
+  const origin = typeof window !== 'undefined' ? window.location.origin : 'https://portfoolio.me';
+  const { data, error } = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: origin + '/#auth',
+  });
+  if (error) throw error;
+  return data;
+}
+async function cloudUpdatePassword(password) {
+  const sb = cloud(); if (!sb) throw new Error('cloud-off');
+  const { data, error } = await sb.auth.updateUser({ password });
+  if (error) throw error;
+  return data;
+}
 async function cloudMyProfile() {
   const sb = cloud(); if (!sb) return null;
   const { data: { user } } = await sb.auth.getUser();
@@ -266,21 +281,21 @@ if (typeof window !== 'undefined') {
   window.addEventListener('DOMContentLoaded', async () => {
     try {
       if (typeof cloudEnabled === 'function' && cloudEnabled()) {
+        const sb = cloud();
+        if (!sb) return;
+        const { data: { user } } = await sb.auth.getUser();
+        if (!user) return;
+
         if (await cloudIsAdmin()) {
-          const sb = cloud();
-          const { data: { user } } = await sb.auth.getUser();
-          if (user && await cloudIsAdmin()) {
-            showAppRole('admin', PORTFOOLIO_SUPERADMIN_EMAIL);
-            return;
-          }
-        }
-        const p = await cloudMyProfile();
-        if (p) {
-          editingCloudSession = true;
-          showAppRole('user', p.email, p);
+          showAppRole('admin', PORTFOOLIO_SUPERADMIN_EMAIL);
           return;
         }
+        const p = await cloudMyProfile();
+        editingCloudSession = true;
+        showAppRole('user', user.email, p);
       }
-    } catch {}
+    } catch (e) {
+      console.warn('Boot auth check:', e);
+    }
   });
 }
