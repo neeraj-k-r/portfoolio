@@ -3625,6 +3625,17 @@ async function paintLiveCount() {
   } catch (err) {
     console.error('Local boot check error:', err);
   }
+// Clean injected Netlify badge / drawer iframes
+(function removeNetlifyBadge() {
+  function clean() {
+    document.querySelectorAll('iframe[title*="Netlify" i], iframe[src*="netlify" i], #netlify-badge, .netlify-badge, [data-netlify-badge]').forEach(el => el.remove());
+  }
+  clean();
+  try {
+    const obs = new MutationObserver(clean);
+    obs.observe(document.documentElement, { childList: true, subtree: true });
+    setTimeout(() => obs.disconnect(), 12000);
+  } catch {}
 })();
 </script>
 </body>

@@ -3101,3 +3101,14 @@ body.studio #edSaveThemeBtn:hover {
 }
 
 /* ===== APPEND ===== */
+/* Hide Netlify injected badge / drawer overlays */
+iframe[title*="Netlify" i],
+iframe[src*="netlify" i],
+#netlify-badge,
+.netlify-badge,
+[data-netlify-badge] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
