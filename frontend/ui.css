@@ -1284,6 +1284,22 @@ body.lx .lx-auth-card .demo-text {
   color: #8a8272;
 }
 
+body.lx .lx-auth-card .auth-inline-switch-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--ink);
+  font-weight: 800;
+  text-decoration: underline;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  transition: opacity 0.2s var(--ease);
+}
+body.lx .lx-auth-card .auth-inline-switch-btn:hover {
+  opacity: 0.75;
+}
+
 /* ── Footer ─────────────────────────────────────────────────────────── */
 body.lx .lx-footer {
   margin-top: 80px;

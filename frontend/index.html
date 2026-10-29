@@ -86,7 +86,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <a href="#directory" class="nav-link">Showcase</a>
       <a href="/explore" class="nav-link">Explore</a>
       <a href="#howitworks" class="nav-link">How it works</a>
-      <a href="#auth" class="nav-link">Log in</a>
+      <a href="#auth" onclick="setAuthMode('login')" class="nav-link">Log in</a>
     </div>
     <div class="lx-nav-cta">
       <a href="#auth" onclick="setAuthMode('login')" class="lx-login">Log in</a>
@@ -474,9 +474,9 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <a class="lx-btn-ghost" href="/?u=demo"><i class="fa-solid fa-eye"></i> Preview a live demo</a>
       </div>
       <div class="lx-auth-card">
-        <div class="auth-tabs">
-          <button class="auth-tab active" id="tabSignup" type="button"><i class="fa-solid fa-user-plus"></i> Sign up</button>
-          <button class="auth-tab" id="tabLogin" type="button"><i class="fa-solid fa-right-to-bracket"></i> Log in</button>
+        <div class="auth-tabs" role="tablist">
+          <button class="auth-tab active" id="tabSignup" type="button" onclick="setAuthMode('signup')" role="tab" aria-selected="true"><i class="fa-solid fa-user-plus"></i> Sign up</button>
+          <button class="auth-tab" id="tabLogin" type="button" onclick="setAuthMode('login')" role="tab" aria-selected="false"><i class="fa-solid fa-right-to-bracket"></i> Log in</button>
         </div>
         <div id="authCloudOff" style="display:none">
           <p class="auth-hint">Cloud login is inactive — enter credentials below to continue to your dashboard:</p>
@@ -485,18 +485,18 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div class="form-group">
             <label class="flabel">Email Address</label>
             <div class="input-wrapper">
-              <input id="authEmail" type="email" placeholder="you@gmail.com">
+              <input id="authEmail" type="email" placeholder="you@gmail.com" autocomplete="email">
               <i class="fa-solid fa-envelope input-icon"></i>
             </div>
           </div>
           <div class="form-group">
             <label class="flabel">Password</label>
             <div class="input-wrapper">
-              <input id="authPass" type="password" placeholder="••••••••">
+              <input id="authPass" type="password" placeholder="••••••••" autocomplete="current-password">
               <button type="button" id="togglePass" class="toggle-pass" aria-label="Toggle password visibility"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
-          <button class="btn btn-primary-block" id="authGoBtn"><i class="fa-solid fa-right-to-bracket"></i> <span id="authGoLabel">Create account</span></button>
+          <button class="btn btn-primary-block" id="authGoBtn" type="button"><i class="fa-solid fa-user-plus" id="authGoIcon"></i> <span id="authGoLabel">Create account</span></button>
           <p class="mono auth-msg" id="authMsg"></p>
         </div>
       </div>
@@ -1293,13 +1293,36 @@ let activeUserProfile = null;
 let editingCloudSession = false;
 
 function setAuthMode(mode) {
-  currentAuthMode = mode;
+  currentAuthMode = (mode === 'login') ? 'login' : 'signup';
   const tabS = $('tabSignup'), tabL = $('tabLogin');
-  if(tabS) tabS.classList.toggle('active', mode === 'signup');
-  if(tabL) tabL.classList.toggle('active', mode === 'login');
-  if($('authGoLabel')) $('authGoLabel').textContent = mode === 'signup' ? 'Create account' : 'Log in';
-  if($('authMsg')) $('authMsg').textContent = mode === 'signup' ? 'New here? Create your account, then claim your subdomain.' : 'Welcome back — enter your email & password to log in.';
+  if (tabS) {
+    tabS.classList.toggle('active', currentAuthMode === 'signup');
+    tabS.setAttribute('aria-selected', currentAuthMode === 'signup' ? 'true' : 'false');
+  }
+  if (tabL) {
+    tabL.classList.toggle('active', currentAuthMode === 'login');
+    tabL.setAttribute('aria-selected', currentAuthMode === 'login' ? 'true' : 'false');
+  }
+  const label = $('authGoLabel');
+  if (label) label.textContent = currentAuthMode === 'signup' ? 'Create account' : 'Log in';
+  const icon = $('authGoIcon') || ($('authGoBtn') ? $('authGoBtn').querySelector('i') : null);
+  if (icon) {
+    icon.className = currentAuthMode === 'signup' ? 'fa-solid fa-user-plus' : 'fa-solid fa-right-to-bracket';
+  }
+  if ($('authMsg')) {
+    $('authMsg').textContent = currentAuthMode === 'signup'
+      ? 'New here? Create your account, then claim your subdomain.'
+      : 'Welcome back — enter your email & password to log in.';
+  }
 }
+
+function handleAuthHash() {
+  const h = window.location.hash;
+  if (h === '#login') setAuthMode('login');
+  else if (h === '#signup') setAuthMode('signup');
+}
+window.addEventListener('hashchange', handleAuthHash);
+handleAuthHash();
 
 // Password visibility toggle
 if($('togglePass')) {
@@ -1330,7 +1353,6 @@ if($('authGoBtn')) $('authGoBtn').addEventListener('click', async () => {
 
   const btn = $('authGoBtn');
   const label = $('authGoLabel');
-  const origLabel = label ? label.textContent : '';
   if (btn) btn.disabled = true;
   if (label) label.textContent = currentAuthMode === 'signup' ? 'Creating account…' : 'Logging in…';
   if ($('authMsg')) $('authMsg').textContent = '';
@@ -1357,7 +1379,7 @@ if($('authGoBtn')) $('authGoBtn').addEventListener('click', async () => {
       const p = await cloudMyProfile();
       editingCloudSession = true;
       showAppRole('user', email, p);
-      toast('✅ Logged in successfully!');
+      toast(currentAuthMode === 'signup' ? '✅ Account created! Welcome to User Studio.' : '✅ Logged in successfully!');
     } else {
       // Local session fallback
       localStorage.setItem('portfoolio_session_email', email);
@@ -1373,20 +1395,24 @@ if($('authGoBtn')) $('authGoBtn').addEventListener('click', async () => {
   } catch (e) {
     const rawMsg = e?.message || e?.error_description || String(e || '');
     if (rawMsg.includes('Invalid login credentials')) {
-      $('authMsg').textContent = '❌ Invalid email or password. Please try again.';
+      if (currentAuthMode === 'signup') {
+        $('authMsg').textContent = '❌ Could not create account: ' + (rawMsg || 'Please try another email or password.');
+      } else {
+        $('authMsg').innerHTML = '❌ Invalid email or password.<br><span style="display:inline-block;margin-top:6px">Don\'t have an account yet? <button type="button" onclick="setAuthMode(\'signup\')" class="auth-inline-switch-btn">Click here to Sign Up</button></span>';
+      }
     } else if (rawMsg.includes('Email not confirmed')) {
       $('authMsg').innerHTML = '❌ Email not confirmed. <strong>Check your inbox</strong> (and spam folder) for the confirmation link, then try again.';
     } else if (rawMsg.includes('User already registered')) {
-      $('authMsg').innerHTML = '⚠️ An account with this email already exists. Click <strong>Log in</strong> above.';
+      $('authMsg').innerHTML = '⚠️ An account with this email already exists.<br><span style="display:inline-block;margin-top:6px">Already registered? <button type="button" onclick="setAuthMode(\'login\')" class="auth-inline-switch-btn">Click here to Log In</button></span>';
       setAuthMode('login');
     } else if (rawMsg === 'cloud-off') {
       $('authMsg').textContent = '❌ Cloud auth service is unavailable. Please check your connection or ad blocker.';
     } else {
-      $('authMsg').textContent = '❌ ' + (rawMsg || 'Authentication failed. Please try again.');
+      $('authMsg').textContent = '❌ ' + (rawMsg || (currentAuthMode === 'signup' ? 'Could not create account.' : 'Authentication failed. Please try again.'));
     }
   } finally {
     if (btn) btn.disabled = false;
-    if (label) label.textContent = origLabel || (currentAuthMode === 'signup' ? 'Create account' : 'Log in');
+    if (label) label.textContent = currentAuthMode === 'signup' ? 'Create account' : 'Log in';
   }
 });
 
