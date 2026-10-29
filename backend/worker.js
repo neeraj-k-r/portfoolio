@@ -373,7 +373,7 @@ function skillsSection(p) {
     </a>`).join('')}</div></section>`;
 }
 function pageGallery(p, wIdx) {
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(String(p.template || '').toLowerCase()) ? String(p.template).toLowerCase() : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(String(p.template || '').toLowerCase()) ? String(p.template).toLowerCase() : 'gallery';
   const works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   const i = parseInt(wIdx, 10);
   const w = (!isNaN(i) && works[i]) ? works[i] : null;
@@ -405,6 +405,125 @@ function pageGallery(p, wIdx) {
         <div class="museum-plaque">
           <span class="museum-no">${String(n + 1).padStart(2, '0')}</span>
           <div class="museum-plaque-text"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}</div>
+        </div>
+      </a>`).join('') || emptyMsg}</section>`
+        : vtpl === 'atelier'
+    ? `<header class="wrap gal-atelier-head">
+      <p class="atelier-kicker">— ATELIER &amp; ARCHIVE —</p>
+      <h1>${esc(p.name)}</h1>
+      <p class="atelier-sub">${esc(p.title || 'Haute Couture &amp; Visual Direction')}</p>
+      <div class="atelier-portrait-wrap">${avatar ? `<img class="atelier-portrait" src="${esc(avatar)}" alt="${esc(p.name)}">` : `<div class="atelier-portrait atelier-fallback">${letter}</div>`}</div>
+      <p class="atelier-meta">${esc(p.location || 'Paris &amp; San Francisco')} · ${countLabel} · SALON 2026</p>
+    </header>
+    <section class="wrap atelier-collection">${works.map((k, n) => `
+      <a class="atelier-card ${n % 3 === 0 ? 'atelier-wide' : ''}" href="/?w=${n}" style="text-decoration:none;color:inherit">
+        <div class="atelier-frame">
+          <span class="atelier-numeral">${['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][n % 10]}</span>
+          <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+        </div>
+        <div class="atelier-meta">
+          <span class="atelier-cat">${esc(k.category || 'COLLECTION')}</span>
+          <b>${esc(k.title || 'Untitled')}</b>
+          ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+        </div>
+      </a>`).join('') || emptyMsg}</section>`
+    : vtpl === 'cinema'
+    ? `<header class="wrap gal-cinema-head">
+      <div class="cinema-rec-chip"><span class="cinema-rec-dot"></span> REC 24.00 FPS · 8K WIDESCREEN</div>
+      <h1>${esc(p.name)}</h1>
+      <p class="cinema-sub">${esc(p.title || 'Cinematographer &amp; Director')}</p>
+      ${avatar ? `<img class="cinema-avatar" src="${esc(avatar)}" alt="${esc(p.name)}">` : ''}
+      <p class="cinema-meta">${esc(p.location || 'Los Angeles, CA')} · ${countLabel} · 2.39:1 LETTERBOX</p>
+    </header>
+    <section class="wrap cinema-slate-grid">${works.map((k, n) => `
+      <a class="cinema-card" href="/?w=${n}" style="text-decoration:none;color:inherit">
+        <div class="cinema-frame">
+          <div class="letterbox-bar bar-top"></div>
+          <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+          <div class="letterbox-bar bar-bottom"></div>
+          <div class="cinema-hud-overlay">
+            <span class="hud-tag hud-tl">SCENE ${String(n + 1).padStart(2, '0')}</span>
+            <span class="hud-tag hud-tr">${esc(k.category || 'NARRATIVE')}</span>
+            <span class="hud-tag hud-bl">50MM ANAMORPHIC</span>
+            <span class="hud-tag hud-br">PRORES 4444</span>
+          </div>
+        </div>
+        <div class="cinema-card-info">
+          <b>${esc(k.title || 'Untitled Still')}</b>
+          ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+        </div>
+      </a>`).join('') || emptyMsg}</section>`
+    : vtpl === 'arch'
+    ? `<header class="wrap gal-arch-head">
+      <div class="arch-ch ch-tl">+</div>
+      <div class="arch-ch ch-tr">+</div>
+      <div class="arch-ch ch-bl">+</div>
+      <div class="arch-ch ch-br">+</div>
+      <p class="arch-kicker">PROJECT REGISTRY &amp; SPATIAL INDEX</p>
+      <h1>${esc(p.name)}</h1>
+      <p class="arch-sub">${esc(p.title || 'Architectural Design &amp; Spatial Research')}</p>
+      <div class="arch-specs">
+        <span>LOC: ${esc(p.location || 'Tokyo &amp; New York')}</span>
+        <span>STATUS: APPROVED</span>
+        <span>PLATES: ${works.length}</span>
+      </div>
+    </header>
+    <section class="wrap arch-draft-grid">${works.map((k, n) => `
+      <a class="arch-plate" href="/?w=${n}" style="text-decoration:none;color:inherit">
+        <div class="arch-plate-head">
+          <span class="plate-no">SHEET A-${String(n + 1).padStart(2, '0')}</span>
+          <span class="plate-cat">${esc(k.category || 'ARCHITECTURE')}</span>
+        </div>
+        <div class="arch-img-wrap">
+          <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+          <span class="arch-dim-badge">DIM: 1920 × 1080 MM</span>
+        </div>
+        <div class="arch-caption">
+          <b>${esc(k.title || 'Untitled Project')}</b>
+          ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+        </div>
+      </a>`).join('') || emptyMsg}</section>`
+    : vtpl === 'zine'
+    ? `<header class="wrap gal-zine-head">
+      <div class="zine-stickers">
+        <span class="zine-pill">100% RISOGRAPH</span>
+        <span class="zine-stamp-chip">✦ ARTIST EDITION</span>
+      </div>
+      <h1>${esc(p.name)}</h1>
+      <p class="zine-sub">${esc(p.title || 'Illustrator &amp; Risograph Printmaker')}</p>
+      ${avatar ? `<div class="zine-polaroid"><img src="${esc(avatar)}" alt="${esc(p.name)}"></div>` : ''}
+      <p class="zine-meta">${esc(p.location || 'London &amp; Berlin')} · ${countLabel} · INK DUO-TONE</p>
+    </header>
+    <section class="wrap zine-board">${works.map((k, n) => `
+      <a class="zine-tile" href="/?w=${n}" style="text-decoration:none;color:inherit">
+        <div class="zine-tape-strip"></div>
+        <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+        <div class="zine-cap">
+          <span class="zine-stamp">[ ${esc(k.category || 'ORIGINAL PRINT')} ]</span>
+          <b>${esc(k.title || 'Untitled Print')}</b>
+          ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+        </div>
+      </a>`).join('') || emptyMsg}</section>`
+    : vtpl === 'zen'
+    ? `<header class="wrap gal-zen-head">
+      <div class="zen-enso-wrap">
+        <div class="zen-enso-ring"></div>
+        ${avatar ? `<img class="zen-portrait" src="${esc(avatar)}" alt="${esc(p.name)}">` : `<div class="zen-portrait zen-fallback">${letter}</div>`}
+      </div>
+      <h1>${esc(p.name)}</h1>
+      <p class="zen-sub">${esc(p.title || 'Ceramic Artist &amp; Sculptural Studio')}</p>
+      <p class="zen-meta">${esc(p.location || 'Kyoto, Japan')} · ${countLabel} · WOODFIRED ANAGAMA</p>
+    </header>
+    <section class="wrap zen-stones">${works.map((k, n) => `
+      <a class="zen-card ${n % 2 === 1 ? 'zen-stagger' : ''}" href="/?w=${n}" style="text-decoration:none;color:inherit">
+        <div class="zen-stone-frame">
+          <span class="zen-num">${['壱', '弐', '参', '四', '五', '六', '七', '八', '九', '十'][n % 10]}</span>
+          <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+        </div>
+        <div class="zen-stone-meta">
+          <b>${esc(k.title || 'Untitled Form')}</b>
+          <span class="zen-glaze">${esc(k.category || 'CERAMICS')}</span>
+          ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
         </div>
       </a>`).join('') || emptyMsg}</section>`
     : vtpl === 'catalog'

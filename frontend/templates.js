@@ -42,7 +42,12 @@ const TEMPLATES = [
   { id: 'museum', name: 'Museum', desc: 'Framed gallery walls with classic museum aesthetics', emoji: '🏛️', best: 'Fine Artists • Painters', track: 'visual' },
   { id: 'catalog', name: 'Catalog', desc: 'Print art-book plates and archival layouts', emoji: '📖', best: 'Book Designers • Printmakers', track: 'visual' },
   { id: 'bloom', name: 'Bloom', desc: 'Soft pastel dreamscapes with delicate color palettes', emoji: '🌸', best: 'Illustrators • Concept Artists', track: 'visual' },
-  { id: 'motion', name: 'Motion Flow', desc: 'Light cream, kinetic word reveal, motion gradients', emoji: '⚡', best: 'Motion Designers • Animators', track: 'visual' }
+  { id: 'motion', name: 'Motion Flow', desc: 'Light cream, kinetic word reveal, motion gradients', emoji: '⚡', best: 'Motion Designers • Animators', track: 'visual' },
+  { id: 'atelier', name: 'Atelier', desc: 'Haute couture minimal editorial with Roman numeral plates & gold hairline rules', emoji: '🏛️', best: 'Fashion Stylists • Luxury Editorial • Art Directors', track: 'visual' },
+  { id: 'cinema', name: 'Cinema', desc: 'Obsidian 2.39:1 widescreen stills with camera HUD, timecode & REC dot', emoji: '🎬', best: 'Filmmakers • Cinematographers • VFX Artists', track: 'visual' },
+  { id: 'arch', name: 'Arch Blueprint', desc: 'Architectural drafting grid with plate specs, dimension stamps & crosshairs', emoji: '📐', best: 'Architects • Interior Designers • Industrial Designers', track: 'visual' },
+  { id: 'zine', name: 'Risograph Zine', desc: 'Indie art zine with washi tape strips, pop halftone shadows & sticker badges', emoji: '🎨', best: 'Illustrators • Comic Artists • Printmakers', track: 'visual' },
+  { id: 'zen', name: 'Zen Wabi-Sabi', desc: 'Serene Japanese ceramic studio with ensō brush avatar & organic stone layout', emoji: '🍵', best: 'Ceramicists • Sculptors • Lifestyle Curators', track: 'visual' }
 ];
 
 function tplEsc(s) {
@@ -6809,6 +6814,293 @@ function initGithubRuntime(p) {
     .catch(() => {});
 }
 
+
+// ============================================================================
+// VISUAL TRACK RENDERERS (Atelier, Cinema, Arch, Zine, Zen)
+// ============================================================================
+
+function getVisualWorks(p) {
+  if (Array.isArray(p.works) && p.works.length > 0) {
+    return p.works.filter(w => w && w.imageUrl);
+  }
+  // If no visual works (e.g. testing with sampleProfile), convert projects to visual items with aesthetic defaults
+  const sampleImages = [
+    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&auto=format&fit=crop'
+  ];
+  if (Array.isArray(p.projects) && p.projects.length > 0) {
+    return p.projects.map((pr, i) => ({
+      title: pr.title || pr.name || 'Untitled Piece',
+      category: (pr.technologies || pr.tags || ['Design'])[0],
+      desc: pr.desc || 'Exploration of form, structure and visual narrative.',
+      imageUrl: sampleImages[i % sampleImages.length],
+      year: 2026
+    }));
+  }
+  return [
+    { title: 'Harmonic Form I', category: 'Editorial', desc: 'Sculptural study in light and silhouette.', imageUrl: sampleImages[0], year: 2026 },
+    { title: 'Tectonic Monolith', category: 'Architecture', desc: 'Cantilever concrete structure.', imageUrl: sampleImages[3], year: 2026 }
+  ];
+}
+
+function renderAtelier(p) {
+  normTpl(p);
+  document.body.dataset.template = 'atelier';
+  document.title = `${p.name} — Atelier Portfolio | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const face = avatar ? `<img class="atelier-portrait" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : `<div class="atelier-portrait atelier-fallback">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`;
+  const numerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+
+  app.innerHTML = `
+  <div class="atelier-page">
+    <nav class="atelier-nav wrap">
+      <a class="atelier-logo" href="/"><span class="atelier-mark">◆</span> ${tplEsc(p.name)}</a>
+      <div class="atelier-nav-links">
+        <a href="#collection">Collection</a>
+        ${p.email ? `<a class="btn-atelier-inquire" href="mailto:${tplEsc(p.email)}">Inquire</a>` : ''}
+      </div>
+    </nav>
+    <header class="wrap gal-atelier-head">
+      <p class="atelier-kicker">— ATELIER &amp; ARCHIVE —</p>
+      <h1 class="atelier-title">${tplEsc(p.name)}</h1>
+      <p class="atelier-sub">${tplEsc(p.title || 'Haute Couture &amp; Visual Direction')}</p>
+      <div class="atelier-portrait-wrap">${face}</div>
+      <p class="atelier-meta">${tplEsc(p.location || 'Paris &amp; San Francisco')} · ${works.length} WORKS ON DISPLAY</p>
+    </header>
+    <section class="wrap atelier-collection" id="collection">
+      ${works.map((w, i) => `
+        <figure class="atelier-card ${i % 3 === 0 ? 'atelier-wide' : ''}" data-gal="${i}">
+          <div class="atelier-frame">
+            <span class="atelier-numeral">${numerals[i % numerals.length]}</span>
+            <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title)}" loading="lazy">
+          </div>
+          <figcaption class="atelier-meta">
+            <span class="atelier-cat">${tplEsc(w.category || 'COLLECTION')}</span>
+            <b>${tplEsc(w.title || 'Untitled')}</b>
+            ${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}
+          </figcaption>
+        </figure>
+      `).join('')}
+    </section>
+    <footer class="atelier-foot wrap">
+      <span>© ${new Date().getFullYear()} ${tplEsc(p.name)}</span>
+      <span>Atelier Portfolio · Built with Portfoolio</span>
+    </footer>
+  </div>
+  `;
+  window.scrollTo(0, 0);
+}
+
+function renderCinema(p) {
+  normTpl(p);
+  document.body.dataset.template = 'cinema';
+  document.title = `${p.name} — Cinema Portfolio | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const face = avatar ? `<img class="cinema-avatar" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : '';
+
+  app.innerHTML = `
+  <div class="cinema-page">
+    <nav class="cinema-nav wrap">
+      <div class="cinema-rec-chip"><span class="cinema-rec-dot"></span> REC 24.00 FPS</div>
+      <a class="cinema-logo" href="/">${tplEsc(p.name)}</a>
+      <div class="cinema-tc">TC 01:24:08:12</div>
+    </nav>
+    <header class="wrap gal-cinema-head">
+      <div class="cinema-slate-tag">[ ROLL 04 · 8K WIDESCREEN ARCHIVE ]</div>
+      <h1 class="cinema-title">${tplEsc(p.name)}</h1>
+      <p class="cinema-sub">${tplEsc(p.title || 'Cinematographer &amp; Director')}</p>
+      ${face}
+      <p class="cinema-meta">${tplEsc(p.location || 'Los Angeles, CA')} · ${works.length} STILLS · 2.39:1 LETTERBOX</p>
+    </header>
+    <section class="wrap cinema-slate-grid">
+      ${works.map((w, i) => `
+        <article class="cinema-card" data-gal="${i}">
+          <div class="cinema-frame">
+            <div class="letterbox-bar bar-top"></div>
+            <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title)}" loading="lazy">
+            <div class="letterbox-bar bar-bottom"></div>
+            <div class="cinema-hud-overlay">
+              <span class="hud-tag hud-tl">SCENE ${String(i + 1).padStart(2, '0')}</span>
+              <span class="hud-tag hud-tr">${tplEsc(w.category || 'NARRATIVE')}</span>
+              <span class="hud-tag hud-bl">50MM ANAMORPHIC</span>
+              <span class="hud-tag hud-br">PRORES 4444</span>
+            </div>
+          </div>
+          <div class="cinema-card-info">
+            <b>${tplEsc(w.title || 'Untitled Still')}</b>
+            ${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}
+          </div>
+        </article>
+      `).join('')}
+    </section>
+    <footer class="cinema-foot wrap">
+      <span>© ${new Date().getFullYear()} ${tplEsc(p.name)}</span>
+      <span>Cinema Portfolio · Built with Portfoolio</span>
+    </footer>
+  </div>
+  `;
+  window.scrollTo(0, 0);
+}
+
+function renderArch(p) {
+  normTpl(p);
+  document.body.dataset.template = 'arch';
+  document.title = `${p.name} — Architectural Portfolio | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+
+  app.innerHTML = `
+  <div class="arch-page">
+    <nav class="arch-nav wrap">
+      <span class="arch-ref">DWG.REF // 2026</span>
+      <a class="arch-logo" href="/">${tplEsc(p.name)}</a>
+      <span class="arch-scale">SCALE 1:50</span>
+    </nav>
+    <header class="wrap gal-arch-head">
+      <div class="arch-ch ch-tl">+</div>
+      <div class="arch-ch ch-tr">+</div>
+      <div class="arch-ch ch-bl">+</div>
+      <div class="arch-ch ch-br">+</div>
+      <p class="arch-kicker">PROJECT REGISTRY &amp; SPATIAL INDEX</p>
+      <h1 class="arch-title">${tplEsc(p.name)}</h1>
+      <p class="arch-sub">${tplEsc(p.title || 'Architectural Design &amp; Spatial Research')}</p>
+      <div class="arch-specs">
+        <span>LOC: ${tplEsc(p.location || 'Tokyo &amp; New York')}</span>
+        <span>STATUS: APPROVED</span>
+        <span>PLATES: ${works.length}</span>
+      </div>
+    </header>
+    <section class="wrap arch-draft-grid">
+      ${works.map((w, i) => `
+        <article class="arch-plate" data-gal="${i}">
+          <div class="arch-plate-head">
+            <span class="plate-no">SHEET A-${String(i + 1).padStart(2, '0')}</span>
+            <span class="plate-cat">${tplEsc(w.category || 'ARCHITECTURE')}</span>
+          </div>
+          <div class="arch-img-wrap">
+            <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title)}" loading="lazy">
+            <span class="arch-dim-badge">DIM: 1920 × 1080 MM</span>
+          </div>
+          <div class="arch-caption">
+            <b>${tplEsc(w.title || 'Untitled Project')}</b>
+            ${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}
+          </div>
+        </article>
+      `).join('')}
+    </section>
+    <footer class="arch-foot wrap">
+      <span>© ${new Date().getFullYear()} ${tplEsc(p.name)}</span>
+      <span>Arch Blueprint · Built with Portfoolio</span>
+    </footer>
+  </div>
+  `;
+  window.scrollTo(0, 0);
+}
+
+function renderZine(p) {
+  normTpl(p);
+  document.body.dataset.template = 'zine';
+  document.title = `${p.name} — Risograph Zine | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+
+  app.innerHTML = `
+  <div class="zine-page">
+    <nav class="zine-nav wrap">
+      <span class="zine-badge">★ INDIE ZINE</span>
+      <a class="zine-logo" href="/">${tplEsc(p.name)}</a>
+      <span class="zine-issue">ISSUE 04</span>
+    </nav>
+    <header class="wrap gal-zine-head">
+      <div class="zine-stickers">
+        <span class="zine-pill">100% RISOGRAPH</span>
+        <span class="zine-stamp-chip">✦ ARTIST EDITION</span>
+      </div>
+      <h1 class="zine-title">${tplEsc(p.name)}</h1>
+      <p class="zine-sub">${tplEsc(p.title || 'Illustrator &amp; Risograph Printmaker')}</p>
+      ${avatar ? `<div class="zine-polaroid"><img src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}"></div>` : ''}
+      <p class="zine-meta">${tplEsc(p.location || 'London &amp; Berlin')} · ${works.length} PRINTS · INK DUO-TONE</p>
+    </header>
+    <section class="wrap zine-board">
+      ${works.map((w, i) => `
+        <figure class="zine-tile" data-gal="${i}">
+          <div class="zine-tape-strip"></div>
+          <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title)}" loading="lazy">
+          <figcaption class="zine-cap">
+            <span class="zine-stamp">[ ${tplEsc(w.category || 'ORIGINAL PRINT')} ]</span>
+            <b>${tplEsc(w.title || 'Untitled Print')}</b>
+            ${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}
+          </figcaption>
+        </figure>
+      `).join('')}
+    </section>
+    <footer class="zine-foot wrap">
+      <span>© ${new Date().getFullYear()} ${tplEsc(p.name)}</span>
+      <span>Risograph Zine · Built with Portfoolio</span>
+    </footer>
+  </div>
+  `;
+  window.scrollTo(0, 0);
+}
+
+function renderZen(p) {
+  normTpl(p);
+  document.body.dataset.template = 'zen';
+  document.title = `${p.name} — Zen Wabi-Sabi | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const kanjiNumerals = ['壱', '弐', '参', '四', '五', '六', '七', '八', '九', '十'];
+
+  app.innerHTML = `
+  <div class="zen-page">
+    <nav class="zen-nav wrap">
+      <span class="zen-kanji">無為自然</span>
+      <a class="zen-logo" href="/">${tplEsc(p.name)}</a>
+      <span class="zen-season">EARTH &amp; STONE</span>
+    </nav>
+    <header class="wrap gal-zen-head">
+      <div class="zen-enso-wrap">
+        <div class="zen-enso-ring"></div>
+        ${avatar ? `<img class="zen-portrait" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : `<div class="zen-portrait zen-fallback">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`}
+      </div>
+      <h1 class="zen-title">${tplEsc(p.name)}</h1>
+      <p class="zen-sub">${tplEsc(p.title || 'Ceramic Artist &amp; Sculptural Studio')}</p>
+      <p class="zen-meta">${tplEsc(p.location || 'Kyoto, Japan')} · ${works.length} ARTIFACTS · WOODFIRED ANAGAMA</p>
+    </header>
+    <section class="wrap zen-stones">
+      ${works.map((w, i) => `
+        <article class="zen-card ${i % 2 === 1 ? 'zen-stagger' : ''}" data-gal="${i}">
+          <div class="zen-stone-frame">
+            <span class="zen-num">${kanjiNumerals[i % kanjiNumerals.length]}</span>
+            <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title)}" loading="lazy">
+          </div>
+          <div class="zen-stone-meta">
+            <b>${tplEsc(w.title || 'Untitled Form')}</b>
+            <span class="zen-glaze">${tplEsc(w.category || 'CERAMICS')}</span>
+            ${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}
+          </div>
+        </article>
+      `).join('')}
+    </section>
+    <footer class="zen-foot wrap">
+      <span>© ${new Date().getFullYear()} ${tplEsc(p.name)}</span>
+      <span>Zen Wabi-Sabi · Built with Portfoolio</span>
+    </footer>
+  </div>
+  `;
+  window.scrollTo(0, 0);
+}
+
 function initCloudRuntime(p) {
   const btn = document.getElementById('cwThemeBtn');
   if (btn) {
@@ -6819,7 +7111,7 @@ function initCloudRuntime(p) {
 }
 
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker };
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen };
 window.PortfoolioTemplateList = TEMPLATES;
 
 

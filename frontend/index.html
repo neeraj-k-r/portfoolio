@@ -187,7 +187,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
     <div class="lx-theme-filters">
       <button type="button" class="lx-filter-btn active" data-filter="all" onclick="filterLandingThemes('all', this)">All Themes (23)</button>
       <button type="button" class="lx-filter-btn" data-filter="tech" onclick="filterLandingThemes('tech', this)"><i class="fa-solid fa-code"></i> Developer (16)</button>
-      <button type="button" class="lx-filter-btn" data-filter="visual" onclick="filterLandingThemes('visual', this)"><i class="fa-solid fa-palette"></i> Visual Artist (7)</button>
+      <button type="button" class="lx-filter-btn" data-filter="visual" onclick="filterLandingThemes('visual', this)"><i class="fa-solid fa-palette"></i> Visual Artist (12)</button>
     </div>
     <div class="lx-gallery">
       <!-- Developer Themes (16) -->
@@ -316,6 +316,26 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <button class="lx-theme-card" data-track="visual" data-theme="motion" data-name="Motion Flow" aria-label="Preview Motion Flow theme">
         <span class="lx-tp lx-tp-motion"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Motion Flow <em>Kinetic gradients</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="atelier" data-name="Atelier" aria-label="Preview Atelier theme">
+        <span class="lx-tp lx-tp-atelier"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Atelier <em>Haute couture</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="cinema" data-name="Cinema" aria-label="Preview Cinema theme">
+        <span class="lx-tp lx-tp-cinema"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Cinema <em>Widescreen still</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="arch" data-name="Arch Blueprint" aria-label="Preview Arch Blueprint theme">
+        <span class="lx-tp lx-tp-arch"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Arch <em>Blueprint plates</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="zine" data-name="Risograph Zine" aria-label="Preview Risograph Zine theme">
+        <span class="lx-tp lx-tp-zine"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Zine <em>Risograph pop</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="zen" data-name="Zen Wabi-Sabi" aria-label="Preview Zen Wabi-Sabi theme">
+        <span class="lx-tp lx-tp-zen"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Zen <em>Wabi-sabi earth</em></span>
       </button>
     </div>
   </section>
@@ -568,6 +588,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <button class="footer-theme-btn" data-theme="catalog">Catalog</button>
           <button class="footer-theme-btn" data-theme="bloom">Bloom</button>
           <button class="footer-theme-btn" data-theme="motion">Motion</button>
+          <button class="footer-theme-btn" data-theme="atelier">Atelier</button>
+          <button class="footer-theme-btn" data-theme="cinema">Cinema</button>
+          <button class="footer-theme-btn" data-theme="arch">Arch</button>
+          <button class="footer-theme-btn" data-theme="zine">Zine</button>
+          <button class="footer-theme-btn" data-theme="zen">Zen</button>
         </div>
       </div>
     </div>
@@ -739,6 +764,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="catalog"><div class="tpl-preview catalog">📖</div><div class="tpl-meta"><b>Catalog</b><span>Print art-book plates</span></div></label>
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="bloom"><div class="tpl-preview bloom">🌸</div><div class="tpl-meta"><b>Bloom</b><span>Soft pastel dream</span></div></label>
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="motion"><div class="tpl-preview motion">⚡</div><div class="tpl-meta"><b>Motion Flow</b><span>Light • Motion • Gradients</span></div></label>
+              <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="atelier"><div class="tpl-preview atelier">🏛️</div><div class="tpl-meta"><b>Atelier</b><span>Haute couture &amp; minimal editorial</span></div></label>
+              <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="cinema"><div class="tpl-preview cinema">🎬</div><div class="tpl-meta"><b>Cinema</b><span>2.39:1 widescreen stills &amp; HUD</span></div></label>
+              <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="arch"><div class="tpl-preview arch">📐</div><div class="tpl-meta"><b>Arch</b><span>Architectural drafting plates</span></div></label>
+              <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="zine"><div class="tpl-preview zine">🎨</div><div class="tpl-meta"><b>Zine</b><span>Risograph indie print &amp; washi tape</span></div></label>
+              <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="zen"><div class="tpl-preview zen">🍵</div><div class="tpl-meta"><b>Zen</b><span>Wabi-sabi ceramic &amp; stone studio</span></div></label>
             </div>
           </div>
 
@@ -907,6 +937,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="catalog"><div class="tpl-preview catalog">📖</div><div class="tpl-meta"><b>Catalog</b><span>Print art-book plates</span></div></label>
             <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="bloom"><div class="tpl-preview bloom">🌸</div><div class="tpl-meta"><b>Bloom</b><span>Soft pastel dream</span></div></label>
             <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="motion"><div class="tpl-preview motion">⚡</div><div class="tpl-meta"><b>Motion Flow</b><span>Light · Motion · Gradients</span></div></label>
+            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="atelier"><div class="tpl-preview atelier">🏛️</div><div class="tpl-meta"><b>Atelier</b><span>Haute couture &amp; minimal editorial</span></div></label>
+            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="cinema"><div class="tpl-preview cinema">🎬</div><div class="tpl-meta"><b>Cinema</b><span>2.39:1 widescreen stills &amp; HUD</span></div></label>
+            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="arch"><div class="tpl-preview arch">📐</div><div class="tpl-meta"><b>Arch</b><span>Architectural drafting plates</span></div></label>
+            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="zine"><div class="tpl-preview zine">🎨</div><div class="tpl-meta"><b>Zine</b><span>Risograph indie print &amp; washi tape</span></div></label>
+            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="zen"><div class="tpl-preview zen">🍵</div><div class="tpl-meta"><b>Zen</b><span>Wabi-sabi ceramic &amp; stone studio</span></div></label>
           </div>
           <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:center">
             <button class="btn btn-primary btn-sm" id="edSaveThemeBtn"><i class="fa-solid fa-floppy-disk"></i> Save theme</button>
@@ -1454,7 +1489,7 @@ function setupUserDashboardView(profile) {
   const wizard = $('subdomainWizardCard'), techSt = $('techStudio'), visSt = $('visualStudio');
   const headerName = $('userHeaderName'), statusPill = $('userStatusPill');
 
-  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'];
+  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
   const getTrack = (profile) => {
     if (profile && profile.track === 'visual') {
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
@@ -1658,7 +1693,7 @@ function paintTrackTabs(profile) {
   document.body.classList.toggle('visual-user', visual);
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
     const v = (c.querySelector('input') || {}).value || '';
-    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(v);
+    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(v);
     c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
   });
   if (visual) { paintWorks(); }
@@ -2088,12 +2123,12 @@ if ($('builderForm')) {
     if ($('inTag')) $('inTag').placeholder = visual ? 'Painting stories in color and form. Open for commissions.' : 'Building web apps & AI solutions that scale.';
     document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
       const v = (c.querySelector('input') || {}).value || '';
-      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(v);
+      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(v);
       c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
     });
     const curChecked = document.querySelector('#tplGrid input[name=tpl]:checked');
     const curVal = curChecked ? curChecked.value : '';
-    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(curVal);
+    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(curVal);
     let wantTpl = curVal;
     if (visual && !curIsVisual) wantTpl = 'gallery';
     else if (!visual && curIsVisual) wantTpl = 'midnight';

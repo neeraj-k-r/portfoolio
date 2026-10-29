@@ -235,7 +235,7 @@ function galleryWorks(p) {
 function renderGallery(p) {
   p = normLocalProfile(p) || p;
   const vtpl = String(p.template || 'gallery').toLowerCase();
-  document.body.dataset.template = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion'].includes(vtpl) ? vtpl : 'gallery';
+  document.body.dataset.template = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(vtpl) ? vtpl : 'gallery';
   document.title = `${p.name} — visual portfolio | portfoolio.me`;
   const app = document.getElementById('app');
   const works = galleryWorks(p);
@@ -350,6 +350,127 @@ function renderGallery(p) {
         <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
         <figcaption><b>${esc(w.title || 'Untitled')}</b>${w.category ? `<small>${esc(w.category)}</small>` : ''}</figcaption>
       </figure>`).join('') || emptyMsg}</section>`;
+    } else if (document.body.dataset.template === 'atelier') {
+    const numerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+    headHtml = `<header class="wrap gal-atelier-head">
+      <p class="atelier-kicker">— ATELIER &amp; ARCHIVE —</p>
+      <h1 class="atelier-title">${esc(p.name)}</h1>
+      <p class="atelier-sub">${esc(p.title || 'Haute Couture &amp; Visual Direction')}</p>
+      <div class="atelier-portrait-wrap">${srcAvatar ? `<img class="atelier-portrait" src="${esc(srcAvatar)}" alt="${esc(p.name)}">` : `<div class="atelier-portrait atelier-fallback">${letter}</div>`}</div>
+      <p class="atelier-meta">${esc(p.location || 'Paris &amp; San Francisco')} · ${countLabel} · SALON 2026</p>
+    </header>`;
+    gridHtml = `<section class="wrap atelier-collection">${works.map((w, i) => `
+      <figure class="atelier-card ${i % 3 === 0 ? 'atelier-wide' : ''}" data-gal="${i}">
+        <div class="atelier-frame">
+          <span class="atelier-numeral">${numerals[i % numerals.length]}</span>
+          <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
+        </div>
+        <figcaption class="atelier-meta">
+          <span class="atelier-cat">${esc(w.category || 'COLLECTION')}</span>
+          <b>${esc(w.title || 'Untitled')}</b>
+          ${w.desc ? `<p>${esc(w.desc)}</p>` : ''}
+        </figcaption>
+      </figure>`).join('') || emptyMsg}</section>`;
+  } else if (document.body.dataset.template === 'cinema') {
+    headHtml = `<header class="wrap gal-cinema-head">
+      <div class="cinema-rec-chip"><span class="cinema-rec-dot"></span> REC 24.00 FPS · 8K WIDESCREEN</div>
+      <h1 class="cinema-title">${esc(p.name)}</h1>
+      <p class="cinema-sub">${esc(p.title || 'Cinematographer &amp; Director')}</p>
+      ${srcAvatar ? `<img class="cinema-avatar" src="${esc(srcAvatar)}" alt="${esc(p.name)}">` : ''}
+      <p class="cinema-meta">${esc(p.location || 'Los Angeles, CA')} · ${countLabel} · 2.39:1 LETTERBOX</p>
+    </header>`;
+    gridHtml = `<section class="wrap cinema-slate-grid">${works.map((w, i) => `
+      <article class="cinema-card" data-gal="${i}">
+        <div class="cinema-frame">
+          <div class="letterbox-bar bar-top"></div>
+          <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
+          <div class="letterbox-bar bar-bottom"></div>
+          <div class="cinema-hud-overlay">
+            <span class="hud-tag hud-tl">SCENE ${String(i + 1).padStart(2, '0')}</span>
+            <span class="hud-tag hud-tr">${esc(w.category || 'NARRATIVE')}</span>
+            <span class="hud-tag hud-bl">50MM ANAMORPHIC</span>
+            <span class="hud-tag hud-br">PRORES 4444</span>
+          </div>
+        </div>
+        <div class="cinema-card-info">
+          <b>${esc(w.title || 'Untitled Still')}</b>
+          ${w.desc ? `<p>${esc(w.desc)}</p>` : ''}
+        </div>
+      </article>`).join('') || emptyMsg}</section>`;
+  } else if (document.body.dataset.template === 'arch') {
+    headHtml = `<header class="wrap gal-arch-head">
+      <div class="arch-ch ch-tl">+</div>
+      <div class="arch-ch ch-tr">+</div>
+      <div class="arch-ch ch-bl">+</div>
+      <div class="arch-ch ch-br">+</div>
+      <p class="arch-kicker">PROJECT REGISTRY &amp; SPATIAL INDEX</p>
+      <h1 class="arch-title">${esc(p.name)}</h1>
+      <p class="arch-sub">${esc(p.title || 'Architectural Design &amp; Spatial Research')}</p>
+      <div class="arch-specs">
+        <span>LOC: ${esc(p.location || 'Tokyo &amp; New York')}</span>
+        <span>STATUS: APPROVED</span>
+        <span>PLATES: ${works.length}</span>
+      </div>
+    </header>`;
+    gridHtml = `<section class="wrap arch-draft-grid">${works.map((w, i) => `
+      <article class="arch-plate" data-gal="${i}">
+        <div class="arch-plate-head">
+          <span class="plate-no">SHEET A-${String(i + 1).padStart(2, '0')}</span>
+          <span class="plate-cat">${esc(w.category || 'ARCHITECTURE')}</span>
+        </div>
+        <div class="arch-img-wrap">
+          <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
+          <span class="arch-dim-badge">DIM: 1920 × 1080 MM</span>
+        </div>
+        <div class="arch-caption">
+          <b>${esc(w.title || 'Untitled Project')}</b>
+          ${w.desc ? `<p>${esc(w.desc)}</p>` : ''}
+        </div>
+      </article>`).join('') || emptyMsg}</section>`;
+  } else if (document.body.dataset.template === 'zine') {
+    headHtml = `<header class="wrap gal-zine-head">
+      <div class="zine-stickers">
+        <span class="zine-pill">100% RISOGRAPH</span>
+        <span class="zine-stamp-chip">✦ ARTIST EDITION</span>
+      </div>
+      <h1 class="zine-title">${esc(p.name)}</h1>
+      <p class="zine-sub">${esc(p.title || 'Illustrator &amp; Risograph Printmaker')}</p>
+      ${srcAvatar ? `<div class="zine-polaroid"><img src="${esc(srcAvatar)}" alt="${esc(p.name)}"></div>` : ''}
+      <p class="zine-meta">${esc(p.location || 'London &amp; Berlin')} · ${countLabel} · INK DUO-TONE</p>
+    </header>`;
+    gridHtml = `<section class="wrap zine-board">${works.map((w, i) => `
+      <figure class="zine-tile" data-gal="${i}">
+        <div class="zine-tape-strip"></div>
+        <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
+        <figcaption class="zine-cap">
+          <span class="zine-stamp">[ ${esc(w.category || 'ORIGINAL PRINT')} ]</span>
+          <b>${esc(w.title || 'Untitled Print')}</b>
+          ${w.desc ? `<p>${esc(w.desc)}</p>` : ''}
+        </figcaption>
+      </figure>`).join('') || emptyMsg}</section>`;
+  } else if (document.body.dataset.template === 'zen') {
+    const kanjiNumerals = ['壱', '弐', '参', '四', '五', '六', '七', '八', '九', '十'];
+    headHtml = `<header class="wrap gal-zen-head">
+      <div class="zen-enso-wrap">
+        <div class="zen-enso-ring"></div>
+        ${srcAvatar ? `<img class="zen-portrait" src="${esc(srcAvatar)}" alt="${esc(p.name)}">` : `<div class="zen-portrait zen-fallback">${letter}</div>`}
+      </div>
+      <h1 class="zen-title">${esc(p.name)}</h1>
+      <p class="zen-sub">${esc(p.title || 'Ceramic Artist &amp; Sculptural Studio')}</p>
+      <p class="zen-meta">${esc(p.location || 'Kyoto, Japan')} · ${countLabel} · WOODFIRED ANAGAMA</p>
+    </header>`;
+    gridHtml = `<section class="wrap zen-stones">${works.map((w, i) => `
+      <article class="zen-card ${i % 2 === 1 ? 'zen-stagger' : ''}" data-gal="${i}">
+        <div class="zen-stone-frame">
+          <span class="zen-num">${kanjiNumerals[i % kanjiNumerals.length]}</span>
+          <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
+        </div>
+        <div class="zen-stone-meta">
+          <b>${esc(w.title || 'Untitled Form')}</b>
+          <span class="zen-glaze">${esc(w.category || 'CERAMICS')}</span>
+          ${w.desc ? `<p>${esc(w.desc)}</p>` : ''}
+        </div>
+      </article>`).join('') || emptyMsg}</section>`;
   } else if (document.body.dataset.template === 'catalog') {
     headHtml = `<header class="wrap gal-catalog-head">
       <p class="cat-kicker">— CATALOGUE —</p>
@@ -420,7 +541,7 @@ function renderPortfolio(p) {
   p = normLocalProfile(p) || p;
   const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
-  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'];
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
   if (visualOnly.includes(tpl)) {
     tpl = 'midnight';
   }
@@ -1047,7 +1168,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       museum: { name: 'Astrid Lind', title: 'Fine Artist & Painter', desc: 'Framed gallery walls showcasing textured acrylic, oil on canvas, and museum installations.', skills: ['Fine Art', 'Oil Painting', 'Exhibits'] },
       catalog: { name: 'David Park', title: 'Book Designer & Printmaker', desc: 'Editorial art-book plates, tactile catalog layouts, and archival typography.', skills: ['Editorial', 'Printmaking', 'Archival'] },
       bloom: { name: 'Hana Mori', title: 'Digital Illustrator & Concept Artist', desc: 'Soft pastel dreamscapes, gentle gradients, and whimsical visual world-building.', skills: ['Illustration', 'Concept Art', 'Color'] },
-      motion: { name: 'Dominique Roy', title: 'Motion Designer & Art Director', desc: 'Kinetic typography, cream-and-orange motion gradients, and fluid scroll interactions.', skills: ['After Effects', 'Kinetic Type', 'Motion'] }
+      motion: { name: 'Dominique Roy', title: 'Motion Designer & Art Director', desc: 'Kinetic typography, cream-and-orange motion gradients, and fluid scroll interactions.', skills: ['After Effects', 'Kinetic Type', 'Motion'] },
+      atelier: { name: 'Camille de Laurent', title: 'Fashion Stylist & Editorial Director', desc: 'Haute couture archives, luxury visual campaigns, and minimal editorial spreads.', skills: ['Haute Couture', 'Styling', 'Direction', 'Luxury'] },
+      cinema: { name: 'Mateo Vance', title: 'Cinematographer & Film Director', desc: 'Narrative feature films, anamorphic lighting studies, and 2.39:1 widescreen stills.', skills: ['Cinematography', 'Direction', 'Color Grading', 'Anamorphic'] },
+      arch: { name: 'Kenzo Takahashi', title: 'Architect & Spatial Designer', desc: 'Precision drafting plates, cantilever concrete structures, and minimal spatial research.', skills: ['Architecture', 'Spatial Design', 'Concrete', 'Detailing'] },
+      zine: { name: 'Maya Rivera', title: 'Illustrator & Risograph Artist', desc: 'Tactile risograph prints, indie comics, vibrant pop posters, and limited editions.', skills: ['Risograph', 'Illustration', 'Comics', 'Screenprinting'] },
+      zen: { name: 'Sōren Morita', title: 'Ceramicist & Sculptor', desc: 'Woodfired anagama ceramics, organic stone vessels, and wabi-sabi tactile forms.', skills: ['Ceramics', 'Sculpture', 'Wabi-Sabi', 'Woodfiring'] },
     };
     let lastFocus = null;
     let currentModalTheme = 'midnight';
@@ -1132,6 +1258,51 @@ document.addEventListener('DOMContentLoaded', async () => {
             technologies: ['TypeScript', 'React', 'Tailwind', 'Storybook'],
             tags: ['TypeScript', 'React', 'Tailwind'],
             stars: '2.1k'
+          }
+        ],
+        
+        works: [
+          {
+            title: 'Sculptural Form 01',
+            category: 'Editorial',
+            desc: 'Study in drape, proportion, and monochrome light.',
+            imageUrl: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&auto=format&fit=crop',
+            year: 2026
+          },
+          {
+            title: 'Tectonic Cantilever',
+            category: 'Architecture',
+            desc: 'Reinforced architectural cast concrete cantilever pavilion.',
+            imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&auto=format&fit=crop',
+            year: 2026
+          },
+          {
+            title: 'Anamorphic Night Still',
+            category: 'Cinematography',
+            desc: 'Atmospheric 2.39:1 widescreen still frame captured on 50mm T1.5.',
+            imageUrl: 'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop',
+            year: 2026
+          },
+          {
+            title: 'Halftone Pop Issue',
+            category: 'Illustration',
+            desc: 'Two-color fluorescent risograph print on warm recycled stock.',
+            imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=900&auto=format&fit=crop',
+            year: 2026
+          },
+          {
+            title: 'Woodfired Ash Vessel',
+            category: 'Ceramics',
+            desc: 'Organic stoneware fired in an anagama kiln for 96 hours.',
+            imageUrl: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=900&auto=format&fit=crop',
+            year: 2026
+          },
+          {
+            title: 'Minimalist Monolith',
+            category: 'Lookbook',
+            desc: 'Natural textures and architectural silhouettes in soft morning light.',
+            imageUrl: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&auto=format&fit=crop',
+            year: 2026
           }
         ],
         education: [
@@ -1360,7 +1531,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
       // Visual theme elements (work cards, museum pieces, catalog rows, bloom tiles)
       const template = document.body.dataset.template;
-      const isVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(template);
+      const isVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(template);
       if (isVisual) {
         document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile').forEach(el => {
           io.observe(el);
@@ -1479,7 +1650,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   trackProfileView(requested);
   if (resumeUser) { renderResumePage(p); return; }
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
-  const isVisualTrack = p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(p.template || '').toLowerCase()));
+  const isVisualTrack = p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(String(p.template || '').toLowerCase()));
   if (isVisualTrack) { renderGallery(p); initMotionTheme(); return; }
   const skill = new URLSearchParams(location.search).get('skill');
   if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
@@ -1491,7 +1662,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (s.view === 'work' && requested) {
       const pp = await loadProfile(requested);
       if (!pp) return;
-      const isPpVisual = pp.track === 'visual' || (pp.track !== 'tech' && Array.isArray(pp.works) && pp.works.length > 0 && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(pp.template || '').toLowerCase()));
+      const isPpVisual = pp.track === 'visual' || (pp.track !== 'tech' && Array.isArray(pp.works) && pp.works.length > 0 && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(String(pp.template || '').toLowerCase()));
       if (isPpVisual) { renderGallery(pp); return; }
       renderPortfolio(pp);
     }
