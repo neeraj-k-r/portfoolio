@@ -1320,6 +1320,11 @@ function setAuthMode(mode) {
       ? 'New here? Create your account, then claim your subdomain.'
       : 'Welcome back — enter your email & password to log in.';
   }
+  if (window.location.hash === '#signup' || window.location.hash === '#login') {
+    try {
+      history.replaceState(null, '', '#' + currentAuthMode);
+    } catch {}
+  }
 }
 
 function handleAuthHash() {
