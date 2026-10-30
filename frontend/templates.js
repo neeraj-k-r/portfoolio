@@ -947,9 +947,9 @@ function renderModerncv(p) {
             </div>
             <h1 class="hero-name" id="heroName">
               <span class="name-prefix">const</span>
+              <span class="name-ident">name</span>
               <span class="name-operator">=</span>
-              <span class="name-value" id="heroNameVal">${name}</span>
-              <span class="name-suffix">;</span>
+              <span class="name-value" id="heroNameVal">${name}</span><span class="name-suffix">;</span>
             </h1>
             <div class="hero-title">
               <span class="title-prefix">//</span>

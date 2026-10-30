@@ -21,7 +21,7 @@ body.rs-page.rs-ats{background:#e8eaf0}
 .rs-ats .rs-title{font-family:Arial,Helvetica,sans-serif;font-size:16px;color:#222}
 .rs-ats .rs-contact{font-family:Arial,Helvetica,sans-serif;color:#222}
 .rs-ats .rs-sec-h{font-family:Arial,Helvetica,sans-serif;border-bottom-color:#111}
-.rs-ats a{color:#111}
+.rs-doc.rs-ats a, body.rs-page.rs-ats a:not(.btn){color:#111}
 .rs-ats strong{font-weight:700}
 
 /* Modern — soft light card */
@@ -30,7 +30,7 @@ body.rs-page.rs-modern{background:#0b1226}
 .rs-modern .rs-name{font-size:34px;letter-spacing:-1px}
 .rs-modern .rs-title{color:#4f46e5}
 .rs-modern .rs-sec-h{color:#4f46e5;border-bottom-color:#c7d2fe}
-.rs-modern a{color:#4f46e5}
+.rs-doc.rs-modern a, body.rs-page.rs-modern a:not(.btn){color:#4f46e5}
 
 /* Midnight — dark neon on-brand */
 .rs-midnight{background:rgba(255,255,255,.05);color:#eef2ff;border:1px solid rgba(108,108,245,.4)}
@@ -38,7 +38,7 @@ body.rs-page.rs-midnight{background:#070b16;color:#eef2ff}
 .rs-midnight .rs-name{font-size:34px;background:linear-gradient(90deg,#a5b4fc,#22d3ee,#f472b6);-webkit-background-clip:text;background-clip:text;color:transparent}
 .rs-midnight .rs-title{color:#22d3ee}
 .rs-midnight .rs-sec-h{color:#22d3ee;border-bottom-color:rgba(34,211,238,.4)}
-.rs-midnight a{color:#22d3ee}
+.rs-doc.rs-midnight a, body.rs-page.rs-midnight a:not(.btn){color:#22d3ee}
 .rs-midnight .rs-foot{color:#9aa3c0;opacity:.8}
 
 /* Terminal — mono green */
@@ -48,7 +48,7 @@ body.rs-page.rs-terminal{background:#050805;color:#d1fae5}
 .rs-terminal .rs-title{color:#86efac}
 .rs-terminal .rs-sec-h{color:#4ade80;border-bottom-color:#166534}
 .rs-terminal .rs-p,.rs-terminal .rs-ul{font-size:13.5px}
-.rs-terminal a{color:#4ade80}
+.rs-doc.rs-terminal a, body.rs-page.rs-terminal a:not(.btn){color:#4ade80}
 
 /* Executive Edge — bold serif, premium feel */
 .rs-executive{background:#fff;color:#1a1a2e;border:1px solid #e8d5b7;box-shadow:0 20px 60px rgba(139,115,78,.15)}
@@ -59,7 +59,7 @@ body.rs-page.rs-executive{background:#faf8f3}
 .rs-executive .rs-sec-h{font-family:'Instrument Serif',Georgia,serif;color:#8b7355;border-bottom-color:#d4c4a8;letter-spacing:2px}
 .rs-executive .rs-sec-h::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:#8b7355;margin-right:10px;vertical-align:middle}
 .rs-executive .rs-item-top b{font-family:'Instrument Serif',Georgia,serif}
-.rs-executive a{color:#8b7355}
+.rs-doc.rs-executive a, body.rs-page.rs-executive a:not(.btn){color:#8b7355}
 .rs-executive .rs-foot{color:#9a8a7a}
 
 /* Creative Balance — gradient accents, playful yet professional */
@@ -70,7 +70,7 @@ body.rs-page.rs-creative{background:linear-gradient(135deg,#fdf2f8,#ede9fe)}
 .rs-creative .rs-contact{color:#7c3aed}
 .rs-creative .rs-sec-h{background:linear-gradient(90deg,#ec4899,#8b5cf6);-webkit-background-clip:text;background-clip:text;color:transparent;border-bottom:3px solid;border-image:linear-gradient(90deg,#ec4899,#8b5cf6,#06b6d4) 1}
 .rs-creative .rs-item-top b{color:#1f1f3f}
-.rs-creative a{color:#8b5cf6}
+.rs-doc.rs-creative a, body.rs-page.rs-creative a:not(.btn){color:#8b5cf6}
 .rs-creative .rs-foot{color:#a855f7}
 
 /* Data Analyst Pro — structured, metrics-focused */
@@ -84,7 +84,7 @@ body.rs-page.rs-datasci{background:#f8fafc}
 .rs-datasci .rs-item-top b{font-family:'JetBrains Mono',monospace;color:#1e293b}
 .rs-datasci .rs-dates{font-family:'JetBrains Mono',monospace;color:#3b82f6}
 .rs-datasci .rs-p,.rs-datasci .rs-ul{font-family:'Plus Jakarta Sans',sans-serif;color:#334155}
-.rs-datasci a{color:#3b82f6}
+.rs-doc.rs-datasci a, body.rs-page.rs-datasci a:not(.btn){color:#3b82f6}
 .rs-datasci .rs-foot{color:#94a3b8}
 
 /* Product Manager Fit — outcome-oriented */
@@ -97,7 +97,7 @@ body.rs-page.rs-product{background:#f0f9ff}
 .rs-product .rs-sec-h::before{content:'🎯';margin-right:8px}
 .rs-product .rs-item-top b{color:#0c4a6e}
 .rs-product .rs-dates{color:#0891b2}
-.rs-product a{color:#0e7490}
+.rs-doc.rs-product a, body.rs-page.rs-product a:not(.btn){color:#0e7490}
 .rs-product .rs-foot{color:#64748b}
 
 /* Compact One-Page — dense, single-page optimized */
@@ -127,7 +127,7 @@ body.rs-page.rs-academic{background:#fafafa}
 .rs-academic .rs-dates{font-size:11.5px;color:#666;font-style:italic}
 .rs-academic .rs-p{font-size:13.5px;line-height:1.7;color:#222}
 .rs-academic .rs-ul{margin:4px 0 4px 22px;font-size:13.5px;line-height:1.7}
-.rs-academic a{color:#1a1a1a;text-decoration:underline}
+.rs-doc.rs-academic a, body.rs-page.rs-academic a:not(.btn){color:#1a1a1a;text-decoration:underline}
 .rs-academic .rs-foot{font-size:10.5px;color:#999;margin-top:30px;font-style:italic}
 
 /* embedded portfolio section card tint per resume theme */
@@ -141,6 +141,9 @@ body.rs-page.rs-academic{background:#fafafa}
 .rs-embed-card.rs-product{border-left:4px solid #0e7490}
 .rs-embed-card.rs-compact{border-left:4px solid #111}
 .rs-embed-card.rs-academic{border-left:4px solid #1a1a1a}
+.rs-embed-card .btn{text-decoration:none!important}
+.rs-embed-card .btn-primary{color:#fff!important;background:linear-gradient(135deg,#6c6cf5,#22d3ee)}
+.rs-embed-card .btn-ghost{text-decoration:none!important}
 
 @media(max-width:640px){.rs-doc{padding:22px 18px;margin:16px 12px 30px}.rs-item-top{flex-direction:column;gap:2px}}
 
