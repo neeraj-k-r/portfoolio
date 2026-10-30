@@ -74,7 +74,7 @@ async function getProfile(sub) {
         row.services = row.resume.services;
       }
       // Self-heal legacy rows: a visual-only template implies the visual track
-      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
+      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
       if (row.track !== 'visual') row.track = 'tech';
 
       // Check seed profile to backfill custom services or extra repos
@@ -226,7 +226,7 @@ function head(p, tpl) {
 <link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -372,8 +372,10 @@ function skillsSection(p) {
       <span style="color:#22d3ee;font-size:13px;font-weight:800">View evidence →</span>
     </a>`).join('')}</div></section>`;
 }
-function pageGallery(p, wIdx) {
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(String(p.template || '').toLowerCase()) ? String(p.template).toLowerCase() : 'gallery';
+function pageGallery(p, wIdx, url) {
+  const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
+  const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(activeTpl) ? activeTpl : 'gallery';
   const works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   const i = parseInt(wIdx, 10);
   const w = (!isNaN(i) && works[i]) ? works[i] : null;
@@ -408,124 +410,181 @@ function pageGallery(p, wIdx) {
         </div>
       </a>`).join('') || emptyMsg}</section>`
         : vtpl === 'atelier'
-    ? `<header class="wrap gal-atelier-head">
-      <p class="atelier-kicker">— ATELIER &amp; ARCHIVE —</p>
-      <h1>${esc(p.name)}</h1>
-      <p class="atelier-sub">${esc(p.title || 'Haute Couture &amp; Visual Direction')}</p>
-      <div class="atelier-portrait-wrap">${avatar ? `<img class="atelier-portrait" src="${esc(avatar)}" alt="${esc(p.name)}">` : `<div class="atelier-portrait atelier-fallback">${letter}</div>`}</div>
-      <p class="atelier-meta">${esc(p.location || 'Paris &amp; San Francisco')} · ${countLabel} · SALON 2026</p>
-    </header>
-    <section class="wrap atelier-collection">${works.map((k, n) => `
-      <a class="atelier-card ${n % 3 === 0 ? 'atelier-wide' : ''}" href="/?w=${n}" style="text-decoration:none;color:inherit">
-        <div class="atelier-frame">
-          <span class="atelier-numeral">${['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][n % 10]}</span>
-          <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+    ? `<div class="atelier-page">
+      <nav class="atelier-nav wrap">
+        <a class="atelier-logo" href="/"><span class="atelier-mark">◆</span> ${esc(p.name)}</a>
+        <div class="atelier-nav-links">
+          <a href="#collection">Collection</a>
+          ${p.email ? `<a class="btn-atelier-inquire" href="mailto:${esc(p.email)}">Inquire</a>` : ''}
         </div>
-        <div class="atelier-meta">
-          <span class="atelier-cat">${esc(k.category || 'COLLECTION')}</span>
-          <b>${esc(k.title || 'Untitled')}</b>
-          ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
-        </div>
-      </a>`).join('') || emptyMsg}</section>`
-    : vtpl === 'cinema'
-    ? `<header class="wrap gal-cinema-head">
-      <div class="cinema-rec-chip"><span class="cinema-rec-dot"></span> REC 24.00 FPS · 8K WIDESCREEN</div>
-      <h1>${esc(p.name)}</h1>
-      <p class="cinema-sub">${esc(p.title || 'Cinematographer &amp; Director')}</p>
-      ${avatar ? `<img class="cinema-avatar" src="${esc(avatar)}" alt="${esc(p.name)}">` : ''}
-      <p class="cinema-meta">${esc(p.location || 'Los Angeles, CA')} · ${countLabel} · 2.39:1 LETTERBOX</p>
-    </header>
-    <section class="wrap cinema-slate-grid">${works.map((k, n) => `
-      <a class="cinema-card" href="/?w=${n}" style="text-decoration:none;color:inherit">
-        <div class="cinema-frame">
-          <div class="letterbox-bar bar-top"></div>
-          <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
-          <div class="letterbox-bar bar-bottom"></div>
-          <div class="cinema-hud-overlay">
-            <span class="hud-tag hud-tl">SCENE ${String(n + 1).padStart(2, '0')}</span>
-            <span class="hud-tag hud-tr">${esc(k.category || 'NARRATIVE')}</span>
-            <span class="hud-tag hud-bl">50MM ANAMORPHIC</span>
-            <span class="hud-tag hud-br">PRORES 4444</span>
+      </nav>
+      <header class="wrap gal-atelier-head">
+        <p class="atelier-kicker">— ATELIER &amp; ARCHIVE —</p>
+        <h1>${esc(p.name)}</h1>
+        <p class="atelier-sub">${esc(p.title || 'Haute Couture &amp; Visual Direction')}</p>
+        <div class="atelier-portrait-wrap">${avatar ? `<img class="atelier-portrait" src="${esc(avatar)}" alt="${esc(p.name)}">` : `<div class="atelier-portrait atelier-fallback">${letter}</div>`}</div>
+        <p class="atelier-meta">${esc(p.location || 'Paris &amp; San Francisco')} · ${countLabel} · SALON 2026</p>
+      </header>
+      <section class="wrap atelier-collection" id="collection">${works.map((k, n) => `
+        <a class="atelier-card ${n % 3 === 0 ? 'atelier-wide' : ''}" href="/?w=${n}" style="text-decoration:none;color:inherit">
+          <div class="atelier-frame">
+            <span class="atelier-numeral">${['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'][n % 10]}</span>
+            <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
           </div>
-        </div>
-        <div class="cinema-card-info">
-          <b>${esc(k.title || 'Untitled Still')}</b>
-          ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
-        </div>
-      </a>`).join('') || emptyMsg}</section>`
+          <div class="atelier-meta">
+            <span class="atelier-cat">${esc(k.category || 'COLLECTION')}</span>
+            <b>${esc(k.title || 'Untitled')}</b>
+            ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+          </div>
+        </a>`).join('') || emptyMsg}</section>
+      <footer class="atelier-foot wrap">
+        <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+        <span>Atelier Portfolio · Built with Portfoolio</span>
+      </footer>
+    </div>`
+    : vtpl === 'cinema'
+    ? `<div class="cinema-page">
+      <nav class="cinema-nav wrap">
+        <div class="cinema-rec-chip"><span class="cinema-rec-dot"></span> REC 24.00 FPS</div>
+        <a class="cinema-logo" href="/">${esc(p.name)}</a>
+        <div class="cinema-tc">TC 01:24:08:12</div>
+      </nav>
+      <header class="wrap gal-cinema-head">
+        <div class="cinema-slate-tag">[ ROLL 04 · 8K WIDESCREEN ARCHIVE ]</div>
+        <h1>${esc(p.name)}</h1>
+        <p class="cinema-sub">${esc(p.title || 'Cinematographer &amp; Director')}</p>
+        ${avatar ? `<img class="cinema-avatar" src="${esc(avatar)}" alt="${esc(p.name)}">` : ''}
+        <p class="cinema-meta">${esc(p.location || 'Los Angeles, CA')} · ${countLabel} · 2.39:1 LETTERBOX</p>
+      </header>
+      <section class="wrap cinema-slate-grid">${works.map((k, n) => `
+        <a class="cinema-card" href="/?w=${n}" style="text-decoration:none;color:inherit">
+          <div class="cinema-frame">
+            <div class="letterbox-bar bar-top"></div>
+            <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+            <div class="letterbox-bar bar-bottom"></div>
+            <div class="cinema-hud-overlay">
+              <span class="hud-tag hud-tl">SCENE ${String(n + 1).padStart(2, '0')}</span>
+              <span class="hud-tag hud-tr">${esc(k.category || 'NARRATIVE')}</span>
+              <span class="hud-tag hud-bl">50MM ANAMORPHIC</span>
+              <span class="hud-tag hud-br">PRORES 4444</span>
+            </div>
+          </div>
+          <div class="cinema-card-info">
+            <b>${esc(k.title || 'Untitled Still')}</b>
+            ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+          </div>
+        </a>`).join('') || emptyMsg}</section>
+      <footer class="cinema-foot wrap">
+        <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+        <span>Cinema Portfolio · Built with Portfoolio</span>
+      </footer>
+    </div>`
     : vtpl === 'arch'
-    ? `<header class="wrap gal-arch-head">
-      <div class="arch-ch ch-tl">+</div>
-      <div class="arch-ch ch-tr">+</div>
-      <div class="arch-ch ch-bl">+</div>
-      <div class="arch-ch ch-br">+</div>
-      <p class="arch-kicker">PROJECT REGISTRY &amp; SPATIAL INDEX</p>
-      <h1>${esc(p.name)}</h1>
-      <p class="arch-sub">${esc(p.title || 'Architectural Design &amp; Spatial Research')}</p>
-      <div class="arch-specs">
-        <span>LOC: ${esc(p.location || 'Tokyo &amp; New York')}</span>
-        <span>STATUS: APPROVED</span>
-        <span>PLATES: ${works.length}</span>
-      </div>
-    </header>
-    <section class="wrap arch-draft-grid">${works.map((k, n) => `
-      <a class="arch-plate" href="/?w=${n}" style="text-decoration:none;color:inherit">
-        <div class="arch-plate-head">
-          <span class="plate-no">SHEET A-${String(n + 1).padStart(2, '0')}</span>
-          <span class="plate-cat">${esc(k.category || 'ARCHITECTURE')}</span>
+    ? `<div class="arch-page">
+      <nav class="arch-nav wrap">
+        <span class="arch-ref">DWG.REF // 2026</span>
+        <a class="arch-logo" href="/">${esc(p.name)}</a>
+        <span class="arch-scale">SCALE 1:50</span>
+      </nav>
+      <header class="wrap gal-arch-head">
+        <div class="arch-ch ch-tl">+</div>
+        <div class="arch-ch ch-tr">+</div>
+        <div class="arch-ch ch-bl">+</div>
+        <div class="arch-ch ch-br">+</div>
+        <p class="arch-kicker">PROJECT REGISTRY &amp; SPATIAL INDEX</p>
+        <h1>${esc(p.name)}</h1>
+        <p class="arch-sub">${esc(p.title || 'Architectural Design &amp; Spatial Research')}</p>
+        <div class="arch-specs">
+          <span>LOC: ${esc(p.location || 'Tokyo &amp; New York')}</span>
+          <span>STATUS: APPROVED</span>
+          <span>PLATES: ${works.length}</span>
         </div>
-        <div class="arch-img-wrap">
-          <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
-          <span class="arch-dim-badge">DIM: 1920 × 1080 MM</span>
-        </div>
-        <div class="arch-caption">
-          <b>${esc(k.title || 'Untitled Project')}</b>
-          ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
-        </div>
-      </a>`).join('') || emptyMsg}</section>`
+      </header>
+      <section class="wrap arch-draft-grid">${works.map((k, n) => `
+        <a class="arch-plate" href="/?w=${n}" style="text-decoration:none;color:inherit">
+          <div class="arch-plate-head">
+            <span class="plate-no">SHEET A-${String(n + 1).padStart(2, '0')}</span>
+            <span class="plate-cat">${esc(k.category || 'ARCHITECTURE')}</span>
+          </div>
+          <div class="arch-img-wrap">
+            <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+            <span class="arch-dim-badge">DIM: 1920 × 1080 MM</span>
+          </div>
+          <div class="arch-caption">
+            <b>${esc(k.title || 'Untitled Project')}</b>
+            ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+          </div>
+        </a>`).join('') || emptyMsg}</section>
+      <footer class="arch-foot wrap">
+        <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+        <span>Arch Blueprint · Built with Portfoolio</span>
+      </footer>
+    </div>`
     : vtpl === 'zine'
-    ? `<header class="wrap gal-zine-head">
-      <div class="zine-stickers">
-        <span class="zine-pill">100% RISOGRAPH</span>
-        <span class="zine-stamp-chip">✦ ARTIST EDITION</span>
-      </div>
-      <h1>${esc(p.name)}</h1>
-      <p class="zine-sub">${esc(p.title || 'Illustrator &amp; Risograph Printmaker')}</p>
-      ${avatar ? `<div class="zine-polaroid"><img src="${esc(avatar)}" alt="${esc(p.name)}"></div>` : ''}
-      <p class="zine-meta">${esc(p.location || 'London &amp; Berlin')} · ${countLabel} · INK DUO-TONE</p>
-    </header>
-    <section class="wrap zine-board">${works.map((k, n) => `
-      <a class="zine-tile" href="/?w=${n}" style="text-decoration:none;color:inherit">
-        <div class="zine-tape-strip"></div>
-        <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
-        <div class="zine-cap">
-          <span class="zine-stamp">[ ${esc(k.category || 'ORIGINAL PRINT')} ]</span>
-          <b>${esc(k.title || 'Untitled Print')}</b>
-          ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+    ? `<div class="zine-page">
+      <nav class="zine-nav wrap">
+        <span class="zine-badge">★ INDIE ZINE</span>
+        <a class="zine-logo" href="/">${esc(p.name)}</a>
+        <span class="zine-issue">ISSUE 04</span>
+      </nav>
+      <header class="wrap gal-zine-head">
+        <div class="zine-stickers">
+          <span class="zine-pill">100% RISOGRAPH</span>
+          <span class="zine-stamp-chip">✦ ARTIST EDITION</span>
         </div>
-      </a>`).join('') || emptyMsg}</section>`
-    : vtpl === 'zen'
-    ? `<header class="wrap gal-zen-head">
-      <div class="zen-enso-wrap">
-        <div class="zen-enso-ring"></div>
-        ${avatar ? `<img class="zen-portrait" src="${esc(avatar)}" alt="${esc(p.name)}">` : `<div class="zen-portrait zen-fallback">${letter}</div>`}
-      </div>
-      <h1>${esc(p.name)}</h1>
-      <p class="zen-sub">${esc(p.title || 'Ceramic Artist &amp; Sculptural Studio')}</p>
-      <p class="zen-meta">${esc(p.location || 'Kyoto, Japan')} · ${countLabel} · WOODFIRED ANAGAMA</p>
-    </header>
-    <section class="wrap zen-stones">${works.map((k, n) => `
-      <a class="zen-card ${n % 2 === 1 ? 'zen-stagger' : ''}" href="/?w=${n}" style="text-decoration:none;color:inherit">
-        <div class="zen-stone-frame">
-          <span class="zen-num">${['壱', '弐', '参', '四', '五', '六', '七', '八', '九', '十'][n % 10]}</span>
+        <h1>${esc(p.name)}</h1>
+        <p class="zine-sub">${esc(p.title || 'Illustrator &amp; Risograph Printmaker')}</p>
+        ${avatar ? `<div class="zine-polaroid"><img src="${esc(avatar)}" alt="${esc(p.name)}"></div>` : ''}
+        <p class="zine-meta">${esc(p.location || 'London &amp; Berlin')} · ${countLabel} · INK DUO-TONE</p>
+      </header>
+      <section class="wrap zine-board">${works.map((k, n) => `
+        <a class="zine-tile" href="/?w=${n}" style="text-decoration:none;color:inherit">
+          <div class="zine-tape-strip"></div>
           <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+          <div class="zine-cap">
+            <span class="zine-stamp">[ ${esc(k.category || 'ORIGINAL PRINT')} ]</span>
+            <b>${esc(k.title || 'Untitled Print')}</b>
+            ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+          </div>
+        </a>`).join('') || emptyMsg}</section>
+      <footer class="zine-foot wrap">
+        <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+        <span>Risograph Zine · Built with Portfoolio</span>
+      </footer>
+    </div>`
+    : vtpl === 'zen'
+    ? `<div class="zen-page">
+      <nav class="zen-nav wrap">
+        <span class="zen-kanji">無為自然</span>
+        <a class="zen-logo" href="/">${esc(p.name)}</a>
+        <span class="zen-season">EARTH &amp; STONE</span>
+      </nav>
+      <header class="wrap gal-zen-head">
+        <div class="zen-enso-wrap">
+          <div class="zen-enso-ring"></div>
+          ${avatar ? `<img class="zen-portrait" src="${esc(avatar)}" alt="${esc(p.name)}">` : `<div class="zen-portrait zen-fallback">${letter}</div>`}
         </div>
-        <div class="zen-stone-meta">
-          <b>${esc(k.title || 'Untitled Form')}</b>
-          <span class="zen-glaze">${esc(k.category || 'CERAMICS')}</span>
-          ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
-        </div>
-      </a>`).join('') || emptyMsg}</section>`
+        <h1>${esc(p.name)}</h1>
+        <p class="zen-sub">${esc(p.title || 'Ceramic Artist &amp; Sculptural Studio')}</p>
+        <p class="zen-meta">${esc(p.location || 'Kyoto, Japan')} · ${countLabel} · WOODFIRED ANAGAMA</p>
+      </header>
+      <section class="wrap zen-stones">${works.map((k, n) => `
+        <a class="zen-card ${n % 2 === 1 ? 'zen-stagger' : ''}" href="/?w=${n}" style="text-decoration:none;color:inherit">
+          <div class="zen-stone-frame">
+            <span class="zen-num">${['壱', '弐', '参', '四', '五', '六', '七', '八', '九', '十'][n % 10]}</span>
+            <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+          </div>
+          <div class="zen-stone-meta">
+            <b>${esc(k.title || 'Untitled Form')}</b>
+            <span class="zen-glaze">${esc(k.category || 'CERAMICS')}</span>
+            ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+          </div>
+        </a>`).join('') || emptyMsg}</section>
+      <footer class="zen-foot wrap">
+        <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+        <span>Zen Wabi-Sabi · Built with Portfoolio</span>
+      </footer>
+    </div>`
     : vtpl === 'catalog'
     ? `<header class="wrap gal-catalog-head">
       <p class="cat-kicker">— CATALOGUE —</p>
@@ -632,7 +691,10 @@ function pageGallery(p, wIdx) {
       })();
     </script></body></html>`;
   }
-  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
+  if (['atelier', 'cinema', 'arch', 'zine', 'zen'].includes(vtpl) && !w) {
+    return `<!DOCTYPE html><html lang="en">${head(p, vtpl)}<body class="portfolio-view" data-template="${vtpl}">${body}<script>(function(){if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
+  }
+  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion','atelier','cinema','arch','zine','zen'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
 }
 function pageModerncv(p) {
   const name = esc(p.name || 'Developer');
@@ -5917,7 +5979,7 @@ function pageCloud(p) {
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
-  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'];
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
   if (visualOnly.includes(tpl)) {
     tpl = 'midnight';
   }
@@ -6386,9 +6448,11 @@ export default {
       // storage empty / deleted → fall through to builder theme instead of 404
     }
     // visual track renders the gallery, not the code portfolio
-    const isVisualTrack = p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom'].includes(String(p.template || '').toLowerCase()));
+    const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
+    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
+    const isVisualTrack = (qTpl && visualThemes.includes(qTpl.toLowerCase())) || p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && visualThemes.includes(String(p.template || '').toLowerCase()));
     if (isVisualTrack) {
-      const html = pageGallery(p, url.searchParams.get('w'));
+      const html = pageGallery(p, url.searchParams.get('w'), url);
       return new Response(html, {
         headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
       });

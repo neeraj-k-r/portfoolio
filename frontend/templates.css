@@ -8433,30 +8433,32 @@ body[data-template="hacker"] img { max-width: 100%; }
 
 /* 1. ATELIER (Haute Couture Minimal Editorial) */
 body[data-template="atelier"] { background: #0b0c10; color: #f4f4f0; font-family: 'Fraunces', Georgia, serif; }
-body[data-template="atelier"] .bg-fx, body[data-template="atelier"] .grid-overlay { display: none; }
-.gal-atelier-head { padding: 140px 0 36px; text-align: center; }
+body[data-template="atelier"] .bg-fx, body[data-template="atelier"] .grid-overlay, body[data-template="atelier"] .blob { display: none; }
+.gal-atelier-head { padding: 40px 0 36px; text-align: center; }
 .atelier-kicker { font-size: 11px; font-weight: 700; letter-spacing: .42em; color: #c5a059; text-transform: uppercase; margin: 0 0 14px; }
 .atelier-title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(38px, 6vw, 64px); font-weight: 500; color: #fdfdfc; margin: 0; line-height: 1.1; letter-spacing: -0.01em; }
 .atelier-sub { font-family: 'Fraunces', serif; font-style: italic; font-size: 18px; color: #a39f93; margin: 10px 0 0; }
 .atelier-portrait-wrap { margin: 24px auto 16px; }
 .atelier-portrait { width: 140px; height: 175px; object-fit: cover; border-radius: 50% / 60%; border: 1px solid rgba(197, 160, 89, 0.6); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(197, 160, 89, 0.15); display: block; margin: 0 auto; }
 .atelier-fallback { display: grid!important; place-items: center; font-size: 54px; font-style: normal; color: #c5a059; background: #181920; }
-.atelier-meta { font-size: 11.5px; letter-spacing: .24em; text-transform: uppercase; color: #8c887b; margin: 16px 0 0; }
-.atelier-collection { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; padding: 20px 0 100px; }
+.gal-atelier-head .atelier-meta { font-size: 11.5px; letter-spacing: .24em; text-transform: uppercase; color: #8c887b; margin: 16px 0 0; }
+.atelier-collection { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; padding: 20px 0 100px; }
 .atelier-card { margin: 0; cursor: pointer; text-decoration: none; color: inherit; display: block; }
+@media (min-width: 900px) { .atelier-card.atelier-wide { grid-column: span 2; } }
 .atelier-frame { position: relative; overflow: hidden; background: #13141a; border: 1px solid rgba(197, 160, 89, 0.25); box-shadow: 0 20px 48px rgba(0,0,0,0.7); transition: transform .35s ease, border-color .35s ease, box-shadow .35s ease; }
 .atelier-card:hover .atelier-frame { transform: translateY(-6px); border-color: rgba(197, 160, 89, 0.6); box-shadow: 0 28px 64px rgba(0,0,0,0.85), 0 0 35px rgba(197, 160, 89, 0.2); }
 .atelier-frame img { width: 100%; height: 440px; object-fit: cover; display: block; transition: transform .6s var(--ease); }
 .atelier-card:hover .atelier-frame img { transform: scale(1.03); }
 .atelier-numeral { position: absolute; top: 14px; left: 18px; font-family: 'Fraunces', serif; font-size: 22px; font-style: italic; color: #c5a059; text-shadow: 0 2px 10px rgba(0,0,0,0.9); z-index: 2; }
-.atelier-meta { padding: 18px 4px 0; }
+.atelier-card .atelier-meta { padding: 18px 4px 0; margin: 0; }
 .atelier-cat { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: #c5a059; margin-bottom: 4px; }
 .atelier-meta b { display: block; font-family: 'Fraunces', serif; font-size: 22px; font-weight: 500; color: #fdfdfc; }
 .atelier-meta p { font-size: 14px; color: #8c887b; margin-top: 6px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.5; }
 .atelier-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(197, 160, 89, 0.15); }
-.atelier-logo { font-size: 16px; letter-spacing: .12em; text-transform: uppercase; color: #fdfdfc; font-weight: 600; }
+.atelier-logo { font-size: 16px; letter-spacing: .12em; text-transform: uppercase; color: #fdfdfc; font-weight: 600; text-decoration: none; }
 .atelier-mark { color: #c5a059; margin-right: 6px; }
-.atelier-nav-links a { color: #a39f93; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-left: 20px; transition: color .2s ease; }
+.atelier-nav-links { display: flex; align-items: center; }
+.atelier-nav-links a { color: #a39f93; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; margin-left: 20px; text-decoration: none; transition: color .2s ease; }
 .atelier-nav-links a:hover { color: #c5a059; }
 .btn-atelier-inquire { padding: 6px 16px; border: 1px solid #c5a059; color: #c5a059!important; border-radius: 20px; }
 .btn-atelier-inquire:hover { background: #c5a059; color: #0b0c10!important; }
@@ -8464,8 +8466,8 @@ body[data-template="atelier"] .bg-fx, body[data-template="atelier"] .grid-overla
 
 /* 2. CINEMA (Widescreen Director & Film Still Showcase) */
 body[data-template="cinema"] { background: #050507; color: #f0f0f5; font-family: 'Space Grotesk', -apple-system, sans-serif; }
-body[data-template="cinema"] .bg-fx, body[data-template="cinema"] .grid-overlay { display: none; }
-.gal-cinema-head { padding: 140px 0 36px; text-align: center; }
+body[data-template="cinema"] .bg-fx, body[data-template="cinema"] .grid-overlay, body[data-template="cinema"] .blob { display: none; }
+.gal-cinema-head { padding: 40px 0 36px; text-align: center; }
 .cinema-rec-chip { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 20px; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: #ef4444; letter-spacing: .08em; }
 .cinema-rec-dot { width: 8px; height: 8px; border-radius: 50%; background: #ef4444; box-shadow: 0 0 10px #ef4444; animation: cinemaPulse 1.4s ease-in-out infinite; }
 @keyframes cinemaPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.85); } }
@@ -8474,7 +8476,7 @@ body[data-template="cinema"] .bg-fx, body[data-template="cinema"] .grid-overlay 
 .cinema-sub { font-size: 17px; color: #9ca3af; margin: 8px 0 0; }
 .cinema-avatar { width: 110px; height: 110px; object-fit: cover; border-radius: 50%; border: 3px solid rgba(255,255,255,0.2); box-shadow: 0 16px 40px rgba(0,0,0,0.8); margin: 20px auto 10px; display: block; }
 .cinema-meta { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; color: #6b7280; margin: 14px 0 0; }
-.cinema-slate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 34px; padding: 20px 0 100px; }
+.cinema-slate-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 34px; padding: 20px 0 100px; }
 .cinema-card { margin: 0; cursor: pointer; text-decoration: none; color: inherit; display: block; }
 .cinema-frame { position: relative; overflow: hidden; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 20px 50px rgba(0,0,0,0.8); aspect-ratio: 2.39 / 1; background: #000; transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
 .cinema-card:hover .cinema-frame { transform: translateY(-5px); border-color: rgba(245, 158, 11, 0.6); box-shadow: 0 24px 60px rgba(0,0,0,0.9), 0 0 35px rgba(245, 158, 11, 0.2); }
@@ -8483,24 +8485,24 @@ body[data-template="cinema"] .bg-fx, body[data-template="cinema"] .grid-overlay 
 .letterbox-bar { position: absolute; left: 0; right: 0; height: 8px; background: #000; z-index: 3; }
 .bar-top { top: 0; }
 .bar-bottom { bottom: 0; }
-.cinema-hud-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 4; padding: 12px 14px; display: flex; justify-content: space-between; align-content: space-between; flex-wrap: wrap; }
-.hud-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.6); padding: 2px 7px; border-radius: 4px; backdrop-filter: blur(4px); letter-spacing: .08em; }
-.hud-tl { margin-right: auto; }
-.hud-tr { margin-left: auto; }
-.hud-bl { margin-right: auto; margin-top: auto; }
-.hud-br { margin-left: auto; margin-top: auto; }
+.cinema-hud-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.hud-tag { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.8); background: rgba(0,0,0,0.6); padding: 2px 7px; border-radius: 4px; backdrop-filter: blur(4px); letter-spacing: .08em; white-space: nowrap; }
+.hud-tl { top: 12px; left: 14px; }
+.hud-tr { top: 12px; right: 14px; }
+.hud-bl { bottom: 12px; left: 14px; }
+.hud-br { bottom: 12px; right: 14px; }
 .cinema-card-info { padding: 14px 4px 0; }
 .cinema-card-info b { display: block; font-size: 18px; font-weight: 700; color: #fff; letter-spacing: .02em; }
 .cinema-card-info p { font-size: 13.5px; color: #9ca3af; margin-top: 4px; line-height: 1.4; }
 .cinema-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
-.cinema-logo { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .15em; color: #fff; }
+.cinema-logo { font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: .15em; color: #fff; text-decoration: none; }
 .cinema-tc { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #f59e0b; }
 .cinema-foot { display: flex; justify-content: space-between; padding: 40px 0; border-top: 1px solid rgba(255,255,255,0.1); color: #6b7280; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; }
 
 /* 3. ARCH (Architectural Blueprint & Swiss Minimal) */
 body[data-template="arch"] { background: #f7f6f2; color: #18181b; font-family: 'Space Grotesk', sans-serif; background-image: linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 36px 36px; }
-body[data-template="arch"] .bg-fx, body[data-template="arch"] .grid-overlay { display: none; }
-.gal-arch-head { padding: 140px 0 36px; text-align: center; position: relative; border: 1px solid #18181b; margin-top: 30px; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); }
+body[data-template="arch"] .bg-fx, body[data-template="arch"] .grid-overlay, body[data-template="arch"] .blob { display: none; }
+.gal-arch-head { padding: 40px 24px 36px; text-align: center; position: relative; border: 1px solid #18181b; margin-top: 24px; background: rgba(255,255,255,0.85); backdrop-filter: blur(8px); }
 .arch-ch { position: absolute; font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 700; color: #18181b; }
 .ch-tl { top: 6px; left: 8px; }
 .ch-tr { top: 6px; right: 8px; }
@@ -8510,7 +8512,7 @@ body[data-template="arch"] .bg-fx, body[data-template="arch"] .grid-overlay { di
 .arch-title { font-family: 'Space Grotesk', sans-serif; font-size: clamp(36px, 5.5vw, 60px); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; color: #09090b; margin: 0; }
 .arch-sub { font-size: 17px; color: #52525b; margin: 8px 0 0; }
 .arch-specs { display: flex; justify-content: center; gap: 24px; font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #71717a; margin-top: 20px; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.1); flex-wrap: wrap; }
-.arch-draft-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 32px; padding: 40px 0 100px; }
+.arch-draft-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; padding: 40px 0 100px; }
 .arch-plate { margin: 0; cursor: pointer; text-decoration: none; color: inherit; display: block; border: 1px solid #18181b; background: #ffffff; padding: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); transition: transform .25s ease, box-shadow .25s ease; }
 .arch-plate:hover { transform: translateY(-4px); box-shadow: 0 20px 45px rgba(0,0,0,0.12); }
 .arch-plate-head { display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px; border-bottom: 1px solid #e4e4e7; margin-bottom: 12px; }
@@ -8523,14 +8525,14 @@ body[data-template="arch"] .bg-fx, body[data-template="arch"] .grid-overlay { di
 .arch-caption b { display: block; font-size: 17px; font-weight: 700; color: #09090b; }
 .arch-caption p { font-size: 13.5px; color: #52525b; margin-top: 4px; line-height: 1.45; }
 .arch-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid #18181b; font-family: 'JetBrains Mono', monospace; font-size: 12px; }
-.arch-logo { font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: #09090b; }
+.arch-logo { font-size: 15px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; color: #09090b; text-decoration: none; }
 .arch-scale { color: #2563eb; }
 .arch-foot { display: flex; justify-content: space-between; padding: 30px 0; border-top: 1px solid #18181b; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #71717a; text-transform: uppercase; }
 
 /* 4. ZINE (Risograph Indie Art Zine & Pop Poster) */
 body[data-template="zine"] { background: #fffcf2; color: #111111; font-family: 'Space Grotesk', -apple-system, sans-serif; }
-body[data-template="zine"] .bg-fx, body[data-template="zine"] .grid-overlay { display: none; }
-.gal-zine-head { padding: 140px 0 36px; text-align: center; }
+body[data-template="zine"] .bg-fx, body[data-template="zine"] .grid-overlay, body[data-template="zine"] .blob { display: none; }
+.gal-zine-head { padding: 40px 0 36px; text-align: center; }
 .zine-stickers { display: flex; justify-content: center; gap: 12px; margin-bottom: 16px; }
 .zine-pill { background: #ff2d78; color: #fff; font-weight: 900; font-size: 11px; letter-spacing: .08em; padding: 5px 12px; border-radius: 4px; border: 2px solid #111; box-shadow: 3px 3px 0px #111; transform: rotate(-2.5deg); display: inline-block; }
 .zine-stamp-chip { background: #00e5ff; color: #111; font-weight: 900; font-size: 11px; letter-spacing: .08em; padding: 5px 12px; border-radius: 4px; border: 2px solid #111; box-shadow: 3px 3px 0px #111; transform: rotate(2deg); display: inline-block; }
@@ -8550,7 +8552,7 @@ body[data-template="zine"] .bg-fx, body[data-template="zine"] .grid-overlay { di
 .zine-cap p { font-size: 13px; color: #444; margin-top: 4px; line-height: 1.4; }
 .zine-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 3px solid #111; }
 .zine-badge { font-weight: 900; font-size: 12px; background: #111; color: #fff; padding: 4px 10px; border-radius: 3px; }
-.zine-logo { font-size: 18px; font-weight: 900; text-transform: uppercase; color: #111; letter-spacing: .05em; }
+.zine-logo { font-size: 18px; font-weight: 900; text-transform: uppercase; color: #111; letter-spacing: .05em; text-decoration: none; }
 .zine-issue { font-weight: 900; font-size: 12px; color: #ff2d78; }
 .zine-foot { display: flex; justify-content: space-between; padding: 30px 0; border-top: 3px solid #111; font-weight: 700; font-size: 12px; }
 @media(max-width:900px){.zine-board{columns:2}}
@@ -8558,8 +8560,8 @@ body[data-template="zine"] .bg-fx, body[data-template="zine"] .grid-overlay { di
 
 /* 5. ZEN (Japanese Wabi-Sabi & Earth Ceramic Studio) */
 body[data-template="zen"] { background: #f2ece4; color: #2c2825; font-family: 'Fraunces', Georgia, serif; }
-body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay { display: none; }
-.gal-zen-head { padding: 140px 0 36px; text-align: center; }
+body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[data-template="zen"] .blob { display: none; }
+.gal-zen-head { padding: 40px 0 36px; text-align: center; }
 .zen-enso-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
 .zen-enso-ring { position: absolute; inset: -8px; border-radius: 50%; border: 3px solid rgba(168, 93, 66, 0.45); box-shadow: 0 0 25px rgba(168, 93, 66, 0.15); animation: zenBreathe 6s ease-in-out infinite; }
 @keyframes zenBreathe { 0%, 100% { transform: scale(1); opacity: .7; } 50% { transform: scale(1.04); opacity: 1; } }
@@ -8568,10 +8570,11 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay { disp
 .zen-title { font-family: 'Fraunces', Georgia, serif; font-size: clamp(38px, 5.5vw, 58px); font-weight: 400; color: #2c2825; margin: 0; letter-spacing: .02em; }
 .zen-sub { font-style: italic; font-size: 18px; color: #6e655c; margin: 8px 0 0; }
 .zen-meta { font-size: 11.5px; letter-spacing: .2em; text-transform: uppercase; color: #a85d42; margin: 14px 0 0; }
-.zen-stones { display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 36px; padding: 20px 0 100px; }
+.zen-stones { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 36px; padding: 20px 0 100px; }
 .zen-card { margin: 0; cursor: pointer; text-decoration: none; color: inherit; display: block; border-radius: 28px 10px 28px 10px; background: #faf7f2; border: 1px solid rgba(168, 93, 66, 0.2); box-shadow: 0 16px 40px rgba(60, 45, 35, 0.08); transition: transform .35s ease, box-shadow .35s ease; padding: 16px; }
 .zen-stagger { transform: translateY(20px); }
 .zen-card:hover { transform: translateY(-6px); box-shadow: 0 24px 55px rgba(60, 45, 35, 0.16); }
+.zen-card.zen-stagger:hover { transform: translateY(14px); }
 .zen-stone-frame { position: relative; overflow: hidden; border-radius: 20px 6px 20px 6px; }
 .zen-stone-frame img { width: 100%; height: 320px; object-fit: cover; display: block; }
 .zen-num { position: absolute; top: 12px; left: 14px; font-family: 'Fraunces', serif; font-size: 18px; color: #a85d42; background: rgba(255,255,255,0.85); padding: 2px 8px; border-radius: 4px; backdrop-filter: blur(4px); }
@@ -8581,9 +8584,23 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay { disp
 .zen-stone-meta p { font-size: 13.5px; color: #6e655c; margin-top: 6px; line-height: 1.45; font-family: -apple-system, sans-serif; }
 .zen-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid rgba(168, 93, 66, 0.2); }
 .zen-kanji { font-size: 14px; letter-spacing: .2em; color: #a85d42; font-family: serif; }
-.zen-logo { font-size: 16px; letter-spacing: .08em; text-transform: uppercase; color: #2c2825; font-weight: 500; }
+.zen-logo { font-size: 16px; letter-spacing: .08em; text-transform: uppercase; color: #2c2825; font-weight: 500; text-decoration: none; }
 .zen-season { font-size: 11px; letter-spacing: .15em; text-transform: uppercase; color: #8c8277; }
 .zen-foot { display: flex; justify-content: space-between; padding: 30px 0; border-top: 1px solid rgba(168, 93, 66, 0.2); font-size: 12px; color: #8c8277; letter-spacing: .08em; text-transform: uppercase; }
+
+/* Responsive adjustments for mobile devices */
+@media (max-width: 640px) {
+  .atelier-collection { grid-template-columns: 1fr; gap: 24px; padding-bottom: 60px; }
+  .atelier-card.atelier-wide { grid-column: span 1; }
+  .atelier-frame img { height: 320px; }
+  .cinema-slate-grid { grid-template-columns: 1fr; gap: 20px; padding-bottom: 60px; }
+  .arch-draft-grid { grid-template-columns: 1fr; gap: 20px; padding-bottom: 60px; }
+  .arch-specs { gap: 12px; font-size: 10px; }
+  .zen-stones { grid-template-columns: 1fr; gap: 24px; padding-bottom: 60px; }
+  .zen-stagger { transform: none; }
+  .zen-card.zen-stagger:hover { transform: translateY(-6px); }
+  .atelier-nav, .cinema-nav, .arch-nav, .zine-nav, .zen-nav { flex-wrap: wrap; gap: 10px; }
+}
 
 /* MINI BROWSER MOCKUP THUMBNAILS (.lx-tp) */
 .lx-tp-atelier{background:#0b0c10;border-color:rgba(197,160,89,0.3)}

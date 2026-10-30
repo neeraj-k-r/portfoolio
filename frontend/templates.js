@@ -7110,8 +7110,93 @@ function initCloudRuntime(p) {
   }
 }
 
+function renderVisualGallery(p, tplName) {
+  normTpl(p);
+  const vtpl = tplName || String(p.template || 'gallery').toLowerCase();
+  document.body.dataset.template = vtpl;
+  document.title = `${p.name} — ${vtpl.charAt(0).toUpperCase() + vtpl.slice(1)} Portfolio | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const face = avatar ? `<img class="gal-avatar" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : `<div class="gal-avatar-fallback">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`;
+  const countLabel = `${works.length} work${works.length === 1 ? '' : 's'}`;
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen };
+  let headHtml = '', gridHtml = '';
+  if (vtpl === 'museum') {
+    headHtml = `<header class="wrap gal-museum-head">
+      ${avatar ? `<img class="museum-portrait" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : `<div class="museum-portrait museum-portrait-fallback">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`}
+      <p class="museum-kicker">— EXHIBITION —</p>
+      <h1>${tplEsc(p.name)}</h1>
+      <p class="museum-sub">${tplEsc(p.title || '')}</p>
+      <p class="museum-meta">${tplEsc(p.location || '')} · ${countLabel}</p>
+    </header>`;
+    gridHtml = `<section class="wrap museum-hang">${works.map((w, i) => `
+      <figure class="museum-piece" data-gal="${i}">
+        <div class="museum-frame"><img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || '')}" loading="lazy"></div>
+        <figcaption class="museum-plaque">
+          <span class="museum-no">${String(i + 1).padStart(2, '0')}</span>
+          <div class="museum-plaque-text"><b>${tplEsc(w.title || 'Untitled')}</b>${w.category ? `<small>${tplEsc(w.category)}</small>` : ''}</div>
+        </figcaption>
+      </figure>`).join('')}</section>`;
+  } else if (vtpl === 'bloom') {
+    headHtml = `<header class="wrap gal-bloom-head">
+      <div class="bloom-orb"></div>
+      ${avatar ? `<img class="bloom-portrait" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : `<div class="bloom-portrait bloom-portrait-fallback">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`}
+      <h1>${tplEsc(p.name)}</h1>
+      <p class="bloom-sub">${tplEsc(p.title || '')}</p>
+      <p class="bloom-meta">${tplEsc(p.location || '')} · ${countLabel}</p>
+    </header>`;
+    gridHtml = `<section class="wrap bloom-masonry">${works.map((w, i) => `
+      <figure class="bloom-tile ${i % 5 === 0 ? 'tall' : ''}" data-gal="${i}">
+        <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || '')}" loading="lazy">
+        <figcaption><b>${tplEsc(w.title || 'Untitled')}</b>${w.category ? `<small>${tplEsc(w.category)}</small>` : ''}</figcaption>
+      </figure>`).join('')}</section>`;
+  } else if (vtpl === 'catalog') {
+    headHtml = `<header class="wrap gal-catalog-head">
+      <p class="cat-kicker">— CATALOGUE —</p>
+      <h1>${tplEsc(p.name)}</h1>
+      <p class="cat-sub">${tplEsc(p.title || '')}</p>
+      <p class="cat-meta">${tplEsc(p.location || '')} · ${countLabel}</p>
+      ${avatar ? `<img class="cat-portrait" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : ''}
+    </header>`;
+    gridHtml = `<section class="wrap cat-index">${works.map((w, i) => `
+      <article class="cat-row" data-gal="${i}">
+        <span class="cat-no">${String(i + 1).padStart(2, '0')}</span>
+        <div class="cat-thumb"><img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || '')}" loading="lazy"></div>
+        <div class="cat-text"><b>${tplEsc(w.title || 'Untitled')}</b>${w.category ? `<small>${tplEsc(w.category)}</small>` : ''}${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}</div>
+        <span class="cat-arrow">→</span>
+      </article>`).join('')}</section>`;
+  } else {
+    headHtml = `<header class="wrap" style="padding:60px 0 10px;text-align:center">
+      ${avatar ? `<img src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}" style="width:110px;height:110px;border-radius:50%;object-fit:cover;margin:0 auto 14px;display:block;border:2px solid rgba(255,255,255,.2)">` : `<div style="width:110px;height:110px;border-radius:50%;margin:0 auto 14px;display:grid;place-items:center;font-size:44px;background:linear-gradient(135deg,#f472b6,#8b5cf6,#22d3ee);color:#fff">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`}
+      <h1 style="font-size:clamp(32px,5vw,52px);margin:0 0 8px">${tplEsc(p.name)}</h1>
+      <p style="color:var(--muted);font-size:16px;margin:0">${tplEsc(p.title || '')}</p>
+      <p style="color:var(--muted);font-size:13px;margin-top:6px">${tplEsc(p.location || '')} · ${countLabel}</p>
+    </header>`;
+    gridHtml = `<section class="wrap" style="padding:20px 0 60px">
+      <div class="works-grid" style="margin-top:18px">${works.map((w, i) => `
+        <div class="work-card" data-gal="${i}" style="cursor:pointer">
+          <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || '')}" loading="lazy">
+          <div class="work-meta" style="padding:12px 14px"><b>${tplEsc(w.title || 'Untitled')}</b>${w.category ? `<small style="color:var(--muted);display:block;margin-top:3px">${tplEsc(w.category)}</small>` : ''}</div>
+        </div>`).join('')}</div>
+    </section>`;
+  }
+
+  const navHtml = `
+  <nav class="wrap" style="display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
+    <a class="logo" href="/" style="text-decoration:none;font-weight:700;color:inherit;letter-spacing:.05em">◈ ${tplEsc(p.name)}</a>
+    <div style="display:flex;gap:12px;align-items:center">
+      <a href="/" style="font-size:13px;color:var(--muted);text-decoration:none">Make yours</a>
+      ${p.email ? `<a href="mailto:${tplEsc(p.email)}" style="font-size:13px;padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.1);color:inherit;text-decoration:none">Contact</a>` : ''}
+    </div>
+  </nav>`;
+  const footHtml = `<footer class="wrap" style="padding:30px 0;text-align:center;font-size:12px;color:var(--muted);border-top:1px solid rgba(255,255,255,0.08)">© ${new Date().getFullYear()} ${tplEsc(p.name)} · Built with portfoolio.me</footer>`;
+
+  app.innerHTML = navHtml + headHtml + gridHtml + footHtml;
+  window.scrollTo(0, 0);
+}
+
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen };
 window.PortfoolioTemplateList = TEMPLATES;
 
 

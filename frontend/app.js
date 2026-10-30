@@ -230,12 +230,48 @@ function esc(s) {
 }
 // ---- Visual track: Behance-style gallery (no resume, no code) ----
 function galleryWorks(p) {
-  return Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
+  if (Array.isArray(p.works) && p.works.length > 0) {
+    const list = p.works.filter(w => w && w.imageUrl);
+    if (list.length > 0) return list;
+  }
+  const isPreview = (typeof location !== 'undefined' && (location.search.includes('preview=1') || location.search.includes('t=') || location.search.includes('template='))) || p.username === 'demo';
+  const sampleImages = [
+    'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=900&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=900&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=900&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&auto=format&fit=crop'
+  ];
+  if (isPreview || !p.works || p.works.length === 0) {
+    if (Array.isArray(p.projects) && p.projects.length > 0) {
+      return p.projects.map((pr, i) => ({
+        title: pr.title || pr.name || 'Untitled Piece',
+        category: (pr.technologies || pr.tags || ['Design'])[0],
+        desc: pr.desc || 'Exploration of form, structure and visual narrative.',
+        imageUrl: sampleImages[i % sampleImages.length],
+        year: 2026
+      }));
+    }
+    if (isPreview) {
+      return [
+        { title: 'Harmonic Form I', category: 'Editorial', desc: 'Sculptural study in light and silhouette.', imageUrl: sampleImages[0], year: 2026 },
+        { title: 'Tectonic Cantilever', category: 'Architecture', desc: 'Cantilever concrete structure.', imageUrl: sampleImages[1], year: 2026 },
+        { title: 'Anamorphic Frame', category: 'Cinematography', desc: 'Widescreen atmospheric night study.', imageUrl: sampleImages[2], year: 2026 },
+        { title: 'Halftone Print', category: 'Risograph', desc: 'Two-color indie print on recycled paper.', imageUrl: sampleImages[3], year: 2026 },
+        { title: 'Woodfired Vessel', category: 'Ceramics', desc: 'Tactile wabi-sabi unglazed stoneware.', imageUrl: sampleImages[4], year: 2026 },
+        { title: 'Minimal Lookbook', category: 'Editorial', desc: 'Natural light and sculptural silhouettes.', imageUrl: sampleImages[5], year: 2026 }
+      ];
+    }
+  }
+  return [];
 }
 function renderGallery(p) {
   p = normLocalProfile(p) || p;
-  const vtpl = String(p.template || 'gallery').toLowerCase();
-  document.body.dataset.template = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(vtpl) ? vtpl : 'gallery';
+  const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
+  const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(activeTpl) ? activeTpl : 'gallery';
+  document.body.dataset.template = vtpl;
   document.title = `${p.name} — visual portfolio | portfoolio.me`;
   const app = document.getElementById('app');
   const works = galleryWorks(p);
@@ -504,8 +540,88 @@ function renderGallery(p) {
         </div>`).join('') || emptyMsg}</div>
     </section>`;
   }
-  app.innerHTML = navHtml + headHtml + gridHtml + footHtml;
-  app.querySelectorAll('[data-gal]').forEach(c => c.onclick = () => {
+  if (vtpl === 'atelier') {
+    app.innerHTML = `
+    <div class="atelier-page">
+      <nav class="atelier-nav wrap">
+        <a class="atelier-logo" href="/"><span class="atelier-mark">◆</span> ${esc(p.name)}</a>
+        <div class="atelier-nav-links">
+          <a href="#collection">Collection</a>
+          ${p.email ? `<a class="btn-atelier-inquire" href="mailto:${esc(p.email)}">Inquire</a>` : ''}
+        </div>
+      </nav>
+      ${headHtml}
+      ${gridHtml}
+      <footer class="atelier-foot wrap">
+        <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+        <span>Atelier Portfolio · Built with Portfoolio</span>
+      </footer>
+    </div>`;
+  } else if (vtpl === 'cinema') {
+    app.innerHTML = `
+    <div class="cinema-page">
+      <nav class="cinema-nav wrap">
+        <div class="cinema-rec-chip"><span class="cinema-rec-dot"></span> REC 24.00 FPS</div>
+        <a class="cinema-logo" href="/">${esc(p.name)}</a>
+        <div class="cinema-tc">TC 01:24:08:12</div>
+      </nav>
+      ${headHtml}
+      ${gridHtml}
+      <footer class="cinema-foot wrap">
+        <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+        <span>Cinema Portfolio · Built with Portfoolio</span>
+      </footer>
+    </div>`;
+  } else if (vtpl === 'arch') {
+    app.innerHTML = `
+    <div class="arch-page">
+      <nav class="arch-nav wrap">
+        <span class="arch-ref">DWG.REF // 2026</span>
+        <a class="arch-logo" href="/">${esc(p.name)}</a>
+        <span class="arch-scale">SCALE 1:50</span>
+      </nav>
+      ${headHtml}
+      ${gridHtml}
+      <footer class="arch-foot wrap">
+        <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+        <span>Arch Blueprint · Built with Portfoolio</span>
+      </footer>
+    </div>`;
+  } else if (vtpl === 'zine') {
+    app.innerHTML = `
+    <div class="zine-page">
+      <nav class="zine-nav wrap">
+        <span class="zine-badge">★ INDIE ZINE</span>
+        <a class="zine-logo" href="/">${esc(p.name)}</a>
+        <span class="zine-issue">ISSUE 04</span>
+      </nav>
+      ${headHtml}
+      ${gridHtml}
+      <footer class="zine-foot wrap">
+        <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+        <span>Risograph Zine · Built with Portfoolio</span>
+      </footer>
+    </div>`;
+  } else if (vtpl === 'zen') {
+    app.innerHTML = `
+    <div class="zen-page">
+      <nav class="zen-nav wrap">
+        <span class="zen-kanji">無為自然</span>
+        <a class="zen-logo" href="/">${esc(p.name)}</a>
+        <span class="zen-season">EARTH &amp; STONE</span>
+      </nav>
+      ${headHtml}
+      ${gridHtml}
+      <footer class="zen-foot wrap">
+        <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+        <span>Zen Wabi-Sabi · Built with Portfoolio</span>
+      </footer>
+    </div>`;
+  } else {
+    app.innerHTML = navHtml + headHtml + gridHtml + footHtml;
+  }
+  app.querySelectorAll('[data-gal]').forEach(c => c.onclick = (e) => {
+    e.preventDefault();
     history.pushState({ view: 'work', username: p.username, idx: +c.dataset.gal }, '', `${location.origin}/?u=${encodeURIComponent(p.username)}`);
     renderWorkDetail(p, +c.dataset.gal);
   });
@@ -520,18 +636,22 @@ function renderWorkDetail(p, idx) {
   const back = portfolioPathURL(p.username);
   app.innerHTML = `
   <nav><a class="logo" href="/"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small>${esc(p.username)}.portfoolio.me</small></span></a>
-  <a class="btn btn-primary btn-sm" href="${back}">← Back to ${esc(p.name)}'s portfolio</a></nav>
+  <a class="btn btn-primary btn-sm" id="galTopBack" href="${back}">← Back to ${esc(p.name)}'s portfolio</a></nav>
   <section class="wrap" style="padding:140px 0 20px;max-width:900px">
     ${w.category ? `<span class="badge">✦ ${esc(w.category)}</span>` : ''}
     <h1 style="font-size:clamp(32px,5vw,52px);margin:10px 0">${esc(w.title || 'Untitled')}</h1>
     ${w.desc ? `<p style="color:var(--muted);font-size:16px">${esc(w.desc)}</p>` : ''}
     <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" style="width:100%;border-radius:18px;margin-top:18px;border:1px solid var(--stroke);box-shadow:0 24px 60px rgba(0,0,0,.35);transition:box-shadow .35s var(--ease)">
     <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
-      <button class="btn btn-ghost btn-sm" onclick="location.href='${back}'">← Back to gallery</button>
+      <button class="btn btn-ghost btn-sm" id="galBackBtn">← Back to gallery</button>
       ${idx > 0 ? `<button class="btn btn-ghost btn-sm" id="galPrev">← Prev</button>` : ''}
       ${idx < works.length - 1 ? `<button class="btn btn-ghost btn-sm" id="galNext">Next →</button>` : ''}
     </div>
   </section>`;
+  const topBack = document.getElementById('galTopBack');
+  if (topBack) topBack.onclick = (e) => { e.preventDefault(); if (window.history.length > 1) window.history.back(); else renderGallery(p); };
+  const bBtn = document.getElementById('galBackBtn');
+  if (bBtn) bBtn.onclick = (e) => { e.preventDefault(); if (window.history.length > 1) window.history.back(); else renderGallery(p); };
   const pv = document.getElementById('galPrev'), nx = document.getElementById('galNext');
   if (pv) pv.onclick = () => renderWorkDetail(p, idx - 1);
   if (nx) nx.onclick = () => renderWorkDetail(p, idx + 1);
@@ -1338,7 +1458,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   <base href="${baseUrl}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -1529,11 +1649,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           el.classList.add('in');
         }
       });
-      // Visual theme elements (work cards, museum pieces, catalog rows, bloom tiles)
+      // Visual theme elements (work cards, museum pieces, catalog rows, bloom tiles, atelier cards, cinema cards, arch plates, zine tiles, zen cards)
       const template = document.body.dataset.template;
       const isVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(template);
       if (isVisual) {
-        document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile').forEach(el => {
+        document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card').forEach(el => {
           io.observe(el);
           const r = el.getBoundingClientRect();
           if (r.top < window.innerHeight && r.bottom > 0) {
@@ -1650,7 +1770,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   trackProfileView(requested);
   if (resumeUser) { renderResumePage(p); return; }
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
-  const isVisualTrack = p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(String(p.template || '').toLowerCase()));
+  const qTpl = (new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t') || '').toLowerCase();
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
+  const isVisualTrack = visualThemes.includes(qTpl) || p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && visualThemes.includes(String(p.template || '').toLowerCase()));
   if (isVisualTrack) { renderGallery(p); initMotionTheme(); return; }
   const skill = new URLSearchParams(location.search).get('skill');
   if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
@@ -1659,10 +1781,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Browser Back from a work detail returns to the gallery
   window.addEventListener('popstate', async (e) => {
     const s = e.state || {};
-    if (s.view === 'work' && requested) {
+    if (requested) {
       const pp = await loadProfile(requested);
       if (!pp) return;
-      const isPpVisual = pp.track === 'visual' || (pp.track !== 'tech' && Array.isArray(pp.works) && pp.works.length > 0 && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(String(pp.template || '').toLowerCase()));
+      const qTpl = (new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t') || '').toLowerCase();
+      const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
+      const isPpVisual = visualThemes.includes(qTpl) || pp.track === 'visual' || (pp.track !== 'tech' && Array.isArray(pp.works) && pp.works.length > 0 && visualThemes.includes(String(pp.template || '').toLowerCase()));
+      if (s.view === 'work' && typeof s.idx === 'number') {
+        renderWorkDetail(pp, s.idx);
+        return;
+      }
       if (isPpVisual) { renderGallery(pp); return; }
       renderPortfolio(pp);
     }
