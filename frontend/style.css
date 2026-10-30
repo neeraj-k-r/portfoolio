@@ -2739,3 +2739,5 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 .lx-modal-body[data-theme="arch"]{background:#f7f6f2;color:#18181b}
 .lx-modal-body[data-theme="zine"]{background:#fffcf2;color:#111111}
 .lx-modal-body[data-theme="zen"]{background:#f2ece4;color:#2c2825}
+
+body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-overlay { display: none !important; }
