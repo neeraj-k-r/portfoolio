@@ -231,7 +231,7 @@ function head(p, tpl) {
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="/style.css?v=20261026a"><link rel="stylesheet" href="/templates.css?v=20261026a"><link rel="stylesheet" href="/resume.css?v=20261026a">
+<link rel="stylesheet" href="/style.css?v=20261030b"><link rel="stylesheet" href="/templates.css?v=20261030b"><link rel="stylesheet" href="/resume.css?v=20261030b">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>

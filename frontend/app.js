@@ -1462,9 +1462,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261026a">
-  <link rel="stylesheet" href="ui.css?v=20261026a">
-  <link rel="stylesheet" href="templates.css?v=20261026a">
+  <link rel="stylesheet" href="style.css?v=20261030b">
+  <link rel="stylesheet" href="ui.css?v=20261030b">
+  <link rel="stylesheet" href="templates.css?v=20261030b">
   <style>
     html, body { min-height: 100%; margin: 0; padding: 0; }
     nav .logo, header .pf-brand { pointer-events: none; }
@@ -1472,7 +1472,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 </head>
 <body class="portfolio-view${pfThemeClass}" data-template="${theme}">
   <div id="app"></div>
-  <script src="templates.js?v=20261026a"><\/script>
+  <script src="templates.js?v=20261030b"><\/script>
   <script>
     (function() {
       const p = ${JSON.stringify(demoProfile)};
