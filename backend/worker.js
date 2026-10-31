@@ -386,59 +386,6 @@ function pageGallery(p, wIdx, url) {
   const letter = esc((p.name || '?').trim().charAt(0).toUpperCase());
   const countLabel = `${works.length} work${works.length === 1 ? '' : 's'}`;
   const emptyMsg = '<p>No works published yet.</p>';
-  const skillsList = (Array.isArray(p.skills) && p.skills.length > 0)
-    ? p.skills
-    : ['Visual Direction', 'Brand Identity', 'Product UI/UX', 'Design Systems', 'Interactive Prototyping'];
-  const capabilityCards = (() => {
-    if (Array.isArray(p.services) && p.services.length > 0) {
-      return p.services.slice(0, 4).map((s, idx) => ({
-        num: String(idx + 1).padStart(2, '0'),
-        badge: idx === 1 ? 'FEATURED' : 'CORE FOCUS',
-        title: s.title || s.name || `Specialty ${idx + 1}`,
-        desc: s.desc || s.description || 'Specialized creative execution and bespoke craft.',
-        tags: Array.isArray(s.deliverables || s.tags || s.skills) ? (s.deliverables || s.tags || s.skills) : [s.title || 'Creative Strategy']
-      }));
-    }
-    if (Array.isArray(p.projects) && p.projects.length > 0) {
-      return p.projects.slice(0, 4).map((pr, idx) => ({
-        num: String(idx + 1).padStart(2, '0'),
-        badge: idx === 0 ? 'FEATURED' : (pr.category || 'CASE STUDY'),
-        title: pr.title || pr.name || `Case Study ${idx + 1}`,
-        desc: pr.desc || 'High-impact product exploration with refined interaction and architectural rigor.',
-        tags: (pr.technologies || pr.tags || ['Design', 'Development']).slice(0, 3)
-      }));
-    }
-    return [
-      {
-        num: '01',
-        badge: 'UI/UX & PRODUCT',
-        title: 'Product Design & Architecture',
-        desc: 'End-to-end product design: intuitive workflows, interactive design systems, and seamless user experiences.',
-        tags: skillsList.slice(0, 3)
-      },
-      {
-        num: '02',
-        badge: 'BRANDING & IDENTITY',
-        title: 'Brand Systems & Visual Direction',
-        desc: 'Distinctive visual identities, bespoke typography hierarchies, and scalable multi-platform design guidelines.',
-        tags: skillsList.slice(2, 5)
-      },
-      {
-        num: '03',
-        badge: 'INTERACTION & MOTION',
-        title: 'Interactive Design & Prototyping',
-        desc: 'High-fidelity prototypes, micro-interactions, and motion design that breathe life into digital interfaces.',
-        tags: skillsList.slice(1, 4)
-      },
-      {
-        num: '04',
-        badge: 'CREATIVE STRATEGY',
-        title: 'Visual Strategy & Case Execution',
-        desc: 'Translating complex ideas into compelling visual narratives, presentation decks, and impactful deliverables.',
-        tags: skillsList.slice(0, 4)
-      }
-    ];
-  })();
   const body = w
     ? `<section class="wrap" style="padding:140px 0 20px;max-width:900px">
       ${w.category ? `<span class="badge">✦ ${esc(w.category)}</span>` : ''}
@@ -651,7 +598,6 @@ function pageGallery(p, wIdx, url) {
         </div>
         <div class="desire-nav-pills">
           <a href="#works">Selected Works</a>
-          <a href="#services">Capabilities</a>
           <a href="#about">About</a>
         </div>
         <div class="desire-nav-actions">
@@ -659,21 +605,18 @@ function pageGallery(p, wIdx, url) {
         </div>
       </nav>
       <header class="wrap gal-desire-head">
-        <div class="desire-kicker-pill"><span class="desire-sparkle">✦</span> CREATIVE DIRECTION &amp; PRODUCT DESIGN</div>
-        <h1 class="desire-title">Creating digital experiences with <em>soul &amp; precision.</em></h1>
+        <div class="desire-kicker-pill"><span class="desire-sparkle">✦</span> ${esc((p.title || 'Visual Portfolio').toUpperCase())}</div>
+        <h1 class="desire-title">${esc(p.name)}</h1>
         <div class="desire-hero-loupe">
           <div class="desire-loupe-glass">
             <svg class="desire-loupe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           </div>
           <div class="desire-loupe-info">
             <b>${esc(p.title || 'Creative Specialist')}</b>
-            <span>${works.length} Case Studies · ${esc(p.location || 'San Francisco, CA')}</span>
+            <span>${works.length} Case Studies${p.location ? ` · ${esc(p.location)}` : ''}</span>
           </div>
         </div>
-        <p class="desire-bio">${esc(p.bio || p.summary || p.tagline || 'Crafting digital products, brand systems, and memorable interactive experiences.')}</p>
-        <div class="desire-tags-row">
-          ${skillsList.slice(0, 6).map(s => `<span class="desire-tag">✦ ${esc(s)}</span>`).join('')}
-        </div>
+        ${(p.bio || p.summary || p.about || p.tagline) ? `<p class="desire-bio">${esc((p.bio || p.summary || p.about || p.tagline).trim())}</p>` : ''}
         <div class="desire-hero-actions">
           <a class="desire-btn-primary" href="#works">Explore Works ↘</a>
           ${p.email ? `<a class="desire-btn-ghost" href="mailto:${esc(p.email)}">Get in Touch</a>` : ''}
@@ -709,31 +652,6 @@ function pageGallery(p, wIdx, url) {
               </div>
             </a>`;
           }).join('') || emptyMsg}
-        </div>
-      </section>
-      <section class="wrap desire-services-sec" id="services">
-        <div class="desire-sec-head">
-          <div>
-            <span class="desire-sec-kicker">— CORE CAPABILITIES &amp; FOCUS —</span>
-            <h2 class="desire-sec-title">Specialized Focus Areas</h2>
-          </div>
-          <p class="desire-sec-desc">Demonstrated craft across digital products, visual systems, and bespoke creative executions.</p>
-        </div>
-        <div class="desire-services-grid">
-          ${capabilityCards.map((c, idx) => `
-          <div class="desire-service-card ${idx === 1 ? 'desire-srv-featured' : ''}">
-            ${c.badge ? `<div class="desire-srv-badge">${esc(c.badge)}</div>` : ''}
-            <div class="desire-srv-head">
-              <span class="desire-srv-num">${c.num}</span>
-              <span class="desire-srv-price">SPECIALTY</span>
-            </div>
-            <h3>${esc(c.title)}</h3>
-            <p>${esc(c.desc)}</p>
-            <ul class="desire-srv-features">
-              ${c.tags.map(t => `<li>${esc(t)}</li>`).join('')}
-            </ul>
-          </div>
-          `).join('')}
         </div>
       </section>
       <section class="wrap desire-about-sec" id="about">
