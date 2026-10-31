@@ -144,6 +144,8 @@ test('Desire theme renders clean hero with creator name and bio, and removes foc
 
   assert.ok(capturedHtml.includes('<h1 class="desire-title">Neeraj K R</h1>'), 'desire must render creator name as title');
   assert.ok(capturedHtml.includes('Aspiring Developer'), 'desire must render creator title in loupe');
+  assert.ok(capturedHtml.includes('Featured Work'), 'desire must render Featured Work(s) instead of Case Studies');
+  assert.ok(!capturedHtml.includes('Case Studies'), 'desire must not contain Case Studies');
   assert.ok(capturedHtml.includes('Kerala, India'), 'desire must render creator location');
   assert.ok(capturedHtml.includes('Crafting clean web architectures'), 'desire must render creator bio');
   assert.ok(!capturedHtml.includes('Specialized Focus Areas'), 'desire must have removed Specialized Focus Areas section');
