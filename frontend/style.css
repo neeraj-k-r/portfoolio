@@ -2726,6 +2726,9 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 .lx-tp-zine{background:#fffcf2;border-color:#111111}
 .lx-tp-zen{background:#f2ece4;border-color:rgba(168,93,66,0.3)}
 .lx-tp-desire{background:#090a10;border-color:rgba(168,85,247,0.4)}
+.lx-tp-lumina{background:#080914;border-color:rgba(56,189,248,0.4)}
+.lx-tp-vogue{background:#0d0d0d;border-color:rgba(255,255,255,0.4)}
+.lx-tp-filmstrip{background:#0b0b0d;border-color:rgba(225,29,72,0.4)}
 
 /* STUDIO PICKER THUMBNAILS (.tpl-preview) */
 .tpl-preview.atelier{background:linear-gradient(135deg,#0b0c10,#1a1b24);color:#c5a059}
@@ -2734,6 +2737,9 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 .tpl-preview.zine{background:linear-gradient(135deg,#ff2d78,#00e5ff);color:#fff}
 .tpl-preview.zen{background:linear-gradient(135deg,#f2ece4,#e8ded3);color:#a85d42}
 .tpl-preview.desire{background:linear-gradient(135deg,#6366f1,#d946ef);color:#fff}
+.tpl-preview.lumina{background:linear-gradient(135deg,#38bdf8,#c084fc);color:#fff}
+.tpl-preview.vogue{background:linear-gradient(135deg,#171717,#404040);color:#f5f5f5}
+.tpl-preview.filmstrip{background:linear-gradient(135deg,#09090b,#27272a);color:#fbbf24}
 
 /* MODAL BODY STYLING */
 .lx-modal-body[data-theme="atelier"]{background:#0b0c10;color:#f4f4f0}
@@ -2742,5 +2748,8 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 .lx-modal-body[data-theme="zine"]{background:#fffcf2;color:#111111}
 .lx-modal-body[data-theme="zen"]{background:#f2ece4;color:#2c2825}
 .lx-modal-body[data-theme="desire"]{background:#090a10;color:#f1f2f6}
+.lx-modal-body[data-theme="lumina"]{background:#080914;color:#f1f5f9}
+.lx-modal-body[data-theme="vogue"]{background:#0d0d0d;color:#f5f5f5}
+.lx-modal-body[data-theme="filmstrip"]{background:#0b0b0d;color:#e2e8f0}
 
 body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-overlay { display: none !important; }
