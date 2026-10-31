@@ -67,6 +67,23 @@ test('Auth state synchronization and configuration tests', async (t) => {
     assert.match(schemaSql, /create trigger on_auth_user_created/);
   });
 
+  await t.test('Database schema uses username as primary key and user_id as unique', () => {
+    const schemaSql = fs.readFileSync('backend/supabase-schema.sql', 'utf8');
+    assert.match(schemaSql, /username text primary key/);
+    assert.match(schemaSql, /user_id uuid not null unique references auth\.users\(id\)/);
+  });
+
+  await t.test('Frontend does not have hardcoded TAKEN_USERNAMES array', () => {
+    const appJs = fs.readFileSync('frontend/app.js', 'utf8');
+    assert.doesNotMatch(appJs, /TAKEN_USERNAMES/);
+  });
+
+  await t.test('Supabase config provides cloudCheckUsernameTaken and onConflict username', () => {
+    const supabaseConfigJs = fs.readFileSync('backend/supabase-config.js', 'utf8');
+    assert.match(supabaseConfigJs, /async function cloudCheckUsernameTaken/);
+    assert.match(supabaseConfigJs, /onConflict:\s*'username'/);
+  });
+
   await t.test('index.html inline script compiles cleanly without syntax errors', () => {
     const scriptMatch = indexHtml.match(/<script>([\s\S]*?)<\/script>\s*<\/body>/);
     assert.ok(scriptMatch, 'Main script tag found');
