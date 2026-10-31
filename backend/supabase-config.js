@@ -58,6 +58,18 @@ async function cloudGetProfile(username) {
   const { data } = await sb.from('profiles').select('*').eq('username', String(username).toLowerCase()).eq('status', 'approved').maybeSingle();
   return normRow(data) || null;
 }
+async function cloudCheckUsernameTaken(username) {
+  const sb = cloud();
+  const u = String(username || '').toLowerCase().trim();
+  if (!u) return true;
+  if (!sb) return false;
+  try {
+    const { data } = await sb.from('profiles').select('username').eq('username', u).maybeSingle();
+    return !!data;
+  } catch (e) {
+    return false;
+  }
+}
 function isMissingColumnError(err) {
   const msg = String((err && err.message) || err || '');
   return /could not find the '.+' column/i.test(msg) || String((err && err.code) || '') === 'PGRST204';
@@ -102,14 +114,14 @@ async function cloudSaveProfile(p) {
       : (existing && typeof existing.show_instagram === 'boolean' ? existing.show_instagram : true),
   };
   if (p.site_type === 'upload') row.site_updated_at = new Date().toISOString();
-  const res = await sb.from('profiles').upsert(row, { onConflict: 'user_id' });
+  const res = await sb.from('profiles').upsert(row, { onConflict: 'username' });
   if (!res.error) return row;
   // Older DB missing the newest columns (resume/upload set): PostgREST rejects
   // the whole upsert, which would lose ALL edits. Retry once with core fields
   // only — a partial save beats no save. Owner fix: re-run supabase-schema.sql.
   if (isMissingColumnError(res.error)) {
     const { experience, education, certifications, resume, site_type, site_path, site_updated_at, show_instagram, track, works, ...core } = row;
-    const retry = await sb.from('profiles').upsert(core, { onConflict: 'user_id' });
+    const retry = await sb.from('profiles').upsert(core, { onConflict: 'username' });
     if (!retry.error) return { ...core, _partial: true };
   }
   throw res.error;
