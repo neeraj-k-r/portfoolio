@@ -523,7 +523,7 @@ function renderGallery(p) {
         </div>
         <div class="desire-loupe-info">
           <b>${esc(p.title || 'Creative Specialist')}</b>
-          <span>${works.length} Case Studies${location ? ` · ${esc(location)}` : ''}</span>
+          <span>${works.length} Featured Work${works.length === 1 ? '' : 's'}${location ? ` · ${esc(location)}` : ''}</span>
         </div>
       </div>
       ${bio ? `<p class="desire-bio">${esc(bio)}</p>` : ''}
@@ -535,7 +535,7 @@ function renderGallery(p) {
     gridHtml = `<section class="wrap desire-works-sec" id="works">
       <div class="desire-sec-head">
         <div>
-          <span class="desire-sec-kicker">— SELECTED CASE STUDIES —</span>
+          <span class="desire-sec-kicker">— FEATURED WORKS —</span>
           <h2 class="desire-sec-title">Featured Explorations</h2>
         </div>
         <span class="desire-counter-badge">${works.length} Works Curated</span>
@@ -555,7 +555,7 @@ function renderGallery(p) {
             <figcaption class="desire-card-meta">
               <div class="desire-meta-text">
                 <span class="desire-card-year">${w.year || '2026'}</span>
-                <b>${esc(w.title || 'Untitled Case Study')}</b>
+                <b>${esc(w.title || 'Untitled Work')}</b>
                 ${w.desc ? `<p>${esc(w.desc)}</p>` : ''}
               </div>
               <span class="desire-arrow-pill">↗</span>
