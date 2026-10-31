@@ -2300,6 +2300,16 @@ if ($('builderForm')) {
     e.preventDefault();
     const username = $('inUser').value.toLowerCase().trim().replace(/[^a-z0-9-]+/g,'');
     if(!/^[a-z0-9][a-z0-9-]{2,29}$/.test(username)) return toast('❌ 3-30 chars: lowercase letters, numbers, hyphens');
+    if (['www','app','api','admin','mail','blog','help','support','static','assets','u','p','netlify','portfoolio'].includes(username)) {
+      return toast('❌ That subdomain is reserved. Please pick another.');
+    }
+    // Dynamic database check: ensure username is not already claimed
+    if (typeof cloudCheckUsernameTaken === 'function' && cloudEnabled()) {
+      const taken = await cloudCheckUsernameTaken(username);
+      if (taken && (!activeUserProfile || activeUserProfile.username !== username)) {
+        return toast('❌ That subdomain is already taken. Please choose another.');
+      }
+    }
 
     const template = (document.querySelector('#tplGrid input[name=tpl]:checked') || {}).value || (claimTrack() === 'visual' ? 'gallery' : 'midnight');
     const manual = $('inP1t').value.trim() ? [{ title: $('inP1t').value.trim(), desc: $('inP1d').value.trim() || 'Featured build.', url: $('inP1u').value.trim() || '#', stars: 'Featured',
