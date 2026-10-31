@@ -1036,7 +1036,8 @@ function renderPortfolio(p) {
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
   const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'];
   if (visualOnly.includes(tpl)) {
-    tpl = 'midnight';
+    renderGallery(p);
+    return;
   }
   if (tpl !== 'midnight' && window.PortfoolioTemplates && window.PortfoolioTemplates[tpl]) {
     window.PortfoolioTemplates[tpl](p); return;
@@ -2150,7 +2151,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
   const qTpl = (new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t') || '').toLowerCase();
   const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'];
-  const isVisualTrack = visualThemes.includes(qTpl) || p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && visualThemes.includes(String(p.template || '').toLowerCase()));
+  const isVisualTrack = visualThemes.includes(qTpl) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
   if (isVisualTrack) { renderGallery(p); initMotionTheme(); return; }
   const skill = new URLSearchParams(location.search).get('skill');
   if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
@@ -2164,7 +2165,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (!pp) return;
       const qTpl = (new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t') || '').toLowerCase();
       const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'];
-      const isPpVisual = visualThemes.includes(qTpl) || pp.track === 'visual' || (pp.track !== 'tech' && Array.isArray(pp.works) && pp.works.length > 0 && visualThemes.includes(String(pp.template || '').toLowerCase()));
+      const isPpVisual = visualThemes.includes(qTpl) || pp.track === 'visual' || visualThemes.includes(String(pp.template || '').toLowerCase());
       if (s.view === 'work' && typeof s.idx === 'number') {
         renderWorkDetail(pp, s.idx);
         return;
