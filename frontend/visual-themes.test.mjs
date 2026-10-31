@@ -111,3 +111,40 @@ test('All themes filter label is updated to 28', () => {
   assert.ok(INDEX_HTML.includes('28 handcrafted themes'), 'index.html kicker must say 28 handcrafted themes');
 });
 
+test('Desire theme renders creator case studies and dynamic focus skills', () => {
+  let capturedHtml = '';
+  const domMock = {
+    document: {
+      getElementById: () => ({
+        set innerHTML(val) { capturedHtml = val; },
+        get innerHTML() { return capturedHtml; }
+      }),
+      body: { dataset: {}, classList: { toggle: () => {}, add: () => {}, remove: () => {} } },
+      title: ''
+    },
+    window: { scrollTo: () => {} },
+    location: { origin: 'https://portfoolio.me' },
+    TEMPLATES: []
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const desireFn = domMock.window.PortfoolioTemplates.desire;
+  assert.ok(desireFn, 'desire template must exist');
+  desireFn({
+    name: 'Neeraj K R',
+    title: 'Design Technologist',
+    location: 'Bangalore, India',
+    skills: ['Figma Mastery', 'Creative Coding', 'Design Ops'],
+    projects: [
+      { title: 'Interactive Aura', technologies: ['Canvas API', 'WebGL'] }
+    ]
+  });
+
+  assert.ok(capturedHtml.includes('Specialized Focus Areas'), 'desire must render Specialized Focus Areas');
+  assert.ok(capturedHtml.includes('Interactive Aura'), 'desire must render real project case study');
+  assert.ok(capturedHtml.includes('Figma Mastery'), 'desire must render dynamic creator skills');
+  assert.ok(!capturedHtml.includes('From $10,000'), 'desire must not have hardcoded agency pricing');
+});
+
