@@ -376,7 +376,34 @@ function pageGallery(p, wIdx, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
   const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(activeTpl) ? activeTpl : 'gallery';
-  const works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
+  let works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
+  if (!works.length) {
+    const sampleImages = [
+      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&auto=format&fit=crop',
+      'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&auto=format&fit=crop'
+    ];
+    if (Array.isArray(p.projects) && p.projects.length > 0) {
+      works = p.projects.map((pr, i) => ({
+        title: pr.title || pr.name || 'Untitled Work',
+        desc: pr.desc || pr.description || 'Creative exploration and visual development.',
+        imageUrl: pr.imageUrl || pr.image || sampleImages[i % sampleImages.length],
+        category: pr.category || (Array.isArray(pr.technologies) && pr.technologies[0]) || (Array.isArray(pr.tags) && pr.tags[0]) || 'VISUAL DIRECTION',
+        year: pr.year || '2026'
+      }));
+    } else {
+      works = sampleImages.map((img, i) => ({
+        title: `Featured Work ${String.fromCharCode(65 + i)}`,
+        desc: 'Editorial visual composition and creative direction study.',
+        imageUrl: img,
+        category: 'CREATIVE DIRECTION',
+        year: '2026'
+      }));
+    }
+  }
   const i = parseInt(wIdx, 10);
   const w = (!isNaN(i) && works[i]) ? works[i] : null;
   const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
@@ -6324,7 +6351,7 @@ function page(p, url) {
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
   const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'];
   if (visualOnly.includes(tpl)) {
-    tpl = 'midnight';
+    return pageGallery(p, url ? (url.searchParams.get('w') || url.searchParams.get('work')) : null, url);
   }
   if (tpl === 'moderncv') {
     return pageModerncv(p);
@@ -6793,7 +6820,7 @@ export default {
     // visual track renders the gallery, not the code portfolio
     const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
     const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'];
-    const isVisualTrack = (qTpl && visualThemes.includes(qTpl.toLowerCase())) || p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && visualThemes.includes(String(p.template || '').toLowerCase()));
+    const isVisualTrack = (qTpl && visualThemes.includes(qTpl.toLowerCase())) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
     if (isVisualTrack) {
       const html = pageGallery(p, url.searchParams.get('w'), url);
       return new Response(html, {
