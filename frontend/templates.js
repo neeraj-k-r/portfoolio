@@ -48,7 +48,10 @@ const TEMPLATES = [
   { id: 'arch', name: 'Arch Blueprint', desc: 'Architectural drafting grid with plate specs, dimension stamps & crosshairs', emoji: '📐', best: 'Architects • Interior Designers • Industrial Designers', track: 'visual' },
   { id: 'zine', name: 'Risograph Zine', desc: 'Indie art zine with washi tape strips, pop halftone shadows & sticker badges', emoji: '🎨', best: 'Illustrators • Comic Artists • Printmakers', track: 'visual' },
   { id: 'zen', name: 'Zen Wabi-Sabi', desc: 'Serene Japanese ceramic studio with ensō brush avatar & organic stone layout', emoji: '🍵', best: 'Ceramicists • Sculptors • Lifestyle Curators', track: 'visual' },
-  { id: 'desire', name: 'Desire Studio', desc: 'Vibrant designer portfolio with interactive loupe lens, asymmetric cards & services pricing', emoji: '✨', best: 'UI/UX Designers • Product Designers • Creative Studios', track: 'visual' }
+  { id: 'desire', name: 'Desire Studio', desc: 'Vibrant designer portfolio with interactive loupe lens, asymmetric cards & services pricing', emoji: '✨', best: 'UI/UX Designers • Product Designers • Creative Studios', track: 'visual' },
+  { id: 'lumina', name: 'Lumina Prism', desc: 'Holographic glassmorphism with iridescent refractive shimmer and chromatic glowing cards', emoji: '💎', best: '3D Artists • Motion Designers • Digital Sculptors', track: 'visual' },
+  { id: 'vogue', name: 'Vogue Editorial', desc: 'High-fashion magazine spread with Didot typography, issue volume badge & full-bleed photography', emoji: '👠', best: 'Fashion Stylists • Models • Art Directors • Photographers', track: 'visual' },
+  { id: 'filmstrip', name: 'Filmstrip Reel', desc: 'Panoramic horizontal cinema reel with 35mm film perforation accents & darkroom atmosphere', emoji: '🎞️', best: 'Cinematographers • Directors • Photographers • Visual Storytellers', track: 'visual' }
 ];
 
 function tplEsc(s) {
