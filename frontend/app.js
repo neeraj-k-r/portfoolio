@@ -15,23 +15,28 @@ function slugify(s) {
   return (s || '').toLowerCase().trim().replace(/[^a-z0-9-]+/g, '').slice(0, 30);
 }
 function validUsername(u) { return /^[a-z0-9][a-z0-9-]{2,29}$/.test(u) && !RESERVED.has(u); }
-const TAKEN_USERNAMES = ['nkr3037','neerajkr-dev','nithin','athukovil','ashmith','neerajkr'];
 function usernameTaken(name) {
   const n = String(name || '').toLowerCase().trim();
   if (!n) return true;
-  if (RESERVED.has(n) || TAKEN_USERNAMES.includes(n)) return true;
+  if (RESERVED.has(n)) return true;
   try { if (store.exists(n)) return true; } catch (e) {}
   return false;
 }
 async function checkUsernameAvailability(name) {
   const n = String(name || '').toLowerCase().trim();
   if (!/^[a-z0-9][a-z0-9-]{2,29}$/.test(n)) return { ok: false, msg: '3-30 chars: lowercase letters, numbers, hyphens' };
-  if (usernameTaken(n)) return { ok: false, msg: 'That subdomain is taken' };
+  if (RESERVED.has(n)) return { ok: false, msg: 'That subdomain is reserved' };
   try {
-    if (typeof cloudEnabled === 'function' && cloudEnabled() && typeof cloudGetProfile === 'function') {
+    if (typeof cloudCheckUsernameTaken === 'function') {
+      const taken = await cloudCheckUsernameTaken(n);
+      if (taken) return { ok: false, msg: 'That subdomain is taken' };
+    } else if (typeof cloudEnabled === 'function' && cloudEnabled() && typeof cloudGetProfile === 'function') {
       const c = await cloudGetProfile(n);
       if (c) return { ok: false, msg: 'That subdomain is taken' };
     }
+  } catch (e) {}
+  try {
+    if (store.exists(n)) return { ok: false, msg: 'That subdomain is taken' };
   } catch (e) {}
   return { ok: true, msg: 'Available — ' + n + '.portfoolio.me' };
 }
