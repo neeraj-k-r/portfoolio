@@ -12,7 +12,7 @@ const SUPABASE_CONFIG = fs.readFileSync(path.resolve('backend/supabase-config.js
 const INDEX_HTML = fs.readFileSync(path.resolve('frontend/index.html'), 'utf8');
 const APP_JS = fs.readFileSync(path.resolve('frontend/app.js'), 'utf8');
 
-test('Visual Themes: PortfoolioTemplates has all 12 visual themes', () => {
+test('Visual Themes: PortfoolioTemplates has all 13 visual themes', () => {
   const domMock = {
     document: {
       getElementById: () => ({ innerHTML: '' }),
@@ -27,14 +27,14 @@ test('Visual Themes: PortfoolioTemplates has all 12 visual themes', () => {
   const ctx = vm.createContext(domMock);
   vm.runInContext(TEMPLATES_JS, ctx);
 
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
   for (const t of visualThemes) {
     assert.strictEqual(typeof domMock.window.PortfoolioTemplates[t], 'function', `PortfoolioTemplates[${t}] must be a function`);
   }
 });
 
-test('Visual Themes: all 5 new themes render custom navigation, header and footer', () => {
-  const newThemes = ['atelier', 'cinema', 'arch', 'zine', 'zen'];
+test('Visual Themes: all 6 new themes render custom navigation, header and footer', () => {
+  const newThemes = ['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
   for (const t of newThemes) {
     let capturedHtml = '';
     const domMock = {
@@ -82,7 +82,7 @@ test('CSS: styling fixes for newly added non-technical visual themes', () => {
 });
 
 test('Track healing & detection across backend and studio', () => {
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
   for (const t of visualThemes) {
     // Check supabase-config.js
     assert.ok(SUPABASE_CONFIG.includes(t), `supabase-config.js must include ${t}`);
@@ -102,8 +102,8 @@ test('Google Fonts includes Fraunces 400 weight', () => {
 });
 
 test('IntersectionObserver observes all new visual theme elements', () => {
-  assert.ok(APP_JS.includes('.atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card'), 'app.js IO must observe new theme cards');
-  assert.ok(WORKER_JS.includes('.atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card'), 'worker.js IO must observe new theme cards');
+  assert.ok(APP_JS.includes('.atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card'), 'app.js IO must observe new theme cards');
+  assert.ok(WORKER_JS.includes('.atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card'), 'worker.js IO must observe new theme cards');
 });
 
 test('All themes filter label is updated to 28', () => {
