@@ -111,6 +111,37 @@ test('All themes filter label is updated to 31', () => {
   assert.ok(INDEX_HTML.includes('31 handcrafted themes'), 'index.html kicker must say 31 handcrafted themes');
 });
 
+test('Visual Themes: routing preserves visual themes and provides project fallbacks', () => {
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'];
+  
+  // Test worker page() delegation to pageGallery
+  const sandbox = {
+    console,
+    Response: class { constructor(b, i) { this.body = b; this.init = i; } },
+    URL, Math, Date, Array, Object, String, parseInt, isNaN, encodeURIComponent, decodeURIComponent
+  };
+  const ctx = vm.createContext(sandbox);
+  const codeBeforeExport = WORKER_JS.slice(0, WORKER_JS.indexOf('export default'));
+  vm.runInContext(codeBeforeExport, ctx);
+
+  for (const t of visualThemes) {
+    const p = {
+      username: 'artisan',
+      name: 'Artisan Dev',
+      title: 'Digital Creator',
+      template: t,
+      track: 'tech', // Note: even if legacy profile says tech
+      projects: [{ title: 'Featured Build', desc: 'Crafted web experience', url: 'https://example.com' }],
+      works: []
+    };
+    const url = new URL(`https://artisan.portfoolio.me/`);
+    const html = sandbox.page(p, url);
+    assert.ok(html.includes(`data-template="${t}"`), `Worker page() must render data-template="${t}"`);
+    assert.ok(!html.includes('data-template="midnight"'), `Worker page() must not reset ${t} to midnight`);
+    assert.ok(html.includes('Featured Build'), `Worker pageGallery must fall back to projects when works is empty`);
+  }
+});
+
 test('Desire theme renders clean hero with creator name and bio, and removes focus areas', () => {
   let capturedHtml = '';
   const domMock = {
