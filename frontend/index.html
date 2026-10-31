@@ -181,13 +181,13 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 
   <!-- Theme Gallery -->
   <section id="themes" class="lx-section rv">
-    <p class="lx-kicker">28 handcrafted themes</p>
+    <p class="lx-kicker">31 handcrafted themes</p>
     <h2 class="lx-h2">Pick a look. <span class="lx-lime">Preview them all.</span></h2>
     <p class="lx-lead">Click any preview to see it larger — every theme is one tap away in your dashboard.</p>
     <div class="lx-theme-filters">
-      <button type="button" class="lx-filter-btn active" data-filter="all" onclick="filterLandingThemes('all', this)">All Themes (28)</button>
+      <button type="button" class="lx-filter-btn active" data-filter="all" onclick="filterLandingThemes('all', this)">All Themes (31)</button>
       <button type="button" class="lx-filter-btn" data-filter="tech" onclick="filterLandingThemes('tech', this)"><i class="fa-solid fa-code"></i> Developer (16)</button>
-      <button type="button" class="lx-filter-btn" data-filter="visual" onclick="filterLandingThemes('visual', this)"><i class="fa-solid fa-palette"></i> Visual Artist (12)</button>
+      <button type="button" class="lx-filter-btn" data-filter="visual" onclick="filterLandingThemes('visual', this)"><i class="fa-solid fa-palette"></i> Visual Artist (15)</button>
     </div>
     <div class="lx-gallery">
       <!-- Developer Themes (16) -->
@@ -340,6 +340,18 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <button class="lx-theme-card" data-track="visual" data-theme="desire" data-name="Desire Studio" aria-label="Preview Desire Studio theme">
         <span class="lx-tp lx-tp-desire"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Desire <em>Designer portfolio</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="lumina" data-name="Lumina Prism" aria-label="Preview Lumina Prism theme">
+        <span class="lx-tp lx-tp-lumina"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Lumina <em>Holographic prism</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="vogue" data-name="Vogue Editorial" aria-label="Preview Vogue Editorial theme">
+        <span class="lx-tp lx-tp-vogue"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Vogue <em>High-fashion Didot</em></span>
+      </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="filmstrip" data-name="Filmstrip Reel" aria-label="Preview Filmstrip Reel theme">
+        <span class="lx-tp lx-tp-filmstrip"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <span class="lx-theme-name">Filmstrip <em>35mm cinema reel</em></span>
       </button>
     </div>
   </section>
@@ -601,6 +613,9 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <button class="footer-theme-btn" data-theme="zine">Zine</button>
           <button class="footer-theme-btn" data-theme="zen">Zen</button>
           <button class="footer-theme-btn" data-theme="desire">Desire</button>
+          <button class="footer-theme-btn" data-theme="lumina">Lumina</button>
+          <button class="footer-theme-btn" data-theme="vogue">Vogue</button>
+          <button class="footer-theme-btn" data-theme="filmstrip">Filmstrip</button>
         </div>
       </div>
     </div>
@@ -778,6 +793,9 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="zine"><div class="tpl-preview zine">🎨</div><div class="tpl-meta"><b>Zine</b><span>Risograph indie print &amp; washi tape</span></div></label>
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="zen"><div class="tpl-preview zen">🍵</div><div class="tpl-meta"><b>Zen</b><span>Wabi-sabi ceramic &amp; stone studio</span></div></label>
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="desire"><div class="tpl-preview desire">✨</div><div class="tpl-meta"><b>Desire</b><span>Vibrant designer portfolio &amp; loupe</span></div></label>
+              <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="lumina"><div class="tpl-preview lumina">💎</div><div class="tpl-meta"><b>Lumina</b><span>Holographic prism glassmorphism</span></div></label>
+              <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="vogue"><div class="tpl-preview vogue">👠</div><div class="tpl-meta"><b>Vogue</b><span>High-fashion editorial Didot</span></div></label>
+              <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="filmstrip"><div class="tpl-preview filmstrip">🎞️</div><div class="tpl-meta"><b>Filmstrip</b><span>35mm cinema reel darkroom</span></div></label>
             </div>
           </div>
 
@@ -952,6 +970,9 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="zine"><div class="tpl-preview zine">🎨</div><div class="tpl-meta"><b>Zine</b><span>Risograph indie print &amp; washi tape</span></div></label>
             <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="zen"><div class="tpl-preview zen">🍵</div><div class="tpl-meta"><b>Zen</b><span>Wabi-sabi ceramic &amp; stone studio</span></div></label>
             <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="desire"><div class="tpl-preview desire">✨</div><div class="tpl-meta"><b>Desire</b><span>Vibrant designer portfolio &amp; loupe</span></div></label>
+            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="lumina"><div class="tpl-preview lumina">💎</div><div class="tpl-meta"><b>Lumina</b><span>Holographic prism glassmorphism</span></div></label>
+            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="vogue"><div class="tpl-preview vogue">👠</div><div class="tpl-meta"><b>Vogue</b><span>High-fashion editorial Didot</span></div></label>
+            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="filmstrip"><div class="tpl-preview filmstrip">🎞️</div><div class="tpl-meta"><b>Filmstrip</b><span>35mm cinema reel darkroom</span></div></label>
           </div>
           <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:center">
             <button class="btn btn-primary btn-sm" id="edSaveThemeBtn"><i class="fa-solid fa-floppy-disk"></i> Save theme</button>
@@ -1620,7 +1641,7 @@ function setupUserDashboardView(profile) {
   const wizard = $('subdomainWizardCard'), techSt = $('techStudio'), visSt = $('visualStudio');
   const headerName = $('userHeaderName'), statusPill = $('userStatusPill');
 
-  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
+  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'];
   const getTrack = (profile) => {
     if (profile && profile.track === 'visual') {
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
@@ -1821,11 +1842,11 @@ async function paintFeaturedPortfolios() {
     </div>`).join('');
 }
 function paintTrackTabs(profile) {
-  const visual = (profile && profile.track) === 'visual' || (profile && profile.track !== 'tech' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'].includes(String((profile && profile.template) || '').toLowerCase()));
+  const visual = (profile && profile.track) === 'visual' || (profile && profile.track !== 'tech' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(String((profile && profile.template) || '').toLowerCase()));
   document.body.classList.toggle('visual-user', visual);
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
     const v = (c.querySelector('input') || {}).value || '';
-    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'].includes(v);
+    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(v);
     c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
   });
   if (visual) { paintWorks(); }
@@ -2256,12 +2277,12 @@ if ($('builderForm')) {
     if ($('inTag')) $('inTag').placeholder = visual ? 'Painting stories in color and form. Open for commissions.' : 'Building web apps & AI solutions that scale.';
     document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
       const v = (c.querySelector('input') || {}).value || '';
-      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'].includes(v);
+      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(v);
       c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
     });
     const curChecked = document.querySelector('#tplGrid input[name=tpl]:checked');
     const curVal = curChecked ? curChecked.value : '';
-    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'].includes(curVal);
+    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(curVal);
     let wantTpl = curVal;
     if (visual && !curIsVisual) wantTpl = 'gallery';
     else if (!visual && curIsVisual) wantTpl = 'midnight';
