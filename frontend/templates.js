@@ -7144,7 +7144,7 @@ function renderDesire(p) {
         </div>
         <div class="desire-loupe-info">
           <b>${tplEsc(headline)}</b>
-          <span>${works.length} Case Studies${location ? ` · ${tplEsc(location)}` : ''}</span>
+          <span>${works.length} Featured Work${works.length === 1 ? '' : 's'}${location ? ` · ${tplEsc(location)}` : ''}</span>
         </div>
       </div>
       ${bio ? `<p class="desire-bio">${tplEsc(bio)}</p>` : ''}
@@ -7157,7 +7157,7 @@ function renderDesire(p) {
     <section class="wrap desire-works-sec" id="works">
       <div class="desire-sec-head">
         <div>
-          <span class="desire-sec-kicker">— SELECTED CASE STUDIES —</span>
+          <span class="desire-sec-kicker">— FEATURED WORKS —</span>
           <h2 class="desire-sec-title">Featured Explorations</h2>
         </div>
         <span class="desire-counter-badge">${works.length} Works Curated</span>
@@ -7177,7 +7177,7 @@ function renderDesire(p) {
             <figcaption class="desire-card-meta">
               <div class="desire-meta-text">
                 <span class="desire-card-year">${w.year || '2026'}</span>
-                <b>${tplEsc(w.title || 'Untitled Case Study')}</b>
+                <b>${tplEsc(w.title || 'Untitled Work')}</b>
                 ${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}
               </div>
               <span class="desire-arrow-pill">↗</span>
