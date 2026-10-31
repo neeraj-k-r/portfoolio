@@ -1647,10 +1647,8 @@ function setupUserDashboardView(profile) {
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
       return 'visual';
     }
-    // Self-heal legacy rows ONLY when no explicit track is set:
-    // a visual-only template implies the visual track (e.g. claims stored before the track column existed).
-    // But if the user explicitly set a track, respect it — don't force-heal.
-    if (profile && profile.username && VISUAL_THEMES.includes(String(profile.template || '').toLowerCase()) && !profile.track) {
+    // Auto-heal track when template is visual
+    if (profile && profile.username && VISUAL_THEMES.includes(String(profile.template || '').toLowerCase())) {
       profile.track = 'visual';
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
       return 'visual';
@@ -1745,11 +1743,9 @@ function setupUserDashboardView(profile) {
     if($('edSkills')) $('edSkills').value = asArray(profile.skills).join(', ');
     draftAvatar = profile.avatarUrl || profile.avatar_url || ''; paintAvatarPreview();
 
-    // Ensure track-appropriate template selection
-    if (!visual && VISUAL_THEMES.includes(String(profile.template || '').toLowerCase())) {
-      profile.template = 'midnight';
-    } else if (visual && !VISUAL_THEMES.includes(String(profile.template || '').toLowerCase())) {
-      profile.template = 'gallery';
+    // Ensure track aligns with template selection
+    if (VISUAL_THEMES.includes(String(profile.template || '').toLowerCase())) {
+      profile.track = 'visual';
     }
     paintTrackTabs(profile);
 
@@ -1842,7 +1838,7 @@ async function paintFeaturedPortfolios() {
     </div>`).join('');
 }
 function paintTrackTabs(profile) {
-  const visual = (profile && profile.track) === 'visual' || (profile && profile.track !== 'tech' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(String((profile && profile.template) || '').toLowerCase()));
+  const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(String((profile && profile.template) || '').toLowerCase());
   document.body.classList.toggle('visual-user', visual);
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
     const v = (c.querySelector('input') || {}).value || '';
@@ -2362,7 +2358,7 @@ async function saveStudio() {
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
       github: normGithub($('edGithub').value), linkedin: normLinkedIn($('edLinkedin').value), instagram: normInsta($('edInsta').value), location: $('edLoc').value.trim(),
       showInstagram: showInsta, show_instagram: showInsta,
-      template: (document.querySelector('input[name=edtpl]:checked') || {}).value || 'midnight',
+      template: (document.querySelector('input[name=edtpl]:checked') || {}).value || activeUserProfile.template || 'midnight',
       avatarUrl: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
       avatar_url: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
       skillsDisplay: (document.querySelector('input[name=skillsDisplay]:checked') || {}).value || 'evidence',
@@ -2378,6 +2374,12 @@ async function saveStudio() {
       },
       updatedAt: new Date().toISOString(),
     });
+
+    const isChosenVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(activeUserProfile.template);
+    if (isChosenVisual) {
+      activeUserProfile.track = 'visual';
+      try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
+    }
 
     const all = JSON.parse(localStorage.getItem('portfoolio_users_v1') || '{}');
     all[activeUserProfile.username] = activeUserProfile;
