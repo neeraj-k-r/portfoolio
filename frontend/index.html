@@ -1702,8 +1702,9 @@ function setupUserDashboardView(profile) {
     // Live-site links: on portfoolio.me, points to the live subdomain (https://username.portfoolio.me).
     // In local development, points to the direct parameter link (?u=username).
     const isProd = location.hostname === 'portfoolio.me' || location.hostname.endsWith('.portfoolio.me');
+    const pathPrefix = location.pathname.includes('/frontend/') ? `${location.origin}/frontend/` : `${location.origin}/`;
     const liveSub = `https://${encodeURIComponent(profile.username)}.portfoolio.me`;
-    const liveDirect = `${location.origin}/?u=${encodeURIComponent(profile.username)}`;
+    const liveDirect = `${pathPrefix}?u=${encodeURIComponent(profile.username)}`;
     const livePath = isProd ? liveSub : liveDirect;
     if ($('edPreviewBtn')) { $('edPreviewBtn').href = livePath; $('edPreviewBtn').target = '_blank'; }
     if ($('dashViewLive')) { $('dashViewLive').href = livePath; $('dashViewLive').style.display = 'inline-flex'; }
@@ -2093,7 +2094,8 @@ function paintUserProjects(p) {
 function refreshRowChips(p) { paintUserProjects(p); }
 
 function paintShareSection(p) {
-  const sub = `https://${p.username}.portfoolio.me`, path = `${location.origin}/?u=${encodeURIComponent(p.username)}`;
+  const pathPrefix = location.pathname.includes('/frontend/') ? `${location.origin}/frontend/` : `${location.origin}/`;
+  const sub = `https://${p.username}.portfoolio.me`, path = `${pathPrefix}?u=${encodeURIComponent(p.username)}`;
   const isProd = location.hostname === 'portfoolio.me' || location.hostname.endsWith('.portfoolio.me');
   const liveUrl = isProd ? sub : path;
   if($('shareSub')) $('shareSub').textContent = sub;

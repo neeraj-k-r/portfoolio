@@ -102,7 +102,10 @@ async function loadProfile(username) {
   const u = username.toLowerCase();
   let seed = null;
   try {
-    const r = await fetch(`profiles/${encodeURIComponent(u)}.json`, { cache: 'no-store' });
+    let r = await fetch(`profiles/${encodeURIComponent(u)}.json`, { cache: 'no-store' });
+    if (!r.ok) {
+      r = await fetch(`frontend/profiles/${encodeURIComponent(u)}.json`, { cache: 'no-store' });
+    }
     if (r.ok) seed = await r.json();
   } catch {}
 
@@ -244,16 +247,7 @@ function galleryWorks(p) {
     'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&auto=format&fit=crop'
   ];
   if (isPreview || !p.works || p.works.length === 0) {
-    if (Array.isArray(p.projects) && p.projects.length > 0) {
-      return p.projects.map((pr, i) => ({
-        title: pr.title || pr.name || 'Untitled Piece',
-        category: (pr.technologies || pr.tags || ['Design'])[0],
-        desc: pr.desc || 'Exploration of form, structure and visual narrative.',
-        imageUrl: sampleImages[i % sampleImages.length],
-        year: 2026
-      }));
-    }
-    if (isPreview) {
+    if (isPreview || p.username === 'demo' || !p.projects || p.projects.length <= 1) {
       return [
         { title: 'Harmonic Form I', category: 'Editorial', desc: 'Sculptural study in light and silhouette.', imageUrl: sampleImages[0], year: 2026 },
         { title: 'Tectonic Cantilever', category: 'Architecture', desc: 'Cantilever concrete structure.', imageUrl: sampleImages[1], year: 2026 },
@@ -262,6 +256,15 @@ function galleryWorks(p) {
         { title: 'Woodfired Vessel', category: 'Ceramics', desc: 'Tactile wabi-sabi unglazed stoneware.', imageUrl: sampleImages[4], year: 2026 },
         { title: 'Minimal Lookbook', category: 'Editorial', desc: 'Natural light and sculptural silhouettes.', imageUrl: sampleImages[5], year: 2026 }
       ];
+    }
+    if (Array.isArray(p.projects) && p.projects.length > 0) {
+      return p.projects.map((pr, i) => ({
+        title: pr.title || pr.name || 'Untitled Piece',
+        category: (pr.technologies || pr.tags || ['Design'])[0],
+        desc: pr.desc || 'Exploration of form, structure and visual narrative.',
+        imageUrl: sampleImages[i % sampleImages.length],
+        year: 2026
+      }));
     }
   }
   return [];
@@ -1692,7 +1695,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (modalOpenFullBtn) {
       modalOpenFullBtn.onclick = () => {
-        window.open(`/?u=demo&t=${encodeURIComponent(currentModalTheme)}&preview=1`, '_blank');
+        const pathPrefix = location.pathname.includes('/frontend/') ? '/frontend/' : '/';
+        window.open(`${pathPrefix}?u=demo&t=${encodeURIComponent(currentModalTheme)}&preview=1`, '_blank');
       };
     }
 
