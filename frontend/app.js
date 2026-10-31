@@ -270,7 +270,7 @@ function renderGallery(p) {
   p = normLocalProfile(p) || p;
   const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
   const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(activeTpl) ? activeTpl : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'].includes(activeTpl) ? activeTpl : 'gallery';
   document.body.dataset.template = vtpl;
   document.title = `${p.name} — visual portfolio | portfoolio.me`;
   const app = document.getElementById('app');
@@ -507,6 +507,64 @@ function renderGallery(p) {
           ${w.desc ? `<p>${esc(w.desc)}</p>` : ''}
         </div>
       </article>`).join('') || emptyMsg}</section>`;
+  } else if (document.body.dataset.template === 'desire') {
+    headHtml = `<header class="wrap gal-desire-head">
+      <div class="desire-kicker-pill"><span class="desire-sparkle">✦</span> CREATIVE DIRECTION &amp; PRODUCT DESIGN</div>
+      <h1 class="desire-title">Creating digital experiences with <em>soul &amp; precision.</em></h1>
+      <div class="desire-hero-loupe">
+        <div class="desire-loupe-glass">
+          <svg class="desire-loupe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <div class="desire-loupe-info">
+          <b>Magnified Craft</b>
+          <span>Curated for high-impact visual creators</span>
+        </div>
+      </div>
+      <p class="desire-bio">${esc(p.bio || p.summary || 'Crafting digital products, brand systems, and memorable interactive experiences.')}</p>
+      <div class="desire-tags-row">
+        <span class="desire-tag">✦ Presentation Design</span>
+        <span class="desire-tag">✦ Logo &amp; Identity</span>
+        <span class="desire-tag">✦ Product UI/UX</span>
+        <span class="desire-tag">✦ Design Systems</span>
+        <span class="desire-tag">✦ Motion &amp; 3D</span>
+      </div>
+      <div class="desire-hero-actions">
+        <a class="desire-btn-primary" href="#works">Explore Works ↘</a>
+        ${p.email ? `<a class="desire-btn-ghost" href="mailto:${esc(p.email)}">Inquire Package</a>` : ''}
+      </div>
+    </header>`;
+    gridHtml = `<section class="wrap desire-works-sec" id="works">
+      <div class="desire-sec-head">
+        <div>
+          <span class="desire-sec-kicker">— SELECTED CASE STUDIES —</span>
+          <h2 class="desire-sec-title">Featured Explorations</h2>
+        </div>
+        <span class="desire-counter-badge">${works.length} Works Curated</span>
+      </div>
+      <div class="desire-grid">
+        ${works.map((w, i) => {
+          const layoutClass = i === 0 ? 'desire-card-hero' : (i % 5 === 1 ? 'desire-card-tall' : (i % 5 === 2 ? 'desire-card-med' : (i % 5 === 3 ? 'desire-card-wide' : 'desire-card-split')));
+          return `
+          <figure class="desire-card ${layoutClass}" data-gal="${i}">
+            <div class="desire-card-frame">
+              <span class="desire-cat-pill">${esc(w.category || 'VISUAL DESIGN')}</span>
+              <img src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
+              <div class="desire-card-overlay">
+                <span class="desire-loupe-preview">🔍 Inspect</span>
+              </div>
+            </div>
+            <figcaption class="desire-card-meta">
+              <div class="desire-meta-text">
+                <span class="desire-card-year">${w.year || '2026'}</span>
+                <b>${esc(w.title || 'Untitled Case Study')}</b>
+                ${w.desc ? `<p>${esc(w.desc)}</p>` : ''}
+              </div>
+              <span class="desire-arrow-pill">↗</span>
+            </figcaption>
+          </figure>`;
+        }).join('') || emptyMsg}
+      </div>
+    </section>`;
   } else if (document.body.dataset.template === 'catalog') {
     headHtml = `<header class="wrap gal-catalog-head">
       <p class="cat-kicker">— CATALOGUE —</p>
@@ -617,6 +675,92 @@ function renderGallery(p) {
         <span>Zen Wabi-Sabi · Built with Portfoolio</span>
       </footer>
     </div>`;
+  } else if (vtpl === 'desire') {
+    app.innerHTML = `
+    <div class="desire-page">
+      <div class="desire-mesh-bg"></div>
+      <nav class="desire-nav wrap">
+        <div class="desire-brand">
+          ${srcAvatar ? `<img class="desire-avatar" src="${esc(srcAvatar)}" alt="${esc(p.name)}">` : `<div class="desire-avatar desire-fallback">${letter}</div>`}
+          <div class="desire-brand-meta">
+            <span class="desire-name">${esc(p.name)}</span>
+            <span class="desire-badge-online"><span class="desire-dot"></span> Available for projects</span>
+          </div>
+        </div>
+        <div class="desire-nav-pills">
+          <a href="#works">Selected Works</a>
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+        </div>
+        <div class="desire-nav-actions">
+          ${p.email ? `<a class="desire-btn-contact" href="mailto:${esc(p.email)}">Let's Talk ↗</a>` : ''}
+        </div>
+      </nav>
+      ${headHtml}
+      ${gridHtml}
+      <section class="wrap desire-services-sec" id="services">
+        <div class="desire-sec-head">
+          <div>
+            <span class="desire-sec-kicker">— WHAT I OFFER —</span>
+            <h2 class="desire-sec-title">Services &amp; Packages</h2>
+          </div>
+          <p class="desire-sec-desc">Direct engagement packages tailored for startups and forward-thinking brands.</p>
+        </div>
+        <div class="desire-services-grid">
+          <div class="desire-service-card">
+            <div class="desire-srv-head"><span class="desire-srv-num">01</span><span class="desire-srv-price">From $1,500</span></div>
+            <h3>Presentation Design</h3>
+            <p>Keynotes, investor pitch decks &amp; sales collateral crafted to win rounds and close enterprise deals.</p>
+            <ul class="desire-srv-features"><li>Investor Pitch Decks</li><li>Custom Visual Narrative</li><li>Interactive Digital Slides</li></ul>
+          </div>
+          <div class="desire-service-card desire-srv-featured">
+            <div class="desire-srv-badge">MOST POPULAR</div>
+            <div class="desire-srv-head"><span class="desire-srv-num">02</span><span class="desire-srv-price">From $2,000</span></div>
+            <h3>Logo &amp; Brand Identity</h3>
+            <p>Memorable visual marks, typography pairings, color systems, and comprehensive identity guidelines.</p>
+            <ul class="desire-srv-features"><li>Vector Logo Suite</li><li>Typography &amp; Color System</li><li>Brand Guidelines &amp; Assets</li></ul>
+          </div>
+          <div class="desire-service-card">
+            <div class="desire-srv-head"><span class="desire-srv-num">03</span><span class="desire-srv-price">From $3,500</span></div>
+            <h3>Branding Starter Pack</h3>
+            <p>End-to-end brand identity kit including social presence, stationery, 3D assets, and marketing guidelines.</p>
+            <ul class="desire-srv-features"><li>Comprehensive Brand Book</li><li>Social Media Template Kits</li><li>Digital &amp; Print Stationery</li></ul>
+          </div>
+          <div class="desire-service-card">
+            <div class="desire-srv-head"><span class="desire-srv-num">04</span><span class="desire-srv-price">From $10,000</span></div>
+            <h3>Product Design &amp; Systems</h3>
+            <p>Full-stack product design: UX research, interactive prototypes, scalable design systems &amp; dev handoff.</p>
+            <ul class="desire-srv-features"><li>End-to-end UX/UI Architecture</li><li>Figma Component Library</li><li>Interactive Motion &amp; Micro-interactions</li></ul>
+          </div>
+        </div>
+      </section>
+      <section class="wrap desire-about-sec" id="about">
+        <div class="desire-quote-card">
+          <div class="desire-quote-kicker">DESIGN PHILOSOPHY</div>
+          <blockquote class="desire-quote">"Design is not simply how things look—it's how effortlessly they connect, communicate, and solve real human needs."</blockquote>
+          <div class="desire-quote-author">
+            ${srcAvatar ? `<img class="desire-avatar" src="${esc(srcAvatar)}" alt="${esc(p.name)}">` : `<div class="desire-avatar desire-fallback">${letter}</div>`}
+            <div>
+              <b>${esc(p.name)}</b>
+              <span>${esc(p.title || 'Product &amp; Visual Designer')} · ${esc(p.location || 'San Francisco, CA')}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="desire-foot wrap">
+        <div class="desire-foot-banner">
+          <div>
+            <span class="desire-foot-kicker">HAVE A VISION IN MIND?</span>
+            <h2>Let's build something unforgettable.</h2>
+          </div>
+          ${p.email ? `<a class="desire-btn-primary" href="mailto:${esc(p.email)}">Get in Touch ↗</a>` : ''}
+        </div>
+        <div class="desire-foot-bottom">
+          <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+          <span>Desire Studio Theme · Built with Portfoolio</span>
+        </div>
+      </footer>
+    </div>`;
   } else {
     app.innerHTML = navHtml + headHtml + gridHtml + footHtml;
   }
@@ -661,7 +805,7 @@ function renderPortfolio(p) {
   p = normLocalProfile(p) || p;
   const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
-  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
   if (visualOnly.includes(tpl)) {
     tpl = 'midnight';
   }
@@ -1294,6 +1438,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       arch: { name: 'Kenzo Takahashi', title: 'Architect & Spatial Designer', desc: 'Precision drafting plates, cantilever concrete structures, and minimal spatial research.', skills: ['Architecture', 'Spatial Design', 'Concrete', 'Detailing'] },
       zine: { name: 'Maya Rivera', title: 'Illustrator & Risograph Artist', desc: 'Tactile risograph prints, indie comics, vibrant pop posters, and limited editions.', skills: ['Risograph', 'Illustration', 'Comics', 'Screenprinting'] },
       zen: { name: 'Sōren Morita', title: 'Ceramicist & Sculptor', desc: 'Woodfired anagama ceramics, organic stone vessels, and wabi-sabi tactile forms.', skills: ['Ceramics', 'Sculpture', 'Wabi-Sabi', 'Woodfiring'] },
+      desire: { name: 'Anya Milovanova', title: 'Product & Visual Designer', desc: 'Vibrant interactive designer portfolio with magnifying loupe lens, asymmetric work layouts, and services pricing.', skills: ['UI/UX', 'Product Design', 'Design Systems', 'Motion'] },
     };
     let lastFocus = null;
     let currentModalTheme = 'midnight';
@@ -1649,11 +1794,11 @@ document.addEventListener('DOMContentLoaded', async () => {
           el.classList.add('in');
         }
       });
-      // Visual theme elements (work cards, museum pieces, catalog rows, bloom tiles, atelier cards, cinema cards, arch plates, zine tiles, zen cards)
+      // Visual theme elements (work cards, museum pieces, catalog rows, bloom tiles, atelier cards, cinema cards, arch plates, zine tiles, zen cards, desire cards)
       const template = document.body.dataset.template;
-      const isVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(template);
+      const isVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'].includes(template);
       if (isVisual) {
-        document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card').forEach(el => {
+        document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card').forEach(el => {
           io.observe(el);
           const r = el.getBoundingClientRect();
           if (r.top < window.innerHeight && r.bottom > 0) {
@@ -1771,7 +1916,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (resumeUser) { renderResumePage(p); return; }
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
   const qTpl = (new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t') || '').toLowerCase();
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
   const isVisualTrack = visualThemes.includes(qTpl) || p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && visualThemes.includes(String(p.template || '').toLowerCase()));
   if (isVisualTrack) { renderGallery(p); initMotionTheme(); return; }
   const skill = new URLSearchParams(location.search).get('skill');
@@ -1785,7 +1930,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const pp = await loadProfile(requested);
       if (!pp) return;
       const qTpl = (new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t') || '').toLowerCase();
-      const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
+      const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
       const isPpVisual = visualThemes.includes(qTpl) || pp.track === 'visual' || (pp.track !== 'tech' && Array.isArray(pp.works) && pp.works.length > 0 && visualThemes.includes(String(pp.template || '').toLowerCase()));
       if (s.view === 'work' && typeof s.idx === 'number') {
         renderWorkDetail(pp, s.idx);
