@@ -511,6 +511,9 @@ function renderGallery(p) {
         </div>
       </article>`).join('') || emptyMsg}</section>`;
   } else if (document.body.dataset.template === 'desire') {
+    const skillsList = (Array.isArray(p.skills) && p.skills.length > 0)
+      ? p.skills
+      : ['Visual Direction', 'Brand Identity', 'Product UI/UX', 'Design Systems', 'Interactive Prototyping'];
     headHtml = `<header class="wrap gal-desire-head">
       <div class="desire-kicker-pill"><span class="desire-sparkle">✦</span> CREATIVE DIRECTION &amp; PRODUCT DESIGN</div>
       <h1 class="desire-title">Creating digital experiences with <em>soul &amp; precision.</em></h1>
@@ -519,21 +522,17 @@ function renderGallery(p) {
           <svg class="desire-loupe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </div>
         <div class="desire-loupe-info">
-          <b>Magnified Craft</b>
-          <span>Curated for high-impact visual creators</span>
+          <b>${esc(p.title || 'Creative Specialist')}</b>
+          <span>${works.length} Case Studies · ${esc(p.location || 'San Francisco, CA')}</span>
         </div>
       </div>
-      <p class="desire-bio">${esc(p.bio || p.summary || 'Crafting digital products, brand systems, and memorable interactive experiences.')}</p>
+      <p class="desire-bio">${esc(p.bio || p.summary || p.tagline || 'Crafting digital products, brand systems, and memorable interactive experiences.')}</p>
       <div class="desire-tags-row">
-        <span class="desire-tag">✦ Presentation Design</span>
-        <span class="desire-tag">✦ Logo &amp; Identity</span>
-        <span class="desire-tag">✦ Product UI/UX</span>
-        <span class="desire-tag">✦ Design Systems</span>
-        <span class="desire-tag">✦ Motion &amp; 3D</span>
+        ${skillsList.slice(0, 6).map(s => `<span class="desire-tag">✦ ${esc(s)}</span>`).join('')}
       </div>
       <div class="desire-hero-actions">
         <a class="desire-btn-primary" href="#works">Explore Works ↘</a>
-        ${p.email ? `<a class="desire-btn-ghost" href="mailto:${esc(p.email)}">Inquire Package</a>` : ''}
+        ${p.email ? `<a class="desire-btn-ghost" href="mailto:${esc(p.email)}">Get in Touch</a>` : ''}
       </div>
     </header>`;
     gridHtml = `<section class="wrap desire-works-sec" id="works">
@@ -679,6 +678,60 @@ function renderGallery(p) {
       </footer>
     </div>`;
   } else if (vtpl === 'desire') {
+    const skillsList = (Array.isArray(p.skills) && p.skills.length > 0)
+      ? p.skills
+      : ['Visual Direction', 'Brand Identity', 'Product UI/UX', 'Design Systems', 'Interactive Prototyping'];
+    const capabilityCards = (() => {
+      if (Array.isArray(p.services) && p.services.length > 0) {
+        return p.services.slice(0, 4).map((s, idx) => ({
+          num: String(idx + 1).padStart(2, '0'),
+          badge: idx === 1 ? 'FEATURED' : 'CORE FOCUS',
+          title: s.title || s.name || `Specialty ${idx + 1}`,
+          desc: s.desc || s.description || 'Specialized creative execution and bespoke craft.',
+          tags: Array.isArray(s.deliverables || s.tags || s.skills) ? (s.deliverables || s.tags || s.skills) : [s.title || 'Creative Strategy']
+        }));
+      }
+      if (Array.isArray(p.projects) && p.projects.length > 0) {
+        return p.projects.slice(0, 4).map((pr, idx) => ({
+          num: String(idx + 1).padStart(2, '0'),
+          badge: idx === 0 ? 'FEATURED' : (pr.category || 'CASE STUDY'),
+          title: pr.title || pr.name || `Case Study ${idx + 1}`,
+          desc: pr.desc || 'High-impact product exploration with refined interaction and architectural rigor.',
+          tags: (pr.technologies || pr.tags || ['Design', 'Development']).slice(0, 3)
+        }));
+      }
+      return [
+        {
+          num: '01',
+          badge: 'UI/UX & PRODUCT',
+          title: 'Product Design & Architecture',
+          desc: 'End-to-end product design: intuitive workflows, interactive design systems, and seamless user experiences.',
+          tags: skillsList.slice(0, 3)
+        },
+        {
+          num: '02',
+          badge: 'BRANDING & IDENTITY',
+          title: 'Brand Systems & Visual Direction',
+          desc: 'Distinctive visual identities, bespoke typography hierarchies, and scalable multi-platform design guidelines.',
+          tags: skillsList.slice(2, 5)
+        },
+        {
+          num: '03',
+          badge: 'INTERACTION & MOTION',
+          title: 'Interactive Design & Prototyping',
+          desc: 'High-fidelity prototypes, micro-interactions, and motion design that breathe life into digital interfaces.',
+          tags: skillsList.slice(1, 4)
+        },
+        {
+          num: '04',
+          badge: 'CREATIVE STRATEGY',
+          title: 'Visual Strategy & Case Execution',
+          desc: 'Translating complex ideas into compelling visual narratives, presentation decks, and impactful deliverables.',
+          tags: skillsList.slice(0, 4)
+        }
+      ];
+    })();
+
     app.innerHTML = `
     <div class="desire-page">
       <div class="desire-mesh-bg"></div>
@@ -692,7 +745,7 @@ function renderGallery(p) {
         </div>
         <div class="desire-nav-pills">
           <a href="#works">Selected Works</a>
-          <a href="#services">Services</a>
+          <a href="#services">Capabilities</a>
           <a href="#about">About</a>
         </div>
         <div class="desire-nav-actions">
@@ -704,37 +757,26 @@ function renderGallery(p) {
       <section class="wrap desire-services-sec" id="services">
         <div class="desire-sec-head">
           <div>
-            <span class="desire-sec-kicker">— WHAT I OFFER —</span>
-            <h2 class="desire-sec-title">Services &amp; Packages</h2>
+            <span class="desire-sec-kicker">— CORE CAPABILITIES &amp; FOCUS —</span>
+            <h2 class="desire-sec-title">Specialized Focus Areas</h2>
           </div>
-          <p class="desire-sec-desc">Direct engagement packages tailored for startups and forward-thinking brands.</p>
+          <p class="desire-sec-desc">Demonstrated craft across digital products, visual systems, and bespoke creative executions.</p>
         </div>
         <div class="desire-services-grid">
-          <div class="desire-service-card">
-            <div class="desire-srv-head"><span class="desire-srv-num">01</span><span class="desire-srv-price">From $1,500</span></div>
-            <h3>Presentation Design</h3>
-            <p>Keynotes, investor pitch decks &amp; sales collateral crafted to win rounds and close enterprise deals.</p>
-            <ul class="desire-srv-features"><li>Investor Pitch Decks</li><li>Custom Visual Narrative</li><li>Interactive Digital Slides</li></ul>
+          ${capabilityCards.map((c, idx) => `
+          <div class="desire-service-card ${idx === 1 ? 'desire-srv-featured' : ''}">
+            ${c.badge ? `<div class="desire-srv-badge">${esc(c.badge)}</div>` : ''}
+            <div class="desire-srv-head">
+              <span class="desire-srv-num">${c.num}</span>
+              <span class="desire-srv-price">SPECIALTY</span>
+            </div>
+            <h3>${esc(c.title)}</h3>
+            <p>${esc(c.desc)}</p>
+            <ul class="desire-srv-features">
+              ${c.tags.map(t => `<li>${esc(t)}</li>`).join('')}
+            </ul>
           </div>
-          <div class="desire-service-card desire-srv-featured">
-            <div class="desire-srv-badge">MOST POPULAR</div>
-            <div class="desire-srv-head"><span class="desire-srv-num">02</span><span class="desire-srv-price">From $2,000</span></div>
-            <h3>Logo &amp; Brand Identity</h3>
-            <p>Memorable visual marks, typography pairings, color systems, and comprehensive identity guidelines.</p>
-            <ul class="desire-srv-features"><li>Vector Logo Suite</li><li>Typography &amp; Color System</li><li>Brand Guidelines &amp; Assets</li></ul>
-          </div>
-          <div class="desire-service-card">
-            <div class="desire-srv-head"><span class="desire-srv-num">03</span><span class="desire-srv-price">From $3,500</span></div>
-            <h3>Branding Starter Pack</h3>
-            <p>End-to-end brand identity kit including social presence, stationery, 3D assets, and marketing guidelines.</p>
-            <ul class="desire-srv-features"><li>Comprehensive Brand Book</li><li>Social Media Template Kits</li><li>Digital &amp; Print Stationery</li></ul>
-          </div>
-          <div class="desire-service-card">
-            <div class="desire-srv-head"><span class="desire-srv-num">04</span><span class="desire-srv-price">From $10,000</span></div>
-            <h3>Product Design &amp; Systems</h3>
-            <p>Full-stack product design: UX research, interactive prototypes, scalable design systems &amp; dev handoff.</p>
-            <ul class="desire-srv-features"><li>End-to-end UX/UI Architecture</li><li>Figma Component Library</li><li>Interactive Motion &amp; Micro-interactions</li></ul>
-          </div>
+          `).join('')}
         </div>
       </section>
       <section class="wrap desire-about-sec" id="about">
