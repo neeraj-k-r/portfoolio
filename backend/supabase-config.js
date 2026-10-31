@@ -33,7 +33,7 @@ function normRow(r) {
   // Self-heal legacy rows: a visual-only template implies the visual track
   // (e.g. claims stored before the track column existed). Every reader routes
   // on track, so heal here to fix dashboards, portfolios and galleries at once.
-  if (r.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(String(r.template || '').toLowerCase())) r.track = 'visual';
+  if (r.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'].includes(String(r.template || '').toLowerCase())) r.track = 'visual';
   if (r.track !== 'visual') r.track = 'tech';
   if (!Array.isArray(r.works)) r.works = [];
   return r;
