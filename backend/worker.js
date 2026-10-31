@@ -613,7 +613,7 @@ function pageGallery(p, wIdx, url) {
           </div>
           <div class="desire-loupe-info">
             <b>${esc(p.title || 'Creative Specialist')}</b>
-            <span>${works.length} Case Studies${p.location ? ` · ${esc(p.location)}` : ''}</span>
+            <span>${works.length} Featured Work${works.length === 1 ? '' : 's'}${p.location ? ` · ${esc(p.location)}` : ''}</span>
           </div>
         </div>
         ${(p.bio || p.summary || p.about || p.tagline) ? `<p class="desire-bio">${esc((p.bio || p.summary || p.about || p.tagline).trim())}</p>` : ''}
@@ -625,7 +625,7 @@ function pageGallery(p, wIdx, url) {
       <section class="wrap desire-works-sec" id="works">
         <div class="desire-sec-head">
           <div>
-            <span class="desire-sec-kicker">— SELECTED CASE STUDIES —</span>
+            <span class="desire-sec-kicker">— FEATURED WORKS —</span>
             <h2 class="desire-sec-title">Featured Explorations</h2>
           </div>
           <span class="desire-counter-badge">${works.length} Works Curated</span>
@@ -645,7 +645,7 @@ function pageGallery(p, wIdx, url) {
               <div class="desire-card-meta">
                 <div class="desire-meta-text">
                   <span class="desire-card-year">${k.year || '2026'}</span>
-                  <b>${esc(k.title || 'Untitled Case Study')}</b>
+                  <b>${esc(k.title || 'Untitled Work')}</b>
                   ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
                 </div>
                 <span class="desire-arrow-pill">↗</span>
