@@ -1,8 +1,8 @@
 -- portfoolio.me — FULL schema (idempotent: safe to re-run over v1)
--- 1) profiles table
+-- 1) profiles table (username as primary key)
 create table if not exists profiles (
-  user_id uuid primary key references auth.users(id) on delete cascade,
-  username text unique not null check (username ~ '^[a-z0-9][a-z0-9-]{2,29}$'),
+  username text primary key check (username ~ '^[a-z0-9][a-z0-9-]{2,29}$'),
+  user_id uuid not null unique references auth.users(id) on delete cascade,
   name text not null, title text not null, tagline text default '',
   email text not null, phone text default '', location text default '',
   github text default '', linkedin text default '', template text default 'midnight',
@@ -10,6 +10,30 @@ create table if not exists profiles (
   available boolean default true,
   created_at timestamptz default now(), updated_at timestamptz default now()
 );
+
+-- Ensure username is primary key on existing databases
+do $$
+begin
+  if exists (
+    select 1 from information_schema.table_constraints
+    where table_schema = 'public' and table_name = 'profiles' and constraint_type = 'PRIMARY KEY'
+  ) then
+    if not exists (
+      select 1 from information_schema.key_column_usage
+      where table_schema = 'public' and table_name = 'profiles' and column_name = 'username'
+      and constraint_name = (
+        select constraint_name from information_schema.table_constraints
+        where table_schema = 'public' and table_name = 'profiles' and constraint_type = 'PRIMARY KEY'
+        limit 1
+      )
+    ) then
+      alter table public.profiles drop constraint if exists profiles_pkey cascade;
+      alter table public.profiles add constraint profiles_pkey primary key (username);
+      alter table public.profiles drop constraint if exists profiles_user_id_key;
+      alter table public.profiles add constraint profiles_user_id_key unique (user_id);
+    end if;
+  end if;
+end $$;
 alter table profiles add column if not exists avatar_url text default '';
 alter table profiles add column if not exists instagram text default '';
 -- v2: status column (kept for admin moderation: approved / rejected).
@@ -132,16 +156,16 @@ begin
     final_u := substr(base_u, 1, 20) || '-' || c;
   end loop;
 
-  insert into public.profiles (user_id, username, name, title, email, status)
+  insert into public.profiles (username, user_id, name, title, email, status)
   values (
-    new.id,
     final_u,
+    new.id,
     initcap(regexp_replace(split_part(new.email, '@', 1), '[^a-zA-Z0-9]', ' ', 'g')),
     'Creator & Developer',
     new.email,
     'approved'
   )
-  on conflict (user_id) do nothing;
+  on conflict (username) do update set user_id = excluded.user_id, email = excluded.email;
 
   return new;
 end;
