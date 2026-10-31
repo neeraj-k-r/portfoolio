@@ -7223,6 +7223,316 @@ function renderDesire(p) {
   window.scrollTo(0, 0);
 }
 
+function renderLumina(p) {
+  normTpl(p);
+  document.body.dataset.template = 'lumina';
+  document.title = `${p.name} — Lumina Prism Portfolio | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const face = avatar ? `<img class="lumina-avatar" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : `<div class="lumina-avatar lumina-fallback">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`;
+  const kicker = (p.title || 'Digital Craft & 3D Art').toUpperCase();
+  const location = p.location || '';
+  const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
+
+  app.innerHTML = `
+  <div class="lumina-page">
+    <div class="lumina-caustic-bg"></div>
+    <nav class="lumina-nav wrap">
+      <div class="lumina-brand">
+        ${face}
+        <div class="lumina-brand-meta">
+          <span class="lumina-name">${tplEsc(p.name)}</span>
+          <span class="lumina-badge-refract"><span class="lumina-dot"></span> Prismatic Studio</span>
+        </div>
+      </div>
+      <div class="lumina-nav-pills">
+        <a href="#gallery">Gallery</a>
+        <a href="#about">About</a>
+      </div>
+      <div class="lumina-nav-actions">
+        ${p.email ? `<a class="lumina-btn-contact" href="mailto:${tplEsc(p.email)}">Inquire ↗</a>` : ''}
+      </div>
+    </nav>
+
+    <header class="wrap gal-lumina-head">
+      <div class="lumina-prism-orb" aria-hidden="true"></div>
+      <div class="lumina-pill"><span class="lumina-spark">✧</span> ${tplEsc(kicker)}</div>
+      <h1 class="lumina-title">${tplEsc(p.name)}</h1>
+      <div class="lumina-stat-glass">
+        <div class="lumina-stat-icon">⬡</div>
+        <div class="lumina-stat-info">
+          <b>${tplEsc(p.title || 'Digital Sculptor & 3D Artist')}</b>
+          <span>${works.length} Works on Display${location ? ` · ${tplEsc(location)}` : ''}</span>
+        </div>
+      </div>
+      ${bio ? `<p class="lumina-bio">${tplEsc(bio)}</p>` : ''}
+      <div class="lumina-hero-actions">
+        <a class="lumina-btn-primary" href="#gallery">Explore Works ↘</a>
+        ${p.email ? `<a class="lumina-btn-glass" href="mailto:${tplEsc(p.email)}">Get in Touch</a>` : ''}
+      </div>
+    </header>
+
+    <section class="wrap lumina-works-sec" id="gallery">
+      <div class="lumina-sec-head">
+        <div>
+          <span class="lumina-sec-kicker">— CHROMATIC REEL —</span>
+          <h2 class="lumina-sec-title">Featured Explorations</h2>
+        </div>
+        <span class="lumina-counter-badge">${works.length} Works</span>
+      </div>
+      <div class="lumina-grid">
+        ${works.map((w, i) => {
+          const layoutClass = i % 4 === 0 ? 'lumina-card-wide' : (i % 4 === 3 ? 'lumina-card-tall' : '');
+          return `
+          <figure class="lumina-card ${layoutClass}" data-gal="${i}">
+            <div class="lumina-card-frame">
+              <span class="lumina-cat-tag">${tplEsc(w.category || 'DIGITAL ART')}</span>
+              <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title)}" loading="lazy">
+              <div class="lumina-shimmer-overlay"></div>
+            </div>
+            <figcaption class="lumina-card-meta">
+              <div class="lumina-meta-text">
+                <span class="lumina-card-year">${w.year || '2026'}</span>
+                <b>${tplEsc(w.title || 'Untitled Work')}</b>
+                ${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}
+              </div>
+              <span class="lumina-arrow">↗</span>
+            </figcaption>
+          </figure>
+          `;
+        }).join('')}
+      </div>
+    </section>
+
+    <section class="wrap lumina-about-sec" id="about">
+      <div class="lumina-glass-card">
+        <div class="lumina-glass-kicker">CREATIVE PERSPECTIVE</div>
+        <blockquote class="lumina-quote">"Light doesn't just illuminate form—it refracts possibilities and breathes soul into virtual dimensions."</blockquote>
+        <div class="lumina-quote-author">
+          ${face}
+          <div>
+            <b>${tplEsc(p.name)}</b>
+            <span>${tplEsc(p.title || 'Visual Creator')}${location ? ` · ${tplEsc(location)}` : ''}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="lumina-foot wrap">
+      <div class="lumina-foot-banner">
+        <div>
+          <span class="lumina-foot-kicker">COLLABORATE</span>
+          <h2>Let's create something transcendent.</h2>
+        </div>
+        ${p.email ? `<a class="lumina-btn-primary" href="mailto:${tplEsc(p.email)}">Connect ↗</a>` : ''}
+      </div>
+      <div class="lumina-foot-bottom">
+        <span>© ${new Date().getFullYear()} ${tplEsc(p.name)}</span>
+        <span>Lumina Prism Theme · Built with Portfoolio</span>
+      </div>
+    </footer>
+  </div>
+  `;
+  window.scrollTo(0, 0);
+}
+
+function renderVogue(p) {
+  normTpl(p);
+  document.body.dataset.template = 'vogue';
+  document.title = `${p.name} — Vogue Editorial | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const face = avatar ? `<img class="vogue-avatar" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : `<div class="vogue-avatar vogue-fallback">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`;
+  const kicker = (p.title || 'Haute Editorial & Direction').toUpperCase();
+  const location = p.location || '';
+  const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
+
+  app.innerHTML = `
+  <div class="vogue-page">
+    <header class="vogue-masthead wrap">
+      <div class="vogue-masthead-bar">
+        <span>VOL. XXIV · EDITION 2026</span>
+        <span class="vogue-masthead-title">VOGUE</span>
+        <span>PARIS · MILAN · NEW YORK</span>
+      </div>
+      <nav class="vogue-nav">
+        <div class="vogue-brand">
+          ${face}
+          <div class="vogue-brand-meta">
+            <span class="vogue-name">${tplEsc(p.name)}</span>
+            <span class="vogue-role">${tplEsc(p.title || 'Creative & Fashion Director')}</span>
+          </div>
+        </div>
+        <div class="vogue-nav-links">
+          <a href="#editorial">Editorial Spread</a>
+          <a href="#letter">Editor's Note</a>
+          ${p.email ? `<a class="vogue-btn-inquire" href="mailto:${tplEsc(p.email)}">Inquire ↗</a>` : ''}
+        </div>
+      </nav>
+    </header>
+
+    <section class="wrap gal-vogue-head">
+      <div class="vogue-issue-badge">— SPECIAL ISSUE · ${tplEsc(kicker)} —</div>
+      <h1 class="vogue-title">${tplEsc(p.name)}</h1>
+      <p class="vogue-sub">${works.length} Editorials Documented${location ? ` · ${tplEsc(location)}` : ''}</p>
+      ${bio ? `<p class="vogue-lead">${tplEsc(bio)}</p>` : ''}
+    </section>
+
+    <section class="wrap vogue-spread" id="editorial">
+      ${works.map((w, i) => {
+        const layoutClass = i % 3 === 0 ? 'vogue-spread-cover' : (i % 3 === 1 ? 'vogue-spread-left' : 'vogue-spread-right');
+        return `
+        <figure class="vogue-plate ${layoutClass}" data-gal="${i}">
+          <div class="vogue-frame">
+            <span class="vogue-plate-no">PLATE ${String(i + 1).padStart(2, '0')}</span>
+            <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title)}" loading="lazy">
+          </div>
+          <figcaption class="vogue-meta">
+            <span class="vogue-cat">${tplEsc(w.category || 'FASHION & EDITORIAL')}</span>
+            <b>${tplEsc(w.title || 'Untitled Spread')}</b>
+            ${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}
+          </figcaption>
+        </figure>
+        `;
+      }).join('')}
+    </section>
+
+    <section class="wrap vogue-about-sec" id="letter">
+      <div class="vogue-letter-card">
+        <div class="vogue-letter-header">
+          <span class="vogue-letter-badge">EDITOR'S NOTE</span>
+          <span class="vogue-letter-date">${new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase()}</span>
+        </div>
+        <blockquote class="vogue-quote">"Fashion is not simply garments—it is an evocative visual language that captures the spirit, attitude, and quiet elegance of our time."</blockquote>
+        <div class="vogue-signature">
+          ${face}
+          <div>
+            <b>${tplEsc(p.name)}</b>
+            <span>${tplEsc(p.title || 'Creative Director')}${location ? ` · ${tplEsc(location)}` : ''}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="vogue-foot wrap">
+      <div class="vogue-foot-top">
+        <span class="vogue-foot-logo">VOGUE ARCHIVE</span>
+        ${p.email ? `<a class="vogue-foot-cta" href="mailto:${tplEsc(p.email)}">Request Press Kit ↗</a>` : ''}
+      </div>
+      <div class="vogue-foot-bottom">
+        <span>© ${new Date().getFullYear()} ${tplEsc(p.name)}</span>
+        <span>Vogue Editorial Portfolio · Built with Portfoolio</span>
+      </div>
+    </footer>
+  </div>
+  `;
+  window.scrollTo(0, 0);
+}
+
+function renderFilmstrip(p) {
+  normTpl(p);
+  document.body.dataset.template = 'filmstrip';
+  document.title = `${p.name} — Filmstrip Reel | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const face = avatar ? `<img class="filmstrip-avatar" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : `<div class="filmstrip-avatar filmstrip-fallback">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`;
+  const kicker = (p.title || 'Cinematography & 35mm Stills').toUpperCase();
+  const location = p.location || '';
+  const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
+
+  app.innerHTML = `
+  <div class="filmstrip-page">
+    <div class="filmstrip-sprocket-strip top-strip" aria-hidden="true"></div>
+    <nav class="filmstrip-nav wrap">
+      <div class="filmstrip-brand">
+        ${face}
+        <div class="filmstrip-brand-meta">
+          <span class="filmstrip-name">${tplEsc(p.name)}</span>
+          <span class="filmstrip-format">● 35MM CINEMA REEL</span>
+        </div>
+      </div>
+      <div class="filmstrip-nav-links">
+        <a href="#reel">Reel</a>
+        <a href="#notes">Director's Log</a>
+        ${p.email ? `<a class="filmstrip-btn-inquire" href="mailto:${tplEsc(p.email)}">Book Shoot ↗</a>` : ''}
+      </div>
+    </nav>
+
+    <header class="wrap gal-filmstrip-head">
+      <div class="filmstrip-slate-badge">✦ ${tplEsc(kicker)} · 24 FPS ✦</div>
+      <h1 class="filmstrip-title">${tplEsc(p.name)}</h1>
+      <div class="filmstrip-stats">
+        <span class="filmstrip-rec-dot"></span>
+        <b>${tplEsc(p.title || 'Director of Photography')}</b>
+        <span>${works.length} Frames Curated${location ? ` · ${tplEsc(location)}` : ''}</span>
+      </div>
+      ${bio ? `<p class="filmstrip-bio">${tplEsc(bio)}</p>` : ''}
+    </header>
+
+    <section class="wrap filmstrip-reel-sec" id="reel">
+      <div class="filmstrip-sec-head">
+        <span class="filmstrip-sec-kicker">— ARCHIVAL ROLL EXPOSURES —</span>
+        <span class="filmstrip-stock">EMULSION: EASTMAN DOUBLE-X 5222</span>
+      </div>
+      <div class="filmstrip-reel">
+        ${works.map((w, i) => {
+          const frameNum = String(i + 1).padStart(2, '0');
+          const isWide = i % 3 === 0;
+          return `
+          <figure class="filmstrip-frame ${isWide ? 'filmstrip-wide' : ''}" data-gal="${i}">
+            <div class="filmstrip-sprocket-row" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="filmstrip-view">
+              <div class="filmstrip-edge-code">
+                <span>KODAK SAFETY FILM</span>
+                <span>▶ ${frameNum}A</span>
+              </div>
+              <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title)}" loading="lazy">
+            </div>
+            <figcaption class="filmstrip-meta">
+              <span class="filmstrip-cat">${tplEsc(w.category || 'ANALOG 35MM')}</span>
+              <b>${tplEsc(w.title || 'Untitled Frame')}</b>
+              ${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}
+            </figcaption>
+          </figure>
+          `;
+        }).join('')}
+      </div>
+    </section>
+
+    <section class="wrap filmstrip-about-sec" id="notes">
+      <div class="filmstrip-log-card">
+        <div class="filmstrip-log-header">
+          <span class="filmstrip-log-title">PRODUCTION LOG</span>
+          <span class="filmstrip-log-cam">ARRI ALEXA 35 · ANAMORPHIC</span>
+        </div>
+        <blockquote class="filmstrip-quote">"Cinema begins when light meets grain—capturing raw presence, unspoken tension, and stories that outlive the reel."</blockquote>
+        <div class="filmstrip-log-author">
+          ${face}
+          <div>
+            <b>${tplEsc(p.name)}</b>
+            <span>${tplEsc(p.title || 'Visual Storyteller')}${location ? ` · ${tplEsc(location)}` : ''}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="filmstrip-foot wrap">
+      <div class="filmstrip-foot-content">
+        <span>© ${new Date().getFullYear()} ${tplEsc(p.name)}</span>
+        <span>Filmstrip Reel Portfolio · Built with Portfoolio</span>
+      </div>
+    </footer>
+    <div class="filmstrip-sprocket-strip bottom-strip" aria-hidden="true"></div>
+  </div>
+  `;
+  window.scrollTo(0, 0);
+}
+
 function initCloudRuntime(p) {
   const btn = document.getElementById('cwThemeBtn');
   if (btn) {
@@ -7318,7 +7628,7 @@ function renderVisualGallery(p, tplName) {
   window.scrollTo(0, 0);
 }
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire };
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip };
 window.PortfoolioTemplateList = TEMPLATES;
 
 
