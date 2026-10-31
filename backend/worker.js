@@ -74,7 +74,7 @@ async function getProfile(sub) {
         row.services = row.resume.services;
       }
       // Self-heal legacy rows: a visual-only template implies the visual track
-      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
+      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
       if (row.track !== 'visual') row.track = 'tech';
 
       // Check seed profile to backfill custom services or extra repos
@@ -375,7 +375,7 @@ function skillsSection(p) {
 function pageGallery(p, wIdx, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'].includes(activeTpl) ? activeTpl : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'].includes(activeTpl) ? activeTpl : 'gallery';
   const works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   const i = parseInt(wIdx, 10);
   const w = (!isNaN(i) && works[i]) ? works[i] : null;
@@ -585,6 +585,146 @@ function pageGallery(p, wIdx, url) {
         <span>Zen Wabi-Sabi · Built with Portfoolio</span>
       </footer>
     </div>`
+    : vtpl === 'desire'
+    ? `<div class="desire-page">
+      <div class="desire-mesh-bg"></div>
+      <nav class="desire-nav wrap">
+        <div class="desire-brand">
+          ${avatar ? `<img class="desire-avatar" src="${esc(avatar)}" alt="${esc(p.name)}">` : `<div class="desire-avatar desire-fallback">${letter}</div>`}
+          <div class="desire-brand-meta">
+            <span class="desire-name">${esc(p.name)}</span>
+            <span class="desire-badge-online"><span class="desire-dot"></span> Available for projects</span>
+          </div>
+        </div>
+        <div class="desire-nav-pills">
+          <a href="#works">Selected Works</a>
+          <a href="#services">Services</a>
+          <a href="#about">About</a>
+        </div>
+        <div class="desire-nav-actions">
+          ${p.email ? `<a class="desire-btn-contact" href="mailto:${esc(p.email)}">Let's Talk ↗</a>` : ''}
+        </div>
+      </nav>
+      <header class="wrap gal-desire-head">
+        <div class="desire-kicker-pill"><span class="desire-sparkle">✦</span> CREATIVE DIRECTION &amp; PRODUCT DESIGN</div>
+        <h1 class="desire-title">Creating digital experiences with <em>soul &amp; precision.</em></h1>
+        <div class="desire-hero-loupe">
+          <div class="desire-loupe-glass">
+            <svg class="desire-loupe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <div class="desire-loupe-info">
+            <b>Magnified Craft</b>
+            <span>Curated for high-impact visual creators</span>
+          </div>
+        </div>
+        <p class="desire-bio">${esc(p.bio || p.summary || 'Crafting digital products, brand systems, and memorable interactive experiences.')}</p>
+        <div class="desire-tags-row">
+          <span class="desire-tag">✦ Presentation Design</span>
+          <span class="desire-tag">✦ Logo &amp; Identity</span>
+          <span class="desire-tag">✦ Product UI/UX</span>
+          <span class="desire-tag">✦ Design Systems</span>
+          <span class="desire-tag">✦ Motion &amp; 3D</span>
+        </div>
+        <div class="desire-hero-actions">
+          <a class="desire-btn-primary" href="#works">Explore Works ↘</a>
+          ${p.email ? `<a class="desire-btn-ghost" href="mailto:${esc(p.email)}">Inquire Package</a>` : ''}
+        </div>
+      </header>
+      <section class="wrap desire-works-sec" id="works">
+        <div class="desire-sec-head">
+          <div>
+            <span class="desire-sec-kicker">— SELECTED CASE STUDIES —</span>
+            <h2 class="desire-sec-title">Featured Explorations</h2>
+          </div>
+          <span class="desire-counter-badge">${works.length} Works Curated</span>
+        </div>
+        <div class="desire-grid">
+          ${works.map((k, n) => {
+            const layoutClass = n === 0 ? 'desire-card-hero' : (n % 5 === 1 ? 'desire-card-tall' : (n % 5 === 2 ? 'desire-card-med' : (n % 5 === 3 ? 'desire-card-wide' : 'desire-card-split')));
+            return `
+            <a class="desire-card ${layoutClass}" href="/?w=${n}" style="text-decoration:none;color:inherit">
+              <div class="desire-card-frame">
+                <span class="desire-cat-pill">${esc(k.category || 'VISUAL DESIGN')}</span>
+                <img src="${esc(k.imageUrl)}" alt="${esc(k.title || '')}" loading="lazy">
+                <div class="desire-card-overlay">
+                  <span class="desire-loupe-preview">🔍 Inspect</span>
+                </div>
+              </div>
+              <div class="desire-card-meta">
+                <div class="desire-meta-text">
+                  <span class="desire-card-year">${k.year || '2026'}</span>
+                  <b>${esc(k.title || 'Untitled Case Study')}</b>
+                  ${k.desc ? `<p>${esc(k.desc)}</p>` : ''}
+                </div>
+                <span class="desire-arrow-pill">↗</span>
+              </div>
+            </a>`;
+          }).join('') || emptyMsg}
+        </div>
+      </section>
+      <section class="wrap desire-services-sec" id="services">
+        <div class="desire-sec-head">
+          <div>
+            <span class="desire-sec-kicker">— WHAT I OFFER —</span>
+            <h2 class="desire-sec-title">Services &amp; Packages</h2>
+          </div>
+          <p class="desire-sec-desc">Direct engagement packages tailored for startups and forward-thinking brands.</p>
+        </div>
+        <div class="desire-services-grid">
+          <div class="desire-service-card">
+            <div class="desire-srv-head"><span class="desire-srv-num">01</span><span class="desire-srv-price">From $1,500</span></div>
+            <h3>Presentation Design</h3>
+            <p>Keynotes, investor pitch decks &amp; sales collateral crafted to win rounds and close enterprise deals.</p>
+            <ul class="desire-srv-features"><li>Investor Pitch Decks</li><li>Custom Visual Narrative</li><li>Interactive Digital Slides</li></ul>
+          </div>
+          <div class="desire-service-card desire-srv-featured">
+            <div class="desire-srv-badge">MOST POPULAR</div>
+            <div class="desire-srv-head"><span class="desire-srv-num">02</span><span class="desire-srv-price">From $2,000</span></div>
+            <h3>Logo &amp; Brand Identity</h3>
+            <p>Memorable visual marks, typography pairings, color systems, and comprehensive identity guidelines.</p>
+            <ul class="desire-srv-features"><li>Vector Logo Suite</li><li>Typography &amp; Color System</li><li>Brand Guidelines &amp; Assets</li></ul>
+          </div>
+          <div class="desire-service-card">
+            <div class="desire-srv-head"><span class="desire-srv-num">03</span><span class="desire-srv-price">From $3,500</span></div>
+            <h3>Branding Starter Pack</h3>
+            <p>End-to-end brand identity kit including social presence, stationery, 3D assets, and marketing guidelines.</p>
+            <ul class="desire-srv-features"><li>Comprehensive Brand Book</li><li>Social Media Template Kits</li><li>Digital &amp; Print Stationery</li></ul>
+          </div>
+          <div class="desire-service-card">
+            <div class="desire-srv-head"><span class="desire-srv-num">04</span><span class="desire-srv-price">From $10,000</span></div>
+            <h3>Product Design &amp; Systems</h3>
+            <p>Full-stack product design: UX research, interactive prototypes, scalable design systems &amp; dev handoff.</p>
+            <ul class="desire-srv-features"><li>End-to-end UX/UI Architecture</li><li>Figma Component Library</li><li>Interactive Motion &amp; Micro-interactions</li></ul>
+          </div>
+        </div>
+      </section>
+      <section class="wrap desire-about-sec" id="about">
+        <div class="desire-quote-card">
+          <div class="desire-quote-kicker">DESIGN PHILOSOPHY</div>
+          <blockquote class="desire-quote">"Design is not simply how things look—it's how effortlessly they connect, communicate, and solve real human needs."</blockquote>
+          <div class="desire-quote-author">
+            ${avatar ? `<img class="desire-avatar" src="${esc(avatar)}" alt="${esc(p.name)}">` : `<div class="desire-avatar desire-fallback">${letter}</div>`}
+            <div>
+              <b>${esc(p.name)}</b>
+              <span>${esc(p.title || 'Product &amp; Visual Designer')} · ${esc(p.location || 'San Francisco, CA')}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="desire-foot wrap">
+        <div class="desire-foot-banner">
+          <div>
+            <span class="desire-foot-kicker">HAVE A VISION IN MIND?</span>
+            <h2>Let's build something unforgettable.</h2>
+          </div>
+          ${p.email ? `<a class="desire-btn-primary" href="mailto:${esc(p.email)}">Get in Touch ↗</a>` : ''}
+        </div>
+        <div class="desire-foot-bottom">
+          <span>© ${new Date().getFullYear()} ${esc(p.name)}</span>
+          <span>Desire Studio Theme · Built with Portfoolio</span>
+        </div>
+      </footer>
+    </div>`
     : vtpl === 'catalog'
     ? `<header class="wrap gal-catalog-head">
       <p class="cat-kicker">— CATALOGUE —</p>
@@ -691,10 +831,10 @@ function pageGallery(p, wIdx, url) {
       })();
     </script></body></html>`;
   }
-  if (['atelier', 'cinema', 'arch', 'zine', 'zen'].includes(vtpl) && !w) {
-    return `<!DOCTYPE html><html lang="en">${head(p, vtpl)}<body class="portfolio-view" data-template="${vtpl}">${body}<script>(function(){if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
+  if (['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'].includes(vtpl) && !w) {
+    return `<!DOCTYPE html><html lang="en">${head(p, vtpl)}<body class="portfolio-view" data-template="${vtpl}">${body}<script>(function(){if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
   }
-  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion','atelier','cinema','arch','zine','zen'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
+  return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion','atelier','cinema','arch','zine','zen', 'desire'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
 }
 function pageModerncv(p) {
   const name = esc(p.name || 'Developer');
@@ -5979,7 +6119,7 @@ function pageCloud(p) {
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
-  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
   if (visualOnly.includes(tpl)) {
     tpl = 'midnight';
   }
@@ -6449,7 +6589,7 @@ export default {
     }
     // visual track renders the gallery, not the code portfolio
     const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
-    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen'];
+    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
     const isVisualTrack = (qTpl && visualThemes.includes(qTpl.toLowerCase())) || p.track === 'visual' || (p.track !== 'tech' && Array.isArray(p.works) && p.works.length > 0 && visualThemes.includes(String(p.template || '').toLowerCase()));
     if (isVisualTrack) {
       const html = pageGallery(p, url.searchParams.get('w'), url);
