@@ -47,7 +47,8 @@ const TEMPLATES = [
   { id: 'cinema', name: 'Cinema', desc: 'Obsidian 2.39:1 widescreen stills with camera HUD, timecode & REC dot', emoji: '🎬', best: 'Filmmakers • Cinematographers • VFX Artists', track: 'visual' },
   { id: 'arch', name: 'Arch Blueprint', desc: 'Architectural drafting grid with plate specs, dimension stamps & crosshairs', emoji: '📐', best: 'Architects • Interior Designers • Industrial Designers', track: 'visual' },
   { id: 'zine', name: 'Risograph Zine', desc: 'Indie art zine with washi tape strips, pop halftone shadows & sticker badges', emoji: '🎨', best: 'Illustrators • Comic Artists • Printmakers', track: 'visual' },
-  { id: 'zen', name: 'Zen Wabi-Sabi', desc: 'Serene Japanese ceramic studio with ensō brush avatar & organic stone layout', emoji: '🍵', best: 'Ceramicists • Sculptors • Lifestyle Curators', track: 'visual' }
+  { id: 'zen', name: 'Zen Wabi-Sabi', desc: 'Serene Japanese ceramic studio with ensō brush avatar & organic stone layout', emoji: '🍵', best: 'Ceramicists • Sculptors • Lifestyle Curators', track: 'visual' },
+  { id: 'desire', name: 'Desire Studio', desc: 'Vibrant designer portfolio with interactive loupe lens, asymmetric cards & services pricing', emoji: '✨', best: 'UI/UX Designers • Product Designers • Creative Studios', track: 'visual' }
 ];
 
 function tplEsc(s) {
@@ -7101,6 +7102,196 @@ function renderZen(p) {
   window.scrollTo(0, 0);
 }
 
+function renderDesire(p) {
+  normTpl(p);
+  document.body.dataset.template = 'desire';
+  document.title = `${p.name} — Desire Creative Studio | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const face = avatar ? `<img class="desire-avatar" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : `<div class="desire-avatar desire-fallback">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`;
+  const headline = p.title || 'Product &amp; Visual Designer';
+  const location = p.location || 'San Francisco, CA';
+  const bio = p.bio || p.summary || 'Crafting digital products, brand systems, and memorable interactive experiences.';
+
+  app.innerHTML = `
+  <div class="desire-page">
+    <div class="desire-mesh-bg"></div>
+    <nav class="desire-nav wrap">
+      <div class="desire-brand">
+        ${face}
+        <div class="desire-brand-meta">
+          <span class="desire-name">${tplEsc(p.name)}</span>
+          <span class="desire-badge-online"><span class="desire-dot"></span> Available for projects</span>
+        </div>
+      </div>
+      <div class="desire-nav-pills">
+        <a href="#works">Selected Works</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+      </div>
+      <div class="desire-nav-actions">
+        ${p.email ? `<a class="desire-btn-contact" href="mailto:${tplEsc(p.email)}">Let's Talk ↗</a>` : ''}
+      </div>
+    </nav>
+
+    <header class="wrap gal-desire-head">
+      <div class="desire-kicker-pill"><span class="desire-sparkle">✦</span> CREATIVE DIRECTION &amp; PRODUCT DESIGN</div>
+      <h1 class="desire-title">Creating digital experiences with <em>soul &amp; precision.</em></h1>
+      <div class="desire-hero-loupe">
+        <div class="desire-loupe-glass">
+          <svg class="desire-loupe-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+        <div class="desire-loupe-info">
+          <b>Magnified Craft</b>
+          <span>Curated for high-impact visual creators</span>
+        </div>
+      </div>
+      <p class="desire-bio">${tplEsc(bio)}</p>
+      <div class="desire-tags-row">
+        <span class="desire-tag">✦ Presentation Design</span>
+        <span class="desire-tag">✦ Logo &amp; Identity</span>
+        <span class="desire-tag">✦ Product UI/UX</span>
+        <span class="desire-tag">✦ Design Systems</span>
+        <span class="desire-tag">✦ Motion &amp; 3D</span>
+      </div>
+      <div class="desire-hero-actions">
+        <a class="desire-btn-primary" href="#works">Explore Works ↘</a>
+        ${p.email ? `<a class="desire-btn-ghost" href="mailto:${tplEsc(p.email)}">Inquire Package</a>` : ''}
+      </div>
+    </header>
+
+    <section class="wrap desire-works-sec" id="works">
+      <div class="desire-sec-head">
+        <div>
+          <span class="desire-sec-kicker">— SELECTED CASE STUDIES —</span>
+          <h2 class="desire-sec-title">Featured Explorations</h2>
+        </div>
+        <span class="desire-counter-badge">${works.length} Works Curated</span>
+      </div>
+      <div class="desire-grid">
+        ${works.map((w, i) => {
+          const layoutClass = i === 0 ? 'desire-card-hero' : (i % 5 === 1 ? 'desire-card-tall' : (i % 5 === 2 ? 'desire-card-med' : (i % 5 === 3 ? 'desire-card-wide' : 'desire-card-split')));
+          return `
+          <figure class="desire-card ${layoutClass}" data-gal="${i}">
+            <div class="desire-card-frame">
+              <span class="desire-cat-pill">${tplEsc(w.category || 'VISUAL DESIGN')}</span>
+              <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title)}" loading="lazy">
+              <div class="desire-card-overlay">
+                <span class="desire-loupe-preview">🔍 Inspect</span>
+              </div>
+            </div>
+            <figcaption class="desire-card-meta">
+              <div class="desire-meta-text">
+                <span class="desire-card-year">${w.year || '2026'}</span>
+                <b>${tplEsc(w.title || 'Untitled Case Study')}</b>
+                ${w.desc ? `<p>${tplEsc(w.desc)}</p>` : ''}
+              </div>
+              <span class="desire-arrow-pill">↗</span>
+            </figcaption>
+          </figure>
+          `;
+        }).join('')}
+      </div>
+    </section>
+
+    <section class="wrap desire-services-sec" id="services">
+      <div class="desire-sec-head">
+        <div>
+          <span class="desire-sec-kicker">— WHAT I OFFER —</span>
+          <h2 class="desire-sec-title">Services &amp; Packages</h2>
+        </div>
+        <p class="desire-sec-desc">Direct engagement packages tailored for startups and forward-thinking brands.</p>
+      </div>
+      <div class="desire-services-grid">
+        <div class="desire-service-card">
+          <div class="desire-srv-head">
+            <span class="desire-srv-num">01</span>
+            <span class="desire-srv-price">From $1,500</span>
+          </div>
+          <h3>Presentation Design</h3>
+          <p>Keynotes, investor pitch decks &amp; sales collateral crafted to win rounds and close enterprise deals.</p>
+          <ul class="desire-srv-features">
+            <li>Investor Pitch Decks</li>
+            <li>Custom Visual Narrative</li>
+            <li>Interactive Digital Slides</li>
+          </ul>
+        </div>
+        <div class="desire-service-card desire-srv-featured">
+          <div class="desire-srv-badge">MOST POPULAR</div>
+          <div class="desire-srv-head">
+            <span class="desire-srv-num">02</span>
+            <span class="desire-srv-price">From $2,000</span>
+          </div>
+          <h3>Logo &amp; Brand Identity</h3>
+          <p>Memorable visual marks, typography pairings, color systems, and comprehensive identity guidelines.</p>
+          <ul class="desire-srv-features">
+            <li>Vector Logo Suite</li>
+            <li>Typography &amp; Color System</li>
+            <li>Brand Guidelines &amp; Assets</li>
+          </ul>
+        </div>
+        <div class="desire-service-card">
+          <div class="desire-srv-head">
+            <span class="desire-srv-num">03</span>
+            <span class="desire-srv-price">From $3,500</span>
+          </div>
+          <h3>Branding Starter Pack</h3>
+          <p>End-to-end brand identity kit including social presence, stationery, 3D assets, and marketing guidelines.</p>
+          <ul class="desire-srv-features">
+            <li>Comprehensive Brand Book</li>
+            <li>Social Media Template Kits</li>
+            <li>Digital &amp; Print Stationery</li>
+          </ul>
+        </div>
+        <div class="desire-service-card">
+          <div class="desire-srv-head">
+            <span class="desire-srv-num">04</span>
+            <span class="desire-srv-price">From $10,000</span>
+          </div>
+          <h3>Product Design &amp; Systems</h3>
+          <p>Full-stack product design: UX research, interactive prototypes, scalable design systems &amp; dev handoff.</p>
+          <ul class="desire-srv-features">
+            <li>End-to-end UX/UI Architecture</li>
+            <li>Figma Component Library</li>
+            <li>Interactive Motion &amp; Micro-interactions</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap desire-about-sec" id="about">
+      <div class="desire-quote-card">
+        <div class="desire-quote-kicker">DESIGN PHILOSOPHY</div>
+        <blockquote class="desire-quote">"Design is not simply how things look—it's how effortlessly they connect, communicate, and solve real human needs."</blockquote>
+        <div class="desire-quote-author">
+          ${face}
+          <div>
+            <b>${tplEsc(p.name)}</b>
+            <span>${tplEsc(headline)} · ${tplEsc(location)}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="desire-foot wrap">
+      <div class="desire-foot-banner">
+        <div>
+          <span class="desire-foot-kicker">HAVE A VISION IN MIND?</span>
+          <h2>Let's build something unforgettable.</h2>
+        </div>
+        ${p.email ? `<a class="desire-btn-primary" href="mailto:${tplEsc(p.email)}">Get in Touch ↗</a>` : ''}
+      </div>
+      <div class="desire-foot-bottom">
+        <span>© ${new Date().getFullYear()} ${tplEsc(p.name)}</span>
+        <span>Desire Studio Theme · Built with Portfoolio</span>
+      </div>
+    </footer>
+  </div>
+  `;
+  window.scrollTo(0, 0);
+}
+
 function initCloudRuntime(p) {
   const btn = document.getElementById('cwThemeBtn');
   if (btn) {
@@ -7196,7 +7387,7 @@ function renderVisualGallery(p, tplName) {
   window.scrollTo(0, 0);
 }
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen };
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire };
 window.PortfoolioTemplateList = TEMPLATES;
 
 
