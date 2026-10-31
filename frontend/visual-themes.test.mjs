@@ -111,7 +111,7 @@ test('All themes filter label is updated to 28', () => {
   assert.ok(INDEX_HTML.includes('28 handcrafted themes'), 'index.html kicker must say 28 handcrafted themes');
 });
 
-test('Desire theme renders creator case studies and dynamic focus skills', () => {
+test('Desire theme renders clean hero with creator name and bio, and removes focus areas', () => {
   let capturedHtml = '';
   const domMock = {
     document: {
@@ -134,17 +134,21 @@ test('Desire theme renders creator case studies and dynamic focus skills', () =>
   assert.ok(desireFn, 'desire template must exist');
   desireFn({
     name: 'Neeraj K R',
-    title: 'Design Technologist',
-    location: 'Bangalore, India',
-    skills: ['Figma Mastery', 'Creative Coding', 'Design Ops'],
-    projects: [
-      { title: 'Interactive Aura', technologies: ['Canvas API', 'WebGL'] }
+    title: 'Aspiring Developer',
+    location: 'Kerala, India',
+    bio: 'Crafting clean web architectures and creative software solutions.',
+    works: [
+      { title: 'Interactive Aura', imageUrl: 'https://example.com/1.jpg', category: 'Creative Tech' }
     ]
   });
 
-  assert.ok(capturedHtml.includes('Specialized Focus Areas'), 'desire must render Specialized Focus Areas');
-  assert.ok(capturedHtml.includes('Interactive Aura'), 'desire must render real project case study');
-  assert.ok(capturedHtml.includes('Figma Mastery'), 'desire must render dynamic creator skills');
+  assert.ok(capturedHtml.includes('<h1 class="desire-title">Neeraj K R</h1>'), 'desire must render creator name as title');
+  assert.ok(capturedHtml.includes('Aspiring Developer'), 'desire must render creator title in loupe');
+  assert.ok(capturedHtml.includes('Kerala, India'), 'desire must render creator location');
+  assert.ok(capturedHtml.includes('Crafting clean web architectures'), 'desire must render creator bio');
+  assert.ok(!capturedHtml.includes('Specialized Focus Areas'), 'desire must have removed Specialized Focus Areas section');
   assert.ok(!capturedHtml.includes('From $10,000'), 'desire must not have hardcoded agency pricing');
+  assert.ok(!capturedHtml.includes('Creating digital experiences with'), 'desire must not have fake agency slogan');
+  assert.ok(!capturedHtml.includes('desire-tags-row'), 'desire must not render dummy tags row');
 });
 
