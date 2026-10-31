@@ -2725,6 +2725,7 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 .lx-tp-arch{background:#f7f6f2;border-color:#18181b}
 .lx-tp-zine{background:#fffcf2;border-color:#111111}
 .lx-tp-zen{background:#f2ece4;border-color:rgba(168,93,66,0.3)}
+.lx-tp-desire{background:#090a10;border-color:rgba(168,85,247,0.4)}
 
 /* STUDIO PICKER THUMBNAILS (.tpl-preview) */
 .tpl-preview.atelier{background:linear-gradient(135deg,#0b0c10,#1a1b24);color:#c5a059}
@@ -2732,6 +2733,7 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 .tpl-preview.arch{background:linear-gradient(135deg,#f7f6f2,#e4e4e7);color:#18181b}
 .tpl-preview.zine{background:linear-gradient(135deg,#ff2d78,#00e5ff);color:#fff}
 .tpl-preview.zen{background:linear-gradient(135deg,#f2ece4,#e8ded3);color:#a85d42}
+.tpl-preview.desire{background:linear-gradient(135deg,#6366f1,#d946ef);color:#fff}
 
 /* MODAL BODY STYLING */
 .lx-modal-body[data-theme="atelier"]{background:#0b0c10;color:#f4f4f0}
@@ -2739,5 +2741,6 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 .lx-modal-body[data-theme="arch"]{background:#f7f6f2;color:#18181b}
 .lx-modal-body[data-theme="zine"]{background:#fffcf2;color:#111111}
 .lx-modal-body[data-theme="zen"]{background:#f2ece4;color:#2c2825}
+.lx-modal-body[data-theme="desire"]{background:#090a10;color:#f1f2f6}
 
 body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-overlay { display: none !important; }
