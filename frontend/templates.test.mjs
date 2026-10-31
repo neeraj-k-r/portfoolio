@@ -65,7 +65,7 @@ const { PortfoolioTemplates, PortfoolioTemplateList } = context.window;
 assert.ok(Array.isArray(PortfoolioTemplateList), 'PortfoolioTemplateList must be an array');
 assert.ok(typeof PortfoolioTemplates === 'object', 'PortfoolioTemplates must be an object');
 
-const newTemplateIds = ['nova', 'codeflow', 'wave', 'assistant', 'console', 'snowcard', 'parchment', 'cloud', 'github', 'particle', 'panels', 'monolith', 'editor', 'magazine', 'bold', 'clean', 'vibrant', 'neon', 'hacker', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
+const newTemplateIds = ['nova', 'codeflow', 'wave', 'assistant', 'console', 'snowcard', 'parchment', 'cloud', 'github', 'particle', 'panels', 'monolith', 'editor', 'magazine', 'bold', 'clean', 'vibrant', 'neon', 'hacker', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'];
 
 for (const id of newTemplateIds) {
   const meta = PortfoolioTemplateList.find(t => t.id === id);

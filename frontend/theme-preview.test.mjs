@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import fs from 'fs';
 
-const newThemes = ['nova', 'codeflow', 'wave', 'assistant', 'console', 'snowcard', 'parchment', 'cloud', 'github', 'particle', 'panels', 'monolith', 'editor', 'magazine', 'bold', 'clean', 'vibrant', 'neon', 'hacker', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire'];
+const newThemes = ['nova', 'codeflow', 'wave', 'assistant', 'console', 'snowcard', 'parchment', 'cloud', 'github', 'particle', 'panels', 'monolith', 'editor', 'magazine', 'bold', 'clean', 'vibrant', 'neon', 'hacker', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'];
 
 describe('Theme Preview Features & Mockups', () => {
   const styleCss = fs.readFileSync('frontend/style.css', 'utf8');
