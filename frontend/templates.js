@@ -7777,7 +7777,36 @@ function renderPavilion(p) {
       </div>
     </header>
 
-  // renderPavilion works stub
+    <section class="wrap pavilion-spatial-sec">
+      <div class="pavilion-sec-title">
+        <span>INSTALLATION SURVEY / REPERTORIO SPAZIALE</span>
+        <span>SECTION A–E</span>
+      </div>
+      <div class="pavilion-grid">
+        ${works.map((w, i) => {
+          const plateId = String(i + 1).padStart(2, '0');
+          const isWide = i % 2 === 0;
+          return `
+          <div class="pavilion-card ${isWide ? 'pavilion-card-wide' : ''}" data-gal="${i}">
+            <div class="pavilion-elevation">
+              <span class="pavilion-plate-badge">PLATE ${plateId}</span>
+              <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || 'Architectural Study')}" loading="lazy">
+            </div>
+            <div class="pavilion-meta-panel">
+              <div class="pavilion-meta-kicker">${tplEsc(w.category || 'Spatial Intervention').toUpperCase()}</div>
+              <h3 class="pavilion-meta-title">${tplEsc(w.title || 'Spatial Monolith')}</h3>
+              ${w.desc ? `<p class="pavilion-meta-desc">${tplEsc(w.desc)}</p>` : ''}
+              <div class="pavilion-tech-specs">
+                <span>COORD: 0${i + 1} // ELEVATION 1:50</span>
+                <span>YEAR: ${year}</span>
+              </div>
+            </div>
+          </div>
+          `;
+        }).join('')}
+      </div>
+    </section>
+
   </div>`;
   window.scrollTo(0, 0);
 }
