@@ -10550,3 +10550,5 @@ body[data-template="filmstrip"] {
 .lx-tp-sketchbook .lx-tp-nav { background: #3f1d2e; height: 3px; }
 .lx-tp-sketchbook .lx-tp-hero { background: #ebe5db; border-left: 2px solid #3f1d2e; }
 .lx-tp-sketchbook .lx-tp-cards { background: #fff; border-radius: 4px; border: 1px solid rgba(0,0,0,0.1); }
+
+.lx-modal-body[data-theme="sketchbook"] { background: #f3efe6; color: #1f1e1c; }
