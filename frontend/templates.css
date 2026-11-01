@@ -10479,3 +10479,15 @@ body[data-template="filmstrip"] {
 
 /* SKETCHBOOK GRAPHITE DRAWING THEME */
 .sb-page { background: #f3efe6; color: #1f1e1c; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; }
+
+.sb-nav { display: flex; justify-content: space-between; align-items: center; padding: 28px 0; }
+.sb-brand { display: flex; align-items: center; gap: 14px; }
+.sb-monogram-sig { font-family: 'Instrument Serif', Georgia, serif; font-size: 34px; font-style: italic; font-weight: 700; color: #1f1e1c; letter-spacing: -1px; line-height: 1; }
+.sb-brand-name { font-size: 16px; font-weight: 700; color: #1f1e1c; display: block; }
+.sb-brand-sub { font-size: 11px; font-weight: 500; color: #787268; }
+.sb-nav-menu { display: flex; gap: 28px; align-items: center; }
+@media(max-width:768px){ .sb-nav-menu { display: none; } }
+.sb-nav-link { color: #524d45; text-decoration: none; font-size: 14px; font-weight: 600; padding-bottom: 4px; transition: color .2s; }
+.sb-nav-link.active { color: #3f1d2e; border-bottom: 2px solid #3f1d2e; font-weight: 700; }
+.sb-contact-pill { background: #3f1d2e; color: #fff; padding: 9px 20px; border-radius: 100px; text-decoration: none; font-size: 13px; font-weight: 700; transition: transform .2s, opacity .2s; }
+.sb-contact-pill:hover { opacity: .9; transform: translateY(-1px); }
