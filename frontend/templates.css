@@ -10545,3 +10545,8 @@ body[data-template="filmstrip"] {
 .sb-footer { padding: 36px 0; border-top: 1px solid rgba(31,30,28,0.1); }
 .sb-footer-inner { display: flex; justify-content: space-between; font-size: 12px; color: #787268; flex-wrap: wrap; gap: 12px; }
 .sb-colophon-tag { font-weight: 600; color: #3f1d2e; }
+
+.lx-tp-sketchbook { background: #f3efe6; border: 1px solid #3f1d2e; }
+.lx-tp-sketchbook .lx-tp-nav { background: #3f1d2e; height: 3px; }
+.lx-tp-sketchbook .lx-tp-hero { background: #ebe5db; border-left: 2px solid #3f1d2e; }
+.lx-tp-sketchbook .lx-tp-cards { background: #fff; border-radius: 4px; border: 1px solid rgba(0,0,0,0.1); }
