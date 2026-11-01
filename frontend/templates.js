@@ -7864,7 +7864,7 @@ function renderDocumenta(p) {
 
     <nav class="documenta-nav wrap">
       <div class="documenta-brand">
-        <span class="documenta-index-chip">DOC.KASSEL</span>
+        <span class="documenta-index-chip">DOC.ARCHIVE</span>
         <div>
           <span class="documenta-reg-name">${tplEsc(p.name)}</span>
           <span class="documenta-reg-dept">ARCHIVAL MONOGRAPH & DOSSIER</span>
@@ -7896,7 +7896,7 @@ function renderDocumenta(p) {
 
     <section class="wrap documenta-archive-sec">
       <div class="documenta-sec-header">
-        <span class="documenta-sec-title">CATALOGUE RAISONNÉ / PLATES</span>
+        <span class="documenta-sec-title">CATALOGUE RAISONNÉ · ARCHIVAL PLATES</span>
         <span class="documenta-sec-filter">INVENTORY SEQUENCE 01–${String(works.length).padStart(2, '0')}</span>
       </div>
       <div class="documenta-grid">
