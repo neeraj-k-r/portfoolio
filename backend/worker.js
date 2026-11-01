@@ -799,13 +799,6 @@ function pageGallery(p, wIdx, url) {
       <section class="sb-artworks-sec wrap" id="artworks">
         <div class="sb-sec-bar">
           <h2 class="sb-sec-title">Artworks</h2>
-          <div class="sb-filter-pills">
-            <span class="sb-pill active">All</span>
-            <span class="sb-pill">Portraits</span>
-            <span class="sb-pill">Sketches</span>
-            <span class="sb-pill">Studies</span>
-            <span class="sb-pill">··· Other</span>
-          </div>
           <a class="sb-view-all-link" href="#artworks">View All <span>→</span></a>
         </div>
         <div class="sb-cards-grid">
