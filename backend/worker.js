@@ -256,6 +256,56 @@ function head(p, tpl) {
 .triennale-card.triennale-card-full{grid-column:span 2}
 .triennale-card-view img{width:100%;height:auto;display:block;object-fit:cover}
 .triennale-card-meta{padding:22px}
+
+/* SKETCHBOOK DRAWING THEME */
+.sb-page{background:#f3efe6;color:#1f1e1c;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh}
+.sb-nav{display:flex;justify-content:space-between;align-items:center;padding:28px 0}
+.sb-brand{display:flex;align-items:center;gap:14px}
+.sb-monogram-sig{font-family:'Instrument Serif',Georgia,serif;font-size:34px;font-style:italic;font-weight:700;color:#1f1e1c;letter-spacing:-1px;line-height:1}
+.sb-brand-name{font-size:16px;font-weight:700;color:#1f1e1c;display:block}
+.sb-brand-sub{font-size:11px;font-weight:500;color:#787268}
+.sb-nav-menu{display:flex;gap:28px;align-items:center}
+@media(max-width:768px){.sb-nav-menu{display:none}}
+.sb-nav-link{color:#524d45;text-decoration:none;font-size:14px;font-weight:600;padding-bottom:4px}
+.sb-nav-link.active{color:#3f1d2e;border-bottom:2px solid #3f1d2e;font-weight:700}
+.sb-contact-pill{background:#3f1d2e;color:#fff;padding:9px 20px;border-radius:100px;text-decoration:none;font-size:13px;font-weight:700}
+.sb-hero{padding:40px 0 60px}
+.sb-hero-layout{display:grid;grid-template-columns:1fr 1.15fr;gap:48px;align-items:center}
+@media(max-width:900px){.sb-hero-layout{grid-template-columns:1fr}}
+.sb-kicker{font-size:11px;font-weight:800;letter-spacing:2.5px;color:#8c857b;text-transform:uppercase;margin-bottom:12px}
+.sb-headline{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(48px,6.5vw,82px);font-weight:400;line-height:1.02;color:#1f1e1c;margin:0 0 10px}
+.sb-headline em{font-style:italic;color:#3f1d2e}
+.sb-brush-stroke{width:180px;height:12px;margin-bottom:24px}
+.sb-lead{font-size:16px;line-height:1.6;color:#615a51;margin:0 0 32px;max-width:440px}
+.sb-cta-group{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.sb-btn-primary{background:#3f1d2e;color:#fff;padding:12px 26px;border-radius:100px;font-size:14px;font-weight:700;text-decoration:none}
+.sb-btn-secondary{background:transparent;border:1.5px solid #3f1d2e;color:#3f1d2e;padding:11px 24px;border-radius:100px;font-size:14px;font-weight:700;text-decoration:none}
+.sb-hero-visual{position:relative}
+.sb-hero-art-wrapper{position:relative;display:flex;justify-content:center}
+.sb-hero-drawing{width:100%;max-width:540px;height:auto;border-radius:20px;object-fit:cover;filter:contrast(1.05) grayscale(0.85);box-shadow:0 12px 40px rgba(0,0,0,0.08)}
+.sb-pencil-prop{position:absolute;right:-15px;top:15%;width:14px;height:160px;transform:rotate(18deg);z-index:2}
+.sb-pencil-body{width:10px;height:120px;background:linear-gradient(90deg,#1f1e1c 0%,#3a3835 50%,#1a1918 100%);border-radius:2px}
+.sb-pencil-tip{width:0;height:0;border-left:5px solid transparent;border-right:5px solid transparent;border-top:25px solid #d4a373;margin-top:-1px}
+.sb-pencil-lead{width:3px;height:10px;background:#1a1918;margin:0 auto;margin-top:-3px;border-radius:1px}
+.sb-pencil-shadow{position:absolute;left:10px;top:10px;width:8px;height:140px;background:rgba(0,0,0,0.12);filter:blur(4px);z-index:-1;transform:rotate(-5deg)}
+.sb-artworks-sec{padding:40px 0 80px}
+.sb-sec-bar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:34px;flex-wrap:wrap}
+.sb-sec-title{font-family:'Instrument Serif',Georgia,serif;font-size:38px;font-weight:400;color:#1f1e1c;margin:0}
+.sb-filter-pills{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sb-pill{background:transparent;border:1px solid rgba(31,30,28,0.2);color:#524d45;padding:7px 16px;border-radius:100px;font-size:13px;font-weight:600}
+.sb-pill.active{background:#3f1d2e;border-color:#3f1d2e;color:#fff}
+.sb-view-all-link{font-size:13px;font-weight:700;color:#3f1d2e;text-decoration:none}
+.sb-cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px}
+.sb-card{background:#fff;border-radius:16px;overflow:hidden;border:1px solid rgba(31,30,28,0.08);box-shadow:0 4px 18px rgba(0,0,0,0.04)}
+.sb-card-frame{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#e5dfd5}
+.sb-card-frame img{width:100%;height:100%;object-fit:cover;filter:contrast(1.04) grayscale(0.7)}
+.sb-card-badge{position:absolute;bottom:10px;left:10px;background:rgba(31,30,28,0.75);color:#fff;font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px}
+.sb-card-info{padding:14px 16px;background:#fff}
+.sb-card-title{font-family:'Instrument Serif',Georgia,serif;font-size:18px;margin:0 0 4px;color:#1f1e1c}
+.sb-card-desc{font-size:12px;color:#787268;margin:0;line-height:1.4}
+.sb-footer{padding:36px 0;border-top:1px solid rgba(31,30,28,0.1)}
+.sb-footer-inner{display:flex;justify-content:space-between;font-size:12px;color:#787268;flex-wrap:wrap;gap:12px}
+.sb-colophon-tag{font-weight:600;color:#3f1d2e}
 </style>` : '';
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
