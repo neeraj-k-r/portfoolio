@@ -8030,6 +8030,37 @@ function renderTriennale(p) {
   window.scrollTo(0, 0);
 }
 
+
+function renderSketchbook(p) {
+  normTpl(p);
+  document.body.dataset.template = 'sketchbook';
+  document.title = `${p.name} — Drawing Portfolio | portfoolio.me`;
+  const app = document.getElementById('app');
+  let works = getVisualWorks(p);
+  if (!works || !works.length) {
+    works = [
+      { title: 'Classical Bust Study', category: 'Portraits', imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80', desc: 'Realistic graphite study rendered with crosshatching on cold-pressed paper.' },
+      { title: 'Soulful Gaze', category: 'Portraits', imageUrl: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80', desc: 'Portrait study capturing subtle lighting and expressive contours.' },
+      { title: 'Ocular Anatomy', category: 'Studies', imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=800&q=80', desc: 'Detailed graphite study of human eye reflections and iris depth.' },
+      { title: 'Stone Temple Elevation', category: 'Sketches', imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80', desc: 'Architectural sketch of tiered Dravidian stone sanctuary.' },
+      { title: 'Canine Companion', category: 'Studies', imageUrl: 'https://images.unsplash.com/photo-1552053831-71594a27632d?auto=format&fit=crop&w=800&q=80', desc: 'Soft pencil fur texture study of a golden retriever in natural light.' },
+      { title: 'Cranial Study', category: 'Other', imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=800&q=80', desc: 'Anatomical bone structure and tonal shading rendered in 2B graphite.' }
+    ];
+  }
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const location = p.location || '';
+  const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
+  const year = new Date().getFullYear();
+  
+  // Extract monogram initials (e.g. Nithin Krishna -> NK)
+  const names = (p.name || 'Artist').trim().split(/\s+/);
+  const initials = names.length > 1 ? (names[0][0] + names[names.length - 1][0]).toUpperCase() : names[0].slice(0, 2).toUpperCase();
+  
+  const heroImg = works[0] ? works[0].imageUrl : 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80';
+
+  // renderSketchbook stub
+}
+
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale };
 window.PortfoolioTemplateList = TEMPLATES;
 
