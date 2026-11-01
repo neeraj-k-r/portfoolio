@@ -577,7 +577,7 @@ function pageGallery(p, wIdx, url) {
       </header>
       <section class="wrap pavilion-spatial-sec">
         <div class="pavilion-sec-title">
-          <span>INSTALLATION SURVEY / REPERTORIO SPAZIALE</span>
+          <span>INSTALLATION SURVEY · SPATIAL PLATES</span>
           <span>SECTION A–E</span>
         </div>
         <div class="pavilion-grid">
@@ -618,7 +618,7 @@ function pageGallery(p, wIdx, url) {
       </div>
       <nav class="documenta-nav wrap">
         <div class="documenta-brand">
-          <span class="documenta-index-chip">DOC.KASSEL</span>
+          <span class="documenta-index-chip">DOC.ARCHIVE</span>
           <div>
             <span class="documenta-reg-name">${esc(p.name)}</span>
             <span class="documenta-reg-dept">ARCHIVAL MONOGRAPH & DOSSIER</span>
@@ -660,20 +660,20 @@ function pageGallery(p, wIdx, url) {
     : vtpl === 'triennale'
     ? `<div class="triennale-page">
       <div class="triennale-cobalt-bar">
-        <span>TRIENNALE MILANO · ESPOSIZIONE INTERNAZIONALE</span>
-        <span>DESIGN · ARCHITETTURA · ARTI APPLICATE</span>
+        <span>INTERNATIONAL DESIGN EXPOSITION · TRIENNALE</span>
+        <span>DESIGN · ARCHITECTURE · APPLIED ARTS</span>
       </div>
       <nav class="triennale-nav wrap">
         <div class="triennale-brand">
           <span class="triennale-emblem">TM</span>
           <div class="triennale-brand-meta">
             <span class="triennale-brand-title">${esc(p.name)}</span>
-            <span class="triennale-brand-dept">PALAZZO DELL'ARTE · MILANO</span>
+            <span class="triennale-brand-dept">PALACE OF MODERN ART · MAIN HALL</span>
           </div>
         </div>
       </nav>
       <header class="wrap gal-triennale-head">
-        <div class="triennale-manifesto-badge">MANIFIESTO DEL DESIGN MODERNO</div>
+        <div class="triennale-manifesto-badge">MODERN DESIGN MANIFESTO</div>
         <h1 class="triennale-big-title">${esc(p.name)}</h1>
         <p class="triennale-big-kicker">${esc(p.title || 'Industrial Design & Architectural Systems')}</p>
       </header>
@@ -685,7 +685,7 @@ function pageGallery(p, wIdx, url) {
             return `
             <article class="triennale-card ${isFull ? 'triennale-card-full' : ''}">
               <div class="triennale-card-view">
-                <span class="triennale-card-no">OPERA ${itemNo}</span>
+                <span class="triennale-card-no">WORK ${itemNo}</span>
                 <img src="${esc(k.imageUrl)}" alt="${esc(k.title || 'Design Project')}" loading="lazy">
               </div>
               <div class="triennale-card-meta">
@@ -697,7 +697,7 @@ function pageGallery(p, wIdx, url) {
           }).join('')}
         </div>
       </section>
-      <footer class="wrap triennale-footer"><div>© 2026 ${esc(p.name)} · Palazzo dell'Arte</div></footer>
+      <footer class="wrap triennale-footer"><div>© 2026 ${esc(p.name)} · Main Exhibition Hall</div></footer>
     </div>`
     : vtpl === 'atelier'
     ? `<div class="atelier-page">
