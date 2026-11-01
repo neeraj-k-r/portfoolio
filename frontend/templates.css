@@ -10400,3 +10400,19 @@ body[data-template="filmstrip"] {
 .documenta-memo-header { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #1e3a8a; border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px; margin-bottom: 12px; }
 .documenta-memo-body { font-size: 14px; line-height: 1.6; color: #333; margin: 0 0 16px; }
 .documenta-memo-footer { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #888; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 8px; }
+
+.documenta-archive-sec { padding: 40px 0 80px; }
+.documenta-sec-header { display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; border-bottom: 2px solid #0d0e11; padding-bottom: 8px; margin-bottom: 30px; }
+.documenta-grid { display: flex; flex-direction: column; gap: 24px; }
+.documenta-row { display: grid; grid-template-columns: 100px 320px 1fr; gap: 24px; background: #fff; border: 1px solid rgba(0,0,0,0.1); padding: 18px; align-items: center; transition: box-shadow .2s; }
+.documenta-row:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+@media(max-width:800px){ .documenta-row { grid-template-columns: 1fr; } }
+.documenta-doc-code { font-size: 16px; font-weight: 800; color: #1e3a8a; display: block; }
+.documenta-doc-sub { font-size: 9px; font-weight: 700; color: #999; letter-spacing: 1px; }
+.documenta-col-img img { width: 100%; height: 200px; object-fit: cover; border: 1px solid rgba(0,0,0,0.08); }
+.documenta-doc-cat { font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #1e3a8a; }
+.documenta-doc-title { font-size: 20px; font-weight: 700; margin: 4px 0 8px; }
+.documenta-doc-desc { font-size: 13px; color: #555; line-height: 1.5; margin: 0 0 12px; }
+.documenta-doc-meta { display: flex; gap: 16px; font-size: 10px; font-weight: 700; color: #888; }
+.documenta-footer { padding: 40px 0; border-top: 1px solid rgba(0,0,0,0.12); }
+.documenta-foot-inner { display: flex; justify-content: space-between; font-size: 11px; color: #666; }
