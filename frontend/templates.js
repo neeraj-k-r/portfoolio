@@ -952,7 +952,24 @@ function renderModerncv(p) {
         <a class="sb-view-all-link" href="#artworks">View All <span>→</span></a>
       </div>
 
-  // renderSketchbook grid stub
+      <div class="sb-cards-grid" id="sbGrid">
+        ${works.map((w, i) => {
+          const cat = (w.category || 'Portraits').toLowerCase();
+          return `
+          <article class="sb-card" data-cat="${tplEsc(cat)}" data-gal="${i}">
+            <div class="sb-card-frame">
+              <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || 'Artwork')}" loading="lazy">
+              <span class="sb-card-badge">${tplEsc(w.category || 'Study')}</span>
+            </div>
+            <div class="sb-card-info">
+              <h3 class="sb-card-title">${tplEsc(w.title || 'Untitled Artwork')}</h3>
+              ${w.desc ? `<p class="sb-card-desc">${tplEsc(w.desc)}</p>` : ''}
+            </div>
+          </article>
+          `;
+        }).join('')}
+      </div>
+
     </section>
 
     <!-- Main Content -->
