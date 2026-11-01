@@ -10476,3 +10476,6 @@ body[data-template="filmstrip"] {
 .lx-modal-body[data-theme="pavilion"] { background: #eae6df; color: #1a1a1c; }
 .lx-modal-body[data-theme="documenta"] { background: #f5f2eb; color: #0d0e11; }
 .lx-modal-body[data-theme="triennale"] { background: #f8fafc; color: #0e0e10; }
+
+/* SKETCHBOOK GRAPHITE DRAWING THEME */
+.sb-page { background: #f3efe6; color: #1f1e1c; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; }
