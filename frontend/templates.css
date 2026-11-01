@@ -10301,3 +10301,15 @@ body[data-template="filmstrip"] {
     display: none;
   }
 }
+
+/* BIENNALE EXHIBITION THEME */
+.biennale-page { background: #fbf9f4; color: #161616; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; }
+.biennale-top-rule { height: 4px; background: #c83226; width: 100%; }
+.biennale-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+.biennale-brand { display: flex; align-items: center; gap: 14px; }
+.biennale-nat-flag { font-family: monospace; font-weight: 800; font-size: 11px; background: #161616; color: #fff; padding: 3px 6px; border-radius: 2px; }
+.biennale-pavilion-num { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #888; text-transform: uppercase; display: block; }
+.biennale-artist-name { font-family: 'Instrument Serif', Georgia, serif; font-size: 19px; font-weight: 600; color: #161616; }
+.biennale-badge-pill { font-size: 11px; font-weight: 700; border: 1px solid rgba(0,0,0,0.18); padding: 5px 12px; border-radius: 100px; color: #555; }
+.biennale-btn-contact { font-size: 12px; font-weight: 700; background: #161616; color: #fff; text-decoration: none; padding: 7px 16px; border-radius: 4px; transition: opacity .2s; }
+.biennale-btn-contact:hover { opacity: .85; }
