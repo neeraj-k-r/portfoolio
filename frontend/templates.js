@@ -7650,30 +7650,30 @@ function renderBiennale(p) {
     <div class="biennale-top-rule" aria-hidden="true"></div>
     <nav class="biennale-nav wrap">
       <div class="biennale-brand">
-        <span class="biennale-nat-flag">IT</span>
+        <span class="biennale-nat-flag">ART</span>
         <div class="biennale-brand-text">
-          <span class="biennale-pavilion-num">PADIGLIONE CENTRALE · SALA 59</span>
+          <span class="biennale-pavilion-num">CENTRAL PAVILION · GALLERY 59</span>
           <span class="biennale-artist-name">${tplEsc(p.name)}</span>
         </div>
       </div>
       <div class="biennale-nav-actions">
-        <span class="biennale-badge-pill">ESPOSIZIONE ${year}</span>
+        <span class="biennale-badge-pill">EXHIBITION ${year}</span>
         ${p.email ? `<a class="biennale-btn-contact" href="mailto:${tplEsc(p.email)}">Curatorial Inquiry ↗</a>` : ''}
       </div>
     </nav>
 
     <header class="wrap gal-biennale-head">
-      <div class="biennale-edition-badge">✦ 60. ESPOSIZIONE INTERNAZIONALE D'ARTE · VENEZIA ✦</div>
+      <div class="biennale-edition-badge">✦ 60TH INTERNATIONAL ART EXHIBITION · BIENNALE ✦</div>
       <h1 class="biennale-display-title">${tplEsc(p.name)}</h1>
       <p class="biennale-discipline">${tplEsc(p.title || 'Contemporary Spatial & Visual Art')}</p>
       
       <div class="biennale-curatorial-block">
-        <div class="biennale-curator-label">— CURATORIAL NOTE / NOTA CURATORIALE —</div>
+        <div class="biennale-curator-label">— CURATORIAL STATEMENT & MONOGRAPH —</div>
         <p class="biennale-statement">${tplEsc(bio || 'An inquiry into material presence, architectural resonance, and the delicate tension between monumental stillness and fleeting encounter.')}</p>
         <div class="biennale-monograph-meta">
-          <span>ROOM / SALA: <b>CENTRAL ROTUNDA</b></span>
-          <span>CURATION / CURATELA: <b>SOLO MONOGRAPH</b></span>
-          ${location ? `<span>PROVENANCE / ORIGINE: <b>${tplEsc(location).toUpperCase()}</b></span>` : ''}
+          <span>GALLERY ROOM: <b>CENTRAL ROTUNDA</b></span>
+          <span>CURATION: <b>SOLO MONOGRAPH</b></span>
+          ${location ? `<span>PROVENANCE / LOCATION: <b>${tplEsc(location).toUpperCase()}</b></span>` : ''}
           <span>CATALOGUE: <b>${works.length} WORKS EXHIBITED</b></span>
         </div>
       </div>
@@ -7681,8 +7681,8 @@ function renderBiennale(p) {
 
     <section class="wrap biennale-gallery-sec">
       <div class="biennale-sec-indicator">
-        <span class="biennale-sec-code">EXHIBITION PLATES · TAVOLE D'ESPOSIZIONE</span>
-        <span class="biennale-sec-guide">GIARDINI DELLA BIENNALE</span>
+        <span class="biennale-sec-code">EXHIBITION PLATES · GALLERY CATALOGUE</span>
+        <span class="biennale-sec-guide">BIENNALE PAVILION GROUNDS</span>
       </div>
       <div class="biennale-works-grid">
         ${works.map((w, i) => {
@@ -7691,7 +7691,7 @@ function renderBiennale(p) {
           return `
           <article class="biennale-piece ${isLarge ? 'biennale-prominent' : ''}" data-gal="${i}">
             <div class="biennale-frame">
-              <span class="biennale-room-tag">SALA ${roomNo}</span>
+              <span class="biennale-room-tag">ROOM ${roomNo}</span>
               <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || 'Untitled Installation')}" loading="lazy">
             </div>
             <div class="biennale-placard">
@@ -7699,7 +7699,7 @@ function renderBiennale(p) {
                 <span class="biennale-cat">${tplEsc(w.category || 'Spatial Installation').toUpperCase()}</span>
                 <span class="biennale-plate-no">CAT. NO. ${roomNo}</span>
               </div>
-              <h3 class="biennale-piece-title">${tplEsc(w.title || 'Senza Titolo')}</h3>
+              <h3 class="biennale-piece-title">${tplEsc(w.title || 'Untitled Installation')}</h3>
               ${w.desc ? `<p class="biennale-piece-desc">${tplEsc(w.desc)}</p>` : ''}
               <div class="biennale-specs">
                 <span><b>Medium:</b> Mixed media on Belgian linen</span>
@@ -7716,12 +7716,12 @@ function renderBiennale(p) {
     <footer class="biennale-footer wrap">
       <div class="biennale-colophon">
         <div class="biennale-colophon-col">
-          <b>ESPOSIZIONE BIENNALE INTERNAZIONALE</b>
-          <p>Padiglione Centrale · Giardini & Arsenale</p>
+          <b>INTERNATIONAL BIENNALE EXHIBITION</b>
+          <p>Central Pavilion · International Art Exhibition</p>
           <p>© ${year} ${tplEsc(p.name)}. All rights reserved.</p>
         </div>
         <div class="biennale-colophon-col biennale-col-right">
-          <b>ARCHIVIO E DOCUMENTAZIONE</b>
+          <b>ARCHIVE & EXHIBITION DOCUMENTATION</b>
           <p>Curated monograph portfolio on portfoolio.me</p>
           ${p.email ? `<a href="mailto:${tplEsc(p.email)}" class="biennale-inquire-link">Direct Inquiries: ${tplEsc(p.email)}</a>` : ''}
         </div>
