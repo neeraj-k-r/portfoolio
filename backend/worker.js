@@ -436,7 +436,78 @@ function pageGallery(p, wIdx, url) {
           <div class="museum-plaque-text"><b>${esc(k.title || 'Untitled')}</b>${k.category ? `<small>${esc(k.category)}</small>` : ''}</div>
         </div>
       </a>`).join('') || emptyMsg}</section>`
-        : vtpl === 'atelier'
+        : vtpl === 'biennale'
+    ? `<div class="biennale-page">
+      <div class="biennale-top-rule" aria-hidden="true"></div>
+      <nav class="biennale-nav wrap">
+        <div class="biennale-brand">
+          <span class="biennale-nat-flag">IT</span>
+          <div class="biennale-brand-text">
+            <span class="biennale-pavilion-num">PADIGLIONE CENTRALE · SALA 59</span>
+            <span class="biennale-artist-name">${esc(p.name)}</span>
+          </div>
+        </div>
+        <div class="biennale-nav-actions">
+          <span class="biennale-badge-pill">ESPOSIZIONE 2026</span>
+          ${p.email ? `<a class="biennale-btn-contact" href="mailto:${esc(p.email)}">Curatorial Inquiry ↗</a>` : ''}
+        </div>
+      </nav>
+      <header class="wrap gal-biennale-head">
+        <div class="biennale-edition-badge">✦ 60. ESPOSIZIONE INTERNAZIONALE D'ARTE · VENEZIA ✦</div>
+        <h1 class="biennale-display-title">${esc(p.name)}</h1>
+        <p class="biennale-discipline">${esc(p.title || 'Contemporary Spatial & Visual Art')}</p>
+        <div class="biennale-curatorial-block">
+          <div class="biennale-curator-label">— CURATORIAL NOTE / NOTA CURATORIALE —</div>
+          <p class="biennale-statement">${esc((p.bio || p.summary || p.about || p.tagline || 'An inquiry into material presence, architectural resonance, and the delicate tension between monumental stillness and fleeting encounter.').trim())}</p>
+          <div class="biennale-monograph-meta">
+            <span>ROOM / SALA: <b>CENTRAL ROTUNDA</b></span>
+            <span>CATALOGUE: <b>${works.length} WORKS EXHIBITED</b></span>
+          </div>
+        </div>
+      </header>
+      <section class="wrap biennale-gallery-sec">
+        <div class="biennale-sec-indicator">
+          <span class="biennale-sec-code">EXHIBITION PLATES · TAVOLE D'ESPOSIZIONE</span>
+          <span class="biennale-sec-guide">GIARDINI DELLA BIENNALE</span>
+        </div>
+        <div class="biennale-works-grid">
+          ${works.map((k, idx) => {
+            const roomNo = String(idx + 1).padStart(2, '0');
+            const isLarge = idx % 3 === 0;
+            return `
+            <article class="biennale-piece ${isLarge ? 'biennale-prominent' : ''}">
+              <div class="biennale-frame">
+                <span class="biennale-room-tag">SALA ${roomNo}</span>
+                <img src="${esc(k.imageUrl)}" alt="${esc(k.title || 'Untitled Installation')}" loading="lazy">
+              </div>
+              <div class="biennale-placard">
+                <div class="biennale-placard-head">
+                  <span class="biennale-cat">${esc((k.category || 'Spatial Installation').toUpperCase())}</span>
+                  <span class="biennale-plate-no">CAT. NO. ${roomNo}</span>
+                </div>
+                <h3 class="biennale-piece-title">${esc(k.title || 'Senza Titolo')}</h3>
+                ${k.desc ? `<p class="biennale-piece-desc">${esc(k.desc)}</p>` : ''}
+                <div class="biennale-specs">
+                  <span><b>Medium:</b> Mixed media on Belgian linen</span>
+                  <span><b>Dimensions:</b> Variable installation</span>
+                  <span><b>Year:</b> 2026</span>
+                </div>
+              </div>
+            </article>
+            `;
+          }).join('')}
+        </div>
+      </section>
+      <footer class="biennale-footer wrap">
+        <div class="biennale-colophon">
+          <div class="biennale-colophon-col">
+            <b>ESPOSIZIONE BIENNALE INTERNAZIONALE</b>
+            <p>© 2026 ${esc(p.name)}. Monograph portfolio on portfoolio.me</p>
+          </div>
+        </div>
+      </footer>
+    </div>`
+    : vtpl === 'atelier'
     ? `<div class="atelier-page">
       <nav class="atelier-nav wrap">
         <a class="atelier-logo" href="/"><span class="atelier-mark">◆</span> ${esc(p.name)}</a>
