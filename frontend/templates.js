@@ -7943,7 +7943,78 @@ function renderTriennale(p) {
   const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
   const year = new Date().getFullYear();
 
-  // renderTriennale stub
+  app.innerHTML = `
+  <div class="triennale-page">
+    <div class="triennale-cobalt-bar">
+      <span>TRIENNALE MILANO · ESPOSIZIONE INTERNAZIONALE</span>
+      <span>DESIGN · ARCHITETTURA · ARTI APPLICATE</span>
+    </div>
+
+    <nav class="triennale-nav wrap">
+      <div class="triennale-brand">
+        <span class="triennale-emblem">TM</span>
+        <div class="triennale-brand-meta">
+          <span class="triennale-brand-title">${tplEsc(p.name)}</span>
+          <span class="triennale-brand-dept">PALAZZO DELL'ARTE · MILANO</span>
+        </div>
+      </div>
+      <div class="triennale-nav-right">
+        <span class="triennale-year-badge">${year}</span>
+        ${p.email ? `<a class="triennale-contact-btn" href="mailto:${tplEsc(p.email)}">Inquire Project ↗</a>` : ''}
+      </div>
+    </nav>
+
+    <header class="wrap gal-triennale-head">
+      <div class="triennale-manifesto-badge">MANIFIESTO DEL DESIGN MODERNO</div>
+      <h1 class="triennale-big-title">${tplEsc(p.name)}</h1>
+      <p class="triennale-big-kicker">${tplEsc(p.title || 'Industrial Design & Architectural Systems')}</p>
+
+      <div class="triennale-intro-grid">
+        <div class="triennale-curator-statement">
+          <b>CURATORIAL STATEMENT</b>
+          <p>${tplEsc(bio || 'Rigorous industrial rationalism fused with chromatic Mediterranean expression, shaping everyday objects into sculptural artifacts.')}</p>
+        </div>
+        <div class="triennale-stats-block">
+          <div class="triennale-stat"><span>DISCIPLINES:</span> <b>PRODUCT · SPATIAL · VISUAL</b></div>
+          ${location ? `<div class="triennale-stat"><span>STUDIO BASE:</span> <b>${tplEsc(location).toUpperCase()}</b></div>` : ''}
+          <div class="triennale-stat"><span>EXHIBITS:</span> <b>${works.length} SELECTED WORKS</b></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="wrap triennale-exposition-sec">
+      <div class="triennale-sec-bar">
+        <span>SELEZIONE UFFICIALE / OFFICIAL SELECTION</span>
+        <span>GALLERIA DEL DESIGN</span>
+      </div>
+      <div class="triennale-works-grid">
+        ${works.map((w, i) => {
+          const itemNo = String(i + 1).padStart(2, '0');
+          const isFull = i % 3 === 0;
+          return `
+          <article class="triennale-card ${isFull ? 'triennale-card-full' : ''}" data-gal="${i}">
+            <div class="triennale-card-view">
+              <span class="triennale-card-no">OPERA ${itemNo}</span>
+              <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || 'Design Project')}" loading="lazy">
+            </div>
+            <div class="triennale-card-meta">
+              <span class="triennale-card-cat">${tplEsc(w.category || 'INDUSTRIAL DESIGN').toUpperCase()}</span>
+              <h3 class="triennale-card-title">${tplEsc(w.title || 'Untitled Prototype')}</h3>
+              ${w.desc ? `<p class="triennale-card-desc">${tplEsc(w.desc)}</p>` : ''}
+              <div class="triennale-card-foot">
+                <span>YEAR: ${year}</span>
+                <span>ORIGIN: MILANO EDITION</span>
+              </div>
+            </div>
+          </article>
+          `;
+        }).join('')}
+      </div>
+    </section>
+
+  // renderTriennale foot stub
+  </div>`;
+  window.scrollTo(0, 0);
 }
 
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip };
