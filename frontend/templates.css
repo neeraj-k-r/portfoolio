@@ -10362,3 +10362,21 @@ body[data-template="filmstrip"] {
 @media(max-width:800px){ .pavilion-curatorial-split { grid-template-columns: 1fr; } }
 .pavilion-manifesto { font-size: 16px; line-height: 1.6; color: #222; margin: 8px 0 0; }
 .pavilion-data-row { display: flex; justify-content: space-between; font-size: 11px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+
+.pavilion-spatial-sec { padding: 40px 0 80px; }
+.pavilion-sec-title { display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; letter-spacing: 2px; border-bottom: 2px solid #1a1a1c; padding-bottom: 10px; margin-bottom: 36px; }
+.pavilion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 40px; }
+.pavilion-card { background: #f4f0e8; border: 1px solid #1a1a1c; box-shadow: 4px 4px 0px #1a1a1c; }
+.pavilion-card-wide { grid-column: span 2; }
+@media(max-width:900px){ .pavilion-card-wide { grid-column: span 1; } }
+.pavilion-elevation { position: relative; overflow: hidden; background: #000; }
+.pavilion-elevation img { width: 100%; height: auto; display: block; object-fit: cover; }
+.pavilion-plate-badge { position: absolute; bottom: 12px; right: 12px; background: #1a1a1c; color: #eae6df; font-size: 10px; font-weight: 800; padding: 4px 8px; letter-spacing: 1px; }
+.pavilion-meta-panel { padding: 24px; }
+.pavilion-meta-kicker { font-size: 10px; font-weight: 800; color: #d4a373; letter-spacing: 1.5px; margin-bottom: 6px; }
+.pavilion-meta-title { font-size: 22px; font-weight: 800; margin: 0 0 10px; text-transform: uppercase; }
+.pavilion-meta-desc { font-size: 13px; color: #555; line-height: 1.5; margin: 0 0 16px; }
+.pavilion-tech-specs { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #777; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 10px; }
+.pavilion-footer { padding: 40px 0; border-top: 2px solid #1a1a1c; }
+.pavilion-colophon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; font-size: 11px; }
+@media(max-width:700px){ .pavilion-colophon-grid { grid-template-columns: 1fr; } }
