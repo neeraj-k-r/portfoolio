@@ -8058,7 +8058,30 @@ function renderSketchbook(p) {
   
   const heroImg = works[0] ? works[0].imageUrl : 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80';
 
-  // renderSketchbook stub
+  app.innerHTML = `
+  <div class="sb-page">
+    <nav class="sb-nav wrap">
+      <div class="sb-brand">
+        <div class="sb-monogram-sig">${initials}</div>
+        <div class="sb-brand-meta">
+          <span class="sb-brand-name">${tplEsc(p.name)}</span>
+          <span class="sb-brand-sub">${tplEsc(p.title || 'Artist · Drawing Portfolio')}</span>
+        </div>
+      </div>
+      <div class="sb-nav-menu">
+        <a href="#" class="sb-nav-link">Home</a>
+        <a href="#artworks" class="sb-nav-link active">Artworks</a>
+        <a href="#artworks" class="sb-nav-link">Sketchbook</a>
+        <a href="#about" class="sb-nav-link">About</a>
+      </div>
+      <div class="sb-nav-cta">
+        ${p.email ? `<a class="sb-contact-pill" href="mailto:${tplEsc(p.email)}">Contact <span>→</span></a>` : ''}
+      </div>
+    </nav>
+
+  // renderSketchbook hero stub
+  </div>`;
+  window.scrollTo(0, 0);
 }
 
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale };
