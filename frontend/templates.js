@@ -7881,7 +7881,38 @@ function renderDocumenta(p) {
       </div>
     </header>
 
-  // renderDocumenta works stub
+    <section class="wrap documenta-archive-sec">
+      <div class="documenta-sec-header">
+        <span class="documenta-sec-title">CATALOGUE RAISONNÉ / PLATES</span>
+        <span class="documenta-sec-filter">INVENTORY SEQUENCE 01–${String(works.length).padStart(2, '0')}</span>
+      </div>
+      <div class="documenta-grid">
+        ${works.map((w, i) => {
+          const docId = String(i + 1).padStart(2, '0');
+          return `
+          <article class="documenta-row" data-gal="${i}">
+            <div class="documenta-col-index">
+              <span class="documenta-doc-code">DOC-${docId}</span>
+              <span class="documenta-doc-sub">PLATE REF</span>
+            </div>
+            <div class="documenta-col-img">
+              <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || 'Archival plate')}" loading="lazy">
+            </div>
+            <div class="documenta-col-info">
+              <span class="documenta-doc-cat">${tplEsc(w.category || 'Archival Study').toUpperCase()}</span>
+              <h3 class="documenta-doc-title">${tplEsc(w.title || 'Untitled Document')}</h3>
+              ${w.desc ? `<p class="documenta-doc-desc">${tplEsc(w.desc)}</p>` : ''}
+              <div class="documenta-doc-meta">
+                <span>YEAR: ${year}</span>
+                <span>STATUS: ARCHIVED</span>
+              </div>
+            </div>
+          </article>
+          `;
+        }).join('')}
+      </div>
+    </section>
+
   </div>`;
   window.scrollTo(0, 0);
 }
