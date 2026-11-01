@@ -119,6 +119,26 @@ function renderMinimal(p) {
     <div class="card"><h3>Contact</h3><p class="mono" style="font-size:13px">${tplEsc(p.email || '')}<br>${tplEsc(p.phone || '')}<br>${tplEsc(p.location || '')}</p></div></div>
     <h2 class="title" style="margin-top:26px">Selected work</h2><div class="dir-grid">${projects}</div>
   </section>${rsSec(p)}${tplFoot(p)}`;
+
+  setTimeout(() => {
+    const pills = document.querySelectorAll('#sbFilters .sb-pill');
+    const cards = document.querySelectorAll('#sbGrid .sb-card');
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const filter = pill.dataset.filter;
+        cards.forEach(c => {
+          const cat = (c.dataset.cat || '').toLowerCase();
+          if (filter === 'all' || cat.includes(filter)) {
+            c.style.display = '';
+          } else {
+            c.style.display = 'none';
+          }
+        });
+      });
+    });
+  }, 0);
   window.scrollTo(0, 0);
 }
 
@@ -8084,6 +8104,7 @@ function renderTriennale(p) {
 
 
 function renderSketchbook(p) {
+  // sbFilter
   normTpl(p);
   document.body.dataset.template = 'sketchbook';
   document.title = `${p.name} — Drawing Portfolio | portfoolio.me`;
