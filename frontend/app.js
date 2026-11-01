@@ -718,6 +718,9 @@ function renderGallery(p) {
         </div>`).join('') || emptyMsg}</div>
     </section>`;
   }
+  if (vtpl === 'biennale') {
+    if (window.PortfoolioTemplates && window.PortfoolioTemplates.biennale) return window.PortfoolioTemplates.biennale(p);
+  }
   if (vtpl === 'atelier') {
     app.innerHTML = `
     <div class="atelier-page">
