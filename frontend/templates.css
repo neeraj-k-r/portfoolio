@@ -10506,3 +10506,12 @@ body[data-template="filmstrip"] {
 .sb-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(63,29,46,0.28); }
 .sb-btn-secondary { background: transparent; border: 1.5px solid #3f1d2e; color: #3f1d2e; padding: 11px 24px; border-radius: 100px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background .2s, color .2s; }
 .sb-btn-secondary:hover { background: rgba(63,29,46,0.06); }
+
+.sb-hero-visual { position: relative; }
+.sb-hero-art-wrapper { position: relative; overflow: visible; display: flex; justify-content: center; }
+.sb-hero-drawing { width: 100%; max-width: 540px; height: auto; border-radius: 20px; object-fit: cover; filter: contrast(1.05) grayscale(0.85); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.sb-pencil-prop { position: absolute; right: -15px; top: 15%; width: 14px; height: 160px; transform: rotate(18deg); z-index: 2; }
+.sb-pencil-body { width: 10px; height: 120px; background: linear-gradient(90deg, #1f1e1c 0%, #3a3835 50%, #1a1918 100%); border-radius: 2px; }
+.sb-pencil-tip { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-top: 25px solid #d4a373; margin-top: -1px; }
+.sb-pencil-lead { width: 3px; height: 10px; background: #1a1918; margin: 0 auto; margin-top: -3px; border-radius: 1px; }
+.sb-pencil-shadow { position: absolute; left: 10px; top: 10px; width: 8px; height: 140px; background: rgba(0,0,0,0.12); filter: blur(4px); z-index: -1; transform: rotate(-5deg); }
