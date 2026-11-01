@@ -7809,7 +7809,7 @@ function renderPavilion(p) {
 
     <section class="wrap pavilion-spatial-sec">
       <div class="pavilion-sec-title">
-        <span>INSTALLATION SURVEY / REPERTORIO SPAZIALE</span>
+        <span>INSTALLATION SURVEY · SPATIAL PLATES</span>
         <span>SECTION A–E</span>
       </div>
       <div class="pavilion-grid">
