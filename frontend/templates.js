@@ -55,7 +55,8 @@ const TEMPLATES = [
   { id: 'biennale', name: 'Biennale Pavilion', desc: 'Venice Biennale international art exhibition with gallery room placards, curated catalog layout & thesis statement', emoji: '🏛️', best: 'Contemporary Artists • Curators • Sculptors • Installation Creators', track: 'visual' },
   { id: 'pavilion', name: 'Pavilion Spatial', desc: 'Monumental architectural pavilion with dual-column curatorial spread & spatial layout', emoji: '🏛️', best: 'Architects • Spatial Artists • Installation Curators', track: 'visual' },
   { id: 'documenta', name: 'Documenta Archive', desc: 'Curatorial research archive with catalog registry, archival notes & documentarian grid', emoji: '📚', best: 'Research Artists • Curators • Archivists • Critics', track: 'visual' },
-  { id: 'triennale', name: 'Triennale Milano', desc: 'International design exposition with Milanese modernist typography & chromatic layout', emoji: '📐', best: 'Industrial Designers • Spatial Planners • Graphic Modernists', track: 'visual' }
+  { id: 'triennale', name: 'Triennale Milano', desc: 'International design exposition with Milanese modernist typography & chromatic layout', emoji: '📐', best: 'Industrial Designers • Spatial Planners • Graphic Modernists', track: 'visual' },
+  { id: 'sketchbook', name: 'Sketchbook Studio', desc: 'Hand-drawn graphite & charcoal collection with textured paper, category filter pills & artist monogram', emoji: '✏️', best: 'Sketch Artists • Illustrators • Portraitists • Drawing Masters', track: 'visual' }
 ];
 
 function tplEsc(s) {
