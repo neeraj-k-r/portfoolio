@@ -8012,7 +8012,19 @@ function renderTriennale(p) {
       </div>
     </section>
 
-  // renderTriennale foot stub
+    <footer class="wrap triennale-footer">
+      <div class="triennale-foot-grid">
+        <div>
+          <b>TRIENNALE MILANO ARCHIVIO</b>
+          <p>© ${year} ${tplEsc(p.name)} · Palazzo dell'Arte</p>
+        </div>
+        <div>
+          <b>JURY SELECTION & HONORS</b>
+          <p>Verified Creative Portfolio on portfoolio.me</p>
+        </div>
+      </div>
+    </footer>
+
   </div>`;
   window.scrollTo(0, 0);
 }
