@@ -218,6 +218,44 @@ function head(p, tpl) {
     text-decoration: underline;
     font-weight: 600;
   }
+
+/* BIENNALE & EXHIBITION THEMES */
+.biennale-page{background:#fbf9f4;color:#161616;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh}
+.biennale-top-rule{height:4px;background:#c83226;width:100%}
+.biennale-nav{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-bottom:1px solid rgba(0,0,0,0.1)}
+.biennale-brand{display:flex;align-items:center;gap:14px}
+.biennale-nat-flag{font-family:monospace;font-weight:800;font-size:11px;background:#161616;color:#fff;padding:3px 6px;border-radius:2px}
+.biennale-pavilion-num{font-size:10px;font-weight:700;letter-spacing:1.5px;color:#888;text-transform:uppercase;display:block}
+.biennale-artist-name{font-family:'Instrument Serif',Georgia,serif;font-size:19px;font-weight:600;color:#161616}
+.gal-biennale-head{padding:70px 0 40px}
+.biennale-edition-badge{font-size:11px;font-weight:800;letter-spacing:2px;color:#c83226;text-transform:uppercase;margin-bottom:14px}
+.biennale-display-title{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(40px,7vw,76px);font-weight:400;line-height:1.05;margin:0 0 12px;color:#111}
+.biennale-curatorial-block{background:#f2eee5;border-left:3px solid #c83226;padding:28px 32px;border-radius:2px;margin-bottom:20px}
+.biennale-statement{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(18px,2.5vw,24px);line-height:1.45;color:#222;margin:0 0 20px}
+.biennale-works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:48px}
+.biennale-piece{background:#fff;border:1px solid rgba(0,0,0,0.08);box-shadow:0 8px 30px rgba(0,0,0,0.04)}
+.biennale-piece.biennale-prominent{grid-column:span 2}
+.biennale-frame{position:relative;overflow:hidden;background:#eee}
+.biennale-frame img{width:100%;height:auto;display:block;object-fit:cover}
+.biennale-room-tag{position:absolute;top:14px;left:14px;background:rgba(0,0,0,0.8);color:#fff;font-size:10px;font-weight:800;padding:4px 8px}
+.biennale-placard{padding:24px;background:#fff}
+.biennale-piece-title{font-family:'Instrument Serif',Georgia,serif;font-size:24px;margin:0 0 10px;color:#111}
+.pavilion-page{background:#eae6df;color:#1a1a1c;font-family:'Space Grotesk',sans-serif;min-height:100vh}
+.pavilion-monolith-title{font-size:clamp(42px,8vw,84px);font-weight:800;line-height:0.95;letter-spacing:-1.5px;margin:0 0 14px;text-transform:uppercase}
+.pavilion-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:40px}
+.pavilion-card{background:#f4f0e8;border:1px solid #1a1a1c;box-shadow:4px 4px 0px #1a1a1c}
+.pavilion-card.pavilion-card-wide{grid-column:span 2}
+.pavilion-elevation img{width:100%;height:auto;display:block;object-fit:cover}
+.pavilion-meta-panel{padding:24px}
+.documenta-page{background:#f5f2eb;color:#0d0e11;font-family:'Space Grotesk',sans-serif;min-height:100vh}
+.documenta-row{display:grid;grid-template-columns:100px 320px 1fr;gap:24px;background:#fff;border:1px solid rgba(0,0,0,0.1);padding:18px}
+.documenta-col-img img{width:100%;height:200px;object-fit:cover}
+.triennale-page{background:#f8fafc;color:#0e0e10;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh}
+.triennale-works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:36px}
+.triennale-card{background:#fff;border:2px solid #0e0e10;box-shadow:4px 4px 0px #0e0e10}
+.triennale-card.triennale-card-full{grid-column:span 2}
+.triennale-card-view img{width:100%;height:auto;display:block;object-fit:cover}
+.triennale-card-meta{padding:22px}
 </style>` : '';
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
