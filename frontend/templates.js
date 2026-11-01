@@ -7930,6 +7930,22 @@ function renderDocumenta(p) {
   window.scrollTo(0, 0);
 }
 
+
+function renderTriennale(p) {
+  normTpl(p);
+  document.body.dataset.template = 'triennale';
+  document.title = `${p.name} — Triennale Milano | portfoolio.me`;
+  const app = document.getElementById('app');
+  const works = getVisualWorks(p);
+  const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
+  const face = avatar ? `<img class="triennale-avatar" src="${tplEsc(avatar)}" alt="${tplEsc(p.name)}">` : `<div class="triennale-avatar triennale-fallback">${tplEsc((p.name||'?').charAt(0).toUpperCase())}</div>`;
+  const location = p.location || '';
+  const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
+  const year = new Date().getFullYear();
+
+  // renderTriennale stub
+}
+
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip };
 window.PortfoolioTemplateList = TEMPLATES;
 
