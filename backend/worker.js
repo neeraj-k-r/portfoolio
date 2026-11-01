@@ -479,34 +479,34 @@ function pageGallery(p, wIdx, url) {
       <div class="biennale-top-rule" aria-hidden="true"></div>
       <nav class="biennale-nav wrap">
         <div class="biennale-brand">
-          <span class="biennale-nat-flag">IT</span>
+          <span class="biennale-nat-flag">ART</span>
           <div class="biennale-brand-text">
-            <span class="biennale-pavilion-num">PADIGLIONE CENTRALE · SALA 59</span>
+            <span class="biennale-pavilion-num">CENTRAL PAVILION · GALLERY 59</span>
             <span class="biennale-artist-name">${esc(p.name)}</span>
           </div>
         </div>
         <div class="biennale-nav-actions">
-          <span class="biennale-badge-pill">ESPOSIZIONE 2026</span>
+          <span class="biennale-badge-pill">EXHIBITION 2026</span>
           ${p.email ? `<a class="biennale-btn-contact" href="mailto:${esc(p.email)}">Curatorial Inquiry ↗</a>` : ''}
         </div>
       </nav>
       <header class="wrap gal-biennale-head">
-        <div class="biennale-edition-badge">✦ 60. ESPOSIZIONE INTERNAZIONALE D'ARTE · VENEZIA ✦</div>
+        <div class="biennale-edition-badge">✦ 60TH INTERNATIONAL ART EXHIBITION · BIENNALE ✦</div>
         <h1 class="biennale-display-title">${esc(p.name)}</h1>
         <p class="biennale-discipline">${esc(p.title || 'Contemporary Spatial & Visual Art')}</p>
         <div class="biennale-curatorial-block">
-          <div class="biennale-curator-label">— CURATORIAL NOTE / NOTA CURATORIALE —</div>
+          <div class="biennale-curator-label">— CURATORIAL STATEMENT & MONOGRAPH —</div>
           <p class="biennale-statement">${esc((p.bio || p.summary || p.about || p.tagline || 'An inquiry into material presence, architectural resonance, and the delicate tension between monumental stillness and fleeting encounter.').trim())}</p>
           <div class="biennale-monograph-meta">
-            <span>ROOM / SALA: <b>CENTRAL ROTUNDA</b></span>
+            <span>GALLERY ROOM: <b>CENTRAL ROTUNDA</b></span>
             <span>CATALOGUE: <b>${works.length} WORKS EXHIBITED</b></span>
           </div>
         </div>
       </header>
       <section class="wrap biennale-gallery-sec">
         <div class="biennale-sec-indicator">
-          <span class="biennale-sec-code">EXHIBITION PLATES · TAVOLE D'ESPOSIZIONE</span>
-          <span class="biennale-sec-guide">GIARDINI DELLA BIENNALE</span>
+          <span class="biennale-sec-code">EXHIBITION PLATES · GALLERY CATALOGUE</span>
+          <span class="biennale-sec-guide">BIENNALE PAVILION GROUNDS</span>
         </div>
         <div class="biennale-works-grid">
           ${works.map((k, idx) => {
@@ -515,7 +515,7 @@ function pageGallery(p, wIdx, url) {
             return `
             <article class="biennale-piece ${isLarge ? 'biennale-prominent' : ''}">
               <div class="biennale-frame">
-                <span class="biennale-room-tag">SALA ${roomNo}</span>
+                <span class="biennale-room-tag">ROOM ${roomNo}</span>
                 <img src="${esc(k.imageUrl)}" alt="${esc(k.title || 'Untitled Installation')}" loading="lazy">
               </div>
               <div class="biennale-placard">
@@ -523,7 +523,7 @@ function pageGallery(p, wIdx, url) {
                   <span class="biennale-cat">${esc((k.category || 'Spatial Installation').toUpperCase())}</span>
                   <span class="biennale-plate-no">CAT. NO. ${roomNo}</span>
                 </div>
-                <h3 class="biennale-piece-title">${esc(k.title || 'Senza Titolo')}</h3>
+                <h3 class="biennale-piece-title">${esc(k.title || 'Untitled Installation')}</h3>
                 ${k.desc ? `<p class="biennale-piece-desc">${esc(k.desc)}</p>` : ''}
                 <div class="biennale-specs">
                   <span><b>Medium:</b> Mixed media on Belgian linen</span>
@@ -539,7 +539,7 @@ function pageGallery(p, wIdx, url) {
       <footer class="biennale-footer wrap">
         <div class="biennale-colophon">
           <div class="biennale-colophon-col">
-            <b>ESPOSIZIONE BIENNALE INTERNAZIONALE</b>
+            <b>INTERNATIONAL BIENNALE EXHIBITION</b>
             <p>© 2026 ${esc(p.name)}. Monograph portfolio on portfoolio.me</p>
           </div>
         </div>
