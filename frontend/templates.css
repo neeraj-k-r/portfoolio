@@ -10451,3 +10451,8 @@ body[data-template="filmstrip"] {
 .triennale-card-foot { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #888; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 10px; }
 .triennale-footer { padding: 40px 0; border-top: 2px solid #0e0e10; }
 .triennale-foot-grid { display: flex; justify-content: space-between; font-size: 11px; color: #555; }
+
+.lx-tp-biennale { background: #fbf9f4; border: 1px solid #c83226; }
+.lx-tp-biennale .lx-tp-nav { background: #161616; height: 3px; }
+.lx-tp-biennale .lx-tp-hero { background: #f2eee5; border-left: 2px solid #c83226; }
+.lx-tp-biennale .lx-tp-cards { background: #fff; border: 1px solid rgba(0,0,0,0.1); }
