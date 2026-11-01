@@ -2913,3 +2913,8 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
 .lx-tp-pavilion .lx-tp-nav { background: #1a1a1c; height: 3px; }
 .lx-tp-pavilion .lx-tp-hero { background: #dfdad0; border-top: 2px solid #d4a373; }
 .lx-tp-pavilion .lx-tp-cards { background: #f4f0e8; border: 1px solid #1a1a1c; }
+
+.lx-tp-documenta { background: #f5f2eb; border: 1px solid #0d0e11; }
+.lx-tp-documenta .lx-tp-nav { background: #0d0e11; height: 3px; }
+.lx-tp-documenta .lx-tp-hero { background: #fff; border-left: 2px solid #1e3a8a; }
+.lx-tp-documenta .lx-tp-cards { background: #fff; border: 1px solid rgba(0,0,0,0.12); }
