@@ -724,6 +724,12 @@ function renderGallery(p) {
   if (vtpl === 'pavilion') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.pavilion) return window.PortfoolioTemplates.pavilion(p);
   }
+  if (vtpl === 'documenta') {
+    if (window.PortfoolioTemplates && window.PortfoolioTemplates.documenta) return window.PortfoolioTemplates.documenta(p);
+  }
+  if (vtpl === 'triennale') {
+    if (window.PortfoolioTemplates && window.PortfoolioTemplates.triennale) return window.PortfoolioTemplates.triennale(p);
+  }
   if (vtpl === 'atelier') {
     app.innerHTML = `
     <div class="atelier-page">
