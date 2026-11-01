@@ -699,6 +699,87 @@ function pageGallery(p, wIdx, url) {
       </section>
       <footer class="wrap triennale-footer"><div>© 2026 ${esc(p.name)} · Main Exhibition Hall</div></footer>
     </div>`
+    : vtpl === 'sketchbook'
+    ? `<div class="sb-page">
+      <nav class="sb-nav wrap">
+        <div class="sb-brand">
+          <div class="sb-monogram-sig">${(p.name || 'Artist').trim().split(/\s+/).map(n => n[0]).slice(0, 2).join('').toUpperCase()}</div>
+          <div class="sb-brand-meta">
+            <span class="sb-brand-name">${esc(p.name)}</span>
+            <span class="sb-brand-sub">${esc(p.title || 'Artist · Drawing Portfolio')}</span>
+          </div>
+        </div>
+        <div class="sb-nav-menu">
+          <a href="#" class="sb-nav-link">Home</a>
+          <a href="#artworks" class="sb-nav-link active">Artworks</a>
+          <a href="#artworks" class="sb-nav-link">Sketchbook</a>
+          <a href="#about" class="sb-nav-link">About</a>
+        </div>
+        <div class="sb-nav-cta">
+          ${p.email ? `<a class="sb-contact-pill" href="mailto:${esc(p.email)}">Contact <span>→</span></a>` : ''}
+        </div>
+      </nav>
+      <header class="sb-hero wrap">
+        <div class="sb-hero-layout">
+          <div class="sb-hero-copy">
+            <div class="sb-kicker">PORTFOLIO</div>
+            <h1 class="sb-headline">My <em>Drawing</em><br>Collection</h1>
+            <div class="sb-brush-stroke" aria-hidden="true">
+              <svg viewBox="0 0 240 16" fill="none"><path d="M4 12C50 4 130 4 236 10C160 8 90 9 4 12Z" fill="#3f1d2e" fill-opacity="0.85"/></svg>
+            </div>
+            <p class="sb-lead">${esc((p.bio || p.summary || p.about || p.tagline || 'A collection of my hand-drawn artworks — realistic portraits, studies, and creative sketches in graphite and charcoal.').trim())}</p>
+            <div class="sb-cta-group">
+              <a class="sb-btn-primary" href="#artworks">Explore Artworks <span>→</span></a>
+              <a class="sb-btn-secondary" href="#about">About Me</a>
+            </div>
+          </div>
+          <div class="sb-hero-visual">
+            <div class="sb-hero-art-wrapper">
+              <img class="sb-hero-drawing" src="${esc(works[0] ? works[0].imageUrl : 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80')}" alt="Drawing Collection">
+              <div class="sb-pencil-prop" aria-hidden="true">
+                <div class="sb-pencil-body"></div>
+                <div class="sb-pencil-tip"></div>
+                <div class="sb-pencil-lead"></div>
+                <div class="sb-pencil-shadow"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section class="sb-artworks-sec wrap" id="artworks">
+        <div class="sb-sec-bar">
+          <h2 class="sb-sec-title">Artworks</h2>
+          <div class="sb-filter-pills">
+            <span class="sb-pill active">All</span>
+            <span class="sb-pill">Portraits</span>
+            <span class="sb-pill">Sketches</span>
+            <span class="sb-pill">Studies</span>
+            <span class="sb-pill">··· Other</span>
+          </div>
+          <a class="sb-view-all-link" href="#artworks">View All <span>→</span></a>
+        </div>
+        <div class="sb-cards-grid">
+          ${works.map((k, idx) => `
+          <article class="sb-card">
+            <div class="sb-card-frame">
+              <img src="${esc(k.imageUrl)}" alt="${esc(k.title || 'Artwork')}" loading="lazy">
+              <span class="sb-card-badge">${esc(k.category || 'Study')}</span>
+            </div>
+            <div class="sb-card-info">
+              <h3 class="sb-card-title">${esc(k.title || 'Untitled Artwork')}</h3>
+              ${k.desc ? `<p class="sb-card-desc">${esc(k.desc)}</p>` : ''}
+            </div>
+          </article>
+          `).join('')}
+        </div>
+      </section>
+      <footer class="sb-footer wrap">
+        <div class="sb-footer-inner">
+          <span>© 2026 ${esc(p.name)} · Hand-drawn Artworks & Studies</span>
+          <span class="sb-colophon-tag">Graphite & Charcoal Portfolio · Built with Portfoolio</span>
+        </div>
+      </footer>
+    </div>`
     : vtpl === 'atelier'
     ? `<div class="atelier-page">
       <nav class="atelier-nav wrap">
