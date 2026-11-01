@@ -572,6 +572,95 @@ function pageGallery(p, wIdx, url) {
         </div>
       </footer>
     </div>`
+    : vtpl === 'documenta'
+    ? `<div class="documenta-page">
+      <div class="documenta-stamp-bar">
+        <span>ARCHIVE RECORD: DOC-REG-2026</span>
+        <span>INDEX CLASSIFICATION: CURATORIAL RESEARCH</span>
+      </div>
+      <nav class="documenta-nav wrap">
+        <div class="documenta-brand">
+          <span class="documenta-index-chip">DOC.KASSEL</span>
+          <div>
+            <span class="documenta-reg-name">${esc(p.name)}</span>
+            <span class="documenta-reg-dept">ARCHIVAL MONOGRAPH & DOSSIER</span>
+          </div>
+        </div>
+      </nav>
+      <header class="wrap gal-documenta-head">
+        <div class="documenta-header-grid">
+          <div class="documenta-title-pane">
+            <span class="documenta-kicker">— CURATORIAL DOSSIER ENTRY —</span>
+            <h1 class="documenta-name">${esc(p.name)}</h1>
+            <p class="documenta-role">${esc(p.title || 'Research Artist & Cultural Practitioner')}</p>
+          </div>
+          <div class="documenta-memo-card">
+            <div class="documenta-memo-header">RESEARCH ABSTRACT & FIELD STATEMENT</div>
+            <p class="documenta-memo-body">${esc((p.bio || p.summary || p.about || p.tagline || 'Documenting ongoing investigations across social archives, collective memory, spatial anthropology, and experimental material practices.').trim())}</p>
+          </div>
+        </div>
+      </header>
+      <section class="wrap documenta-archive-sec">
+        <div class="documenta-grid">
+          ${works.map((k, idx) => {
+            const docId = String(idx + 1).padStart(2, '0');
+            return `
+            <article class="documenta-row">
+              <div class="documenta-col-index"><span class="documenta-doc-code">DOC-${docId}</span></div>
+              <div class="documenta-col-img"><img src="${esc(k.imageUrl)}" alt="${esc(k.title || 'Archival plate')}" loading="lazy"></div>
+              <div class="documenta-col-info">
+                <span class="documenta-doc-cat">${esc((k.category || 'Archival Study').toUpperCase())}</span>
+                <h3 class="documenta-doc-title">${esc(k.title || 'Untitled Document')}</h3>
+                ${k.desc ? `<p class="documenta-doc-desc">${esc(k.desc)}</p>` : ''}
+              </div>
+            </article>`;
+          }).join('')}
+        </div>
+      </section>
+      <footer class="wrap documenta-footer"><div>© 2026 ${esc(p.name)} · Monograph Catalog</div></footer>
+    </div>`
+    : vtpl === 'triennale'
+    ? `<div class="triennale-page">
+      <div class="triennale-cobalt-bar">
+        <span>TRIENNALE MILANO · ESPOSIZIONE INTERNAZIONALE</span>
+        <span>DESIGN · ARCHITETTURA · ARTI APPLICATE</span>
+      </div>
+      <nav class="triennale-nav wrap">
+        <div class="triennale-brand">
+          <span class="triennale-emblem">TM</span>
+          <div class="triennale-brand-meta">
+            <span class="triennale-brand-title">${esc(p.name)}</span>
+            <span class="triennale-brand-dept">PALAZZO DELL'ARTE · MILANO</span>
+          </div>
+        </div>
+      </nav>
+      <header class="wrap gal-triennale-head">
+        <div class="triennale-manifesto-badge">MANIFIESTO DEL DESIGN MODERNO</div>
+        <h1 class="triennale-big-title">${esc(p.name)}</h1>
+        <p class="triennale-big-kicker">${esc(p.title || 'Industrial Design & Architectural Systems')}</p>
+      </header>
+      <section class="wrap triennale-exposition-sec">
+        <div class="triennale-works-grid">
+          ${works.map((k, idx) => {
+            const itemNo = String(idx + 1).padStart(2, '0');
+            const isFull = idx % 3 === 0;
+            return `
+            <article class="triennale-card ${isFull ? 'triennale-card-full' : ''}">
+              <div class="triennale-card-view">
+                <span class="triennale-card-no">OPERA ${itemNo}</span>
+                <img src="${esc(k.imageUrl)}" alt="${esc(k.title || 'Design Project')}" loading="lazy">
+              </div>
+              <div class="triennale-card-meta">
+                <span class="triennale-card-cat">${esc((k.category || 'INDUSTRIAL DESIGN').toUpperCase())}</span>
+                <h3 class="triennale-card-title">${esc(k.title || 'Untitled Prototype')}</h3>
+                ${k.desc ? `<p class="triennale-card-desc">${esc(k.desc)}</p>` : ''}
+              </div>
+            </article>`;
+          }).join('')}
+        </div>
+      </section>
+      <footer class="wrap triennale-footer"><div>© 2026 ${esc(p.name)} · Palazzo dell'Arte</div></footer>
+    </div>`
     : vtpl === 'atelier'
     ? `<div class="atelier-page">
       <nav class="atelier-nav wrap">
