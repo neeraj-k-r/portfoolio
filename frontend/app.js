@@ -730,6 +730,9 @@ function renderGallery(p) {
   if (vtpl === 'triennale') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.triennale) return window.PortfoolioTemplates.triennale(p);
   }
+  if (vtpl === 'sketchbook') {
+    if (window.PortfoolioTemplates && window.PortfoolioTemplates.sketchbook) return window.PortfoolioTemplates.sketchbook(p);
+  }
   if (vtpl === 'atelier') {
     app.innerHTML = `
     <div class="atelier-page">
