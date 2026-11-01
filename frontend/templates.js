@@ -7841,7 +7841,49 @@ function renderDocumenta(p) {
   const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
   const year = new Date().getFullYear();
 
-  // renderDocumenta stub
+  app.innerHTML = `
+  <div class="documenta-page">
+    <div class="documenta-stamp-bar">
+      <span>ARCHIVE RECORD: DOC-REG-${year}</span>
+      <span>INDEX CLASSIFICATION: CURATORIAL RESEARCH</span>
+      <span>STATUS: PUBLIC REPOSITORY</span>
+    </div>
+
+    <nav class="documenta-nav wrap">
+      <div class="documenta-brand">
+        <span class="documenta-index-chip">DOC.KASSEL</span>
+        <div>
+          <span class="documenta-reg-name">${tplEsc(p.name)}</span>
+          <span class="documenta-reg-dept">ARCHIVAL MONOGRAPH & DOSSIER</span>
+        </div>
+      </div>
+      <div class="documenta-nav-meta">
+        ${p.email ? `<a class="documenta-dossier-btn" href="mailto:${tplEsc(p.email)}">Request Full Dossier ↗</a>` : ''}
+      </div>
+    </nav>
+
+    <header class="wrap gal-documenta-head">
+      <div class="documenta-header-grid">
+        <div class="documenta-title-pane">
+          <span class="documenta-kicker">— CURATORIAL DOSSIER ENTRY —</span>
+          <h1 class="documenta-name">${tplEsc(p.name)}</h1>
+          <p class="documenta-role">${tplEsc(p.title || 'Research Artist & Cultural Practitioner')}</p>
+          ${location ? `<p class="documenta-origin">FIELD HEADQUARTERS: ${tplEsc(location).toUpperCase()}</p>` : ''}
+        </div>
+        <div class="documenta-memo-card">
+          <div class="documenta-memo-header">RESEARCH ABSTRACT & FIELD STATEMENT</div>
+          <p class="documenta-memo-body">${tplEsc(bio || 'Documenting ongoing investigations across social archives, collective memory, spatial anthropology, and experimental material practices.')}</p>
+          <div class="documenta-memo-footer">
+            <span>INDEXED: ${works.length} ARTIFACTS</span>
+            <span>REPOSITORY REF: PORTFOOLIO-ARCHIVE</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+  // renderDocumenta works stub
+  </div>`;
+  window.scrollTo(0, 0);
 }
 
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip };
