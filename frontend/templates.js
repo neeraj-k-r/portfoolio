@@ -8079,7 +8079,24 @@ function renderSketchbook(p) {
       </div>
     </nav>
 
-  // renderSketchbook hero stub
+    <header class="sb-hero wrap">
+      <div class="sb-hero-layout">
+        <div class="sb-hero-copy">
+          <div class="sb-kicker">PORTFOLIO</div>
+          <h1 class="sb-headline">My <em>Drawing</em><br>Collection</h1>
+          <div class="sb-brush-stroke" aria-hidden="true">
+            <svg viewBox="0 0 240 16" fill="none"><path d="M4 12C50 4 130 4 236 10C160 8 90 9 4 12Z" fill="#3f1d2e" fill-opacity="0.85"/></svg>
+          </div>
+          <p class="sb-lead">${tplEsc(bio || 'A collection of my hand-drawn artworks — realistic portraits, studies, and creative sketches in graphite and charcoal.')}</p>
+          <div class="sb-cta-group">
+            <a class="sb-btn-primary" href="#artworks">Explore Artworks <span>→</span></a>
+            <a class="sb-btn-secondary" href="#about">About Me</a>
+          </div>
+        </div>
+
+  // renderSketchbook hero visual stub
+      </div>
+    </header>
   </div>`;
   window.scrollTo(0, 0);
 }
