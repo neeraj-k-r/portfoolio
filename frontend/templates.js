@@ -7642,7 +7642,43 @@ function renderBiennale(p) {
   const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
   const year = new Date().getFullYear();
 
-  // renderBiennale stub
+  app.innerHTML = `
+  <div class="biennale-page">
+    <div class="biennale-top-rule" aria-hidden="true"></div>
+    <nav class="biennale-nav wrap">
+      <div class="biennale-brand">
+        <span class="biennale-nat-flag">IT</span>
+        <div class="biennale-brand-text">
+          <span class="biennale-pavilion-num">PADIGLIONE CENTRALE · SALA 59</span>
+          <span class="biennale-artist-name">${tplEsc(p.name)}</span>
+        </div>
+      </div>
+      <div class="biennale-nav-actions">
+        <span class="biennale-badge-pill">ESPOSIZIONE ${year}</span>
+        ${p.email ? `<a class="biennale-btn-contact" href="mailto:${tplEsc(p.email)}">Curatorial Inquiry ↗</a>` : ''}
+      </div>
+    </nav>
+
+    <header class="wrap gal-biennale-head">
+      <div class="biennale-edition-badge">✦ 60. ESPOSIZIONE INTERNAZIONALE D'ARTE · VENEZIA ✦</div>
+      <h1 class="biennale-display-title">${tplEsc(p.name)}</h1>
+      <p class="biennale-discipline">${tplEsc(p.title || 'Contemporary Spatial & Visual Art')}</p>
+      
+      <div class="biennale-curatorial-block">
+        <div class="biennale-curator-label">— CURATORIAL NOTE / NOTA CURATORIALE —</div>
+        <p class="biennale-statement">${tplEsc(bio || 'An inquiry into material presence, architectural resonance, and the delicate tension between monumental stillness and fleeting encounter.')}</p>
+        <div class="biennale-monograph-meta">
+          <span>ROOM / SALA: <b>CENTRAL ROTUNDA</b></span>
+          <span>CURATION / CURATELA: <b>SOLO MONOGRAPH</b></span>
+          ${location ? `<span>PROVENANCE / ORIGINE: <b>${tplEsc(location).toUpperCase()}</b></span>` : ''}
+          <span>CATALOGUE: <b>${works.length} WORKS EXHIBITED</b></span>
+        </div>
+      </div>
+    </header>
+
+  // renderBiennale gallery stub
+  </div>`;
+  window.scrollTo(0, 0);
 }
 
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip };
