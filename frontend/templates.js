@@ -7742,6 +7742,18 @@ function renderBiennale(p) {
         </div>
       </div>
     </footer>
+    <footer class="wrap documenta-footer">
+      <div class="documenta-foot-inner">
+        <div>
+          <b>DOCUMENTA ARCHIVAL REGISTRY</b>
+          <p>© ${year} ${tplEsc(p.name)} · Monograph Catalog</p>
+        </div>
+        <div>
+          <b>CURATORIAL CITATION</b>
+          <p>Preserved on portfoolio.me verified registry</p>
+        </div>
+      </div>
+    </footer>
   </div>`;
   window.scrollTo(0, 0);
 }
