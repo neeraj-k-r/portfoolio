@@ -7946,8 +7946,8 @@ function renderTriennale(p) {
   app.innerHTML = `
   <div class="triennale-page">
     <div class="triennale-cobalt-bar">
-      <span>TRIENNALE MILANO · ESPOSIZIONE INTERNAZIONALE</span>
-      <span>DESIGN · ARCHITETTURA · ARTI APPLICATE</span>
+      <span>INTERNATIONAL DESIGN EXPOSITION · TRIENNALE</span>
+      <span>DESIGN · ARCHITECTURE · APPLIED ARTS</span>
     </div>
 
     <nav class="triennale-nav wrap">
@@ -7955,7 +7955,7 @@ function renderTriennale(p) {
         <span class="triennale-emblem">TM</span>
         <div class="triennale-brand-meta">
           <span class="triennale-brand-title">${tplEsc(p.name)}</span>
-          <span class="triennale-brand-dept">PALAZZO DELL'ARTE · MILANO</span>
+          <span class="triennale-brand-dept">PALACE OF MODERN ART · MAIN HALL</span>
         </div>
       </div>
       <div class="triennale-nav-right">
@@ -7965,7 +7965,7 @@ function renderTriennale(p) {
     </nav>
 
     <header class="wrap gal-triennale-head">
-      <div class="triennale-manifesto-badge">MANIFIESTO DEL DESIGN MODERNO</div>
+      <div class="triennale-manifesto-badge">MODERN DESIGN MANIFESTO</div>
       <h1 class="triennale-big-title">${tplEsc(p.name)}</h1>
       <p class="triennale-big-kicker">${tplEsc(p.title || 'Industrial Design & Architectural Systems')}</p>
 
@@ -7984,8 +7984,8 @@ function renderTriennale(p) {
 
     <section class="wrap triennale-exposition-sec">
       <div class="triennale-sec-bar">
-        <span>SELEZIONE UFFICIALE / OFFICIAL SELECTION</span>
-        <span>GALLERIA DEL DESIGN</span>
+        <span>OFFICIAL SELECTION · DESIGN ARCHIVE</span>
+        <span>DESIGN GALLERY & MONOGRAPH</span>
       </div>
       <div class="triennale-works-grid">
         ${works.map((w, i) => {
@@ -7994,7 +7994,7 @@ function renderTriennale(p) {
           return `
           <article class="triennale-card ${isFull ? 'triennale-card-full' : ''}" data-gal="${i}">
             <div class="triennale-card-view">
-              <span class="triennale-card-no">OPERA ${itemNo}</span>
+              <span class="triennale-card-no">WORK ${itemNo}</span>
               <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || 'Design Project')}" loading="lazy">
             </div>
             <div class="triennale-card-meta">
@@ -8003,7 +8003,7 @@ function renderTriennale(p) {
               ${w.desc ? `<p class="triennale-card-desc">${tplEsc(w.desc)}</p>` : ''}
               <div class="triennale-card-foot">
                 <span>YEAR: ${year}</span>
-                <span>ORIGIN: MILANO EDITION</span>
+                <span>EDITION: EXHIBITION RELEASE</span>
               </div>
             </div>
           </article>
@@ -8015,8 +8015,8 @@ function renderTriennale(p) {
     <footer class="wrap triennale-footer">
       <div class="triennale-foot-grid">
         <div>
-          <b>TRIENNALE MILANO ARCHIVIO</b>
-          <p>© ${year} ${tplEsc(p.name)} · Palazzo dell'Arte</p>
+          <b>TRIENNALE DESIGN ARCHIVE</b>
+          <p>© ${year} ${tplEsc(p.name)} · Main Exhibition Hall</p>
         </div>
         <div>
           <b>JURY SELECTION & HONORS</b>
