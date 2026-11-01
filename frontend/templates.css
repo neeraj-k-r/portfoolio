@@ -10434,3 +10434,20 @@ body[data-template="filmstrip"] {
 @media(max-width:800px){ .triennale-intro-grid { grid-template-columns: 1fr; } }
 .triennale-curator-statement p { font-size: 15px; line-height: 1.6; color: #333; margin: 8px 0 0; }
 .triennale-stat { display: flex; justify-content: space-between; font-size: 11px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
+
+.triennale-exposition-sec { padding: 40px 0 80px; }
+.triennale-sec-bar { display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; letter-spacing: 2px; border-bottom: 2px solid #0e0e10; padding-bottom: 10px; margin-bottom: 36px; }
+.triennale-works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 36px; }
+.triennale-card { background: #fff; border: 2px solid #0e0e10; box-shadow: 4px 4px 0px #0e0e10; }
+.triennale-card-full { grid-column: span 2; }
+@media(max-width:850px){ .triennale-card-full { grid-column: span 1; } }
+.triennale-card-view { position: relative; overflow: hidden; background: #000; }
+.triennale-card-view img { width: 100%; height: auto; display: block; object-fit: cover; }
+.triennale-card-no { position: absolute; top: 12px; left: 12px; background: #1544c0; color: #fff; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 2px; }
+.triennale-card-meta { padding: 22px; }
+.triennale-card-cat { font-size: 10px; font-weight: 800; color: #1544c0; letter-spacing: 1.5px; }
+.triennale-card-title { font-size: 22px; font-weight: 800; margin: 6px 0 10px; }
+.triennale-card-desc { font-size: 13px; color: #555; line-height: 1.5; margin: 0 0 14px; }
+.triennale-card-foot { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #888; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 10px; }
+.triennale-footer { padding: 40px 0; border-top: 2px solid #0e0e10; }
+.triennale-foot-grid { display: flex; justify-content: space-between; font-size: 11px; color: #555; }
