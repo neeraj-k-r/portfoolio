@@ -53,7 +53,8 @@ const TEMPLATES = [
   { id: 'vogue', name: 'Vogue Editorial', desc: 'High-fashion magazine spread with Didot typography, issue volume badge & full-bleed photography', emoji: '👠', best: 'Fashion Stylists • Models • Art Directors • Photographers', track: 'visual' },
   { id: 'filmstrip', name: 'Filmstrip Reel', desc: 'Panoramic horizontal cinema reel with 35mm film perforation accents & darkroom atmosphere', emoji: '🎞️', best: 'Cinematographers • Directors • Photographers • Visual Storytellers', track: 'visual' },
   { id: 'biennale', name: 'Biennale Pavilion', desc: 'Venice Biennale international art exhibition with room placards, bilingual headers & curatorial thesis', emoji: '🏛️', best: 'Contemporary Artists • Curators • Sculptors • Installation Creators', track: 'visual' },
-  { id: 'pavilion', name: 'Pavilion Spatial', desc: 'Monumental architectural pavilion with dual-column curatorial spread & spatial layout', emoji: '🏛️', best: 'Architects • Spatial Artists • Installation Curators', track: 'visual' }
+  { id: 'pavilion', name: 'Pavilion Spatial', desc: 'Monumental architectural pavilion with dual-column curatorial spread & spatial layout', emoji: '🏛️', best: 'Architects • Spatial Artists • Installation Curators', track: 'visual' },
+  { id: 'documenta', name: 'Documenta Archive', desc: 'Curatorial research archive with catalog registry, archival notes & documentarian grid', emoji: '📚', best: 'Research Artists • Curators • Archivists • Critics', track: 'visual' }
 ];
 
 function tplEsc(s) {
