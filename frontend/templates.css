@@ -10344,3 +10344,21 @@ body[data-template="filmstrip"] {
 .biennale-colophon { display: flex; justify-content: space-between; gap: 30px; font-size: 12px; color: #666; }
 .biennale-col-right { text-align: right; }
 .biennale-inquire-link { color: #c83226; text-decoration: none; font-weight: 700; display: inline-block; margin-top: 6px; }
+
+/* PAVILION SPATIAL THEME */
+.pavilion-page { background: #eae6df; color: #1a1a1c; font-family: 'Space Grotesk', sans-serif; min-height: 100vh; }
+.pavilion-nav { display: flex; justify-content: space-between; align-items: center; padding: 26px 0; border-bottom: 2px solid #1a1a1c; }
+.pavilion-brand { display: flex; align-items: center; gap: 12px; }
+.pavilion-geo-marker { color: #d4a373; font-size: 20px; }
+.pavilion-org { font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #666; text-transform: uppercase; display: block; }
+.pavilion-architect { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; }
+.pavilion-nav-coords { display: flex; align-items: center; gap: 18px; font-size: 11px; color: #555; }
+.pavilion-inquire-btn { background: #1a1a1c; color: #eae6df; padding: 8px 18px; font-weight: 700; font-size: 12px; text-decoration: none; border-radius: 2px; }
+.gal-pavilion-head { padding: 60px 0 40px; }
+.pavilion-monolith-kicker { font-size: 10px; font-weight: 800; letter-spacing: 2.5px; color: #d4a373; text-transform: uppercase; margin-bottom: 12px; }
+.pavilion-monolith-title { font-size: clamp(42px, 8vw, 84px); font-weight: 800; line-height: 0.95; letter-spacing: -1.5px; margin: 0 0 14px; text-transform: uppercase; }
+.pavilion-subtitle { font-size: 16px; color: #555; margin-bottom: 34px; font-weight: 600; }
+.pavilion-curatorial-split { display: grid; grid-template-columns: 2fr 1fr; gap: 36px; background: #dfdad0; padding: 32px; border: 1px solid #1a1a1c; margin-bottom: 20px; }
+@media(max-width:800px){ .pavilion-curatorial-split { grid-template-columns: 1fr; } }
+.pavilion-manifesto { font-size: 16px; line-height: 1.6; color: #222; margin: 8px 0 0; }
+.pavilion-data-row { display: flex; justify-content: space-between; font-size: 11px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
