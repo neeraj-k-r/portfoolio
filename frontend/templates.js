@@ -8094,7 +8094,17 @@ function renderSketchbook(p) {
           </div>
         </div>
 
-  // renderSketchbook hero visual stub
+        <div class="sb-hero-visual">
+          <div class="sb-hero-art-wrapper">
+            <img class="sb-hero-drawing" src="${tplEsc(heroImg)}" alt="${tplEsc(p.name)} Drawing Collection">
+            <div class="sb-pencil-prop" aria-hidden="true">
+              <div class="sb-pencil-body"></div>
+              <div class="sb-pencil-tip"></div>
+              <div class="sb-pencil-lead"></div>
+              <div class="sb-pencil-shadow"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </header>
   </div>`;
