@@ -2923,3 +2923,8 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
 .lx-tp-triennale .lx-tp-nav { background: #1544c0; height: 3px; }
 .lx-tp-triennale .lx-tp-hero { background: #fff; border: 1px solid #0e0e10; }
 .lx-tp-triennale .lx-tp-cards { background: #fff; border: 1px solid #0e0e10; box-shadow: 1px 1px 0px #1544c0; }
+
+.lx-modal-body[data-theme="biennale"] { background: #fbf9f4; color: #161616; }
+.lx-modal-body[data-theme="pavilion"] { background: #eae6df; color: #1a1a1c; }
+.lx-modal-body[data-theme="documenta"] { background: #f5f2eb; color: #0d0e11; }
+.lx-modal-body[data-theme="triennale"] { background: #f8fafc; color: #0e0e10; }
