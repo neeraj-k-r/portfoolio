@@ -7676,7 +7676,40 @@ function renderBiennale(p) {
       </div>
     </header>
 
-  // renderBiennale gallery stub
+    <section class="wrap biennale-gallery-sec">
+      <div class="biennale-sec-indicator">
+        <span class="biennale-sec-code">EXHIBITION PLATES · TAVOLE D'ESPOSIZIONE</span>
+        <span class="biennale-sec-guide">GIARDINI DELLA BIENNALE</span>
+      </div>
+      <div class="biennale-works-grid">
+        ${works.map((w, i) => {
+          const roomNo = String(i + 1).padStart(2, '0');
+          const isLarge = i % 3 === 0;
+          return `
+          <article class="biennale-piece ${isLarge ? 'biennale-prominent' : ''}" data-gal="${i}">
+            <div class="biennale-frame">
+              <span class="biennale-room-tag">SALA ${roomNo}</span>
+              <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || 'Untitled Installation')}" loading="lazy">
+            </div>
+            <div class="biennale-placard">
+              <div class="biennale-placard-head">
+                <span class="biennale-cat">${tplEsc(w.category || 'Spatial Installation').toUpperCase()}</span>
+                <span class="biennale-plate-no">CAT. NO. ${roomNo}</span>
+              </div>
+              <h3 class="biennale-piece-title">${tplEsc(w.title || 'Senza Titolo')}</h3>
+              ${w.desc ? `<p class="biennale-piece-desc">${tplEsc(w.desc)}</p>` : ''}
+              <div class="biennale-specs">
+                <span><b>Medium:</b> Mixed media on Belgian linen</span>
+                <span><b>Dimensions:</b> Variable installation</span>
+                <span><b>Year:</b> ${year}</span>
+              </div>
+            </div>
+          </article>
+          `;
+        }).join('')}
+      </div>
+    </section>
+
   </div>`;
   window.scrollTo(0, 0);
 }
