@@ -8104,7 +8104,6 @@ function renderTriennale(p) {
 
 
 function renderSketchbook(p) {
-  // sbFilter
   normTpl(p);
   document.body.dataset.template = 'sketchbook';
   document.title = `${p.name} — Drawing Portfolio | portfoolio.me`;
@@ -8124,11 +8123,9 @@ function renderSketchbook(p) {
   const location = p.location || '';
   const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
   const year = new Date().getFullYear();
-  
-  // Extract monogram initials (e.g. Nithin Krishna -> NK)
+
   const names = (p.name || 'Artist').trim().split(/\s+/);
   const initials = names.length > 1 ? (names[0][0] + names[names.length - 1][0]).toUpperCase() : names[0].slice(0, 2).toUpperCase();
-  
   const heroImg = works[0] ? works[0].imageUrl : 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80';
 
   app.innerHTML = `
@@ -8180,6 +8177,47 @@ function renderSketchbook(p) {
         </div>
       </div>
     </header>
+
+    <section class="sb-artworks-sec wrap" id="artworks">
+      <div class="sb-sec-bar">
+        <h2 class="sb-sec-title">Artworks</h2>
+        <a class="sb-view-all-link" href="#artworks">View All <span>→</span></a>
+      </div>
+      <div class="sb-cards-grid" id="sbGrid">
+        ${works.map((w, i) => `
+        <article class="sb-card" data-gal="${i}">
+          <div class="sb-card-frame">
+            <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || 'Artwork')}" loading="lazy">
+            <span class="sb-card-badge">${tplEsc(w.category || 'Study')}</span>
+          </div>
+          <div class="sb-card-info">
+            <h3 class="sb-card-title">${tplEsc(w.title || 'Untitled Artwork')}</h3>
+            ${w.desc ? `<p class="sb-card-desc">${tplEsc(w.desc)}</p>` : ''}
+          </div>
+        </article>
+        `).join('')}
+      </div>
+    </section>
+
+    <section class="sb-about-sec wrap" id="about">
+      <div class="sb-about-card">
+        <div class="sb-about-header">ABOUT THE ARTIST</div>
+        <div class="sb-about-content">
+          <div class="sb-about-quote">"Drawing is not what one sees, but what one can make others see. Each stroke of graphite preserves light, contour, and silence on raw paper."</div>
+          <div class="sb-artist-info">
+            <b>${tplEsc(p.name)}</b>
+            <span>${tplEsc(p.title || 'Classical Drawing & Graphite Artist')}${location ? ` · ${tplEsc(location)}` : ''}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="sb-footer wrap">
+      <div class="sb-footer-inner">
+        <span>© ${year} ${tplEsc(p.name)} · Hand-drawn Artworks & Studies</span>
+        <span class="sb-colophon-tag">Graphite & Charcoal Portfolio · Built with Portfoolio</span>
+      </div>
+    </footer>
   </div>`;
   window.scrollTo(0, 0);
 }
