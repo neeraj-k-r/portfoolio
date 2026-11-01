@@ -7725,6 +7725,22 @@ function renderBiennale(p) {
         </div>
       </div>
     </footer>
+    <footer class="wrap pavilion-footer">
+      <div class="pavilion-colophon-grid">
+        <div>
+          <b>PAVILION ARCHITECTURAL ARCHIVE</b>
+          <p>Commissioned monograph edition ${year}</p>
+        </div>
+        <div>
+          <b>AUTHOR & DIRECTION</b>
+          <p>${tplEsc(p.name)} · ${tplEsc(p.title || 'Spatial Architect')}</p>
+        </div>
+        <div>
+          <b>HOSTED DOSSIER</b>
+          <p>Published with portfoolio.me</p>
+        </div>
+      </div>
+    </footer>
   </div>`;
   window.scrollTo(0, 0);
 }
