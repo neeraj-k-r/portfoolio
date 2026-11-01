@@ -7742,7 +7742,44 @@ function renderPavilion(p) {
   const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
   const year = new Date().getFullYear();
 
-  // renderPavilion stub
+  app.innerHTML = `
+  <div class="pavilion-page">
+    <nav class="pavilion-nav wrap">
+      <div class="pavilion-brand">
+        <span class="pavilion-geo-marker">◈</span>
+        <div class="pavilion-brand-titles">
+          <span class="pavilion-org">INTERNATIONAL ARCHITECTURE & SPATIAL PAVILION</span>
+          <span class="pavilion-architect">${tplEsc(p.name)}</span>
+        </div>
+      </div>
+      <div class="pavilion-nav-coords">
+        <span>45°25'49"N 12°21'38"E · ARSENALE</span>
+        ${p.email ? `<a class="pavilion-inquire-btn" href="mailto:${tplEsc(p.email)}">Commission Study ↗</a>` : ''}
+      </div>
+    </nav>
+
+    <header class="wrap gal-pavilion-head">
+      <div class="pavilion-monolith-kicker">COMMISSIONED SPATIAL INSTALLATION · STRUCTURAL MONOGRAPH</div>
+      <h1 class="pavilion-monolith-title">${tplEsc(p.name)}</h1>
+      <div class="pavilion-subtitle">${tplEsc(p.title || 'Architectural Scenography & Monumental Spatial Design')}</div>
+
+      <div class="pavilion-curatorial-split">
+        <div class="pavilion-curatorial-col">
+          <div class="pavilion-label-line">— ARCHITECTURAL DISCOURSE —</div>
+          <p class="pavilion-manifesto">${tplEsc(bio || 'Exploring how void, daylight, and monolithic materiality construct somatic memory within temporary urban and gallery enclosures.')}</p>
+        </div>
+        <div class="pavilion-spec-col">
+          <div class="pavilion-data-row"><span>STRUCTURE:</span> <b>PAVILION ARSENALE N° 04</b></div>
+          <div class="pavilion-data-row"><span>MATERIALITY:</span> <b>TRAVERTINE · STEEL · ACOUSTIC VOID</b></div>
+          ${location ? `<div class="pavilion-data-row"><span>LOCATION:</span> <b>${tplEsc(location).toUpperCase()}</b></div>` : ''}
+          <div class="pavilion-data-row"><span>SURVEY:</span> <b>${works.length} SPATIAL PLATES</b></div>
+        </div>
+      </div>
+    </header>
+
+  // renderPavilion works stub
+  </div>`;
+  window.scrollTo(0, 0);
 }
 
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip };
