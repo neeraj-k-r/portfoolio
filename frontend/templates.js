@@ -7710,6 +7710,20 @@ function renderBiennale(p) {
       </div>
     </section>
 
+    <footer class="biennale-footer wrap">
+      <div class="biennale-colophon">
+        <div class="biennale-colophon-col">
+          <b>ESPOSIZIONE BIENNALE INTERNAZIONALE</b>
+          <p>Padiglione Centrale · Giardini & Arsenale</p>
+          <p>© ${year} ${tplEsc(p.name)}. All rights reserved.</p>
+        </div>
+        <div class="biennale-colophon-col biennale-col-right">
+          <b>ARCHIVIO E DOCUMENTAZIONE</b>
+          <p>Curated monograph portfolio on portfoolio.me</p>
+          ${p.email ? `<a href="mailto:${tplEsc(p.email)}" class="biennale-inquire-link">Direct Inquiries: ${tplEsc(p.email)}</a>` : ''}
+        </div>
+      </div>
+    </footer>
   </div>`;
   window.scrollTo(0, 0);
 }
