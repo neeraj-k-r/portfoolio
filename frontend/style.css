@@ -2753,3 +2753,153 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 .lx-modal-body[data-theme="filmstrip"]{background:#0b0b0d;color:#e2e8f0}
 
 body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-overlay { display: none !important; }
+
+/* BIENNALE EXHIBITION THEME */
+.biennale-page { background: #fbf9f4; color: #161616; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; }
+.biennale-top-rule { height: 4px; background: #c83226; width: 100%; }
+.biennale-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+.biennale-brand { display: flex; align-items: center; gap: 14px; }
+.biennale-nat-flag { font-family: monospace; font-weight: 800; font-size: 11px; background: #161616; color: #fff; padding: 3px 6px; border-radius: 2px; }
+.biennale-pavilion-num { font-size: 10px; font-weight: 700; letter-spacing: 1.5px; color: #888; text-transform: uppercase; display: block; }
+.biennale-artist-name { font-family: 'Instrument Serif', Georgia, serif; font-size: 19px; font-weight: 600; color: #161616; }
+.biennale-badge-pill { font-size: 11px; font-weight: 700; border: 1px solid rgba(0,0,0,0.18); padding: 5px 12px; border-radius: 100px; color: #555; }
+.biennale-btn-contact { font-size: 12px; font-weight: 700; background: #161616; color: #fff; text-decoration: none; padding: 7px 16px; border-radius: 4px; transition: opacity .2s; }
+.biennale-btn-contact:hover { opacity: .85; }
+
+.gal-biennale-head { padding: 70px 0 40px; }
+.biennale-edition-badge { font-size: 11px; font-weight: 800; letter-spacing: 2px; color: #c83226; text-transform: uppercase; margin-bottom: 14px; }
+.biennale-display-title { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(40px, 7vw, 76px); font-weight: 400; line-height: 1.05; margin: 0 0 12px; color: #111; }
+.biennale-discipline { font-size: 16px; color: #666; font-weight: 500; margin: 0 0 36px; }
+.biennale-curatorial-block { background: #f2eee5; border-left: 3px solid #c83226; padding: 28px 32px; border-radius: 2px; margin-bottom: 20px; }
+.biennale-curator-label { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #888; margin-bottom: 12px; }
+.biennale-statement { font-family: 'Instrument Serif', Georgia, serif; font-size: clamp(18px, 2.5vw, 24px); line-height: 1.45; color: #222; margin: 0 0 20px; }
+.biennale-monograph-meta { display: flex; flex-wrap: wrap; gap: 20px; font-size: 11px; color: #666; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 14px; }
+.biennale-monograph-meta span b { color: #111; margin-left: 4px; }
+
+.biennale-gallery-sec { padding: 40px 0 80px; }
+.biennale-sec-indicator { display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #999; border-bottom: 2px solid #161616; padding-bottom: 12px; margin-bottom: 40px; }
+.biennale-works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 48px; }
+.biennale-piece { background: #fff; border: 1px solid rgba(0,0,0,0.08); box-shadow: 0 8px 30px rgba(0,0,0,0.04); transition: transform .3s; }
+.biennale-piece:hover { transform: translateY(-4px); }
+.biennale-prominent { grid-column: span 2; }
+@media(max-width:850px){ .biennale-prominent { grid-column: span 1; } }
+.biennale-frame { position: relative; overflow: hidden; background: #eee; }
+.biennale-frame img { width: 100%; height: auto; display: block; object-fit: cover; }
+.biennale-room-tag { position: absolute; top: 14px; left: 14px; background: rgba(0,0,0,0.8); color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; padding: 4px 8px; border-radius: 2px; }
+.biennale-placard { padding: 24px; background: #fff; }
+.biennale-placard-head { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; letter-spacing: 1.2px; color: #888; margin-bottom: 8px; }
+.biennale-cat { color: #c83226; }
+.biennale-piece-title { font-family: 'Instrument Serif', Georgia, serif; font-size: 24px; margin: 0 0 10px; color: #111; }
+.biennale-piece-desc { font-size: 13px; color: #555; line-height: 1.5; margin: 0 0 16px; }
+.biennale-specs { display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: #777; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 12px; }
+.biennale-footer { padding: 50px 0; border-top: 1px solid rgba(0,0,0,0.1); }
+.biennale-colophon { display: flex; justify-content: space-between; gap: 30px; font-size: 12px; color: #666; }
+.biennale-col-right { text-align: right; }
+.biennale-inquire-link { color: #c83226; text-decoration: none; font-weight: 700; display: inline-block; margin-top: 6px; }
+
+/* PAVILION SPATIAL THEME */
+.pavilion-page { background: #eae6df; color: #1a1a1c; font-family: 'Space Grotesk', sans-serif; min-height: 100vh; }
+.pavilion-nav { display: flex; justify-content: space-between; align-items: center; padding: 26px 0; border-bottom: 2px solid #1a1a1c; }
+.pavilion-brand { display: flex; align-items: center; gap: 12px; }
+.pavilion-geo-marker { color: #d4a373; font-size: 20px; }
+.pavilion-org { font-size: 9px; font-weight: 800; letter-spacing: 2px; color: #666; text-transform: uppercase; display: block; }
+.pavilion-architect { font-size: 18px; font-weight: 800; letter-spacing: 0.5px; }
+.pavilion-nav-coords { display: flex; align-items: center; gap: 18px; font-size: 11px; color: #555; }
+.pavilion-inquire-btn { background: #1a1a1c; color: #eae6df; padding: 8px 18px; font-weight: 700; font-size: 12px; text-decoration: none; border-radius: 2px; }
+.gal-pavilion-head { padding: 60px 0 40px; }
+.pavilion-monolith-kicker { font-size: 10px; font-weight: 800; letter-spacing: 2.5px; color: #d4a373; text-transform: uppercase; margin-bottom: 12px; }
+.pavilion-monolith-title { font-size: clamp(42px, 8vw, 84px); font-weight: 800; line-height: 0.95; letter-spacing: -1.5px; margin: 0 0 14px; text-transform: uppercase; }
+.pavilion-subtitle { font-size: 16px; color: #555; margin-bottom: 34px; font-weight: 600; }
+.pavilion-curatorial-split { display: grid; grid-template-columns: 2fr 1fr; gap: 36px; background: #dfdad0; padding: 32px; border: 1px solid #1a1a1c; margin-bottom: 20px; }
+@media(max-width:800px){ .pavilion-curatorial-split { grid-template-columns: 1fr; } }
+.pavilion-manifesto { font-size: 16px; line-height: 1.6; color: #222; margin: 8px 0 0; }
+.pavilion-data-row { display: flex; justify-content: space-between; font-size: 11px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.1); }
+
+.pavilion-spatial-sec { padding: 40px 0 80px; }
+.pavilion-sec-title { display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; letter-spacing: 2px; border-bottom: 2px solid #1a1a1c; padding-bottom: 10px; margin-bottom: 36px; }
+.pavilion-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 40px; }
+.pavilion-card { background: #f4f0e8; border: 1px solid #1a1a1c; box-shadow: 4px 4px 0px #1a1a1c; }
+.pavilion-card-wide { grid-column: span 2; }
+@media(max-width:900px){ .pavilion-card-wide { grid-column: span 1; } }
+.pavilion-elevation { position: relative; overflow: hidden; background: #000; }
+.pavilion-elevation img { width: 100%; height: auto; display: block; object-fit: cover; }
+.pavilion-plate-badge { position: absolute; bottom: 12px; right: 12px; background: #1a1a1c; color: #eae6df; font-size: 10px; font-weight: 800; padding: 4px 8px; letter-spacing: 1px; }
+.pavilion-meta-panel { padding: 24px; }
+.pavilion-meta-kicker { font-size: 10px; font-weight: 800; color: #d4a373; letter-spacing: 1.5px; margin-bottom: 6px; }
+.pavilion-meta-title { font-size: 22px; font-weight: 800; margin: 0 0 10px; text-transform: uppercase; }
+.pavilion-meta-desc { font-size: 13px; color: #555; line-height: 1.5; margin: 0 0 16px; }
+.pavilion-tech-specs { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #777; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 10px; }
+.pavilion-footer { padding: 40px 0; border-top: 2px solid #1a1a1c; }
+.pavilion-colophon-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; font-size: 11px; }
+@media(max-width:700px){ .pavilion-colophon-grid { grid-template-columns: 1fr; } }
+
+/* DOCUMENTA ARCHIVE THEME */
+.documenta-page { background: #f5f2eb; color: #0d0e11; font-family: 'Space Grotesk', sans-serif; min-height: 100vh; }
+.documenta-stamp-bar { display: flex; justify-content: space-between; background: #0d0e11; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 6px 24px; text-transform: uppercase; }
+.documenta-nav { display: flex; justify-content: space-between; align-items: center; padding: 22px 0; border-bottom: 1px solid rgba(0,0,0,0.12); }
+.documenta-index-chip { font-size: 11px; font-weight: 800; background: #1e3a8a; color: #fff; padding: 4px 8px; border-radius: 2px; }
+.documenta-reg-name { font-size: 18px; font-weight: 800; display: block; }
+.documenta-reg-dept { font-size: 10px; font-weight: 700; color: #777; letter-spacing: 1px; }
+.documenta-dossier-btn { font-size: 12px; font-weight: 700; background: #0d0e11; color: #fff; padding: 8px 16px; text-decoration: none; border-radius: 2px; }
+.gal-documenta-head { padding: 50px 0 30px; }
+.documenta-header-grid { display: grid; grid-template-columns: 1.2fr 1.8fr; gap: 36px; align-items: start; }
+@media(max-width:850px){ .documenta-header-grid { grid-template-columns: 1fr; } }
+.documenta-kicker { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #1e3a8a; }
+.documenta-name { font-size: clamp(38px, 6vw, 64px); font-weight: 800; line-height: 1.05; margin: 8px 0; }
+.documenta-role { font-size: 15px; color: #555; font-weight: 600; margin: 0 0 10px; }
+.documenta-origin { font-size: 11px; font-weight: 800; color: #777; letter-spacing: 1px; }
+.documenta-memo-card { background: #fff; border: 1px solid rgba(0,0,0,0.12); padding: 24px; box-shadow: 2px 2px 0px rgba(0,0,0,0.1); }
+.documenta-memo-header { font-size: 11px; font-weight: 800; letter-spacing: 1.5px; color: #1e3a8a; border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 8px; margin-bottom: 12px; }
+.documenta-memo-body { font-size: 14px; line-height: 1.6; color: #333; margin: 0 0 16px; }
+.documenta-memo-footer { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #888; border-top: 1px solid rgba(0,0,0,0.06); padding-top: 8px; }
+
+.documenta-archive-sec { padding: 40px 0 80px; }
+.documenta-sec-header { display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; letter-spacing: 1.5px; border-bottom: 2px solid #0d0e11; padding-bottom: 8px; margin-bottom: 30px; }
+.documenta-grid { display: flex; flex-direction: column; gap: 24px; }
+.documenta-row { display: grid; grid-template-columns: 100px 320px 1fr; gap: 24px; background: #fff; border: 1px solid rgba(0,0,0,0.1); padding: 18px; align-items: center; transition: box-shadow .2s; }
+.documenta-row:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+@media(max-width:800px){ .documenta-row { grid-template-columns: 1fr; } }
+.documenta-doc-code { font-size: 16px; font-weight: 800; color: #1e3a8a; display: block; }
+.documenta-doc-sub { font-size: 9px; font-weight: 700; color: #999; letter-spacing: 1px; }
+.documenta-col-img img { width: 100%; height: 200px; object-fit: cover; border: 1px solid rgba(0,0,0,0.08); }
+.documenta-doc-cat { font-size: 10px; font-weight: 800; letter-spacing: 1px; color: #1e3a8a; }
+.documenta-doc-title { font-size: 20px; font-weight: 700; margin: 4px 0 8px; }
+.documenta-doc-desc { font-size: 13px; color: #555; line-height: 1.5; margin: 0 0 12px; }
+.documenta-doc-meta { display: flex; gap: 16px; font-size: 10px; font-weight: 700; color: #888; }
+.documenta-footer { padding: 40px 0; border-top: 1px solid rgba(0,0,0,0.12); }
+.documenta-foot-inner { display: flex; justify-content: space-between; font-size: 11px; color: #666; }
+
+/* TRIENNALE MILANO THEME */
+.triennale-page { background: #f8fafc; color: #0e0e10; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; }
+.triennale-cobalt-bar { display: flex; justify-content: space-between; background: #1544c0; color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 1.8px; padding: 8px 24px; text-transform: uppercase; }
+.triennale-nav { display: flex; justify-content: space-between; align-items: center; padding: 24px 0; border-bottom: 2px solid #0e0e10; }
+.triennale-emblem { font-size: 14px; font-weight: 900; background: #0e0e10; color: #fff; padding: 6px 10px; border-radius: 4px; }
+.triennale-brand-title { font-size: 18px; font-weight: 800; display: block; }
+.triennale-brand-dept { font-size: 10px; font-weight: 700; color: #666; letter-spacing: 1.2px; }
+.triennale-year-badge { font-size: 11px; font-weight: 800; border: 2px solid #0e0e10; padding: 4px 10px; border-radius: 100px; }
+.triennale-contact-btn { background: #1544c0; color: #fff; font-size: 12px; font-weight: 800; padding: 8px 18px; border-radius: 4px; text-decoration: none; }
+.gal-triennale-head { padding: 60px 0 40px; }
+.triennale-manifesto-badge { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #1544c0; text-transform: uppercase; margin-bottom: 12px; }
+.triennale-big-title { font-size: clamp(42px, 8vw, 84px); font-weight: 900; line-height: 0.98; letter-spacing: -1.5px; margin: 0 0 10px; text-transform: uppercase; }
+.triennale-big-kicker { font-size: 17px; color: #555; font-weight: 600; margin: 0 0 34px; }
+.triennale-intro-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 32px; background: #fff; border: 2px solid #0e0e10; padding: 30px; box-shadow: 6px 6px 0px #1544c0; margin-bottom: 20px; }
+@media(max-width:800px){ .triennale-intro-grid { grid-template-columns: 1fr; } }
+.triennale-curator-statement p { font-size: 15px; line-height: 1.6; color: #333; margin: 8px 0 0; }
+.triennale-stat { display: flex; justify-content: space-between; font-size: 11px; padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.08); }
+
+.triennale-exposition-sec { padding: 40px 0 80px; }
+.triennale-sec-bar { display: flex; justify-content: space-between; font-size: 11px; font-weight: 800; letter-spacing: 2px; border-bottom: 2px solid #0e0e10; padding-bottom: 10px; margin-bottom: 36px; }
+.triennale-works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 36px; }
+.triennale-card { background: #fff; border: 2px solid #0e0e10; box-shadow: 4px 4px 0px #0e0e10; }
+.triennale-card-full { grid-column: span 2; }
+@media(max-width:850px){ .triennale-card-full { grid-column: span 1; } }
+.triennale-card-view { position: relative; overflow: hidden; background: #000; }
+.triennale-card-view img { width: 100%; height: auto; display: block; object-fit: cover; }
+.triennale-card-no { position: absolute; top: 12px; left: 12px; background: #1544c0; color: #fff; font-size: 10px; font-weight: 800; padding: 4px 8px; border-radius: 2px; }
+.triennale-card-meta { padding: 22px; }
+.triennale-card-cat { font-size: 10px; font-weight: 800; color: #1544c0; letter-spacing: 1.5px; }
+.triennale-card-title { font-size: 22px; font-weight: 800; margin: 6px 0 10px; }
+.triennale-card-desc { font-size: 13px; color: #555; line-height: 1.5; margin: 0 0 14px; }
+.triennale-card-foot { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; color: #888; border-top: 1px solid rgba(0,0,0,0.08); padding-top: 10px; }
+.triennale-footer { padding: 40px 0; border-top: 2px solid #0e0e10; }
+.triennale-foot-grid { display: flex; justify-content: space-between; font-size: 11px; color: #555; }
