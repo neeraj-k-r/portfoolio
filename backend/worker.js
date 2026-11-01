@@ -507,6 +507,71 @@ function pageGallery(p, wIdx, url) {
         </div>
       </footer>
     </div>`
+    : vtpl === 'pavilion'
+    ? `<div class="pavilion-page">
+      <nav class="pavilion-nav wrap">
+        <div class="pavilion-brand">
+          <span class="pavilion-geo-marker">◈</span>
+          <div class="pavilion-brand-titles">
+            <span class="pavilion-org">INTERNATIONAL ARCHITECTURE & SPATIAL PAVILION</span>
+            <span class="pavilion-architect">${esc(p.name)}</span>
+          </div>
+        </div>
+        <div class="pavilion-nav-coords">
+          <span>45°25'49"N 12°21'38"E · ARSENALE</span>
+          ${p.email ? `<a class="pavilion-inquire-btn" href="mailto:${esc(p.email)}">Commission Study ↗</a>` : ''}
+        </div>
+      </nav>
+      <header class="wrap gal-pavilion-head">
+        <div class="pavilion-monolith-kicker">COMMISSIONED SPATIAL INSTALLATION · STRUCTURAL MONOGRAPH</div>
+        <h1 class="pavilion-monolith-title">${esc(p.name)}</h1>
+        <div class="pavilion-subtitle">${esc(p.title || 'Architectural Scenography & Monumental Spatial Design')}</div>
+        <div class="pavilion-curatorial-split">
+          <div class="pavilion-curatorial-col">
+            <div class="pavilion-label-line">— ARCHITECTURAL DISCOURSE —</div>
+            <p class="pavilion-manifesto">${esc((p.bio || p.summary || p.about || p.tagline || 'Exploring how void, daylight, and monolithic materiality construct somatic memory within temporary urban and gallery enclosures.').trim())}</p>
+          </div>
+          <div class="pavilion-spec-col">
+            <div class="pavilion-data-row"><span>STRUCTURE:</span> <b>PAVILION ARSENALE N° 04</b></div>
+            <div class="pavilion-data-row"><span>SURVEY:</span> <b>${works.length} SPATIAL PLATES</b></div>
+          </div>
+        </div>
+      </header>
+      <section class="wrap pavilion-spatial-sec">
+        <div class="pavilion-sec-title">
+          <span>INSTALLATION SURVEY / REPERTORIO SPAZIALE</span>
+          <span>SECTION A–E</span>
+        </div>
+        <div class="pavilion-grid">
+          ${works.map((k, idx) => {
+            const plateId = String(idx + 1).padStart(2, '0');
+            const isWide = idx % 2 === 0;
+            return `
+            <div class="pavilion-card ${isWide ? 'pavilion-card-wide' : ''}">
+              <div class="pavilion-elevation">
+                <span class="pavilion-plate-badge">PLATE ${plateId}</span>
+                <img src="${esc(k.imageUrl)}" alt="${esc(k.title || 'Architectural Study')}" loading="lazy">
+              </div>
+              <div class="pavilion-meta-panel">
+                <div class="pavilion-meta-kicker">${esc((k.category || 'Spatial Intervention').toUpperCase())}</div>
+                <h3 class="pavilion-meta-title">${esc(k.title || 'Spatial Monolith')}</h3>
+                ${k.desc ? `<p class="pavilion-meta-desc">${esc(k.desc)}</p>` : ''}
+                <div class="pavilion-tech-specs">
+                  <span>COORD: 0${idx + 1} // ELEVATION 1:50</span>
+                  <span>YEAR: 2026</span>
+                </div>
+              </div>
+            </div>
+            `;
+          }).join('')}
+        </div>
+      </section>
+      <footer class="wrap pavilion-footer">
+        <div class="pavilion-colophon-grid">
+          <div><b>PAVILION ARCHITECTURAL ARCHIVE</b><p>© 2026 ${esc(p.name)}</p></div>
+        </div>
+      </footer>
+    </div>`
     : vtpl === 'atelier'
     ? `<div class="atelier-page">
       <nav class="atelier-nav wrap">
