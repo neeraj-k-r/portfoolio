@@ -8425,6 +8425,28 @@ function renderIllustra(p) {
   
   // Base render container initialized
   let html = `<div class="illustra-page" id="illustraRoot">`;
+  const navHeader = `
+    <header class="illustra-header wrap">
+      <div class="illustra-header-inner">
+        <a href="#home" class="illustra-brand" aria-label="Home">
+          <span class="illustra-monogram">${tplEsc(initials)}</span>
+        </a>
+        <nav class="illustra-nav" aria-label="Main Navigation">
+          <a href="#home" class="illustra-nav-link active">Home</a>
+          <a href="#works" class="illustra-nav-link">Works</a>
+          <a href="#process" class="illustra-nav-link">Process</a>
+          <a href="#about" class="illustra-nav-link">About</a>
+        </nav>
+        <div class="illustra-header-actions">
+          <button class="illustra-theme-toggle" id="illustraThemeToggle" aria-label="Toggle light or dark theme" title="Toggle theme">
+            <span class="illustra-toggle-pill">
+              <span class="illustra-toggle-icon sun"><i class="fa-solid fa-sun"></i></span>
+              <span class="illustra-toggle-icon moon"><i class="fa-solid fa-moon"></i></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>`;
   html += `</div>`;
   app.innerHTML = html;
 }
