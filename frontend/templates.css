@@ -11323,3 +11323,18 @@ body.illustra-dark-mode {
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
 }
+
+.techno-page * {
+  box-sizing: border-box;
+}
+.techno-wrap {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+@media (max-width: 768px) {
+  .techno-wrap {
+    padding: 0 20px;
+  }
+}
