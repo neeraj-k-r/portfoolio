@@ -9367,7 +9367,32 @@ function renderAnalogSelectedCards(p) {
   </div>`;
 }
 
+function renderAnalogExploring(p) {
+  const fallbackSkills = [
+    'Generative Art',
+    'Creative Coding',
+    'Interaction Design',
+    'Media & Motion',
+    'AI × Creativity'
+  ];
+
+  const skills = (p.skills && p.skills.length) ? p.skills : fallbackSkills;
+
+  return `<div class="analog-exploring-sec">
+    <div class="analog-exploring-label">
+      <span class="analog-exp-title">Also Exploring</span>
+      <span class="analog-exp-slashes">//</span>
+    </div>
+    <div class="analog-exploring-tags">
+      ${skills.map(skill => `
+        <span class="analog-skill-badge">${tplEsc(skill)}</span>
+      `).join('')}
+    </div>
+  </div>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
