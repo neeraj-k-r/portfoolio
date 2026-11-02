@@ -11404,6 +11404,7 @@ body.illustra-dark-mode {
   align-items: center;
 }
 .techno-nav-link:hover {
+  transform: translateY(-1px);
   color: var(--tc-plum-vibrant);
 }
 .techno-nav-link.active {
