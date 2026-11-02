@@ -306,6 +306,70 @@ function head(p, tpl) {
 .sb-footer{padding:36px 0;border-top:1px solid rgba(31,30,28,0.1)}
 .sb-footer-inner{display:flex;justify-content:space-between;font-size:12px;color:#787268;flex-wrap:wrap;gap:12px}
 .sb-colophon-tag{font-weight:600;color:#3f1d2e}
+
+/* SALON EMERALD GALLERY THEME */
+.salon-page{background:#13271c;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;position:relative;overflow-x:hidden}
+.salon-ambient-light{position:absolute;top:0;left:0;right:0;height:1000px;background:radial-gradient(circle at 50% 120px,rgba(255,230,170,.14) 0%,rgba(20,50,36,.6) 45%,rgba(15,32,23,.95) 85%);pointer-events:none;z-index:1}
+.salon-nav{display:flex;justify-content:space-between;align-items:center;padding:30px 0;position:relative;z-index:10;border-bottom:1px solid rgba(255,255,255,.08)}
+.salon-brand{display:flex;align-items:center;gap:16px}
+.salon-sig-monogram{font-family:'Instrument Serif',Georgia,serif;font-size:38px;font-style:italic;font-weight:700;color:#fff;line-height:1;letter-spacing:-1px}
+.salon-artist-name{font-size:17px;font-weight:700;color:#fff;display:block;letter-spacing:.5px}
+.salon-artist-title{font-size:11px;font-weight:600;color:#8ea89a;letter-spacing:1px;text-transform:uppercase}
+.salon-nav-links{display:flex;gap:32px;align-items:center}
+@media(max-width:768px){.salon-nav-links{display:none}}
+.salon-nav-item{color:rgba(255,255,255,.75);text-decoration:none;font-size:14px;font-weight:600}
+.salon-nav-item.active{color:#fff;font-weight:700}
+.salon-contact-btn{background:transparent;border:1.5px solid rgba(255,255,255,.85);color:#fff;padding:8px 22px;border-radius:100px;text-decoration:none;font-size:13px;font-weight:700}
+.salon-hero{padding:40px 0 20px;position:relative;z-index:10}
+.salon-ceiling-rig{position:absolute;top:0;left:55%;transform:translateX(-50%);z-index:5;pointer-events:none}
+.salon-pendant-wire{width:2px;height:35px;background:#c5a059;margin:0 auto}
+.salon-lamp-fixture{width:34px;height:20px;background:#1a1a1a;border-radius:14px 14px 4px 4px;margin:0 auto;border:1px solid #444}
+.salon-spotlight-beam{width:440px;height:500px;background:radial-gradient(ellipse at 50% 0%,rgba(255,235,175,.28) 0%,rgba(255,230,160,.12) 40%,transparent 70%);margin:0 auto;transform:translateY(-4px)}
+.salon-hero-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:40px;align-items:center}
+@media(max-width:960px){.salon-hero-grid{grid-template-columns:1fr}}
+.salon-kicker{font-size:11px;font-weight:800;letter-spacing:3px;color:#9ab3a5;text-transform:uppercase;margin-bottom:16px;display:block}
+.salon-title{font-family:'Instrument Serif',Georgia,serif;font-size:clamp(52px,7vw,92px);font-weight:400;line-height:.95;color:#fff;margin:0 0 16px;letter-spacing:-1px}
+.salon-title em{font-style:italic;color:#fff}
+.salon-accent-rule{width:64px;height:2px;background:rgba(255,255,255,.5);margin:0 0 24px}
+.salon-desc{font-size:16px;line-height:1.6;color:#a3c2b1;margin:0 0 34px}
+.salon-browse-btn{display:inline-flex;align-items:center;gap:8px;border:1.5px solid #fff;background:rgba(0,0,0,.2);color:#fff;padding:12px 28px;border-radius:4px;font-size:14px;font-weight:700;text-decoration:none}
+.salon-gallery-wall{display:flex;align-items:center;gap:26px;justify-content:center;position:relative}
+.salon-main-frame-wrap{flex:1.6;max-width:480px}
+.salon-secondary-frame-wrap{flex:1;max-width:260px}
+@media(max-width:768px){.salon-secondary-frame-wrap{display:none}}
+.salon-gilded-frame{border:10px solid #c5a059;outline:3px solid #dfc07b;box-shadow:inset 0 0 10px rgba(0,0,0,.6),0 18px 40px rgba(0,0,0,.7);position:relative;overflow:hidden;background:#000;border-radius:2px}
+.salon-frame-primary{aspect-ratio:1.05/1}
+.salon-frame-secondary{aspect-ratio:0.8/1;transform:translateY(-10px)}
+.salon-oil-canvas{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.08) saturate(1.1)}
+.salon-furniture-row{position:relative;margin-top:36px;padding-bottom:20px}
+.salon-bench{width:280px;margin:0 auto;position:relative}
+.salon-bench-seat{height:12px;background:#261b14;border-radius:2px;border:1px solid #140d0a}
+.salon-bench-legs{display:flex;justify-content:space-between;padding:0 28px}
+.salon-bench-legs span{width:10px;height:32px;background:#1c130e}
+.salon-bench-shadow{position:absolute;bottom:-8px;left:10%;width:80%;height:10px;background:rgba(0,0,0,.5);filter:blur(6px);border-radius:50%}
+.salon-floor-reflection{height:16px;background:linear-gradient(180deg,rgba(255,235,175,.05) 0%,transparent 100%);margin-top:14px}
+.salon-works-sec{padding:60px 0 90px;position:relative;z-index:10}
+.salon-sec-header{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:20px;margin-bottom:50px;flex-wrap:wrap;gap:16px}
+.salon-sec-badge{font-size:10px;font-weight:800;letter-spacing:2px;color:#c5a059;text-transform:uppercase;display:block;margin-bottom:6px}
+.salon-sec-title{font-family:'Instrument Serif',Georgia,serif;font-size:42px;font-weight:400;color:#fff;margin:0}
+.salon-sec-meta{font-size:11px;font-weight:700;letter-spacing:1.5px;color:#8ea89a}
+.salon-art-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:46px}
+.salon-frame-wall{width:100%;aspect-ratio:1.1/1;border:8px solid #c5a059;outline:2px solid #dfc07b;box-shadow:0 14px 30px rgba(0,0,0,.6)}
+.salon-frame-wall img{width:100%;height:100%;object-fit:cover;display:block}
+.salon-brass-placard{margin-top:18px;text-align:center;background:rgba(18,36,26,.9);border:1px solid rgba(197,160,89,.35);padding:12px 20px;border-radius:2px;box-shadow:0 4px 14px rgba(0,0,0,.4);max-width:280px}
+.salon-placard-title{font-family:'Instrument Serif',Georgia,serif;font-size:18px;color:#fff;margin-bottom:2px}
+.salon-placard-medium{font-size:11px;font-weight:600;color:#c5a059;letter-spacing:.5px;margin-bottom:6px}
+.salon-placard-desc{font-size:12px;color:#8ea89a;line-height:1.4;margin:0 0 8px}
+.salon-placard-meta{display:flex;justify-content:space-between;font-size:9px;font-weight:700;letter-spacing:1px;color:#698375;border-top:1px solid rgba(255,255,255,.06);padding-top:6px}
+.salon-exhibitions-sec{padding:40px 0 60px;position:relative;z-index:10}
+.salon-exhibitions-card{background:rgba(15,32,23,.85);border:1px solid rgba(197,160,89,.3);border-radius:4px;padding:32px 38px}
+.salon-exhibition-head{display:flex;justify-content:space-between;font-size:10px;font-weight:800;letter-spacing:2px;color:#c5a059;border-bottom:1px solid rgba(255,255,255,.08);padding-bottom:12px;margin-bottom:24px}
+.salon-viewing-details{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.salon-viewing-col h3{font-family:'Instrument Serif',Georgia,serif;font-size:22px;color:#fff;margin:0 0 6px}
+.salon-viewing-col p{font-size:13.5px;color:#9ab3a5;margin:0;line-height:1.5}
+.salon-footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.08);position:relative;z-index:10}
+.salon-footer-inner{display:flex;justify-content:space-between;font-size:12px;color:#8ea89a;flex-wrap:wrap;gap:14px}
+.salon-foot-badge{color:#c5a059;font-weight:600}
 </style>` : '';
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
