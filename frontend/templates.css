@@ -11338,3 +11338,13 @@ body.illustra-dark-mode {
     padding: 0 20px;
   }
 }
+
+.techno-emblem-star {
+  display: inline-block;
+  color: var(--tc-text-primary);
+  flex-shrink: 0;
+  transition: transform 0.4s ease;
+}
+.techno-brand:hover .techno-emblem-star {
+  transform: rotate(45deg);
+}
