@@ -730,6 +730,9 @@ function renderGallery(p) {
   if (vtpl === 'triennale') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.triennale) return window.PortfoolioTemplates.triennale(p);
   }
+  if (vtpl === 'salon') {
+    if (window.PortfoolioTemplates && window.PortfoolioTemplates.salon) return window.PortfoolioTemplates.salon(p);
+  }
   if (vtpl === 'sketchbook') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.sketchbook) return window.PortfoolioTemplates.sketchbook(p);
   }
