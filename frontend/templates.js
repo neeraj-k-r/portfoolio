@@ -8882,6 +8882,47 @@ function technoExplorationTicker(p) {
   </section>`;
 }
 
+
+function technoProjectsSection(p) {
+  const works = getVisualWorks(p) || [];
+  if (!works.length) return '';
+
+  return `<section class="techno-archive-sec techno-wrap" id="projects">
+    <div class="techno-sec-head">
+      <span class="techno-sec-kicker">CURATED ARCHIVE</span>
+      <h2 class="techno-sec-title">Selected Projects & Visual Artifacts</h2>
+    </div>
+    <div class="techno-archive-grid">
+      ${works.map((w, idx) => {
+        const title = w.title || w.name || `Artifact ${idx + 1}`;
+        const category = w.category || w.tag || 'Creative Tech';
+        const img = w.imageUrl || w.img || 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80';
+        const desc = w.desc || w.summary || '';
+        const year = w.year || '2026';
+        return `
+          <article class="techno-archive-card" onclick="window.openTechnoModal&&window.openTechnoModal(${idx})">
+            <div class="techno-archive-thumb">
+              <img src="${tplEsc(img)}" alt="${tplEsc(title)}" loading="lazy" class="techno-archive-img"/>
+              <span class="techno-archive-tag">${tplEsc(category)}</span>
+            </div>
+            <div class="techno-archive-meta">
+              <div class="techno-archive-row">
+                <h3 class="techno-archive-title">${tplEsc(title)}</h3>
+                <span class="techno-archive-year">${tplEsc(year)}</span>
+              </div>
+              ${desc ? `<p class="techno-archive-desc">${tplEsc(desc)}</p>` : ''}
+              <div class="techno-archive-link">
+                <span>View Artifact</span>
+                <span class="techno-arrow">↗</span>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('')}
+    </div>
+  </section>`;
+}
+
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
