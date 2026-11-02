@@ -12589,6 +12589,28 @@ body.techno-dark-mode {
   }
 }
 
+.analog-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.82rem;
+  font-family: var(--ag-font-sans);
+  color: var(--ag-text-muted);
+  margin-bottom: 20px;
+  letter-spacing: 0.02em;
+}
+
+.analog-bc-sep {
+  color: var(--ag-text-dim);
+  font-weight: 300;
+}
+
+.analog-bc-name {
+  color: var(--ag-cream);
+  font-weight: 400;
+}
+
+
 
 
 
