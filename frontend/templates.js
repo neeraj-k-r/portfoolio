@@ -8309,7 +8309,28 @@ function renderSalon(p) {
           <span>ROOM I · IMPASTO & OIL SALON</span>
         </div>
       </div>
-  // renderSalon cards stub
+      <div class="salon-art-grid">
+        ${works.map((w, i) => `
+        <article class="salon-piece" data-gal="${i}">
+          <div class="salon-art-hang">
+            <div class="salon-spotlight-micro" aria-hidden="true"></div>
+            <div class="salon-gilded-frame salon-frame-wall">
+              <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || 'Exhibition Piece')}" loading="lazy">
+            </div>
+            <div class="salon-brass-placard">
+              <div class="salon-placard-title">${tplEsc(w.title || 'Untitled Composition')}</div>
+              <div class="salon-placard-medium">${tplEsc(w.category || 'Oil on Linen Canvas')}</div>
+              ${w.desc ? `<p class="salon-placard-desc">${tplEsc(w.desc)}</p>` : ''}
+              <div class="salon-placard-meta">
+                <span>YEAR: ${year}</span>
+                <span>ORIGINAL WORK</span>
+              </div>
+            </div>
+          </div>
+        </article>
+        `).join('')}
+      </div>
+
     </section>
 }
 
