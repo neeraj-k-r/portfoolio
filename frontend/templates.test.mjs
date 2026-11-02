@@ -71,6 +71,9 @@ for (const id of newTemplateIds) {
   const meta = PortfoolioTemplateList.find(t => t.id === id);
   assert.ok(meta, `Template metadata for "${id}" must exist in PortfoolioTemplateList`);
   assert.ok(typeof PortfoolioTemplates[id] === 'function', `PortfoolioTemplates["${id}"] must be a function`);
+  if (['techno', 'illustra', 'salon', 'sketchbook'].includes(id)) {
+    assert.equal(meta.track, 'visual', `Template "${id}" must be classified in visual track`);
+  }
 }
 
 // Test rendering sample profile with each template
@@ -126,5 +129,5 @@ for (const id of newTemplateIds) {
   console.log(`✓ Template "${id}" rendered cleanly and passed all assertions`);
 }
 
-console.log('\nAll 19 reverse engineered templates passed unit tests successfully!');
+console.log(`\nAll ${newTemplateIds.length} templates passed unit tests successfully!`);
 process.exit(0);
