@@ -8671,6 +8671,19 @@ const TECHNO_STAR_SVG = `<svg class="techno-emblem-star" viewBox="0 0 24 24" wid
   <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
 </svg>`;
 
+
+function technoHeaderBrand(p) {
+  const name = (p.name || 'Creative Technologist').trim().toUpperCase();
+  const role = (p.title || 'Creative Technologist').trim();
+  return `<a href="#home" class="techno-brand" aria-label="Home">
+    ${TECHNO_STAR_SVG}
+    <div class="techno-brand-text">
+      <span class="techno-artist-name">${tplEsc(name)}</span>
+      <span class="techno-artist-role">${tplEsc(role)}</span>
+    </div>
+  </a>`;
+}
+
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
