@@ -9247,7 +9247,18 @@ function renderAnalogDaisy() {
   </div>`;
 }
 
+function renderAnalogMainTapePhoto() {
+  return `<div class="analog-tape-photo" aria-label="Featured Dusk Portrait">
+    <div class="analog-washi-tape analog-washi-top"></div>
+    <div class="analog-tape-frame">
+      <img src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80" alt="Sunset Dusk Silhouette" class="analog-tape-img" loading="eager"/>
+      <div class="analog-photo-grain"></div>
+    </div>
+  </div>`;
+}
+
 function renderAnalogCollage(p) {
+
 
 
 
