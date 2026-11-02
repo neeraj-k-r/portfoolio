@@ -311,25 +311,6 @@ function renderMotion(p) {
       <p class="eyebrow rv">Selected work</p>
       <ul class="work-rows">${rows || '<li class="rv">No projects yet.</li>'}</ul>
     </section>
-    <section class="sb-about-sec wrap" id="about">
-      <div class="sb-about-card">
-        <div class="sb-about-header">ABOUT THE ARTIST</div>
-        <div class="sb-about-content">
-          <div class="sb-about-quote">"Drawing is not what one sees, but what one can make others see. Each stroke of graphite preserves light, contour, and silence on raw paper."</div>
-          <div class="sb-artist-info">
-            <b>${tplEsc(p.name)}</b>
-            <span>${tplEsc(p.title || 'Classical Drawing & Graphite Artist')}${location ? ` · ${tplEsc(location)}` : ''}</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="sb-footer wrap">
-      <div class="sb-footer-inner">
-        <span>© ${year} ${tplEsc(p.name)} · Hand-drawn Artworks & Studies</span>
-        <span class="sb-colophon-tag">Graphite & Charcoal Portfolio · Built with Portfoolio</span>
-      </div>
-    </footer>
 
     ${rsSec(p)}
     <section class="pad" id="about">
