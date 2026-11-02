@@ -12713,6 +12713,40 @@ body.techno-dark-mode {
   transform: translateY(-2px);
 }
 
+.analog-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 10px;
+}
+
+.analog-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.analog-stat-number {
+  font-size: 1.35rem;
+  font-weight: 500;
+  color: var(--ag-cream);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.analog-stat-label {
+  font-size: 0.74rem;
+  color: var(--ag-text-muted);
+  letter-spacing: 0.03em;
+}
+
+.analog-stat-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(240, 235, 220, 0.14);
+}
+
+
 
 
 
