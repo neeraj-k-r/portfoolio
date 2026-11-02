@@ -11350,6 +11350,8 @@ body.illustra-dark-mode {
 }
 
 .techno-header {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 24px 0;
   position: relative;
   z-index: 50;
