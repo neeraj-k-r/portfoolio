@@ -739,6 +739,9 @@ function renderGallery(p) {
   if (vtpl === 'illustra') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.illustra) return window.PortfoolioTemplates.illustra(p);
   }
+  if (vtpl === 'techno') {
+    if (window.PortfoolioTemplates && window.PortfoolioTemplates.techno) return window.PortfoolioTemplates.techno(p);
+  }
   if (vtpl === 'atelier') {
     app.innerHTML = `
     <div class="atelier-page">
