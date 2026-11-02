@@ -12439,6 +12439,62 @@ body.techno-dark-mode {
   letter-spacing: 0.01em;
 }
 
+.analog-sidebar-footer {
+  margin-top: auto;
+  padding: 16px 4px 0 4px;
+  position: relative;
+  z-index: 2;
+}
+
+.analog-sidebar-divider {
+  width: 28px;
+  height: 1px;
+  background: rgba(240, 235, 220, 0.2);
+  margin-bottom: 20px;
+}
+
+.analog-profile-meta {
+  margin-bottom: 16px;
+}
+
+.analog-profile-name {
+  margin: 0 0 4px 0;
+  font-size: 0.96rem;
+  font-weight: 500;
+  color: var(--ag-cream);
+  letter-spacing: -0.01em;
+}
+
+.analog-profile-role {
+  margin: 0;
+  font-size: 0.76rem;
+  font-style: italic;
+  color: var(--ag-text-muted);
+  font-family: var(--ag-font-serif);
+  letter-spacing: 0.02em;
+}
+
+.analog-socials-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.analog-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ag-text-muted);
+  text-decoration: none;
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.analog-social-link:hover {
+  color: var(--ag-cream);
+  transform: translateY(-1px);
+}
+
+
 
 
 
