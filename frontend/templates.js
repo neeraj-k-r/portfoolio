@@ -58,7 +58,8 @@ const TEMPLATES = [
   { id: 'triennale', name: 'Triennale Milano', desc: 'International design exposition with Milanese modernist typography & chromatic layout', emoji: '📐', best: 'Industrial Designers • Spatial Planners • Graphic Modernists', track: 'visual' },
   { id: 'sketchbook', name: 'Sketchbook Studio', desc: 'Hand-drawn graphite & charcoal collection with textured paper, category filter pills & artist monogram', emoji: '✏️', best: 'Sketch Artists • Illustrators • Portraitists • Drawing Masters', track: 'visual' },
   { id: 'salon', name: 'Salon Emerald', desc: 'Classical fine art salon with emerald gallery walls, overhead spotlight, gilded gold frames & viewing bench', emoji: '🖼️', best: 'Oil Painters • Classical Artists • Fine Art Curators • Impressionists', track: 'visual' },
-  { id: 'illustra', name: 'Illustra Modern', desc: 'Modern mixed-media illustration with botanical orange lilies, constructivist color blocks & charcoal portraiture', emoji: '🌺', best: 'Illustrators • Visual Artists • Digital Painters • Graphic Creators', track: 'visual' }
+  { id: 'illustra', name: 'Illustra Modern', desc: 'Modern mixed-media illustration with botanical orange lilies, constructivist color blocks & charcoal portraiture', emoji: '🌺', best: 'Illustrators • Visual Artists • Digital Painters • Graphic Creators', track: 'visual' },
+  { id: 'techno', name: 'Techno Creative', desc: 'Creative technology & experimental media with generative fluid collage, monochrome Alpine photography & exploration pills', emoji: '✳️', best: 'Creative Technologists • Generative Artists • Creative Coders • Interactive Designers', track: 'visual' }
 ];
 
 function tplEsc(s) {
