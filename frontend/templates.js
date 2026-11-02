@@ -8451,7 +8451,21 @@ function renderIllustra(p) {
           </div>
         </div>
         <div class="illustra-hero-visual">
-          <!-- Right mixed-media collage column -->
+          
+          <div class="illustra-collage-stage">
+            <!-- Constructivist Blueprint Vector Lines -->
+            <div class="illustra-vector-lines" aria-hidden="true">
+              <svg class="illustra-blueprint-svg" viewBox="0 0 520 480" fill="none">
+                <line x1="30" y1="180" x2="490" y2="180" stroke="#37206b" stroke-width="1.5" stroke-opacity="0.35"/>
+                <line x1="180" y1="20" x2="180" y2="440" stroke="#37206b" stroke-width="1.5" stroke-opacity="0.35"/>
+                <circle cx="30" cy="180" r="3.5" fill="#37206b" fill-opacity="0.6"/>
+                <circle cx="180" cy="180" r="4.5" fill="#f2711c"/>
+                <circle cx="180" cy="20" r="3.5" fill="#37206b" fill-opacity="0.6"/>
+                <circle cx="490" cy="180" r="3.5" fill="#37206b" fill-opacity="0.6"/>
+              </svg>
+            </div>
+            <!-- Collage Blocks & Canvas -->
+          </div>
         </div>
       </div>
     </section>`;
