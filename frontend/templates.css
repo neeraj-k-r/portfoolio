@@ -11525,6 +11525,7 @@ body.illustra-dark-mode {
   display: inline-block;
 }
 .techno-hero-title {
+  word-break: break-word;
   font-size: clamp(3.2rem, 6.2vw, 5.4rem);
   font-weight: 900;
   line-height: 1.02;
