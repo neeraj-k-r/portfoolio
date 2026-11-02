@@ -278,7 +278,7 @@ function renderGallery(p) {
   p = normLocalProfile(p) || p;
   const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
   const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'].includes(activeTpl) ? activeTpl : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'].includes(activeTpl) ? activeTpl : 'gallery';
   document.body.dataset.template = vtpl;
   document.title = `${p.name} — visual portfolio | portfoolio.me`;
   const app = document.getElementById('app');
@@ -742,6 +742,9 @@ function renderGallery(p) {
   if (vtpl === 'techno') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.techno) return window.PortfoolioTemplates.techno(p);
   }
+  if (vtpl === 'analog') {
+    if (window.PortfoolioTemplates && window.PortfoolioTemplates.analog) return window.PortfoolioTemplates.analog(p);
+  }
   if (vtpl === 'atelier') {
     app.innerHTML = `
     <div class="atelier-page">
@@ -1058,7 +1061,7 @@ function renderPortfolio(p) {
   p = normLocalProfile(p) || p;
   const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
-  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'];
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
   if (visualOnly.includes(tpl)) {
     renderGallery(p);
     return;
@@ -1703,6 +1706,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       salon: { name: 'Vittorio Bellini', title: 'Classical & Renaissance Oil Painter', desc: 'Museum gallery salon with warm spotlight illumination, gilded ornate frames, and curatorial placards.', skills: ['Oil on Linen', 'Impasto', 'Figurative Art', 'Chiaroscuro'] },
       illustra: { name: 'Maya Lin', title: 'Visual Artist & Illustrator', desc: 'Editorial illustration theme with organic botanicals, geometric accent color blocking, and clean portfolio layout.', skills: ['Illustration', 'Botanical Art', 'Vector Art', 'Mixed Media'] },
       techno: { name: 'Nithin Krishna', title: 'Creative Technologist', desc: 'Creative technology & experimental media portfolio with generative fluid collage, monochrome Alpine photography & exploration pills.', skills: ['Generative Art', 'Interactive Web', 'Creative Coding', 'Digital Media', 'AI × Creativity'] },
+      analog: { name: 'Nithin Krishna', title: 'Creative Technologist', desc: 'Aesthetic dark desk collage with vinyl LP, warm desk lamp, taped sunset polaroids, film negatives & kraft paper checklist.', skills: ['Generative Art', 'Creative Coding', 'Interaction Design', 'Media & Motion', 'AI × Creativity'] },
       triennale: { name: 'Matteo Colombo', title: 'Industrial & Spatial Designer', desc: 'International design exposition with Milanese modernist typography & chromatic layout.', skills: ['Product Design', 'Modernist Systems', 'Spatial Planning', 'Chromatic Form'] },
     };
     let lastFocus = null;
@@ -2062,7 +2066,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
       // Visual theme elements (work cards, museum pieces, catalog rows, bloom tiles, atelier cards, cinema cards, arch plates, zine tiles, zen cards, desire cards, lumina cards, vogue plates, filmstrip frames)
       const template = document.body.dataset.template;
-      const isVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'].includes(template);
+      const isVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'].includes(template);
       if (isVisual) {
         document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .lumina-card, .vogue-plate, .filmstrip-frame').forEach(el => {
           io.observe(el);
@@ -2182,7 +2186,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (resumeUser) { renderResumePage(p); return; }
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
   const qTpl = (new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t') || '').toLowerCase();
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
   const isVisualTrack = visualThemes.includes(qTpl) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
   if (isVisualTrack) { renderGallery(p); initMotionTheme(); return; }
   const skill = new URLSearchParams(location.search).get('skill');
@@ -2196,7 +2200,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const pp = await loadProfile(requested);
       if (!pp) return;
       const qTpl = (new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t') || '').toLowerCase();
-      const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'];
+      const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
       const isPpVisual = visualThemes.includes(qTpl) || pp.track === 'visual' || visualThemes.includes(String(pp.template || '').toLowerCase());
       if (s.view === 'work' && typeof s.idx === 'number') {
         renderWorkDetail(pp, s.idx);
