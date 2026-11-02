@@ -1370,6 +1370,104 @@ function pageGallery(p, wIdx, url) {
       })();
       </script>
     </div>`
+    : vtpl === 'analog'
+    ? (() => {
+        const parts = String(p.name || 'NK').trim().split(/\s+/).filter(Boolean);
+        const initials = !parts.length ? 'NK' : (parts.length === 1 ? parts[0].slice(0, 2).toUpperCase() : (parts[0][0] + parts[parts.length - 1][0]).toUpperCase());
+        const displayCards = (works && works.length ? works.slice(0, 4) : [
+          { title: 'Web Experiences', category: 'Products · Websites · UI/UX', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80' },
+          { title: 'Creative Art', category: 'Digital · Mixed · Experimental', imageUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=700&q=80' },
+          { title: 'Photography', category: 'Places · People · Perspectives', imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=700&q=80' },
+          { title: 'Experiments', category: 'Generative · Interactive · AI', imageUrl: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80' }
+        ]);
+        const bio = p.bio || p.tagline || 'Blending design, art, and technology to build meaningful digital experiences.';
+        const skills = (p.skills && p.skills.length) ? p.skills : ['Generative Art', 'Creative Coding', 'Interaction Design', 'Media & Motion', 'AI × Creativity'];
+        const projectCount = (p.projects && p.projects.length) ? `${p.projects.length}+` : (works.length ? `${works.length}+` : '25+');
+        const year = new Date().getFullYear();
+
+        return `<div class="analog-page" id="analogRoot">
+          <div class="analog-layout">
+            <aside class="analog-sidebar">
+              <div class="analog-sidebar-inner">
+                <div class="analog-brand-top">
+                  <a href="#home" class="analog-monogram" aria-label="Monogram">${esc(initials)}</a>
+                </div>
+                <nav class="analog-nav">
+                  <ul class="analog-nav-list">
+                    <li class="analog-nav-item"><a href="#home" class="analog-nav-link is-active"><span class="analog-nav-label">Home</span></a></li>
+                    <li class="analog-nav-item"><a href="#work" class="analog-nav-link"><span class="analog-nav-label">Work</span></a></li>
+                    <li class="analog-nav-item"><a href="#experiments" class="analog-nav-link"><span class="analog-nav-label">Experiments</span></a></li>
+                    <li class="analog-nav-item"><a href="#about" class="analog-nav-link"><span class="analog-nav-label">About</span></a></li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="analog-sidebar-footer">
+                <h3 class="analog-profile-name">${esc(p.name || 'Creative Technologist')}</h3>
+                <p class="analog-profile-role">${esc(p.title || 'Creative Technologist')}</p>
+              </div>
+            </aside>
+            <main class="analog-main" id="home">
+              <div class="analog-top-bar">
+                <div class="analog-collab-pill"><span class="analog-collab-dot"></span><span>Available for Collaboration</span></div>
+              </div>
+              <section class="analog-hero-grid">
+                <div class="analog-hero-col-left">
+                  <div class="analog-breadcrumb">Portfolio / ${esc(p.name || 'Creative Technologist')}</div>
+                  <h1 class="analog-hero-title">Design × Innovation<span class="analog-title-dot">.</span></h1>
+                  <p class="analog-hero-desc">${esc(bio)}</p>
+                  <div class="analog-hero-actions">
+                    <a href="#work" class="analog-btn-primary">View Work ↗</a>
+                    <a href="#about" class="analog-btn-secondary">About Me</a>
+                  </div>
+                  <div class="analog-stats-row">
+                    <div class="analog-stat-item"><span class="analog-stat-number">${projectCount}</span><span class="analog-stat-label">Projects</span></div>
+                    <div class="analog-stat-divider"></div>
+                    <div class="analog-stat-item"><span class="analog-stat-number">${skills.length}+</span><span class="analog-stat-label">Domains</span></div>
+                    <div class="analog-stat-divider"></div>
+                    <div class="analog-stat-item"><span class="analog-stat-number">∞</span><span class="analog-stat-label">Experiments</span></div>
+                  </div>
+                </div>
+                <div class="analog-hero-col-right">
+                  <div class="analog-collage-stage">
+                    <div class="analog-tape-photo">
+                      <div class="analog-tape-frame">
+                        <img src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80" alt="Dusk Landscape" class="analog-tape-img"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <section class="analog-selected-sec" id="work">
+                <div class="analog-sec-head">
+                  <h2 class="analog-sec-title">Selected Work</h2>
+                  <div class="analog-sec-divider"></div>
+                  <span class="analog-sec-arrow">→</span>
+                </div>
+                <div class="analog-cards-grid">
+                  ${displayCards.map((w, idx) => `
+                    <article class="analog-work-card">
+                      <div class="analog-card-thumb"><img src="${esc(w.imageUrl || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80')}" alt="${esc(w.title || 'Work')}" class="analog-card-img"/></div>
+                      <div class="analog-card-content">
+                        <span class="analog-card-num">/ 0${idx + 1}</span>
+                        <h3 class="analog-card-title">${esc(w.title || 'Untitled Work')}</h3>
+                        <p class="analog-card-sub">${esc(w.category || w.desc || 'Creative Tech')}</p>
+                      </div>
+                    </article>
+                  `).join('')}
+                </div>
+              </section>
+              <div class="analog-exploring-sec">
+                <span class="analog-exp-title">Also Exploring //</span>
+                ${skills.map(s => `<span class="analog-skill-badge">${esc(s)}</span>`).join('')}
+              </div>
+              <footer class="analog-footer">
+                <span>© ${year} ${esc(p.name || 'Creative Technologist')}. All rights reserved.</span>
+                <span>Crafted with Analog Studio</span>
+              </footer>
+            </main>
+          </div>
+        </div>`;
+      })()
     : vtpl === 'salon'
     ? `<div class="salon-page">
       <div class="salon-ambient-light" aria-hidden="true"></div>
