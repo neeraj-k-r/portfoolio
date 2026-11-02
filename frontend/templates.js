@@ -8423,6 +8423,29 @@ function renderIllustra(p) {
   const email = p.email || 'hello@nithinkrishna.art';
   const location = p.location || '';
   
+  const navHeader = `
+    <header class="illustra-header wrap">
+      <div class="illustra-header-inner">
+        <a href="#home" class="illustra-brand" aria-label="Home">
+          <span class="illustra-monogram">${tplEsc(initials)}</span>
+        </a>
+        <nav class="illustra-nav" aria-label="Main Navigation">
+          <a href="#home" class="illustra-nav-link active">Home</a>
+          <a href="#works" class="illustra-nav-link">Works</a>
+          <a href="#process" class="illustra-nav-link">Process</a>
+          <a href="#about" class="illustra-nav-link">About</a>
+        </nav>
+        <div class="illustra-header-actions">
+          <button class="illustra-theme-toggle" id="illustraThemeToggle" aria-label="Toggle light or dark theme" title="Toggle theme">
+            <span class="illustra-toggle-pill">
+              <span class="illustra-toggle-icon sun"><i class="fa-solid fa-sun"></i></span>
+              <span class="illustra-toggle-icon moon"><i class="fa-solid fa-moon"></i></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>`;
+
   // Base render container initialized
   let html = `<div class="illustra-page" id="illustraRoot">` + navHeader + `
     <section class="illustra-hero-section wrap" id="home">
@@ -8541,28 +8564,7 @@ function renderIllustra(p) {
         </div>
       </div>
     </section>`;
-  const navHeader = `
-    <header class="illustra-header wrap">
-      <div class="illustra-header-inner">
-        <a href="#home" class="illustra-brand" aria-label="Home">
-          <span class="illustra-monogram">${tplEsc(initials)}</span>
-        </a>
-        <nav class="illustra-nav" aria-label="Main Navigation">
-          <a href="#home" class="illustra-nav-link active">Home</a>
-          <a href="#works" class="illustra-nav-link">Works</a>
-          <a href="#process" class="illustra-nav-link">Process</a>
-          <a href="#about" class="illustra-nav-link">About</a>
-        </nav>
-        <div class="illustra-header-actions">
-          <button class="illustra-theme-toggle" id="illustraThemeToggle" aria-label="Toggle light or dark theme" title="Toggle theme">
-            <span class="illustra-toggle-pill">
-              <span class="illustra-toggle-icon sun"><i class="fa-solid fa-sun"></i></span>
-              <span class="illustra-toggle-icon moon"><i class="fa-solid fa-moon"></i></span>
-            </span>
-          </button>
-        </div>
-      </div>
-    </header>`;
+
 
   const defaultArtworks = [
     { title: 'Echoes of Reverie', category: 'Illustrations', medium: 'Mixed Media & Bristol Board', year: '2026', desc: 'Charcoal study intertwined with organic chromatic elements.', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80' },
