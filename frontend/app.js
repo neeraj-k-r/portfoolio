@@ -278,7 +278,7 @@ function renderGallery(p) {
   p = normLocalProfile(p) || p;
   const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
   const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'salon'].includes(activeTpl) ? activeTpl : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'].includes(activeTpl) ? activeTpl : 'gallery';
   document.body.dataset.template = vtpl;
   document.title = `${p.name} — visual portfolio | portfoolio.me`;
   const app = document.getElementById('app');
