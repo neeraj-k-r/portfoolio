@@ -9321,7 +9321,54 @@ function renderAnalogSectionHeading(title) {
   </div>`;
 }
 
+function renderAnalogSelectedCards(p) {
+  const fallbackCards = [
+    { title: 'Web Experiences', category: 'Products · Websites · UI/UX', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80' },
+    { title: 'Creative Art', category: 'Digital · Mixed · Experimental', imageUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=700&q=80' },
+    { title: 'Photography', category: 'Places · People · Perspectives', imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=700&q=80' },
+    { title: 'Experiments', category: 'Generative · Interactive · AI', imageUrl: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80' }
+  ];
+
+  const sourceItems = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : fallbackCards);
+  const cards = sourceItems.slice(0, 4);
+  while (cards.length < 4) {
+    cards.push(fallbackCards[cards.length]);
+  }
+
+  return `<div class="analog-cards-grid">
+    ${cards.map((item, idx) => {
+      const num = String(idx + 1).padStart(2, '0');
+      const title = item.title || item.name || 'Untitled Work';
+      const cat = item.category || item.desc || 'Creative Tech';
+      const img = item.imageUrl || item.image || item.thumb || fallbackCards[idx % fallbackCards.length].imageUrl;
+      const url = item.url || item.link || '#work';
+
+      return `<article class="analog-work-card" onclick="window.openAnalogWorkDetail&&window.openAnalogWorkDetail(${idx})">
+        <div class="analog-card-thumb">
+          <img src="${tplEsc(img)}" alt="${tplEsc(title)}" class="analog-card-img" loading="lazy"/>
+          <div class="analog-card-overlay"></div>
+        </div>
+        <div class="analog-card-content">
+          <div class="analog-card-top">
+            <span class="analog-card-num">/ ${num}</span>
+          </div>
+          <div class="analog-card-main">
+            <div class="analog-card-meta">
+              <h3 class="analog-card-title">${tplEsc(title)}</h3>
+              <p class="analog-card-sub">${tplEsc(cat)}</p>
+            </div>
+            <a href="${tplEsc(url)}" class="analog-card-btn" aria-label="View ${tplEsc(title)}" onclick="event.stopPropagation()">
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </article>`;
+    }).join('')}
+  </div>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
