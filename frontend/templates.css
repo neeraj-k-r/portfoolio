@@ -10732,3 +10732,35 @@ body[data-template="filmstrip"] {
 @media(max-width: 680px) {
   .illustra-nav { display: none; }
 }
+
+.illustra-theme-toggle {
+  background: #251642;
+  border: none;
+  border-radius: 999px;
+  padding: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  outline: none;
+  box-shadow: 0 4px 14px rgba(37, 22, 66, 0.25);
+  transition: background 0.3s ease;
+}
+.illustra-toggle-pill {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 10px;
+  color: #fff;
+  font-size: 13px;
+  position: relative;
+}
+.illustra-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.illustra-toggle-icon.sun { color: #f2711c; }
+.illustra-toggle-icon.moon { color: #d0c8eb; }
+.illustra-theme-toggle.is-dark .illustra-toggle-icon.sun { opacity: 0.45; }
+.illustra-theme-toggle.is-dark .illustra-toggle-icon.moon { color: #9c82f7; transform: scale(1.1); }
