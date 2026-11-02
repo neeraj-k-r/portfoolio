@@ -9169,7 +9169,20 @@ function renderAnalogHeroBio(p) {
   return `<p class="analog-hero-desc">${tplEsc(bio)}</p>`;
 }
 
+function renderAnalogHeroActions() {
+  return `<div class="analog-hero-actions">
+    <a href="#work" class="analog-btn-primary">
+      <span>View Work</span>
+      <span class="analog-btn-arrow">↗</span>
+    </a>
+    <a href="#about" class="analog-btn-secondary" onclick="window.openAnalogAboutModal&&window.openAnalogAboutModal(event)">
+      <span>About Me</span>
+    </a>
+  </div>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
