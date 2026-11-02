@@ -8855,6 +8855,33 @@ function technoCategoryCards(p) {
   </section>`;
 }
 
+
+function technoExplorationTicker(p) {
+  const defaultSkills = ['Generative Art', 'Interactive Web', 'Creative Coding', 'Digital Media', 'AI × Creativity'];
+  const userSkills = (Array.isArray(p.skills) && p.skills.filter(Boolean).length)
+    ? p.skills.filter(Boolean)
+    : defaultSkills;
+
+  return `<section class="techno-ticker-sec techno-wrap">
+    <div class="techno-ticker-bar">
+      <div class="techno-ticker-left">
+        <svg class="techno-ecg-icon" viewBox="0 0 40 20" width="32" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 10h6l4-7 6 14 5-10 4 5h11"/>
+        </svg>
+        <span class="techno-ticker-title">Currently Exploring</span>
+        <span class="techno-ticker-sep">|</span>
+      </div>
+      <div class="techno-pills-scroll">
+        ${userSkills.map(s => `<span class="techno-skill-pill">${tplEsc(s)}</span>`).join('')}
+      </div>
+      <div class="techno-ticker-status">
+        <span class="techno-pulse-dot" aria-hidden="true"></span>
+        <span class="techno-status-text">Open for Collaborations</span>
+      </div>
+    </div>
+  </section>`;
+}
+
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
