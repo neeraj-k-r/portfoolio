@@ -13266,6 +13266,67 @@ body.techno-dark-mode {
   transform: rotate(45deg);
 }
 
+.analog-exploring-sec {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 56px;
+  padding-top: 10px;
+}
+
+.analog-exploring-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.analog-exp-title {
+  font-family: var(--ag-font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--ag-cream);
+  letter-spacing: -0.01em;
+}
+
+.analog-exp-slashes {
+  color: var(--ag-text-dim);
+  font-family: var(--ag-font-mono);
+  font-size: 0.88rem;
+  letter-spacing: 0.1em;
+}
+
+.analog-exploring-tags {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.analog-skill-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 16px;
+  background: rgba(20, 18, 16, 0.6);
+  border: 1px solid rgba(240, 235, 220, 0.15);
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: #d6cfc2;
+  letter-spacing: 0.01em;
+  transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+  cursor: default;
+}
+
+.analog-skill-badge:hover {
+  border-color: rgba(240, 235, 220, 0.45);
+  background: rgba(35, 30, 26, 0.9);
+  color: var(--ag-cream);
+  transform: translateY(-2px);
+}
+
+
 
 
 
