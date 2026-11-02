@@ -12122,6 +12122,11 @@ body.illustra-dark-mode {
   gap: 10px;
 }
 .techno-disc-badge {
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.techno-disc-badge:hover {
+  transform: translateY(-1px);
+  background: rgba(110, 32, 96, 0.15);
   background: rgba(110, 32, 96, 0.08);
   color: var(--tc-plum-vibrant);
   font-size: 12.5px;
