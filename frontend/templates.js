@@ -8428,6 +8428,15 @@ function renderIllustra(p) {
     <section class="illustra-hero-section wrap" id="home">
       <div class="illustra-hero-grid">
         <div class="illustra-hero-content">
+          
+          <div class="illustra-hero-headings">
+            <h1 class="illustra-name">
+              <span class="illustra-first-name">${tplEsc(firstName)}</span>
+              <span class="illustra-last-name">${tplEsc(lastName)}</span>
+            </h1>
+            <p class="illustra-subtitle">${tplEsc(subtitle)}</p>
+            <div class="illustra-accent-line" aria-hidden="true"></div>
+          </div>
           <!-- Left typography column -->
         </div>
         <div class="illustra-hero-visual">
