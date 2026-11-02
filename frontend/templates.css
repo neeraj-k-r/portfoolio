@@ -11199,3 +11199,59 @@ body[data-template="filmstrip"] {
 @media (max-width: 600px) {
   .illustra-monograph-card { padding: 30px 20px; }
 }
+
+.illustra-footer {
+  border-top: 1px solid var(--il-border);
+  padding: 36px 0;
+}
+.illustra-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.illustra-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.illustra-footer-monogram {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--il-text-primary);
+}
+.illustra-footer-copy {
+  font-size: 13.5px;
+  color: var(--il-text-secondary);
+}
+.illustra-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.illustra-footer-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--il-purple);
+}
+.illustra-back-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--il-surface);
+  border: 1px solid var(--il-border);
+  color: var(--il-text-primary);
+  text-decoration: none;
+  transition: transform 0.2s, background 0.2s;
+}
+.illustra-back-top:hover {
+  transform: translateY(-2px);
+  background: var(--il-purple);
+  color: #fff;
+}
