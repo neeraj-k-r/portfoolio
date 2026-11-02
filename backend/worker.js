@@ -887,6 +887,10 @@ function pageGallery(p, wIdx, url) {
         </div>
       </footer>
     </div>`
+    : vtpl === 'illustra'
+    ? `<div class="illustra-page" id="illustraRoot">
+      <!-- Illustra SSR Content -->
+    </div>`
     : vtpl === 'salon'
     ? `<div class="salon-page">
       <div class="salon-ambient-light" aria-hidden="true"></div>
