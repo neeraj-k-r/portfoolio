@@ -11385,3 +11385,43 @@ body.illustra-dark-mode {
   letter-spacing: 0.5px;
   margin-top: 2px;
 }
+
+.techno-nav {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+.techno-nav-link {
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--tc-text-primary);
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.techno-nav-link:hover {
+  color: var(--tc-plum-vibrant);
+}
+.techno-nav-link.active {
+  font-weight: 600;
+}
+.techno-nav-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--tc-text-primary);
+  border-radius: 50%;
+  margin-top: 4px;
+  display: none;
+}
+.techno-nav-link.active .techno-nav-dot {
+  display: block;
+}
+@media (max-width: 900px) {
+  .techno-nav {
+    display: none;
+  }
+}
