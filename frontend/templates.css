@@ -12252,3 +12252,5 @@ body.techno-dark-mode {
 .lx-modal-body[data-theme="techno"] { background: #f7f5f0; color: #14101e; }
 
 .techno-btn-cta:focus-visible, .techno-btn-primary:focus-visible, .techno-btn-showreel:focus-visible { outline: 2px solid var(--tc-plum-vibrant); outline-offset: 2px; }
+
+@media (max-width: 600px) { .techno-archive-meta { padding: 18px; } }
