@@ -9133,7 +9133,16 @@ function renderAnalogCollaborationPill(statusText) {
   </div>`;
 }
 
+function renderAnalogSparkleStar() {
+  return `<div class="analog-sparkle-star" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M12 0C12 7.5 16.5 12 24 12C16.5 12 12 16.5 12 24C12 16.5 7.5 12 0 12C7.5 12 12 7.5 12 0Z" fill="#f4ede1" fill-opacity="0.85"/>
+    </svg>
+  </div>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
