@@ -12,7 +12,7 @@ const SUPABASE_CONFIG = fs.readFileSync(path.resolve('backend/supabase-config.js
 const INDEX_HTML = fs.readFileSync(path.resolve('frontend/index.html'), 'utf8');
 const APP_JS = fs.readFileSync(path.resolve('frontend/app.js'), 'utf8');
 
-test('Visual Themes: PortfoolioTemplates has all 23 visual themes', () => {
+test('Visual Themes: PortfoolioTemplates has all 24 visual themes', () => {
   const domMock = {
     document: {
       getElementById: () => ({ innerHTML: '' }),
@@ -27,7 +27,7 @@ test('Visual Themes: PortfoolioTemplates has all 23 visual themes', () => {
   const ctx = vm.createContext(domMock);
   vm.runInContext(TEMPLATES_JS, ctx);
 
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
   for (const t of visualThemes) {
     assert.strictEqual(typeof domMock.window.PortfoolioTemplates[t], 'function', `PortfoolioTemplates[${t}] must be a function`);
   }
@@ -82,7 +82,7 @@ test('CSS: styling fixes for newly added non-technical visual themes', () => {
 });
 
 test('Track healing & detection across backend and studio', () => {
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
   for (const t of visualThemes) {
     // Check supabase-config.js
     assert.ok(SUPABASE_CONFIG.includes(t), `supabase-config.js must include ${t}`);
@@ -112,7 +112,7 @@ test('All themes filter label is updated to 31', () => {
 });
 
 test('Visual Themes: routing preserves visual themes and provides project fallbacks', () => {
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
   
   // Test worker page() delegation to pageGallery
   const sandbox = {
@@ -222,5 +222,45 @@ test('Techno theme renders creative technology hero, categories, and dynamic arc
   assert.ok(capturedHtml.includes('Open for Collaborations'), 'techno must render collaboration badge');
   assert.ok(capturedHtml.includes('Generative Engine'), 'techno must render user artwork in archive');
 });
+
+test('Analog theme renders dark vintage desk collage, sidebar nav, and work cards', () => {
+  let capturedHtml = '';
+  const domMock = {
+    document: {
+      getElementById: () => ({
+        set innerHTML(val) { capturedHtml = val; },
+        get innerHTML() { return capturedHtml; }
+      }),
+      body: { dataset: {}, classList: { toggle: () => {}, add: () => {}, remove: () => {} } },
+      title: ''
+    },
+    window: { scrollTo: () => {} },
+    location: { origin: 'https://portfoolio.me' },
+    TEMPLATES: []
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const analogFn = domMock.window.PortfoolioTemplates.analog;
+  assert.ok(analogFn, 'analog template must exist');
+  analogFn({
+    name: 'Nithin Krishna',
+    title: 'Creative Technologist',
+    bio: 'Blending design, art, and technology to build meaningful digital experiences.',
+    works: [
+      { title: 'Interactive Aura', imageUrl: 'https://example.com/1.jpg', category: 'Creative Tech' }
+    ]
+  });
+
+  assert.ok(capturedHtml.includes('analog-sidebar'), 'analog must render sidebar');
+  assert.ok(capturedHtml.includes('analog-monogram'), 'analog must render monogram');
+  assert.ok(capturedHtml.includes('Design') && capturedHtml.includes('Innovation'), 'analog must render hero title');
+  assert.ok(capturedHtml.includes('Available for Collaboration'), 'analog must render collaboration pill');
+  assert.ok(capturedHtml.includes('analog-collage-stage'), 'analog must render visual collage stage');
+  assert.ok(capturedHtml.includes('Interactive Aura'), 'analog must render user work');
+  assert.ok(capturedHtml.includes('Also Exploring'), 'analog must render Also Exploring skills bar');
+});
+
 
 

@@ -693,7 +693,7 @@ function skillsSection(p) {
 function pageGallery(p, wIdx, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'].includes(activeTpl) ? activeTpl : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'].includes(activeTpl) ? activeTpl : 'gallery';
   let works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   if (!works.length) {
     const sampleImages = [

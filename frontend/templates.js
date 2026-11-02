@@ -9568,11 +9568,13 @@ function renderAnalog(p) {
     }
   };
 
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      window.closeAnalogAboutModal();
-    }
-  });
+  if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        window.closeAnalogAboutModal();
+      }
+    });
+  }
 }
 
 
