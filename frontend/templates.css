@@ -12773,6 +12773,56 @@ body.techno-dark-mode {
   height: 100%;
 }
 
+.analog-film-strip {
+  position: absolute;
+  left: 90px;
+  top: 15px;
+  width: 120px;
+  height: 250px;
+  background: rgba(14, 12, 10, 0.88);
+  border: 1px solid rgba(240, 235, 220, 0.1);
+  border-radius: 4px;
+  transform: rotate(-6deg);
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 4px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.analog-sprockets {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 10px;
+}
+
+.analog-sprockets span {
+  display: block;
+  width: 8px;
+  height: 12px;
+  background: #000;
+  border: 1px solid rgba(240, 235, 220, 0.18);
+  border-radius: 2px;
+}
+
+.analog-film-frames {
+  flex: 1;
+  margin: 0 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.analog-film-cell {
+  flex: 1;
+  background: rgba(25, 22, 19, 0.6);
+  border: 1px solid rgba(240, 235, 220, 0.08);
+  border-radius: 2px;
+}
+
+
 
 
 
