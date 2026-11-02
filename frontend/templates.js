@@ -8684,6 +8684,19 @@ function technoHeaderBrand(p) {
   </a>`;
 }
 
+
+function technoHeaderNav(p) {
+  const bio = (p.bio || p.about || p.summary || '').trim();
+  const skills = Array.isArray(p.skills) ? p.skills.filter(Boolean) : [];
+  return `<nav class="techno-nav" aria-label="Main Navigation">
+    <a href="#home" class="techno-nav-link active">Home<span class="techno-nav-dot" aria-hidden="true"></span></a>
+    <a href="#projects" class="techno-nav-link">Projects</a>
+    <a href="#works" class="techno-nav-link">Creative Work</a>
+    <a href="#playground" class="techno-nav-link">Playground</a>
+    ${(bio || skills.length) ? `<a href="#about" class="techno-nav-link">About</a>` : ''}
+  </nav>`;
+}
+
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
