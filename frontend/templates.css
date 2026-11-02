@@ -10651,3 +10651,5 @@ body[data-template="filmstrip"] {
 .lx-tp-salon .lx-tp-nav { background: #1b3828; height: 3px; }
 .lx-tp-salon .lx-tp-hero { background: #183324; border: 1px solid #c5a059; }
 .lx-tp-salon .lx-tp-cards { background: #13271c; border: 1px solid rgba(197, 160, 89, 0.4); }
+
+.lx-modal-body[data-theme="salon"] { background: #13271c; color: #ffffff; }
