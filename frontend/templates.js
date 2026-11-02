@@ -9427,7 +9427,42 @@ function renderAnalogArchive(p) {
   </section>`;
 }
 
+function renderAnalogAboutModal(p) {
+  const name = p.name || 'Creative Technologist';
+  const title = p.title || 'Creative Technologist';
+  const bio = p.bio || 'Blending design, art, and technology to build meaningful digital experiences.';
+  const email = p.email || 'hello@example.com';
+  const location = p.location || 'San Francisco, CA';
+
+  return `<div class="analog-modal-backdrop" id="analogAboutModal" onclick="window.closeAnalogAboutModal&&window.closeAnalogAboutModal(event)">
+    <div class="analog-modal-card" onclick="event.stopPropagation()">
+      <div class="analog-modal-head">
+        <div class="analog-modal-title-group">
+          <span class="analog-modal-kicker">ABOUT &amp; CONTACT</span>
+          <h3 class="analog-modal-title">${tplEsc(name)}</h3>
+          <p class="analog-modal-role">${tplEsc(title)}</p>
+        </div>
+        <button class="analog-modal-close" onclick="window.closeAnalogAboutModal()" aria-label="Close modal">✕</button>
+      </div>
+      <div class="analog-modal-body">
+        <p class="analog-modal-bio">${tplEsc(bio)}</p>
+        <div class="analog-modal-meta-grid">
+          <div class="analog-modal-meta-item">
+            <span class="analog-modal-meta-label">Location</span>
+            <span class="analog-modal-meta-val">${tplEsc(location)}</span>
+          </div>
+          <div class="analog-modal-meta-item">
+            <span class="analog-modal-meta-label">Direct Inquiries</span>
+            <a href="mailto:${tplEsc(email)}" class="analog-modal-email">${tplEsc(email)}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
