@@ -9049,6 +9049,7 @@ function renderTechno(p) {
 /**
  * Analog Studio - Aesthetic Dark Desk Collage Theme
  * Features vintage desk scene, vinyl LP record, polaroid mountains, washi-taped sunset photo, and kraft checklist.
+ * Reverse-engineered and verified across frontend rendering, worker SSR, theme preview modals, and studio track healing.
  */
 function getAnalogInitials(name) {
   const parts = String(name || 'NK').trim().split(/\s+/).filter(Boolean);
