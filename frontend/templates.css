@@ -12202,3 +12202,33 @@ body.techno-dark-mode {
   background: #2b1f3d;
   box-shadow: 0 4px 14px rgba(184, 67, 164, 0.3);
 }
+
+/* RESPONSIVE MEDIA QUERIES */
+@media (max-width: 768px) {
+  .techno-hero-title {
+    font-size: clamp(2.4rem, 9.5vw, 3.4rem);
+  }
+  .techno-collage-stage {
+    max-width: 100%;
+    height: 420px;
+  }
+  .techno-circular-swirl-wrap {
+    width: 270px;
+    height: 270px;
+    left: 20px;
+  }
+  .techno-mountain-cutout {
+    width: 240px;
+    height: 110px;
+    right: 0;
+    bottom: 40px;
+  }
+  .techno-moon-pillar {
+    width: 85px;
+    height: 140px;
+    right: 10px;
+  }
+  .techno-slide-pagination {
+    display: none;
+  }
+}
