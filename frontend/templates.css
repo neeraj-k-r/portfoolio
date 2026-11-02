@@ -12105,7 +12105,8 @@ body.illustra-dark-mode {
   color: var(--tc-text-primary);
   margin: 0 0 32px;
   padding-left: 24px;
-  border-left: 3.5px solid var(--tc-plum-vibrant);
+  border-left: 4px solid var(--tc-plum-vibrant);
+  border-radius: 2px;
 }
 .techno-disciplines-head {
   font-size: 11px;
