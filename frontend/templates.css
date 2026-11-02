@@ -11274,3 +11274,8 @@ body[data-template="filmstrip"] {
 .illustra-page.illustra-dark .illustra-crop-tile {
   border-color: #2b1f47;
 }
+
+.lx-tp-illustra { background: #f6f4fa; border: 1px solid #7356e5; }
+.lx-tp-illustra .lx-tp-nav { background: #e7e2f5; height: 3px; }
+.lx-tp-illustra .lx-tp-hero { background: #7356e5; border: 1px solid #f2711c; }
+.lx-tp-illustra .lx-tp-cards { background: #ffffff; border: 1px solid rgba(115, 86, 229, 0.3); }
