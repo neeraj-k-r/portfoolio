@@ -312,6 +312,25 @@ function renderMotion(p) {
       <p class="eyebrow rv">Selected work</p>
       <ul class="work-rows">${rows || '<li class="rv">No projects yet.</li>'}</ul>
     </section>
+    <section class="salon-exhibitions-sec wrap" id="exhibitions">
+      <div class="salon-exhibitions-card">
+        <div class="salon-exhibition-head">
+          <span>PRIVATE SALON VIEWINGS & COMMISSIONS</span>
+          <b>CURRENT ACADEMIC ROTATION</b>
+        </div>
+        <div class="salon-viewing-details">
+          <div class="salon-viewing-col">
+            <h3>Solo Presentation</h3>
+            <p>On view through December ${year} · Royal Gallery Suite</p>
+          </div>
+          <div class="salon-viewing-col">
+            <h3>Curatorial Inquiries</h3>
+            <p>Original oil on linen canvases and commissioned landscape studies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
 
     ${rsSec(p)}
     <section class="pad" id="about">
