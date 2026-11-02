@@ -10597,3 +10597,11 @@ body[data-template="filmstrip"] {
 
 .salon-oil-canvas { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.08) saturate(1.1); transition: transform .5s cubic-bezier(0.16, 1, 0.3, 1); }
 .salon-gilded-frame:hover .salon-oil-canvas { transform: scale(1.03); }
+
+.salon-furniture-row { position: relative; margin-top: 36px; padding-bottom: 20px; }
+.salon-bench { width: 280px; margin: 0 auto; position: relative; }
+.salon-bench-seat { height: 12px; background: #261b14; border-radius: 2px; border: 1px solid #140d0a; box-shadow: 0 4px 10px rgba(0,0,0,0.6); }
+.salon-bench-legs { display: flex; justify-content: space-between; padding: 0 28px; }
+.salon-bench-legs span { width: 10px; height: 32px; background: #1c130e; box-shadow: 0 2px 6px rgba(0,0,0,0.7); }
+.salon-bench-shadow { position: absolute; bottom: -8px; left: 10%; width: 80%; height: 10px; background: rgba(0,0,0,0.5); filter: blur(6px); border-radius: 50%; }
+.salon-floor-reflection { height: 16px; background: linear-gradient(180deg, rgba(255, 235, 175, 0.05) 0%, transparent 100%); margin-top: 14px; }
