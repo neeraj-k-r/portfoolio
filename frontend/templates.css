@@ -12610,6 +12610,41 @@ body.techno-dark-mode {
   font-weight: 400;
 }
 
+.analog-hero-title {
+  margin: 0 0 20px 0;
+  font-family: var(--ag-font-serif);
+  font-style: italic;
+  font-size: clamp(3rem, 5.5vw, 4.6rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--ag-cream);
+  display: flex;
+  flex-direction: column;
+}
+
+.analog-title-line {
+  display: inline-block;
+}
+
+.analog-title-cross {
+  font-family: var(--ag-font-sans);
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.72em;
+  color: var(--ag-text-muted);
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.analog-title-dot {
+  color: var(--ag-accent-coral);
+  font-style: normal;
+  display: inline-block;
+  text-shadow: 0 0 16px rgba(255, 107, 74, 0.75);
+}
+
+
 
 
 
