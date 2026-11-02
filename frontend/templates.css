@@ -12260,6 +12260,13 @@ body.techno-dark-mode {
 .lx-tp-techno .lx-tp-cards { background: #14101e; border: 1px solid rgba(184, 67, 164, 0.4); }
 .lx-modal-body[data-theme="techno"] { background: #f7f5f0; color: #14101e; }
 
+.lx-tp-analog { background: #0c0b0a; border: 1px solid #e85938; }
+.lx-tp-analog .lx-tp-nav { background: #1a1715; height: 3px; }
+.lx-tp-analog .lx-tp-hero { background: #1e1b18; border: 1px solid rgba(232, 89, 56, 0.4); }
+.lx-tp-analog .lx-tp-cards { background: #141210; border: 1px solid rgba(240, 235, 220, 0.15); }
+.lx-modal-body[data-theme="analog"] { background: #0c0b0a; color: #f4ede1; }
+
+
 .techno-btn-cta:focus-visible, .techno-btn-primary:focus-visible, .techno-btn-showreel:focus-visible { outline: 2px solid var(--tc-plum-vibrant); outline-offset: 2px; }
 
 @media (max-width: 600px) { .techno-archive-meta { padding: 18px; } }
