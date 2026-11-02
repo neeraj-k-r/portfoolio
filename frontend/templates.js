@@ -8707,12 +8707,31 @@ function renderIllustra(p) {
       btn.classList.toggle('is-dark', isDark);
       localStorage.setItem('illustra_theme', isDark ? 'dark' : 'light');
     };
+
+    // Wire filter pill buttons
+    const filterPills = root.querySelectorAll('.illustra-filter-pill');
+    const cards = root.querySelectorAll('.illustra-work-card');
+    filterPills.forEach(pill => {
+      pill.onclick = () => {
+        filterPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        const f = pill.dataset.filter.toLowerCase();
+        cards.forEach(c => {
+          if (f === 'all') {
+            c.style.display = '';
+          } else {
+            const cat = (c.dataset.category || '').toLowerCase();
+            c.style.display = (cat.includes(f) || (f === 'botany' && cat.includes('flora'))) ? '' : 'none';
+          }
+        });
+      };
+    });
   }, 50);
   app.innerHTML = html;
 }
 
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook, salon: renderSalon };
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook, salon: renderSalon, illustra: renderIllustra };
 window.PortfoolioTemplateList = TEMPLATES;
 
 
