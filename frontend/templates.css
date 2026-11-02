@@ -13249,6 +13249,24 @@ body.techno-dark-mode {
   transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
 }
 
+.analog-work-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(240, 235, 220, 0.22);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 20px rgba(244, 237, 225, 0.05);
+}
+
+.analog-work-card:hover .analog-card-img {
+  transform: scale(1.05);
+}
+
+.analog-work-card:hover .analog-card-btn {
+  background: var(--ag-cream);
+  color: #151311;
+  border-color: var(--ag-cream);
+  transform: rotate(45deg);
+}
+
+
 
 
 
