@@ -889,6 +889,57 @@ function pageGallery(p, wIdx, url) {
     </div>`
     : vtpl === 'illustra'
     ? `<div class="illustra-page" id="illustraRoot">
+      <header class="illustra-header wrap">
+        <div class="illustra-header-inner">
+          <a href="#" class="illustra-brand"><span class="illustra-monogram">${(p.name || 'NK').trim().split(/\s+/).map(n => n[0]).slice(0, 2).join('').toUpperCase()}</span></a>
+          <nav class="illustra-nav">
+            <a href="#" class="illustra-nav-link active">Home</a>
+            <a href="#works" class="illustra-nav-link">Works</a>
+            <a href="#process" class="illustra-nav-link">Process</a>
+            <a href="#about" class="illustra-nav-link">About</a>
+          </nav>
+          <div class="illustra-header-actions">
+            <button class="illustra-theme-toggle" aria-label="Toggle theme">
+              <span class="illustra-toggle-pill"><span class="illustra-toggle-icon sun">☀</span><span class="illustra-toggle-icon moon">☾</span></span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <section class="illustra-hero-section wrap" id="home">
+        <div class="illustra-hero-grid">
+          <div class="illustra-hero-content">
+            <div class="illustra-hero-headings">
+              <h1 class="illustra-name">
+                <span class="illustra-first-name">${esc((p.name || 'Nithin').trim().split(/\s+/)[0])}</span>
+                <span class="illustra-last-name">${esc((p.name || 'Krishna').trim().split(/\s+/).slice(1).join(' ') || 'Krishna')}</span>
+              </h1>
+              <p class="illustra-subtitle">${esc(p.title || 'Visual Artist & Illustrator')}</p>
+              <div class="illustra-accent-line"></div>
+            </div>
+            <p class="illustra-bio">${esc(p.bio || p.summary || p.about || 'Exploring visual stories through illustration, digital art, and experimental compositions.')}</p>
+            <div class="illustra-hero-cta-wrap">
+              <a href="#works" class="illustra-btn-primary"><span>View Works</span> →</a>
+              ${p.email ? `<a href="mailto:${esc(p.email)}" class="illustra-btn-secondary">Get in Touch</a>` : ''}
+            </div>
+          </div>
+          <div class="illustra-hero-visual">
+            <div class="illustra-collage-stage">
+              <div class="illustra-block-purple"></div>
+              <div class="illustra-block-orange"><div class="illustra-stipple-grain"></div></div>
+              <div class="illustra-portrait-canvas">
+                <div class="illustra-portrait-frame">
+                  <img src="${esc(p.avatarUrl || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80')}" alt="${esc(p.name)}" class="illustra-portrait-img"/>
+                </div>
+              </div>
+              <div class="illustra-crop-tile">
+                <div class="illustra-crop-inner">
+                  <img src="${esc(p.avatarUrl || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80')}" alt="Study detail" class="illustra-crop-img"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <!-- Illustra SSR Content -->
     </div>`
     : vtpl === 'salon'
