@@ -8467,6 +8467,11 @@ function renderIllustra(p) {
             
             <!-- Vertical Iris Purple Color Block -->
             <div class="illustra-block-purple" aria-hidden="true"></div>
+            
+            <!-- Horizontal Stippled Tangerine Block -->
+            <div class="illustra-block-orange" aria-hidden="true">
+              <div class="illustra-stipple-grain"></div>
+            </div>
             <!-- Collage Blocks & Canvas -->
           </div>
         </div>
