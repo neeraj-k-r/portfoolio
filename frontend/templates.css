@@ -10853,3 +10853,25 @@ body[data-template="filmstrip"] {
   border-color: var(--il-purple);
   background: rgba(115, 86, 229, 0.05);
 }
+
+.illustra-hero-visual {
+  display: flex;
+  justify-content: center;
+}
+.illustra-collage-stage {
+  position: relative;
+  width: 100%;
+  max-width: 490px;
+  height: 470px;
+}
+.illustra-vector-lines {
+  position: absolute;
+  inset: -10px;
+  pointer-events: none;
+  z-index: 0;
+}
+.illustra-blueprint-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
