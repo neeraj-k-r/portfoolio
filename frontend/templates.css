@@ -10678,3 +10678,57 @@ body[data-template="filmstrip"] {
   transition: background-color 0.3s ease, color 0.3s ease;
   overflow-x: hidden;
 }
+
+.illustra-header {
+  padding: 24px 0;
+  position: relative;
+  z-index: 50;
+}
+.illustra-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.illustra-brand {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.illustra-monogram {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 32px;
+  color: var(--il-text-primary);
+  letter-spacing: -1.5px;
+}
+.illustra-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.illustra-nav-link {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--il-text-primary);
+  position: relative;
+  padding: 6px 0;
+  transition: color 0.2s ease;
+}
+.illustra-nav-link:hover {
+  color: var(--il-purple);
+}
+.illustra-nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background: var(--il-text-primary);
+  border-radius: 2px;
+}
+@media(max-width: 680px) {
+  .illustra-nav { display: none; }
+}
