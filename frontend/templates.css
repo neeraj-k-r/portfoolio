@@ -10552,3 +10552,7 @@ body[data-template="filmstrip"] {
 .lx-tp-sketchbook .lx-tp-cards { background: #fff; border-radius: 4px; border: 1px solid rgba(0,0,0,0.1); }
 
 .lx-modal-body[data-theme="sketchbook"] { background: #f3efe6; color: #1f1e1c; }
+
+/* SALON EMERALD GALLERY THEME */
+.salon-page { background: #13271c; color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; position: relative; overflow-x: hidden; }
+.salon-ambient-light { position: absolute; top: 0; left: 0; right: 0; height: 1000px; background: radial-gradient(circle at 50% 120px, rgba(255, 230, 170, 0.14) 0%, rgba(20, 50, 36, 0.6) 45%, rgba(15, 32, 23, 0.95) 85%); pointer-events: none; z-index: 1; }
