@@ -11104,3 +11104,48 @@ body[data-template="filmstrip"] {
   margin: 0;
   line-height: 1.5;
 }
+
+.illustra-process-sec {
+  padding: 70px 0;
+  border-top: 1px solid var(--il-border);
+}
+.illustra-sec-desc {
+  font-size: 1.05rem;
+  color: var(--il-text-secondary);
+  max-width: 580px;
+  margin: 0 auto;
+}
+.illustra-process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.illustra-process-card {
+  background: var(--il-surface);
+  border: 1px solid var(--il-border);
+  border-radius: 12px;
+  padding: 30px 24px;
+  box-shadow: var(--il-card-shadow);
+  position: relative;
+}
+.illustra-process-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--il-orange);
+  display: block;
+  margin-bottom: 14px;
+  font-family: 'Playfair Display', serif;
+}
+.illustra-process-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--il-text-primary);
+  margin: 0 0 10px;
+}
+.illustra-process-body {
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--il-text-secondary);
+  margin: 0;
+}
