@@ -9257,7 +9257,19 @@ function renderAnalogMainTapePhoto() {
   </div>`;
 }
 
+function renderAnalogVinylRecord() {
+  return `<div class="analog-vinyl-record" aria-hidden="true">
+    <div class="analog-vinyl-disc">
+      <div class="analog-vinyl-grooves"></div>
+      <div class="analog-vinyl-label">
+        <div class="analog-vinyl-hole"></div>
+      </div>
+    </div>
+  </div>`;
+}
+
 function renderAnalogCollage(p) {
+
 
 
 
