@@ -8448,6 +8448,23 @@ function renderIllustra(p) {
       </div>
     </header>`;
   html += `</div>`;
+
+  // Wire theme toggle interaction after mount
+  setTimeout(() => {
+    const root = document.getElementById('illustraRoot');
+    const btn = document.getElementById('illustraThemeToggle');
+    if (!root || !btn) return;
+    const saved = localStorage.getItem('illustra_theme') || 'light';
+    if (saved === 'dark') {
+      root.classList.add('illustra-dark');
+      btn.classList.add('is-dark');
+    }
+    btn.onclick = () => {
+      const isDark = root.classList.toggle('illustra-dark');
+      btn.classList.toggle('is-dark', isDark);
+      localStorage.setItem('illustra_theme', isDark ? 'dark' : 'light');
+    };
+  }, 50);
   app.innerHTML = html;
 }
 
