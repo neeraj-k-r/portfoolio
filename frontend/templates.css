@@ -12562,6 +12562,34 @@ body.techno-dark-mode {
   color: #c8d1c8;
 }
 
+.analog-sparkle-star {
+  position: absolute;
+  top: 48px;
+  right: 240px;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  z-index: 15;
+  filter: drop-shadow(0 0 10px rgba(244, 237, 225, 0.6));
+  animation: analogStarTwinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes analogStarTwinkle {
+  0% {
+    transform: scale(0.85) rotate(0deg);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.15) rotate(15deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.85) rotate(0deg);
+    opacity: 0.6;
+  }
+}
+
+
 
 
 
