@@ -9218,7 +9218,17 @@ function renderAnalogFilmStrip() {
   </div>`;
 }
 
+function renderAnalogMountainPolaroid() {
+  return `<div class="analog-polaroid-mountain" aria-label="Mountain Landscape Polaroid">
+    <div class="analog-polaroid-frame">
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="Mountain Landscape" class="analog-polaroid-img" loading="lazy"/>
+      <div class="analog-polaroid-tint"></div>
+    </div>
+  </div>`;
+}
+
 function renderAnalogCollage(p) {
+
 
   return `<div class="analog-collage-stage" aria-label="Visual Collage">
     <div class="analog-collage-inner">
