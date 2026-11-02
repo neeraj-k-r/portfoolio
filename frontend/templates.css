@@ -12169,3 +12169,36 @@ body.illustra-dark-mode {
   color: #fff;
   transform: translateY(-2px);
 }
+
+/* DARK MODE OVERRIDES */
+.techno-page.techno-dark {
+  --tc-bg: #0f0c16;
+  --tc-surface: #181324;
+  --tc-surface-card: #1d182b;
+  --tc-surface-light: #161220;
+  --tc-text-primary: #f6f3fc;
+  --tc-text-secondary: #aba1bd;
+  --tc-text-muted: #7e7492;
+  --tc-plum-vibrant: #b843a4;
+  --tc-border: rgba(255, 255, 255, 0.08);
+  --tc-border-subtle: rgba(255, 255, 255, 0.04);
+  --tc-card-shadow: 0 14px 35px rgba(0, 0, 0, 0.4);
+}
+body.techno-dark-mode {
+  background: #0f0c16 !important;
+}
+.techno-page.techno-dark .techno-ticker-bar {
+  background: rgba(24, 19, 36, 0.7);
+}
+.techno-page.techno-dark .techno-about-card,
+.techno-page.techno-dark .techno-archive-card {
+  background: #181324;
+}
+.techno-page.techno-dark .techno-btn-showreel {
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #f6f3fc;
+}
+.techno-page.techno-dark .techno-theme-toggle {
+  background: #2b1f3d;
+  box-shadow: 0 4px 14px rgba(184, 67, 164, 0.3);
+}
