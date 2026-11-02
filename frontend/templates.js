@@ -8218,7 +8218,29 @@ function renderSalon(p) {
 
   const names = (p.name || 'Artist').trim().split(/\s+/);
   const initials = names.length > 1 ? (names[0][0] + names[names.length - 1][0]).toUpperCase() : names[0].slice(0, 2).toUpperCase();
-  // renderSalon brand stub
+  const navHtml = `
+  <div class="salon-page">
+    <div class="salon-ambient-light" aria-hidden="true"></div>
+    <nav class="salon-nav wrap">
+      <div class="salon-brand">
+        <div class="salon-sig-monogram">${initials}</div>
+        <div class="salon-brand-meta">
+          <span class="salon-artist-name">${tplEsc(p.name)}</span>
+          <span class="salon-artist-title">${tplEsc(p.title || 'Visual Artist')}</span>
+        </div>
+      </div>
+      <div class="salon-nav-links">
+        <a href="#" class="salon-nav-item">Home</a>
+        <a href="#works" class="salon-nav-item active">Works</a>
+        <a href="#exhibitions" class="salon-nav-item">Exhibitions</a>
+        <a href="#about" class="salon-nav-item">About</a>
+      </div>
+      <div class="salon-nav-action">
+        ${p.email ? `<a class="salon-contact-btn" href="mailto:${tplEsc(p.email)}">Contact ↗</a>` : ''}
+      </div>
+    </nav>
+`;
+  // renderSalon spotlight stub
 }
 
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook };
