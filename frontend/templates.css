@@ -13657,6 +13657,44 @@ body.techno-dark-mode {
   }
 }
 
+@media (max-width: 640px) {
+  .analog-main {
+    padding: 20px 16px 48px 16px;
+  }
+  .analog-hero-title {
+    font-size: 2.6rem;
+  }
+  .analog-hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .analog-btn-primary, .analog-btn-secondary {
+    justify-content: center;
+  }
+  .analog-collage-stage {
+    height: 330px;
+  }
+  .analog-collage-inner {
+    transform: scale(0.72);
+    transform-origin: center top;
+  }
+  .analog-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .analog-archive-grid {
+    grid-template-columns: 1fr;
+  }
+  .analog-exploring-sec {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .analog-footer-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+
 
 
 
