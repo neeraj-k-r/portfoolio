@@ -9313,7 +9313,16 @@ function renderAnalogCollage(p) {
   </div>`;
 }
 
+function renderAnalogSectionHeading(title) {
+  return `<div class="analog-sec-head">
+    <h2 class="analog-sec-title">${tplEsc(title)}</h2>
+    <div class="analog-sec-divider"></div>
+    <span class="analog-sec-arrow" aria-hidden="true">→</span>
+  </div>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
