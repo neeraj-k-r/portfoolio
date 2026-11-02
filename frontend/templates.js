@@ -8982,6 +8982,64 @@ function technoFooter(p) {
  */
 function renderTechno(p) {
   normTpl(p);
+  const year = new Date().getFullYear();
   document.body.dataset.template = 'techno';
-  window.onkeydown = function(e) { if (e.key === "Escape") { /* dismiss */ } };
+  const name = (p.name || 'Creative Technologist').trim();
+  const title = (p.title || 'Creative Technologist').trim();
+  document.title = `${name} — ${title} | portfoolio.me`;
+  const app = document.getElementById('app') || document.body;
+
+  const headerHtml = `<header class="techno-header techno-wrap">` +
+    `<div class="techno-header-inner">` +
+    technoHeaderBrand(p) +
+    technoHeaderNav(p) +
+    technoHeaderActions(p) +
+    `</div></header>`;
+
+  const heroHtml = `<section class="techno-hero-section techno-wrap" id="home">` +
+    `<div class="techno-hero-grid">` +
+    technoHeroContent(p) +
+    technoHeroVisual(p) +
+    `</div></section>`;
+
+  const categoriesHtml = technoCategoryCards(p);
+  const tickerHtml = technoExplorationTicker(p);
+  const projectsHtml = technoProjectsSection(p);
+  const aboutHtml = technoAboutSection(p);
+  const footerHtml = technoFooter(p);
+
+  const fullHtml = `<div class="techno-page" id="technoRoot">` +
+    headerHtml +
+    heroHtml +
+    categoriesHtml +
+    tickerHtml +
+    projectsHtml +
+    aboutHtml +
+    footerHtml +
+    `</div>`;
+
+  app.innerHTML = fullHtml;
+
+  window.toggleTechnoTheme = function() {
+    const root = document.getElementById('technoRoot');
+    const btn = document.getElementById('technoThemeToggle');
+    if (!root) return;
+    const isDark = root.classList.toggle('techno-dark');
+    if (document.body) document.body.classList.toggle('techno-dark-mode', isDark);
+    if (btn) btn.classList.toggle('is-dark', isDark);
+    try { localStorage.setItem('techno_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+  };
+
+  try {
+    const saved = localStorage.getItem('techno_theme');
+    const isDark = saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const root = document.getElementById('technoRoot');
+    const btn = document.getElementById('technoThemeToggle');
+    if (isDark) {
+      if (root) root.classList.add('techno-dark');
+      if (document.body) document.body.classList.add('techno-dark-mode');
+      if (btn) btn.classList.add('is-dark');
+    }
+    if (btn) btn.onclick = window.toggleTechnoTheme;
+  } catch (e) {}
 }
