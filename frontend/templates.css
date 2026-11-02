@@ -12866,6 +12866,24 @@ body.techno-dark-mode {
   pointer-events: none;
 }
 
+.analog-daisy-botanical {
+  position: absolute;
+  left: 170px;
+  top: 155px;
+  width: 56px;
+  height: 56px;
+  z-index: 5;
+  pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.7));
+  transform: rotate(18deg);
+  transition: transform 0.3s ease;
+}
+
+.analog-daisy-botanical:hover {
+  transform: rotate(26deg) scale(1.08);
+}
+
+
 
 
 
