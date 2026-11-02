@@ -10764,3 +10764,20 @@ body[data-template="filmstrip"] {
 .illustra-toggle-icon.moon { color: #d0c8eb; }
 .illustra-theme-toggle.is-dark .illustra-toggle-icon.sun { opacity: 0.45; }
 .illustra-theme-toggle.is-dark .illustra-toggle-icon.moon { color: #9c82f7; transform: scale(1.1); }
+
+.illustra-hero-section {
+  padding: 40px 0 80px;
+  position: relative;
+}
+.illustra-hero-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+@media (max-width: 960px) {
+  .illustra-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+}
