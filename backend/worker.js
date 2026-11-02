@@ -1174,6 +1174,139 @@ function pageGallery(p, wIdx, url) {
       })();
       </script>
     </div>`
+    : vtpl === 'techno'
+    ? `<div class="techno-page" id="technoRoot">
+      <header class="techno-header techno-wrap">
+        <div class="techno-header-inner">
+          <a href="#" class="techno-brand">
+            <svg class="techno-emblem-star" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/>
+              <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+            </svg>
+            <div class="techno-brand-text">
+              <span class="techno-artist-name">${esc((p.name || 'Creative Technologist').trim().toUpperCase())}</span>
+              <span class="techno-artist-role">${esc(p.title || 'Creative Technologist')}</span>
+            </div>
+          </a>
+          <nav class="techno-nav">
+            <a href="#" class="techno-nav-link active">Home<span class="techno-nav-dot"></span></a>
+            <a href="#projects" class="techno-nav-link">Projects</a>
+            <a href="#works" class="techno-nav-link">Creative Work</a>
+            <a href="#about" class="techno-nav-link">About</a>
+          </nav>
+          <div class="techno-header-actions">
+            ${p.email ? `<a href="mailto:${esc(p.email)}" class="techno-btn-cta">Get in Touch ↗</a>` : `<a href="#projects" class="techno-btn-cta">Explore Work ↗</a>`}
+            <button class="techno-theme-toggle" id="technoThemeToggle" onclick="window.toggleTechnoTheme&&window.toggleTechnoTheme()" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <span class="techno-toggle-pill"><span class="techno-toggle-icon sun">☀</span><span class="techno-toggle-icon moon">☾</span></span>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <section class="techno-hero-section techno-wrap" id="home">
+        <div class="techno-hero-grid">
+          <div class="techno-hero-content">
+            <span class="techno-hero-kicker">PORTFOLIO / CREATIVE TECH</span>
+            <h1 class="techno-hero-title">
+              <span class="techno-title-row">CREATIVE</span>
+              <span class="techno-title-row">TECHNOLOGY</span>
+            </h1>
+            <div class="techno-hero-subline">
+              <span class="techno-subline-dash">—</span>
+              <span class="techno-subline-text">Art × Design × Code × Experiments</span>
+            </div>
+            <p class="techno-hero-desc">${esc(p.bio || p.summary || p.about || 'A portfolio of creative work, digital experiments, visuals, and real-world projects.')}</p>
+            <div class="techno-hero-actions">
+              <a href="#projects" class="techno-btn-primary">Explore Projects ↗</a>
+              <button class="techno-btn-showreel">▶ Showreel</button>
+            </div>
+          </div>
+          <div class="techno-hero-visual">
+            <div class="techno-collage-stage">
+              <div class="techno-circular-swirl-wrap">
+                <img src="https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=80" alt="Generative swirl" class="techno-circle-img"/>
+              </div>
+              <div class="techno-mountain-cutout">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80" alt="Alpine mountain" class="techno-mountain-img"/>
+              </div>
+              <div class="techno-moon-pillar">
+                <img src="https://images.unsplash.com/photo-1532693322450-2cb5c511067d?auto=format&fit=crop&w=600&q=80" alt="Moon" class="techno-pillar-img"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="techno-categories-sec techno-wrap" id="categories">
+        <div class="techno-cards-grid">
+          <a href="#projects" class="techno-category-card">
+            <div class="techno-card-bg"><img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=700&q=80" class="techno-card-img"/><div class="techno-card-tint"></div></div>
+            <div class="techno-card-top"><span class="techno-card-arrow">↗</span></div>
+            <div class="techno-card-info"><h3 class="techno-card-title">Visual Art</h3><p class="techno-card-sub">Illustration · Digital · Mixed</p></div>
+          </a>
+          <a href="#projects" class="techno-category-card">
+            <div class="techno-card-bg"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" class="techno-card-img"/><div class="techno-card-tint"></div></div>
+            <div class="techno-card-top"><span class="techno-card-arrow">↗</span></div>
+            <div class="techno-card-info"><h3 class="techno-card-title">Design</h3><p class="techno-card-sub">Branding · UI/UX · Systems</p></div>
+          </a>
+          <a href="#projects" class="techno-category-card">
+            <div class="techno-card-bg"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80" class="techno-card-img"/><div class="techno-card-tint"></div></div>
+            <div class="techno-card-top"><span class="techno-card-arrow">↗</span></div>
+            <div class="techno-card-info"><h3 class="techno-card-title">Experiments</h3><p class="techno-card-sub">Generative · Motion · Interactive</p></div>
+          </a>
+          <a href="#projects" class="techno-category-card">
+            <div class="techno-card-bg"><img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80" class="techno-card-img"/><div class="techno-card-tint"></div></div>
+            <div class="techno-card-top"><span class="techno-card-arrow">↗</span></div>
+            <div class="techno-card-info"><h3 class="techno-card-title">Projects</h3><p class="techno-card-sub">Web · App · Creative Tools</p></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="techno-ticker-sec techno-wrap">
+        <div class="techno-ticker-bar">
+          <div class="techno-ticker-left">
+            <span class="techno-ticker-title">Currently Exploring</span>
+          </div>
+          <div class="techno-pills-scroll">
+            ${(Array.isArray(p.skills) && p.skills.length ? p.skills : ['Generative Art', 'Interactive Web', 'Creative Coding', 'Digital Media', 'AI × Creativity']).map(s => `<span class="techno-skill-pill">${esc(s)}</span>`).join('')}
+          </div>
+          <div class="techno-ticker-status">
+            <span class="techno-pulse-dot"></span>
+            <span>Open for Collaborations</span>
+          </div>
+        </div>
+      </section>
+
+      <footer class="techno-footer techno-wrap">
+        <div>© ${new Date().getFullYear()} ${esc(p.name || 'Creative Technologist')} · ${esc(p.title || 'Creative Technologist')}</div>
+        <div>Techno Theme · Built with Portfoolio</div>
+      </footer>
+      <script>
+      (function(){
+        function apply(dark){
+          var r=document.getElementById('technoRoot');
+          var b=document.getElementById('technoThemeToggle');
+          if(r)r.classList.toggle('techno-dark',dark);
+          if(document.body)document.body.classList.toggle('techno-dark-mode',dark);
+          if(b)b.classList.toggle('is-dark',dark);
+        }
+        window.toggleTechnoTheme=function(){
+          var r=document.getElementById('technoRoot');
+          var isDark=r?!r.classList.contains('techno-dark'):true;
+          apply(isDark);
+          try{localStorage.setItem('techno_theme',isDark?'dark':'light')}catch(e){}
+        };
+        try{
+          var s=localStorage.getItem('techno_theme');
+          if(s==='dark'||(!s&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){
+            apply(true);
+          }
+        }catch(e){}
+        var btn=document.getElementById('technoThemeToggle');
+        if(btn)btn.onclick=window.toggleTechnoTheme;
+      })();
+      </script>
+    </div>`
     : vtpl === 'salon'
     ? `<div class="salon-page">
       <div class="salon-ambient-light" aria-hidden="true"></div>
