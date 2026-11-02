@@ -10610,3 +10610,15 @@ body[data-template="filmstrip"] {
 .salon-plant { position: absolute; bottom: -10px; width: 120px; height: 90px; background: radial-gradient(circle at center, #0d2116 20%, transparent 70%); opacity: 0.6; filter: blur(2px); }
 .salon-plant-left { left: 0; }
 .salon-plant-right { right: 0; }
+
+.salon-works-sec { padding: 60px 0 90px; position: relative; z-index: 10; }
+.salon-sec-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid rgba(255, 255, 255, 0.12); padding-bottom: 20px; margin-bottom: 50px; flex-wrap: wrap; gap: 16px; }
+.salon-sec-badge { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: #c5a059; text-transform: uppercase; display: block; margin-bottom: 6px; }
+.salon-sec-title { font-family: 'Instrument Serif', Georgia, serif; font-size: 42px; font-weight: 400; color: #ffffff; margin: 0; }
+.salon-sec-meta { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; color: #8ea89a; }
+.salon-art-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 46px; }
+.salon-piece { background: transparent; }
+.salon-art-hang { display: flex; flex-direction: column; align-items: center; position: relative; }
+.salon-spotlight-micro { position: absolute; top: -20px; width: 160px; height: 60px; background: radial-gradient(ellipse at top, rgba(255, 240, 190, 0.18) 0%, transparent 70%); pointer-events: none; }
+.salon-frame-wall { width: 100%; aspect-ratio: 1.1/1; border: 8px solid #c5a059; outline: 2px solid #dfc07b; box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6); }
+.salon-frame-wall img { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.05); }
