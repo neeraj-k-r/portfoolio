@@ -11276,8 +11276,12 @@ body[data-template="filmstrip"] {
   --il-border: rgba(255, 255, 255, 0.08);
   --il-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
+body.illustra-dark-mode {
+  background: #120e1e !important;
+}
 .illustra-page.illustra-dark .illustra-theme-toggle {
   background: #341e5e;
+  box-shadow: 0 4px 14px rgba(143, 114, 250, 0.3);
 }
 .illustra-page.illustra-dark .illustra-crop-tile {
   border-color: #2b1f47;

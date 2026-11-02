@@ -8438,9 +8438,6 @@ function renderIllustra(p) {
   const navHeader = `
     <header class="illustra-header wrap">
       <div class="illustra-header-inner">
-        <a href="#home" class="illustra-brand" aria-label="Home">
-          <span class="illustra-monogram">${tplEsc(initials)}</span>
-        </a>
         <nav class="illustra-nav" aria-label="Main Navigation">
           <a href="#home" class="illustra-nav-link active">Home</a>
           <a href="#works" class="illustra-nav-link">Works</a>
@@ -8448,10 +8445,10 @@ function renderIllustra(p) {
           ${email ? `<a href="mailto:${tplEsc(email)}" class="illustra-nav-link">Contact</a>` : ''}
         </nav>
         <div class="illustra-header-actions">
-          <button class="illustra-theme-toggle" id="illustraThemeToggle" aria-label="Toggle light or dark theme" title="Toggle theme">
+          <button class="illustra-theme-toggle" id="illustraThemeToggle" onclick="window.toggleIllustraTheme&&window.toggleIllustraTheme()" aria-label="Toggle dark mode" title="Toggle dark mode">
             <span class="illustra-toggle-pill">
-              <span class="illustra-toggle-icon sun"><i class="fa-solid fa-sun"></i></span>
-              <span class="illustra-toggle-icon moon"><i class="fa-solid fa-moon"></i></span>
+              <span class="illustra-toggle-icon sun" aria-hidden="true">☀</span>
+              <span class="illustra-toggle-icon moon" aria-hidden="true">☾</span>
             </span>
           </button>
         </div>
@@ -8519,7 +8516,6 @@ function renderIllustra(p) {
     <footer class="illustra-footer wrap">
       <div class="illustra-footer-inner">
         <div class="illustra-footer-left">
-          <span class="illustra-footer-monogram">${tplEsc(initials)}</span>
           <span class="illustra-footer-copy">© ${year} ${tplEsc(name)}${title ? ` · ${tplEsc(title)}` : ''}</span>
         </div>
         <div class="illustra-footer-right">
@@ -8633,23 +8629,32 @@ function renderIllustra(p) {
       </div>
     </section>` + worksSection + aboutSection + footerSection + `</div>`;
 
-  setTimeout(() => {
+  app.innerHTML = html;
+
+  window.toggleIllustraTheme = function() {
     const root = document.getElementById('illustraRoot');
     const btn = document.getElementById('illustraThemeToggle');
-    if (!root || !btn) return;
-    const saved = localStorage.getItem('illustra_theme') || 'light';
-    if (saved === 'dark') {
-      root.classList.add('illustra-dark');
-      btn.classList.add('is-dark');
-    }
-    btn.onclick = () => {
-      const isDark = root.classList.toggle('illustra-dark');
-      btn.classList.toggle('is-dark', isDark);
-      localStorage.setItem('illustra_theme', isDark ? 'dark' : 'light');
-    };
-  }, 50);
+    if (!root) return;
+    const isDark = root.classList.toggle('illustra-dark');
+    if (document.body) document.body.classList.toggle('illustra-dark-mode', isDark);
+    if (btn) btn.classList.toggle('is-dark', isDark);
+    try { localStorage.setItem('illustra_theme', isDark ? 'dark' : 'light'); } catch (e) {}
+  };
 
-  app.innerHTML = html;
+  try {
+    const saved = localStorage.getItem('illustra_theme');
+    const isDark = saved === 'dark' || (!saved && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const root = document.getElementById('illustraRoot');
+    const btn = document.getElementById('illustraThemeToggle');
+    if (isDark) {
+      if (root) root.classList.add('illustra-dark');
+      if (document.body) document.body.classList.add('illustra-dark-mode');
+      if (btn) btn.classList.add('is-dark');
+    }
+    if (btn) {
+      btn.onclick = window.toggleIllustraTheme;
+    }
+  } catch (e) {}
 }
 
 

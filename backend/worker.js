@@ -308,30 +308,38 @@ function head(p, tpl) {
 .sb-colophon-tag{font-weight:600;color:#3f1d2e}
 
 /* SALON EMERALD GALLERY THEME */
-.illustra-page{background:#f6f4fa;color:#1e1533;font-family:'Outfit','Plus Jakarta Sans',sans-serif;min-height:100vh;margin:0;padding:0}
+.illustra-page{--il-bg:#f6f4fa;--il-surface:#ffffff;--il-text-primary:#1e1533;--il-text-secondary:#584c6e;--il-text-muted:#85799c;--il-purple:#7356e5;--il-orange:#f2711c;--il-plum:#2b184c;--il-border:rgba(43,24,76,0.08);--il-card-shadow:0 10px 30px rgba(43,24,76,0.06);background:var(--il-bg);color:var(--il-text-primary);font-family:'Outfit','Plus Jakarta Sans',sans-serif;min-height:100vh;margin:0;padding:0;transition:background-color .3s ease,color .3s ease}
+.illustra-page.illustra-dark{--il-bg:#120e1e;--il-surface:#1a152b;--il-text-primary:#f5f2fd;--il-text-secondary:#aba1c2;--il-text-muted:#796f94;--il-purple:#8f72fa;--il-orange:#ff8533;--il-plum:#512f8f;--il-border:rgba(255,255,255,0.08);--il-card-shadow:0 10px 30px rgba(0,0,0,0.35)}
+body.illustra-dark-mode{background:#120e1e!important}
+.illustra-page.illustra-dark .illustra-theme-toggle{background:#341e5e;box-shadow:0 4px 14px rgba(143,114,250,0.3)}
+.illustra-page.illustra-dark .illustra-crop-tile{border-color:#2b1f47}
 .illustra-header{padding:24px 0}
 .illustra-header-inner{display:flex;align-items:center;justify-content:space-between}
-.illustra-monogram{font-family:'Playfair Display',serif;font-style:italic;font-weight:800;font-size:32px;color:#1e1533}
 .illustra-nav{display:flex;gap:32px}
-.illustra-nav-link{text-decoration:none;font-weight:500;color:#1e1533}
-.illustra-nav-link.active{font-weight:700;border-bottom:2px solid #1e1533}
-.illustra-theme-toggle{background:#251642;border:none;border-radius:999px;padding:4px 10px;color:#fff}
+.illustra-nav-link{text-decoration:none;font-weight:500;color:var(--il-text-primary);transition:color .2s ease}
+.illustra-nav-link:hover{color:var(--il-purple)}
+.illustra-nav-link.active{font-weight:700;border-bottom:2px solid var(--il-text-primary)}
+.illustra-theme-toggle{background:#251642;border:none;border-radius:999px;padding:4px 12px;color:#fff;cursor:pointer;display:inline-flex;align-items:center;box-shadow:0 4px 14px rgba(37,22,66,.25);transition:background .3s ease,box-shadow .3s ease}
+.illustra-toggle-pill{display:flex;align-items:center;gap:10px;font-size:13px}
+.illustra-toggle-icon.sun{color:#f2711c;transition:opacity .2s}
+.illustra-toggle-icon.moon{color:#d0c8eb;transition:transform .2s,color .2s}
+.illustra-theme-toggle.is-dark .illustra-toggle-icon.sun{opacity:0.45}
+.illustra-theme-toggle.is-dark .illustra-toggle-icon.moon{color:#9c82f7;transform:scale(1.15)}
 .illustra-hero-section{padding:40px 0 80px}
 .illustra-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 @media(max-width:960px){.illustra-hero-grid{grid-template-columns:1fr}}
 .illustra-hero-headings{margin-bottom:24px;padding-top:14px;overflow:visible}
-.illustra-name{font-size:clamp(2.8rem,5.5vw,4.6rem);font-weight:800;line-height:1.14;letter-spacing:-0.02em;margin:0 0 16px;overflow:visible;word-break:break-word}
-.illustra-first-name,.illustra-last-name{display:block;line-height:1.12;overflow:visible}
-.illustra-subtitle{font-size:1.25rem;font-weight:600;color:#584c6e;margin:0 0 14px}
-.illustra-accent-line{width:48px;height:3.5px;background:#7356e5;border-radius:2px}
-.illustra-bio{font-size:1.15rem;line-height:1.6;color:#584c6e;max-width:460px;margin:16px 0 32px}
-.illustra-btn-primary{background:#2b184c;color:#fff;text-decoration:none;font-weight:600;padding:14px 28px;border-radius:999px;display:inline-flex;align-items:center;gap:10px}
-.illustra-btn-secondary{color:#1e1533;border:1.5px solid rgba(43,24,76,.15);text-decoration:none;font-size:14px;font-weight:600;padding:12px 24px;border-radius:999px;margin-left:12px}
+.illustra-name{font-size:clamp(2.8rem,5.5vw,4.6rem);font-weight:800;line-height:1.14;letter-spacing:-0.02em;color:var(--il-text-primary);margin:0 0 16px;overflow:visible;word-break:break-word}
+.illustra-subtitle{font-size:1.25rem;font-weight:600;color:var(--il-text-secondary);margin:0 0 14px}
+.illustra-accent-line{width:48px;height:3.5px;background:var(--il-purple);border-radius:2px}
+.illustra-bio{font-size:1.15rem;line-height:1.6;color:var(--il-text-secondary);max-width:460px;margin:16px 0 32px}
+.illustra-btn-primary{background:var(--il-plum);color:#fff;text-decoration:none;font-weight:600;padding:14px 28px;border-radius:999px;display:inline-flex;align-items:center;gap:10px}
+.illustra-btn-secondary{color:var(--il-text-primary);border:1.5px solid var(--il-border);text-decoration:none;font-size:14px;font-weight:600;padding:12px 24px;border-radius:999px;margin-left:12px}
 .illustra-collage-stage{position:relative;width:100%;max-width:490px;height:470px;margin:0 auto}
 .illustra-vector-lines{position:absolute;inset:-10px;pointer-events:none;z-index:0}
 .illustra-blueprint-svg{width:100%;height:100%;overflow:visible}
-.illustra-block-purple{position:absolute;top:15px;right:175px;width:72px;height:380px;background:#7356e5;border-radius:6px;z-index:1}
-.illustra-block-orange{position:absolute;bottom:25px;left:30px;width:170px;height:95px;background:#f2711c;border-radius:6px;z-index:2}
+.illustra-block-purple{position:absolute;top:15px;right:175px;width:72px;height:380px;background:var(--il-purple);border-radius:6px;z-index:1}
+.illustra-block-orange{position:absolute;bottom:25px;left:30px;width:170px;height:95px;background:var(--il-orange);border-radius:6px;z-index:2}
 .illustra-portrait-canvas{position:absolute;top:25px;right:25px;width:320px;height:380px;z-index:3}
 .illustra-portrait-frame{width:100%;height:100%;border-radius:12px;overflow:hidden;box-shadow:0 20px 45px rgba(35,18,66,.18)}
 .illustra-portrait-img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.15)}
@@ -341,27 +349,25 @@ function head(p, tpl) {
 .illustra-crop-img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%)}
 .illustra-works-sec{padding:80px 0}
 .illustra-sec-head{text-align:center;margin-bottom:48px}
-.illustra-sec-kicker{font-size:11px;font-weight:800;letter-spacing:2px;color:#7356e5;text-transform:uppercase;display:block}
-.illustra-sec-title{font-size:clamp(2rem,3.8vw,2.8rem);font-weight:800;color:#1e1533}
+.illustra-sec-kicker{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--il-purple);text-transform:uppercase;display:block}
+.illustra-sec-title{font-size:clamp(2rem,3.8vw,2.8rem);font-weight:800;color:var(--il-text-primary)}
 .illustra-works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:32px}
-.illustra-work-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(43,24,76,.06);border:1px solid rgba(43,24,76,.08)}
+.illustra-work-card{background:var(--il-surface);border-radius:12px;overflow:hidden;box-shadow:var(--il-card-shadow);border:1px solid var(--il-border);transition:transform .25s ease,box-shadow .25s ease}
 .illustra-work-thumb-wrap{height:250px;position:relative}
 .illustra-work-img{width:100%;height:100%;object-fit:cover}
-.illustra-work-badge{position:absolute;top:14px;left:14px;background:rgba(43,24,76,.85);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px}
+.illustra-work-badge{position:absolute;top:14px;left:14px;background:var(--il-plum);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px}
 .illustra-work-meta{padding:22px}
-.illustra-work-title{font-size:1.15rem;font-weight:700;margin:0;color:#1e1533}
-.illustra-work-medium{font-size:12.5px;font-weight:600;color:#7356e5;margin:4px 0 8px}
-.illustra-process-sec{padding:70px 0;border-top:1px solid rgba(43,24,76,.08)}
-.illustra-process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;margin-top:40px}
-.illustra-process-card{background:#fff;border:1px solid rgba(43,24,76,.08);border-radius:12px;padding:30px 24px}
-.illustra-process-num{font-size:28px;font-weight:800;color:#f2711c;display:block;margin-bottom:14px}
+.illustra-work-title{font-size:1.15rem;font-weight:700;margin:0;color:var(--il-text-primary)}
+.illustra-work-year{font-size:12px;font-weight:600;color:var(--il-text-muted)}
+.illustra-work-medium{font-size:12.5px;font-weight:600;color:var(--il-purple);margin:4px 0 8px}
+.illustra-work-desc{font-size:13px;line-height:1.5;color:var(--il-text-secondary);margin:8px 0 0}
 .illustra-monograph-sec{padding:60px 0 90px}
-.illustra-monograph-card{background:#fff;border-radius:16px;padding:48px;max-width:860px;margin:0 auto;box-shadow:0 14px 40px rgba(43,24,76,.08);border:1px solid rgba(43,24,76,.08)}
-.illustra-quote{font-size:1.4rem;font-style:italic;line-height:1.5;color:#1e1533;margin:0;padding-left:20px;border-left:3.5px solid #f2711c}
-.illustra-footer{border-top:1px solid rgba(43,24,76,.08);padding:36px 0}
+.illustra-monograph-card{background:var(--il-surface);border-radius:16px;padding:48px;max-width:860px;margin:0 auto;box-shadow:var(--il-card-shadow);border:1px solid var(--il-border)}
+.illustra-quote{font-size:1.3rem;font-style:italic;line-height:1.5;color:var(--il-text-primary);margin:0;padding-left:20px;border-left:3.5px solid var(--il-orange)}
+.illustra-footer{border-top:1px solid var(--il-border);padding:36px 0}
 .illustra-footer-inner{display:flex;justify-content:space-between;align-items:center}
-.illustra-footer-monogram{font-family:'Playfair Display',serif;font-style:italic;font-weight:800;font-size:20px}
-.illustra-footer-badge{font-size:12px;font-weight:600;color:#7356e5}
+.illustra-footer-copy{color:var(--il-text-secondary);font-size:13px}
+.illustra-footer-badge{font-size:12px;font-weight:600;color:var(--il-purple)}
 
 .salon-page{background:#13271c;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;position:relative;overflow-x:hidden}
 .salon-ambient-light{position:absolute;top:0;left:0;right:0;height:1000px;background:radial-gradient(circle at 50% 120px,rgba(255,230,170,.14) 0%,rgba(20,50,36,.6) 45%,rgba(15,32,23,.95) 85%);pointer-events:none;z-index:1}
@@ -946,7 +952,6 @@ function pageGallery(p, wIdx, url) {
     ? `<div class="illustra-page" id="illustraRoot">
       <header class="illustra-header wrap">
         <div class="illustra-header-inner">
-          <a href="#" class="illustra-brand"><span class="illustra-monogram">${(p.name || 'VA').trim().split(/\s+/).map(n => n[0]).slice(0, 2).join('').toUpperCase() || 'VA'}</span></a>
           <nav class="illustra-nav">
             <a href="#" class="illustra-nav-link active">Home</a>
             <a href="#works" class="illustra-nav-link">Works</a>
@@ -954,8 +959,8 @@ function pageGallery(p, wIdx, url) {
             ${p.email ? `<a href="mailto:${esc(p.email)}" class="illustra-nav-link">Contact</a>` : ''}
           </nav>
           <div class="illustra-header-actions">
-            <button class="illustra-theme-toggle" aria-label="Toggle theme">
-              <span class="illustra-toggle-pill"><span class="illustra-toggle-icon sun">☀</span><span class="illustra-toggle-icon moon">☾</span></span>
+            <button class="illustra-theme-toggle" id="illustraThemeToggle" onclick="window.toggleIllustraTheme&&window.toggleIllustraTheme()" aria-label="Toggle dark mode" title="Toggle dark mode">
+              <span class="illustra-toggle-pill"><span class="illustra-toggle-icon sun" aria-hidden="true">☀</span><span class="illustra-toggle-icon moon" aria-hidden="true">☾</span></span>
             </button>
           </div>
         </div>
@@ -1077,7 +1082,6 @@ function pageGallery(p, wIdx, url) {
       <footer class="illustra-footer wrap">
         <div class="illustra-footer-inner">
           <div class="illustra-footer-left">
-            <span class="illustra-footer-monogram">${(p.name || 'VA').trim().split(/\s+/).map(n => n[0]).slice(0, 2).join('').toUpperCase() || 'VA'}</span>
             <span class="illustra-footer-copy">© ${new Date().getFullYear()} ${esc(p.name || 'Visual Artist')}${p.title ? ` · ${esc(p.title)}` : ''}</span>
           </div>
           <div class="illustra-footer-right">
@@ -1086,6 +1090,31 @@ function pageGallery(p, wIdx, url) {
           </div>
         </div>
       </footer>
+      <script>
+      (function(){
+        function apply(dark){
+          var r=document.getElementById('illustraRoot');
+          var b=document.getElementById('illustraThemeToggle');
+          if(r)r.classList.toggle('illustra-dark',dark);
+          if(document.body)document.body.classList.toggle('illustra-dark-mode',dark);
+          if(b)b.classList.toggle('is-dark',dark);
+        }
+        window.toggleIllustraTheme=function(){
+          var r=document.getElementById('illustraRoot');
+          var isDark=r?!r.classList.contains('illustra-dark'):true;
+          apply(isDark);
+          try{localStorage.setItem('illustra_theme',isDark?'dark':'light')}catch(e){}
+        };
+        try{
+          var s=localStorage.getItem('illustra_theme');
+          if(s==='dark'||(!s&&window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches)){
+            apply(true);
+          }
+        }catch(e){}
+        var btn=document.getElementById('illustraThemeToggle');
+        if(btn)btn.onclick=window.toggleIllustraTheme;
+      })();
+      </script>
     </div>`
     : vtpl === 'salon'
     ? `<div class="salon-page">
