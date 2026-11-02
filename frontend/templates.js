@@ -8647,6 +8647,29 @@ function renderIllustra(p) {
       </div>
     </section>`;
   html += processSection;
+
+  const skills = (p.skills && p.skills.length) ? p.skills : ['Charcoal & Graphite', 'Botanical Illustration', 'Digital Inking', 'Mixed Media Collage', 'Poster & Printmaking'];
+  const skillsPills = skills.map(s => `<span class="illustra-medium-pill">${tplEsc(s)}</span>`).join('');
+
+  const monographSection = `
+    <section class="illustra-monograph-sec wrap" id="about">
+      <div class="illustra-monograph-card">
+        <div class="illustra-monograph-header">
+          <span class="illustra-sec-kicker">MONOGRAPH & STATEMENT</span>
+          <h2 class="illustra-sec-title">Artistic Philosophy</h2>
+        </div>
+        <blockquote class="illustra-quote">
+          "Art flourishes where strict geometry meets wild organic living form. By juxtaposing architectural blocks with botanical life, every illustration becomes a living tension between order and instinct."
+        </blockquote>
+        <div class="illustra-mediums-wrap">
+          <h4 class="illustra-mediums-title">Core Disciplines & Mediums</h4>
+          <div class="illustra-mediums-grid">
+            ${skillsPills}
+          </div>
+        </div>
+      </div>
+    </section>`;
+  html += monographSection;
   html += `</div>`;
 
   // Wire theme toggle interaction after mount
