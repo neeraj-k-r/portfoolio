@@ -8529,7 +8529,14 @@ function renderIllustra(p) {
                 </defs>
               </svg>
             </div>
-            <!-- Collage Blocks & Canvas -->
+            
+            <!-- Inset Study Crop Detail Tile -->
+            <div class="illustra-crop-tile" aria-hidden="true">
+              <div class="illustra-crop-inner">
+                <img src="${p.avatarUrl || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80'}" alt="Detail study" class="illustra-crop-img"/>
+                <div class="illustra-crop-grain"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
