@@ -940,6 +940,51 @@ function pageGallery(p, wIdx, url) {
           </div>
         </div>
       </section>
+      <section class="illustra-works-sec wrap" id="works">
+        <div class="illustra-sec-head">
+          <span class="illustra-sec-kicker">SELECTED PORTFOLIO</span>
+          <h2 class="illustra-sec-title">Artworks & Studies</h2>
+        </div>
+        <div class="illustra-works-grid">
+          ${(Array.isArray(p.artworks) && p.artworks.length ? p.artworks : (Array.isArray(p.projects) && p.projects.length ? p.projects : [
+            { title: 'Echoes of Reverie', category: 'Illustrations', medium: 'Mixed Media & Bristol Board', imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80', desc: 'Charcoal study intertwined with organic chromatic elements.' },
+            { title: 'Botanical Solitude', category: 'Botany & Flora', medium: 'Charcoal & Gouache on Heavy Stock', imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80', desc: 'Detailed tiger lily floral study celebrating organic symmetry.' },
+            { title: 'Constructivist Fragment IV', category: 'Experimental', medium: 'Ink & Digital Chromatic Collage', imageUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80', desc: 'Juxtaposing geometric vector tensions against human expression.' }
+          ])).map((w, idx) => `
+            <article class="illustra-work-card">
+              <div class="illustra-work-thumb-wrap">
+                <img src="${esc(w.imageUrl || w.img || 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80')}" alt="${esc(w.title || 'Artwork')}" class="illustra-work-img"/>
+                <div class="illustra-work-badge">${esc(w.category || 'Illustration')}</div>
+              </div>
+              <div class="illustra-work-meta">
+                <div class="illustra-work-head">
+                  <h3 class="illustra-work-title">${esc(w.title || `Study ${idx + 1}`)}</h3>
+                  <span class="illustra-work-year">2026</span>
+                </div>
+                <p class="illustra-work-medium">${esc(w.medium || 'Mixed Media & Ink')}</p>
+                ${w.desc ? `<p class="illustra-work-desc">${esc(w.desc)}</p>` : ''}
+              </div>
+            </article>
+          `).join('')}
+        </div>
+      </section>
+      <section class="illustra-process-sec wrap" id="process">
+        <div class="illustra-sec-head">
+          <span class="illustra-sec-kicker">STUDIO WORKFLOW</span>
+          <h2 class="illustra-sec-title">From Concept to Canvas</h2>
+        </div>
+        <div class="illustra-process-grid">
+          <div class="illustra-process-card"><span class="illustra-process-num">01</span><h3 class="illustra-process-name">Thumbnail & Gestures</h3><p class="illustra-process-body">Rapid observational sketches and compositional blueprints.</p></div>
+          <div class="illustra-process-card"><span class="illustra-process-num">02</span><h3 class="illustra-process-name">Charcoal Rendering</h3><p class="illustra-process-body">Building light values from velvety blacks to luminous tones.</p></div>
+          <div class="illustra-process-card"><span class="illustra-process-num">03</span><h3 class="illustra-process-name">Color Geometry</h3><p class="illustra-process-body">Layering violet pillars and warm tangerine accent blocks.</p></div>
+          <div class="illustra-process-card"><span class="illustra-process-num">04</span><h3 class="illustra-process-name">Botanical Overlay</h3><p class="illustra-process-body">Organic tiger lilies and ink lines bursting beyond borders.</p></div>
+        </div>
+      </section>
+      <section class="illustra-monograph-sec wrap" id="about">
+        <div class="illustra-monograph-card">
+          <blockquote class="illustra-quote">"Art flourishes where strict geometry meets wild organic living form."</blockquote>
+        </div>
+      </section>
       <!-- Illustra SSR Content -->
     </div>`
     : vtpl === 'salon'
