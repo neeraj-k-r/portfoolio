@@ -10653,3 +10653,28 @@ body[data-template="filmstrip"] {
 .lx-tp-salon .lx-tp-cards { background: #13271c; border: 1px solid rgba(197, 160, 89, 0.4); }
 
 .lx-modal-body[data-theme="salon"] { background: #13271c; color: #ffffff; }
+
+/* ==========================================================================
+   ILLUSTRA THEME — Modern Mixed-Media Illustration & Botanical Collage
+   ========================================================================== */
+.illustra-page {
+  --il-bg: #f6f4fa;
+  --il-surface: #ffffff;
+  --il-text-primary: #1e1533;
+  --il-text-secondary: #584c6e;
+  --il-text-muted: #85799c;
+  --il-purple: #7356e5;
+  --il-orange: #f2711c;
+  --il-plum: #2b184c;
+  --il-border: rgba(43, 24, 76, 0.08);
+  --il-card-shadow: 0 10px 30px rgba(43, 24, 76, 0.06);
+  background: var(--il-bg);
+  color: var(--il-text-primary);
+  font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
