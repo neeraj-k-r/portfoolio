@@ -8437,7 +8437,18 @@ function renderIllustra(p) {
             <p class="illustra-subtitle">${tplEsc(subtitle)}</p>
             <div class="illustra-accent-line" aria-hidden="true"></div>
           </div>
-          <!-- Left typography column -->
+          
+          <p class="illustra-bio">${tplEsc(bio)}</p>
+          <div class="illustra-hero-cta-wrap">
+            <a href="#works" class="illustra-btn-primary">
+              <span>View Works</span>
+              <svg class="illustra-btn-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            ${email ? `<a href="mailto:${tplEsc(email)}" class="illustra-btn-secondary">Get in Touch</a>` : ''}
+          </div>
         </div>
         <div class="illustra-hero-visual">
           <!-- Right mixed-media collage column -->
