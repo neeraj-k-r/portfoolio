@@ -8299,7 +8299,18 @@ function renderSalon(p) {
       <div class="salon-plant salon-plant-right"></div>
     </div>
 `;
-  // renderSalon works grid stub
+    <section class="salon-works-sec wrap" id="works">
+      <div class="salon-sec-header">
+        <div class="salon-sec-titles">
+          <span class="salon-sec-badge">GALLERIA PRINCIPALE</span>
+          <h2 class="salon-sec-title">Exhibited Works</h2>
+        </div>
+        <div class="salon-sec-meta">
+          <span>ROOM I · IMPASTO & OIL SALON</span>
+        </div>
+      </div>
+  // renderSalon cards stub
+    </section>
 }
 
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook };
