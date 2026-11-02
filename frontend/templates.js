@@ -9164,7 +9164,13 @@ function renderAnalogHeroTitle(customTitle) {
   </h1>`;
 }
 
+function renderAnalogHeroBio(p) {
+  const bio = p.bio || p.tagline || 'Blending design, art, and technology to build meaningful digital experiences.';
+  return `<p class="analog-hero-desc">${tplEsc(bio)}</p>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
