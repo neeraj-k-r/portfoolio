@@ -8670,6 +8670,26 @@ function renderIllustra(p) {
       </div>
     </section>`;
   html += monographSection;
+
+  const footerSection = `
+    <footer class="illustra-footer wrap">
+      <div class="illustra-footer-inner">
+        <div class="illustra-footer-left">
+          <span class="illustra-footer-monogram">${tplEsc(initials)}</span>
+          <span class="illustra-footer-copy">© ${year} ${tplEsc(p.name || 'Nithin Krishna')} · Visual Artist & Illustrator</span>
+        </div>
+        <div class="illustra-footer-right">
+          <span class="illustra-footer-badge">Illustra Theme · Built with Portfoolio</span>
+          <a href="#home" class="illustra-back-top" aria-label="Back to top">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>`;
+  html += footerSection;
   html += `</div>`;
 
   // Wire theme toggle interaction after mount
