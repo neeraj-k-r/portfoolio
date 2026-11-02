@@ -185,3 +185,42 @@ test('Desire theme renders clean hero with creator name and bio, and removes foc
   assert.ok(!capturedHtml.includes('desire-tags-row'), 'desire must not render dummy tags row');
 });
 
+test('Techno theme renders creative technology hero, categories, and dynamic archive', () => {
+  let capturedHtml = '';
+  const domMock = {
+    document: {
+      getElementById: () => ({
+        set innerHTML(val) { capturedHtml = val; },
+        get innerHTML() { return capturedHtml; }
+      }),
+      body: { dataset: {}, classList: { toggle: () => {}, add: () => {}, remove: () => {} } },
+      title: ''
+    },
+    window: { scrollTo: () => {} },
+    location: { origin: 'https://portfoolio.me' },
+    TEMPLATES: []
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const technoFn = domMock.window.PortfoolioTemplates.techno;
+  assert.ok(technoFn, 'techno template must exist');
+  technoFn({
+    name: 'Ada Lovelace',
+    title: 'Creative Technologist',
+    bio: 'Pioneering algorithmic art and computational design.',
+    works: [
+      { title: 'Generative Engine', imageUrl: 'https://example.com/gen.jpg', category: 'Generative Art' }
+    ]
+  });
+
+  assert.ok(capturedHtml.includes('techno-nav'), 'techno must render custom navbar');
+  assert.ok(capturedHtml.includes('ADA LOVELACE'), 'techno must render uppercase artist name');
+  assert.ok(capturedHtml.includes('techno-hero-title') && capturedHtml.includes('CREATIVE') && capturedHtml.includes('TECHNOLOGY'), 'techno must render display hero title');
+  assert.ok(capturedHtml.includes('Currently Exploring'), 'techno must render exploration ticker');
+  assert.ok(capturedHtml.includes('Open for Collaborations'), 'techno must render collaboration badge');
+  assert.ok(capturedHtml.includes('Generative Engine'), 'techno must render user artwork in archive');
+});
+
+
