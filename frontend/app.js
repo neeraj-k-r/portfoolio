@@ -730,14 +730,14 @@ function renderGallery(p) {
   if (vtpl === 'triennale') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.triennale) return window.PortfoolioTemplates.triennale(p);
   }
+  if (vtpl === 'sketchbook') {
+    if (window.PortfoolioTemplates && window.PortfoolioTemplates.sketchbook) return window.PortfoolioTemplates.sketchbook(p);
+  }
   if (vtpl === 'salon') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.salon) return window.PortfoolioTemplates.salon(p);
   }
   if (vtpl === 'illustra') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.illustra) return window.PortfoolioTemplates.illustra(p);
-  }
-  if (vtpl === 'sketchbook') {
-    if (window.PortfoolioTemplates && window.PortfoolioTemplates.sketchbook) return window.PortfoolioTemplates.sketchbook(p);
   }
   if (vtpl === 'atelier') {
     app.innerHTML = `
@@ -1696,9 +1696,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       biennale: { name: 'Giulia Moretti', title: 'Contemporary Installation Artist', desc: 'Venice Biennale international art exhibition with gallery room placards, curated catalog layout & thesis statement.', skills: ['Spatial Curation', 'Sculpture', 'Monograph', 'Installation Art'] },
       pavilion: { name: 'Kaelen Thorne', title: 'Architectural Scenographer', desc: 'Monumental architectural pavilion with dual-column curatorial spread & spatial layout.', skills: ['Spatial Architecture', 'Scenography', 'Monoliths', 'Materiality'] },
       documenta: { name: 'Dr. Arthur Vane', title: 'Archival & Research Artist', desc: 'Curatorial research archive with catalog registry, archival notes & documentarian grid.', skills: ['Archival Research', 'Field Notes', 'Curatorial Practice', 'Catalogue Raisonné'] },
-      salon: { name: 'Nithin Krishna', title: 'Visual Artist · Oil Painter', desc: 'Classical fine art salon with emerald gallery walls, overhead spotlight, gilded gold frames & viewing bench.', skills: ['Oil Painting', 'Impasto', 'Classical Art', 'Seascapes', 'Alpine Landscapes'] },
-      illustra: { name: 'Nithin Krishna', title: 'Visual Artist & Illustrator', desc: 'Modern mixed-media illustration with botanical orange lilies, constructivist color blocks & charcoal portraiture.', skills: ['Digital Art', 'Charcoal Drawing', 'Mixed Media', 'Botanical Illustration', 'Poster Design'] },
-      sketchbook: { name: 'Nithin Krishna', title: 'Artist · Drawing Portfolio', desc: 'Hand-drawn graphite & charcoal collection with realistic portraits, anatomy studies, and creative sketches.', skills: ['Graphite', 'Charcoal', 'Portraiture', 'Anatomy Studies', 'Architectural Sketch'] },
+      sketchbook: { name: 'Julian Vance', title: 'Artist · Drawing Portfolio', desc: 'Hand-drawn graphite & charcoal collection with realistic portraits, anatomy studies, and creative sketches.', skills: ['Graphite', 'Charcoal', 'Portraiture', 'Anatomy Studies', 'Architectural Sketch'] },
+      salon: { name: 'Vittorio Bellini', title: 'Classical & Renaissance Oil Painter', desc: 'Museum gallery salon with warm spotlight illumination, gilded ornate frames, and curatorial placards.', skills: ['Oil on Linen', 'Impasto', 'Figurative Art', 'Chiaroscuro'] },
+      illustra: { name: 'Maya Lin', title: 'Visual Artist & Illustrator', desc: 'Editorial illustration theme with organic botanicals, geometric accent color blocking, and clean portfolio layout.', skills: ['Illustration', 'Botanical Art', 'Vector Art', 'Mixed Media'] },
       triennale: { name: 'Matteo Colombo', title: 'Industrial & Spatial Designer', desc: 'International design exposition with Milanese modernist typography & chromatic layout.', skills: ['Product Design', 'Modernist Systems', 'Spatial Planning', 'Chromatic Form'] },
     };
     let lastFocus = null;

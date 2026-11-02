@@ -8412,17 +8412,29 @@ function renderIllustra(p) {
   normTpl(p);
   const year = new Date().getFullYear();
   document.body.dataset.template = 'illustra';
-  document.title = `${p.name || 'Nithin Krishna'} — ${p.title || 'Visual Artist & Illustrator'} | portfoolio.me`;
+  const name = (p.name || 'Visual Artist').trim();
+  const title = (p.title && p.title.trim())
+    ? p.title.trim()
+    : 'Visual Artist & Illustrator';
+  document.title = `${name} — ${title} | portfoolio.me`;
   const app = document.getElementById('app') || document.body;
-  const nameParts = (p.name || 'Nithin Krishna').trim().split(/\s+/);
-  const firstName = nameParts[0] || 'Nithin';
-  const lastName = nameParts.slice(1).join(' ') || 'Krishna';
-  const initials = (nameParts.map(w => w[0]).join('') || 'NK').toUpperCase();
-  const subtitle = (!p.title || p.title === 'Aspiring Developer' || p.title.toLowerCase().includes('developer') || p.title.toLowerCase().includes('engineer')) ? 'Visual Artist & Illustrator' : p.title;
-  const bio = (!p.bio || p.bio.toLowerCase().includes('recruiter') || p.bio.toLowerCase().includes('ship fast') || p.bio.toLowerCase().includes('scalable web')) ? (p.about || 'Exploring visual stories through illustration, digital art, and experimental compositions.') : p.bio;
-  const email = p.email || 'hello@nithinkrishna.art';
-  const location = p.location || '';
-  
+  const initials = (name.split(/\s+/).map(n => n[0]).slice(0, 2).join('') || 'VA').toUpperCase();
+  const bio = (p.bio || p.about || p.summary || p.tagline || '').trim();
+  const email = (p.email || '').trim();
+  const location = (p.location || '').trim();
+  const skills = Array.isArray(p.skills) ? p.skills.filter(Boolean) : [];
+
+  let works = getVisualWorks(p);
+  if (!works || !works.length) {
+    works = [
+      { title: 'Featured Study I', category: 'Illustration', medium: 'Mixed Media', desc: 'Exploration of form and visual narrative.', imageUrl: 'https://images.unsplash.com/photo-1578926375605-eaf7559b1458?auto=format&fit=crop&w=800&q=80', year },
+      { title: 'Featured Study II', category: 'Flora', medium: 'Botanical Illustration', desc: 'Organic study in line and color.', imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80', year }
+    ];
+  }
+
+  const heroImage = (p.avatarUrl || p.avatar_url || '').trim() || (works[0] ? works[0].imageUrl : 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80');
+  const cropImage = (works[1] ? works[1].imageUrl : heroImage);
+
   const navHeader = `
     <header class="illustra-header wrap">
       <div class="illustra-header-inner">
@@ -8432,8 +8444,8 @@ function renderIllustra(p) {
         <nav class="illustra-nav" aria-label="Main Navigation">
           <a href="#home" class="illustra-nav-link active">Home</a>
           <a href="#works" class="illustra-nav-link">Works</a>
-          <a href="#process" class="illustra-nav-link">Process</a>
-          <a href="#about" class="illustra-nav-link">About</a>
+          ${(bio || skills.length) ? `<a href="#about" class="illustra-nav-link">About</a>` : ''}
+          ${email ? `<a href="mailto:${tplEsc(email)}" class="illustra-nav-link">Contact</a>` : ''}
         </nav>
         <div class="illustra-header-actions">
           <button class="illustra-theme-toggle" id="illustraThemeToggle" aria-label="Toggle light or dark theme" title="Toggle theme">
@@ -8446,22 +8458,95 @@ function renderIllustra(p) {
       </div>
     </header>`;
 
-  // Base render container initialized
+  const worksList = works.map((item, idx) => {
+    const wTitle = item.title || item.name || `Artwork ${idx + 1}`;
+    const wMedium = item.medium || item.tech || item.role || item.category || 'Artwork';
+    const wTag = item.category || 'Visual';
+    const wImg = item.imageUrl || item.img || item.image || 'https://images.unsplash.com/photo-1578926375605-eaf7559b1458?auto=format&fit=crop&w=800&q=80';
+    const wDesc = item.desc || item.summary || '';
+    const wYear = item.year || year;
+    return `
+      <article class="illustra-work-card" data-category="${tplEsc(wTag)}">
+        <div class="illustra-work-thumb-wrap">
+          <img src="${tplEsc(wImg)}" alt="${tplEsc(wTitle)}" class="illustra-work-img" loading="lazy"/>
+          <div class="illustra-work-badge">${tplEsc(wTag)}</div>
+        </div>
+        <div class="illustra-work-meta">
+          <div class="illustra-work-head">
+            <h3 class="illustra-work-title">${tplEsc(wTitle)}</h3>
+            <span class="illustra-work-year">${tplEsc(wYear)}</span>
+          </div>
+          <p class="illustra-work-medium">${tplEsc(wMedium)}</p>
+          ${wDesc ? `<p class="illustra-work-desc">${tplEsc(wDesc)}</p>` : ''}
+        </div>
+      </article>`;
+  }).join('');
+
+  const worksSection = `
+    <section class="illustra-works-sec wrap" id="works">
+      <div class="illustra-sec-head">
+        <span class="illustra-sec-kicker">SELECTED PORTFOLIO</span>
+        <h2 class="illustra-sec-title">Artworks & Studies</h2>
+      </div>
+      <div class="illustra-works-grid">
+        ${worksList}
+      </div>
+    </section>`;
+
+  let aboutSection = '';
+  if (bio || skills.length) {
+    const skillsPills = skills.map(s => `<span class="illustra-medium-pill">${tplEsc(s)}</span>`).join('');
+    aboutSection = `
+      <section class="illustra-monograph-sec wrap" id="about">
+        <div class="illustra-monograph-card">
+          <div class="illustra-monograph-header">
+            <span class="illustra-sec-kicker">ABOUT THE ARTIST</span>
+            <h2 class="illustra-sec-title">${tplEsc(name)}</h2>
+          </div>
+          ${bio ? `<blockquote class="illustra-quote">${tplEsc(bio)}</blockquote>` : ''}
+          ${skills.length ? `
+            <div class="illustra-mediums-wrap">
+              <h4 class="illustra-mediums-title">Disciplines & Skills</h4>
+              <div class="illustra-mediums-grid">
+                ${skillsPills}
+              </div>
+            </div>` : ''}
+        </div>
+      </section>`;
+  }
+
+  const footerSection = `
+    <footer class="illustra-footer wrap">
+      <div class="illustra-footer-inner">
+        <div class="illustra-footer-left">
+          <span class="illustra-footer-monogram">${tplEsc(initials)}</span>
+          <span class="illustra-footer-copy">© ${year} ${tplEsc(name)}${title ? ` · ${tplEsc(title)}` : ''}</span>
+        </div>
+        <div class="illustra-footer-right">
+          ${email ? `<a href="mailto:${tplEsc(email)}" class="illustra-footer-link">Contact</a>` : ''}
+          ${p.instagram ? `<a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener" class="illustra-footer-link">Instagram</a>` : ''}
+          ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener" class="illustra-footer-link">GitHub</a>` : ''}
+          <span class="illustra-footer-badge">Illustra Theme · portfoolio.me</span>
+          <a href="#home" class="illustra-back-top" aria-label="Back to top">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="19" x2="12" y2="5"></line>
+              <polyline points="5 12 12 5 19 12"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </footer>`;
+
   let html = `<div class="illustra-page" id="illustraRoot">` + navHeader + `
     <section class="illustra-hero-section wrap" id="home">
       <div class="illustra-hero-grid">
         <div class="illustra-hero-content">
-          
           <div class="illustra-hero-headings">
-            <h1 class="illustra-name">
-              <span class="illustra-first-name">${tplEsc(firstName)}</span>
-              <span class="illustra-last-name">${tplEsc(lastName)}</span>
-            </h1>
-            <p class="illustra-subtitle">${tplEsc(subtitle)}</p>
+            <h1 class="illustra-name">${tplEsc(name)}</h1>
+            <p class="illustra-subtitle">${tplEsc(title)}</p>
             <div class="illustra-accent-line" aria-hidden="true"></div>
           </div>
-          
-          <p class="illustra-bio">${tplEsc(bio)}</p>
+          ${bio ? `<p class="illustra-bio">${tplEsc(bio)}</p>` : ''}
           <div class="illustra-hero-cta-wrap">
             <a href="#works" class="illustra-btn-primary">
               <span>View Works</span>
@@ -8474,7 +8559,6 @@ function renderIllustra(p) {
           </div>
         </div>
         <div class="illustra-hero-visual">
-          
           <div class="illustra-collage-stage">
             <!-- Constructivist Blueprint Vector Lines -->
             <div class="illustra-vector-lines" aria-hidden="true">
@@ -8496,53 +8580,37 @@ function renderIllustra(p) {
               <div class="illustra-stipple-grain"></div>
             </div>
             
-            <!-- Charcoal & Ink Portrait Canvas -->
+            <!-- Portrait Canvas -->
             <div class="illustra-portrait-canvas">
               <div class="illustra-portrait-frame">
-                <img src="${p.avatarUrl || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80'}" alt="${tplEsc(p.name)} artwork portrait" class="illustra-portrait-img" loading="eager"/>
+                <img src="${tplEsc(heroImage)}" alt="${tplEsc(name)}" class="illustra-portrait-img" loading="eager"/>
                 <div class="illustra-charcoal-tone"></div>
               </div>
             </div>
-            
+
             <!-- Botanical Blooming Tiger Lilies Overlay -->
             <div class="illustra-botanical-overlay" aria-hidden="true">
               <svg class="illustra-lily-svg" viewBox="0 0 320 420" fill="none">
                 <g filter="url(#dropShadowLilies)">
-                  <!-- Lily Stems -->
                   <path d="M120 380 Q130 260 180 180 T240 60" stroke="#4a5d23" stroke-width="4.5" stroke-linecap="round"/>
                   <path d="M120 380 Q160 300 220 250" stroke="#5a6e2e" stroke-width="3.5" stroke-linecap="round"/>
-                  
-                  <!-- Primary Upper Tiger Lily -->
                   <g transform="translate(190, 50)">
                     <path d="M0 40 C-30 -10 -60 10 -40 60 C-20 110 0 70 0 40Z" fill="#ff7a00" stroke="#d45000" stroke-width="2"/>
                     <path d="M0 40 C10 -30 50 -30 40 30 C30 90 0 70 0 40Z" fill="#ff9100" stroke="#d45000" stroke-width="2"/>
                     <path d="M0 40 C-40 -40 -10 -70 20 -40 C50 -10 10 30 0 40Z" fill="#ffa726" stroke="#d45000" stroke-width="2"/>
                     <path d="M0 40 C-70 10 -80 -30 -30 -40 C20 -50 0 20 0 40Z" fill="#ff6f00" stroke="#b73c00" stroke-width="2"/>
                     <path d="M0 40 C40 30 80 10 60 -20 C40 -50 10 20 0 40Z" fill="#ff8f00" stroke="#d45000" stroke-width="2"/>
-                    <!-- Stamens & Speckles -->
                     <circle cx="-12" cy="18" r="2" fill="#5c1d00"/>
                     <circle cx="-8" cy="8" r="1.8" fill="#5c1d00"/>
                     <circle cx="10" cy="15" r="2" fill="#5c1d00"/>
                     <circle cx="6" cy="5" r="1.6" fill="#5c1d00"/>
-                    <path d="M0 40 Q-15 15 -25 0" stroke="#8d2b00" stroke-width="1.8" stroke-linecap="round"/>
-                    <ellipse cx="-25" cy="0" rx="4" ry="2" fill="#5c1d00"/>
-                    <path d="M0 40 Q5 10 15 -5" stroke="#8d2b00" stroke-width="1.8" stroke-linecap="round"/>
-                    <ellipse cx="15" cy="-5" rx="4" ry="2" fill="#5c1d00"/>
-                    <path d="M0 40 Q25 25 35 15" stroke="#8d2b00" stroke-width="1.8" stroke-linecap="round"/>
-                    <ellipse cx="35" cy="15" rx="4" ry="2" fill="#5c1d00"/>
                   </g>
-
-                  <!-- Secondary Lower Blossom -->
                   <g transform="translate(170, 210) scale(0.9)">
                     <path d="M0 35 C-35 -15 -65 5 -45 55 C-25 105 0 65 0 35Z" fill="#ff7a00" stroke="#d45000" stroke-width="2"/>
                     <path d="M0 35 C15 -25 55 -25 45 25 C35 85 0 65 0 35Z" fill="#ff9100" stroke="#d45000" stroke-width="2"/>
                     <path d="M0 35 C-45 -35 -15 -65 15 -35 C45 -5 10 25 0 35Z" fill="#ffa726" stroke="#d45000" stroke-width="2"/>
                     <path d="M0 35 C-75 5 -85 -35 -35 -45 C15 -55 0 15 0 35Z" fill="#ff6f00" stroke="#b73c00" stroke-width="2"/>
                     <path d="M0 35 C45 25 85 5 65 -25 C45 -55 10 15 0 35Z" fill="#ff8f00" stroke="#d45000" stroke-width="2"/>
-                    <circle cx="-10" cy="15" r="1.8" fill="#5c1d00"/>
-                    <circle cx="8" cy="12" r="1.8" fill="#5c1d00"/>
-                    <path d="M0 35 Q-15 10 -20 -5" stroke="#8d2b00" stroke-width="1.6"/>
-                    <ellipse cx="-20" cy="-5" rx="3.5" ry="1.8" fill="#5c1d00"/>
                   </g>
                 </g>
                 <defs>
@@ -8552,149 +8620,19 @@ function renderIllustra(p) {
                 </defs>
               </svg>
             </div>
-            
-            <!-- Inset Study Crop Detail Tile -->
+
+            <!-- Inset Detail Crop Tile -->
             <div class="illustra-crop-tile" aria-hidden="true">
               <div class="illustra-crop-inner">
-                <img src="${p.avatarUrl || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80'}" alt="Detail study" class="illustra-crop-img"/>
+                <img src="${tplEsc(cropImage)}" alt="Study detail" class="illustra-crop-img"/>
                 <div class="illustra-crop-grain"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>`;
+    </section>` + worksSection + aboutSection + footerSection + `</div>`;
 
-
-  const defaultArtworks = [
-    { title: 'Echoes of Reverie', category: 'Illustrations', medium: 'Mixed Media & Bristol Board', year: '2026', desc: 'Charcoal study intertwined with organic chromatic elements.', img: 'https://images.unsplash.com/photo-1578926375605-eaf7559b1458?auto=format&fit=crop&w=800&q=80' },
-    { title: 'Botanical Solitude', category: 'Botany & Flora', medium: 'Charcoal & Gouache on Heavy Stock', year: '2026', desc: 'Detailed tiger lily floral study celebrating organic symmetry.', img: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80' },
-    { title: 'Constructivist Fragment IV', category: 'Experimental', medium: 'Ink & Digital Chromatic Collage', year: '2025', desc: 'Juxtaposing geometric vector tensions against human expression.', img: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80' },
-    { title: 'Daylily Awakening', category: 'Botany & Flora', medium: 'Pencil Study with Watercolor Accent', year: '2025', desc: 'Delicate botanical study capturing morning petal dew and stamens.', img: 'https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=800&q=80' },
-    { title: 'Monochrome Contemplation', category: 'Illustrations', medium: 'Graphite on Cold-Pressed Paper', year: '2025', desc: 'Realistic portrait exploring light gradient across facial contours.', img: 'https://images.unsplash.com/photo-1582561424760-0321d75e81fa?auto=format&fit=crop&w=800&q=80' },
-    { title: 'Architectonic Bloom', category: 'Digital Art', medium: 'Stipple Ink & Screenprint Overlay', year: '2024', desc: 'Geometric structures intersecting with floral living matter.', img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80' }
-  ];
-
-  const rawWorks = (p.projects && p.projects.length) ? p.projects : defaultArtworks;
-  const worksList = rawWorks.map((item, idx) => {
-    const title = item.title || item.name || `Artwork ${idx + 1}`;
-    const medium = item.medium || item.tech || item.role || 'Mixed Media & Ink';
-    const tag = item.category || (idx % 2 === 0 ? 'Illustration' : 'Botanical Art');
-    const img = item.img || item.image || defaultArtworks[idx % defaultArtworks.length].img;
-    const desc = item.desc || item.summary || 'Original artwork exploring visual narratives and expressive forms.';
-    return `
-      <article class="illustra-work-card" data-category="${tplEsc(tag)}">
-        <div class="illustra-work-thumb-wrap">
-          <img src="${tplEsc(img)}" alt="${tplEsc(title)}" class="illustra-work-img" loading="lazy"/>
-          <div class="illustra-work-badge">${tplEsc(tag)}</div>
-        </div>
-        <div class="illustra-work-meta">
-          <div class="illustra-work-head">
-            <h3 class="illustra-work-title">${tplEsc(title)}</h3>
-            <span class="illustra-work-year">${tplEsc(item.year || year)}</span>
-          </div>
-          <p class="illustra-work-medium">${tplEsc(medium)}</p>
-          <p class="illustra-work-desc">${tplEsc(desc)}</p>
-        </div>
-      </article>`;
-  }).join('');
-
-  const worksSection = `
-    <section class="illustra-works-sec wrap" id="works">
-      <div class="illustra-sec-head">
-        <span class="illustra-sec-kicker">SELECTED PORTFOLIO</span>
-        <h2 class="illustra-sec-title">Artworks & Studies</h2>
-        <div class="illustra-filter-bar">
-          <button class="illustra-filter-pill active" data-filter="all">All</button>
-          <button class="illustra-filter-pill" data-filter="illustrations">Illustrations</button>
-          <button class="illustra-filter-pill" data-filter="botany">Botany & Flora</button>
-          <button class="illustra-filter-pill" data-filter="digital">Digital Art</button>
-          <button class="illustra-filter-pill" data-filter="experimental">Experimental</button>
-        </div>
-      </div>
-      <div class="illustra-works-grid">
-        ${worksList}
-      </div>
-    </section>`;
-  html += worksSection;
-
-  const processSection = `
-    <section class="illustra-process-sec wrap" id="process">
-      <div class="illustra-sec-head">
-        <span class="illustra-sec-kicker">STUDIO WORKFLOW</span>
-        <h2 class="illustra-sec-title">From Concept to Canvas</h2>
-        <p class="illustra-sec-desc">A disciplined four-stage exploration balancing classical graphite foundations with bold modern constructivism.</p>
-      </div>
-      <div class="illustra-process-grid">
-        <div class="illustra-process-card">
-          <span class="illustra-process-num">01</span>
-          <h3 class="illustra-process-name">Thumbnail & Gestures</h3>
-          <p class="illustra-process-body">Rapid observational sketches and compositional blueprints mapping dynamic rhythm and spatial mass.</p>
-        </div>
-        <div class="illustra-process-card">
-          <span class="illustra-process-num">02</span>
-          <h3 class="illustra-process-name">Charcoal Rendering</h3>
-          <p class="illustra-process-body">Building light values from velvety blacks to luminous skin tones with dense graphite and charcoal sticks.</p>
-        </div>
-        <div class="illustra-process-card">
-          <span class="illustra-process-num">03</span>
-          <h3 class="illustra-process-name">Color Geometry</h3>
-          <p class="illustra-process-body">Layering pure violet pillars and warm tangerine accent blocks to establish chromatic contrast against monochrome forms.</p>
-        </div>
-        <div class="illustra-process-card">
-          <span class="illustra-process-num">04</span>
-          <h3 class="illustra-process-name">Botanical Overlay</h3>
-          <p class="illustra-process-body">Finishing with organic tiger lilies and precision ink lines that burst forward beyond rectangular borders.</p>
-        </div>
-      </div>
-    </section>`;
-  html += processSection;
-
-  const skills = (p.skills && p.skills.length) ? p.skills : ['Charcoal & Graphite', 'Botanical Illustration', 'Digital Inking', 'Mixed Media Collage', 'Poster & Printmaking'];
-  const skillsPills = skills.map(s => `<span class="illustra-medium-pill">${tplEsc(s)}</span>`).join('');
-
-  const monographSection = `
-    <section class="illustra-monograph-sec wrap" id="about">
-      <div class="illustra-monograph-card">
-        <div class="illustra-monograph-header">
-          <span class="illustra-sec-kicker">MONOGRAPH & STATEMENT</span>
-          <h2 class="illustra-sec-title">Artistic Philosophy</h2>
-        </div>
-        <blockquote class="illustra-quote">
-          "Art flourishes where strict geometry meets wild organic living form. By juxtaposing architectural blocks with botanical life, every illustration becomes a living tension between order and instinct."
-        </blockquote>
-        <div class="illustra-mediums-wrap">
-          <h4 class="illustra-mediums-title">Core Disciplines & Mediums</h4>
-          <div class="illustra-mediums-grid">
-            ${skillsPills}
-          </div>
-        </div>
-      </div>
-    </section>`;
-  html += monographSection;
-
-  const footerSection = `
-    <footer class="illustra-footer wrap">
-      <div class="illustra-footer-inner">
-        <div class="illustra-footer-left">
-          <span class="illustra-footer-monogram">${tplEsc(initials)}</span>
-          <span class="illustra-footer-copy">© ${year} ${tplEsc(p.name || 'Nithin Krishna')} · Visual Artist & Illustrator</span>
-        </div>
-        <div class="illustra-footer-right">
-          <span class="illustra-footer-badge">Illustra Theme · Built with Portfoolio</span>
-          <a href="#home" class="illustra-back-top" aria-label="Back to top">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="12" y1="19" x2="12" y2="5"></line>
-              <polyline points="5 12 12 5 19 12"></polyline>
-            </svg>
-          </a>
-        </div>
-      </div>
-    </footer>`;
-  html += footerSection;
-  html += `</div>`;
-
-  // Wire theme toggle interaction after mount
   setTimeout(() => {
     const root = document.getElementById('illustraRoot');
     const btn = document.getElementById('illustraThemeToggle');
@@ -8709,26 +8647,8 @@ function renderIllustra(p) {
       btn.classList.toggle('is-dark', isDark);
       localStorage.setItem('illustra_theme', isDark ? 'dark' : 'light');
     };
-
-    // Wire filter pill buttons
-    const filterPills = root.querySelectorAll('.illustra-filter-pill');
-    const cards = root.querySelectorAll('.illustra-work-card');
-    filterPills.forEach(pill => {
-      pill.onclick = () => {
-        filterPills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-        const f = pill.dataset.filter.toLowerCase();
-        cards.forEach(c => {
-          if (f === 'all') {
-            c.style.display = '';
-          } else {
-            const cat = (c.dataset.category || '').toLowerCase();
-            c.style.display = (cat.includes(f) || (f === 'botany' && cat.includes('flora'))) ? '' : 'none';
-          }
-        });
-      };
-    });
   }, 50);
+
   app.innerHTML = html;
 }
 

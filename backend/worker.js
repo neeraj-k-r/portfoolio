@@ -320,7 +320,7 @@ function head(p, tpl) {
 .illustra-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 @media(max-width:960px){.illustra-hero-grid{grid-template-columns:1fr}}
 .illustra-hero-headings{margin-bottom:24px;padding-top:14px;overflow:visible}
-.illustra-name{font-size:clamp(3rem,5.8vw,4.8rem);font-weight:800;line-height:1.14;letter-spacing:-0.02em;margin:0 0 16px;display:flex;flex-direction:column;overflow:visible}
+.illustra-name{font-size:clamp(2.8rem,5.5vw,4.6rem);font-weight:800;line-height:1.14;letter-spacing:-0.02em;margin:0 0 16px;overflow:visible;word-break:break-word}
 .illustra-first-name,.illustra-last-name{display:block;line-height:1.12;overflow:visible}
 .illustra-subtitle{font-size:1.25rem;font-weight:600;color:#584c6e;margin:0 0 14px}
 .illustra-accent-line{width:48px;height:3.5px;background:#7356e5;border-radius:2px}
@@ -946,12 +946,12 @@ function pageGallery(p, wIdx, url) {
     ? `<div class="illustra-page" id="illustraRoot">
       <header class="illustra-header wrap">
         <div class="illustra-header-inner">
-          <a href="#" class="illustra-brand"><span class="illustra-monogram">${(p.name || 'NK').trim().split(/\s+/).map(n => n[0]).slice(0, 2).join('').toUpperCase()}</span></a>
+          <a href="#" class="illustra-brand"><span class="illustra-monogram">${(p.name || 'VA').trim().split(/\s+/).map(n => n[0]).slice(0, 2).join('').toUpperCase() || 'VA'}</span></a>
           <nav class="illustra-nav">
             <a href="#" class="illustra-nav-link active">Home</a>
             <a href="#works" class="illustra-nav-link">Works</a>
-            <a href="#process" class="illustra-nav-link">Process</a>
-            <a href="#about" class="illustra-nav-link">About</a>
+            ${(p.bio || p.summary || p.about || (Array.isArray(p.skills) && p.skills.length)) ? `<a href="#about" class="illustra-nav-link">About</a>` : ''}
+            ${p.email ? `<a href="mailto:${esc(p.email)}" class="illustra-nav-link">Contact</a>` : ''}
           </nav>
           <div class="illustra-header-actions">
             <button class="illustra-theme-toggle" aria-label="Toggle theme">
@@ -964,14 +964,11 @@ function pageGallery(p, wIdx, url) {
         <div class="illustra-hero-grid">
           <div class="illustra-hero-content">
             <div class="illustra-hero-headings">
-              <h1 class="illustra-name">
-                <span class="illustra-first-name">${esc((p.name || 'Nithin').trim().split(/\s+/)[0])}</span>
-                <span class="illustra-last-name">${esc((p.name || 'Krishna').trim().split(/\s+/).slice(1).join(' ') || 'Krishna')}</span>
-              </h1>
-              <p class="illustra-subtitle">${esc((!p.title || p.title === 'Aspiring Developer' || p.title.toLowerCase().includes('developer') || p.title.toLowerCase().includes('engineer')) ? 'Visual Artist & Illustrator' : p.title)}</p>
+              <h1 class="illustra-name">${esc(p.name || 'Visual Artist')}</h1>
+              <p class="illustra-subtitle">${esc(p.title || 'Visual Artist & Illustrator')}</p>
               <div class="illustra-accent-line"></div>
             </div>
-            <p class="illustra-bio">${esc(p.bio || p.summary || p.about || 'Exploring visual stories through illustration, digital art, and experimental compositions.')}</p>
+            ${p.bio || p.summary || p.about ? `<p class="illustra-bio">${esc(p.bio || p.summary || p.about)}</p>` : ''}
             <div class="illustra-hero-cta-wrap">
               <a href="#works" class="illustra-btn-primary"><span>View Works</span> →</a>
               ${p.email ? `<a href="mailto:${esc(p.email)}" class="illustra-btn-secondary">Get in Touch</a>` : ''}
@@ -993,7 +990,7 @@ function pageGallery(p, wIdx, url) {
               <div class="illustra-block-orange"><div class="illustra-stipple-grain"></div></div>
               <div class="illustra-portrait-canvas">
                 <div class="illustra-portrait-frame">
-                  <img src="${esc(p.avatarUrl || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80')}" alt="${esc(p.name)}" class="illustra-portrait-img"/>
+                  <img src="${esc(p.avatarUrl || (works[0] && works[0].imageUrl) || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80')}" alt="${esc(p.name || 'Artist')}" class="illustra-portrait-img"/>
                 </div>
               </div>
               <div class="illustra-botanical-overlay" aria-hidden="true">
@@ -1029,7 +1026,7 @@ function pageGallery(p, wIdx, url) {
               </div>
               <div class="illustra-crop-tile">
                 <div class="illustra-crop-inner">
-                  <img src="${esc(p.avatarUrl || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80')}" alt="Study detail" class="illustra-crop-img"/>
+                  <img src="${esc((works[1] && works[1].imageUrl) || p.avatarUrl || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80')}" alt="Study detail" class="illustra-crop-img"/>
                 </div>
               </div>
             </div>
@@ -1042,11 +1039,7 @@ function pageGallery(p, wIdx, url) {
           <h2 class="illustra-sec-title">Artworks & Studies</h2>
         </div>
         <div class="illustra-works-grid">
-          ${(Array.isArray(p.artworks) && p.artworks.length ? p.artworks : (Array.isArray(p.projects) && p.projects.length ? p.projects : [
-            { title: 'Echoes of Reverie', category: 'Illustrations', medium: 'Mixed Media & Bristol Board', imageUrl: 'https://images.unsplash.com/photo-1578926375605-eaf7559b1458?auto=format&fit=crop&w=800&q=80', desc: 'Charcoal study intertwined with organic chromatic elements.' },
-            { title: 'Botanical Solitude', category: 'Botany & Flora', medium: 'Charcoal & Gouache on Heavy Stock', imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80', desc: 'Detailed tiger lily floral study celebrating organic symmetry.' },
-            { title: 'Constructivist Fragment IV', category: 'Experimental', medium: 'Ink & Digital Chromatic Collage', imageUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80', desc: 'Juxtaposing geometric vector tensions against human expression.' }
-          ])).map((w, idx) => `
+          ${works.map((w, idx) => `
             <article class="illustra-work-card">
               <div class="illustra-work-thumb-wrap">
                 <img src="${esc(w.imageUrl || w.img || 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80')}" alt="${esc(w.title || 'Artwork')}" class="illustra-work-img"/>
@@ -1055,39 +1048,40 @@ function pageGallery(p, wIdx, url) {
               <div class="illustra-work-meta">
                 <div class="illustra-work-head">
                   <h3 class="illustra-work-title">${esc(w.title || `Study ${idx + 1}`)}</h3>
-                  <span class="illustra-work-year">2026</span>
+                  <span class="illustra-work-year">${esc(w.year || '2026')}</span>
                 </div>
-                <p class="illustra-work-medium">${esc(w.medium || 'Mixed Media & Ink')}</p>
+                <p class="illustra-work-medium">${esc(w.medium || w.category || 'Mixed Media & Ink')}</p>
                 ${w.desc ? `<p class="illustra-work-desc">${esc(w.desc)}</p>` : ''}
               </div>
             </article>
           `).join('')}
         </div>
       </section>
-      <section class="illustra-process-sec wrap" id="process">
-        <div class="illustra-sec-head">
-          <span class="illustra-sec-kicker">STUDIO WORKFLOW</span>
-          <h2 class="illustra-sec-title">From Concept to Canvas</h2>
-        </div>
-        <div class="illustra-process-grid">
-          <div class="illustra-process-card"><span class="illustra-process-num">01</span><h3 class="illustra-process-name">Thumbnail & Gestures</h3><p class="illustra-process-body">Rapid observational sketches and compositional blueprints.</p></div>
-          <div class="illustra-process-card"><span class="illustra-process-num">02</span><h3 class="illustra-process-name">Charcoal Rendering</h3><p class="illustra-process-body">Building light values from velvety blacks to luminous tones.</p></div>
-          <div class="illustra-process-card"><span class="illustra-process-num">03</span><h3 class="illustra-process-name">Color Geometry</h3><p class="illustra-process-body">Layering violet pillars and warm tangerine accent blocks.</p></div>
-          <div class="illustra-process-card"><span class="illustra-process-num">04</span><h3 class="illustra-process-name">Botanical Overlay</h3><p class="illustra-process-body">Organic tiger lilies and ink lines bursting beyond borders.</p></div>
-        </div>
-      </section>
+      ${(p.bio || p.summary || p.about || (Array.isArray(p.skills) && p.skills.length)) ? `
       <section class="illustra-monograph-sec wrap" id="about">
         <div class="illustra-monograph-card">
-          <blockquote class="illustra-quote">"Art flourishes where strict geometry meets wild organic living form."</blockquote>
+          <div class="illustra-monograph-header">
+            <span class="illustra-sec-kicker">ABOUT THE ARTIST</span>
+            <h2 class="illustra-sec-title">${esc(p.name || 'Visual Artist')}</h2>
+          </div>
+          ${(p.bio || p.summary || p.about) ? `<blockquote class="illustra-quote">${esc(p.bio || p.summary || p.about)}</blockquote>` : ''}
+          ${(Array.isArray(p.skills) && p.skills.length) ? `
+            <div class="illustra-mediums-wrap" style="margin-top:24px">
+              <h4 class="illustra-mediums-title" style="font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#7356e5;margin-bottom:12px">Disciplines & Skills</h4>
+              <div class="illustra-mediums-grid" style="display:flex;flex-wrap:wrap;gap:8px">
+                ${p.skills.filter(Boolean).map(s => `<span class="illustra-medium-pill" style="background:rgba(115,86,229,.1);color:#7356e5;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:600">${esc(s)}</span>`).join('')}
+              </div>
+            </div>` : ''}
         </div>
-      </section>
+      </section>` : ''}
       <footer class="illustra-footer wrap">
         <div class="illustra-footer-inner">
           <div class="illustra-footer-left">
-            <span class="illustra-footer-monogram">${(p.name || 'NK').trim().split(/\s+/).map(n => n[0]).slice(0, 2).join('').toUpperCase()}</span>
-            <span class="illustra-footer-copy">© 2026 ${esc(p.name)} · Visual Artist & Illustrator</span>
+            <span class="illustra-footer-monogram">${(p.name || 'VA').trim().split(/\s+/).map(n => n[0]).slice(0, 2).join('').toUpperCase() || 'VA'}</span>
+            <span class="illustra-footer-copy">© ${new Date().getFullYear()} ${esc(p.name || 'Visual Artist')}${p.title ? ` · ${esc(p.title)}` : ''}</span>
           </div>
           <div class="illustra-footer-right">
+            ${p.email ? `<a href="mailto:${esc(p.email)}" class="illustra-footer-link" style="color:inherit;text-decoration:none;margin-right:16px;font-size:13px">Contact</a>` : ''}
             <span class="illustra-footer-badge">Illustra Theme · Built with Portfoolio</span>
           </div>
         </div>
