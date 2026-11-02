@@ -12114,3 +12114,58 @@ body.illustra-dark-mode {
   padding: 6px 16px;
   border-radius: 999px;
 }
+
+.techno-footer {
+  border-top: 1px solid var(--tc-border);
+  padding: 36px 0 48px;
+  margin-top: 40px;
+}
+.techno-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.techno-footer-copy {
+  font-size: 13.5px;
+  color: var(--tc-text-secondary);
+  font-weight: 500;
+}
+.techno-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.techno-footer-link {
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--tc-text-secondary);
+  transition: color 0.2s;
+}
+.techno-footer-link:hover {
+  color: var(--tc-plum-vibrant);
+}
+.techno-footer-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--tc-plum-vibrant);
+}
+.techno-back-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--tc-border);
+  color: var(--tc-text-primary);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.techno-back-top:hover {
+  background: var(--tc-surface);
+  color: #fff;
+  transform: translateY(-2px);
+}
