@@ -12269,3 +12269,44 @@ body.techno-dark-mode {
 
 @keyframes technoStarIntro { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
 .techno-emblem-star { animation: technoStarIntro 0.5s ease-out; }
+
+/* ==========================================================================
+   ANALOG STUDIO THEME STYLES
+   Aesthetic Dark Vintage Desk Collage & Multidisciplinary Portfolio
+   ========================================================================== */
+.analog-page {
+  --ag-bg: #0c0b0a;
+  --ag-sidebar-bg: #0f0e0d;
+  --ag-surface: #151311;
+  --ag-surface-hover: #1e1b18;
+  --ag-card-bg: rgba(22, 20, 18, 0.85);
+  --ag-border: rgba(240, 235, 220, 0.08);
+  --ag-border-subtle: rgba(240, 235, 220, 0.05);
+  --ag-text: #e8e3d8;
+  --ag-text-muted: #8c857b;
+  --ag-text-dim: #5c564e;
+  --ag-cream: #f4ede1;
+  --ag-cream-btn: #eee7d7;
+  --ag-cream-btn-hover: #fff8eb;
+  --ag-accent-orange: #e85938;
+  --ag-accent-coral: #ff6b4a;
+  --ag-green-dot: #22c55e;
+  --ag-green-dot-glow: rgba(34, 197, 94, 0.4);
+  --ag-kraft: #d8c3a5;
+  --ag-kraft-bg: #c9b193;
+  --ag-font-serif: 'Playfair Display', 'Fraunces', Georgia, serif;
+  --ag-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --ag-font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  
+  background-color: var(--ag-bg);
+  color: var(--ag-text);
+  font-family: var(--ag-font-sans);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  overflow-x: hidden;
+}
+
