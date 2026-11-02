@@ -8923,6 +8923,31 @@ function technoProjectsSection(p) {
   </section>`;
 }
 
+
+function technoAboutSection(p) {
+  const bio = (p.bio || p.summary || p.about || '').trim();
+  const skills = Array.isArray(p.skills) ? p.skills.filter(Boolean) : [];
+  if (!bio && !skills.length) return '';
+
+  return `<section class="techno-about-sec techno-wrap" id="about">
+    <div class="techno-about-card">
+      <div class="techno-about-header">
+        <span class="techno-sec-kicker">ARTIST STATEMENT & PHILOSOPHY</span>
+        <h2 class="techno-about-title">${tplEsc(p.name || 'Creative Technologist')}</h2>
+      </div>
+      ${bio ? `<blockquote class="techno-statement-quote">${tplEsc(bio)}</blockquote>` : ''}
+      ${skills.length ? `
+        <div class="techno-disciplines-wrap">
+          <h4 class="techno-disciplines-head">PRACTICE & EXPERTISE</h4>
+          <div class="techno-disciplines-grid">
+            ${skills.map(s => `<span class="techno-disc-badge">${tplEsc(s)}</span>`).join('')}
+          </div>
+        </div>
+      ` : ''}
+    </div>
+  </section>`;
+}
+
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
