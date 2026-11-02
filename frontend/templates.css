@@ -10585,3 +10585,12 @@ body[data-template="filmstrip"] {
 .salon-desc { font-size: 16px; line-height: 1.6; color: #a3c2b1; margin: 0 0 34px; font-weight: 400; }
 .salon-browse-btn { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid #ffffff; background: rgba(0, 0, 0, 0.2); color: #ffffff; padding: 12px 28px; border-radius: 4px; font-size: 14px; font-weight: 700; text-decoration: none; transition: all .25s; box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
 .salon-browse-btn:hover { background: #ffffff; color: #13271c; transform: translateY(-2px); }
+
+.salon-gallery-wall { display: flex; align-items: center; gap: 26px; justify-content: center; position: relative; }
+.salon-main-frame-wrap { flex: 1.6; max-width: 480px; }
+.salon-secondary-frame-wrap { flex: 1; max-width: 260px; }
+@media(max-width:768px){ .salon-secondary-frame-wrap { display: none; } }
+.salon-gilded-frame { border: 10px solid #c5a059; outline: 3px solid #dfc07b; box-shadow: inset 0 0 10px rgba(0,0,0,0.6), 0 18px 40px rgba(0, 0, 0, 0.7); position: relative; overflow: hidden; background: #000; border-radius: 2px; }
+.salon-frame-primary { aspect-ratio: 1.05/1; }
+.salon-frame-secondary { aspect-ratio: 0.8/1; transform: translateY(-10px); }
+.salon-canvas-shadow { position: absolute; inset: 0; box-shadow: inset 0 0 24px rgba(0,0,0,0.4); pointer-events: none; z-index: 2; }
