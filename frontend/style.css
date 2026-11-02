@@ -3105,3 +3105,8 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
 .lx-tp-salon .lx-tp-cards { background: #13271c; border: 1px solid rgba(197, 160, 89, 0.4); }
 
 .lx-modal-body[data-theme="salon"] { background: #13271c; color: #ffffff; }
+
+.lx-tp-illustra { background: #f6f4fa; border: 1px solid #7356e5; }
+.lx-tp-illustra .lx-tp-nav { background: #e7e2f5; height: 3px; }
+.lx-tp-illustra .lx-tp-hero { background: #7356e5; border: 1px solid #f2711c; }
+.lx-tp-illustra .lx-tp-cards { background: #ffffff; border: 1px solid rgba(115, 86, 229, 0.3); }
