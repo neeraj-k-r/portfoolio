@@ -12232,3 +12232,9 @@ body.techno-dark-mode {
     display: none;
   }
 }
+
+.lx-tp-techno { background: #f7f5f0; border: 1px solid #4a1240; }
+.lx-tp-techno .lx-tp-nav { background: #e8e4db; height: 3px; }
+.lx-tp-techno .lx-tp-hero { background: #4a1240; border: 1px solid #6e2060; }
+.lx-tp-techno .lx-tp-cards { background: #14101e; border: 1px solid rgba(184, 67, 164, 0.4); }
+.lx-modal-body[data-theme="techno"] { background: #f7f5f0; color: #14101e; }
