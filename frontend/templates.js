@@ -8472,6 +8472,14 @@ function renderIllustra(p) {
             <div class="illustra-block-orange" aria-hidden="true">
               <div class="illustra-stipple-grain"></div>
             </div>
+            
+            <!-- Charcoal & Ink Portrait Canvas -->
+            <div class="illustra-portrait-canvas">
+              <div class="illustra-portrait-frame">
+                <img src="${p.avatarUrl || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80'}" alt="${tplEsc(p.name)} artwork portrait" class="illustra-portrait-img" loading="eager"/>
+                <div class="illustra-charcoal-tone"></div>
+              </div>
+            </div>
             <!-- Collage Blocks & Canvas -->
           </div>
         </div>
