@@ -8480,6 +8480,55 @@ function renderIllustra(p) {
                 <div class="illustra-charcoal-tone"></div>
               </div>
             </div>
+            
+            <!-- Botanical Blooming Tiger Lilies Overlay -->
+            <div class="illustra-botanical-overlay" aria-hidden="true">
+              <svg class="illustra-lily-svg" viewBox="0 0 320 420" fill="none">
+                <g filter="url(#dropShadowLilies)">
+                  <!-- Lily Stems -->
+                  <path d="M120 380 Q130 260 180 180 T240 60" stroke="#4a5d23" stroke-width="4.5" stroke-linecap="round"/>
+                  <path d="M120 380 Q160 300 220 250" stroke="#5a6e2e" stroke-width="3.5" stroke-linecap="round"/>
+                  
+                  <!-- Primary Upper Tiger Lily -->
+                  <g transform="translate(190, 50)">
+                    <path d="M0 40 C-30 -10 -60 10 -40 60 C-20 110 0 70 0 40Z" fill="#ff7a00" stroke="#d45000" stroke-width="2"/>
+                    <path d="M0 40 C10 -30 50 -30 40 30 C30 90 0 70 0 40Z" fill="#ff9100" stroke="#d45000" stroke-width="2"/>
+                    <path d="M0 40 C-40 -40 -10 -70 20 -40 C50 -10 10 30 0 40Z" fill="#ffa726" stroke="#d45000" stroke-width="2"/>
+                    <path d="M0 40 C-70 10 -80 -30 -30 -40 C20 -50 0 20 0 40Z" fill="#ff6f00" stroke="#b73c00" stroke-width="2"/>
+                    <path d="M0 40 C40 30 80 10 60 -20 C40 -50 10 20 0 40Z" fill="#ff8f00" stroke="#d45000" stroke-width="2"/>
+                    <!-- Stamens & Speckles -->
+                    <circle cx="-12" cy="18" r="2" fill="#5c1d00"/>
+                    <circle cx="-8" cy="8" r="1.8" fill="#5c1d00"/>
+                    <circle cx="10" cy="15" r="2" fill="#5c1d00"/>
+                    <circle cx="6" cy="5" r="1.6" fill="#5c1d00"/>
+                    <path d="M0 40 Q-15 15 -25 0" stroke="#8d2b00" stroke-width="1.8" stroke-linecap="round"/>
+                    <ellipse cx="-25" cy="0" rx="4" ry="2" fill="#5c1d00"/>
+                    <path d="M0 40 Q5 10 15 -5" stroke="#8d2b00" stroke-width="1.8" stroke-linecap="round"/>
+                    <ellipse cx="15" cy="-5" rx="4" ry="2" fill="#5c1d00"/>
+                    <path d="M0 40 Q25 25 35 15" stroke="#8d2b00" stroke-width="1.8" stroke-linecap="round"/>
+                    <ellipse cx="35" cy="15" rx="4" ry="2" fill="#5c1d00"/>
+                  </g>
+
+                  <!-- Secondary Lower Blossom -->
+                  <g transform="translate(170, 210) scale(0.9)">
+                    <path d="M0 35 C-35 -15 -65 5 -45 55 C-25 105 0 65 0 35Z" fill="#ff7a00" stroke="#d45000" stroke-width="2"/>
+                    <path d="M0 35 C15 -25 55 -25 45 25 C35 85 0 65 0 35Z" fill="#ff9100" stroke="#d45000" stroke-width="2"/>
+                    <path d="M0 35 C-45 -35 -15 -65 15 -35 C45 -5 10 25 0 35Z" fill="#ffa726" stroke="#d45000" stroke-width="2"/>
+                    <path d="M0 35 C-75 5 -85 -35 -35 -45 C15 -55 0 15 0 35Z" fill="#ff6f00" stroke="#b73c00" stroke-width="2"/>
+                    <path d="M0 35 C45 25 85 5 65 -25 C45 -55 10 15 0 35Z" fill="#ff8f00" stroke="#d45000" stroke-width="2"/>
+                    <circle cx="-10" cy="15" r="1.8" fill="#5c1d00"/>
+                    <circle cx="8" cy="12" r="1.8" fill="#5c1d00"/>
+                    <path d="M0 35 Q-15 10 -20 -5" stroke="#8d2b00" stroke-width="1.6"/>
+                    <ellipse cx="-20" cy="-5" rx="3.5" ry="1.8" fill="#5c1d00"/>
+                  </g>
+                </g>
+                <defs>
+                  <filter id="dropShadowLilies" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="3" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.25"/>
+                  </filter>
+                </defs>
+              </svg>
+            </div>
             <!-- Collage Blocks & Canvas -->
           </div>
         </div>
