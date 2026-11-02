@@ -11255,3 +11255,22 @@ body[data-template="filmstrip"] {
   background: var(--il-purple);
   color: #fff;
 }
+
+.illustra-page.illustra-dark {
+  --il-bg: #120e1e;
+  --il-surface: #1a152b;
+  --il-text-primary: #f5f2fd;
+  --il-text-secondary: #aba1c2;
+  --il-text-muted: #796f94;
+  --il-purple: #8f72fa;
+  --il-orange: #ff8533;
+  --il-plum: #512f8f;
+  --il-border: rgba(255, 255, 255, 0.08);
+  --il-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.illustra-page.illustra-dark .illustra-theme-toggle {
+  background: #341e5e;
+}
+.illustra-page.illustra-dark .illustra-crop-tile {
+  border-color: #2b1f47;
+}
