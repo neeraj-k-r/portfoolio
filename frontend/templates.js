@@ -9203,7 +9203,23 @@ function renderAnalogStats(p) {
   </div>`;
 }
 
+function renderAnalogFilmStrip() {
+  return `<div class="analog-film-strip" aria-hidden="true">
+    <div class="analog-sprockets analog-sprockets-left">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="analog-film-frames">
+      <div class="analog-film-cell"></div>
+      <div class="analog-film-cell"></div>
+    </div>
+    <div class="analog-sprockets analog-sprockets-right">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+  </div>`;
+}
+
 function renderAnalogCollage(p) {
+
   return `<div class="analog-collage-stage" aria-label="Visual Collage">
     <div class="analog-collage-inner">
       <!-- Collage components will be placed here -->
