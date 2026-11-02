@@ -1702,6 +1702,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       sketchbook: { name: 'Julian Vance', title: 'Artist · Drawing Portfolio', desc: 'Hand-drawn graphite & charcoal collection with realistic portraits, anatomy studies, and creative sketches.', skills: ['Graphite', 'Charcoal', 'Portraiture', 'Anatomy Studies', 'Architectural Sketch'] },
       salon: { name: 'Vittorio Bellini', title: 'Classical & Renaissance Oil Painter', desc: 'Museum gallery salon with warm spotlight illumination, gilded ornate frames, and curatorial placards.', skills: ['Oil on Linen', 'Impasto', 'Figurative Art', 'Chiaroscuro'] },
       illustra: { name: 'Maya Lin', title: 'Visual Artist & Illustrator', desc: 'Editorial illustration theme with organic botanicals, geometric accent color blocking, and clean portfolio layout.', skills: ['Illustration', 'Botanical Art', 'Vector Art', 'Mixed Media'] },
+      techno: { name: 'Nithin Krishna', title: 'Creative Technologist', desc: 'Creative technology & experimental media portfolio with generative fluid collage, monochrome Alpine photography & exploration pills.', skills: ['Generative Art', 'Interactive Web', 'Creative Coding', 'Digital Media', 'AI × Creativity'] },
       triennale: { name: 'Matteo Colombo', title: 'Industrial & Spatial Designer', desc: 'International design exposition with Milanese modernist typography & chromatic layout.', skills: ['Product Design', 'Modernist Systems', 'Spatial Planning', 'Chromatic Form'] },
     };
     let lastFocus = null;
