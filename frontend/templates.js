@@ -8563,6 +8563,58 @@ function renderIllustra(p) {
         </div>
       </div>
     </header>`;
+
+  const defaultArtworks = [
+    { title: 'Echoes of Reverie', category: 'Illustrations', medium: 'Mixed Media & Bristol Board', year: '2026', desc: 'Charcoal study intertwined with organic chromatic elements.', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Botanical Solitude', category: 'Botany & Flora', medium: 'Charcoal & Gouache on Heavy Stock', year: '2026', desc: 'Detailed tiger lily floral study celebrating organic symmetry.', img: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Constructivist Fragment IV', category: 'Experimental', medium: 'Ink & Digital Chromatic Collage', year: '2025', desc: 'Juxtaposing geometric vector tensions against human expression.', img: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Daylily Awakening', category: 'Botany & Flora', medium: 'Pencil Study with Watercolor Accent', year: '2025', desc: 'Delicate botanical study capturing morning petal dew and stamens.', img: 'https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Monochrome Contemplation', category: 'Illustrations', medium: 'Graphite on Cold-Pressed Paper', year: '2025', desc: 'Realistic portrait exploring light gradient across facial contours.', img: 'https://images.unsplash.com/photo-1582561424760-0321d75e81fa?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Architectonic Bloom', category: 'Digital Art', medium: 'Stipple Ink & Screenprint Overlay', year: '2024', desc: 'Geometric structures intersecting with floral living matter.', img: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&w=800&q=80' }
+  ];
+
+  const rawWorks = (p.projects && p.projects.length) ? p.projects : defaultArtworks;
+  const worksList = rawWorks.map((item, idx) => {
+    const title = item.title || item.name || `Artwork ${idx + 1}`;
+    const medium = item.medium || item.tech || item.role || 'Mixed Media & Ink';
+    const tag = item.category || (idx % 2 === 0 ? 'Illustration' : 'Botanical Art');
+    const img = item.img || item.image || defaultArtworks[idx % defaultArtworks.length].img;
+    const desc = item.desc || item.summary || 'Original artwork exploring visual narratives and expressive forms.';
+    return `
+      <article class="illustra-work-card" data-category="${tplEsc(tag)}">
+        <div class="illustra-work-thumb-wrap">
+          <img src="${tplEsc(img)}" alt="${tplEsc(title)}" class="illustra-work-img" loading="lazy"/>
+          <div class="illustra-work-badge">${tplEsc(tag)}</div>
+        </div>
+        <div class="illustra-work-meta">
+          <div class="illustra-work-head">
+            <h3 class="illustra-work-title">${tplEsc(title)}</h3>
+            <span class="illustra-work-year">${tplEsc(item.year || year)}</span>
+          </div>
+          <p class="illustra-work-medium">${tplEsc(medium)}</p>
+          <p class="illustra-work-desc">${tplEsc(desc)}</p>
+        </div>
+      </article>`;
+  }).join('');
+
+  const worksSection = `
+    <section class="illustra-works-sec wrap" id="works">
+      <div class="illustra-sec-head">
+        <span class="illustra-sec-kicker">SELECTED PORTFOLIO</span>
+        <h2 class="illustra-sec-title">Artworks & Studies</h2>
+        <div class="illustra-filter-bar">
+          <button class="illustra-filter-pill active" data-filter="all">All</button>
+          <button class="illustra-filter-pill" data-filter="illustrations">Illustrations</button>
+          <button class="illustra-filter-pill" data-filter="botany">Botany & Flora</button>
+          <button class="illustra-filter-pill" data-filter="digital">Digital Art</button>
+          <button class="illustra-filter-pill" data-filter="experimental">Experimental</button>
+        </div>
+      </div>
+      <div class="illustra-works-grid">
+        ${worksList}
+      </div>
+    </section>`;
+  html += worksSection;
   html += `</div>`;
 
   // Wire theme toggle interaction after mount
