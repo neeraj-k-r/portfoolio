@@ -11919,6 +11919,9 @@ body.illustra-dark-mode {
   white-space: nowrap;
   transition: border-color 0.2s, background 0.2s, color 0.2s;
 }
+.techno-skill-pill {
+  cursor: default;
+}
 .techno-skill-pill:hover {
   border-color: var(--tc-plum-vibrant);
   color: var(--tc-plum-vibrant);
