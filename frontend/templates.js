@@ -9268,7 +9268,30 @@ function renderAnalogVinylRecord() {
   </div>`;
 }
 
+function renderAnalogKraftChecklist() {
+  const items = [
+    { label: 'Design', checked: false },
+    { label: 'Code', checked: false },
+    { label: 'Create', checked: false },
+    { label: 'Experiment', checked: false },
+    { label: 'Repeat', repeat: true }
+  ];
+
+  return `<div class="analog-kraft-note" aria-label="Creative Ritual Checklist">
+    <div class="analog-kraft-tear-edge"></div>
+    <ul class="analog-kraft-list">
+      ${items.map(item => `
+        <li class="analog-kraft-item">
+          <span class="analog-kraft-box"></span>
+          <span class="analog-kraft-text">${item.label} ${item.repeat ? '<span class="analog-repeat-icon">↻</span>' : ''}</span>
+        </li>
+      `).join('')}
+    </ul>
+  </div>`;
+}
+
 function renderAnalogCollage(p) {
+
 
 
 
