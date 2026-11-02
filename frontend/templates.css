@@ -12494,6 +12494,24 @@ body.techno-dark-mode {
   transform: translateY(-1px);
 }
 
+.analog-sidebar-mountain {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 160px;
+  background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=500&q=80');
+  background-size: cover;
+  background-position: center bottom;
+  opacity: 0.22;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
+  mask-image: linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.9) 20%, transparent 100%);
+  z-index: 1;
+}
+
+
 
 
 
