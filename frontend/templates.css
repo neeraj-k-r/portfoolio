@@ -12511,6 +12511,58 @@ body.techno-dark-mode {
   z-index: 1;
 }
 
+.analog-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 20;
+}
+
+.analog-collab-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px 6px 12px;
+  background: rgba(18, 17, 16, 0.85);
+  border: 1px solid rgba(240, 235, 220, 0.12);
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.analog-collab-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--ag-green-dot);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--ag-green-dot-glow);
+  animation: analogGreenPulse 2.4s infinite ease-in-out;
+}
+
+@keyframes analogGreenPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 6px var(--ag-green-dot-glow);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.3);
+    box-shadow: 0 0 14px rgba(34, 197, 94, 0.8);
+    opacity: 1;
+  }
+}
+
+.analog-collab-text {
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #c8d1c8;
+}
+
+
 
 
 
