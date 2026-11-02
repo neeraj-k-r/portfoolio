@@ -11149,3 +11149,53 @@ body[data-template="filmstrip"] {
   color: var(--il-text-secondary);
   margin: 0;
 }
+
+.illustra-monograph-sec {
+  padding: 60px 0 90px;
+}
+.illustra-monograph-card {
+  background: var(--il-surface);
+  border-radius: 16px;
+  padding: 48px;
+  box-shadow: 0 14px 40px rgba(43, 24, 76, 0.08);
+  border: 1px solid var(--il-border);
+  max-width: 860px;
+  margin: 0 auto;
+}
+.illustra-monograph-header {
+  margin-bottom: 24px;
+}
+.illustra-quote {
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem);
+  font-style: italic;
+  line-height: 1.5;
+  color: var(--il-text-primary);
+  margin: 0 0 36px;
+  padding-left: 20px;
+  border-left: 3.5px solid var(--il-orange);
+}
+.illustra-mediums-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--il-text-muted);
+  margin: 0 0 16px;
+}
+.illustra-mediums-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.illustra-medium-pill {
+  background: rgba(115, 86, 229, 0.08);
+  color: var(--il-purple);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(115, 86, 229, 0.15);
+}
+@media (max-width: 600px) {
+  .illustra-monograph-card { padding: 30px 20px; }
+}
