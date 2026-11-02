@@ -9141,7 +9141,17 @@ function renderAnalogSparkleStar() {
   </div>`;
 }
 
+function renderAnalogBreadcrumb(name) {
+  const author = name || 'Nithin Krishna';
+  return `<div class="analog-breadcrumb">
+    <span class="analog-bc-item">Portfolio</span>
+    <span class="analog-bc-sep">/</span>
+    <span class="analog-bc-name">${tplEsc(author)}</span>
+  </div>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
