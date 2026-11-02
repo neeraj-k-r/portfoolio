@@ -1685,7 +1685,7 @@ function setupUserDashboardView(profile) {
   const wizard = $('subdomainWizardCard'), techSt = $('techStudio'), visSt = $('visualStudio');
   const headerName = $('userHeaderName'), statusPill = $('userStatusPill');
 
-  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon'];
+  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'];
   const getTrack = (profile) => {
     if (profile && profile.track === 'visual') {
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
@@ -1882,11 +1882,11 @@ async function paintFeaturedPortfolios() {
     </div>`).join('');
 }
 function paintTrackTabs(profile) {
-  const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon'].includes(String((profile && profile.template) || '').toLowerCase());
+  const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'].includes(String((profile && profile.template) || '').toLowerCase());
   document.body.classList.toggle('visual-user', visual);
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
     const v = (c.querySelector('input') || {}).value || '';
-    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon'].includes(v);
+    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'].includes(v);
     c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
   });
   if (visual) { paintWorks(); }
@@ -2317,12 +2317,12 @@ if ($('builderForm')) {
     if ($('inTag')) $('inTag').placeholder = visual ? 'Painting stories in color and form. Open for commissions.' : 'Building web apps & AI solutions that scale.';
     document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
       const v = (c.querySelector('input') || {}).value || '';
-      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon'].includes(v);
+      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'].includes(v);
       c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
     });
     const curChecked = document.querySelector('#tplGrid input[name=tpl]:checked');
     const curVal = curChecked ? curChecked.value : '';
-    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon'].includes(curVal);
+    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'].includes(curVal);
     let wantTpl = curVal;
     if (visual && !curIsVisual) wantTpl = 'gallery';
     else if (!visual && curIsVisual) wantTpl = 'midnight';
@@ -2419,7 +2419,7 @@ async function saveStudio() {
       updatedAt: new Date().toISOString(),
     });
 
-    const isChosenVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon'].includes(activeUserProfile.template);
+    const isChosenVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'].includes(activeUserProfile.template);
     if (isChosenVisual) {
       activeUserProfile.track = 'visual';
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
