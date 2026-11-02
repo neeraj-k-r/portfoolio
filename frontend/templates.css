@@ -12883,6 +12883,70 @@ body.techno-dark-mode {
   transform: rotate(26deg) scale(1.08);
 }
 
+.analog-tape-photo {
+  position: absolute;
+  left: 205px;
+  top: -5px;
+  width: 235px;
+  background: #e4dfd4;
+  padding: 10px 10px 14px 10px;
+  border-radius: 4px;
+  transform: rotate(3deg);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 4;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.analog-tape-photo:hover {
+  transform: rotate(1deg) translateY(-6px) scale(1.02);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.95);
+  z-index: 12;
+}
+
+.analog-washi-tape {
+  position: absolute;
+  z-index: 10;
+  background: rgba(216, 195, 165, 0.8);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-left: 2px dashed rgba(160, 140, 110, 0.4);
+  border-right: 2px dashed rgba(160, 140, 110, 0.4);
+}
+
+.analog-washi-top {
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  width: 90px;
+  height: 22px;
+}
+
+.analog-tape-frame {
+  position: relative;
+  width: 100%;
+  height: 270px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #111;
+}
+
+.analog-tape-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: saturate(1.15) contrast(1.05);
+}
+
+.analog-photo-grain {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 30%, rgba(20, 14, 10, 0.25) 100%);
+  pointer-events: none;
+}
+
+
 
 
 
