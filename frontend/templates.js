@@ -8714,6 +8714,31 @@ function technoHeaderActions(p) {
   </div>`;
 }
 
+
+function technoHeroContent(p) {
+  const bio = (p.bio || p.summary || p.about || 'A portfolio of creative work, digital experiments, visuals, and real-world projects.').trim();
+  return `<div class="techno-hero-content">
+    <div class="techno-hero-meta">
+      <span class="techno-hero-kicker">PORTFOLIO / CREATIVE TECH</span>
+    </div>
+    <h1 class="techno-hero-title">
+      <span class="techno-title-row">CREATIVE</span>
+      <span class="techno-title-row">TECHNOLOGY</span>
+    </h1>
+    <div class="techno-hero-subline">
+      <span class="techno-subline-dash">—</span>
+      <span class="techno-subline-text">Art × Design × Code × Experiments</span>
+    </div>
+    <p class="techno-hero-desc">${tplEsc(bio)}</p>
+    <div class="techno-hero-actions">
+      <a href="#projects" class="techno-btn-primary">Explore Projects <span class="techno-arrow">↗</span></a>
+      <button class="techno-btn-showreel" onclick="window.playTechnoShowreel&&window.playTechnoShowreel()">
+        <span class="techno-play-triangle">▶</span> Showreel
+      </button>
+    </div>
+  </div>`;
+}
+
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
