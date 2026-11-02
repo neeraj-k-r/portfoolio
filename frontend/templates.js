@@ -8424,7 +8424,17 @@ function renderIllustra(p) {
   const location = p.location || '';
   
   // Base render container initialized
-  let html = `<div class="illustra-page" id="illustraRoot">`;
+  let html = `<div class="illustra-page" id="illustraRoot">` + navHeader + `
+    <section class="illustra-hero-section wrap" id="home">
+      <div class="illustra-hero-grid">
+        <div class="illustra-hero-content">
+          <!-- Left typography column -->
+        </div>
+        <div class="illustra-hero-visual">
+          <!-- Right mixed-media collage column -->
+        </div>
+      </div>
+    </section>`;
   const navHeader = `
     <header class="illustra-header wrap">
       <div class="illustra-header-inner">
