@@ -12266,3 +12266,6 @@ body.techno-dark-mode {
 
 .techno-page.techno-dark .techno-page-num.active { color: #ffffff; }
 .techno-page.techno-dark .techno-page-bar { background: #ffffff; }
+
+@keyframes technoStarIntro { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+.techno-emblem-star { animation: technoStarIntro 0.5s ease-out; }
