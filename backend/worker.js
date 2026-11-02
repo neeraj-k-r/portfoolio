@@ -985,7 +985,17 @@ function pageGallery(p, wIdx, url) {
           <blockquote class="illustra-quote">"Art flourishes where strict geometry meets wild organic living form."</blockquote>
         </div>
       </section>
-      <!-- Illustra SSR Content -->
+      <footer class="illustra-footer wrap">
+        <div class="illustra-footer-inner">
+          <div class="illustra-footer-left">
+            <span class="illustra-footer-monogram">${(p.name || 'NK').trim().split(/\s+/).map(n => n[0]).slice(0, 2).join('').toUpperCase()}</span>
+            <span class="illustra-footer-copy">© 2026 ${esc(p.name)} · Visual Artist & Illustrator</span>
+          </div>
+          <div class="illustra-footer-right">
+            <span class="illustra-footer-badge">Illustra Theme · Built with Portfoolio</span>
+          </div>
+        </div>
+      </footer>
     </div>`
     : vtpl === 'salon'
     ? `<div class="salon-page">
