@@ -8976,6 +8976,10 @@ function technoFooter(p) {
   </footer>`;
 }
 
+/**
+ * Techno Creative Technology & Experimental Media Theme
+ * Features generative fluid marbling, monochromatic Alpine photography, and status exploration pills.
+ */
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
