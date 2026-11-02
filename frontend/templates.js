@@ -9461,25 +9461,118 @@ function renderAnalogAboutModal(p) {
   </div>`;
 }
 
+function renderAnalogFooter(p) {
+  const name = p.name || 'Creative Technologist';
+  const year = new Date().getFullYear();
+
+  return `<footer class="analog-footer">
+    <div class="analog-footer-divider"></div>
+    <div class="analog-footer-row">
+      <div class="analog-footer-copy">
+        <span>© ${year} ${tplEsc(name)}. All rights reserved.</span>
+        <span class="analog-footer-tagline">Crafted with Analog Studio</span>
+      </div>
+      <a href="#home" class="analog-back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+        <span>Back to Top</span>
+        <span class="analog-top-arrow">↑</span>
+      </a>
+    </div>
+  </footer>`;
+}
+
 function renderAnalog(p) {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   normTpl(p);
   const app = document.getElementById('app') || document.body;
   document.body.dataset.template = 'analog';
   document.title = `${p.name || 'Portfolio'} — Analog Studio`;
+
+  const initials = getAnalogInitials(p.name);
+
+  const fullHtml = `
+  <div class="analog-page" id="analogRoot">
+    <div class="analog-layout">
+      <!-- Fixed Left Sidebar -->
+      <aside class="analog-sidebar">
+        <div class="analog-sidebar-mountain"></div>
+        <div class="analog-sidebar-inner">
+          <div class="analog-brand-top">
+            <a href="#home" class="analog-brand-link">
+              ${renderAnalogMonogram(initials)}
+            </a>
+          </div>
+          ${renderAnalogNav()}
+        </div>
+        ${renderAnalogSidebarFooter(p)}
+      </aside>
+
+      <!-- Main Content Area -->
+      <main class="analog-main" id="home">
+        ${renderAnalogSparkleStar()}
+        
+        <header class="analog-top-bar">
+          ${renderAnalogCollaborationPill(p.availableText || 'Available for Collaboration')}
+        </header>
+
+        <section class="analog-hero-grid">
+          <div class="analog-hero-col-left">
+            ${renderAnalogBreadcrumb(p.name)}
+            ${renderAnalogHeroTitle(p.headline)}
+            ${renderAnalogHeroBio(p)}
+            ${renderAnalogHeroActions()}
+            ${renderAnalogStats(p)}
+          </div>
+          <div class="analog-hero-col-right">
+            ${renderAnalogCollage(p)}
+          </div>
+        </section>
+
+        <!-- Selected Work Section -->
+        <section class="analog-selected-sec" id="work">
+          ${renderAnalogSectionHeading('Selected Work')}
+          ${renderAnalogSelectedCards(p)}
+        </section>
+
+        <!-- Also Exploring Skills Bar -->
+        ${renderAnalogExploring(p)}
+
+        <!-- Full Curated Archive -->
+        ${renderAnalogArchive(p)}
+
+        <!-- Footer -->
+        ${renderAnalogFooter(p)}
+      </main>
+    </div>
+
+    <!-- About & Contact Modal -->
+    ${renderAnalogAboutModal(p)}
+  </div>`;
+
+  app.innerHTML = fullHtml;
+
+  window.openAnalogAboutModal = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const modal = document.getElementById('analogAboutModal');
+    if (modal) modal.classList.add('is-open');
+  };
+
+  window.closeAnalogAboutModal = function() {
+    const modal = document.getElementById('analogAboutModal');
+    if (modal) modal.classList.remove('is-open');
+  };
+
+  window.openAnalogWorkDetail = function(idx) {
+    const items = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : []);
+    const item = items[idx];
+    if (item && item.url) {
+      window.open(item.url, '_blank', 'noopener');
+    }
+  };
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      window.closeAnalogAboutModal();
+    }
+  });
 }
+
 
