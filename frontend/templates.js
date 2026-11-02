@@ -331,6 +331,17 @@ function renderMotion(p) {
       </div>
     </section>
 
+    <section class="salon-about-sec wrap" id="about">
+      <div class="salon-about-panel">
+        <div class="salon-about-kicker">MONOGRAPH & ARTIST STATEMENT</div>
+        <blockquote class="salon-quote">"The alchemy of oil painting lies in heavy pigment and living shadow—layering light upon darkness until mountains breathe and water reflects the evening sky."</blockquote>
+        <div class="salon-artist-colophon">
+          <b>${tplEsc(p.name)}</b>
+          <span>${tplEsc(p.title || 'Visual Artist & Oil Painter')}${location ? ` · ${tplEsc(location)}` : ''}</span>
+        </div>
+      </div>
+    </section>
+
 
     ${rsSec(p)}
     <section class="pad" id="about">
