@@ -8247,7 +8247,20 @@ function renderSalon(p) {
       <div class="salon-spotlight-beam"></div>
     </div>
 `;
-  // renderSalon hero copy stub
+  const heroCopyHtml = `
+    <header class="salon-hero wrap">
+      <div class="salon-hero-grid">
+        <div class="salon-hero-text">
+          <span class="salon-kicker">SELECTED WORKS</span>
+          <h1 class="salon-title">The<br><em>Collection</em></h1>
+          <div class="salon-accent-rule" aria-hidden="true"><span></span></div>
+          <p class="salon-desc">${tplEsc(bio || 'A showcase of my best works across different styles, themes, and mediums.')}</p>
+          <div class="salon-cta-wrap">
+            <a class="salon-browse-btn" href="#works">Browse Collection <span>→</span></a>
+          </div>
+        </div>
+`;
+  // renderSalon hero art stub
 }
 
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook };
