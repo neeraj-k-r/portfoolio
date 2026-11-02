@@ -10568,3 +10568,8 @@ body[data-template="filmstrip"] {
 .salon-nav-item:hover, .salon-nav-item.active { color: #ffffff; font-weight: 700; }
 .salon-contact-btn { background: transparent; border: 1.5px solid rgba(255, 255, 255, 0.85); color: #ffffff; padding: 8px 22px; border-radius: 100px; text-decoration: none; font-size: 13px; font-weight: 700; transition: all .2s; }
 .salon-contact-btn:hover { background: #ffffff; color: #13271c; }
+
+.salon-ceiling-rig { position: absolute; top: 0; left: 55%; transform: translateX(-50%); z-index: 5; pointer-events: none; }
+.salon-pendant-wire { width: 2px; height: 35px; background: #c5a059; margin: 0 auto; box-shadow: 0 0 4px rgba(0,0,0,0.5); }
+.salon-lamp-fixture { width: 34px; height: 20px; background: #1a1a1a; border-radius: 14px 14px 4px 4px; margin: 0 auto; border: 1px solid #444; box-shadow: 0 4px 12px rgba(0,0,0,0.7); }
+.salon-spotlight-beam { width: 440px; height: 500px; background: radial-gradient(ellipse at 50% 0%, rgba(255, 235, 175, 0.28) 0%, rgba(255, 230, 160, 0.12) 40%, transparent 70%); margin: 0 auto; transform: translateY(-4px); }
