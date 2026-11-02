@@ -8418,8 +8418,8 @@ function renderIllustra(p) {
   const firstName = nameParts[0] || 'Nithin';
   const lastName = nameParts.slice(1).join(' ') || 'Krishna';
   const initials = (nameParts.map(w => w[0]).join('') || 'NK').toUpperCase();
-  const subtitle = p.title || 'Visual Artist & Illustrator';
-  const bio = p.bio || p.about || 'Exploring visual stories through illustration, digital art, and experimental compositions.';
+  const subtitle = (!p.title || p.title === 'Aspiring Developer' || p.title.toLowerCase().includes('developer') || p.title.toLowerCase().includes('engineer')) ? 'Visual Artist & Illustrator' : p.title;
+  const bio = (!p.bio || p.bio.toLowerCase().includes('recruiter') || p.bio.toLowerCase().includes('ship fast') || p.bio.toLowerCase().includes('scalable web')) ? (p.about || 'Exploring visual stories through illustration, digital art, and experimental compositions.') : p.bio;
   const email = p.email || 'hello@nithinkrishna.art';
   const location = p.location || '';
   
@@ -8567,7 +8567,7 @@ function renderIllustra(p) {
 
 
   const defaultArtworks = [
-    { title: 'Echoes of Reverie', category: 'Illustrations', medium: 'Mixed Media & Bristol Board', year: '2026', desc: 'Charcoal study intertwined with organic chromatic elements.', img: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Echoes of Reverie', category: 'Illustrations', medium: 'Mixed Media & Bristol Board', year: '2026', desc: 'Charcoal study intertwined with organic chromatic elements.', img: 'https://images.unsplash.com/photo-1578926375605-eaf7559b1458?auto=format&fit=crop&w=800&q=80' },
     { title: 'Botanical Solitude', category: 'Botany & Flora', medium: 'Charcoal & Gouache on Heavy Stock', year: '2026', desc: 'Detailed tiger lily floral study celebrating organic symmetry.', img: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80' },
     { title: 'Constructivist Fragment IV', category: 'Experimental', medium: 'Ink & Digital Chromatic Collage', year: '2025', desc: 'Juxtaposing geometric vector tensions against human expression.', img: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80' },
     { title: 'Daylily Awakening', category: 'Botany & Flora', medium: 'Pencil Study with Watercolor Accent', year: '2025', desc: 'Delicate botanical study capturing morning petal dew and stamens.', img: 'https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=800&q=80' },

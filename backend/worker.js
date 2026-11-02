@@ -319,18 +319,24 @@ function head(p, tpl) {
 .illustra-hero-section{padding:40px 0 80px}
 .illustra-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
 @media(max-width:960px){.illustra-hero-grid{grid-template-columns:1fr}}
-.illustra-name{font-size:clamp(3.2rem,6vw,5.2rem);font-weight:800;line-height:1.02;margin:0 0 16px;display:flex;flex-direction:column}
+.illustra-hero-headings{margin-bottom:24px;padding-top:14px;overflow:visible}
+.illustra-name{font-size:clamp(3rem,5.8vw,4.8rem);font-weight:800;line-height:1.14;letter-spacing:-0.02em;margin:0 0 16px;display:flex;flex-direction:column;overflow:visible}
+.illustra-first-name,.illustra-last-name{display:block;line-height:1.12;overflow:visible}
 .illustra-subtitle{font-size:1.25rem;font-weight:600;color:#584c6e;margin:0 0 14px}
 .illustra-accent-line{width:48px;height:3.5px;background:#7356e5;border-radius:2px}
 .illustra-bio{font-size:1.15rem;line-height:1.6;color:#584c6e;max-width:460px;margin:16px 0 32px}
 .illustra-btn-primary{background:#2b184c;color:#fff;text-decoration:none;font-weight:600;padding:14px 28px;border-radius:999px;display:inline-flex;align-items:center;gap:10px}
 .illustra-btn-secondary{color:#1e1533;border:1.5px solid rgba(43,24,76,.15);text-decoration:none;font-size:14px;font-weight:600;padding:12px 24px;border-radius:999px;margin-left:12px}
 .illustra-collage-stage{position:relative;width:100%;max-width:490px;height:470px;margin:0 auto}
+.illustra-vector-lines{position:absolute;inset:-10px;pointer-events:none;z-index:0}
+.illustra-blueprint-svg{width:100%;height:100%;overflow:visible}
 .illustra-block-purple{position:absolute;top:15px;right:175px;width:72px;height:380px;background:#7356e5;border-radius:6px;z-index:1}
 .illustra-block-orange{position:absolute;bottom:25px;left:30px;width:170px;height:95px;background:#f2711c;border-radius:6px;z-index:2}
 .illustra-portrait-canvas{position:absolute;top:25px;right:25px;width:320px;height:380px;z-index:3}
 .illustra-portrait-frame{width:100%;height:100%;border-radius:12px;overflow:hidden;box-shadow:0 20px 45px rgba(35,18,66,.18)}
 .illustra-portrait-img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.15)}
+.illustra-botanical-overlay{position:absolute;top:-15px;right:-25px;width:290px;height:410px;z-index:4;pointer-events:none}
+.illustra-lily-svg{width:100%;height:100%;overflow:visible;filter:drop-shadow(0 12px 25px rgba(212,80,0,.28))}
 .illustra-crop-tile{position:absolute;bottom:12px;left:65px;width:135px;height:105px;z-index:5;border-radius:8px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.18);border:2px solid #fff}
 .illustra-crop-img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%)}
 .illustra-works-sec{padding:80px 0}
@@ -427,7 +433,7 @@ function head(p, tpl) {
 <link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Turret+Road:wght@300;400;500;700;800&family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
@@ -962,7 +968,7 @@ function pageGallery(p, wIdx, url) {
                 <span class="illustra-first-name">${esc((p.name || 'Nithin').trim().split(/\s+/)[0])}</span>
                 <span class="illustra-last-name">${esc((p.name || 'Krishna').trim().split(/\s+/).slice(1).join(' ') || 'Krishna')}</span>
               </h1>
-              <p class="illustra-subtitle">${esc(p.title || 'Visual Artist & Illustrator')}</p>
+              <p class="illustra-subtitle">${esc((!p.title || p.title === 'Aspiring Developer' || p.title.toLowerCase().includes('developer') || p.title.toLowerCase().includes('engineer')) ? 'Visual Artist & Illustrator' : p.title)}</p>
               <div class="illustra-accent-line"></div>
             </div>
             <p class="illustra-bio">${esc(p.bio || p.summary || p.about || 'Exploring visual stories through illustration, digital art, and experimental compositions.')}</p>
@@ -973,12 +979,53 @@ function pageGallery(p, wIdx, url) {
           </div>
           <div class="illustra-hero-visual">
             <div class="illustra-collage-stage">
+              <div class="illustra-vector-lines" aria-hidden="true">
+                <svg class="illustra-blueprint-svg" viewBox="0 0 520 480" fill="none">
+                  <line x1="30" y1="180" x2="490" y2="180" stroke="#37206b" stroke-width="1.5" stroke-opacity="0.35"/>
+                  <line x1="180" y1="20" x2="180" y2="440" stroke="#37206b" stroke-width="1.5" stroke-opacity="0.35"/>
+                  <circle cx="30" cy="180" r="3.5" fill="#37206b" fill-opacity="0.6"/>
+                  <circle cx="180" cy="180" r="4.5" fill="#f2711c"/>
+                  <circle cx="180" cy="20" r="3.5" fill="#37206b" fill-opacity="0.6"/>
+                  <circle cx="490" cy="180" r="3.5" fill="#37206b" fill-opacity="0.6"/>
+                </svg>
+              </div>
               <div class="illustra-block-purple"></div>
               <div class="illustra-block-orange"><div class="illustra-stipple-grain"></div></div>
               <div class="illustra-portrait-canvas">
                 <div class="illustra-portrait-frame">
                   <img src="${esc(p.avatarUrl || 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80')}" alt="${esc(p.name)}" class="illustra-portrait-img"/>
                 </div>
+              </div>
+              <div class="illustra-botanical-overlay" aria-hidden="true">
+                <svg class="illustra-lily-svg" viewBox="0 0 320 420" fill="none">
+                  <g filter="url(#dropShadowLiliesW)">
+                    <path d="M120 380 Q130 260 180 180 T240 60" stroke="#4a5d23" stroke-width="4.5" stroke-linecap="round"/>
+                    <path d="M120 380 Q160 300 220 250" stroke="#5a6e2e" stroke-width="3.5" stroke-linecap="round"/>
+                    <g transform="translate(190, 50)">
+                      <path d="M0 40 C-30 -10 -60 10 -40 60 C-20 110 0 70 0 40Z" fill="#ff7a00" stroke="#d45000" stroke-width="2"/>
+                      <path d="M0 40 C10 -30 50 -30 40 30 C30 90 0 70 0 40Z" fill="#ff9100" stroke="#d45000" stroke-width="2"/>
+                      <path d="M0 40 C-40 -40 -10 -70 20 -40 C50 -10 10 30 0 40Z" fill="#ffa726" stroke="#d45000" stroke-width="2"/>
+                      <path d="M0 40 C-70 10 -80 -30 -30 -40 C20 -50 0 20 0 40Z" fill="#ff6f00" stroke="#b73c00" stroke-width="2"/>
+                      <path d="M0 40 C40 30 80 10 60 -20 C40 -50 10 20 0 40Z" fill="#ff8f00" stroke="#d45000" stroke-width="2"/>
+                      <circle cx="-12" cy="18" r="2" fill="#5c1d00"/>
+                      <circle cx="-8" cy="8" r="1.8" fill="#5c1d00"/>
+                      <circle cx="10" cy="15" r="2" fill="#5c1d00"/>
+                      <circle cx="6" cy="5" r="1.6" fill="#5c1d00"/>
+                    </g>
+                    <g transform="translate(170, 210) scale(0.9)">
+                      <path d="M0 35 C-35 -15 -65 5 -45 55 C-25 105 0 65 0 35Z" fill="#ff7a00" stroke="#d45000" stroke-width="2"/>
+                      <path d="M0 35 C15 -25 55 -25 45 25 C35 85 0 65 0 35Z" fill="#ff9100" stroke="#d45000" stroke-width="2"/>
+                      <path d="M0 35 C-45 -35 -15 -65 15 -35 C45 -5 10 25 0 35Z" fill="#ffa726" stroke="#d45000" stroke-width="2"/>
+                      <path d="M0 35 C-75 5 -85 -35 -35 -45 C15 -55 0 15 0 35Z" fill="#ff6f00" stroke="#b73c00" stroke-width="2"/>
+                      <path d="M0 35 C45 25 85 5 65 -25 C45 -55 10 15 0 35Z" fill="#ff8f00" stroke="#d45000" stroke-width="2"/>
+                    </g>
+                  </g>
+                  <defs>
+                    <filter id="dropShadowLiliesW" x="-20%" y="-20%" width="140%" height="140%">
+                      <feDropShadow dx="3" dy="6" stdDeviation="6" flood-color="#000000" flood-opacity="0.25"/>
+                    </filter>
+                  </defs>
+                </svg>
               </div>
               <div class="illustra-crop-tile">
                 <div class="illustra-crop-inner">
@@ -996,7 +1043,7 @@ function pageGallery(p, wIdx, url) {
         </div>
         <div class="illustra-works-grid">
           ${(Array.isArray(p.artworks) && p.artworks.length ? p.artworks : (Array.isArray(p.projects) && p.projects.length ? p.projects : [
-            { title: 'Echoes of Reverie', category: 'Illustrations', medium: 'Mixed Media & Bristol Board', imageUrl: 'https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80', desc: 'Charcoal study intertwined with organic chromatic elements.' },
+            { title: 'Echoes of Reverie', category: 'Illustrations', medium: 'Mixed Media & Bristol Board', imageUrl: 'https://images.unsplash.com/photo-1578926375605-eaf7559b1458?auto=format&fit=crop&w=800&q=80', desc: 'Charcoal study intertwined with organic chromatic elements.' },
             { title: 'Botanical Solitude', category: 'Botany & Flora', medium: 'Charcoal & Gouache on Heavy Stock', imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=800&q=80', desc: 'Detailed tiger lily floral study celebrating organic symmetry.' },
             { title: 'Constructivist Fragment IV', category: 'Experimental', medium: 'Ink & Digital Chromatic Collage', imageUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80', desc: 'Juxtaposing geometric vector tensions against human expression.' }
           ])).map((w, idx) => `

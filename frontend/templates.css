@@ -10784,16 +10784,25 @@ body[data-template="filmstrip"] {
 
 .illustra-hero-headings {
   margin-bottom: 24px;
+  padding-top: 14px;
+  overflow: visible;
 }
 .illustra-name {
-  font-size: clamp(3.2rem, 6.2vw, 5.2rem);
+  font-size: clamp(3rem, 5.8vw, 4.8rem);
   font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  line-height: 1.14;
+  letter-spacing: -0.02em;
   color: var(--il-text-primary);
   margin: 0 0 16px;
   display: flex;
   flex-direction: column;
+  overflow: visible;
+}
+.illustra-first-name,
+.illustra-last-name {
+  display: block;
+  line-height: 1.12;
+  overflow: visible;
 }
 .illustra-subtitle {
   font-size: 1.25rem;
