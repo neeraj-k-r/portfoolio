@@ -9290,16 +9290,25 @@ function renderAnalogKraftChecklist() {
   </div>`;
 }
 
+function renderAnalogDeskAtmosphere() {
+  return `<div class="analog-desk-atmosphere" aria-hidden="true">
+    <div class="analog-lamp-glow"></div>
+    <div class="analog-desk-props">
+      <div class="analog-camera-vignette"></div>
+    </div>
+  </div>`;
+}
+
 function renderAnalogCollage(p) {
-
-
-
-
-
-
-  return `<div class="analog-collage-stage" aria-label="Visual Collage">
+  return `<div class="analog-collage-stage" aria-label="Aesthetic Desk Collage">
     <div class="analog-collage-inner">
-      <!-- Collage components will be placed here -->
+      ${renderAnalogFilmStrip()}
+      ${renderAnalogMountainPolaroid()}
+      ${renderAnalogDaisy()}
+      ${renderAnalogVinylRecord()}
+      ${renderAnalogMainTapePhoto()}
+      ${renderAnalogKraftChecklist()}
+      ${renderAnalogDeskAtmosphere()}
     </div>
   </div>`;
 }
