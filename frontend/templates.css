@@ -10556,3 +10556,15 @@ body[data-template="filmstrip"] {
 /* SALON EMERALD GALLERY THEME */
 .salon-page { background: #13271c; color: #ffffff; font-family: 'Plus Jakarta Sans', sans-serif; min-height: 100vh; position: relative; overflow-x: hidden; }
 .salon-ambient-light { position: absolute; top: 0; left: 0; right: 0; height: 1000px; background: radial-gradient(circle at 50% 120px, rgba(255, 230, 170, 0.14) 0%, rgba(20, 50, 36, 0.6) 45%, rgba(15, 32, 23, 0.95) 85%); pointer-events: none; z-index: 1; }
+
+.salon-nav { display: flex; justify-content: space-between; align-items: center; padding: 30px 0; position: relative; z-index: 10; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.salon-brand { display: flex; align-items: center; gap: 16px; }
+.salon-sig-monogram { font-family: 'Instrument Serif', Georgia, serif; font-size: 38px; font-style: italic; font-weight: 700; color: #ffffff; line-height: 1; letter-spacing: -1px; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+.salon-artist-name { font-size: 17px; font-weight: 700; color: #ffffff; display: block; letter-spacing: 0.5px; }
+.salon-artist-title { font-size: 11px; font-weight: 600; color: #8ea89a; letter-spacing: 1px; text-transform: uppercase; }
+.salon-nav-links { display: flex; gap: 32px; align-items: center; }
+@media(max-width:768px){ .salon-nav-links { display: none; } }
+.salon-nav-item { color: rgba(255, 255, 255, 0.75); text-decoration: none; font-size: 14px; font-weight: 600; transition: color .2s; }
+.salon-nav-item:hover, .salon-nav-item.active { color: #ffffff; font-weight: 700; }
+.salon-contact-btn { background: transparent; border: 1.5px solid rgba(255, 255, 255, 0.85); color: #ffffff; padding: 8px 22px; border-radius: 100px; text-decoration: none; font-size: 13px; font-weight: 700; transition: all .2s; }
+.salon-contact-btn:hover { background: #ffffff; color: #13271c; }
