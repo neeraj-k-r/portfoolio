@@ -9391,7 +9391,44 @@ function renderAnalogExploring(p) {
   </div>`;
 }
 
+function renderAnalogArchive(p) {
+  const items = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : []);
+  if (!items.length) return '';
+
+  return `<section class="analog-archive-sec" id="work">
+    <div class="analog-sec-head">
+      <h2 class="analog-sec-title">Curated Archive</h2>
+      <div class="analog-sec-divider"></div>
+      <span class="analog-sec-arrow" aria-hidden="true">↓</span>
+    </div>
+    <div class="analog-archive-grid">
+      ${items.map((item, idx) => {
+        const title = item.title || item.name || 'Untitled Work';
+        const desc = item.desc || item.description || '';
+        const cat = item.category || 'Creative Work';
+        const img = item.imageUrl || item.image || item.thumb || 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80';
+        const url = item.url || item.link || '#';
+
+        return `<article class="analog-archive-item">
+          <div class="analog-archive-thumb">
+            <img src="${tplEsc(img)}" alt="${tplEsc(title)}" class="analog-archive-img" loading="lazy"/>
+            <span class="analog-archive-tag">${tplEsc(cat)}</span>
+          </div>
+          <div class="analog-archive-info">
+            <div class="analog-archive-top">
+              <h3 class="analog-archive-title">${tplEsc(title)}</h3>
+              <a href="${tplEsc(url)}" class="analog-archive-arrow" target="_blank" rel="noopener">↗</a>
+            </div>
+            ${desc ? `<p class="analog-archive-desc">${tplEsc(desc)}</p>` : ''}
+          </div>
+        </article>`;
+      }).join('')}
+    </div>
+  </section>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
