@@ -823,6 +823,114 @@ function pageGallery(p, wIdx, url) {
         </div>
       </footer>
     </div>`
+    : vtpl === 'salon'
+    ? `<div class="salon-page">
+      <div class="salon-ambient-light" aria-hidden="true"></div>
+      <nav class="salon-nav wrap">
+        <div class="salon-brand">
+          <div class="salon-sig-monogram">${(p.name || 'Artist').trim().split(/\s+/).map(n => n[0]).slice(0, 2).join('').toUpperCase()}</div>
+          <div class="salon-brand-meta">
+            <span class="salon-artist-name">${esc(p.name)}</span>
+            <span class="salon-artist-title">${esc(p.title || 'Visual Artist')}</span>
+          </div>
+        </div>
+        <div class="salon-nav-links">
+          <a href="#" class="salon-nav-item">Home</a>
+          <a href="#works" class="salon-nav-item active">Works</a>
+          <a href="#exhibitions" class="salon-nav-item">Exhibitions</a>
+          <a href="#about" class="salon-nav-item">About</a>
+        </div>
+        <div class="salon-nav-action">
+          ${p.email ? `<a class="salon-contact-btn" href="mailto:${esc(p.email)}">Contact ↗</a>` : ''}
+        </div>
+      </nav>
+      <header class="salon-hero wrap">
+        <div class="salon-ceiling-rig" aria-hidden="true">
+          <div class="salon-pendant-wire"></div>
+          <div class="salon-lamp-fixture"></div>
+          <div class="salon-spotlight-beam"></div>
+        </div>
+        <div class="salon-hero-grid">
+          <div class="salon-hero-text">
+            <span class="salon-kicker">SELECTED WORKS</span>
+            <h1 class="salon-title">The<br><em>Collection</em></h1>
+            <div class="salon-accent-rule" aria-hidden="true"><span></span></div>
+            <p class="salon-desc">${esc((p.bio || p.summary || p.about || p.tagline || 'A showcase of my best works across different styles, themes, and mediums.').trim())}</p>
+            <div class="salon-cta-wrap">
+              <a class="salon-browse-btn" href="#works">Browse Collection <span>→</span></a>
+            </div>
+          </div>
+          <div class="salon-gallery-wall">
+            <div class="salon-main-frame-wrap">
+              <div class="salon-gilded-frame salon-frame-primary">
+                <div class="salon-canvas-shadow"></div>
+                <img class="salon-oil-canvas" src="${esc(works[0] ? works[0].imageUrl : 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80')}" alt="Featured Masterpiece" loading="eager">
+              </div>
+            </div>
+            <div class="salon-secondary-frame-wrap">
+              <div class="salon-gilded-frame salon-frame-secondary">
+                <div class="salon-canvas-shadow"></div>
+                <img class="salon-oil-canvas" src="${esc(works[1] ? works[1].imageUrl : 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80')}" alt="Secondary Masterpiece" loading="lazy">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="salon-furniture-row wrap" aria-hidden="true">
+          <div class="salon-bench">
+            <div class="salon-bench-seat"></div>
+            <div class="salon-bench-legs"><span class="leg-l"></span><span class="leg-r"></span></div>
+            <div class="salon-bench-shadow"></div>
+          </div>
+          <div class="salon-floor-reflection"></div>
+        </div>
+        <div class="salon-botanicals" aria-hidden="true">
+          <div class="salon-plant salon-plant-left"></div>
+          <div class="salon-plant salon-plant-right"></div>
+        </div>
+      </header>
+      <section class="salon-works-sec wrap" id="works">
+        <div class="salon-sec-header">
+          <div class="salon-sec-titles">
+            <span class="salon-sec-badge">GALLERIA PRINCIPALE</span>
+            <h2 class="salon-sec-title">Exhibited Works</h2>
+          </div>
+          <div class="salon-sec-meta"><span>ROOM I · IMPASTO & OIL SALON</span></div>
+        </div>
+        <div class="salon-art-grid">
+          ${works.map((k, idx) => `
+          <article class="salon-piece">
+            <div class="salon-art-hang">
+              <div class="salon-spotlight-micro" aria-hidden="true"></div>
+              <div class="salon-gilded-frame salon-frame-wall">
+                <img src="${esc(k.imageUrl)}" alt="${esc(k.title || 'Exhibition Piece')}" loading="lazy">
+              </div>
+              <div class="salon-brass-placard">
+                <div class="salon-placard-title">${esc(k.title || 'Untitled Composition')}</div>
+                <div class="salon-placard-medium">${esc(k.category || 'Oil on Linen Canvas')}</div>
+                ${k.desc ? `<p class="salon-placard-desc">${esc(k.desc)}</p>` : ''}
+                <div class="salon-placard-meta"><span>YEAR: 2026</span><span>ORIGINAL WORK</span></div>
+              </div>
+            </div>
+          </article>
+          `).join('')}
+        </div>
+      </section>
+      <section class="salon-exhibitions-sec wrap" id="exhibitions">
+        <div class="salon-exhibitions-card">
+          <div class="salon-exhibition-head"><span>PRIVATE SALON VIEWINGS & COMMISSIONS</span><b>CURRENT ACADEMIC ROTATION</b></div>
+          <div class="salon-viewing-details">
+            <div class="salon-viewing-col"><h3>Solo Presentation</h3><p>On view through December 2026 · Royal Gallery Suite</p></div>
+            <div class="salon-viewing-col"><h3>Curatorial Inquiries</h3><p>Original oil on linen canvases and commissioned landscape studies.</p></div>
+          </div>
+        </div>
+      </section>
+      <footer class="salon-footer wrap">
+        <div class="salon-footer-inner">
+          <span>© 2026 ${esc(p.name)} · Fine Art Salon Exhibition</span>
+          <span class="salon-foot-badge">Emerald Gallery Collection · Built with Portfoolio</span>
+        </div>
+      </footer>
+    </div>`
     : vtpl === 'atelier'
     ? `<div class="atelier-page">
       <nav class="atelier-nav wrap">
