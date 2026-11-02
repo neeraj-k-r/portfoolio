@@ -12310,3 +12310,40 @@ body.techno-dark-mode {
   overflow-x: hidden;
 }
 
+.analog-layout {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+.analog-sidebar {
+  width: 220px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background: var(--ag-sidebar-bg);
+  border-right: 1px solid var(--ag-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px 20px 24px 20px;
+  z-index: 40;
+  box-sizing: border-box;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+.analog-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.analog-main {
+  flex: 1;
+  margin-left: 220px;
+  min-width: 0;
+  padding: 32px 48px 60px 48px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+
