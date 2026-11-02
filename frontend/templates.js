@@ -9227,7 +9227,28 @@ function renderAnalogMountainPolaroid() {
   </div>`;
 }
 
+function renderAnalogDaisy() {
+  return `<div class="analog-daisy-botanical" aria-hidden="true">
+    <svg width="56" height="56" viewBox="0 0 100 100" fill="none">
+      <g opacity="0.92">
+        <ellipse cx="50" cy="22" rx="7" ry="18" fill="#fdfaf3"/>
+        <ellipse cx="50" cy="78" rx="7" ry="18" fill="#fdfaf3"/>
+        <ellipse cx="22" cy="50" rx="18" ry="7" fill="#fdfaf3"/>
+        <ellipse cx="78" cy="50" rx="18" ry="7" fill="#fdfaf3"/>
+        <ellipse cx="30" cy="30" rx="7" ry="18" transform="rotate(-45 30 30)" fill="#f6f0df"/>
+        <ellipse cx="70" cy="30" rx="7" ry="18" transform="rotate(45 70 30)" fill="#f6f0df"/>
+        <ellipse cx="30" cy="70" rx="7" ry="18" transform="rotate(45 30 70)" fill="#f6f0df"/>
+        <ellipse cx="70" cy="70" rx="7" ry="18" transform="rotate(-45 70 70)" fill="#f6f0df"/>
+      </g>
+      <circle cx="50" cy="50" r="12" fill="#e5a93c"/>
+      <circle cx="50" cy="50" r="10" fill="#c48624"/>
+      <circle cx="48" cy="48" r="4" fill="#deb04c" opacity="0.6"/>
+    </svg>
+  </div>`;
+}
+
 function renderAnalogCollage(p) {
+
 
 
   return `<div class="analog-collage-stage" aria-label="Visual Collage">
