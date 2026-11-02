@@ -27,7 +27,7 @@ test('Visual Themes: PortfoolioTemplates has all 22 visual themes', () => {
   const ctx = vm.createContext(domMock);
   vm.runInContext(TEMPLATES_JS, ctx);
 
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'];
   for (const t of visualThemes) {
     assert.strictEqual(typeof domMock.window.PortfoolioTemplates[t], 'function', `PortfoolioTemplates[${t}] must be a function`);
   }
@@ -82,7 +82,7 @@ test('CSS: styling fixes for newly added non-technical visual themes', () => {
 });
 
 test('Track healing & detection across backend and studio', () => {
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'];
   for (const t of visualThemes) {
     // Check supabase-config.js
     assert.ok(SUPABASE_CONFIG.includes(t), `supabase-config.js must include ${t}`);
@@ -112,7 +112,7 @@ test('All themes filter label is updated to 31', () => {
 });
 
 test('Visual Themes: routing preserves visual themes and provides project fallbacks', () => {
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'];
   
   // Test worker page() delegation to pageGallery
   const sandbox = {
