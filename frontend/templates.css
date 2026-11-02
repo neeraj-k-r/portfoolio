@@ -13424,6 +13424,131 @@ body.techno-dark-mode {
   color: var(--ag-text-muted);
 }
 
+.analog-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 9, 8, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.analog-modal-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.analog-modal-card {
+  background: #151311;
+  border: 1px solid rgba(240, 235, 220, 0.16);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 540px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.9);
+  padding: 32px 36px;
+  position: relative;
+  transform: translateY(12px);
+  transition: transform 0.25s ease;
+}
+
+.analog-modal-backdrop.is-open .analog-modal-card {
+  transform: translateY(0);
+}
+
+.analog-modal-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(240, 235, 220, 0.1);
+}
+
+.analog-modal-kicker {
+  display: block;
+  font-family: var(--ag-font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--ag-accent-coral);
+  margin-bottom: 6px;
+}
+
+.analog-modal-title {
+  margin: 0 0 4px 0;
+  font-family: var(--ag-font-serif);
+  font-style: italic;
+  font-size: 1.8rem;
+  color: var(--ag-cream);
+  line-height: 1.15;
+}
+
+.analog-modal-role {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--ag-text-muted);
+}
+
+.analog-modal-close {
+  background: none;
+  border: 1px solid rgba(240, 235, 220, 0.15);
+  color: var(--ag-text-muted);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.analog-modal-close:hover {
+  color: #fff;
+  border-color: rgba(240, 235, 220, 0.4);
+}
+
+.analog-modal-bio {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: #c9c3b8;
+  margin: 0 0 28px 0;
+}
+
+.analog-modal-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.analog-modal-meta-label {
+  display: block;
+  font-size: 0.72rem;
+  font-family: var(--ag-font-mono);
+  color: var(--ag-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.analog-modal-meta-val, .analog-modal-email {
+  font-size: 0.88rem;
+  color: var(--ag-cream);
+  text-decoration: none;
+}
+
+.analog-modal-email:hover {
+  text-decoration: underline;
+}
+
+
 
 
 
