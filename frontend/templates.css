@@ -12245,3 +12245,5 @@ body.techno-dark-mode {
 .lx-tp-techno .lx-tp-hero { background: #4a1240; border: 1px solid #6e2060; }
 .lx-tp-techno .lx-tp-cards { background: #14101e; border: 1px solid rgba(184, 67, 164, 0.4); }
 .lx-modal-body[data-theme="techno"] { background: #f7f5f0; color: #14101e; }
+
+.techno-btn-cta:focus-visible, .techno-btn-primary:focus-visible, .techno-btn-showreel:focus-visible { outline: 2px solid var(--tc-plum-vibrant); outline-offset: 2px; }
