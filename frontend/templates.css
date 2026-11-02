@@ -12256,3 +12256,6 @@ body.techno-dark-mode {
 .techno-btn-cta:focus-visible, .techno-btn-primary:focus-visible, .techno-btn-showreel:focus-visible { outline: 2px solid var(--tc-plum-vibrant); outline-offset: 2px; }
 
 @media (max-width: 600px) { .techno-archive-meta { padding: 18px; } }
+
+.techno-page.techno-dark .techno-page-num.active { color: #ffffff; }
+.techno-page.techno-dark .techno-page-bar { background: #ffffff; }
