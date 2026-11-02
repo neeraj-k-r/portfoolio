@@ -9203,7 +9203,16 @@ function renderAnalogStats(p) {
   </div>`;
 }
 
+function renderAnalogCollage(p) {
+  return `<div class="analog-collage-stage" aria-label="Visual Collage">
+    <div class="analog-collage-inner">
+      <!-- Collage components will be placed here -->
+    </div>
+  </div>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
