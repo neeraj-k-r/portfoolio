@@ -2740,6 +2740,8 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 .tpl-preview.lumina{background:linear-gradient(135deg,#38bdf8,#c084fc);color:#fff}
 .tpl-preview.vogue{background:linear-gradient(135deg,#171717,#404040);color:#f5f5f5}
 .tpl-preview.filmstrip{background:linear-gradient(135deg,#09090b,#27272a);color:#fbbf24}
+.tpl-preview.salon{background:linear-gradient(135deg,#13271c,#1c3d2c);color:#c5a059}
+.tpl-preview.illustra{background:linear-gradient(135deg,#f6f4fa,#e8e3f5);color:#7356e5}
 
 /* MODAL BODY STYLING */
 .lx-modal-body[data-theme="atelier"]{background:#0b0c10;color:#f4f4f0}
