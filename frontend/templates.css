@@ -11717,6 +11717,7 @@ body.illustra-dark-mode {
   z-index: 3;
 }
 .techno-pillar-frame {
+  box-shadow: 0 12px 30px rgba(0,0,0,0.35), 0 0 25px rgba(255, 255, 255, 0.08);
   width: 100%;
   height: 100%;
   background: #000;
