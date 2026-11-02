@@ -11667,6 +11667,7 @@ body.illustra-dark-mode {
   background: #3b0d34;
 }
 .techno-circle-img {
+  will-change: transform;
   width: 100%;
   height: 100%;
   object-fit: cover;
