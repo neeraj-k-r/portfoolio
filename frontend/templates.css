@@ -11291,3 +11291,35 @@ body.illustra-dark-mode {
 .lx-tp-illustra .lx-tp-nav { background: #e7e2f5; height: 3px; }
 .lx-tp-illustra .lx-tp-hero { background: #7356e5; border: 1px solid #f2711c; }
 .lx-tp-illustra .lx-tp-cards { background: #ffffff; border: 1px solid rgba(115, 86, 229, 0.3); }
+
+/* TECHNO CREATIVE TECHNOLOGY THEME */
+.techno-page {
+  --tc-bg: #f7f5f0;
+  --tc-surface: #14101e;
+  --tc-surface-card: #181322;
+  --tc-surface-light: #ffffff;
+  --tc-text-primary: #14101e;
+  --tc-text-secondary: #5a5468;
+  --tc-text-muted: #8d859b;
+  --tc-text-on-dark: #ffffff;
+  --tc-text-sub-dark: #bbaec6;
+  --tc-plum: #4a1240;
+  --tc-plum-vibrant: #6e2060;
+  --tc-plum-glow: #8e2b7c;
+  --tc-border: rgba(20, 16, 30, 0.08);
+  --tc-border-subtle: rgba(20, 16, 30, 0.05);
+  --tc-border-dark: rgba(255, 255, 255, 0.1);
+  --tc-pill-bg: #14101e;
+  --tc-pill-text: #ffffff;
+  --tc-card-shadow: 0 14px 35px rgba(20, 16, 30, 0.06);
+  --tc-card-glow: 0 20px 45px rgba(74, 18, 64, 0.15);
+  background: var(--tc-bg);
+  color: var(--tc-text-primary);
+  font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
