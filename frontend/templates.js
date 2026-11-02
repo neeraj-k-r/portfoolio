@@ -8697,6 +8697,23 @@ function technoHeaderNav(p) {
   </nav>`;
 }
 
+
+function technoHeaderActions(p) {
+  const email = (p.email || '').trim();
+  return `<div class="techno-header-actions">
+    <button class="techno-search-btn" aria-label="Search portfolio" title="Search">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+    ${email ? `<a href="mailto:${tplEsc(email)}" class="techno-btn-cta">Get in Touch <span class="techno-arrow">↗</span></a>` : `<a href="#projects" class="techno-btn-cta">Explore Work <span class="techno-arrow">↗</span></a>`}
+    <button class="techno-theme-toggle" id="technoThemeToggle" onclick="window.toggleTechnoTheme&&window.toggleTechnoTheme()" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <span class="techno-toggle-pill">
+        <span class="techno-toggle-icon sun" aria-hidden="true">☀</span>
+        <span class="techno-toggle-icon moon" aria-hidden="true">☾</span>
+      </span>
+    </button>
+  </div>`;
+}
+
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
