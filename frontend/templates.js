@@ -9063,6 +9063,30 @@ function renderAnalogMonogram(initials) {
   </div>`;
 }
 
+function renderAnalogNav() {
+  const items = [
+    { id: 'home', label: 'Home', icon: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>`, active: true, href: '#home' },
+    { id: 'work', label: 'Work', icon: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>`, href: '#work' },
+    { id: 'experiments', label: 'Experiments', icon: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31L4.36 20.1A2 2 0 0 0 6.16 23h11.68a2 2 0 0 0 1.8-2.9L14 9.31V2"></path><line x1="8.5" y1="2" x2="15.5" y2="2"></line><line x1="14" y1="9.31" x2="10" y2="9.31"></line></svg>`, href: '#experiments' },
+    { id: 'playground', label: 'Playground', icon: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>`, href: '#playground' },
+    { id: 'about', label: 'About', icon: `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>`, href: '#about' }
+  ];
+
+  return `<nav class="analog-nav" aria-label="Main Navigation">
+    <ul class="analog-nav-list">
+      ${items.map(item => `
+        <li class="analog-nav-item">
+          <a href="${item.href}" class="analog-nav-link ${item.active ? 'is-active' : ''}">
+            <span class="analog-nav-icon">${item.icon}</span>
+            <span class="analog-nav-label">${item.label}</span>
+          </a>
+        </li>
+      `).join('')}
+    </ul>
+  </nav>`;
+}
+
+
 function renderAnalog(p) {
 
   normTpl(p);
