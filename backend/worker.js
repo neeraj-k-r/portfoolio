@@ -74,7 +74,7 @@ async function getProfile(sub) {
         row.services = row.resume.services;
       }
       // Self-heal legacy rows: a visual-only template implies the visual track
-      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
+      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
       if (row.track !== 'visual') row.track = 'tech';
 
       // Check seed profile to backfill custom services or extra repos
@@ -364,6 +364,53 @@ body.techno-dark-mode{background:#0f0c16!important}
 .techno-ticker-status{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--tc-text-primary)}
 .techno-pulse-dot{width:8px;height:8px;background:#10b981;border-radius:50%}
 .techno-footer{border-top:1px solid var(--tc-border);padding:36px 0 48px;display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--tc-text-secondary)}
+
+/* ANALOG STUDIO THEME */
+.analog-page{--ag-bg:#0c0b0a;--ag-sidebar-bg:#0f0e0d;--ag-surface:#151311;--ag-card-bg:rgba(22,20,18,0.85);--ag-border:rgba(240,235,220,0.08);--ag-text:#e8e3d8;--ag-text-muted:#8c857b;--ag-cream:#f4ede1;--ag-accent-coral:#ff6b4a;--ag-green-dot:#22c55e;background:var(--ag-bg);color:var(--ag-text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;margin:0;padding:0}
+.analog-layout{display:flex;min-height:100vh}
+.analog-sidebar{width:220px;position:fixed;top:0;bottom:0;left:0;background:var(--ag-sidebar-bg);border-right:1px solid var(--ag-border);display:flex;flex-direction:column;justify-content:space-between;padding:32px 20px 24px;box-sizing:border-box}
+.analog-brand-top{padding:0 4px 28px}
+.analog-monogram{font-family:'Playfair Display',serif;font-style:italic;font-size:2.1rem;color:var(--ag-cream);text-decoration:none}
+.analog-nav-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.analog-nav-link{display:flex;align-items:center;gap:12px;color:var(--ag-text-muted);text-decoration:none;font-size:.88rem}
+.analog-nav-link.is-active{color:var(--ag-cream);font-weight:600}
+.analog-sidebar-footer{margin-top:auto;padding-top:16px;border-top:1px solid rgba(240,235,220,.1)}
+.analog-profile-name{margin:0 0 4px;font-size:.95rem;color:var(--ag-cream)}
+.analog-profile-role{margin:0;font-size:.76rem;color:var(--ag-text-muted);font-style:italic}
+.analog-main{flex:1;margin-left:220px;padding:32px 48px 60px}
+.analog-top-bar{display:flex;justify-content:flex-end;margin-bottom:24px}
+.analog-collab-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(18,17,16,.85);border:1px solid rgba(240,235,220,.12);border-radius:999px;font-size:.74rem;color:#c8d1c8}
+.analog-collab-dot{width:7px;height:7px;background:var(--ag-green-dot);border-radius:50%}
+.analog-hero-grid{display:grid;grid-template-columns:1.05fr 1.2fr;gap:32px;align-items:center;margin-bottom:60px}
+.analog-breadcrumb{font-size:.82rem;color:var(--ag-text-muted);margin-bottom:20px}
+.analog-hero-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(3rem,5vw,4.5rem);line-height:1.08;color:var(--ag-cream);margin:0 0 20px}
+.analog-title-dot{color:var(--ag-accent-coral)}
+.analog-hero-desc{font-size:1.02rem;line-height:1.65;color:#a8a094;max-width:440px;margin:0 0 32px}
+.analog-hero-actions{display:flex;gap:14px;margin-bottom:44px}
+.analog-btn-primary{padding:11px 22px;background:#eee7d7;color:#151311;font-size:.88rem;font-weight:600;border-radius:9px;text-decoration:none}
+.analog-btn-secondary{padding:11px 22px;background:rgba(22,20,18,.7);border:1px solid rgba(240,235,220,.18);color:var(--ag-cream);font-size:.88rem;border-radius:999px;text-decoration:none}
+.analog-stats-row{display:flex;align-items:center;gap:28px}
+.analog-stat-number{font-size:1.35rem;font-weight:600;color:var(--ag-cream)}
+.analog-stat-label{font-size:.74rem;color:var(--ag-text-muted)}
+.analog-collage-stage{position:relative;width:100%;height:440px}
+.analog-tape-photo{position:absolute;left:205px;top:0;width:235px;background:#e4dfd4;padding:10px 10px 14px;border-radius:4px;box-shadow:0 20px 50px rgba(0,0,0,.85);transform:rotate(3deg)}
+.analog-tape-frame{height:270px;overflow:hidden}
+.analog-tape-img{width:100%;height:100%;object-fit:cover}
+.analog-sec-head{display:flex;align-items:center;gap:20px;margin-bottom:24px}
+.analog-sec-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.75rem;color:var(--ag-cream);margin:0}
+.analog-sec-divider{flex:1;height:1px;background:rgba(240,235,220,.12)}
+.analog-cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:50px}
+.analog-work-card{background:var(--ag-card-bg);border:1px solid var(--ag-border);border-radius:14px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column}
+.analog-card-thumb{height:125px;overflow:hidden}
+.analog-card-img{width:100%;height:100%;object-fit:cover}
+.analog-card-content{padding:14px 16px 16px}
+.analog-card-title{font-size:1.05rem;color:var(--ag-cream);margin:0 0 3px}
+.analog-card-sub{font-size:.73rem;color:var(--ag-text-muted);margin:0}
+.analog-exploring-sec{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:56px}
+.analog-exp-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;color:var(--ag-cream)}
+.analog-skill-badge{padding:6px 16px;background:rgba(20,18,16,.6);border:1px solid rgba(240,235,220,.15);border-radius:999px;font-size:.76rem;color:#d6cfc2}
+.analog-footer{margin-top:60px;border-top:1px solid var(--ag-border);padding-top:24px;display:flex;justify-content:space-between;color:var(--ag-text-muted);font-size:.78rem}
+@media(max-width:960px){.analog-layout{flex-direction:column}.analog-sidebar{position:relative;width:100%;height:auto}.analog-main{margin-left:0;padding:24px}.analog-hero-grid{grid-template-columns:1fr}.analog-cards-grid{grid-template-columns:repeat(2,1fr)}}
 
 /* SALON EMERALD GALLERY THEME */
 .illustra-page{--il-bg:#f6f4fa;--il-surface:#ffffff;--il-text-primary:#1e1533;--il-text-secondary:#584c6e;--il-text-muted:#85799c;--il-purple:#7356e5;--il-orange:#f2711c;--il-plum:#2b184c;--il-border:rgba(43,24,76,0.08);--il-card-shadow:0 10px 30px rgba(43,24,76,0.06);background:var(--il-bg);color:var(--il-text-primary);font-family:'Outfit','Plus Jakarta Sans',sans-serif;min-height:100vh;margin:0;padding:0;transition:background-color .3s ease,color .3s ease}
@@ -7344,7 +7391,7 @@ function pageCloud(p) {
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
-  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'];
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
   if (visualOnly.includes(tpl)) {
     return pageGallery(p, url ? (url.searchParams.get('w') || url.searchParams.get('work')) : null, url);
   }
@@ -7814,7 +7861,7 @@ export default {
     }
     // visual track renders the gallery, not the code portfolio
     const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
-    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno'];
+    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
     const isVisualTrack = (qTpl && visualThemes.includes(qTpl.toLowerCase())) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
     if (isVisualTrack) {
       const html = pageGallery(p, url.searchParams.get('w'), url);
