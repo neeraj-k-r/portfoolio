@@ -10594,3 +10594,6 @@ body[data-template="filmstrip"] {
 .salon-frame-primary { aspect-ratio: 1.05/1; }
 .salon-frame-secondary { aspect-ratio: 0.8/1; transform: translateY(-10px); }
 .salon-canvas-shadow { position: absolute; inset: 0; box-shadow: inset 0 0 24px rgba(0,0,0,0.4); pointer-events: none; z-index: 2; }
+
+.salon-oil-canvas { width: 100%; height: 100%; object-fit: cover; display: block; filter: contrast(1.08) saturate(1.1); transition: transform .5s cubic-bezier(0.16, 1, 0.3, 1); }
+.salon-gilded-frame:hover .salon-oil-canvas { transform: scale(1.03); }
