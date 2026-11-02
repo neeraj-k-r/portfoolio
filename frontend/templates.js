@@ -8794,6 +8794,67 @@ function technoHeroVisual(p) {
   </div>`;
 }
 
+
+function technoCategoryCards(p) {
+  const works = getVisualWorks(p) || [];
+  const defaultCards = [
+    {
+      title: 'Visual Art',
+      subtitle: 'Illustration · Digital · Mixed',
+      image: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=700&q=80',
+      category: 'Visual Art'
+    },
+    {
+      title: 'Design',
+      subtitle: 'Branding · UI/UX · Systems',
+      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80',
+      category: 'Design'
+    },
+    {
+      title: 'Experiments',
+      subtitle: 'Generative · Motion · Interactive',
+      image: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80',
+      category: 'Experiments'
+    },
+    {
+      title: 'Projects',
+      subtitle: 'Web · App · Creative Tools',
+      image: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80',
+      category: 'Projects'
+    }
+  ];
+
+  const cards = defaultCards.map((def, idx) => {
+    const userWork = works[idx];
+    return {
+      title: (userWork && (userWork.title || userWork.name)) ? (userWork.title || userWork.name) : def.title,
+      subtitle: (userWork && (userWork.medium || userWork.category)) ? (userWork.medium || userWork.category) : def.subtitle,
+      image: (userWork && (userWork.imageUrl || userWork.img)) ? (userWork.imageUrl || userWork.img) : def.image,
+      category: (userWork && userWork.category) ? userWork.category : def.category
+    };
+  });
+
+  return `<section class="techno-categories-sec techno-wrap" id="categories">
+    <div class="techno-cards-grid">
+      ${cards.map((c, idx) => `
+        <a href="#projects" class="techno-category-card" data-cat="${tplEsc(c.category)}">
+          <div class="techno-card-bg">
+            <img src="${tplEsc(c.image)}" alt="${tplEsc(c.title)}" class="techno-card-img" loading="lazy"/>
+            <div class="techno-card-tint"></div>
+          </div>
+          <div class="techno-card-top">
+            <span class="techno-card-arrow">↗</span>
+          </div>
+          <div class="techno-card-info">
+            <h3 class="techno-card-title">${tplEsc(c.title)}</h3>
+            <p class="techno-card-sub">${tplEsc(c.subtitle)}</p>
+          </div>
+        </a>
+      `).join('')}
+    </div>
+  </section>`;
+}
+
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
