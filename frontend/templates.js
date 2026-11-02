@@ -8407,6 +8407,29 @@ function renderSalon(p) {
   window.scrollTo(0, 0);
 }
 
+
+function renderIllustra(p) {
+  normTpl(p);
+  const year = new Date().getFullYear();
+  document.body.dataset.template = 'illustra';
+  document.title = `${p.name || 'Nithin Krishna'} — ${p.title || 'Visual Artist & Illustrator'} | portfoolio.me`;
+  const app = document.getElementById('app') || document.body;
+  const nameParts = (p.name || 'Nithin Krishna').trim().split(/\s+/);
+  const firstName = nameParts[0] || 'Nithin';
+  const lastName = nameParts.slice(1).join(' ') || 'Krishna';
+  const initials = (nameParts.map(w => w[0]).join('') || 'NK').toUpperCase();
+  const subtitle = p.title || 'Visual Artist & Illustrator';
+  const bio = p.bio || p.about || 'Exploring visual stories through illustration, digital art, and experimental compositions.';
+  const email = p.email || 'hello@nithinkrishna.art';
+  const location = p.location || '';
+  
+  // Base render container initialized
+  let html = `<div class="illustra-page" id="illustraRoot">`;
+  html += `</div>`;
+  app.innerHTML = html;
+}
+
+
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook, salon: renderSalon };
 window.PortfoolioTemplateList = TEMPLATES;
 
