@@ -8665,6 +8665,12 @@ window.PortfoolioTemplateList = TEMPLATES;
 
 
 
+
+const TECHNO_STAR_SVG = `<svg class="techno-emblem-star" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/>
+  <circle cx="12" cy="12" r="2.5" fill="currentColor"/>
+</svg>`;
+
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
