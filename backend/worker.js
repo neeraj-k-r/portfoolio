@@ -366,51 +366,100 @@ body.techno-dark-mode{background:#0f0c16!important}
 .techno-footer{border-top:1px solid var(--tc-border);padding:36px 0 48px;display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--tc-text-secondary)}
 
 /* ANALOG STUDIO THEME */
-.analog-page{--ag-bg:#0c0b0a;--ag-sidebar-bg:#0f0e0d;--ag-surface:#151311;--ag-card-bg:rgba(22,20,18,0.85);--ag-border:rgba(240,235,220,0.08);--ag-text:#e8e3d8;--ag-text-muted:#8c857b;--ag-cream:#f4ede1;--ag-accent-coral:#ff6b4a;--ag-green-dot:#22c55e;background:var(--ag-bg);color:var(--ag-text);font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;margin:0;padding:0}
-.analog-layout{display:flex;min-height:100vh}
-.analog-sidebar{width:220px;position:fixed;top:0;bottom:0;left:0;background:var(--ag-sidebar-bg);border-right:1px solid var(--ag-border);display:flex;flex-direction:column;justify-content:space-between;padding:32px 20px 24px;box-sizing:border-box}
+.analog-page{--ag-bg:#0c0b0a;--ag-sidebar-bg:#0f0e0d;--ag-surface:#151311;--ag-surface-hover:#1e1b18;--ag-card-bg:rgba(22,20,18,0.85);--ag-border:rgba(240,235,220,0.08);--ag-border-subtle:rgba(240,235,220,0.05);--ag-text:#e8e3d8;--ag-text-muted:#8c857b;--ag-text-dim:#5c564e;--ag-cream:#f4ede1;--ag-cream-btn:#eee7d7;--ag-cream-btn-hover:#fff8eb;--ag-accent-orange:#e85938;--ag-accent-coral:#ff6b4a;--ag-green-dot:#22c55e;--ag-green-dot-glow:rgba(34,197,94,0.4);--ag-kraft:#d8c3a5;--ag-font-serif:'Playfair Display','Fraunces',Georgia,serif;--ag-font-sans:'Plus Jakarta Sans',system-ui,sans-serif;--ag-font-mono:'JetBrains Mono','Courier New',monospace;background-color:var(--ag-bg);color:var(--ag-text);font-family:var(--ag-font-sans);min-height:100vh;margin:0;padding:0;line-height:1.6;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
+.analog-layout{display:flex;min-height:100vh;position:relative}
+.analog-sidebar{width:220px;position:fixed;top:0;bottom:0;left:0;background:var(--ag-sidebar-bg);border-right:1px solid var(--ag-border);display:flex;flex-direction:column;justify-content:space-between;padding:32px 20px 24px;z-index:40;box-sizing:border-box;overflow-y:auto}
+.analog-sidebar-mountain{position:absolute;bottom:0;left:0;right:0;height:160px;background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=500&q=80');background-size:cover;background-position:center bottom;opacity:0.22;mix-blend-mode:luminosity;pointer-events:none;mask-image:linear-gradient(to top,rgba(0,0,0,0.9) 20%,transparent 100%);-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,0.9) 20%,transparent 100%);z-index:1}
 .analog-brand-top{padding:0 4px 28px}
-.analog-monogram{font-family:'Playfair Display',serif;font-style:italic;font-size:2.1rem;color:var(--ag-cream);text-decoration:none}
+.analog-monogram{display:inline-flex;align-items:center;font-family:var(--ag-font-serif);font-style:italic;font-size:2.1rem;font-weight:400;color:var(--ag-cream);letter-spacing:-0.05em;line-height:1;text-decoration:none}
+.analog-nav{margin-top:12px;flex:1}
 .analog-nav-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.analog-nav-link{display:flex;align-items:center;gap:12px;color:var(--ag-text-muted);text-decoration:none;font-size:.88rem}
-.analog-nav-link.is-active{color:var(--ag-cream);font-weight:600}
-.analog-sidebar-footer{margin-top:auto;padding-top:16px;border-top:1px solid rgba(240,235,220,.1)}
-.analog-profile-name{margin:0 0 4px;font-size:.95rem;color:var(--ag-cream)}
-.analog-profile-role{margin:0;font-size:.76rem;color:var(--ag-text-muted);font-style:italic}
-.analog-main{flex:1;margin-left:220px;padding:32px 48px 60px}
-.analog-top-bar{display:flex;justify-content:flex-end;margin-bottom:24px}
-.analog-collab-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;background:rgba(18,17,16,.85);border:1px solid rgba(240,235,220,.12);border-radius:999px;font-size:.74rem;color:#c8d1c8}
-.analog-collab-dot{width:7px;height:7px;background:var(--ag-green-dot);border-radius:50%}
-.analog-hero-grid{display:grid;grid-template-columns:1.05fr 1.2fr;gap:32px;align-items:center;margin-bottom:60px}
-.analog-breadcrumb{font-size:.82rem;color:var(--ag-text-muted);margin-bottom:20px}
-.analog-hero-title{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(3rem,5vw,4.5rem);line-height:1.08;color:var(--ag-cream);margin:0 0 20px}
-.analog-title-dot{color:var(--ag-accent-coral)}
-.analog-hero-desc{font-size:1.02rem;line-height:1.65;color:#a8a094;max-width:440px;margin:0 0 32px}
-.analog-hero-actions{display:flex;gap:14px;margin-bottom:44px}
-.analog-btn-primary{padding:11px 22px;background:#eee7d7;color:#151311;font-size:.88rem;font-weight:600;border-radius:9px;text-decoration:none}
-.analog-btn-secondary{padding:11px 22px;background:rgba(22,20,18,.7);border:1px solid rgba(240,235,220,.18);color:var(--ag-cream);font-size:.88rem;border-radius:999px;text-decoration:none}
-.analog-stats-row{display:flex;align-items:center;gap:28px}
-.analog-stat-number{font-size:1.35rem;font-weight:600;color:var(--ag-cream)}
-.analog-stat-label{font-size:.74rem;color:var(--ag-text-muted)}
+.analog-nav-item{position:relative}
+.analog-nav-link{display:flex;align-items:center;gap:13px;padding:8px 12px 8px 8px;color:var(--ag-text-muted);text-decoration:none;font-size:0.88rem;border-radius:6px;transition:color .18s,background .18s;position:relative}
+.analog-nav-link:hover,.analog-nav-link.is-active{color:var(--ag-cream)}
+.analog-nav-link.is-active::before{content:'';position:absolute;left:-20px;top:6px;bottom:6px;width:3px;background:var(--ag-accent-orange);border-radius:0 2px 2px 0;box-shadow:0 0 10px rgba(232,89,56,0.5)}
+.analog-sidebar-footer{margin-top:auto;padding:16px 4px 0;position:relative;z-index:2}
+.analog-sidebar-divider{width:28px;height:1px;background:rgba(240,235,220,0.2);margin-bottom:20px}
+.analog-profile-meta{margin-bottom:16px}
+.analog-profile-name{margin:0 0 4px;font-size:0.96rem;font-weight:500;color:var(--ag-cream)}
+.analog-profile-role{margin:0;font-size:0.76rem;font-style:italic;color:var(--ag-text-muted);font-family:var(--ag-font-serif)}
+.analog-socials-row{display:flex;align-items:center;gap:14px}
+.analog-social-link{display:inline-flex;color:var(--ag-text-muted);text-decoration:none}
+.analog-social-link:hover{color:var(--ag-cream)}
+.analog-main{flex:1;margin-left:220px;min-width:0;padding:32px 48px 60px;position:relative;box-sizing:border-box}
+.analog-top-bar{display:flex;align-items:center;justify-content:flex-end;margin-bottom:24px;position:relative;z-index:20}
+.analog-collab-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 16px 6px 12px;background:rgba(18,17,16,0.85);border:1px solid rgba(240,235,220,0.12);border-radius:9999px;backdrop-filter:blur(8px);box-shadow:0 4px 16px rgba(0,0,0,0.4)}
+.analog-collab-dot{width:7px;height:7px;background:var(--ag-green-dot);border-radius:50%;box-shadow:0 0 10px var(--ag-green-dot-glow)}
+.analog-collab-text{font-size:0.74rem;font-weight:500;color:#c8d1c8}
+.analog-sparkle-star{position:absolute;top:48px;right:240px;width:24px;height:24px;pointer-events:none;z-index:15;filter:drop-shadow(0 0 10px rgba(244,237,225,0.6))}
+.analog-breadcrumb{display:flex;align-items:center;gap:10px;font-size:0.82rem;color:var(--ag-text-muted);margin-bottom:20px}
+.analog-bc-sep{color:var(--ag-text-dim)}
+.analog-bc-name{color:var(--ag-cream)}
+.analog-hero-title{margin:0 0 20px;font-family:var(--ag-font-serif);font-style:italic;font-size:clamp(3rem,5.5vw,4.6rem);font-weight:400;line-height:1.08;letter-spacing:-0.03em;color:var(--ag-cream);display:flex;flex-direction:column}
+.analog-title-line{display:inline-block}
+.analog-title-cross{font-family:var(--ag-font-sans);font-style:normal;font-weight:300;font-size:0.72em;color:var(--ag-text-muted);margin-left:8px}
+.analog-title-dot{color:var(--ag-accent-coral);font-style:normal;text-shadow:0 0 16px rgba(255,107,74,0.75)}
+.analog-hero-desc{margin:0 0 32px;font-size:1.02rem;line-height:1.65;color:#a8a094;max-width:440px;font-weight:350}
+.analog-hero-actions{display:flex;align-items:center;gap:14px;margin-bottom:44px}
+.analog-btn-primary{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;background:var(--ag-cream-btn);color:#151311;font-size:0.88rem;font-weight:500;border-radius:9px;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,0.35)}
+.analog-btn-secondary{display:inline-flex;align-items:center;padding:11px 22px;background:rgba(22,20,18,0.7);border:1px solid rgba(240,235,220,0.18);color:var(--ag-cream);font-size:0.88rem;border-radius:9px;text-decoration:none}
+.analog-stats-row{display:flex;align-items:center;gap:28px;margin-top:10px}
+.analog-stat-item{display:flex;flex-direction:column;gap:2px}
+.analog-stat-number{font-size:1.35rem;font-weight:500;color:var(--ag-cream);line-height:1.1}
+.analog-stat-label{font-size:0.74rem;color:var(--ag-text-muted)}
+.analog-stat-divider{width:1px;height:24px;background:rgba(240,235,220,0.14)}
+.analog-hero-grid{display:grid;grid-template-columns:minmax(360px,1.05fr) minmax(420px,1.2fr);align-items:center;gap:32px;margin-bottom:60px;position:relative}
+.analog-hero-col-left{position:relative;z-index:10}
 .analog-collage-stage{position:relative;width:100%;height:440px}
-.analog-tape-photo{position:absolute;left:205px;top:0;width:235px;background:#e4dfd4;padding:10px 10px 14px;border-radius:4px;box-shadow:0 20px 50px rgba(0,0,0,.85);transform:rotate(3deg)}
-.analog-tape-frame{height:270px;overflow:hidden}
-.analog-tape-img{width:100%;height:100%;object-fit:cover}
+.analog-collage-inner{position:relative;width:100%;height:100%}
+.analog-film-strip{position:absolute;left:90px;top:15px;width:120px;height:250px;background:rgba(14,12,10,0.88);border:1px solid rgba(240,235,220,0.1);border-radius:4px;transform:rotate(-6deg);display:flex;justify-content:space-between;padding:8px 4px;box-shadow:0 8px 24px rgba(0,0,0,0.6);z-index:2;pointer-events:none}
+.analog-sprockets{display:flex;flex-direction:column;justify-content:space-between;width:10px}
+.analog-sprockets span{display:block;width:8px;height:12px;background:#000;border:1px solid rgba(240,235,220,0.18);border-radius:2px}
+.analog-film-frames{flex:1;margin:0 6px;display:flex;flex-direction:column;gap:12px}
+.analog-film-cell{flex:1;background:rgba(25,22,19,0.6);border:1px solid rgba(240,235,220,0.08);border-radius:2px}
+.analog-polaroid-mountain{position:absolute;left:45px;top:45px;width:175px;background:#eae4d6;padding:8px 8px 24px;border-radius:3px;transform:rotate(-7deg);box-shadow:0 14px 32px rgba(0,0,0,0.75);z-index:3}
+.analog-polaroid-frame{position:relative;width:100%;height:140px;overflow:hidden;border-radius:2px;background:#111}
+.analog-polaroid-img{width:100%;height:100%;object-fit:cover;filter:contrast(1.1) brightness(0.95) grayscale(0.2);display:block}
+.analog-daisy-botanical{position:absolute;left:170px;top:155px;width:56px;height:56px;z-index:5;pointer-events:none;filter:drop-shadow(0 6px 14px rgba(0,0,0,0.7));transform:rotate(18deg)}
+.analog-tape-photo{position:absolute;left:205px;top:-5px;width:235px;background:#e4dfd4;padding:10px 10px 14px;border-radius:4px;transform:rotate(3deg);box-shadow:0 20px 50px rgba(0,0,0,0.85);z-index:4}
+.analog-washi-tape{position:absolute;z-index:10;background:rgba(216,195,165,0.8);box-shadow:0 2px 6px rgba(0,0,0,0.25)}
+.analog-washi-top{top:-12px;left:50%;transform:translateX(-50%) rotate(-1.5deg);width:90px;height:22px}
+.analog-tape-frame{position:relative;width:100%;height:270px;overflow:hidden;border-radius:2px;background:#111}
+.analog-tape-img{width:100%;height:100%;object-fit:cover;display:block}
+.analog-vinyl-record{position:absolute;left:355px;top:55px;width:190px;height:190px;z-index:3}
+.analog-vinyl-disc{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at center,#111 0%,#1a1a1a 15%,#111 25%,#222 35%,#111 45%,#1f1f1f 55%,#0f0f0f 70%,#1c1c1c 85%,#0d0d0d 100%);box-shadow:0 16px 36px rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;position:relative}
+.analog-vinyl-grooves{position:absolute;inset:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.04)}
+.analog-vinyl-label{width:62px;height:62px;border-radius:50%;background:radial-gradient(circle,#e06d28 0%,#bd4e15 100%);display:flex;align-items:center;justify-content:center}
+.analog-vinyl-hole{width:10px;height:10px;border-radius:50%;background:#000}
+.analog-kraft-note{position:absolute;left:450px;top:75px;width:135px;background:#d4bf9f;padding:18px 14px 18px 16px;box-shadow:0 14px 34px rgba(0,0,0,0.75);transform:rotate(2deg);z-index:4;clip-path:polygon(0% 2%,3% 0%,97% 1%,100% 3%,99% 30%,100% 55%,98% 85%,100% 98%,96% 100%,75% 99%,45% 100%,15% 98%,0% 100%,2% 80%,0% 50%,1% 25%)}
+.analog-kraft-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;font-family:var(--ag-font-mono)}
+.analog-kraft-item{display:flex;align-items:center;gap:8px;color:#2b241c;font-size:0.78rem;font-weight:500}
+.analog-kraft-box{width:10px;height:10px;border:1.5px solid #3d3429;border-radius:1px;display:inline-block}
+.analog-desk-atmosphere{position:absolute;right:-40px;top:-40px;bottom:-40px;width:260px;pointer-events:none;z-index:2}
+.analog-lamp-glow{position:absolute;top:-20px;right:-20px;width:320px;height:380px;background:radial-gradient(ellipse at 75% 20%,rgba(255,185,90,0.28) 0%,rgba(255,150,50,0.12) 40%,rgba(200,100,30,0.04) 65%,transparent 85%);filter:blur(20px)}
 .analog-sec-head{display:flex;align-items:center;gap:20px;margin-bottom:24px}
-.analog-sec-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.75rem;color:var(--ag-cream);margin:0}
-.analog-sec-divider{flex:1;height:1px;background:rgba(240,235,220,.12)}
+.analog-sec-title{margin:0;font-family:var(--ag-font-serif);font-style:italic;font-size:1.75rem;font-weight:400;color:var(--ag-cream);white-space:nowrap}
+.analog-sec-divider{flex:1;height:1px;background:rgba(240,235,220,0.12)}
+.analog-sec-arrow{color:var(--ag-text-muted);font-size:1.1rem}
 .analog-cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:50px}
-.analog-work-card{background:var(--ag-card-bg);border:1px solid var(--ag-border);border-radius:14px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column}
-.analog-card-thumb{height:125px;overflow:hidden}
-.analog-card-img{width:100%;height:100%;object-fit:cover}
-.analog-card-content{padding:14px 16px 16px}
-.analog-card-title{font-size:1.05rem;color:var(--ag-cream);margin:0 0 3px}
-.analog-card-sub{font-size:.73rem;color:var(--ag-text-muted);margin:0}
-.analog-exploring-sec{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:56px}
-.analog-exp-title{font-family:'Playfair Display',serif;font-style:italic;font-size:1.15rem;color:var(--ag-cream)}
-.analog-skill-badge{padding:6px 16px;background:rgba(20,18,16,.6);border:1px solid rgba(240,235,220,.15);border-radius:999px;font-size:.76rem;color:#d6cfc2}
-.analog-footer{margin-top:60px;border-top:1px solid var(--ag-border);padding-top:24px;display:flex;justify-content:space-between;color:var(--ag-text-muted);font-size:.78rem}
-@media(max-width:960px){.analog-layout{flex-direction:column}.analog-sidebar{position:relative;width:100%;height:auto}.analog-main{margin-left:0;padding:24px}.analog-hero-grid{grid-template-columns:1fr}.analog-cards-grid{grid-template-columns:repeat(2,1fr)}}
+.analog-work-card{background:var(--ag-card-bg);border:1px solid var(--ag-border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,0.45)}
+.analog-card-thumb{position:relative;width:100%;height:125px;overflow:hidden;background:#100f0d}
+.analog-card-img{width:100%;height:100%;object-fit:cover;display:block}
+.analog-card-content{padding:14px 16px 16px;display:flex;flex-direction:column;flex:1}
+.analog-card-top{margin-bottom:4px}
+.analog-card-num{font-family:var(--ag-font-mono);font-size:0.72rem;color:var(--ag-text-muted)}
+.analog-card-main{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin-top:auto}
+.analog-card-meta{flex:1;min-width:0}
+.analog-card-title{margin:0 0 3px;font-size:1.05rem;font-weight:500;color:var(--ag-cream);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.analog-card-sub{margin:0;font-size:0.73rem;color:var(--ag-text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.analog-card-btn{width:32px;height:32px;border-radius:50%;border:1px solid rgba(240,235,220,0.2);display:flex;align-items:center;justify-content:center;color:var(--ag-cream);font-size:0.88rem;flex-shrink:0}
+.analog-exploring-sec{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:56px;padding-top:10px}
+.analog-exp-title{font-family:var(--ag-font-serif);font-style:italic;font-size:1.15rem;color:var(--ag-cream)}
+.analog-skill-badge{display:inline-flex;align-items:center;padding:6px 16px;background:rgba(20,18,16,0.6);border:1px solid rgba(240,235,220,0.15);border-radius:9999px;font-size:0.76rem;color:#d6cfc2}
+.analog-footer{margin-top:60px;padding-bottom:24px;border-top:1px solid var(--ag-border);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:0.78rem;color:var(--ag-text-muted)}
+@media(max-width:980px){.analog-layout{flex-direction:column}.analog-sidebar{position:relative;width:100%;height:auto;border-right:none;border-bottom:1px solid var(--ag-border);padding:20px 24px}.analog-sidebar-mountain,.analog-sidebar-footer{display:none}.analog-nav-list{flex-direction:row;flex-wrap:wrap;gap:8px}.analog-main{margin-left:0;padding:28px 24px 60px}.analog-hero-grid{grid-template-columns:1fr;gap:48px}.analog-cards-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.analog-main{padding:20px 16px 48px}.analog-hero-title{font-size:2.6rem}.analog-hero-actions{flex-direction:column}.analog-collage-stage{height:330px}.analog-collage-inner{transform:scale(0.72);transform-origin:center top}.analog-cards-grid{grid-template-columns:1fr}}
+
 
 /* SALON EMERALD GALLERY THEME */
 .illustra-page{--il-bg:#f6f4fa;--il-surface:#ffffff;--il-text-primary:#1e1533;--il-text-secondary:#584c6e;--il-text-muted:#85799c;--il-purple:#7356e5;--il-orange:#f2711c;--il-plum:#2b184c;--il-border:rgba(43,24,76,0.08);--il-card-shadow:0 10px 30px rgba(43,24,76,0.06);background:var(--il-bg);color:var(--il-text-primary);font-family:'Outfit','Plus Jakarta Sans',sans-serif;min-height:100vh;margin:0;padding:0;transition:background-color .3s ease,color .3s ease}
@@ -1374,98 +1423,301 @@ function pageGallery(p, wIdx, url) {
     ? (() => {
         const parts = String(p.name || 'NK').trim().split(/\s+/).filter(Boolean);
         const initials = !parts.length ? 'NK' : (parts.length === 1 ? parts[0].slice(0, 2).toUpperCase() : (parts[0][0] + parts[parts.length - 1][0]).toUpperCase());
-        const displayCards = (works && works.length ? works.slice(0, 4) : [
+        const fallbackCards = [
           { title: 'Web Experiences', category: 'Products · Websites · UI/UX', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80' },
           { title: 'Creative Art', category: 'Digital · Mixed · Experimental', imageUrl: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=700&q=80' },
           { title: 'Photography', category: 'Places · People · Perspectives', imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=700&q=80' },
           { title: 'Experiments', category: 'Generative · Interactive · AI', imageUrl: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80' }
-        ]);
+        ];
+        const sourceItems = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : fallbackCards);
+        const displayCards = sourceItems.slice(0, 4);
+        while (displayCards.length < 4) {
+          displayCards.push(fallbackCards[displayCards.length]);
+        }
         const bio = p.bio || p.tagline || 'Blending design, art, and technology to build meaningful digital experiences.';
-        const skills = (p.skills && p.skills.length) ? p.skills : ['Generative Art', 'Creative Coding', 'Interaction Design', 'Media & Motion', 'AI × Creativity'];
+        const skills = (Array.isArray(p.skills) && p.skills.length) ? p.skills : ['Generative Art', 'Creative Coding', 'Interaction Design', 'Media & Motion', 'AI × Creativity'];
         const projectCount = (p.projects && p.projects.length) ? `${p.projects.length}+` : (works.length ? `${works.length}+` : '25+');
+        const domainsCount = `${Math.min(skills.length, 12)}+`;
         const year = new Date().getFullYear();
 
         return `<div class="analog-page" id="analogRoot">
           <div class="analog-layout">
             <aside class="analog-sidebar">
+              <div class="analog-sidebar-mountain"></div>
               <div class="analog-sidebar-inner">
                 <div class="analog-brand-top">
                   <a href="#home" class="analog-monogram" aria-label="Monogram">${esc(initials)}</a>
                 </div>
-                <nav class="analog-nav">
+                <nav class="analog-nav" aria-label="Main Navigation">
                   <ul class="analog-nav-list">
-                    <li class="analog-nav-item"><a href="#home" class="analog-nav-link is-active"><span class="analog-nav-label">Home</span></a></li>
-                    <li class="analog-nav-item"><a href="#work" class="analog-nav-link"><span class="analog-nav-label">Work</span></a></li>
-                    <li class="analog-nav-item"><a href="#experiments" class="analog-nav-link"><span class="analog-nav-label">Experiments</span></a></li>
-                    <li class="analog-nav-item"><a href="#about" class="analog-nav-link"><span class="analog-nav-label">About</span></a></li>
+                    <li class="analog-nav-item"><a href="#home" class="analog-nav-link is-active"><span class="analog-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg></span><span class="analog-nav-label">Home</span></a></li>
+                    <li class="analog-nav-item"><a href="#work" class="analog-nav-link"><span class="analog-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg></span><span class="analog-nav-label">Work</span></a></li>
+                    <li class="analog-nav-item"><a href="#experiments" class="analog-nav-link"><span class="analog-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.31L4.36 20.1A2 2 0 0 0 6.16 23h11.68a2 2 0 0 0 1.8-2.9L14 9.31V2"></path><line x1="8.5" y1="2" x2="15.5" y2="2"></line><line x1="14" y1="9.31" x2="10" y2="9.31"></line></svg></span><span class="analog-nav-label">Experiments</span></a></li>
+                    <li class="analog-nav-item"><a href="#playground" class="analog-nav-link"><span class="analog-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></span><span class="analog-nav-label">Playground</span></a></li>
+                    <li class="analog-nav-item"><a href="#about" class="analog-nav-link"><span class="analog-nav-icon"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg></span><span class="analog-nav-label">About</span></a></li>
                   </ul>
                 </nav>
               </div>
               <div class="analog-sidebar-footer">
-                <h3 class="analog-profile-name">${esc(p.name || 'Creative Technologist')}</h3>
-                <p class="analog-profile-role">${esc(p.title || 'Creative Technologist')}</p>
+                <div class="analog-sidebar-divider"></div>
+                <div class="analog-profile-meta">
+                  <h3 class="analog-profile-name">${esc(p.name || 'Creative Technologist')}</h3>
+                  <p class="analog-profile-role">${esc(p.title || 'Creative Technologist')}</p>
+                </div>
+                <div class="analog-socials-row">
+                  <a href="${esc(p.github || '#')}" class="analog-social-link" title="GitHub" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+                  <a href="${esc(p.instagram || '#')}" class="analog-social-link" title="Instagram" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                  <a href="${esc(p.linkedin || '#')}" class="analog-social-link" title="LinkedIn" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                  <a href="${esc(p.youtube || '#')}" class="analog-social-link" title="YouTube" target="_blank" rel="noopener"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+                </div>
               </div>
             </aside>
             <main class="analog-main" id="home">
-              <div class="analog-top-bar">
-                <div class="analog-collab-pill"><span class="analog-collab-dot"></span><span>Available for Collaboration</span></div>
+              <div class="analog-sparkle-star" aria-hidden="true">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <path d="M12 0C12 7.5 16.5 12 24 12C16.5 12 12 16.5 12 24C12 16.5 7.5 12 0 12C7.5 12 12 7.5 12 0Z" fill="#f4ede1" fill-opacity="0.85"/>
+                </svg>
               </div>
+
+              <header class="analog-top-bar">
+                <div class="analog-collab-pill" role="status">
+                  <span class="analog-collab-dot"></span>
+                  <span class="analog-collab-text">${esc(p.availableText || 'Available for Collaboration')}</span>
+                </div>
+              </header>
+
               <section class="analog-hero-grid">
                 <div class="analog-hero-col-left">
-                  <div class="analog-breadcrumb">Portfolio / ${esc(p.name || 'Creative Technologist')}</div>
-                  <h1 class="analog-hero-title">Design × Innovation<span class="analog-title-dot">.</span></h1>
+                  <div class="analog-breadcrumb"><span class="analog-bc-item">Portfolio</span> <span class="analog-bc-sep">/</span> <span class="analog-bc-name">${esc(p.name || 'Creative Technologist')}</span></div>
+                  <h1 class="analog-hero-title">
+                    <span class="analog-title-line">Design <span class="analog-title-cross">×</span></span>
+                    <span class="analog-title-line">Innovation<span class="analog-title-dot">.</span></span>
+                  </h1>
                   <p class="analog-hero-desc">${esc(bio)}</p>
                   <div class="analog-hero-actions">
-                    <a href="#work" class="analog-btn-primary">View Work ↗</a>
-                    <a href="#about" class="analog-btn-secondary">About Me</a>
+                    <a href="#work" class="analog-btn-primary"><span>View Work</span><span class="analog-btn-arrow">↗</span></a>
+                    <a href="#about" class="analog-btn-secondary" onclick="window.openAnalogAboutModal&&window.openAnalogAboutModal(event)"><span>About Me</span></a>
                   </div>
                   <div class="analog-stats-row">
                     <div class="analog-stat-item"><span class="analog-stat-number">${projectCount}</span><span class="analog-stat-label">Projects</span></div>
                     <div class="analog-stat-divider"></div>
-                    <div class="analog-stat-item"><span class="analog-stat-number">${skills.length}+</span><span class="analog-stat-label">Domains</span></div>
+                    <div class="analog-stat-item"><span class="analog-stat-number">${domainsCount}</span><span class="analog-stat-label">Domains</span></div>
                     <div class="analog-stat-divider"></div>
                     <div class="analog-stat-item"><span class="analog-stat-number">∞</span><span class="analog-stat-label">Experiments</span></div>
                   </div>
                 </div>
+
                 <div class="analog-hero-col-right">
-                  <div class="analog-collage-stage">
-                    <div class="analog-tape-photo">
-                      <div class="analog-tape-frame">
-                        <img src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80" alt="Dusk Landscape" class="analog-tape-img"/>
+                  <div class="analog-collage-stage" aria-label="Aesthetic Desk Collage">
+                    <div class="analog-collage-inner">
+                      <!-- Film Strip -->
+                      <div class="analog-film-strip" aria-hidden="true">
+                        <div class="analog-sprockets analog-sprockets-left">
+                          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                        <div class="analog-film-frames">
+                          <div class="analog-film-cell"></div>
+                          <div class="analog-film-cell"></div>
+                        </div>
+                        <div class="analog-sprockets analog-sprockets-right">
+                          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                      </div>
+
+                      <!-- Mountain Polaroid -->
+                      <div class="analog-polaroid-mountain" aria-label="Mountain Landscape Polaroid">
+                        <div class="analog-polaroid-frame">
+                          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80" alt="Mountain Landscape" class="analog-polaroid-img" loading="lazy"/>
+                          <div class="analog-polaroid-tint"></div>
+                        </div>
+                      </div>
+
+                      <!-- Daisy Botanical Blossom -->
+                      <div class="analog-daisy-botanical" aria-hidden="true">
+                        <svg width="56" height="56" viewBox="0 0 100 100" fill="none">
+                          <g opacity="0.92">
+                            <ellipse cx="50" cy="22" rx="7" ry="18" fill="#fdfaf3"/>
+                            <ellipse cx="50" cy="78" rx="7" ry="18" fill="#fdfaf3"/>
+                            <ellipse cx="22" cy="50" rx="18" ry="7" fill="#fdfaf3"/>
+                            <ellipse cx="78" cy="50" rx="18" ry="7" fill="#fdfaf3"/>
+                            <ellipse cx="30" cy="30" rx="7" ry="18" transform="rotate(-45 30 30)" fill="#f6f0df"/>
+                            <ellipse cx="70" cy="30" rx="7" ry="18" transform="rotate(45 70 30)" fill="#f6f0df"/>
+                            <ellipse cx="30" cy="70" rx="7" ry="18" transform="rotate(45 30 70)" fill="#f6f0df"/>
+                            <ellipse cx="70" cy="70" rx="7" ry="18" transform="rotate(-45 70 70)" fill="#f6f0df"/>
+                          </g>
+                          <circle cx="50" cy="50" r="12" fill="#e5a93c"/>
+                          <circle cx="50" cy="50" r="10" fill="#c48624"/>
+                          <circle cx="48" cy="48" r="4" fill="#deb04c" opacity="0.6"/>
+                        </svg>
+                      </div>
+
+                      <!-- Vinyl LP Record -->
+                      <div class="analog-vinyl-record" aria-hidden="true">
+                        <div class="analog-vinyl-disc">
+                          <div class="analog-vinyl-grooves"></div>
+                          <div class="analog-vinyl-label">
+                            <div class="analog-vinyl-hole"></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Main Dusk Portrait with Washi Tape -->
+                      <div class="analog-tape-photo" aria-label="Featured Dusk Portrait">
+                        <div class="analog-washi-tape analog-washi-top"></div>
+                        <div class="analog-tape-frame">
+                          <img src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?auto=format&fit=crop&w=800&q=80" alt="Sunset Dusk Silhouette" class="analog-tape-img" loading="eager"/>
+                          <div class="analog-photo-grain"></div>
+                        </div>
+                      </div>
+
+                      <!-- Kraft Paper Checklist Note -->
+                      <div class="analog-kraft-note" aria-label="Creative Ritual Checklist">
+                        <div class="analog-kraft-tear-edge"></div>
+                        <ul class="analog-kraft-list">
+                          <li class="analog-kraft-item"><span class="analog-kraft-box"></span><span class="analog-kraft-text">Design</span></li>
+                          <li class="analog-kraft-item"><span class="analog-kraft-box"></span><span class="analog-kraft-text">Code</span></li>
+                          <li class="analog-kraft-item"><span class="analog-kraft-box"></span><span class="analog-kraft-text">Create</span></li>
+                          <li class="analog-kraft-item"><span class="analog-kraft-box"></span><span class="analog-kraft-text">Experiment</span></li>
+                          <li class="analog-kraft-item"><span class="analog-kraft-box"></span><span class="analog-kraft-text">Repeat <span class="analog-repeat-icon">↻</span></span></li>
+                        </ul>
+                      </div>
+
+                      <!-- Warm Desk Lamp Atmosphere & Props -->
+                      <div class="analog-desk-atmosphere" aria-hidden="true">
+                        <div class="analog-lamp-glow"></div>
+                        <div class="analog-desk-props">
+                          <div class="analog-camera-vignette"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </section>
+
+              <!-- Selected Work Section -->
               <section class="analog-selected-sec" id="work">
                 <div class="analog-sec-head">
                   <h2 class="analog-sec-title">Selected Work</h2>
                   <div class="analog-sec-divider"></div>
-                  <span class="analog-sec-arrow">→</span>
+                  <span class="analog-sec-arrow" aria-hidden="true">→</span>
                 </div>
                 <div class="analog-cards-grid">
-                  ${displayCards.map((w, idx) => `
-                    <article class="analog-work-card">
-                      <div class="analog-card-thumb"><img src="${esc(w.imageUrl || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80')}" alt="${esc(w.title || 'Work')}" class="analog-card-img"/></div>
+                  ${displayCards.map((w, idx) => {
+                    const num = String(idx + 1).padStart(2, '0');
+                    const img = w.imageUrl || w.image || w.thumb || fallbackCards[idx % fallbackCards.length].imageUrl;
+                    const url = w.url || w.link || '#work';
+                    return `<article class="analog-work-card">
+                      <div class="analog-card-thumb">
+                        <img src="${esc(img)}" alt="${esc(w.title || 'Work')}" class="analog-card-img" loading="lazy"/>
+                        <div class="analog-card-overlay"></div>
+                      </div>
                       <div class="analog-card-content">
-                        <span class="analog-card-num">/ 0${idx + 1}</span>
-                        <h3 class="analog-card-title">${esc(w.title || 'Untitled Work')}</h3>
-                        <p class="analog-card-sub">${esc(w.category || w.desc || 'Creative Tech')}</p>
+                        <div class="analog-card-top"><span class="analog-card-num">/ ${num}</span></div>
+                        <div class="analog-card-main">
+                          <div class="analog-card-meta">
+                            <h3 class="analog-card-title">${esc(w.title || 'Untitled Work')}</h3>
+                            <p class="analog-card-sub">${esc(w.category || w.desc || 'Creative Tech')}</p>
+                          </div>
+                          <a href="${esc(url)}" class="analog-card-btn" aria-label="View ${esc(w.title || 'Work')}"><span>↗</span></a>
+                        </div>
+                      </div>
+                    </article>`;
+                  }).join('')}
+                </div>
+              </section>
+
+              <!-- Also Exploring Skills Badges -->
+              <div class="analog-exploring-sec">
+                <div class="analog-exploring-label">
+                  <span class="analog-exp-title">Also Exploring</span>
+                  <span class="analog-exp-slashes">//</span>
+                </div>
+                <div class="analog-exploring-tags">
+                  ${skills.map(s => `<span class="analog-skill-badge">${esc(s)}</span>`).join('')}
+                </div>
+              </div>
+
+              <!-- Curated Archive -->
+              ${works && works.length ? `
+              <section class="analog-archive-sec" id="archive">
+                <div class="analog-sec-head">
+                  <h2 class="analog-sec-title">Curated Archive</h2>
+                  <div class="analog-sec-divider"></div>
+                  <span class="analog-sec-arrow" aria-hidden="true">↓</span>
+                </div>
+                <div class="analog-archive-grid">
+                  ${works.map((item, idx) => `
+                    <article class="analog-archive-item">
+                      <div class="analog-archive-thumb">
+                        <img src="${esc(item.imageUrl || item.image || item.thumb || 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80')}" alt="${esc(item.title || 'Work')}" class="analog-archive-img" loading="lazy"/>
+                        <span class="analog-archive-tag">${esc(item.category || 'Creative Work')}</span>
+                      </div>
+                      <div class="analog-archive-info">
+                        <div class="analog-archive-top">
+                          <h3 class="analog-archive-title">${esc(item.title || 'Untitled Work')}</h3>
+                          <a href="${esc(item.url || item.link || '#')}" class="analog-archive-arrow" target="_blank" rel="noopener">↗</a>
+                        </div>
+                        ${item.desc ? `<p class="analog-archive-desc">${esc(item.desc)}</p>` : ''}
                       </div>
                     </article>
                   `).join('')}
                 </div>
-              </section>
-              <div class="analog-exploring-sec">
-                <span class="analog-exp-title">Also Exploring //</span>
-                ${skills.map(s => `<span class="analog-skill-badge">${esc(s)}</span>`).join('')}
-              </div>
+              </section>` : ''}
+
+              <!-- Footer with Back to Top -->
               <footer class="analog-footer">
-                <span>© ${year} ${esc(p.name || 'Creative Technologist')}. All rights reserved.</span>
-                <span>Crafted with Analog Studio</span>
+                <div class="analog-footer-divider"></div>
+                <div class="analog-footer-row">
+                  <div class="analog-footer-copy">
+                    <span>© ${year} ${esc(p.name || 'Creative Technologist')}. All rights reserved.</span>
+                    <span class="analog-footer-tagline">Crafted with Analog Studio</span>
+                  </div>
+                  <a href="#home" class="analog-back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+                    <span>Back to Top</span>
+                    <span class="analog-top-arrow">↑</span>
+                  </a>
+                </div>
               </footer>
             </main>
           </div>
+
+          <!-- About & Contact Modal -->
+          <div class="analog-modal-backdrop" id="analogAboutModal" onclick="window.closeAnalogAboutModal&&window.closeAnalogAboutModal(event)">
+            <div class="analog-modal-card" onclick="event.stopPropagation()">
+              <div class="analog-modal-head">
+                <div class="analog-modal-title-group">
+                  <span class="analog-modal-kicker">ABOUT &amp; CONTACT</span>
+                  <h3 class="analog-modal-title">${esc(p.name || 'Creative Technologist')}</h3>
+                  <p class="analog-modal-role">${esc(p.title || 'Creative Technologist')}</p>
+                </div>
+                <button class="analog-modal-close" onclick="window.closeAnalogAboutModal()" aria-label="Close modal">✕</button>
+              </div>
+              <div class="analog-modal-body">
+                <p class="analog-modal-bio">${esc(bio)}</p>
+                <div class="analog-modal-meta-grid">
+                  <div class="analog-modal-meta-item">
+                    <span class="analog-modal-meta-label">Location</span>
+                    <span class="analog-modal-meta-val">${esc(p.location || 'Creative Studio')}</span>
+                  </div>
+                  ${p.email ? `<div class="analog-modal-meta-item">
+                    <span class="analog-modal-meta-label">Direct Inquiries</span>
+                    <a href="mailto:${esc(p.email)}" class="analog-modal-email">${esc(p.email)}</a>
+                  </div>` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+          <script>
+            window.openAnalogAboutModal = function(e) {
+              if (e && e.preventDefault) e.preventDefault();
+              var m = document.getElementById('analogAboutModal');
+              if (m) m.classList.add('is-open');
+            };
+            window.closeAnalogAboutModal = function() {
+              var m = document.getElementById('analogAboutModal');
+              if (m) m.classList.remove('is-open');
+            };
+          </script>
         </div>`;
       })()
     : vtpl === 'salon'
@@ -2201,7 +2453,7 @@ function pageGallery(p, wIdx, url) {
       })();
     </script></body></html>`;
   }
-  if (['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(vtpl) && !w) {
+  if (['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'].includes(vtpl) && !w) {
     return `<!DOCTYPE html><html lang="en">${head(p, vtpl)}<body class="portfolio-view" data-template="${vtpl}">${body}<script>(function(){if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .lumina-card, .vogue-plate, .filmstrip-frame, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
   }
   return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion','atelier','cinema','arch','zine','zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .lumina-card, .vogue-plate, .filmstrip-frame, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
