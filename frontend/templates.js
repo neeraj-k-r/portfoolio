@@ -8739,6 +8739,61 @@ function technoHeroContent(p) {
   </div>`;
 }
 
+
+function technoHeroVisual(p) {
+  const works = getVisualWorks(p) || [];
+  const plumImg = 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=900&q=80';
+  const mountainImg = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80';
+  const moonImg = 'https://images.unsplash.com/photo-1532693322450-2cb5c511067d?auto=format&fit=crop&w=600&q=80';
+
+  return `<div class="techno-hero-visual">
+    <div class="techno-collage-stage">
+      <div class="techno-blueprint-grid" aria-hidden="true">
+        <svg class="techno-grid-svg" viewBox="0 0 540 500" fill="none">
+          <circle cx="270" cy="230" r="190" stroke="rgba(20, 16, 30, 0.12)" stroke-dasharray="3 4"/>
+          <line x1="80" y1="230" x2="490" y2="230" stroke="rgba(20, 16, 30, 0.1)" stroke-width="1"/>
+          <line x1="270" y1="40" x2="270" y2="440" stroke="rgba(20, 16, 30, 0.1)" stroke-width="1"/>
+          <path d="M70 230h12M270 30v12M480 230h12M270 430v12" stroke="rgba(20, 16, 30, 0.4)" stroke-width="1.5"/>
+          <path d="M120 120m-5 0h10M120 120m0 -5v10" stroke="rgba(20, 16, 30, 0.35)" stroke-width="1.2"/>
+          <path d="M460 360m-5 0h10M460 360m0 -5v10" stroke="rgba(20, 16, 30, 0.35)" stroke-width="1.2"/>
+        </svg>
+      </div>
+
+      <div class="techno-barcode-ticks" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <div class="techno-circular-swirl-wrap">
+        <div class="techno-circle-disc">
+          <img src="${plumImg}" alt="Generative fluid composition" class="techno-circle-img"/>
+          <div class="techno-circle-overlay"></div>
+        </div>
+      </div>
+
+      <div class="techno-mountain-cutout">
+        <div class="techno-mountain-frame">
+          <img src="${mountainImg}" alt="Alpine landscape study" class="techno-mountain-img"/>
+          <div class="techno-mountain-gradient"></div>
+        </div>
+      </div>
+
+      <div class="techno-moon-pillar">
+        <div class="techno-pillar-frame">
+          <img src="${moonImg}" alt="Lunar observation" class="techno-pillar-img"/>
+          <div class="techno-pillar-tint"></div>
+        </div>
+      </div>
+
+      <div class="techno-slide-pagination" aria-label="Slide pagination">
+        <span class="techno-page-num active">01<i class="techno-page-bar"></i></span>
+        <span class="techno-page-num">02</span>
+        <span class="techno-page-num">03</span>
+        <span class="techno-page-num">04</span>
+      </div>
+    </div>
+  </div>`;
+}
+
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
