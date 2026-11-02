@@ -1239,26 +1239,42 @@ function pageGallery(p, wIdx, url) {
 
       <section class="techno-categories-sec techno-wrap" id="categories">
         <div class="techno-cards-grid">
+          ${(works && works.length ? works.slice(0, 4) : [
+            { title: 'Visual Art', category: 'Illustration · Digital · Mixed', imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=700&q=80' },
+            { title: 'Design', category: 'Branding · UI/UX · Systems', imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80' },
+            { title: 'Experiments', category: 'Generative · Motion · Interactive', imageUrl: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80' },
+            { title: 'Projects', category: 'Web · App · Creative Tools', imageUrl: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80' }
+          ]).map((w, idx) => `
           <a href="#projects" class="techno-category-card">
-            <div class="techno-card-bg"><img src="https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=700&q=80" class="techno-card-img"/><div class="techno-card-tint"></div></div>
+            <div class="techno-card-bg"><img src="${esc(w.imageUrl || 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=700&q=80')}" alt="${esc(w.title || 'Work')}" class="techno-card-img"/><div class="techno-card-tint"></div></div>
             <div class="techno-card-top"><span class="techno-card-arrow">↗</span></div>
-            <div class="techno-card-info"><h3 class="techno-card-title">Visual Art</h3><p class="techno-card-sub">Illustration · Digital · Mixed</p></div>
+            <div class="techno-card-info"><h3 class="techno-card-title">${esc(w.title || 'Untitled Work')}</h3><p class="techno-card-sub">${esc(w.category || w.desc || 'Creative Tech')}</p></div>
           </a>
-          <a href="#projects" class="techno-category-card">
-            <div class="techno-card-bg"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80" class="techno-card-img"/><div class="techno-card-tint"></div></div>
-            <div class="techno-card-top"><span class="techno-card-arrow">↗</span></div>
-            <div class="techno-card-info"><h3 class="techno-card-title">Design</h3><p class="techno-card-sub">Branding · UI/UX · Systems</p></div>
-          </a>
-          <a href="#projects" class="techno-category-card">
-            <div class="techno-card-bg"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=700&q=80" class="techno-card-img"/><div class="techno-card-tint"></div></div>
-            <div class="techno-card-top"><span class="techno-card-arrow">↗</span></div>
-            <div class="techno-card-info"><h3 class="techno-card-title">Experiments</h3><p class="techno-card-sub">Generative · Motion · Interactive</p></div>
-          </a>
-          <a href="#projects" class="techno-category-card">
-            <div class="techno-card-bg"><img src="https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=700&q=80" class="techno-card-img"/><div class="techno-card-tint"></div></div>
-            <div class="techno-card-top"><span class="techno-card-arrow">↗</span></div>
-            <div class="techno-card-info"><h3 class="techno-card-title">Projects</h3><p class="techno-card-sub">Web · App · Creative Tools</p></div>
-          </a>
+          `).join('')}
+        </div>
+      </section>
+
+      <section class="techno-archive-sec techno-wrap" id="projects">
+        <div class="techno-sec-head">
+          <span class="techno-sec-kicker">CURATED ARCHIVE</span>
+          <h2 class="techno-sec-title">Selected Projects & Visual Artifacts</h2>
+        </div>
+        <div class="techno-archive-grid">
+          ${works.map((w, idx) => `
+            <article class="techno-archive-card">
+              <div class="techno-archive-thumb">
+                <img src="${esc(w.imageUrl || 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=800&q=80')}" alt="${esc(w.title || 'Work')}" class="techno-archive-img"/>
+                <span class="techno-archive-tag">${esc(w.category || 'Creative Tech')}</span>
+              </div>
+              <div class="techno-archive-meta">
+                <div class="techno-archive-row">
+                  <h3 class="techno-archive-title">${esc(w.title || 'Untitled Work')}</h3>
+                  <span class="techno-archive-year">${esc(w.year || '2026')}</span>
+                </div>
+                ${w.desc ? `<p class="techno-archive-desc">${esc(w.desc)}</p>` : ''}
+              </div>
+            </article>
+          `).join('')}
         </div>
       </section>
 
