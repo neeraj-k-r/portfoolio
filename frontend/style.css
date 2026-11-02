@@ -3115,3 +3115,9 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
 .lx-tp-illustra .lx-tp-cards { background: #ffffff; border: 1px solid rgba(115, 86, 229, 0.3); }
 
 .lx-modal-body[data-theme="illustra"] { background: #f6f4fa; color: #1e1533; }
+
+.lx-tp-techno { background: #f7f5f0; border: 1px solid #4a1240; }
+.lx-tp-techno .lx-tp-nav { background: #e8e4db; height: 3px; }
+.lx-tp-techno .lx-tp-hero { background: #4a1240; border: 1px solid #6e2060; }
+.lx-tp-techno .lx-tp-cards { background: #14101e; border: 1px solid rgba(184, 67, 164, 0.4); }
+.lx-modal-body[data-theme="techno"] { background: #f7f5f0; color: #14101e; }
