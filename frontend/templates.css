@@ -12148,6 +12148,7 @@ body.illustra-dark-mode {
   flex-wrap: wrap;
 }
 .techno-footer-copy {
+  letter-spacing: 0.2px;
   font-size: 13.5px;
   color: var(--tc-text-secondary);
   font-weight: 500;
