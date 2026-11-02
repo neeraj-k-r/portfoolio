@@ -8241,6 +8241,14 @@ function renderSalon(p) {
   document.title = `${p.name} — Fine Art Salon | portfoolio.me`;
   const app = document.getElementById('app');
   let works = getVisualWorks(p);
+  if (!works || !works.length) {
+    works = [
+      { title: 'Alpine Sunset Glow', category: 'Oil on Linen', imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80', desc: 'Textured impasto mountain peaks illuminated by dramatic golden twilight.' },
+      { title: 'Sailboat in Twilight', category: 'Impasto Seascape', imageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80', desc: 'Luminous setting sun over calm ocean waters with solitary wooden boat.' },
+      { title: 'Venetian Canal Shimmer', category: 'Oil on Canvas', imageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80', desc: 'Evening reflections in emerald canals with classical Renaissance facades.' },
+      { title: 'Golden Field at Dusk', category: 'Landscape Study', imageUrl: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=800&q=80', desc: 'Warm amber palette knife strokes capturing rural silence before nightfall.' }
+    ];
+  }
   const avatar = String(p.avatarUrl || p.avatar_url || '').trim();
   const location = p.location || '';
   const bio = (p.bio || p.summary || p.about || p.tagline || '').trim();
@@ -8248,7 +8256,10 @@ function renderSalon(p) {
 
   const names = (p.name || 'Artist').trim().split(/\s+/);
   const initials = names.length > 1 ? (names[0][0] + names[names.length - 1][0]).toUpperCase() : names[0].slice(0, 2).toUpperCase();
-  const navHtml = `
+  const heroMainImg = works[0] ? works[0].imageUrl : 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80';
+  const heroSecImg = works[1] ? works[1].imageUrl : 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80';
+
+  app.innerHTML = `
   <div class="salon-page">
     <div class="salon-ambient-light" aria-hidden="true"></div>
     <nav class="salon-nav wrap">
@@ -8269,16 +8280,14 @@ function renderSalon(p) {
         ${p.email ? `<a class="salon-contact-btn" href="mailto:${tplEsc(p.email)}">Contact ↗</a>` : ''}
       </div>
     </nav>
-`;
-  const spotlightHtml = `
-    <div class="salon-ceiling-rig" aria-hidden="true">
-      <div class="salon-pendant-wire"></div>
-      <div class="salon-lamp-fixture"></div>
-      <div class="salon-spotlight-beam"></div>
-    </div>
-`;
-  const heroCopyHtml = `
+
     <header class="salon-hero wrap">
+      <div class="salon-ceiling-rig" aria-hidden="true">
+        <div class="salon-pendant-wire"></div>
+        <div class="salon-lamp-fixture"></div>
+        <div class="salon-spotlight-beam"></div>
+      </div>
+
       <div class="salon-hero-grid">
         <div class="salon-hero-text">
           <span class="salon-kicker">SELECTED WORKS</span>
@@ -8289,11 +8298,7 @@ function renderSalon(p) {
             <a class="salon-browse-btn" href="#works">Browse Collection <span>→</span></a>
           </div>
         </div>
-`;
-  const heroMainImg = works[0] ? works[0].imageUrl : 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=1200&q=80';
-  const heroSecImg = works[1] ? works[1].imageUrl : 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80';
 
-  const heroWallHtml = `
         <div class="salon-gallery-wall">
           <div class="salon-main-frame-wrap">
             <div class="salon-gilded-frame salon-frame-primary">
@@ -8301,7 +8306,6 @@ function renderSalon(p) {
               <img class="salon-oil-canvas" src="${tplEsc(heroMainImg)}" alt="Featured Masterpiece" loading="eager">
             </div>
           </div>
-`;
           <div class="salon-secondary-frame-wrap">
             <div class="salon-gilded-frame salon-frame-secondary">
               <div class="salon-canvas-shadow"></div>
@@ -8310,25 +8314,24 @@ function renderSalon(p) {
           </div>
         </div>
       </div>
-`;
-    <div class="salon-furniture-row wrap" aria-hidden="true">
-      <div class="salon-bench">
-        <div class="salon-bench-seat"></div>
-        <div class="salon-bench-legs">
-          <span class="leg-l"></span>
-          <span class="leg-r"></span>
+
+      <div class="salon-furniture-row wrap" aria-hidden="true">
+        <div class="salon-bench">
+          <div class="salon-bench-seat"></div>
+          <div class="salon-bench-legs">
+            <span class="leg-l"></span>
+            <span class="leg-r"></span>
+          </div>
+          <div class="salon-bench-shadow"></div>
         </div>
-        <div class="salon-bench-shadow"></div>
+        <div class="salon-floor-reflection"></div>
       </div>
-      <div class="salon-floor-reflection"></div>
-    </div>
+      <div class="salon-botanicals" aria-hidden="true">
+        <div class="salon-plant salon-plant-left"></div>
+        <div class="salon-plant salon-plant-right"></div>
+      </div>
     </header>
-`;
-    <div class="salon-botanicals" aria-hidden="true">
-      <div class="salon-plant salon-plant-left"></div>
-      <div class="salon-plant salon-plant-right"></div>
-    </div>
-`;
+
     <section class="salon-works-sec wrap" id="works">
       <div class="salon-sec-header">
         <div class="salon-sec-titles">
@@ -8339,6 +8342,7 @@ function renderSalon(p) {
           <span>ROOM I · IMPASTO & OIL SALON</span>
         </div>
       </div>
+
       <div class="salon-art-grid">
         ${works.map((w, i) => `
         <article class="salon-piece" data-gal="${i}">
@@ -8360,8 +8364,46 @@ function renderSalon(p) {
         </article>
         `).join('')}
       </div>
-
     </section>
+
+    <section class="salon-exhibitions-sec wrap" id="exhibitions">
+      <div class="salon-exhibitions-card">
+        <div class="salon-exhibition-head">
+          <span>PRIVATE SALON VIEWINGS & COMMISSIONS</span>
+          <b>CURRENT ACADEMIC ROTATION</b>
+        </div>
+        <div class="salon-viewing-details">
+          <div class="salon-viewing-col">
+            <h3>Solo Presentation</h3>
+            <p>On view through December ${year} · Royal Gallery Suite</p>
+          </div>
+          <div class="salon-viewing-col">
+            <h3>Curatorial Inquiries</h3>
+            <p>Original oil on linen canvases and commissioned landscape studies.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="salon-about-sec wrap" id="about">
+      <div class="salon-about-panel">
+        <div class="salon-about-kicker">MONOGRAPH & ARTIST STATEMENT</div>
+        <blockquote class="salon-quote">"The alchemy of oil painting lies in heavy pigment and living shadow—layering light upon darkness until mountains breathe and water reflects the evening sky."</blockquote>
+        <div class="salon-artist-colophon">
+          <b>${tplEsc(p.name)}</b>
+          <span>${tplEsc(p.title || 'Visual Artist & Oil Painter')}${location ? ` · ${tplEsc(location)}` : ''}</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="salon-footer wrap">
+      <div class="salon-footer-inner">
+        <span>© ${year} ${tplEsc(p.name)} · Fine Art Salon Exhibition</span>
+        <span class="salon-foot-badge">Emerald Gallery Collection · Built with Portfoolio</span>
+      </div>
+    </footer>
+  </div>`;
+  window.scrollTo(0, 0);
 }
 
 window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook };
