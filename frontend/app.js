@@ -1055,7 +1055,7 @@ function renderPortfolio(p) {
   p = normLocalProfile(p) || p;
   const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
-  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon'];
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra'];
   if (visualOnly.includes(tpl)) {
     renderGallery(p);
     return;
