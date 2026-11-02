@@ -13009,6 +13009,66 @@ body.techno-dark-mode {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.analog-kraft-note {
+  position: absolute;
+  left: 450px;
+  top: 75px;
+  width: 135px;
+  background: #d4bf9f;
+  padding: 18px 14px 18px 16px;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.75), 0 2px 6px rgba(0, 0, 0, 0.4);
+  transform: rotate(2deg);
+  z-index: 4;
+  clip-path: polygon(
+    0% 2%, 3% 0%, 97% 1%, 100% 3%,
+    99% 30%, 100% 55%, 98% 85%, 100% 98%,
+    96% 100%, 75% 99%, 45% 100%, 15% 98%, 0% 100%,
+    2% 80%, 0% 50%, 1% 25%
+  );
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.analog-kraft-note:hover {
+  transform: rotate(0deg) translateY(-4px) scale(1.03);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
+  z-index: 10;
+}
+
+.analog-kraft-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--ag-font-mono);
+}
+
+.analog-kraft-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #2b241c;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.analog-kraft-box {
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid #3d3429;
+  border-radius: 1px;
+  display: inline-block;
+}
+
+.analog-repeat-icon {
+  font-size: 0.95em;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+
 
 
 
