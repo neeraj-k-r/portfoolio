@@ -9125,7 +9125,16 @@ function renderAnalogSidebarFooter(p) {
   </div>`;
 }
 
+function renderAnalogCollaborationPill(statusText) {
+  const text = statusText || 'Available for Collaboration';
+  return `<div class="analog-collab-pill" role="status">
+    <span class="analog-collab-dot"></span>
+    <span class="analog-collab-text">${tplEsc(text)}</span>
+  </div>`;
+}
+
 function renderAnalog(p) {
+
 
 
   normTpl(p);
