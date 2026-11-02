@@ -11759,3 +11759,97 @@ body.illustra-dark-mode {
   background: var(--tc-text-primary);
   margin-top: 4px;
 }
+
+.techno-categories-sec {
+  padding: 10px 0 50px;
+}
+.techno-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+@media (max-width: 1080px) {
+  .techno-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 540px) {
+  .techno-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.techno-category-card {
+  position: relative;
+  height: 190px;
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  background: var(--tc-surface-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px 22px;
+  box-shadow: 0 10px 25px rgba(20, 16, 30, 0.08);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s ease;
+  border: 1px solid var(--tc-border-dark);
+}
+.techno-category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(20, 16, 30, 0.18);
+}
+.techno-card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.techno-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.techno-category-card:hover .techno-card-img {
+  transform: scale(1.06);
+}
+.techno-card-tint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20, 16, 30, 0.35) 0%, rgba(20, 16, 30, 0.88) 85%);
+  transition: background 0.25s ease;
+}
+.techno-category-card:hover .techno-card-tint {
+  background: linear-gradient(180deg, rgba(74, 18, 64, 0.35) 0%, rgba(20, 16, 30, 0.92) 80%);
+}
+.techno-card-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: flex-end;
+}
+.techno-card-arrow {
+  color: #fff;
+  font-size: 16px;
+  opacity: 0.85;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.techno-category-card:hover .techno-card-arrow {
+  transform: translate(2px, -2px);
+  opacity: 1;
+}
+.techno-card-info {
+  position: relative;
+  z-index: 2;
+}
+.techno-card-title {
+  color: var(--tc-text-on-dark);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 4px;
+}
+.techno-card-sub {
+  color: var(--tc-text-sub-dark);
+  font-size: 12px;
+  font-weight: 500;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
