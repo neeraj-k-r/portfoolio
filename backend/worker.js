@@ -308,6 +308,55 @@ function head(p, tpl) {
 .sb-colophon-tag{font-weight:600;color:#3f1d2e}
 
 /* SALON EMERALD GALLERY THEME */
+.illustra-page{background:#f6f4fa;color:#1e1533;font-family:'Outfit','Plus Jakarta Sans',sans-serif;min-height:100vh;margin:0;padding:0}
+.illustra-header{padding:24px 0}
+.illustra-header-inner{display:flex;align-items:center;justify-content:space-between}
+.illustra-monogram{font-family:'Playfair Display',serif;font-style:italic;font-weight:800;font-size:32px;color:#1e1533}
+.illustra-nav{display:flex;gap:32px}
+.illustra-nav-link{text-decoration:none;font-weight:500;color:#1e1533}
+.illustra-nav-link.active{font-weight:700;border-bottom:2px solid #1e1533}
+.illustra-theme-toggle{background:#251642;border:none;border-radius:999px;padding:4px 10px;color:#fff}
+.illustra-hero-section{padding:40px 0 80px}
+.illustra-hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+@media(max-width:960px){.illustra-hero-grid{grid-template-columns:1fr}}
+.illustra-name{font-size:clamp(3.2rem,6vw,5.2rem);font-weight:800;line-height:1.02;margin:0 0 16px;display:flex;flex-direction:column}
+.illustra-subtitle{font-size:1.25rem;font-weight:600;color:#584c6e;margin:0 0 14px}
+.illustra-accent-line{width:48px;height:3.5px;background:#7356e5;border-radius:2px}
+.illustra-bio{font-size:1.15rem;line-height:1.6;color:#584c6e;max-width:460px;margin:16px 0 32px}
+.illustra-btn-primary{background:#2b184c;color:#fff;text-decoration:none;font-weight:600;padding:14px 28px;border-radius:999px;display:inline-flex;align-items:center;gap:10px}
+.illustra-btn-secondary{color:#1e1533;border:1.5px solid rgba(43,24,76,.15);text-decoration:none;font-size:14px;font-weight:600;padding:12px 24px;border-radius:999px;margin-left:12px}
+.illustra-collage-stage{position:relative;width:100%;max-width:490px;height:470px;margin:0 auto}
+.illustra-block-purple{position:absolute;top:15px;right:175px;width:72px;height:380px;background:#7356e5;border-radius:6px;z-index:1}
+.illustra-block-orange{position:absolute;bottom:25px;left:30px;width:170px;height:95px;background:#f2711c;border-radius:6px;z-index:2}
+.illustra-portrait-canvas{position:absolute;top:25px;right:25px;width:320px;height:380px;z-index:3}
+.illustra-portrait-frame{width:100%;height:100%;border-radius:12px;overflow:hidden;box-shadow:0 20px 45px rgba(35,18,66,.18)}
+.illustra-portrait-img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%) contrast(1.15)}
+.illustra-crop-tile{position:absolute;bottom:12px;left:65px;width:135px;height:105px;z-index:5;border-radius:8px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,.18);border:2px solid #fff}
+.illustra-crop-img{width:100%;height:100%;object-fit:cover;filter:grayscale(100%)}
+.illustra-works-sec{padding:80px 0}
+.illustra-sec-head{text-align:center;margin-bottom:48px}
+.illustra-sec-kicker{font-size:11px;font-weight:800;letter-spacing:2px;color:#7356e5;text-transform:uppercase;display:block}
+.illustra-sec-title{font-size:clamp(2rem,3.8vw,2.8rem);font-weight:800;color:#1e1533}
+.illustra-works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:32px}
+.illustra-work-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(43,24,76,.06);border:1px solid rgba(43,24,76,.08)}
+.illustra-work-thumb-wrap{height:250px;position:relative}
+.illustra-work-img{width:100%;height:100%;object-fit:cover}
+.illustra-work-badge{position:absolute;top:14px;left:14px;background:rgba(43,24,76,.85);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:999px}
+.illustra-work-meta{padding:22px}
+.illustra-work-title{font-size:1.15rem;font-weight:700;margin:0;color:#1e1533}
+.illustra-work-medium{font-size:12.5px;font-weight:600;color:#7356e5;margin:4px 0 8px}
+.illustra-process-sec{padding:70px 0;border-top:1px solid rgba(43,24,76,.08)}
+.illustra-process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:24px;margin-top:40px}
+.illustra-process-card{background:#fff;border:1px solid rgba(43,24,76,.08);border-radius:12px;padding:30px 24px}
+.illustra-process-num{font-size:28px;font-weight:800;color:#f2711c;display:block;margin-bottom:14px}
+.illustra-monograph-sec{padding:60px 0 90px}
+.illustra-monograph-card{background:#fff;border-radius:16px;padding:48px;max-width:860px;margin:0 auto;box-shadow:0 14px 40px rgba(43,24,76,.08);border:1px solid rgba(43,24,76,.08)}
+.illustra-quote{font-size:1.4rem;font-style:italic;line-height:1.5;color:#1e1533;margin:0;padding-left:20px;border-left:3.5px solid #f2711c}
+.illustra-footer{border-top:1px solid rgba(43,24,76,.08);padding:36px 0}
+.illustra-footer-inner{display:flex;justify-content:space-between;align-items:center}
+.illustra-footer-monogram{font-family:'Playfair Display',serif;font-style:italic;font-weight:800;font-size:20px}
+.illustra-footer-badge{font-size:12px;font-weight:600;color:#7356e5}
+
 .salon-page{background:#13271c;color:#fff;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh;position:relative;overflow-x:hidden}
 .salon-ambient-light{position:absolute;top:0;left:0;right:0;height:1000px;background:radial-gradient(circle at 50% 120px,rgba(255,230,170,.14) 0%,rgba(20,50,36,.6) 45%,rgba(15,32,23,.95) 85%);pointer-events:none;z-index:1}
 .salon-nav{display:flex;justify-content:space-between;align-items:center;padding:30px 0;position:relative;z-index:10;border-bottom:1px solid rgba(255,255,255,.08)}
