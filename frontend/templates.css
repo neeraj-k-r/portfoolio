@@ -13326,6 +13326,105 @@ body.techno-dark-mode {
   transform: translateY(-2px);
 }
 
+.analog-archive-sec {
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+.analog-archive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.analog-archive-item {
+  background: var(--ag-card-bg);
+  border: 1px solid var(--ag-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.analog-archive-item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(240, 235, 220, 0.22);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65);
+}
+
+.analog-archive-thumb {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+}
+
+.analog-archive-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.analog-archive-item:hover .analog-archive-img {
+  transform: scale(1.05);
+}
+
+.analog-archive-tag {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 4px 10px;
+  background: rgba(14, 12, 10, 0.85);
+  border: 1px solid rgba(240, 235, 220, 0.15);
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  color: var(--ag-cream);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.analog-archive-info {
+  padding: 16px 18px 20px 18px;
+}
+
+.analog-archive-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.analog-archive-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--ag-cream);
+}
+
+.analog-archive-arrow {
+  color: var(--ag-text-muted);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.18s ease, transform 0.18s ease;
+}
+
+.analog-archive-arrow:hover {
+  color: var(--ag-cream);
+  transform: translate(2px, -2px);
+}
+
+.analog-archive-desc {
+  margin: 0;
+  font-size: 0.84rem;
+  line-height: 1.55;
+  color: var(--ag-text-muted);
+}
+
+
 
 
 
