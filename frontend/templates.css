@@ -11803,6 +11803,7 @@ body.illustra-dark-mode {
   border: 1px solid var(--tc-border-dark);
 }
 .techno-category-card:hover {
+  border-color: rgba(184, 67, 164, 0.35);
   transform: translateY(-4px);
   box-shadow: 0 16px 36px rgba(20, 16, 30, 0.18);
 }
