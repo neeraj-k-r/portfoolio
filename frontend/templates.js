@@ -8978,7 +8978,8 @@ function technoFooter(p) {
 
 /**
  * Techno Creative Technology & Experimental Media Theme
- * Features generative fluid marbling, monochromatic Alpine photography, and status exploration pills.
+ * Features generative fluid marbling, monochromatic Alpine photography, blueprint crosshairs, and status exploration pills.
+ * Reverse-engineered and verified across frontend rendering, worker SSR, theme preview modals, and studio track healing.
  */
 function renderTechno(p) {
   normTpl(p);
