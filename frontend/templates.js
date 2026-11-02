@@ -9150,7 +9150,22 @@ function renderAnalogBreadcrumb(name) {
   </div>`;
 }
 
+function renderAnalogHeroTitle(customTitle) {
+  if (customTitle && customTitle.includes('×')) {
+    const parts = customTitle.split('×');
+    return `<h1 class="analog-hero-title">
+      <span class="analog-title-line">${tplEsc(parts[0].trim())} <span class="analog-title-cross">×</span></span>
+      <span class="analog-title-line">${tplEsc(parts[1].trim())}<span class="analog-title-dot">.</span></span>
+    </h1>`;
+  }
+  return `<h1 class="analog-hero-title">
+    <span class="analog-title-line">Design <span class="analog-title-cross">×</span></span>
+    <span class="analog-title-line">Innovation<span class="analog-title-dot">.</span></span>
+  </h1>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
