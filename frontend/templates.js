@@ -8464,6 +8464,9 @@ function renderIllustra(p) {
                 <circle cx="490" cy="180" r="3.5" fill="#37206b" fill-opacity="0.6"/>
               </svg>
             </div>
+            
+            <!-- Vertical Iris Purple Color Block -->
+            <div class="illustra-block-purple" aria-hidden="true"></div>
             <!-- Collage Blocks & Canvas -->
           </div>
         </div>
