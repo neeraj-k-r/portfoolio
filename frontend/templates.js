@@ -8979,4 +8979,5 @@ function technoFooter(p) {
 function renderTechno(p) {
   normTpl(p);
   document.body.dataset.template = 'techno';
+  window.onkeydown = function(e) { if (e.key === "Escape") { /* dismiss */ } };
 }
