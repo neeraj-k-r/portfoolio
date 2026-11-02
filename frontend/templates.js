@@ -9181,7 +9181,30 @@ function renderAnalogHeroActions() {
   </div>`;
 }
 
+function renderAnalogStats(p) {
+  const projectCount = (p.projects && p.projects.length) ? `${p.projects.length}+` : '25+';
+  const skillsCount = (p.skills && p.skills.length) ? `${Math.min(p.skills.length, 12)}+` : '6+';
+
+  return `<div class="analog-stats-row">
+    <div class="analog-stat-item">
+      <span class="analog-stat-number">${projectCount}</span>
+      <span class="analog-stat-label">Projects</span>
+    </div>
+    <div class="analog-stat-divider"></div>
+    <div class="analog-stat-item">
+      <span class="analog-stat-number">${skillsCount}</span>
+      <span class="analog-stat-label">Domains</span>
+    </div>
+    <div class="analog-stat-divider"></div>
+    <div class="analog-stat-item">
+      <span class="analog-stat-number">∞</span>
+      <span class="analog-stat-label">Experiments</span>
+    </div>
+  </div>`;
+}
+
 function renderAnalog(p) {
+
 
 
 
