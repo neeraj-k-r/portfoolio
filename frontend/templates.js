@@ -8615,6 +8615,38 @@ function renderIllustra(p) {
       </div>
     </section>`;
   html += worksSection;
+
+  const processSection = `
+    <section class="illustra-process-sec wrap" id="process">
+      <div class="illustra-sec-head">
+        <span class="illustra-sec-kicker">STUDIO WORKFLOW</span>
+        <h2 class="illustra-sec-title">From Concept to Canvas</h2>
+        <p class="illustra-sec-desc">A disciplined four-stage exploration balancing classical graphite foundations with bold modern constructivism.</p>
+      </div>
+      <div class="illustra-process-grid">
+        <div class="illustra-process-card">
+          <span class="illustra-process-num">01</span>
+          <h3 class="illustra-process-name">Thumbnail & Gestures</h3>
+          <p class="illustra-process-body">Rapid observational sketches and compositional blueprints mapping dynamic rhythm and spatial mass.</p>
+        </div>
+        <div class="illustra-process-card">
+          <span class="illustra-process-num">02</span>
+          <h3 class="illustra-process-name">Charcoal Rendering</h3>
+          <p class="illustra-process-body">Building light values from velvety blacks to luminous skin tones with dense graphite and charcoal sticks.</p>
+        </div>
+        <div class="illustra-process-card">
+          <span class="illustra-process-num">03</span>
+          <h3 class="illustra-process-name">Color Geometry</h3>
+          <p class="illustra-process-body">Layering pure violet pillars and warm tangerine accent blocks to establish chromatic contrast against monochrome forms.</p>
+        </div>
+        <div class="illustra-process-card">
+          <span class="illustra-process-num">04</span>
+          <h3 class="illustra-process-name">Botanical Overlay</h3>
+          <p class="illustra-process-body">Finishing with organic tiger lilies and precision ink lines that burst forward beyond rectangular borders.</p>
+        </div>
+      </div>
+    </section>`;
+  html += processSection;
   html += `</div>`;
 
   // Wire theme toggle interaction after mount
