@@ -15277,3 +15277,32 @@ body.portfolio-view[data-template="mythos"] {
   padding: 0 32px;
   font-size: 0.95rem;
 }
+
+.suki-menu-toggle {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 1px solid var(--sk-line);
+  background: rgba(10, 26, 37, 0.55);
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+.suki-menu-toggle span {
+  position: absolute;
+  left: 13px;
+  width: 19px;
+  height: 1.5px;
+  background: #ffffff;
+  transition: 0.35s ease;
+}
+.suki-menu-toggle span:first-child { top: 19px; }
+.suki-menu-toggle span:last-child { top: 26px; }
+.suki-menu-toggle.is-active span:first-child {
+  top: 22px;
+  transform: rotate(45deg);
+}
+.suki-menu-toggle.is-active span:last-child {
+  top: 22px;
+  transform: rotate(-45deg);
+}
