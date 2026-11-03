@@ -15858,3 +15858,32 @@ body.portfolio-view[data-template="mythos"] {
   margin: 0;
   font-weight: 500;
 }
+
+.suki-marquee {
+  overflow: hidden;
+  position: relative;
+  padding: 20px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(9, 25, 36, 0.28);
+}
+.suki-marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  gap: 80px;
+  animation: sukiMarquee 22s linear infinite;
+  white-space: nowrap;
+}
+.suki-marquee-track span {
+  font-family: var(--sk-font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: #8fb7c8;
+  text-transform: uppercase;
+}
+@keyframes sukiMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 40px)); }
+}
