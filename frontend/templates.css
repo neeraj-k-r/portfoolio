@@ -14556,3 +14556,42 @@ body.portfolio-view[data-template="mythos"] {
 .mythos-cat-card:hover .mythos-card-arrow {
   transform: translate(1px, -1px);
 }
+
+/* Tech & Tools Bottom Bar */
+.mythos-bottom-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 16px 0;
+  border-top: 1px solid var(--my-border-subtle);
+  position: relative;
+  z-index: 10;
+}
+
+.mythos-tools-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.mythos-tools-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.mythos-stack-icon {
+  color: var(--my-lavender);
+}
+
+.mythos-tools-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255, 255, 255, 0.15);
+}
