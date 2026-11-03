@@ -320,6 +320,7 @@ test('Mythos theme renders classical sculpture hero, celestial moon, categories,
   assert.ok(capturedHtml.includes('naalukavaladisc'), 'card 2 must dynamically render second project');
   assert.ok(capturedHtml.includes('GROCERY IMAGE'), 'card 3 must dynamically render third project');
   assert.ok(capturedHtml.includes('BANGLE2'), 'card 4 must dynamically render fourth project');
+  assert.ok(!capturedHtml.includes('Playground'), 'hardcoded Playground card must be removed');
 });
 
 test('Suki theme renders cyber video hero, grid, services, and dynamic projects', () => {

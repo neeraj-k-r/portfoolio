@@ -493,7 +493,7 @@ body.techno-dark-mode{background:#0f0c16!important}
 .mythos-slide-indicators{position:absolute;top:100px;right:-25px;display:flex;flex-direction:column;gap:24px;z-index:10;pointer-events:none;font-size:0.82rem;color:#6f677d}
 .mythos-slide-num.is-active{color:#fff;font-weight:600}
 .mythos-cards-section{margin-bottom:52px;position:relative;z-index:10}
-.mythos-cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.mythos-cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .mythos-cat-card{background:var(--my-bg-card);border:1px solid var(--my-border);border-radius:18px;padding:12px 12px 16px;display:flex;flex-direction:column;text-decoration:none;position:relative;overflow:hidden;backdrop-filter:blur(12px)}
 .mythos-card-media{position:relative;width:100%;height:165px;border-radius:12px;overflow:hidden;margin-bottom:14px}
 .mythos-card-img{width:100%;height:100%;object-fit:cover;display:block}
@@ -2040,15 +2040,14 @@ function pageGallery(p, wIdx, url) {
                   const fallbackCards = [
                     { title: 'Projects', category: 'Real Builds & Case Studies', imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80', url: '#works', type: 'projects' },
                     { title: 'Experiments', category: 'Creative Tech & Explorations', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80', url: '#works', type: 'experiments' },
-                    { title: 'Visuals', category: 'Art, Photography & Edits', imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80', url: '#archives', type: 'visuals' },
-                    { title: 'Playground', category: 'Ideas, Prototypes & Fun Builds', imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80', url: '#archives', type: 'playground' }
+                    { title: 'Visuals', category: 'Art, Photography & Edits', imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80', url: '#archives', type: 'visuals' }
                   ];
                   const source = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : fallbackCards);
-                  const cards = source.slice(0, 4);
-                  while (cards.length < 4) {
+                  const cards = source.slice(0, 3);
+                  while (cards.length < 3) {
                     cards.push(fallbackCards[cards.length]);
                   }
-                  const types = ['projects', 'experiments', 'visuals', 'playground'];
+                  const types = ['projects', 'experiments', 'visuals'];
                   return cards.map((item, idx) => {
                     const type = types[idx] || 'projects';
                     const fb = fallbackCards[idx] || fallbackCards[0];
@@ -2066,10 +2065,7 @@ function pageGallery(p, wIdx, url) {
                             <div class="mythos-film-sprockets"><span></span><span></span><span></span><span></span></div>
                             <div class="mythos-film-sprockets"><span></span><span></span><span></span><span></span></div>
                           </div>` : ''}
-                          ${idx === 3 ? `
-                          <div class="mythos-card-crt-glow" aria-hidden="true">
-                            <span class="mythos-crt-prompt">&gt;_</span>
-                          </div>` : ''}
+
                           <div class="mythos-card-overlay"></div>
                         </div>
                         <div class="mythos-card-footer">
