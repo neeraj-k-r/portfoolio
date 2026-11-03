@@ -15420,3 +15420,21 @@ body.portfolio-view[data-template="mythos"] {
 .suki-hero-copy {
   max-width: 850px;
 }
+
+.suki-hero-title {
+  font-family: var(--sk-font-display);
+  font-weight: 700;
+  font-size: clamp(4rem, 11vw, 9.8rem);
+  line-height: 0.82;
+  letter-spacing: -0.08em;
+  margin: 0;
+}
+.suki-hero-title .line {
+  display: block;
+  color: #ffffff;
+}
+.suki-hero-title .accent {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(111, 235, 246, 0.85);
+  text-shadow: 0 0 50px rgba(25, 227, 230, 0.2);
+}
