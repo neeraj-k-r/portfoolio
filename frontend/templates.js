@@ -60,7 +60,8 @@ const TEMPLATES = [
   { id: 'salon', name: 'Salon Emerald', desc: 'Classical fine art salon with emerald gallery walls, overhead spotlight, gilded gold frames & viewing bench', emoji: '🖼️', best: 'Oil Painters • Classical Artists • Fine Art Curators • Impressionists', track: 'visual' },
   { id: 'illustra', name: 'Illustra Modern', desc: 'Modern mixed-media illustration with botanical orange lilies, constructivist color blocks & charcoal portraiture', emoji: '🌺', best: 'Illustrators • Visual Artists • Digital Painters • Graphic Creators', track: 'visual' },
   { id: 'techno', name: 'Techno Creative', desc: 'Creative technology & experimental media with generative fluid collage, monochrome Alpine photography & exploration pills', emoji: '✳️', best: 'Creative Technologists • Generative Artists • Creative Coders • Interactive Designers', track: 'visual' },
-  { id: 'analog', name: 'Analog Studio', desc: 'Aesthetic dark desk collage with vinyl LP, warm desk lamp, taped sunset polaroids, film negatives & kraft paper checklist', emoji: '🎞️', best: 'Creative Directors • Designers • Multidisciplinary Artists • Photographers', track: 'visual' }
+  { id: 'analog', name: 'Analog Studio', desc: 'Aesthetic dark desk collage with vinyl LP, warm desk lamp, taped sunset polaroids, film negatives & kraft paper checklist', emoji: '🎞️', best: 'Creative Directors • Designers • Multidisciplinary Artists • Photographers', track: 'visual' },
+  { id: 'mythos', name: 'Mythos Classical', desc: 'Cosmic violet classical sculpture showcase with Michelangelo David bust, celestial glowing moon, botanical flora, and 4 interactive category decks', emoji: '🏛️', best: 'Creative Engineers • Digital Builders • Visual Explorers • Designers', track: 'visual' }
 ];
 
 function tplEsc(s) {
