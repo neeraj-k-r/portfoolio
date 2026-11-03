@@ -10152,3 +10152,22 @@ function renderMythos(p) {
 
 
 
+
+// ==========================================
+// SUKI CINEMATIC THEME (Cyber Video & Motion)
+// ==========================================
+
+function getSukiBrand(p) {
+  const raw = String(p.name || 'SUKI').trim();
+  const parts = raw.split(/\s+/);
+  const brand = (parts[0] || 'SUKI').toUpperCase();
+  return brand;
+}
+
+function renderSukiBrand(p) {
+  const brand = getSukiBrand(p);
+  return `
+    <a class="suki-brand" href="#home" aria-label="${brand} Home">
+      ${tplEsc(brand)}<span class="suki-brand-dot">.</span>
+    </a>`;
+}
