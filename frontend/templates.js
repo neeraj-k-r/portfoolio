@@ -9867,12 +9867,37 @@ function renderMythosCardExperiments(p) {
     </article>`;
 }
 
+function renderMythosCardVisuals(p) {
+  const img = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80';
+  return `
+    <article class="mythos-cat-card mythos-card-visuals">
+      <div class="mythos-card-media">
+        <img src="${img}" alt="Alpine mountain peaks framed with 35mm film strip" class="mythos-card-img" loading="lazy"/>
+        <div class="mythos-card-film-strip" aria-hidden="true">
+          <div class="mythos-film-sprockets"><span></span><span></span><span></span><span></span></div>
+          <div class="mythos-film-sprockets"><span></span><span></span><span></span><span></span></div>
+        </div>
+        <div class="mythos-card-overlay"></div>
+      </div>
+      <div class="mythos-card-footer">
+        <div class="mythos-card-meta">
+          <h3 class="mythos-card-title">Visuals</h3>
+          <p class="mythos-card-sub">Art, Photography & Edits</p>
+        </div>
+        <a href="#archives" class="mythos-card-btn" aria-label="Explore Visuals">
+          <span class="mythos-card-arrow">↗</span>
+        </a>
+      </div>
+    </article>`;
+}
+
 function renderMythosCardsGrid(p) {
   return `
     <section class="mythos-cards-section" id="works">
       <div class="mythos-cards-grid">
         ${renderMythosCardProjects(p)}
         ${renderMythosCardExperiments(p)}
+        ${renderMythosCardVisuals(p)}
       </div>
     </section>`;
 }
