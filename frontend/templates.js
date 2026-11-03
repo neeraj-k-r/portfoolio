@@ -9922,6 +9922,35 @@ function renderMythosSparkleKicker() {
     </div>`;
 }
 
+function renderMythosArchive(p) {
+  const items = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : []);
+  if (!items.length) return '';
+  return `
+    <section class="mythos-archive-section" id="archives">
+      <div class="mythos-archive-head">
+        <h2 class="mythos-archive-title">Curated Archive</h2>
+        <div class="mythos-archive-divider" aria-hidden="true"></div>
+      </div>
+      <div class="mythos-archive-grid">
+        ${items.map((item, idx) => `
+          <article class="mythos-archive-card">
+            <div class="mythos-archive-thumb">
+              <img src="${tplEsc(item.imageUrl || item.image || 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=700&q=80')}" alt="${tplEsc(item.title || 'Work')}" class="mythos-archive-img" loading="lazy"/>
+              <span class="mythos-archive-tag">${tplEsc(item.category || (item.tags && item.tags[0]) || 'Creation')}</span>
+            </div>
+            <div class="mythos-archive-body">
+              <div class="mythos-archive-top">
+                <h3 class="mythos-archive-item-title">${tplEsc(item.title || item.name || 'Untitled')}</h3>
+                ${(item.url || item.demoUrl) ? `<a href="${tplEsc(item.url || item.demoUrl)}" class="mythos-archive-link" target="_blank" rel="noopener" aria-label="Open project">↗</a>` : ''}
+              </div>
+              ${item.desc ? `<p class="mythos-archive-desc">${tplEsc(item.desc)}</p>` : ''}
+            </div>
+          </article>
+        `).join('')}
+      </div>
+    </section>`;
+}
+
 function renderMythosSkillIcon(skill) {
   const s = String(skill).toLowerCase();
   if (s.includes('react')) return '<i class="fa-brands fa-react" style="color:#61dafb"></i>';
@@ -10014,6 +10043,7 @@ function renderMythos(p) {
         </div>
       </section>
       ${renderMythosCardsGrid(p)}
+      ${renderMythosArchive(p)}
       ${renderMythosTechTools(p)}
     </div>
   </div>`;
