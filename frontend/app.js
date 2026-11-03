@@ -748,6 +748,9 @@ function renderGallery(p) {
   if (vtpl === 'mythos') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.mythos) return window.PortfoolioTemplates.mythos(p);
   }
+  if (vtpl === 'suki') {
+    if (window.PortfoolioTemplates && window.PortfoolioTemplates.suki) return window.PortfoolioTemplates.suki(p);
+  }
   if (vtpl === 'atelier') {
     app.innerHTML = `
     <div class="atelier-page">
