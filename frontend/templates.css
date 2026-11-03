@@ -15306,3 +15306,63 @@ body.portfolio-view[data-template="mythos"] {
   top: 22px;
   transform: rotate(-45deg);
 }
+
+.suki-mobile-menu {
+  position: fixed;
+  z-index: 95;
+  inset: 0;
+  background: rgba(3, 10, 16, 0.97);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 8vw 60px;
+  transform: translateY(-105%);
+  transition: transform 0.65s cubic-bezier(0.76, 0, 0.24, 1);
+  pointer-events: none;
+}
+.suki-mobile-menu.is-open {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+.suki-mobile-menu__glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  right: -180px;
+  top: 15%;
+  border-radius: 50%;
+  background: rgba(25, 227, 230, 0.09);
+  filter: blur(60px);
+  pointer-events: none;
+}
+.suki-mobile-menu nav {
+  display: flex;
+  flex-direction: column;
+}
+.suki-mobile-menu nav a {
+  font-family: var(--sk-font-display);
+  font-weight: 600;
+  font-size: clamp(2.2rem, 9vw, 4.2rem);
+  line-height: 1.25;
+  color: #ffffff;
+  border-bottom: 1px solid var(--sk-line);
+  padding: 15px 0;
+  text-decoration: none;
+  display: flex;
+  align-items: baseline;
+}
+.suki-mobile-menu nav a span {
+  display: inline-block;
+  width: 44px;
+  font-family: var(--sk-font-body);
+  font-weight: 500;
+  font-size: 0.75rem;
+  color: var(--sk-cyan);
+}
+.suki-mobile-menu > p {
+  margin-top: 35px;
+  color: var(--sk-muted);
+  font-size: 0.85rem;
+}
