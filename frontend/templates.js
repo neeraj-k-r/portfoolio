@@ -9661,6 +9661,11 @@ function renderMythosHeroTitle(p) {
     </h1>`;
 }
 
+function renderMythosHeroBio(p) {
+  const bio = p.bio || p.tagline || 'A showcase of my creative work, digital builds, visual explorations, and curious experiments.';
+  return `<p class="mythos-hero-bio">${tplEsc(bio)}</p>`;
+}
+
 function renderMythos(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
@@ -9673,6 +9678,7 @@ function renderMythos(p) {
         <div class="mythos-hero-col-left">
           ${renderMythosHeroKicker()}
           ${renderMythosHeroTitle(p)}
+          ${renderMythosHeroBio(p)}
         </div>
       </section>
     </div>
