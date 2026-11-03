@@ -9632,12 +9632,29 @@ function renderMythosNav() {
     </nav>`;
 }
 
+function renderMythosHeaderActions(p) {
+  const email = p.email || '';
+  const hireHref = email ? `mailto:${tplEsc(email)}?subject=Collaboration%20Inquiry` : '#about';
+  return `
+    <div class="mythos-header-actions">
+      <button class="mythos-theme-toggle" aria-label="Theme mode indicator" title="Dark celestial mode">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <a href="${hireHref}" class="mythos-collab-btn" ${!email ? 'onclick="window.openMythosAboutModal&&window.openMythosAboutModal(event)"' : ''}>
+        <span>Let's Collaborate</span>
+        <span class="mythos-arrow-icon" aria-hidden="true">↗</span>
+      </a>
+    </div>`;
+}
+
 function renderMythos(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
   document.body.dataset.template = 'mythos';
   document.title = `${p.name || 'Portfolio'} — Mythos Classical`;
-  app.innerHTML = `<div class="mythos-page" id="mythosRoot"><div class="mythos-wrap"><header class="mythos-header">${renderMythosBrand(p)}${renderMythosNav()}</header></div></div>`;
+  app.innerHTML = `<div class="mythos-page" id="mythosRoot"><div class="mythos-wrap"><header class="mythos-header">${renderMythosBrand(p)}${renderMythosNav()}${renderMythosHeaderActions(p)}</header></div></div>`;
 }
 
 
