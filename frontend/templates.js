@@ -10022,6 +10022,42 @@ function renderMythosHeroVisual(p) {
     </div>`;
 }
 
+function renderMythosAboutModal(p) {
+  const name = tplEsc(p.name || 'Nithin Krishna');
+  const role = tplEsc(p.title || 'Creative Engineer');
+  const bio = tplEsc(p.bio || p.tagline || 'A showcase of creative work, digital builds, visual explorations, and curious experiments.');
+  const location = tplEsc(p.location || 'Creative Studio');
+  const email = p.email || '';
+
+  return `
+    <div class="mythos-modal-backdrop" id="mythosAboutModal" onclick="window.closeMythosAboutModal&&window.closeMythosAboutModal(event)">
+      <div class="mythos-modal-card" onclick="event.stopPropagation()">
+        <div class="mythos-modal-head">
+          <div class="mythos-modal-title-group">
+            <span class="mythos-modal-kicker">ABOUT &amp; INQUIRIES</span>
+            <h3 class="mythos-modal-name">${name}</h3>
+            <p class="mythos-modal-role">${role}</p>
+          </div>
+          <button class="mythos-modal-close" onclick="window.closeMythosAboutModal()" aria-label="Close modal">✕</button>
+        </div>
+        <div class="mythos-modal-body">
+          <p class="mythos-modal-bio">${bio}</p>
+          <div class="mythos-modal-meta-grid">
+            <div class="mythos-modal-meta-item">
+              <span class="mythos-modal-meta-label">Location</span>
+              <span class="mythos-modal-meta-val">${location}</span>
+            </div>
+            ${email ? `
+            <div class="mythos-modal-meta-item">
+              <span class="mythos-modal-meta-label">Direct Contact</span>
+              <a href="mailto:${tplEsc(email)}" class="mythos-modal-email">${tplEsc(email)}</a>
+            </div>` : ''}
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
 function renderMythos(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
@@ -10046,7 +10082,27 @@ function renderMythos(p) {
       ${renderMythosArchive(p)}
       ${renderMythosTechTools(p)}
     </div>
+    ${renderMythosAboutModal(p)}
   </div>`;
+
+  window.openMythosAboutModal = function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const modal = document.getElementById('mythosAboutModal');
+    if (modal) modal.classList.add('is-open');
+  };
+
+  window.closeMythosAboutModal = function() {
+    const modal = document.getElementById('mythosAboutModal');
+    if (modal) modal.classList.remove('is-open');
+  };
+
+  if (typeof document !== 'undefined' && typeof document.addEventListener === 'function') {
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        window.closeMythosAboutModal();
+      }
+    });
+  }
 }
 
 
