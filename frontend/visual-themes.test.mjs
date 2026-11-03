@@ -342,7 +342,7 @@ test('Suki theme renders cyber video hero, grid, services, and dynamic projects'
   const sukiFn = domMock.window.PortfoolioTemplates.suki;
   assert.ok(sukiFn, 'suki template must exist in PortfoolioTemplates');
   sukiFn({
-    name: 'Suki Dotae',
+    name: 'Suki Cinema',
     title: 'Video Editor & Motion Designer',
     bio: 'Cinematic edits, commercials and motion graphics built to make people stop scrolling.',
     skills: ['Video Editing', 'Motion Design', 'Automotive', 'Commercial'],
@@ -360,4 +360,13 @@ test('Suki theme renders cyber video hero, grid, services, and dynamic projects'
   assert.ok(capturedHtml.includes('Built for'), 'suki must render services section');
   assert.ok(capturedHtml.includes('suki-marquee'), 'suki must render marquee ticker');
   assert.ok(capturedHtml.includes('Have a project?'), 'suki must render contact section');
+  assert.ok(!capturedHtml.includes('DOTAE'), 'suki must not contain hardcoded DOTAE');
+
+  // Verify single-word username doesn't generate DOTAE fallback
+  sukiFn({
+    name: 'nkr3037',
+    title: 'Creative Technologist'
+  });
+  assert.ok(capturedHtml.includes('NKR3037'), 'suki must render single word name');
+  assert.ok(!capturedHtml.includes('DOTAE'), 'suki single-word name must never render DOTAE');
 });

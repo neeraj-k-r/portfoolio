@@ -2170,11 +2170,11 @@ function pageGallery(p, wIdx, url) {
       })()
     : vtpl === 'suki'
     ? (() => {
-        const parts = String(p.name || 'SUKI').trim().split(/\s+/).filter(Boolean);
-        const brand = (parts[0] || 'SUKI').toUpperCase();
+        const parts = String(p.name || 'PORTFOLIO').trim().split(/\s+/).filter(Boolean);
+        const brand = esc((parts[0] || 'PORTFOLIO').toUpperCase());
         const line1 = brand;
-        const line2 = (parts.slice(1).join(' ') || 'DOTAE').toUpperCase();
-        const name = esc(p.name || 'Sukidotae');
+        const line2 = parts.length > 1 ? esc(parts.slice(1).join(' ').toUpperCase()) : '';
+        const name = esc(p.name || 'Portfolio');
         const role = esc(p.title || 'Video Editor / Motion Designer');
         const bio = esc(p.bio || p.tagline || 'Cinematic edits, commercials and motion graphics built to make people stop scrolling.');
         const email = p.email || '';
@@ -2233,7 +2233,7 @@ function pageGallery(p, wIdx, url) {
                   <div class="suki-eyebrow"><span></span> ${role.toUpperCase()}</div>
                   <h1 class="suki-hero-title">
                     <span class="line">${line1}</span>
-                    <span class="line accent">${line2}</span>
+                    ${line2 ? `<span class="line accent">${line2}</span>` : ''}
                   </h1>
                   <p class="suki-hero-desc">${bio}</p>
                   <div class="suki-hero-actions">

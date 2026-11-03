@@ -10127,9 +10127,9 @@ function renderMythos(p) {
 // ==========================================
 
 function getSukiBrand(p) {
-  const raw = String(p.name || 'SUKI').trim();
+  const raw = String(p.name || 'PORTFOLIO').trim();
   const parts = raw.split(/\s+/);
-  const brand = (parts[0] || 'SUKI').toUpperCase();
+  const brand = (parts[0] || 'PORTFOLIO').toUpperCase();
   return brand;
 }
 
@@ -10171,15 +10171,15 @@ function renderSukiEyebrow(p) {
 }
 
 function renderSukiHeroTitle(p) {
-  const raw = String(p.name || 'SUKI DOTAE').trim();
+  const raw = String(p.name || 'PORTFOLIO').trim();
   const parts = raw.split(/\s+/);
-  const line1 = (parts[0] || 'SUKI').toUpperCase();
-  const line2 = (parts.slice(1).join(' ') || 'DOTAE').toUpperCase();
+  const line1 = (parts[0] || 'PORTFOLIO').toUpperCase();
+  const line2 = parts.length > 1 ? parts.slice(1).join(' ').toUpperCase() : '';
 
   return `
     <h1 class="suki-hero-title">
       <span class="line">${tplEsc(line1)}</span>
-      <span class="line accent">${tplEsc(line2)}</span>
+      ${line2 ? `<span class="line accent">${tplEsc(line2)}</span>` : ''}
     </h1>`;
 }
 
@@ -10409,7 +10409,7 @@ function renderSukiFooter(p) {
     <footer class="suki-footer">
       <div class="suki-shell suki-footer-inner">
         <a class="suki-brand" href="#home">${tplEsc(brand)}<span class="suki-brand-dot">.</span></a>
-        <p>© ${year} ${tplEsc(p.name || 'Sukidotae')}. All rights reserved.</p>
+        <p>© ${year} ${tplEsc(p.name || 'Portfolio')}. All rights reserved.</p>
         <a href="#home">Back to top ↑</a>
       </div>
     </footer>`;
@@ -10419,7 +10419,7 @@ function renderSuki(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
   document.body.dataset.template = 'suki';
-  document.title = `${p.name || 'Sukidotae'} | Video Editor & Motion Designer`;
+  document.title = `${p.name || 'Portfolio'} | Video Editor & Motion Designer`;
 
   const brand = getSukiBrand(p);
   const sourceItems = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : SUKI_FALLBACK_WORKS);
