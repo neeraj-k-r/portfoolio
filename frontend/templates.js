@@ -9891,6 +9891,29 @@ function renderMythosCardVisuals(p) {
     </article>`;
 }
 
+function renderMythosCardPlayground(p) {
+  const img = 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80';
+  return `
+    <article class="mythos-cat-card mythos-card-playground">
+      <div class="mythos-card-media">
+        <img src="${img}" alt="Retro CRT terminal monitor with glowing code prompt" class="mythos-card-img" loading="lazy"/>
+        <div class="mythos-card-crt-glow" aria-hidden="true">
+          <span class="mythos-crt-prompt">&gt;_</span>
+        </div>
+        <div class="mythos-card-overlay"></div>
+      </div>
+      <div class="mythos-card-footer">
+        <div class="mythos-card-meta">
+          <h3 class="mythos-card-title">Playground</h3>
+          <p class="mythos-card-sub">Ideas, Prototypes & Fun Builds</p>
+        </div>
+        <a href="#playground" class="mythos-card-btn" aria-label="Explore Playground">
+          <span class="mythos-card-arrow">↗</span>
+        </a>
+      </div>
+    </article>`;
+}
+
 function renderMythosCardsGrid(p) {
   return `
     <section class="mythos-cards-section" id="works">
@@ -9898,6 +9921,7 @@ function renderMythosCardsGrid(p) {
         ${renderMythosCardProjects(p)}
         ${renderMythosCardExperiments(p)}
         ${renderMythosCardVisuals(p)}
+        ${renderMythosCardPlayground(p)}
       </div>
     </section>`;
 }
