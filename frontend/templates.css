@@ -14947,3 +14947,53 @@ body.portfolio-view[data-template="mythos"] {
     align-items: flex-start;
   }
 }
+
+/* Responsive: Mobile Phone Adjustments */
+@media (max-width: 680px) {
+  .mythos-wrap {
+    padding: 16px 18px 48px;
+  }
+  .mythos-header {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+  .mythos-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .mythos-nav-list {
+    gap: 20px;
+  }
+  .mythos-art-stage {
+    height: 340px;
+  }
+  .mythos-art-inner {
+    transform: scale(0.75);
+    transform-origin: center top;
+  }
+  .mythos-slide-indicators {
+    display: none;
+  }
+  .mythos-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .mythos-archive-grid {
+    grid-template-columns: 1fr;
+  }
+  .mythos-hero-title {
+    font-size: 2.3rem;
+  }
+  .mythos-hero-actions {
+    flex-wrap: wrap;
+  }
+  .mythos-stats-row {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .mythos-stat-divider {
+    display: none;
+  }
+}
