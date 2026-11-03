@@ -14466,3 +14466,13 @@ body.portfolio-view[data-template="mythos"] {
   color: var(--my-text-dim);
   margin: 0;
 }
+
+/* Card 2 Experiments Specific Styling */
+.mythos-card-experiments .mythos-card-media {
+  background: radial-gradient(circle at center, rgba(139, 92, 246, 0.25) 0%, #0d0b13 80%);
+}
+
+.mythos-card-experiments:hover {
+  border-color: rgba(167, 139, 250, 0.45);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 25px rgba(139, 92, 246, 0.3);
+}
