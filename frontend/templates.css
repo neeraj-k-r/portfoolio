@@ -15025,3 +15025,26 @@ body.portfolio-view[data-template="mythos"] {
   --sk-font-display: 'Space Grotesk', system-ui, sans-serif;
   --sk-font-body: 'Inter', system-ui, sans-serif;
 }
+
+.suki-page {
+  min-height: 100vh;
+  background: var(--sk-bg);
+  color: var(--sk-text);
+  font-family: var(--sk-font-body);
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  padding-bottom: 0;
+}
+.suki-page ::selection {
+  background: var(--sk-cyan);
+  color: #031016;
+}
+.suki-shell {
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+}
+.suki-section {
+  position: relative;
+  padding: clamp(88px, 11vw, 150px) 0;
+}
