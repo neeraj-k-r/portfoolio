@@ -15637,3 +15637,21 @@ body.portfolio-view[data-template="mythos"] {
 .suki-project-card:hover .suki-project-media iframe {
   transform: scale(1.04);
 }
+
+.suki-project-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 65%
+  );
+  transform: translateX(-150%);
+  transition: transform 0.8s ease;
+  pointer-events: none;
+}
+.suki-project-card:hover .suki-project-media::after {
+  transform: translateX(150%);
+}
