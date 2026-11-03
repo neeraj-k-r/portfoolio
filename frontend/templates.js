@@ -9734,12 +9734,23 @@ function renderMythosConstellations() {
     </div>`;
 }
 
+function renderMythosSculpture() {
+  const statueImg = 'https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1000&q=80';
+  return `
+    <div class="mythos-sculpture-wrapper" aria-label="Michelangelo David Classical Sculpture">
+      <img src="${statueImg}" alt="Classical Marble Sculpture Bust" class="mythos-sculpture-img" loading="eager"/>
+      <div class="mythos-sculpture-shadow" aria-hidden="true"></div>
+      <div class="mythos-sculpture-tint" aria-hidden="true"></div>
+    </div>`;
+}
+
 function renderMythosHeroVisual(p) {
   return `
     <div class="mythos-art-stage" aria-label="Classical Sculpture Artwork">
       <div class="mythos-art-inner">
         ${renderMythosConstellations()}
         ${renderMythosCelestialMoon()}
+        ${renderMythosSculpture()}
       </div>
     </div>`;
 }
