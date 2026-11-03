@@ -9744,6 +9744,31 @@ function renderMythosSculpture() {
     </div>`;
 }
 
+function renderMythosWhiteLily() {
+  return `
+    <div class="mythos-lily-botanical" aria-hidden="true">
+      <svg class="mythos-lily-svg" viewBox="0 0 200 200" fill="none">
+        <path d="M40 180 Q80 140 100 110" stroke="#4a5538" stroke-width="5" stroke-linecap="round"/>
+        <path d="M70 150 Q50 130 30 140" fill="#3f4a2f" opacity="0.8"/>
+        <g class="mythos-lily-petals">
+          <ellipse cx="100" cy="60" rx="18" ry="48" fill="#ffffff" filter="drop-shadow(0 4px 12px rgba(0,0,0,0.5))"/>
+          <ellipse cx="70" cy="95" rx="18" ry="46" transform="rotate(-50 70 95)" fill="#f8fafc"/>
+          <ellipse cx="130" cy="95" rx="18" ry="46" transform="rotate(50 130 95)" fill="#f8fafc"/>
+          <ellipse cx="75" cy="135" rx="16" ry="42" transform="rotate(-110 75 135)" fill="#edf2f7"/>
+          <ellipse cx="125" cy="135" rx="16" ry="42" transform="rotate(110 125 135)" fill="#edf2f7"/>
+          <ellipse cx="100" cy="150" rx="16" ry="42" fill="#e2e8f0"/>
+          <circle cx="100" cy="105" r="16" fill="#84cc16" opacity="0.45"/>
+          <line x1="100" y1="105" x2="88" y2="75" stroke="#eab308" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="100" y1="105" x2="100" y2="70" stroke="#eab308" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="100" y1="105" x2="112" y2="75" stroke="#eab308" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="88" cy="74" r="3" fill="#ca8a04"/>
+          <circle cx="100" cy="69" r="3" fill="#ca8a04"/>
+          <circle cx="112" cy="74" r="3" fill="#ca8a04"/>
+        </g>
+      </svg>
+    </div>`;
+}
+
 function renderMythosHeroVisual(p) {
   return `
     <div class="mythos-art-stage" aria-label="Classical Sculpture Artwork">
@@ -9751,6 +9776,7 @@ function renderMythosHeroVisual(p) {
         ${renderMythosConstellations()}
         ${renderMythosCelestialMoon()}
         ${renderMythosSculpture()}
+        ${renderMythosWhiteLily()}
       </div>
     </div>`;
 }
