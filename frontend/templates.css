@@ -14252,3 +14252,22 @@ body.portfolio-view[data-template="mythos"] {
   mix-blend-mode: color-dodge;
   pointer-events: none;
 }
+
+/* White Lily Botanical Accent */
+.mythos-lily-botanical {
+  position: absolute;
+  top: 175px;
+  left: 95px;
+  width: 170px;
+  height: 170px;
+  z-index: 6;
+  pointer-events: none;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.75));
+  transform: rotate(-12deg);
+}
+
+.mythos-lily-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
