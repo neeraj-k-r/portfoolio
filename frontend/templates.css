@@ -15911,3 +15911,41 @@ body.portfolio-view[data-template="mythos"] {
 .suki-contact-actions {
   margin-top: 42px;
 }
+
+.suki-social-row {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+.suki-social-row a {
+  color: var(--sk-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.suki-social-row a:hover {
+  color: var(--sk-cyan);
+}
+
+.suki-footer {
+  border-top: 1px solid var(--sk-line);
+}
+.suki-footer-inner {
+  min-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.suki-footer-inner p,
+.suki-footer-inner > a:last-child {
+  font-size: 0.72rem;
+  color: var(--sk-muted);
+  text-decoration: none;
+}
+.suki-footer-inner > a:last-child:hover {
+  color: var(--sk-cyan);
+}
