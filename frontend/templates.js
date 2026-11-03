@@ -10309,3 +10309,37 @@ function renderSukiWorkCard(item, idx) {
       </div>
     </article>`;
 }
+
+function renderSukiServices(p) {
+  const defaultServices = [
+    { num: '01', title: 'Commercial Editing', desc: 'Brand films, campaigns, product launches and promotional content.' },
+    { num: '02', title: 'Automotive & Sound', desc: 'Cinematic car edits, dealership campaigns, reels and enthusiast content.' },
+    { num: '03', title: 'Short-form Content', desc: 'Fast, retention-focused edits for Instagram Reels, Shorts and TikTok.' },
+    { num: '04', title: 'Motion Graphics', desc: 'Typography, transitions, visual systems and motion-led storytelling.' }
+  ];
+
+  return `
+    <section class="suki-section suki-services" id="services">
+      <div class="suki-shell">
+        <div class="suki-section-heading">
+          <div>
+            <p class="suki-kicker">02 / WHAT I DO</p>
+            <h2>Built for <span>attention.</span></h2>
+          </div>
+          <p>From the first cut to final sound design, every decision supports pacing, clarity and retention.</p>
+        </div>
+        <div class="suki-service-list">
+          ${defaultServices.map(s => `
+            <article class="suki-service suki-glass">
+              <span class="suki-service-number">${s.num}</span>
+              <div>
+                <h3>${tplEsc(s.title)}</h3>
+                <p>${tplEsc(s.desc)}</p>
+              </div>
+              <b>↗</b>
+            </article>
+          `).join('')}
+        </div>
+      </div>
+    </section>`;
+}
