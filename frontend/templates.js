@@ -9797,6 +9797,17 @@ function renderMythosPetuniaBranch() {
     </div>`;
 }
 
+function renderMythosCloudCard() {
+  const cloudImg = 'https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=600&q=80';
+  return `
+    <div class="mythos-cloud-card" aria-label="Purple Dusk Clouds Polaroid">
+      <div class="mythos-cloud-frame">
+        <img src="${cloudImg}" alt="Atmospheric Dusk Clouds" class="mythos-cloud-img" loading="lazy"/>
+        <div class="mythos-cloud-tint"></div>
+      </div>
+    </div>`;
+}
+
 function renderMythosHeroVisual(p) {
   return `
     <div class="mythos-art-stage" aria-label="Classical Sculpture Artwork">
@@ -9806,6 +9817,7 @@ function renderMythosHeroVisual(p) {
         ${renderMythosSculpture()}
         ${renderMythosWhiteLily()}
         ${renderMythosPetuniaBranch()}
+        ${renderMythosCloudCard()}
       </div>
     </div>`;
 }
