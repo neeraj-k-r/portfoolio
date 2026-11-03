@@ -10227,3 +10227,23 @@ function renderSukiHeroActions(p) {
       </a>
     </div>`;
 }
+
+function renderSukiFilters(items) {
+  const categories = ['all'];
+  (items || []).forEach(it => {
+    const cat = String(it.category || (it.tags && it.tags[0]) || 'Commercial').toLowerCase();
+    if (!categories.includes(cat) && cat) categories.push(cat);
+  });
+  if (categories.length === 1) {
+    categories.push('automotive', 'commercial', 'motion', 'product');
+  }
+
+  return `
+    <div class="suki-filters" role="group" aria-label="Project category filters">
+      ${categories.map(c => `
+        <button class="suki-filter-btn ${c === 'all' ? 'is-active' : ''}" data-filter="${tplEsc(c)}" onclick="window.filterSukiProjects&&window.filterSukiProjects('${tplEsc(c)}', event)">
+          ${tplEsc(c.charAt(0).toUpperCase() + c.slice(1))}
+        </button>
+      `).join('')}
+    </div>`;
+}
