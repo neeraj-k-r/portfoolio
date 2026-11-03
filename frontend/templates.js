@@ -8662,7 +8662,7 @@ function renderIllustra(p) {
 }
 
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook, salon: renderSalon, illustra: renderIllustra, techno: renderTechno, analog: renderAnalog, mythos: renderMythos };
+window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook, salon: renderSalon, illustra: renderIllustra, techno: renderTechno, analog: renderAnalog, mythos: renderMythos , suki: renderSuki};
 window.PortfoolioTemplateList = TEMPLATES;
 
 
@@ -10444,4 +10444,187 @@ function renderSukiFooter(p) {
         <a href="#home">Back to top ↑</a>
       </div>
     </footer>`;
+}
+
+function renderSuki(p) {
+  normTpl(p);
+  const app = document.getElementById('app') || document.body;
+  document.body.dataset.template = 'suki';
+  document.title = `${p.name || 'Sukidotae'} | Video Editor & Motion Designer`;
+
+  const brand = getSukiBrand(p);
+  const sourceItems = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : SUKI_FALLBACK_WORKS);
+  const displayWorks = sourceItems.slice(0, 6);
+  while (displayWorks.length < 4) {
+    displayWorks.push(SUKI_FALLBACK_WORKS[displayWorks.length]);
+  }
+
+  const email = p.email || '';
+  const hireHref = email ? `mailto:${email}?subject=Collaboration%20Inquiry` : '#contact';
+
+  app.innerHTML = `
+    <div class="suki-page" id="sukiRoot">
+      <div class="suki-scroll-progress" id="sukiScrollProgress"></div>
+      <div class="suki-noise" aria-hidden="true"></div>
+      <div class="suki-cyber-grid" aria-hidden="true"></div>
+      <div class="suki-mouse-glow" id="sukiMouseGlow" aria-hidden="true"></div>
+      <div class="suki-cursor-dot" id="sukiCursorDot" aria-hidden="true"></div>
+      <div class="suki-cursor-ring" id="sukiCursorRing" aria-hidden="true"></div>
+
+      <header class="suki-site-header" id="sukiHeader">
+        <nav class="suki-nav suki-shell">
+          ${renderSukiBrand(p)}
+          <div class="suki-nav-links" id="sukiNavLinks">
+            <a href="#home">Home</a>
+            <a href="#work">Work</a>
+            <a href="#services">Services</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </div>
+          <a class="suki-btn suki-btn--small" href="${tplEsc(hireHref)}">Hire Me</a>
+          <button class="suki-menu-toggle" id="sukiMenuToggle" aria-label="Open menu" aria-expanded="false" onclick="window.toggleSukiMobileMenu&&window.toggleSukiMobileMenu()">
+            <span></span><span></span>
+          </button>
+        </nav>
+      </header>
+
+      <aside class="suki-mobile-menu" id="sukiMobileMenu" aria-hidden="true">
+        <div class="suki-mobile-menu__glow"></div>
+        <nav>
+          <a href="#home" onclick="window.toggleSukiMobileMenu(false)"><span>01</span>Home</a>
+          <a href="#work" onclick="window.toggleSukiMobileMenu(false)"><span>02</span>Work</a>
+          <a href="#services" onclick="window.toggleSukiMobileMenu(false)"><span>03</span>Services</a>
+          <a href="#about" onclick="window.toggleSukiMobileMenu(false)"><span>04</span>About</a>
+          <a href="#contact" onclick="window.toggleSukiMobileMenu(false)"><span>05</span>Contact</a>
+        </nav>
+        <p>${tplEsc(p.title || 'Video editor • Motion designer')}</p>
+      </aside>
+
+      <main>
+        <section class="suki-hero" id="home">
+          ${renderSukiHeroMedia(p)}
+          <div class="suki-hero-orb suki-hero-orb--one" aria-hidden="true"></div>
+          <div class="suki-hero-orb suki-hero-orb--two" aria-hidden="true"></div>
+
+          <div class="suki-shell suki-hero-content">
+            <div class="suki-hero-copy">
+              ${renderSukiEyebrow(p)}
+              ${renderSukiHeroTitle(p)}
+              <p class="suki-hero-desc">
+                ${tplEsc(p.bio || p.tagline || 'Cinematic edits, commercials and motion graphics built to make people stop scrolling.')}
+              </p>
+              ${renderSukiHeroActions(p)}
+            </div>
+
+            <div class="suki-hero-badge suki-glass">
+              <span class="suki-pulse" aria-hidden="true"></span>
+              <div>
+                <small>Availability</small>
+                <strong>Available for Projects</strong>
+              </div>
+            </div>
+          </div>
+
+          <a class="suki-scroll-cue" href="#work">
+            <span>Scroll to explore</span>
+            <i>↓</i>
+          </a>
+        </section>
+
+        <section class="suki-section suki-work" id="work">
+          <div class="suki-shell">
+            <div class="suki-section-heading">
+              <div>
+                <p class="suki-kicker">01 / SELECTED WORK</p>
+                <h2>Featured <span>Projects.</span></h2>
+              </div>
+              <p>A selection of edits across automotive, commercial, product and motion design.</p>
+            </div>
+
+            ${renderSukiFilters(displayWorks)}
+
+            <div class="suki-project-grid" id="sukiProjectGrid">
+              ${displayWorks.map((w, idx) => renderSukiWorkCard(w, idx)).join('')}
+            </div>
+          </div>
+        </section>
+
+        ${renderSukiServices(p)}
+        ${renderSukiAbout(p)}
+        ${renderSukiMarquee(p)}
+        ${renderSukiContact(p)}
+      </main>
+
+      ${renderSukiFooter(p)}
+    </div>`;
+
+  // Attach interactive behaviors
+  window.openSukiWorkDetail = function(idx) {
+    const item = displayWorks[idx];
+    if (item && (item.url || item.demoUrl || item.link)) {
+      window.open(item.url || item.demoUrl || item.link, '_blank', 'noopener');
+    }
+  };
+
+  window.toggleSukiMobileMenu = function(force) {
+    const menu = document.getElementById('sukiMobileMenu');
+    const toggle = document.getElementById('sukiMenuToggle');
+    if (!menu || !toggle) return;
+    const isOpen = typeof force === 'boolean' ? force : !menu.classList.contains('is-open');
+    menu.classList.toggle('is-open', isOpen);
+    toggle.classList.toggle('is-active', isOpen);
+    document.body.classList.toggle('suki-menu-open', isOpen);
+  };
+
+  window.filterSukiProjects = function(category, e) {
+    if (e && e.preventDefault) e.preventDefault();
+    const btns = document.querySelectorAll('.suki-filter-btn');
+    btns.forEach(b => b.classList.toggle('is-active', b.dataset.filter === category));
+
+    const cards = document.querySelectorAll('.suki-project-card');
+    cards.forEach(c => {
+      const cat = c.dataset.category || 'all';
+      if (category === 'all' || cat === category) {
+        c.classList.remove('is-hidden');
+      } else {
+        c.classList.add('is-hidden');
+      }
+    });
+  };
+
+  if (typeof window !== 'undefined') {
+    // Scroll progress & header blur
+    window.addEventListener('scroll', function() {
+      const prog = document.getElementById('sukiScrollProgress');
+      const header = document.getElementById('sukiHeader');
+      const scrollMax = document.documentElement.scrollHeight - window.innerHeight;
+      if (prog && scrollMax > 0) {
+        const pct = (window.scrollY / scrollMax) * 100;
+        prog.style.width = pct + '%';
+      }
+      if (header) {
+        header.classList.toggle('is-scrolled', window.scrollY > 40);
+      }
+    }, { passive: true });
+
+    // Cursor tracking
+    const dot = document.getElementById('sukiCursorDot');
+    const ring = document.getElementById('sukiCursorRing');
+    const glow = document.getElementById('sukiMouseGlow');
+    if (dot && ring) {
+      window.addEventListener('mousemove', function(e) {
+        dot.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        ring.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        if (glow) {
+          glow.style.left = e.clientX + 'px';
+          glow.style.top = e.clientY + 'px';
+        }
+      }, { passive: true });
+
+      document.querySelectorAll('a, button, .suki-project-card').forEach(el => {
+        el.addEventListener('mouseenter', () => ring.classList.add('is-hover'));
+        el.addEventListener('mouseleave', () => ring.classList.remove('is-hover'));
+      });
+    }
+  }
 }
