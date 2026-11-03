@@ -15739,3 +15739,29 @@ body.portfolio-view[data-template="mythos"] {
 .suki-video-controls .fullscreen-btn {
   margin-left: auto;
 }
+
+.suki-project-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-end;
+  padding: 18px 10px 8px;
+}
+.suki-project-info h3 {
+  font-family: var(--sk-font-display);
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #ffffff;
+  margin: 0;
+}
+.suki-project-info p {
+  color: var(--sk-muted);
+  font-size: 0.78rem;
+  margin: 6px 0 0;
+}
+.suki-project-info > span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--sk-cyan);
+  white-space: nowrap;
+}
