@@ -15002,3 +15002,26 @@ body.portfolio-view[data-template="mythos"] {
     display: none;
   }
 }
+
+/* ==========================================================================
+   SUKI CINEMATIC THEME (Cyber Video Editor & Motion Showcase)
+   ========================================================================== */
+
+:root {
+  --sk-bg: #050b11;
+  --sk-bg-2: #07131d;
+  --sk-surface: rgba(13, 29, 42, 0.58);
+  --sk-surface-strong: rgba(14, 32, 46, 0.82);
+  --sk-line: rgba(148, 220, 236, 0.13);
+  --sk-line-bright: rgba(25, 227, 230, 0.38);
+  --sk-cyan: #19e3e6;
+  --sk-blue: #36b7ff;
+  --sk-text: #f3fbff;
+  --sk-muted: #8da8b8;
+  --sk-muted-2: #607a89;
+  --sk-shadow: 0 30px 80px rgba(0, 0, 0, 0.32);
+  --sk-radius: 24px;
+  --sk-header: 78px;
+  --sk-font-display: 'Space Grotesk', system-ui, sans-serif;
+  --sk-font-body: 'Inter', system-ui, sans-serif;
+}
