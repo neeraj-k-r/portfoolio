@@ -15109,3 +15109,15 @@ body.portfolio-view[data-template="mythos"] {
   filter: blur(100px);
   pointer-events: none;
 }
+
+.suki-mouse-glow {
+  position: fixed;
+  z-index: 1;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(25, 227, 230, 0.09), rgba(54, 183, 255, 0.035) 35%, transparent 68%);
+  transition: opacity 0.3s ease;
+}
