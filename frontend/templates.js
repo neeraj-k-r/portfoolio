@@ -9716,10 +9716,29 @@ function renderMythosCelestialMoon() {
     </div>`;
 }
 
+function renderMythosConstellations() {
+  return `
+    <div class="mythos-constellations" aria-hidden="true">
+      <svg class="mythos-constellation-svg" viewBox="0 0 500 500" fill="none">
+        <circle cx="250" cy="250" r="190" stroke="rgba(196, 165, 252, 0.22)" stroke-width="1" stroke-dasharray="2 3"/>
+        <circle cx="250" cy="250" r="230" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.8"/>
+        <line x1="50" y1="250" x2="450" y2="250" stroke="rgba(196, 165, 252, 0.12)" stroke-width="0.7"/>
+        <line x1="250" y1="50" x2="250" y2="450" stroke="rgba(196, 165, 252, 0.12)" stroke-width="0.7"/>
+        <path d="M70 245v10M65 250h10" stroke="rgba(196, 165, 252, 0.35)" stroke-width="1"/>
+        <path d="M430 245v10M425 250h10" stroke="rgba(196, 165, 252, 0.35)" stroke-width="1"/>
+        <circle cx="85" cy="180" r="4.5" fill="#c4a5fc" class="mythos-node-glow"/>
+        <circle cx="60" cy="250" r="2.5" fill="#ffffff"/>
+        <circle cx="115" cy="360" r="3" fill="#a78bfa"/>
+        <circle cx="395" cy="130" r="3" fill="#c4a5fc"/>
+      </svg>
+    </div>`;
+}
+
 function renderMythosHeroVisual(p) {
   return `
     <div class="mythos-art-stage" aria-label="Classical Sculpture Artwork">
       <div class="mythos-art-inner">
+        ${renderMythosConstellations()}
         ${renderMythosCelestialMoon()}
       </div>
     </div>`;
