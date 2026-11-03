@@ -10432,3 +10432,16 @@ function renderSukiSocials(p) {
       ${links.map(l => `<a href="${tplEsc(l.url)}" target="_blank" rel="noopener">${tplEsc(l.label)}</a>`).join('')}
     </div>`;
 }
+
+function renderSukiFooter(p) {
+  const brand = getSukiBrand(p);
+  const year = new Date().getFullYear();
+  return `
+    <footer class="suki-footer">
+      <div class="suki-shell suki-footer-inner">
+        <a class="suki-brand" href="#home">${tplEsc(brand)}<span class="suki-brand-dot">.</span></a>
+        <p>© ${year} ${tplEsc(p.name || 'Sukidotae')}. All rights reserved.</p>
+        <a href="#home">Back to top ↑</a>
+      </div>
+    </footer>`;
+}
