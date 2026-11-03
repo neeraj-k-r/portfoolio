@@ -15121,3 +15121,34 @@ body.portfolio-view[data-template="mythos"] {
   background: radial-gradient(circle, rgba(25, 227, 230, 0.09), rgba(54, 183, 255, 0.035) 35%, transparent 68%);
   transition: opacity 0.3s ease;
 }
+
+.suki-cursor-dot,
+.suki-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 300;
+  pointer-events: none;
+  border-radius: 50%;
+  will-change: transform;
+  transform: translate3d(-50%, -50%, 0);
+}
+.suki-cursor-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--sk-cyan);
+  box-shadow: 0 0 12px var(--sk-cyan);
+}
+.suki-cursor-ring {
+  width: 34px;
+  height: 34px;
+  border: 1px solid rgba(25, 227, 230, 0.65);
+  transition: width 0.22s ease, height 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+}
+.suki-cursor-ring.is-hover {
+  width: 54px;
+  height: 54px;
+  background: rgba(25, 227, 230, 0.08);
+  border-color: var(--sk-cyan);
+  transform: translate3d(-50%, -50%, 0) scale(1.15);
+}
