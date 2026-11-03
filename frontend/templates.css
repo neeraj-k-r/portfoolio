@@ -14017,3 +14017,62 @@ body.portfolio-view[data-template="mythos"] {
   font-weight: 400;
   letter-spacing: -0.005em;
 }
+
+/* Hero CTA Buttons */
+.mythos-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.mythos-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background: var(--my-lavender);
+  color: #160f26;
+  font-size: 0.92rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 0 24px rgba(196, 165, 252, 0.35);
+  transition: all 0.25s ease;
+}
+
+.mythos-btn-primary:hover {
+  background: #dbcafe;
+  box-shadow: 0 0 32px rgba(196, 165, 252, 0.6);
+  transform: translateY(-2px);
+}
+
+.mythos-btn-arrow {
+  font-size: 1rem;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.mythos-btn-primary:hover .mythos-btn-arrow {
+  transform: translate(2px, -2px);
+}
+
+.mythos-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 26px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #ffffff;
+  font-size: 0.92rem;
+  font-weight: 500;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+.mythos-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(196, 165, 252, 0.4);
+  transform: translateY(-2px);
+}
