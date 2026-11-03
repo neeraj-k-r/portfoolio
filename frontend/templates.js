@@ -10192,3 +10192,11 @@ function renderSukiHeroMedia(p) {
       <div class="suki-hero-overlay"></div>
     </div>`;
 }
+
+function renderSukiEyebrow(p) {
+  const role = tplEsc((p.title || p.role || 'Video Editor / Motion Designer').toUpperCase());
+  return `
+    <div class="suki-eyebrow">
+      <span></span> ${role}
+    </div>`;
+}
