@@ -1806,6 +1806,268 @@ function pageGallery(p, wIdx, url) {
           </script>
         </div>`;
       })()
+    : vtpl === 'mythos'
+    ? (() => {
+        const parts = String(p.name || 'NK').trim().split(/\s+/).filter(Boolean);
+        const initials = !parts.length ? 'NK' : (parts.length === 1 ? parts[0].slice(0, 2).toUpperCase() : (parts[0][0] + parts[parts.length - 1][0]).toUpperCase());
+        const name = esc(p.name || 'Nithin Krishna');
+        const role = esc(p.title || 'Creative Engineer');
+        const bio = esc(p.bio || p.tagline || 'A showcase of my creative work, digital builds, visual explorations, and curious experiments.');
+        const location = esc(p.location || 'Creative Studio');
+        const email = p.email || '';
+        const hireHref = email ? `mailto:${esc(email)}?subject=Collaboration%20Inquiry` : '#about';
+        const projectCount = (p.projects && p.projects.length) ? `${p.projects.length}+` : '25+';
+        const expCount = (works && works.length) ? `${works.length}+` : '10+';
+        const tools = (Array.isArray(p.skills) && p.skills.length) ? p.skills.slice(0, 6) : ['React', 'TypeScript', 'Firebase', 'Tailwind', 'Figma', 'Blender'];
+        const archiveItems = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : []);
+
+        return `<div class="mythos-page" id="mythosRoot">
+          <div class="mythos-wrap">
+            <header class="mythos-header">
+              <div class="mythos-brand">
+                <a href="#home" class="mythos-brand-logo" aria-label="${name}">
+                  <span class="mythos-monogram">${initials}<span class="mythos-monogram-plus">+</span></span>
+                </a>
+                <span class="mythos-brand-divider" aria-hidden="true"></span>
+                <div class="mythos-brand-meta">
+                  <span class="mythos-brand-name">${name}</span>
+                  <span class="mythos-brand-role">${role}</span>
+                </div>
+              </div>
+              <nav class="mythos-nav" aria-label="Main Navigation">
+                <ul class="mythos-nav-list">
+                  <li class="mythos-nav-item"><a href="#home" class="mythos-nav-link is-active">Home<span class="mythos-nav-indicator" aria-hidden="true"></span></a></li>
+                  <li class="mythos-nav-item"><a href="#works" class="mythos-nav-link">Works</a></li>
+                  <li class="mythos-nav-item"><a href="#playground" class="mythos-nav-link">Playground</a></li>
+                  <li class="mythos-nav-item"><a href="#archives" class="mythos-nav-link">Archives</a></li>
+                  <li class="mythos-nav-item"><a href="#about" class="mythos-nav-link" onclick="window.openMythosAboutModal&&window.openMythosAboutModal(event)">About</a></li>
+                </ul>
+              </nav>
+              <div class="mythos-header-actions">
+                <button class="mythos-theme-toggle" aria-label="Theme mode indicator" title="Dark celestial mode">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+                </button>
+                <a href="${hireHref}" class="mythos-collab-btn" ${!email ? 'onclick="window.openMythosAboutModal&&window.openMythosAboutModal(event)"' : ''}>
+                  <span>Let's Collaborate</span>
+                  <span class="mythos-arrow-icon" aria-hidden="true">↗</span>
+                </a>
+              </div>
+            </header>
+
+            <section class="mythos-hero-stage">
+              <div class="mythos-hero-col-left">
+                <span class="mythos-kicker">PORTFOLIO</span>
+                <h1 class="mythos-hero-title">
+                  <span class="mythos-title-line">Ideas, Design</span>
+                  <span class="mythos-title-line">and <em class="mythos-title-italic">Experiments</em></span>
+                </h1>
+                <p class="mythos-hero-bio">${bio}</p>
+                <div class="mythos-hero-actions">
+                  <a href="#works" class="mythos-btn-primary"><span>Explore Work</span><span class="mythos-btn-arrow" aria-hidden="true">↗</span></a>
+                  <a href="#about" class="mythos-btn-secondary" onclick="window.openMythosAboutModal&&window.openMythosAboutModal(event)"><span>About Me</span></a>
+                </div>
+                <div class="mythos-stats-row">
+                  <div class="mythos-stat-item">
+                    <span class="mythos-stat-accent-bar" aria-hidden="true"></span>
+                    <div class="mythos-stat-text-group">
+                      <span class="mythos-stat-val">${projectCount}</span>
+                      <span class="mythos-stat-label">Projects</span>
+                    </div>
+                  </div>
+                  <div class="mythos-stat-divider" aria-hidden="true"></div>
+                  <div class="mythos-stat-item">
+                    <div class="mythos-stat-text-group">
+                      <span class="mythos-stat-val">${expCount}</span>
+                      <span class="mythos-stat-label">Experiments</span>
+                    </div>
+                  </div>
+                  <div class="mythos-stat-divider" aria-hidden="true"></div>
+                  <div class="mythos-stat-item">
+                    <div class="mythos-stat-text-group">
+                      <span class="mythos-stat-val">∞</span>
+                      <span class="mythos-stat-label">Ideas</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mythos-hero-col-right">
+                <div class="mythos-art-stage" aria-label="Classical Sculpture Artwork">
+                  <div class="mythos-art-inner">
+                    <div class="mythos-constellations" aria-hidden="true">
+                      <svg class="mythos-constellation-svg" viewBox="0 0 500 500" fill="none">
+                        <circle cx="250" cy="250" r="190" stroke="rgba(196, 165, 252, 0.22)" stroke-width="1" stroke-dasharray="2 3"/>
+                        <circle cx="250" cy="250" r="230" stroke="rgba(255, 255, 255, 0.08)" stroke-width="0.8"/>
+                        <line x1="50" y1="250" x2="450" y2="250" stroke="rgba(196, 165, 252, 0.12)" stroke-width="0.7"/>
+                        <line x1="250" y1="50" x2="250" y2="450" stroke="rgba(196, 165, 252, 0.12)" stroke-width="0.7"/>
+                        <circle cx="85" cy="180" r="4.5" fill="#c4a5fc" class="mythos-node-glow"/>
+                        <circle cx="60" cy="250" r="2.5" fill="#ffffff"/>
+                        <circle cx="115" cy="360" r="3" fill="#a78bfa"/>
+                        <circle cx="395" cy="130" r="3" fill="#c4a5fc"/>
+                      </svg>
+                    </div>
+                    <div class="mythos-celestial-moon" aria-hidden="true">
+                      <div class="mythos-moon-surface"></div>
+                      <div class="mythos-moon-glow"></div>
+                    </div>
+                    <div class="mythos-sculpture-wrapper" aria-label="Michelangelo David Classical Sculpture">
+                      <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=1000&q=80" alt="Classical Marble Sculpture Bust" class="mythos-sculpture-img" loading="eager"/>
+                      <div class="mythos-sculpture-shadow" aria-hidden="true"></div>
+                      <div class="mythos-sculpture-tint" aria-hidden="true"></div>
+                    </div>
+                    <div class="mythos-lily-botanical" aria-hidden="true">
+                      <svg class="mythos-lily-svg" viewBox="0 0 200 200" fill="none">
+                        <path d="M40 180 Q80 140 100 110" stroke="#4a5538" stroke-width="5" stroke-linecap="round"/>
+                        <ellipse cx="100" cy="60" rx="18" ry="48" fill="#ffffff"/>
+                        <ellipse cx="70" cy="95" rx="18" ry="46" transform="rotate(-50 70 95)" fill="#f8fafc"/>
+                        <ellipse cx="130" cy="95" rx="18" ry="46" transform="rotate(50 130 95)" fill="#f8fafc"/>
+                        <ellipse cx="100" cy="150" rx="16" ry="42" fill="#e2e8f0"/>
+                      </svg>
+                    </div>
+                    <div class="mythos-petunia-branch" aria-hidden="true">
+                      <svg class="mythos-petunia-svg" viewBox="0 0 160 220" fill="none">
+                        <path d="M120 220 Q100 160 115 110 Q125 70 95 30" stroke="#374127" stroke-width="2.5" stroke-linecap="round"/>
+                        <g class="mythos-petunia-flower" transform="translate(110, 80)"><circle cx="0" cy="0" r="14" fill="#8b5cf6"/><circle cx="0" cy="0" r="10" fill="#a78bfa"/></g>
+                        <g class="mythos-petunia-flower" transform="translate(85, 30)"><circle cx="0" cy="0" r="12" fill="#8b5cf6"/><circle cx="0" cy="0" r="8" fill="#c4a5fc"/></g>
+                      </svg>
+                    </div>
+                    <div class="mythos-cloud-card" aria-label="Purple Dusk Clouds Polaroid">
+                      <div class="mythos-cloud-frame">
+                        <img src="https://images.unsplash.com/photo-1534088568595-a066f410bcda?auto=format&fit=crop&w=600&q=80" alt="Atmospheric Dusk Clouds" class="mythos-cloud-img" loading="lazy"/>
+                        <div class="mythos-cloud-tint"></div>
+                      </div>
+                    </div>
+                    <div class="mythos-slide-indicators" aria-hidden="true">
+                      <div class="mythos-slide-num is-active"><span>01</span><span class="mythos-slide-bar"></span></div>
+                      <div class="mythos-slide-num"><span>02</span></div>
+                      <div class="mythos-slide-num"><span>03</span></div>
+                      <div class="mythos-slide-num"><span>04</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="mythos-cards-section" id="works">
+              <div class="mythos-cards-grid">
+                <article class="mythos-cat-card mythos-card-projects">
+                  <div class="mythos-card-media"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80" alt="Coffee cup" class="mythos-card-img" loading="lazy"/></div>
+                  <div class="mythos-card-footer">
+                    <div class="mythos-card-meta"><h3 class="mythos-card-title">Projects</h3><p class="mythos-card-sub">Real Builds &amp; Case Studies</p></div>
+                    <a href="#works" class="mythos-card-btn" aria-label="Explore Projects"><span class="mythos-card-arrow">↗</span></a>
+                  </div>
+                </article>
+                <article class="mythos-cat-card mythos-card-experiments">
+                  <div class="mythos-card-media"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80" alt="3D wave mesh" class="mythos-card-img" loading="lazy"/></div>
+                  <div class="mythos-card-footer">
+                    <div class="mythos-card-meta"><h3 class="mythos-card-title">Experiments</h3><p class="mythos-card-sub">Creative Tech &amp; Explorations</p></div>
+                    <a href="#playground" class="mythos-card-btn" aria-label="Explore Experiments"><span class="mythos-card-arrow">↗</span></a>
+                  </div>
+                </article>
+                <article class="mythos-cat-card mythos-card-visuals">
+                  <div class="mythos-card-media"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80" alt="Mountain film peaks" class="mythos-card-img" loading="lazy"/></div>
+                  <div class="mythos-card-footer">
+                    <div class="mythos-card-meta"><h3 class="mythos-card-title">Visuals</h3><p class="mythos-card-sub">Art, Photography &amp; Edits</p></div>
+                    <a href="#archives" class="mythos-card-btn" aria-label="Explore Visuals"><span class="mythos-card-arrow">↗</span></a>
+                  </div>
+                </article>
+                <article class="mythos-cat-card mythos-card-playground">
+                  <div class="mythos-card-media"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80" alt="Retro terminal" class="mythos-card-img" loading="lazy"/></div>
+                  <div class="mythos-card-footer">
+                    <div class="mythos-card-meta"><h3 class="mythos-card-title">Playground</h3><p class="mythos-card-sub">Ideas, Prototypes &amp; Fun Builds</p></div>
+                    <a href="#playground" class="mythos-card-btn" aria-label="Explore Playground"><span class="mythos-card-arrow">↗</span></a>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            ${archiveItems.length ? `
+            <section class="mythos-archive-section" id="archives">
+              <div class="mythos-archive-head">
+                <h2 class="mythos-archive-title">Curated Archive</h2>
+                <div class="mythos-archive-divider" aria-hidden="true"></div>
+              </div>
+              <div class="mythos-archive-grid">
+                ${archiveItems.map((item, idx) => `
+                  <article class="mythos-archive-card">
+                    <div class="mythos-archive-thumb">
+                      <img src="${esc(item.imageUrl || item.image || 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&w=700&q=80')}" alt="${esc(item.title || 'Work')}" class="mythos-archive-img" loading="lazy"/>
+                      <span class="mythos-archive-tag">${esc(item.category || (item.tags && item.tags[0]) || 'Creation')}</span>
+                    </div>
+                    <div class="mythos-archive-body">
+                      <div class="mythos-archive-top">
+                        <h3 class="mythos-archive-item-title">${esc(item.title || item.name || 'Untitled')}</h3>
+                        ${(item.url || item.demoUrl) ? `<a href="${esc(item.url || item.demoUrl)}" class="mythos-archive-link" target="_blank" rel="noopener">↗</a>` : ''}
+                      </div>
+                      ${item.desc ? `<p class="mythos-archive-desc">${esc(item.desc)}</p>` : ''}
+                    </div>
+                  </article>
+                `).join('')}
+              </div>
+            </section>` : ''}
+
+            <footer class="mythos-bottom-bar">
+              <div class="mythos-tools-group">
+                <div class="mythos-tools-label">
+                  <svg class="mythos-stack-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                  </svg>
+                  <span>Tech &amp; Tools</span>
+                </div>
+                <div class="mythos-tools-divider" aria-hidden="true"></div>
+                <div class="mythos-pills-list">
+                  ${tools.map(t => `<span class="mythos-tool-pill"><span>${esc(t)}</span></span>`).join('')}
+                  <a href="#archives" class="mythos-tool-pill mythos-pill-more">+ More</a>
+                </div>
+              </div>
+              <div class="mythos-sparkle-kicker">
+                <span class="mythos-sparkle-icon" aria-hidden="true">✦</span>
+                <span class="mythos-sparkle-text">Always exploring new possibilities...</span>
+              </div>
+            </footer>
+          </div>
+
+          <div class="mythos-modal-backdrop" id="mythosAboutModal" onclick="window.closeMythosAboutModal&&window.closeMythosAboutModal(event)">
+            <div class="mythos-modal-card" onclick="event.stopPropagation()">
+              <div class="mythos-modal-head">
+                <div class="mythos-modal-title-group">
+                  <span class="mythos-modal-kicker">ABOUT &amp; INQUIRIES</span>
+                  <h3 class="mythos-modal-name">${name}</h3>
+                  <p class="mythos-modal-role">${role}</p>
+                </div>
+                <button class="mythos-modal-close" onclick="window.closeMythosAboutModal()" aria-label="Close modal">✕</button>
+              </div>
+              <div class="mythos-modal-body">
+                <p class="mythos-modal-bio">${bio}</p>
+                <div class="mythos-modal-meta-grid">
+                  <div class="mythos-modal-meta-item">
+                    <span class="mythos-modal-meta-label">Location</span>
+                    <span class="mythos-modal-meta-val">${location}</span>
+                  </div>
+                  ${email ? `<div class="mythos-modal-meta-item">
+                    <span class="mythos-modal-meta-label">Direct Contact</span>
+                    <a href="mailto:${esc(email)}" class="mythos-modal-email">${esc(email)}</a>
+                  </div>` : ''}
+                </div>
+              </div>
+            </div>
+          </div>
+          <script>
+            window.openMythosAboutModal = function(e) {
+              if (e && e.preventDefault) e.preventDefault();
+              var m = document.getElementById('mythosAboutModal');
+              if (m) m.classList.add('is-open');
+            };
+            window.closeMythosAboutModal = function() {
+              var m = document.getElementById('mythosAboutModal');
+              if (m) m.classList.remove('is-open');
+            };
+          </script>
+        </div>`;
+      })()
     : vtpl === 'salon'
     ? `<div class="salon-page">
       <div class="salon-ambient-light" aria-hidden="true"></div>
