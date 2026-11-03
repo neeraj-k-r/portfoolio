@@ -13790,3 +13790,75 @@ body.portfolio-view[data-template="mythos"] {
   z-index: 2;
   box-sizing: border-box;
 }
+
+/* Header & Brand */
+.mythos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0 36px;
+  position: relative;
+  z-index: 50;
+}
+
+.mythos-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.mythos-brand-logo {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.2s ease;
+}
+
+.mythos-brand-logo:hover {
+  opacity: 0.85;
+}
+
+.mythos-monogram {
+  font-family: var(--my-font-serif);
+  font-size: 1.75rem;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  color: var(--my-text);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.mythos-monogram-plus {
+  font-family: var(--my-font-sans);
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: var(--my-lavender);
+  margin-left: 2px;
+  line-height: 1;
+}
+
+.mythos-brand-divider {
+  width: 26px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.mythos-brand-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mythos-brand-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--my-text);
+  letter-spacing: -0.01em;
+}
+
+.mythos-brand-role {
+  font-size: 0.76rem;
+  font-weight: 400;
+  color: var(--my-text-dim);
+}
