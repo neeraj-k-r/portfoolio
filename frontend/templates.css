@@ -15592,3 +15592,25 @@ body.portfolio-view[data-template="mythos"] {
   background: var(--sk-cyan);
   box-shadow: 0 4px 18px rgba(25, 227, 230, 0.35);
 }
+
+.suki-project-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.suki-project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  padding: 12px;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease, border-color 0.45s ease;
+  cursor: pointer;
+}
+.suki-project-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(25, 227, 230, 0.45);
+  box-shadow: 0 30px 60px rgba(25, 227, 230, 0.18), 0 8px 25px rgba(0, 0, 0, 0.28);
+}
+.suki-project-card.is-hidden {
+  display: none !important;
+}
