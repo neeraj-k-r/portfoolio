@@ -14123,3 +14123,40 @@ body.portfolio-view[data-template="mythos"] {
   height: 38px;
   background: rgba(255, 255, 255, 0.12);
 }
+
+/* Hero Stage & Visual Container */
+.mythos-hero-stage {
+  display: grid;
+  grid-template-columns: 1.05fr 1.15fr;
+  align-items: center;
+  gap: 32px;
+  min-height: 540px;
+  margin-bottom: 56px;
+  position: relative;
+}
+
+.mythos-hero-col-left {
+  position: relative;
+  z-index: 10;
+}
+
+.mythos-hero-col-right {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mythos-art-stage {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  height: 520px;
+}
+
+.mythos-art-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
