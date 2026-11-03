@@ -9827,10 +9827,31 @@ function renderMythosSlideIndicators() {
     </div>`;
 }
 
+function renderMythosCardProjects(p) {
+  const img = 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80';
+  return `
+    <article class="mythos-cat-card mythos-card-projects">
+      <div class="mythos-card-media">
+        <img src="${img}" alt="Coffee cup in slatted window shadows" class="mythos-card-img" loading="lazy"/>
+        <div class="mythos-card-overlay"></div>
+      </div>
+      <div class="mythos-card-footer">
+        <div class="mythos-card-meta">
+          <h3 class="mythos-card-title">Projects</h3>
+          <p class="mythos-card-sub">Real Builds & Case Studies</p>
+        </div>
+        <a href="#works" class="mythos-card-btn" aria-label="Explore Projects">
+          <span class="mythos-card-arrow">↗</span>
+        </a>
+      </div>
+    </article>`;
+}
+
 function renderMythosCardsGrid(p) {
   return `
     <section class="mythos-cards-section" id="works">
       <div class="mythos-cards-grid">
+        ${renderMythosCardProjects(p)}
       </div>
     </section>`;
 }
