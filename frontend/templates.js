@@ -9827,6 +9827,14 @@ function renderMythosSlideIndicators() {
     </div>`;
 }
 
+function renderMythosCardsGrid(p) {
+  return `
+    <section class="mythos-cards-section" id="works">
+      <div class="mythos-cards-grid">
+      </div>
+    </section>`;
+}
+
 function renderMythosHeroVisual(p) {
   return `
     <div class="mythos-art-stage" aria-label="Classical Sculpture Artwork">
@@ -9862,6 +9870,7 @@ function renderMythos(p) {
           ${renderMythosHeroVisual(p)}
         </div>
       </section>
+      ${renderMythosCardsGrid(p)}
     </div>
   </div>`;
 }
