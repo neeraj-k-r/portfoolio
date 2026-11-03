@@ -10392,3 +10392,26 @@ function renderSukiMarquee(p) {
       </div>
     </section>`;
 }
+
+function renderSukiContact(p) {
+  const email = p.email || '';
+  const phone = p.phone || '';
+  const hireHref = phone ? `https://wa.me/${phone.replace(/\D/g, '')}?text=Hi,${encodeURIComponent(' ')}I'm${encodeURIComponent(' ')}interested${encodeURIComponent(' ')}in${encodeURIComponent(' ')}working${encodeURIComponent(' ')}with${encodeURIComponent(' ')}you` : (email ? `mailto:${email}?subject=Project%20Inquiry` : '#home');
+
+  return `
+    <section class="suki-section suki-contact" id="contact">
+      <div class="suki-contact-glow" aria-hidden="true"></div>
+      <div class="suki-shell suki-contact-inner">
+        <p class="suki-kicker">04 / LET'S WORK</p>
+        <h2>Have a project?<br><span>Let's make it hit.</span></h2>
+        <p>Tell me what you're building and what you want the audience to feel.</p>
+        <div class="suki-contact-actions">
+          <a class="suki-btn suki-btn--large" href="${tplEsc(hireHref)}" target="_blank" rel="noopener">
+            <span>Start a Project</span>
+            <b>↗</b>
+          </a>
+        </div>
+        ${renderSukiSocials(p)}
+      </div>
+    </section>`;
+}
