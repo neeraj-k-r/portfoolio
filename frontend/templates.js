@@ -9708,10 +9708,19 @@ function renderMythosStats(p) {
     </div>`;
 }
 
+function renderMythosCelestialMoon() {
+  return `
+    <div class="mythos-celestial-moon" aria-hidden="true">
+      <div class="mythos-moon-surface"></div>
+      <div class="mythos-moon-glow"></div>
+    </div>`;
+}
+
 function renderMythosHeroVisual(p) {
   return `
     <div class="mythos-art-stage" aria-label="Classical Sculpture Artwork">
       <div class="mythos-art-inner">
+        ${renderMythosCelestialMoon()}
       </div>
     </div>`;
 }
