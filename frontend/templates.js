@@ -10377,3 +10377,18 @@ function renderSukiAbout(p) {
       </div>
     </section>`;
 }
+
+function renderSukiMarquee(p) {
+  const skills = (Array.isArray(p.skills) && p.skills.length) ? p.skills : ['Video Editing', 'Motion Design', 'Automotive', 'Commercial', 'Storytelling'];
+  const text = skills.map(s => s.toUpperCase()).join(' ✦ ') + ' ✦';
+
+  return `
+    <section class="suki-marquee" aria-hidden="true">
+      <div class="suki-marquee-track">
+        <span>${tplEsc(text)}</span>
+        <span>${tplEsc(text)}</span>
+        <span>${tplEsc(text)}</span>
+        <span>${tplEsc(text)}</span>
+      </div>
+    </section>`;
+}
