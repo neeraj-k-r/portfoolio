@@ -14503,3 +14503,22 @@ body.portfolio-view[data-template="mythos"] {
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 2px;
 }
+
+/* Card 4 CRT Terminal Glow */
+.mythos-card-crt-glow {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.mythos-crt-prompt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #c4a5fc;
+  text-shadow: 0 0 14px rgba(196, 165, 252, 0.9), 0 0 24px rgba(139, 92, 246, 0.8);
+  letter-spacing: -0.05em;
+}
