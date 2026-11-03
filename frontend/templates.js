@@ -9649,12 +9649,34 @@ function renderMythosHeaderActions(p) {
     </div>`;
 }
 
+function renderMythosHeroKicker() {
+  return `<span class="mythos-kicker">PORTFOLIO</span>`;
+}
+
+function renderMythosHeroTitle(p) {
+  return `
+    <h1 class="mythos-hero-title">
+      <span class="mythos-title-line">Ideas, Design</span>
+      <span class="mythos-title-line">and <em class="mythos-title-italic">Experiments</em></span>
+    </h1>`;
+}
+
 function renderMythos(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
   document.body.dataset.template = 'mythos';
   document.title = `${p.name || 'Portfolio'} — Mythos Classical`;
-  app.innerHTML = `<div class="mythos-page" id="mythosRoot"><div class="mythos-wrap"><header class="mythos-header">${renderMythosBrand(p)}${renderMythosNav()}${renderMythosHeaderActions(p)}</header></div></div>`;
+  app.innerHTML = `<div class="mythos-page" id="mythosRoot">
+    <div class="mythos-wrap">
+      <header class="mythos-header">${renderMythosBrand(p)}${renderMythosNav()}${renderMythosHeaderActions(p)}</header>
+      <section class="mythos-hero-stage">
+        <div class="mythos-hero-col-left">
+          ${renderMythosHeroKicker()}
+          ${renderMythosHeroTitle(p)}
+        </div>
+      </section>
+    </div>
+  </div>`;
 }
 
 
