@@ -9914,7 +9914,24 @@ function renderMythosCardPlayground(p) {
     </article>`;
 }
 
+function renderMythosSkillIcon(skill) {
+  const s = String(skill).toLowerCase();
+  if (s.includes('react')) return '<i class="fa-brands fa-react" style="color:#61dafb"></i>';
+  if (s.includes('type') || s.includes('ts')) return '<span class="mythos-ts-icon">TS</span>';
+  if (s.includes('fire') || s.includes('base')) return '<i class="fa-solid fa-fire" style="color:#f59e0b"></i>';
+  if (s.includes('tail') || s.includes('css')) return '<i class="fa-solid fa-wind" style="color:#38bdf8"></i>';
+  if (s.includes('figma')) return '<i class="fa-brands fa-figma" style="color:#a855f7"></i>';
+  if (s.includes('blender') || s.includes('3d')) return '<i class="fa-solid fa-cube" style="color:#f97316"></i>';
+  if (s.includes('git')) return '<i class="fa-brands fa-github"></i>';
+  return '<span class="mythos-default-dot">✦</span>';
+}
+
 function renderMythosTechTools(p) {
+  const defaultTools = ['React', 'TypeScript', 'Firebase', 'Tailwind', 'Figma', 'Blender'];
+  const userTools = (p.skills && p.skills.length) ? p.skills : defaultTools;
+  const displayTools = userTools.slice(0, 6);
+  const hasMore = userTools.length > 6 || true;
+
   return `
     <footer class="mythos-bottom-bar">
       <div class="mythos-tools-group">
@@ -9928,6 +9945,13 @@ function renderMythosTechTools(p) {
         </div>
         <div class="mythos-tools-divider" aria-hidden="true"></div>
         <div class="mythos-pills-list">
+          ${displayTools.map(t => `
+            <span class="mythos-tool-pill">
+              ${renderMythosSkillIcon(t)}
+              <span class="mythos-pill-text">${tplEsc(t)}</span>
+            </span>
+          `).join('')}
+          ${hasMore ? `<a href="#archives" class="mythos-tool-pill mythos-pill-more">+ More</a>` : ''}
         </div>
       </div>
     </footer>`;
