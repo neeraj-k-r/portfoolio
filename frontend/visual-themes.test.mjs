@@ -12,7 +12,7 @@ const SUPABASE_CONFIG = fs.readFileSync(path.resolve('backend/supabase-config.js
 const INDEX_HTML = fs.readFileSync(path.resolve('frontend/index.html'), 'utf8');
 const APP_JS = fs.readFileSync(path.resolve('frontend/app.js'), 'utf8');
 
-test('Visual Themes: PortfoolioTemplates has all 25 visual themes', () => {
+test('Visual Themes: PortfoolioTemplates has all 26 visual themes', () => {
   const domMock = {
     document: {
       getElementById: () => ({ innerHTML: '' }),
@@ -27,13 +27,13 @@ test('Visual Themes: PortfoolioTemplates has all 25 visual themes', () => {
   const ctx = vm.createContext(domMock);
   vm.runInContext(TEMPLATES_JS, ctx);
 
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'];
   for (const t of visualThemes) {
     assert.strictEqual(typeof domMock.window.PortfoolioTemplates[t], 'function', `PortfoolioTemplates[${t}] must be a function`);
   }
 });
 
-test('Visual Themes: all 9 new themes render custom navigation, header and footer', () => {
+test('Visual Themes: all 10 new themes render custom navigation, header and footer', () => {
   const newThemes = ['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip'];
   for (const t of newThemes) {
     let capturedHtml = '';
@@ -320,4 +320,43 @@ test('Mythos theme renders classical sculpture hero, celestial moon, categories,
   assert.ok(capturedHtml.includes('naalukavaladisc'), 'card 2 must dynamically render second project');
   assert.ok(capturedHtml.includes('GROCERY IMAGE'), 'card 3 must dynamically render third project');
   assert.ok(capturedHtml.includes('BANGLE2'), 'card 4 must dynamically render fourth project');
+});
+
+test('Suki theme renders cyber video hero, grid, services, and dynamic projects', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const sukiFn = domMock.window.PortfoolioTemplates.suki;
+  assert.ok(sukiFn, 'suki template must exist in PortfoolioTemplates');
+  sukiFn({
+    name: 'Suki Dotae',
+    title: 'Video Editor & Motion Designer',
+    bio: 'Cinematic edits, commercials and motion graphics built to make people stop scrolling.',
+    skills: ['Video Editing', 'Motion Design', 'Automotive', 'Commercial'],
+    works: [
+      { title: 'Automotive Showcase', category: 'automotive', imageUrl: 'https://example.com/car.jpg' },
+      { title: 'Brand Commercial', category: 'commercial', imageUrl: 'https://example.com/brand.jpg' }
+    ]
+  });
+
+  assert.ok(capturedHtml.includes('suki-brand'), 'suki must render brand logo');
+  assert.ok(capturedHtml.includes('suki-hero-title'), 'suki must render hero title');
+  assert.ok(capturedHtml.includes('suki-cyber-grid'), 'suki must render cyber grid');
+  assert.ok(capturedHtml.includes('suki-project-grid'), 'suki must render project grid');
+  assert.ok(capturedHtml.includes('Automotive Showcase'), 'suki must dynamically render user project');
+  assert.ok(capturedHtml.includes('Built for'), 'suki must render services section');
+  assert.ok(capturedHtml.includes('suki-marquee'), 'suki must render marquee ticker');
+  assert.ok(capturedHtml.includes('Have a project?'), 'suki must render contact section');
 });
