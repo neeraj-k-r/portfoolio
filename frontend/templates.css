@@ -13914,3 +13914,62 @@ body.portfolio-view[data-template="mythos"] {
   border-radius: 9999px;
   box-shadow: 0 0 10px var(--my-lavender-glow);
 }
+
+/* Header Actions */
+.mythos-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.mythos-theme-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--my-text-dim);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mythos-theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.09);
+  color: var(--my-text);
+  border-color: rgba(196, 165, 252, 0.25);
+  transform: scale(1.05);
+}
+
+.mythos-collab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: var(--my-lavender);
+  color: #1a102f;
+  font-size: 0.86rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(196, 165, 252, 0.35);
+  transition: all 0.25s ease;
+}
+
+.mythos-collab-btn:hover {
+  background: #d8c2ff;
+  box-shadow: 0 0 28px rgba(196, 165, 252, 0.6);
+  transform: translateY(-1px);
+}
+
+.mythos-arrow-icon {
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.mythos-collab-btn:hover .mythos-arrow-icon {
+  transform: translate(2px, -2px);
+}
