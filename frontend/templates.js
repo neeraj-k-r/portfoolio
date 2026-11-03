@@ -10171,3 +10171,24 @@ function renderSukiBrand(p) {
       ${tplEsc(brand)}<span class="suki-brand-dot">.</span>
     </a>`;
 }
+
+function renderSukiHeroMedia(p) {
+  const showreelUrl = p.showreelUrl || (p.videoUrl ? p.videoUrl : '');
+  const isYoutube = showreelUrl.includes('youtube.com') || showreelUrl.includes('youtu.be');
+  let embedUrl = '';
+  if (isYoutube) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = showreelUrl.match(regExp);
+    const videoId = (match && match[2].length === 11) ? match[2] : 'DVSM1GQ4bUE';
+    embedUrl = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&playsinline=1&rel=0&enablejsapi=1`;
+  } else {
+    embedUrl = 'https://www.youtube-nocookie.com/embed/DVSM1GQ4bUE?autoplay=1&mute=1&loop=1&playlist=DVSM1GQ4bUE&controls=0&playsinline=1&rel=0&enablejsapi=1';
+  }
+
+  return `
+    <div class="suki-hero-media" aria-hidden="true">
+      <iframe class="suki-hero-youtube" src="${embedUrl}" title="Showreel backdrop" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+      <div class="suki-hero-media__fallback"></div>
+      <div class="suki-hero-overlay"></div>
+    </div>`;
+}
