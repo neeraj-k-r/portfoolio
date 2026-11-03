@@ -14076,3 +14076,50 @@ body.portfolio-view[data-template="mythos"] {
   border-color: rgba(196, 165, 252, 0.4);
   transform: translateY(-2px);
 }
+
+/* Metric Counters & Stats Row */
+.mythos-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.mythos-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.mythos-stat-accent-bar {
+  width: 24px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+.mythos-stat-text-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.mythos-stat-val {
+  font-family: var(--my-font-sans);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.mythos-stat-label {
+  font-size: 0.76rem;
+  color: var(--my-text-dim);
+  text-transform: capitalize;
+  margin-top: 2px;
+}
+
+.mythos-stat-divider {
+  width: 1px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.12);
+}
