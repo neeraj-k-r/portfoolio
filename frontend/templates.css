@@ -14922,3 +14922,28 @@ body.portfolio-view[data-template="mythos"] {
 .mythos-modal-email:hover {
   text-decoration: underline;
 }
+
+/* Responsive: Tablet Layout */
+@media (max-width: 1024px) {
+  .mythos-hero-stage {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .mythos-hero-col-right {
+    order: -1;
+  }
+  .mythos-art-stage {
+    max-width: 500px;
+    height: 440px;
+  }
+  .mythos-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mythos-archive-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mythos-bottom-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
