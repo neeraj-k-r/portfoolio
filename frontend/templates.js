@@ -10415,3 +10415,20 @@ function renderSukiContact(p) {
       </div>
     </section>`;
 }
+
+function renderSukiSocials(p) {
+  const links = [];
+  if (p.instagram) links.push({ label: 'Instagram', url: p.instagram });
+  if (p.youtube) links.push({ label: 'YouTube', url: p.youtube });
+  if (p.github) links.push({ label: 'GitHub', url: p.github });
+  if (p.linkedin) links.push({ label: 'LinkedIn', url: p.linkedin });
+  if (p.twitter) links.push({ label: 'Twitter', url: p.twitter });
+  if (!links.length) {
+    links.push({ label: 'Instagram', url: '#' }, { label: 'YouTube', url: '#' });
+  }
+
+  return `
+    <div class="suki-social-row">
+      ${links.map(l => `<a href="${tplEsc(l.url)}" target="_blank" rel="noopener">${tplEsc(l.label)}</a>`).join('')}
+    </div>`;
+}
