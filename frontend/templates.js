@@ -9666,6 +9666,19 @@ function renderMythosHeroBio(p) {
   return `<p class="mythos-hero-bio">${tplEsc(bio)}</p>`;
 }
 
+function renderMythosHeroActions() {
+  return `
+    <div class="mythos-hero-actions">
+      <a href="#works" class="mythos-btn-primary">
+        <span>Explore Work</span>
+        <span class="mythos-btn-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href="#about" class="mythos-btn-secondary" onclick="window.openMythosAboutModal&&window.openMythosAboutModal(event)">
+        <span>About Me</span>
+      </a>
+    </div>`;
+}
+
 function renderMythos(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
@@ -9679,6 +9692,7 @@ function renderMythos(p) {
           ${renderMythosHeroKicker()}
           ${renderMythosHeroTitle(p)}
           ${renderMythosHeroBio(p)}
+          ${renderMythosHeroActions()}
         </div>
       </section>
     </div>
