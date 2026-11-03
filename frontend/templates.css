@@ -13973,3 +13973,36 @@ body.portfolio-view[data-template="mythos"] {
 .mythos-collab-btn:hover .mythos-arrow-icon {
   transform: translate(2px, -2px);
 }
+
+/* Hero Kicker & Display Headline */
+.mythos-kicker {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--my-lavender);
+  margin-bottom: 22px;
+  opacity: 0.85;
+}
+
+.mythos-hero-title {
+  font-family: var(--my-font-serif);
+  font-size: clamp(2.8rem, 5.2vw, 4.4rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  color: #ffffff;
+  margin: 0 0 24px;
+}
+
+.mythos-title-line {
+  display: block;
+}
+
+.mythos-title-italic {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--my-lavender);
+  text-shadow: 0 0 32px rgba(196, 165, 252, 0.4);
+}
