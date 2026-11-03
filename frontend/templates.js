@@ -9708,6 +9708,14 @@ function renderMythosStats(p) {
     </div>`;
 }
 
+function renderMythosHeroVisual(p) {
+  return `
+    <div class="mythos-art-stage" aria-label="Classical Sculpture Artwork">
+      <div class="mythos-art-inner">
+      </div>
+    </div>`;
+}
+
 function renderMythos(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
@@ -9723,6 +9731,9 @@ function renderMythos(p) {
           ${renderMythosHeroBio(p)}
           ${renderMythosHeroActions()}
           ${renderMythosStats(p)}
+        </div>
+        <div class="mythos-hero-col-right">
+          ${renderMythosHeroVisual(p)}
         </div>
       </section>
     </div>
