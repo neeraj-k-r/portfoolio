@@ -15172,3 +15172,25 @@ body.portfolio-view[data-template="mythos"] {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
+
+.suki-eyebrow,
+.suki-kicker {
+  font-family: var(--sk-font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.19em;
+  color: var(--sk-cyan);
+  text-transform: uppercase;
+}
+.suki-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+.suki-eyebrow span {
+  width: 28px;
+  height: 1px;
+  background: var(--sk-cyan);
+}
