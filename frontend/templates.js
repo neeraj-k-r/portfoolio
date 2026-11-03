@@ -10200,3 +10200,30 @@ function renderSukiEyebrow(p) {
       <span></span> ${role}
     </div>`;
 }
+
+function renderSukiHeroTitle(p) {
+  const raw = String(p.name || 'SUKI DOTAE').trim();
+  const parts = raw.split(/\s+/);
+  const line1 = (parts[0] || 'SUKI').toUpperCase();
+  const line2 = (parts.slice(1).join(' ') || 'DOTAE').toUpperCase();
+
+  return `
+    <h1 class="suki-hero-title">
+      <span class="line">${tplEsc(line1)}</span>
+      <span class="line accent">${tplEsc(line2)}</span>
+    </h1>`;
+}
+
+function renderSukiHeroActions(p) {
+  return `
+    <div class="suki-hero-actions">
+      <a class="suki-btn" href="#work">
+        <span>Explore Work</span>
+        <b>↘</b>
+      </a>
+      <a class="suki-text-link" href="#contact">
+        <span>Get in Touch</span>
+        <span>→</span>
+      </a>
+    </div>`;
+}
