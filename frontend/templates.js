@@ -10247,3 +10247,34 @@ function renderSukiFilters(items) {
       `).join('')}
     </div>`;
 }
+
+const SUKI_FALLBACK_WORKS = [
+  {
+    title: 'Automotive Showcase',
+    category: 'automotive',
+    desc: 'High-speed cinematic supercar edit & sound design',
+    imageUrl: 'https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=900&q=80',
+    year: '2026'
+  },
+  {
+    title: 'Brand Campaign',
+    category: 'commercial',
+    desc: 'Social campaign & lifestyle commercial launch',
+    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80',
+    year: '2026'
+  },
+  {
+    title: 'Fashion & Product Film',
+    category: 'product',
+    desc: 'Studio lighting, macro angles and rhythm pacing',
+    imageUrl: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80',
+    year: '2026'
+  },
+  {
+    title: 'Motion Graphics System',
+    category: 'motion',
+    desc: 'Kinetic typography, 3D title design & transitions',
+    imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=900&q=80',
+    year: '2026'
+  }
+];
