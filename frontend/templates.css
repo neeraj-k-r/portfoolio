@@ -15670,3 +15670,30 @@ body.portfolio-view[data-template="mythos"] {
   color: var(--sk-cyan);
   z-index: 10;
 }
+
+.suki-project-play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  transform: translate(-50%, -50%) scale(0.85);
+  opacity: 0;
+  background: rgba(5, 15, 22, 0.72);
+  border: 1px solid rgba(25, 227, 230, 0.5);
+  backdrop-filter: blur(12px);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--sk-cyan);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 8;
+  pointer-events: none;
+}
+.suki-project-card:hover .suki-project-play {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
