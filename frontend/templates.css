@@ -15164,3 +15164,11 @@ body.portfolio-view[data-template="mythos"] {
   box-shadow: 0 0 16px var(--sk-cyan);
   transition: width 0.1s linear;
 }
+
+.suki-glass {
+  background: linear-gradient(145deg, rgba(17, 39, 55, 0.72), rgba(7, 20, 30, 0.48));
+  border: 1px solid var(--sk-line);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035), var(--sk-shadow);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
