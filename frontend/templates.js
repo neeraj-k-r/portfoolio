@@ -9583,12 +9583,37 @@ function renderAnalog(p) {
 // MYTHOS CLASSICAL THEME
 // ==========================================
 
+function getMythosInitials(name) {
+  if (!name) return 'NK';
+  const parts = String(name).trim().split(/\s+/).filter(Boolean);
+  if (!parts.length) return 'NK';
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+function renderMythosBrand(p) {
+  const initials = getMythosInitials(p.name);
+  const name = tplEsc(p.name || 'Nithin Krishna');
+  const role = tplEsc(p.title || 'Creative Engineer');
+  return `
+    <div class="mythos-brand">
+      <a href="#home" class="mythos-brand-logo" aria-label="${name}">
+        <span class="mythos-monogram">${initials}<span class="mythos-monogram-plus">+</span></span>
+      </a>
+      <span class="mythos-brand-divider" aria-hidden="true"></span>
+      <div class="mythos-brand-meta">
+        <span class="mythos-brand-name">${name}</span>
+        <span class="mythos-brand-role">${role}</span>
+      </div>
+    </div>`;
+}
+
 function renderMythos(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
   document.body.dataset.template = 'mythos';
   document.title = `${p.name || 'Portfolio'} — Mythos Classical`;
-  app.innerHTML = `<div class="mythos-page" id="mythosRoot"></div>`;
+  app.innerHTML = `<div class="mythos-page" id="mythosRoot"><div class="mythos-wrap"><header class="mythos-header">${renderMythosBrand(p)}</header></div></div>`;
 }
 
 
