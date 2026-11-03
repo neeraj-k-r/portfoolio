@@ -9914,6 +9914,14 @@ function renderMythosCardPlayground(p) {
     </article>`;
 }
 
+function renderMythosSparkleKicker() {
+  return `
+    <div class="mythos-sparkle-kicker">
+      <span class="mythos-sparkle-icon" aria-hidden="true">✦</span>
+      <span class="mythos-sparkle-text">Always exploring new possibilities...</span>
+    </div>`;
+}
+
 function renderMythosSkillIcon(skill) {
   const s = String(skill).toLowerCase();
   if (s.includes('react')) return '<i class="fa-brands fa-react" style="color:#61dafb"></i>';
@@ -9954,6 +9962,7 @@ function renderMythosTechTools(p) {
           ${hasMore ? `<a href="#archives" class="mythos-tool-pill mythos-pill-more">+ More</a>` : ''}
         </div>
       </div>
+      ${renderMythosSparkleKicker()}
     </footer>`;
 }
 
