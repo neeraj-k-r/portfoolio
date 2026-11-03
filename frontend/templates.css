@@ -15400,3 +15400,23 @@ body.portfolio-view[data-template="mythos"] {
   z-index: -1;
   background: radial-gradient(circle at 70% 35%, #173a4b 0, #0b1c29 30%, #050b11 72%);
 }
+
+.suki-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(3, 8, 13, 0.95) 0%, rgba(3, 9, 15, 0.73) 45%, rgba(3, 9, 15, 0.42) 72%),
+    linear-gradient(0deg, var(--sk-bg) 0%, transparent 28%, rgba(2, 7, 12, 0.25) 100%);
+  pointer-events: none;
+}
+.suki-hero-content {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 60px;
+}
+.suki-hero-copy {
+  max-width: 850px;
+}
