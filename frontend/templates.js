@@ -9808,6 +9808,25 @@ function renderMythosCloudCard() {
     </div>`;
 }
 
+function renderMythosSlideIndicators() {
+  const slides = [
+    { num: '01', active: true },
+    { num: '02' },
+    { num: '03' },
+    { num: '04' }
+  ];
+
+  return `
+    <div class="mythos-slide-indicators" aria-hidden="true">
+      ${slides.map(s => `
+        <div class="mythos-slide-num ${s.active ? 'is-active' : ''}">
+          <span>${s.num}</span>
+          ${s.active ? '<span class="mythos-slide-bar"></span>' : ''}
+        </div>
+      `).join('')}
+    </div>`;
+}
+
 function renderMythosHeroVisual(p) {
   return `
     <div class="mythos-art-stage" aria-label="Classical Sculpture Artwork">
@@ -9818,6 +9837,7 @@ function renderMythosHeroVisual(p) {
         ${renderMythosWhiteLily()}
         ${renderMythosPetuniaBranch()}
         ${renderMythosCloudCard()}
+        ${renderMythosSlideIndicators()}
       </div>
     </div>`;
 }
