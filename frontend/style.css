@@ -2744,6 +2744,7 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 .tpl-preview.illustra{background:linear-gradient(135deg,#f6f4fa,#e8e3f5);color:#7356e5}
 .tpl-preview.techno{background:linear-gradient(135deg,#f7f5f0,#4a1240);color:#b843a4}
 .tpl-preview.analog{background:linear-gradient(135deg,#0c0b0a,#1e1b18);color:#e85938}
+.tpl-preview.mythos{background:linear-gradient(135deg,#08070b 0%,#1e1435 60%,#3b185f 100%);color:#c4a5fc}
 
 /* MODAL BODY STYLING */
 .lx-modal-body[data-theme="atelier"]{background:#0b0c10;color:#f4f4f0}
