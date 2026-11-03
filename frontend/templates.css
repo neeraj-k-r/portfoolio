@@ -14646,3 +14646,25 @@ body.portfolio-view[data-template="mythos"] {
   border-color: var(--my-lavender);
   color: #ffffff;
 }
+
+/* Sparkle Footer Kicker */
+.mythos-sparkle-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mythos-sparkle-icon {
+  color: var(--my-lavender);
+  font-size: 1rem;
+  line-height: 1;
+  filter: drop-shadow(0 0 6px rgba(196, 165, 252, 0.8));
+}
+
+.mythos-sparkle-text {
+  font-family: var(--my-font-serif);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--my-text-dim);
+  letter-spacing: -0.01em;
+}
