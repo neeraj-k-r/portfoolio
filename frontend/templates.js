@@ -10278,3 +10278,34 @@ const SUKI_FALLBACK_WORKS = [
     year: '2026'
   }
 ];
+
+function renderSukiWorkCard(item, idx) {
+  const num = String(idx + 1).padStart(2, '0');
+  const title = item.title || item.name || 'Untitled Project';
+  const cat = String(item.category || (item.tags && item.tags[0]) || 'Commercial').toLowerCase();
+  const sub = item.desc || (item.category ? item.category : 'Cinematic Edit');
+  const img = item.imageUrl || item.image || item.thumb || SUKI_FALLBACK_WORKS[idx % SUKI_FALLBACK_WORKS.length].imageUrl;
+  const year = item.year || '2026';
+  const url = item.url || item.demoUrl || item.link || '';
+
+  return `
+    <article class="suki-project-card suki-glass" data-category="${tplEsc(cat)}" onclick="window.openSukiWorkDetail&&window.openSukiWorkDetail(${idx})">
+      <div class="suki-project-media">
+        <img src="${tplEsc(img)}" alt="${tplEsc(title)}" loading="lazy"/>
+        <div class="suki-project-play">PLAY</div>
+        <div class="suki-project-index">${num}</div>
+        <div class="suki-video-controls" onclick="event.stopPropagation()">
+          <button type="button" aria-label="Play video" onclick="window.openSukiWorkDetail&&window.openSukiWorkDetail(${idx})">▶</button>
+          <button type="button" aria-label="Mute audio">🔇</button>
+          <button type="button" class="fullscreen-btn" aria-label="Fullscreen" onclick="window.openSukiWorkDetail&&window.openSukiWorkDetail(${idx})">⛶</button>
+        </div>
+      </div>
+      <div class="suki-project-info">
+        <div>
+          <h3>${tplEsc(title)}</h3>
+          <p>${tplEsc(sub)}</p>
+        </div>
+        <span>${tplEsc(year)} ↗</span>
+      </div>
+    </article>`;
+}
