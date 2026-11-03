@@ -15470,3 +15470,43 @@ body.portfolio-view[data-template="mythos"] {
 .suki-text-link:hover span {
   transform: translateX(4px);
 }
+
+.suki-hero-badge {
+  position: absolute;
+  right: 0;
+  bottom: 8%;
+  border-radius: 18px;
+  padding: 16px 22px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.suki-hero-badge small,
+.suki-hero-badge strong {
+  display: block;
+}
+.suki-hero-badge small {
+  font-size: 0.6rem;
+  letter-spacing: 0.16em;
+  color: var(--sk-muted);
+  text-transform: uppercase;
+}
+.suki-hero-badge strong {
+  font-family: var(--sk-font-display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-top: 2px;
+}
+.suki-pulse {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #57f3a0;
+  box-shadow: 0 0 0 0 rgba(87, 243, 160, 0.55);
+  animation: sukiPulse 1.8s infinite;
+}
+@keyframes sukiPulse {
+  70% { box-shadow: 0 0 0 10px rgba(87, 243, 160, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(87, 243, 160, 0); }
+}
