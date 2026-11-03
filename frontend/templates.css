@@ -14271,3 +14271,25 @@ body.portfolio-view[data-template="mythos"] {
   height: 100%;
   display: block;
 }
+
+/* Purple Petunia Botanical Branch */
+.mythos-petunia-branch {
+  position: absolute;
+  top: 190px;
+  right: 60px;
+  width: 150px;
+  height: 200px;
+  z-index: 6;
+  pointer-events: none;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.65));
+}
+
+.mythos-petunia-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.mythos-petunia-flower {
+  filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.5));
+}
