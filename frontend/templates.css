@@ -15827,3 +15827,34 @@ body.portfolio-view[data-template="mythos"] {
   max-width: 550px;
   font-size: 0.95rem;
 }
+
+.suki-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.suki-stat {
+  min-height: 190px;
+  border-radius: 22px;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.suki-stat strong {
+  font-family: var(--sk-font-display);
+  font-weight: 600;
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  color: var(--sk-text);
+  letter-spacing: -0.07em;
+  line-height: 1;
+}
+.suki-stat strong span {
+  color: var(--sk-cyan);
+}
+.suki-stat p {
+  color: var(--sk-muted);
+  font-size: 0.78rem;
+  margin: 0;
+  font-weight: 500;
+}
