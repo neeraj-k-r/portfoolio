@@ -65,13 +65,13 @@ const { PortfoolioTemplates, PortfoolioTemplateList } = context.window;
 assert.ok(Array.isArray(PortfoolioTemplateList), 'PortfoolioTemplateList must be an array');
 assert.ok(typeof PortfoolioTemplates === 'object', 'PortfoolioTemplates must be an object');
 
-const newTemplateIds = ['nova', 'codeflow', 'wave', 'assistant', 'console', 'snowcard', 'parchment', 'cloud', 'github', 'particle', 'panels', 'monolith', 'editor', 'magazine', 'bold', 'clean', 'vibrant', 'neon', 'hacker', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
+const newTemplateIds = ['nova', 'codeflow', 'wave', 'assistant', 'console', 'snowcard', 'parchment', 'cloud', 'github', 'particle', 'panels', 'monolith', 'editor', 'magazine', 'bold', 'clean', 'vibrant', 'neon', 'hacker', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'];
 
 for (const id of newTemplateIds) {
   const meta = PortfoolioTemplateList.find(t => t.id === id);
   assert.ok(meta, `Template metadata for "${id}" must exist in PortfoolioTemplateList`);
   assert.ok(typeof PortfoolioTemplates[id] === 'function', `PortfoolioTemplates["${id}"] must be a function`);
-  if (['techno', 'illustra', 'salon', 'sketchbook', 'analog'].includes(id)) {
+  if (['techno', 'illustra', 'salon', 'sketchbook', 'analog', 'mythos'].includes(id)) {
     assert.equal(meta.track, 'visual', `Template "${id}" must be classified in visual track`);
   }
 }

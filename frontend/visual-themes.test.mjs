@@ -12,7 +12,7 @@ const SUPABASE_CONFIG = fs.readFileSync(path.resolve('backend/supabase-config.js
 const INDEX_HTML = fs.readFileSync(path.resolve('frontend/index.html'), 'utf8');
 const APP_JS = fs.readFileSync(path.resolve('frontend/app.js'), 'utf8');
 
-test('Visual Themes: PortfoolioTemplates has all 24 visual themes', () => {
+test('Visual Themes: PortfoolioTemplates has all 25 visual themes', () => {
   const domMock = {
     document: {
       getElementById: () => ({ innerHTML: '' }),
@@ -27,7 +27,7 @@ test('Visual Themes: PortfoolioTemplates has all 24 visual themes', () => {
   const ctx = vm.createContext(domMock);
   vm.runInContext(TEMPLATES_JS, ctx);
 
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'];
   for (const t of visualThemes) {
     assert.strictEqual(typeof domMock.window.PortfoolioTemplates[t], 'function', `PortfoolioTemplates[${t}] must be a function`);
   }
@@ -262,5 +262,47 @@ test('Analog theme renders dark vintage desk collage, sidebar nav, and work card
   assert.ok(capturedHtml.includes('Also Exploring'), 'analog must render Also Exploring skills bar');
 });
 
+test('Mythos theme renders classical sculpture hero, celestial moon, categories, and dynamic archive', () => {
+  let capturedHtml = '';
+  const domMock = {
+    document: {
+      getElementById: () => ({
+        set innerHTML(val) { capturedHtml = val; },
+        get innerHTML() { return capturedHtml; }
+      }),
+      body: { dataset: {}, classList: { toggle: () => {}, add: () => {}, remove: () => {} } },
+      title: '',
+      addEventListener: () => {}
+    },
+    window: { scrollTo: () => {} },
+    location: { origin: 'https://portfoolio.me' },
+    TEMPLATES: []
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
 
+  const mythosFn = domMock.window.PortfoolioTemplates.mythos;
+  assert.ok(mythosFn, 'mythos template must exist');
+  mythosFn({
+    name: 'Nithin Krishna',
+    title: 'Creative Engineer',
+    bio: 'A showcase of my creative work, digital builds, visual explorations, and curious experiments.',
+    skills: ['React', 'TypeScript', 'Firebase', 'Tailwind', 'Figma', 'Blender'],
+    works: [
+      { title: 'Interactive Sculptures', imageUrl: 'https://example.com/art.jpg', category: 'Creative Tech' }
+    ]
+  });
 
+  assert.ok(capturedHtml.includes('mythos-monogram'), 'mythos must render monogram');
+  assert.ok(capturedHtml.includes('Ideas, Design') && capturedHtml.includes('Experiments'), 'mythos must render hero title');
+  assert.ok(capturedHtml.includes('mythos-celestial-moon'), 'mythos must render celestial moon');
+  assert.ok(capturedHtml.includes('mythos-sculpture-wrapper'), 'mythos must render marble sculpture');
+  assert.ok(capturedHtml.includes('mythos-lily-botanical'), 'mythos must render white lily');
+  assert.ok(capturedHtml.includes('mythos-petunia-branch'), 'mythos must render petunia branch');
+  assert.ok(capturedHtml.includes('mythos-cloud-card'), 'mythos must render dusk cloud card');
+  assert.ok(capturedHtml.includes('mythos-cards-grid'), 'mythos must render 4-card interactive grid');
+  assert.ok(capturedHtml.includes('Tech &amp; Tools'), 'mythos must render tech and tools bar');
+  assert.ok(capturedHtml.includes('Interactive Sculptures'), 'mythos must render user work');
+  assert.ok(capturedHtml.includes('Always exploring new possibilities'), 'mythos must render sparkle footer');
+});
