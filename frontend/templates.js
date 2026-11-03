@@ -9612,7 +9612,6 @@ function renderMythosNav() {
   const items = [
     { label: 'Home', href: '#home', active: true },
     { label: 'Works', href: '#works' },
-    { label: 'Playground', href: '#playground' },
     { label: 'Archives', href: '#archives' },
     { label: 'About', href: '#about', isModal: true }
   ];
@@ -9858,7 +9857,7 @@ function renderMythosCardExperiments(p, item) {
   const img = it.imageUrl || it.image || it.thumb || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80';
   const title = it.title || it.name || 'Experiments';
   const sub = it.category || it.desc || it.subtitle || 'Creative Tech & Explorations';
-  const url = it.url || it.demoUrl || it.link || '#playground';
+  const url = it.url || it.demoUrl || it.link || '#archives';
   const isExt = /^https?:\/\//i.test(url);
 
   return `
@@ -9914,7 +9913,7 @@ function renderMythosCardPlayground(p, item) {
   const img = it.imageUrl || it.image || it.thumb || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80';
   const title = it.title || it.name || 'Playground';
   const sub = it.category || it.desc || it.subtitle || 'Ideas, Prototypes & Fun Builds';
-  const url = it.url || it.demoUrl || it.link || '#playground';
+  const url = it.url || it.demoUrl || it.link || '#archives';
   const isExt = /^https?:\/\//i.test(url);
 
   return `
@@ -10022,9 +10021,9 @@ function renderMythosTechTools(p) {
 function renderMythosCardsGrid(p) {
   const fallbackCards = [
     { title: 'Projects', category: 'Real Builds & Case Studies', imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80', url: '#works' },
-    { title: 'Experiments', category: 'Creative Tech & Explorations', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80', url: '#playground' },
+    { title: 'Experiments', category: 'Creative Tech & Explorations', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80', url: '#archives' },
     { title: 'Visuals', category: 'Art, Photography & Edits', imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80', url: '#archives' },
-    { title: 'Playground', category: 'Ideas, Prototypes & Fun Builds', imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80', url: '#playground' }
+    { title: 'Playground', category: 'Ideas, Prototypes & Fun Builds', imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80', url: '#archives' }
   ];
 
   const sourceItems = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : fallbackCards);

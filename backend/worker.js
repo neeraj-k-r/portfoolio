@@ -1838,7 +1838,6 @@ function pageGallery(p, wIdx, url) {
                 <ul class="mythos-nav-list">
                   <li class="mythos-nav-item"><a href="#home" class="mythos-nav-link is-active">Home<span class="mythos-nav-indicator" aria-hidden="true"></span></a></li>
                   <li class="mythos-nav-item"><a href="#works" class="mythos-nav-link">Works</a></li>
-                  <li class="mythos-nav-item"><a href="#playground" class="mythos-nav-link">Playground</a></li>
                   <li class="mythos-nav-item"><a href="#archives" class="mythos-nav-link">Archives</a></li>
                   <li class="mythos-nav-item"><a href="#about" class="mythos-nav-link" onclick="window.openMythosAboutModal&&window.openMythosAboutModal(event)">About</a></li>
                 </ul>
@@ -1954,9 +1953,9 @@ function pageGallery(p, wIdx, url) {
                 ${(() => {
                   const fallbackCards = [
                     { title: 'Projects', category: 'Real Builds & Case Studies', imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80', url: '#works', type: 'projects' },
-                    { title: 'Experiments', category: 'Creative Tech & Explorations', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80', url: '#playground', type: 'experiments' },
+                    { title: 'Experiments', category: 'Creative Tech & Explorations', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80', url: '#works', type: 'experiments' },
                     { title: 'Visuals', category: 'Art, Photography & Edits', imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80', url: '#archives', type: 'visuals' },
-                    { title: 'Playground', category: 'Ideas, Prototypes & Fun Builds', imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80', url: '#playground', type: 'playground' }
+                    { title: 'Playground', category: 'Ideas, Prototypes & Fun Builds', imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80', url: '#archives', type: 'playground' }
                   ];
                   const source = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : fallbackCards);
                   const cards = source.slice(0, 4);
