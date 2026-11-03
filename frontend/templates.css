@@ -14194,3 +14194,24 @@ body.portfolio-view[data-template="mythos"] {
   filter: blur(20px);
   pointer-events: none;
 }
+
+/* Orbital Constellations */
+.mythos-constellations {
+  position: absolute;
+  top: -20px;
+  left: 60px;
+  width: 480px;
+  height: 480px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.mythos-constellation-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.mythos-node-glow {
+  filter: drop-shadow(0 0 6px rgba(196, 165, 252, 0.9));
+}
