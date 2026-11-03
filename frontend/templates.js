@@ -10343,3 +10343,37 @@ function renderSukiServices(p) {
       </div>
     </section>`;
 }
+
+function renderSukiAbout(p) {
+  const worksCount = (p.works && p.works.length) ? p.works.length : ((p.projects && p.projects.length) ? p.projects.length : 30);
+  const bio = p.bio || p.about || 'I focus on rhythm, visual hierarchy, sound and motion to turn raw footage into work that feels intentional. The goal is simple: make every second earn its place.';
+
+  return `
+    <section class="suki-section suki-about" id="about">
+      <div class="suki-shell suki-about-grid">
+        <div class="suki-about-copy">
+          <p class="suki-kicker">03 / ABOUT</p>
+          <h2>Editing is more than <span>cutting clips.</span></h2>
+          <p>${tplEsc(bio)}</p>
+        </div>
+        <div class="suki-stats">
+          <article class="suki-stat suki-glass">
+            <strong>${worksCount}<span>+</span></strong>
+            <p>Projects completed</p>
+          </article>
+          <article class="suki-stat suki-glass">
+            <strong>10<span>+</span></strong>
+            <p>Client collaborations</p>
+          </article>
+          <article class="suki-stat suki-glass">
+            <strong>3<span>+</span></strong>
+            <p>Years creating</p>
+          </article>
+          <article class="suki-stat suki-glass">
+            <strong>100<span>%</span></strong>
+            <p>Attention to detail</p>
+          </article>
+        </div>
+      </div>
+    </section>`;
+}
