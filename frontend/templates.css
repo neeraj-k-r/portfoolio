@@ -14668,3 +14668,126 @@ body.portfolio-view[data-template="mythos"] {
   color: var(--my-text-dim);
   letter-spacing: -0.01em;
 }
+
+/* Curated Works Archive */
+.mythos-archive-section {
+  margin: 64px 0 52px;
+  position: relative;
+  z-index: 10;
+}
+
+.mythos-archive-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.mythos-archive-title {
+  font-family: var(--my-font-serif);
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+}
+
+.mythos-archive-divider {
+  flex: 1;
+  height: 1px;
+  background: var(--my-border);
+}
+
+.mythos-archive-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.mythos-archive-card {
+  background: var(--my-bg-card);
+  border: 1px solid var(--my-border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mythos-archive-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--my-border-hover);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+}
+
+.mythos-archive-thumb {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+}
+
+.mythos-archive-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mythos-archive-tag {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(14, 11, 20, 0.85);
+  border: 1px solid rgba(196, 165, 252, 0.3);
+  color: var(--my-lavender);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  backdrop-filter: blur(8px);
+}
+
+.mythos-archive-body {
+  padding: 16px;
+}
+
+.mythos-archive-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.mythos-archive-item-title {
+  font-family: var(--my-font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: #ffffff;
+  margin: 0;
+}
+
+.mythos-archive-link {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 0.82rem;
+  transition: all 0.2s ease;
+}
+
+.mythos-archive-link:hover {
+  background: var(--my-lavender);
+  color: #1a102f;
+}
+
+.mythos-archive-desc {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: var(--my-text-dim);
+  margin: 0;
+}
