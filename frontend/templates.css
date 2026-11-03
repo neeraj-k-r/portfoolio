@@ -14595,3 +14595,54 @@ body.portfolio-view[data-template="mythos"] {
   height: 20px;
   background: rgba(255, 255, 255, 0.15);
 }
+
+/* Tool Pill Badges */
+.mythos-pills-list {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mythos-tool-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--my-text-dim);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.mythos-tool-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(196, 165, 252, 0.3);
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.mythos-ts-icon {
+  background: #3178c6;
+  color: #ffffff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 3px;
+  border-radius: 2px;
+  line-height: 1;
+}
+
+.mythos-pill-more {
+  color: var(--my-lavender);
+  border-color: rgba(196, 165, 252, 0.2);
+}
+
+.mythos-pill-more:hover {
+  background: rgba(196, 165, 252, 0.12);
+  border-color: var(--my-lavender);
+  color: #ffffff;
+}
