@@ -9914,6 +9914,25 @@ function renderMythosCardPlayground(p) {
     </article>`;
 }
 
+function renderMythosTechTools(p) {
+  return `
+    <footer class="mythos-bottom-bar">
+      <div class="mythos-tools-group">
+        <div class="mythos-tools-label">
+          <svg class="mythos-stack-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          <span>Tech &amp; Tools</span>
+        </div>
+        <div class="mythos-tools-divider" aria-hidden="true"></div>
+        <div class="mythos-pills-list">
+        </div>
+      </div>
+    </footer>`;
+}
+
 function renderMythosCardsGrid(p) {
   return `
     <section class="mythos-cards-section" id="works">
@@ -9962,6 +9981,7 @@ function renderMythos(p) {
         </div>
       </section>
       ${renderMythosCardsGrid(p)}
+      ${renderMythosTechTools(p)}
     </div>
   </div>`;
 }
