@@ -9769,6 +9769,34 @@ function renderMythosWhiteLily() {
     </div>`;
 }
 
+function renderMythosPetuniaBranch() {
+  return `
+    <div class="mythos-petunia-branch" aria-hidden="true">
+      <svg class="mythos-petunia-svg" viewBox="0 0 160 220" fill="none">
+        <path d="M120 220 Q100 160 115 110 Q125 70 95 30" stroke="#374127" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M110 170 Q130 160 140 175" stroke="#374127" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M110 130 Q80 120 75 135" stroke="#374127" stroke-width="1.8" stroke-linecap="round"/>
+        <ellipse cx="135" cy="170" rx="9" ry="5" transform="rotate(25 135 170)" fill="#4d5f35"/>
+        <ellipse cx="80" cy="130" rx="8" ry="4.5" transform="rotate(-30 80 130)" fill="#4d5f35"/>
+        <g class="mythos-petunia-flower" transform="translate(110, 80)">
+          <circle cx="0" cy="0" r="16" fill="#8b5cf6" opacity="0.95"/>
+          <circle cx="0" cy="0" r="12" fill="#a78bfa"/>
+          <circle cx="0" cy="0" r="4" fill="#fde047"/>
+        </g>
+        <g class="mythos-petunia-flower" transform="translate(85, 30)">
+          <circle cx="0" cy="0" r="13" fill="#8b5cf6" opacity="0.95"/>
+          <circle cx="0" cy="0" r="9" fill="#c4a5fc"/>
+          <circle cx="0" cy="0" r="3" fill="#fde047"/>
+        </g>
+        <g class="mythos-petunia-flower" transform="translate(130, 140)">
+          <circle cx="0" cy="0" r="14" fill="#7c3aed" opacity="0.95"/>
+          <circle cx="0" cy="0" r="10" fill="#a78bfa"/>
+          <circle cx="0" cy="0" r="3.5" fill="#fde047"/>
+        </g>
+      </svg>
+    </div>`;
+}
+
 function renderMythosHeroVisual(p) {
   return `
     <div class="mythos-art-stage" aria-label="Classical Sculpture Artwork">
@@ -9777,6 +9805,7 @@ function renderMythosHeroVisual(p) {
         ${renderMythosCelestialMoon()}
         ${renderMythosSculpture()}
         ${renderMythosWhiteLily()}
+        ${renderMythosPetuniaBranch()}
       </div>
     </div>`;
 }
