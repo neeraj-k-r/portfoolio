@@ -14338,3 +14338,39 @@ body.portfolio-view[data-template="mythos"] {
   mix-blend-mode: color;
   pointer-events: none;
 }
+
+/* Vertical Slide Pagination Indicators */
+.mythos-slide-indicators {
+  position: absolute;
+  top: 100px;
+  right: -25px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.mythos-slide-num {
+  font-family: var(--my-font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--my-text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.mythos-slide-num.is-active {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.mythos-slide-bar {
+  width: 16px;
+  height: 2px;
+  background: #ffffff;
+  border-radius: 2px;
+}
