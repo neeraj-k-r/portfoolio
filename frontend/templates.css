@@ -14006,3 +14006,14 @@ body.portfolio-view[data-template="mythos"] {
   color: var(--my-lavender);
   text-shadow: 0 0 32px rgba(196, 165, 252, 0.4);
 }
+
+/* Hero Bio Typography */
+.mythos-hero-bio {
+  font-size: 1.05rem;
+  line-height: 1.62;
+  color: var(--my-text-dim);
+  max-width: 440px;
+  margin: 0 0 32px;
+  font-weight: 400;
+  letter-spacing: -0.005em;
+}
