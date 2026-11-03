@@ -15765,3 +15765,51 @@ body.portfolio-view[data-template="mythos"] {
   color: var(--sk-cyan);
   white-space: nowrap;
 }
+
+.suki-service-list {
+  display: grid;
+  gap: 14px;
+}
+.suki-service {
+  display: grid;
+  grid-template-columns: 70px 1fr 30px;
+  align-items: center;
+  gap: 25px;
+  padding: 30px;
+  border-radius: 20px;
+  transition: transform 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+  cursor: default;
+}
+.suki-service:hover {
+  transform: translateX(8px);
+  border-color: var(--sk-line-bright);
+  background: rgba(16, 40, 55, 0.76);
+}
+.suki-service-number {
+  font-family: var(--sk-font-display);
+  font-weight: 500;
+  font-size: 0.72rem;
+  color: var(--sk-cyan);
+}
+.suki-service h3 {
+  font-family: var(--sk-font-display);
+  font-weight: 600;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  color: #ffffff;
+  margin: 0;
+}
+.suki-service p {
+  color: var(--sk-muted);
+  font-size: 0.84rem;
+  line-height: 1.6;
+  margin: 8px 0 0;
+}
+.suki-service b {
+  font-weight: 400;
+  font-size: 1.25rem;
+  color: var(--sk-cyan);
+  transition: transform 0.25s ease;
+}
+.suki-service:hover b {
+  transform: translate(3px, -3px);
+}
