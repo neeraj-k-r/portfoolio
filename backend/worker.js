@@ -74,7 +74,7 @@ async function getProfile(sub) {
         row.services = row.resume.services;
       }
       // Self-heal legacy rows: a visual-only template implies the visual track
-      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
+      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
       if (row.track !== 'visual') row.track = 'tech';
 
       // Check seed profile to backfill custom services or extra repos
@@ -364,6 +364,92 @@ body.techno-dark-mode{background:#0f0c16!important}
 .techno-ticker-status{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--tc-text-primary)}
 .techno-pulse-dot{width:8px;height:8px;background:#10b981;border-radius:50%}
 .techno-footer{border-top:1px solid var(--tc-border);padding:36px 0 48px;display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--tc-text-secondary)}
+
+/* MYTHOS CLASSICAL THEME */
+.mythos-page{--my-bg:#08070b;--my-bg-card:rgba(18,16,23,0.85);--my-border:rgba(196,165,252,0.12);--my-border-hover:rgba(196,165,252,0.35);--my-text:#ffffff;--my-text-dim:#9b93a8;--my-lavender:#c4a5fc;--my-lavender-glow:rgba(196,165,252,0.45);--my-font-serif:'Playfair Display','Fraunces',Georgia,serif;--my-font-sans:'Plus Jakarta Sans',system-ui,sans-serif;background-color:var(--my-bg);color:var(--my-text);font-family:var(--my-font-sans);min-height:100vh;margin:0;padding:0;line-height:1.55;position:relative;overflow-x:hidden}
+.mythos-wrap{max-width:1340px;margin:0 auto;padding:24px 32px 64px;position:relative;z-index:2;box-sizing:border-box}
+.mythos-header{display:flex;align-items:center;justify-content:space-between;padding:12px 0 36px;position:relative;z-index:50}
+.mythos-brand{display:flex;align-items:center;gap:18px}
+.mythos-monogram{font-family:var(--my-font-serif);font-size:1.75rem;font-weight:500;letter-spacing:-0.04em;color:#fff;text-decoration:none}
+.mythos-monogram-plus{color:var(--my-lavender);font-size:1.15rem;font-weight:300;margin-left:2px}
+.mythos-brand-divider{width:26px;height:1px;background:rgba(255,255,255,0.2)}
+.mythos-brand-name{font-size:0.95rem;font-weight:600;color:#fff}
+.mythos-brand-role{font-size:0.76rem;color:var(--my-text-dim)}
+.mythos-nav-list{display:flex;align-items:center;gap:32px;list-style:none;margin:0;padding:0}
+.mythos-nav-link{font-size:0.88rem;color:var(--my-text-dim);text-decoration:none;position:relative;display:inline-flex;flex-direction:column;align-items:center}
+.mythos-nav-link.is-active{color:#fff}
+.mythos-nav-indicator{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:24px;height:2px;background:var(--my-lavender);border-radius:9999px;box-shadow:0 0 10px var(--my-lavender-glow)}
+.mythos-header-actions{display:flex;align-items:center;gap:16px}
+.mythos-theme-toggle{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--my-text-dim);display:inline-flex;align-items:center;justify-content:center}
+.mythos-collab-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--my-lavender);color:#1a102f;font-size:0.86rem;font-weight:600;border-radius:9999px;text-decoration:none;box-shadow:0 0 20px rgba(196,165,252,0.35)}
+.mythos-hero-stage{display:grid;grid-template-columns:1.05fr 1.15fr;align-items:center;gap:32px;min-height:540px;margin-bottom:56px}
+.mythos-kicker{display:inline-block;font-size:0.72rem;font-weight:700;letter-spacing:0.28em;text-transform:uppercase;color:var(--my-lavender);margin-bottom:22px}
+.mythos-hero-title{font-family:var(--my-font-serif);font-size:clamp(2.8rem,5.2vw,4.4rem);font-weight:400;line-height:1.08;letter-spacing:-0.035em;color:#fff;margin:0 0 24px}
+.mythos-title-italic{font-style:italic;color:var(--my-lavender);text-shadow:0 0 32px rgba(196,165,252,0.4)}
+.mythos-hero-bio{font-size:1.05rem;line-height:1.62;color:var(--my-text-dim);max-width:440px;margin:0 0 32px}
+.mythos-hero-actions{display:flex;align-items:center;gap:16px;margin-bottom:48px}
+.mythos-btn-primary{display:inline-flex;align-items:center;gap:10px;padding:12px 24px;background:var(--my-lavender);color:#160f26;font-size:0.92rem;font-weight:600;border-radius:9999px;text-decoration:none;box-shadow:0 0 24px rgba(196,165,252,0.35)}
+.mythos-btn-secondary{display:inline-flex;align-items:center;padding:12px 26px;background:rgba(255,255,255,0.03);color:#fff;font-size:0.92rem;font-weight:500;border-radius:9999px;border:1px solid rgba(255,255,255,0.15);text-decoration:none}
+.mythos-stats-row{display:flex;align-items:center;gap:28px}
+.mythos-stat-val{font-size:1.55rem;font-weight:700;color:#fff}
+.mythos-stat-label{font-size:0.76rem;color:var(--my-text-dim)}
+.mythos-stat-divider{width:1px;height:38px;background:rgba(255,255,255,0.12)}
+.mythos-art-stage{position:relative;width:100%;max-width:640px;height:520px}
+.mythos-art-inner{position:relative;width:100%;height:100%}
+.mythos-celestial-moon{position:absolute;top:40px;left:140px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#9d74f8 0%,#7c3aed 45%,#581c87 90%,#3b0764 100%);box-shadow:0 0 60px rgba(139,92,246,0.45),0 0 120px rgba(124,58,237,0.25);z-index:1}
+.mythos-constellations{position:absolute;top:-20px;left:60px;width:480px;height:480px;z-index:1;pointer-events:none}
+.mythos-sculpture-wrapper{position:absolute;top:10px;right:15px;width:440px;height:500px;z-index:4;pointer-events:none}
+.mythos-sculpture-img{width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:4px;filter:contrast(1.15) brightness(0.92) grayscale(0.15);mask-image:radial-gradient(circle at 50% 45%,black 65%,transparent 95%);-webkit-mask-image:radial-gradient(circle at 50% 45%,black 65%,transparent 95%)}
+.mythos-lily-botanical{position:absolute;top:175px;left:95px;width:170px;height:170px;z-index:6;pointer-events:none;transform:rotate(-12deg);filter:drop-shadow(0 12px 24px rgba(0,0,0,0.75))}
+.mythos-petunia-branch{position:absolute;top:190px;right:60px;width:150px;height:200px;z-index:6;pointer-events:none;filter:drop-shadow(0 8px 18px rgba(0,0,0,0.65))}
+.mythos-cloud-card{position:absolute;bottom:60px;right:0;width:195px;height:125px;background:rgba(28,22,38,0.8);border:1px solid rgba(196,165,252,0.25);border-radius:8px;padding:5px;z-index:5}
+.mythos-cloud-img{width:100%;height:100%;object-fit:cover;border-radius:6px;display:block}
+.mythos-slide-indicators{position:absolute;top:100px;right:-25px;display:flex;flex-direction:column;gap:24px;z-index:10;pointer-events:none;font-size:0.82rem;color:#6f677d}
+.mythos-slide-num.is-active{color:#fff;font-weight:600}
+.mythos-cards-section{margin-bottom:52px;position:relative;z-index:10}
+.mythos-cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.mythos-cat-card{background:var(--my-bg-card);border:1px solid var(--my-border);border-radius:18px;padding:12px 12px 16px;display:flex;flex-direction:column;text-decoration:none;position:relative;overflow:hidden;backdrop-filter:blur(12px)}
+.mythos-card-media{position:relative;width:100%;height:165px;border-radius:12px;overflow:hidden;margin-bottom:14px}
+.mythos-card-img{width:100%;height:100%;object-fit:cover;display:block}
+.mythos-card-footer{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding:0 4px}
+.mythos-card-title{font-family:var(--my-font-serif);font-size:1.18rem;font-weight:500;color:#fff;margin:0 0 4px}
+.mythos-card-sub{font-size:0.76rem;color:var(--my-text-dim);margin:0}
+.mythos-card-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.12);color:#fff;display:inline-flex;align-items:center;justify-content:center}
+.mythos-bottom-bar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px;padding:16px 0;border-top:1px solid rgba(255,255,255,0.06);position:relative;z-index:10}
+.mythos-tools-group{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.mythos-tools-label{display:inline-flex;align-items:center;gap:8px;font-size:0.84rem;font-weight:600;color:#fff}
+.mythos-tools-divider{width:1px;height:20px;background:rgba(255,255,255,0.15)}
+.mythos-pills-list{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.mythos-tool-pill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);border-radius:9999px;font-size:0.8rem;color:var(--my-text-dim);text-decoration:none}
+.mythos-sparkle-kicker{display:inline-flex;align-items:center;gap:10px}
+.mythos-sparkle-icon{color:var(--my-lavender)}
+.mythos-sparkle-text{font-family:var(--my-font-serif);font-style:italic;font-size:0.95rem;color:var(--my-text-dim)}
+.mythos-archive-section{margin:64px 0 52px;position:relative;z-index:10}
+.mythos-archive-head{display:flex;align-items:center;gap:20px;margin-bottom:28px}
+.mythos-archive-title{font-family:var(--my-font-serif);font-size:1.8rem;color:#fff;margin:0}
+.mythos-archive-divider{flex:1;height:1px;background:var(--my-border)}
+.mythos-archive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.mythos-archive-card{background:var(--my-bg-card);border:1px solid var(--my-border);border-radius:14px;overflow:hidden}
+.mythos-archive-thumb{position:relative;width:100%;height:180px;overflow:hidden}
+.mythos-archive-img{width:100%;height:100%;object-fit:cover;display:block}
+.mythos-archive-tag{position:absolute;top:10px;left:10px;background:rgba(14,11,20,0.85);border:1px solid rgba(196,165,252,0.3);color:var(--my-lavender);font-size:0.72rem;padding:4px 10px;border-radius:9999px}
+.mythos-archive-body{padding:16px}
+.mythos-archive-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.mythos-archive-item-title{font-family:var(--my-font-serif);font-size:1.15rem;color:#fff;margin:0}
+.mythos-archive-desc{font-size:0.84rem;color:var(--my-text-dim);margin:0}
+.mythos-modal-backdrop{position:fixed;inset:0;background:rgba(5,4,8,0.85);backdrop-filter:blur(16px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+.mythos-modal-backdrop.is-open{opacity:1;pointer-events:auto}
+.mythos-modal-card{width:100%;max-width:540px;background:#110e17;border:1px solid rgba(196,165,252,0.25);border-radius:20px;padding:32px;box-shadow:0 24px 60px rgba(0,0,0,0.8)}
+.mythos-modal-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:20px}
+.mythos-modal-name{font-family:var(--my-font-serif);font-size:1.6rem;color:#fff;margin:4px 0 2px}
+.mythos-modal-role{font-size:0.85rem;color:var(--my-text-dim);margin:0}
+.mythos-modal-close{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;width:32px;height:32px;border-radius:50%;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.mythos-modal-bio{font-size:0.95rem;line-height:1.6;color:#cbd5e1;margin:0 0 24px}
+.mythos-modal-meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:1px solid rgba(255,255,255,0.08);padding-top:20px}
+.mythos-modal-meta-label{font-size:0.72rem;text-transform:uppercase;color:#6f677d}
+.mythos-modal-meta-val,.mythos-modal-email{font-size:0.9rem;color:#fff;text-decoration:none}
+@media(max-width:1024px){.mythos-hero-stage{grid-template-columns:1fr;gap:48px}.mythos-cards-grid{grid-template-columns:repeat(2,1fr)}.mythos-archive-grid{grid-template-columns:repeat(2,1fr)}.mythos-bottom-bar{flex-direction:column;align-items:flex-start}}
+@media(max-width:680px){.mythos-wrap{padding:16px 18px 48px}.mythos-cards-grid{grid-template-columns:1fr}.mythos-archive-grid{grid-template-columns:1fr}.mythos-hero-title{font-size:2.3rem}.mythos-stats-row{flex-wrap:wrap;gap:16px}}
 
 /* ANALOG STUDIO THEME */
 .analog-page{--ag-bg:#0c0b0a;--ag-sidebar-bg:#0f0e0d;--ag-surface:#151311;--ag-surface-hover:#1e1b18;--ag-card-bg:rgba(22,20,18,0.85);--ag-border:rgba(240,235,220,0.08);--ag-border-subtle:rgba(240,235,220,0.05);--ag-text:#e8e3d8;--ag-text-muted:#8c857b;--ag-text-dim:#5c564e;--ag-cream:#f4ede1;--ag-cream-btn:#eee7d7;--ag-cream-btn-hover:#fff8eb;--ag-accent-orange:#e85938;--ag-accent-coral:#ff6b4a;--ag-green-dot:#22c55e;--ag-green-dot-glow:rgba(34,197,94,0.4);--ag-kraft:#d8c3a5;--ag-font-serif:'Playfair Display','Fraunces',Georgia,serif;--ag-font-sans:'Plus Jakarta Sans',system-ui,sans-serif;--ag-font-mono:'JetBrains Mono','Courier New',monospace;background-color:var(--ag-bg);color:var(--ag-text);font-family:var(--ag-font-sans);min-height:100vh;margin:0;padding:0;line-height:1.6;-webkit-font-smoothing:antialiased;position:relative;overflow-x:hidden}
@@ -742,7 +828,7 @@ function skillsSection(p) {
 function pageGallery(p, wIdx, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'].includes(activeTpl) ? activeTpl : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'].includes(activeTpl) ? activeTpl : 'gallery';
   let works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   if (!works.length) {
     const sampleImages = [
@@ -2453,7 +2539,7 @@ function pageGallery(p, wIdx, url) {
       })();
     </script></body></html>`;
   }
-  if (['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'].includes(vtpl) && !w) {
+  if (['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'].includes(vtpl) && !w) {
     return `<!DOCTYPE html><html lang="en">${head(p, vtpl)}<body class="portfolio-view" data-template="${vtpl}">${body}<script>(function(){if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .lumina-card, .vogue-plate, .filmstrip-frame, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
   }
   return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion','atelier','cinema','arch','zine','zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .lumina-card, .vogue-plate, .filmstrip-frame, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
@@ -7741,7 +7827,7 @@ function pageCloud(p) {
 function page(p, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
-  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'];
   if (visualOnly.includes(tpl)) {
     return pageGallery(p, url ? (url.searchParams.get('w') || url.searchParams.get('work')) : null, url);
   }
@@ -8211,7 +8297,7 @@ export default {
     }
     // visual track renders the gallery, not the code portfolio
     const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
-    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog'];
+    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'];
     const isVisualTrack = (qTpl && visualThemes.includes(qTpl.toLowerCase())) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
     if (isVisualTrack) {
       const html = pageGallery(p, url.searchParams.get('w'), url);
