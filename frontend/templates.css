@@ -15655,3 +15655,18 @@ body.portfolio-view[data-template="mythos"] {
 .suki-project-card:hover .suki-project-media::after {
   transform: translateX(150%);
 }
+
+.suki-project-index {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  border-radius: 999px;
+  background: rgba(3, 12, 18, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 11px;
+  font-family: var(--sk-font-display);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--sk-cyan);
+  z-index: 10;
+}
