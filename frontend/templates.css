@@ -15243,3 +15243,37 @@ body.portfolio-view[data-template="mythos"] {
 .suki-nav-links a.is-active {
   color: var(--sk-cyan);
 }
+
+.suki-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 50px;
+  padding: 0 24px;
+  border-radius: 999px;
+  color: #031016;
+  font-family: var(--sk-font-body);
+  font-weight: 700;
+  font-size: 0.86rem;
+  text-decoration: none;
+  background: linear-gradient(120deg, var(--sk-cyan), #4bd8ff 55%, var(--sk-blue));
+  box-shadow: 0 12px 35px rgba(25, 227, 230, 0.16);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+  border: none;
+}
+.suki-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 45px rgba(25, 227, 230, 0.32);
+}
+.suki-btn--small {
+  min-height: 42px;
+  padding: 0 20px;
+  font-size: 0.82rem;
+}
+.suki-btn--large {
+  min-height: 64px;
+  padding: 0 32px;
+  font-size: 0.95rem;
+}
