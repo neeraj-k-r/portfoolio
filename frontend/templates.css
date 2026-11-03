@@ -15226,3 +15226,20 @@ body.portfolio-view[data-template="mythos"] {
 .suki-brand-dot {
   color: var(--sk-cyan);
 }
+
+.suki-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.suki-nav-links a {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #c2d4de;
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+.suki-nav-links a:hover,
+.suki-nav-links a.is-active {
+  color: var(--sk-cyan);
+}
