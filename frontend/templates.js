@@ -9847,11 +9847,32 @@ function renderMythosCardProjects(p) {
     </article>`;
 }
 
+function renderMythosCardExperiments(p) {
+  const img = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80';
+  return `
+    <article class="mythos-cat-card mythos-card-experiments">
+      <div class="mythos-card-media">
+        <img src="${img}" alt="Glowing violet 3D undulating wave mesh" class="mythos-card-img" loading="lazy"/>
+        <div class="mythos-card-overlay"></div>
+      </div>
+      <div class="mythos-card-footer">
+        <div class="mythos-card-meta">
+          <h3 class="mythos-card-title">Experiments</h3>
+          <p class="mythos-card-sub">Creative Tech & Explorations</p>
+        </div>
+        <a href="#playground" class="mythos-card-btn" aria-label="Explore Experiments">
+          <span class="mythos-card-arrow">↗</span>
+        </a>
+      </div>
+    </article>`;
+}
+
 function renderMythosCardsGrid(p) {
   return `
     <section class="mythos-cards-section" id="works">
       <div class="mythos-cards-grid">
         ${renderMythosCardProjects(p)}
+        ${renderMythosCardExperiments(p)}
       </div>
     </section>`;
 }
