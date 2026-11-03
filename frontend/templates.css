@@ -15438,3 +15438,35 @@ body.portfolio-view[data-template="mythos"] {
   -webkit-text-stroke: 1.5px rgba(111, 235, 246, 0.85);
   text-shadow: 0 0 50px rgba(25, 227, 230, 0.2);
 }
+
+.suki-hero-desc {
+  max-width: 580px;
+  margin-top: 36px;
+  color: #b3c8d4;
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  line-height: 1.75;
+}
+.suki-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+.suki-text-link {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: #dbe9f0;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.25s ease;
+}
+.suki-text-link span {
+  color: var(--sk-cyan);
+  transition: transform 0.25s ease;
+}
+.suki-text-link:hover span {
+  transform: translateX(4px);
+}
