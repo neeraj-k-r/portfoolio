@@ -13730,3 +13730,29 @@ body.techno-dark-mode {
 
 
 
+
+
+/* ==========================================================================
+   MYTHOS CLASSICAL SCULPTURE THEME (VIOLET CELESTIAL DARK)
+   ========================================================================== */
+
+.mythos-page,
+body.portfolio-view[data-template="mythos"] {
+  --my-bg: #08070b;
+  --my-bg-card: rgba(18, 16, 23, 0.85);
+  --my-bg-card-hover: rgba(26, 22, 36, 0.96);
+  --my-surface: #110f17;
+  --my-border: rgba(196, 165, 252, 0.12);
+  --my-border-hover: rgba(196, 165, 252, 0.35);
+  --my-border-subtle: rgba(255, 255, 255, 0.06);
+  --my-text: #ffffff;
+  --my-text-dim: #9b93a8;
+  --my-text-muted: #6f677d;
+  --my-lavender: #c4a5fc;
+  --my-lavender-glow: rgba(196, 165, 252, 0.45);
+  --my-violet: #8b5cf6;
+  --my-deep-violet: #6d28d9;
+  --my-moon-gradient: linear-gradient(135deg, #a78bfa 0%, #7c3aed 55%, #4c1d95 100%);
+  --my-font-serif: 'Playfair Display', 'Fraunces', Georgia, serif;
+  --my-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
