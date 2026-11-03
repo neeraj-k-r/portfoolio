@@ -9679,6 +9679,35 @@ function renderMythosHeroActions() {
     </div>`;
 }
 
+function renderMythosStats(p) {
+  const projCount = (p.projects && p.projects.length) ? `${p.projects.length}+` : '25+';
+  const expCount = (p.works && p.works.length) ? `${p.works.length}+` : '10+';
+  return `
+    <div class="mythos-stats-row">
+      <div class="mythos-stat-item">
+        <span class="mythos-stat-accent-bar" aria-hidden="true"></span>
+        <div class="mythos-stat-text-group">
+          <span class="mythos-stat-val">${projCount}</span>
+          <span class="mythos-stat-label">Projects</span>
+        </div>
+      </div>
+      <div class="mythos-stat-divider" aria-hidden="true"></div>
+      <div class="mythos-stat-item">
+        <div class="mythos-stat-text-group">
+          <span class="mythos-stat-val">${expCount}</span>
+          <span class="mythos-stat-label">Experiments</span>
+        </div>
+      </div>
+      <div class="mythos-stat-divider" aria-hidden="true"></div>
+      <div class="mythos-stat-item">
+        <div class="mythos-stat-text-group">
+          <span class="mythos-stat-val">∞</span>
+          <span class="mythos-stat-label">Ideas</span>
+        </div>
+      </div>
+    </div>`;
+}
+
 function renderMythos(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
@@ -9693,6 +9722,7 @@ function renderMythos(p) {
           ${renderMythosHeroTitle(p)}
           ${renderMythosHeroBio(p)}
           ${renderMythosHeroActions()}
+          ${renderMythosStats(p)}
         </div>
       </section>
     </div>
