@@ -305,4 +305,19 @@ test('Mythos theme renders classical sculpture hero, celestial moon, categories,
   assert.ok(capturedHtml.includes('Tech &amp; Tools'), 'mythos must render tech and tools bar');
   assert.ok(capturedHtml.includes('Interactive Sculptures'), 'mythos must render user work');
   assert.ok(capturedHtml.includes('Always exploring new possibilities'), 'mythos must render sparkle footer');
+
+  // Verify dynamic cards mapping with user projects (not hardcoded)
+  mythosFn({
+    name: 'NKR User',
+    projects: [
+      { title: 'Minimalist Village Market Route', category: 'Creative Tech', imageUrl: 'https://example.com/p1.jpg' },
+      { title: 'naalukavaladisc', category: 'Creative Tech', imageUrl: 'https://example.com/p2.jpg' },
+      { title: 'GROCERY IMAGE', category: 'Creative Tech', imageUrl: 'https://example.com/p3.jpg' },
+      { title: 'BANGLE2', category: 'Creative Tech', imageUrl: 'https://example.com/p4.jpg' }
+    ]
+  });
+  assert.ok(capturedHtml.includes('Minimalist Village Market Route'), 'card 1 must dynamically render first project');
+  assert.ok(capturedHtml.includes('naalukavaladisc'), 'card 2 must dynamically render second project');
+  assert.ok(capturedHtml.includes('GROCERY IMAGE'), 'card 3 must dynamically render third project');
+  assert.ok(capturedHtml.includes('BANGLE2'), 'card 4 must dynamically render fourth project');
 });

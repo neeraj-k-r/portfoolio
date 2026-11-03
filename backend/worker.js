@@ -1951,36 +1951,55 @@ function pageGallery(p, wIdx, url) {
 
             <section class="mythos-cards-section" id="works">
               <div class="mythos-cards-grid">
-                <article class="mythos-cat-card mythos-card-projects">
-                  <div class="mythos-card-media"><img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80" alt="Coffee cup" class="mythos-card-img" loading="lazy"/></div>
-                  <div class="mythos-card-footer">
-                    <div class="mythos-card-meta"><h3 class="mythos-card-title">Projects</h3><p class="mythos-card-sub">Real Builds &amp; Case Studies</p></div>
-                    <a href="#works" class="mythos-card-btn" aria-label="Explore Projects"><span class="mythos-card-arrow">↗</span></a>
-                  </div>
-                </article>
-                <article class="mythos-cat-card mythos-card-experiments">
-                  <div class="mythos-card-media"><img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80" alt="3D wave mesh" class="mythos-card-img" loading="lazy"/></div>
-                  <div class="mythos-card-footer">
-                    <div class="mythos-card-meta"><h3 class="mythos-card-title">Experiments</h3><p class="mythos-card-sub">Creative Tech &amp; Explorations</p></div>
-                    <a href="#playground" class="mythos-card-btn" aria-label="Explore Experiments"><span class="mythos-card-arrow">↗</span></a>
-                  </div>
-                </article>
-                <article class="mythos-cat-card mythos-card-visuals">
-                  <div class="mythos-card-media"><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80" alt="Mountain film peaks" class="mythos-card-img" loading="lazy"/></div>
-                  <div class="mythos-card-footer">
-                    <div class="mythos-card-meta"><h3 class="mythos-card-title">Visuals</h3><p class="mythos-card-sub">Art, Photography &amp; Edits</p></div>
-                    <a href="#archives" class="mythos-card-btn" aria-label="Explore Visuals"><span class="mythos-card-arrow">↗</span></a>
-                  </div>
-                </article>
-                <article class="mythos-cat-card mythos-card-playground">
-                  <div class="mythos-card-media"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80" alt="Retro terminal" class="mythos-card-img" loading="lazy"/></div>
-                  <div class="mythos-card-footer">
-                    <div class="mythos-card-meta"><h3 class="mythos-card-title">Playground</h3><p class="mythos-card-sub">Ideas, Prototypes &amp; Fun Builds</p></div>
-                    <a href="#playground" class="mythos-card-btn" aria-label="Explore Playground"><span class="mythos-card-arrow">↗</span></a>
-                  </div>
-                </article>
-              </div>
-            </section>
+                ${(() => {
+                  const fallbackCards = [
+                    { title: 'Projects', category: 'Real Builds & Case Studies', imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80', url: '#works', type: 'projects' },
+                    { title: 'Experiments', category: 'Creative Tech & Explorations', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80', url: '#playground', type: 'experiments' },
+                    { title: 'Visuals', category: 'Art, Photography & Edits', imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80', url: '#archives', type: 'visuals' },
+                    { title: 'Playground', category: 'Ideas, Prototypes & Fun Builds', imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80', url: '#playground', type: 'playground' }
+                  ];
+                  const source = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : fallbackCards);
+                  const cards = source.slice(0, 4);
+                  while (cards.length < 4) {
+                    cards.push(fallbackCards[cards.length]);
+                  }
+                  const types = ['projects', 'experiments', 'visuals', 'playground'];
+                  return cards.map((item, idx) => {
+                    const type = types[idx] || 'projects';
+                    const fb = fallbackCards[idx] || fallbackCards[0];
+                    const title = item.title || item.name || fb.title;
+                    const cat = item.category || item.desc || fb.category;
+                    const img = item.imageUrl || item.image || fb.imageUrl;
+                    const url = item.url || item.demoUrl || fb.url;
+                    const isExt = /^https?:\/\//i.test(url);
+                    return `
+                      <article class="mythos-cat-card mythos-card-${type}">
+                        <div class="mythos-card-media">
+                          <img src="${esc(img)}" alt="${esc(title)}" class="mythos-card-img" loading="lazy"/>
+                          ${idx === 2 ? `
+                          <div class="mythos-card-film-strip" aria-hidden="true">
+                            <div class="mythos-film-sprockets"><span></span><span></span><span></span><span></span></div>
+                            <div class="mythos-film-sprockets"><span></span><span></span><span></span><span></span></div>
+                          </div>` : ''}
+                          ${idx === 3 ? `
+                          <div class="mythos-card-crt-glow" aria-hidden="true">
+                            <span class="mythos-crt-prompt">&gt;_</span>
+                          </div>` : ''}
+                          <div class="mythos-card-overlay"></div>
+                        </div>
+                        <div class="mythos-card-footer">
+                          <div class="mythos-card-meta">
+                            <h3 class="mythos-card-title">${esc(title)}</h3>
+                            <p class="mythos-card-sub">${esc(cat)}</p>
+                          </div>
+                          <a href="${esc(url)}" class="mythos-card-btn" aria-label="Explore ${esc(title)}" ${isExt ? 'target="_blank" rel="noopener"' : ''}>
+                            <span class="mythos-card-arrow">↗</span>
+                          </a>
+                        </div>
+                      </article>`;
+                  }).join('');
+                })()}
+              </div></section>
 
             ${archiveItems.length ? `
             <section class="mythos-archive-section" id="archives">

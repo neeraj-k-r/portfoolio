@@ -9827,52 +9827,70 @@ function renderMythosSlideIndicators() {
     </div>`;
 }
 
-function renderMythosCardProjects(p) {
-  const img = 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80';
+function renderMythosCardProjects(p, item) {
+  const it = item || ((p.works && p.works[0]) || (p.projects && p.projects[0])) || {};
+  const img = it.imageUrl || it.image || it.thumb || 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80';
+  const title = it.title || it.name || 'Projects';
+  const sub = it.category || it.desc || it.subtitle || 'Real Builds & Case Studies';
+  const url = it.url || it.demoUrl || it.link || '#works';
+  const isExt = /^https?:\/\//i.test(url);
+
   return `
-    <article class="mythos-cat-card mythos-card-projects">
+    <article class="mythos-cat-card mythos-card-projects" onclick="window.openMythosWorkDetail&&window.openMythosWorkDetail(0)">
       <div class="mythos-card-media">
-        <img src="${img}" alt="Coffee cup in slatted window shadows" class="mythos-card-img" loading="lazy"/>
+        <img src="${tplEsc(img)}" alt="${tplEsc(title)}" class="mythos-card-img" loading="lazy"/>
         <div class="mythos-card-overlay"></div>
       </div>
       <div class="mythos-card-footer">
         <div class="mythos-card-meta">
-          <h3 class="mythos-card-title">Projects</h3>
-          <p class="mythos-card-sub">Real Builds & Case Studies</p>
+          <h3 class="mythos-card-title">${tplEsc(title)}</h3>
+          <p class="mythos-card-sub">${tplEsc(sub)}</p>
         </div>
-        <a href="#works" class="mythos-card-btn" aria-label="Explore Projects">
+        <a href="${tplEsc(url)}" class="mythos-card-btn" aria-label="Explore ${tplEsc(title)}" ${isExt ? 'target="_blank" rel="noopener"' : ''} onclick="event.stopPropagation()">
           <span class="mythos-card-arrow">↗</span>
         </a>
       </div>
     </article>`;
 }
 
-function renderMythosCardExperiments(p) {
-  const img = 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80';
+function renderMythosCardExperiments(p, item) {
+  const it = item || ((p.works && p.works[1]) || (p.projects && p.projects[1])) || {};
+  const img = it.imageUrl || it.image || it.thumb || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80';
+  const title = it.title || it.name || 'Experiments';
+  const sub = it.category || it.desc || it.subtitle || 'Creative Tech & Explorations';
+  const url = it.url || it.demoUrl || it.link || '#playground';
+  const isExt = /^https?:\/\//i.test(url);
+
   return `
-    <article class="mythos-cat-card mythos-card-experiments">
+    <article class="mythos-cat-card mythos-card-experiments" onclick="window.openMythosWorkDetail&&window.openMythosWorkDetail(1)">
       <div class="mythos-card-media">
-        <img src="${img}" alt="Glowing violet 3D undulating wave mesh" class="mythos-card-img" loading="lazy"/>
+        <img src="${tplEsc(img)}" alt="${tplEsc(title)}" class="mythos-card-img" loading="lazy"/>
         <div class="mythos-card-overlay"></div>
       </div>
       <div class="mythos-card-footer">
         <div class="mythos-card-meta">
-          <h3 class="mythos-card-title">Experiments</h3>
-          <p class="mythos-card-sub">Creative Tech & Explorations</p>
+          <h3 class="mythos-card-title">${tplEsc(title)}</h3>
+          <p class="mythos-card-sub">${tplEsc(sub)}</p>
         </div>
-        <a href="#playground" class="mythos-card-btn" aria-label="Explore Experiments">
+        <a href="${tplEsc(url)}" class="mythos-card-btn" aria-label="Explore ${tplEsc(title)}" ${isExt ? 'target="_blank" rel="noopener"' : ''} onclick="event.stopPropagation()">
           <span class="mythos-card-arrow">↗</span>
         </a>
       </div>
     </article>`;
 }
 
-function renderMythosCardVisuals(p) {
-  const img = 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80';
+function renderMythosCardVisuals(p, item) {
+  const it = item || ((p.works && p.works[2]) || (p.projects && p.projects[2])) || {};
+  const img = it.imageUrl || it.image || it.thumb || 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80';
+  const title = it.title || it.name || 'Visuals';
+  const sub = it.category || it.desc || it.subtitle || 'Art, Photography & Edits';
+  const url = it.url || it.demoUrl || it.link || '#archives';
+  const isExt = /^https?:\/\//i.test(url);
+
   return `
-    <article class="mythos-cat-card mythos-card-visuals">
+    <article class="mythos-cat-card mythos-card-visuals" onclick="window.openMythosWorkDetail&&window.openMythosWorkDetail(2)">
       <div class="mythos-card-media">
-        <img src="${img}" alt="Alpine mountain peaks framed with 35mm film strip" class="mythos-card-img" loading="lazy"/>
+        <img src="${tplEsc(img)}" alt="${tplEsc(title)}" class="mythos-card-img" loading="lazy"/>
         <div class="mythos-card-film-strip" aria-hidden="true">
           <div class="mythos-film-sprockets"><span></span><span></span><span></span><span></span></div>
           <div class="mythos-film-sprockets"><span></span><span></span><span></span><span></span></div>
@@ -9881,22 +9899,28 @@ function renderMythosCardVisuals(p) {
       </div>
       <div class="mythos-card-footer">
         <div class="mythos-card-meta">
-          <h3 class="mythos-card-title">Visuals</h3>
-          <p class="mythos-card-sub">Art, Photography & Edits</p>
+          <h3 class="mythos-card-title">${tplEsc(title)}</h3>
+          <p class="mythos-card-sub">${tplEsc(sub)}</p>
         </div>
-        <a href="#archives" class="mythos-card-btn" aria-label="Explore Visuals">
+        <a href="${tplEsc(url)}" class="mythos-card-btn" aria-label="Explore ${tplEsc(title)}" ${isExt ? 'target="_blank" rel="noopener"' : ''} onclick="event.stopPropagation()">
           <span class="mythos-card-arrow">↗</span>
         </a>
       </div>
     </article>`;
 }
 
-function renderMythosCardPlayground(p) {
-  const img = 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80';
+function renderMythosCardPlayground(p, item) {
+  const it = item || ((p.works && p.works[3]) || (p.projects && p.projects[3])) || {};
+  const img = it.imageUrl || it.image || it.thumb || 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80';
+  const title = it.title || it.name || 'Playground';
+  const sub = it.category || it.desc || it.subtitle || 'Ideas, Prototypes & Fun Builds';
+  const url = it.url || it.demoUrl || it.link || '#playground';
+  const isExt = /^https?:\/\//i.test(url);
+
   return `
-    <article class="mythos-cat-card mythos-card-playground">
+    <article class="mythos-cat-card mythos-card-playground" onclick="window.openMythosWorkDetail&&window.openMythosWorkDetail(3)">
       <div class="mythos-card-media">
-        <img src="${img}" alt="Retro CRT terminal monitor with glowing code prompt" class="mythos-card-img" loading="lazy"/>
+        <img src="${tplEsc(img)}" alt="${tplEsc(title)}" class="mythos-card-img" loading="lazy"/>
         <div class="mythos-card-crt-glow" aria-hidden="true">
           <span class="mythos-crt-prompt">&gt;_</span>
         </div>
@@ -9904,10 +9928,10 @@ function renderMythosCardPlayground(p) {
       </div>
       <div class="mythos-card-footer">
         <div class="mythos-card-meta">
-          <h3 class="mythos-card-title">Playground</h3>
-          <p class="mythos-card-sub">Ideas, Prototypes & Fun Builds</p>
+          <h3 class="mythos-card-title">${tplEsc(title)}</h3>
+          <p class="mythos-card-sub">${tplEsc(sub)}</p>
         </div>
-        <a href="#playground" class="mythos-card-btn" aria-label="Explore Playground">
+        <a href="${tplEsc(url)}" class="mythos-card-btn" aria-label="Explore ${tplEsc(title)}" ${isExt ? 'target="_blank" rel="noopener"' : ''} onclick="event.stopPropagation()">
           <span class="mythos-card-arrow">↗</span>
         </a>
       </div>
@@ -9996,13 +10020,26 @@ function renderMythosTechTools(p) {
 }
 
 function renderMythosCardsGrid(p) {
+  const fallbackCards = [
+    { title: 'Projects', category: 'Real Builds & Case Studies', imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=700&q=80', url: '#works' },
+    { title: 'Experiments', category: 'Creative Tech & Explorations', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=700&q=80', url: '#playground' },
+    { title: 'Visuals', category: 'Art, Photography & Edits', imageUrl: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80', url: '#archives' },
+    { title: 'Playground', category: 'Ideas, Prototypes & Fun Builds', imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=700&q=80', url: '#playground' }
+  ];
+
+  const sourceItems = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : fallbackCards);
+  const cards = sourceItems.slice(0, 4);
+  while (cards.length < 4) {
+    cards.push(fallbackCards[cards.length]);
+  }
+
   return `
     <section class="mythos-cards-section" id="works">
       <div class="mythos-cards-grid">
-        ${renderMythosCardProjects(p)}
-        ${renderMythosCardExperiments(p)}
-        ${renderMythosCardVisuals(p)}
-        ${renderMythosCardPlayground(p)}
+        ${renderMythosCardProjects(p, cards[0])}
+        ${renderMythosCardExperiments(p, cards[1])}
+        ${renderMythosCardVisuals(p, cards[2])}
+        ${renderMythosCardPlayground(p, cards[3])}
       </div>
     </section>`;
 }
@@ -10089,6 +10126,14 @@ function renderMythos(p) {
     if (e && e.preventDefault) e.preventDefault();
     const modal = document.getElementById('mythosAboutModal');
     if (modal) modal.classList.add('is-open');
+  };
+
+    window.openMythosWorkDetail = function(idx) {
+    const items = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : []);
+    const item = items[idx];
+    if (item && (item.url || item.demoUrl || item.link)) {
+      window.open(item.url || item.demoUrl || item.link, '_blank', 'noopener');
+    }
   };
 
   window.closeMythosAboutModal = function() {
