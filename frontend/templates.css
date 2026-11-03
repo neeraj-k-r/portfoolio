@@ -13756,3 +13756,37 @@ body.portfolio-view[data-template="mythos"] {
   --my-font-serif: 'Playfair Display', 'Fraunces', Georgia, serif;
   --my-font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 }
+
+.mythos-page {
+  min-height: 100vh;
+  background-color: var(--my-bg);
+  color: var(--my-text);
+  font-family: var(--my-font-sans);
+  margin: 0;
+  padding: 0;
+  line-height: 1.55;
+  position: relative;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.mythos-page::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 68% 28%, rgba(139, 92, 246, 0.15) 0%, rgba(109, 40, 217, 0.06) 38%, transparent 72%),
+    radial-gradient(circle at 12% 82%, rgba(124, 58, 237, 0.08) 0%, transparent 55%),
+    radial-gradient(circle at 85% 90%, rgba(91, 33, 182, 0.06) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.mythos-wrap {
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 24px 32px 64px;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
