@@ -9608,12 +9608,36 @@ function renderMythosBrand(p) {
     </div>`;
 }
 
+function renderMythosNav() {
+  const items = [
+    { label: 'Home', href: '#home', active: true },
+    { label: 'Works', href: '#works' },
+    { label: 'Playground', href: '#playground' },
+    { label: 'Archives', href: '#archives' },
+    { label: 'About', href: '#about', isModal: true }
+  ];
+
+  return `
+    <nav class="mythos-nav" aria-label="Main Navigation">
+      <ul class="mythos-nav-list">
+        ${items.map(item => `
+          <li class="mythos-nav-item">
+            <a href="${item.href}" class="mythos-nav-link ${item.active ? 'is-active' : ''}" ${item.isModal ? 'onclick="window.openMythosAboutModal&&window.openMythosAboutModal(event)"' : ''}>
+              ${item.label}
+              ${item.active ? '<span class="mythos-nav-indicator" aria-hidden="true"></span>' : ''}
+            </a>
+          </li>
+        `).join('')}
+      </ul>
+    </nav>`;
+}
+
 function renderMythos(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
   document.body.dataset.template = 'mythos';
   document.title = `${p.name || 'Portfolio'} — Mythos Classical`;
-  app.innerHTML = `<div class="mythos-page" id="mythosRoot"><div class="mythos-wrap"><header class="mythos-header">${renderMythosBrand(p)}</header></div></div>`;
+  app.innerHTML = `<div class="mythos-page" id="mythosRoot"><div class="mythos-wrap"><header class="mythos-header">${renderMythosBrand(p)}${renderMythosNav()}</header></div></div>`;
 }
 
 
