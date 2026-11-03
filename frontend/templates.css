@@ -12265,6 +12265,11 @@ body.techno-dark-mode {
 .lx-tp-analog .lx-tp-hero { background: #1e1b18; border: 1px solid rgba(232, 89, 56, 0.4); }
 .lx-tp-analog .lx-tp-cards { background: #141210; border: 1px solid rgba(240, 235, 220, 0.15); }
 .lx-modal-body[data-theme="analog"] { background: #0c0b0a; color: #f4ede1; }
+.lx-tp-mythos { background: #08070b; border: 1px solid #c4a5fc; }
+.lx-tp-mythos .lx-tp-nav { background: #151124; height: 3px; }
+.lx-tp-mythos .lx-tp-hero { background: radial-gradient(circle at 65% 50%, #7c3aed, #150f24); border: 1px solid rgba(196, 165, 252, 0.4); }
+.lx-tp-mythos .lx-tp-cards { background: #120e1a; border: 1px solid rgba(196, 165, 252, 0.15); }
+.lx-modal-body[data-theme="mythos"] { background: #08070b; color: #ffffff; }
 
 
 .techno-btn-cta:focus-visible, .techno-btn-primary:focus-visible, .techno-btn-showreel:focus-visible { outline: 2px solid var(--tc-plum-vibrant); outline-offset: 2px; }
