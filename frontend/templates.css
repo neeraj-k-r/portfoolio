@@ -14522,3 +14522,37 @@ body.portfolio-view[data-template="mythos"] {
   text-shadow: 0 0 14px rgba(196, 165, 252, 0.9), 0 0 24px rgba(139, 92, 246, 0.8);
   letter-spacing: -0.05em;
 }
+
+/* Circular Arrow Button & Hover Dynamics */
+.mythos-card-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.mythos-card-arrow {
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.mythos-cat-card:hover .mythos-card-btn {
+  background: var(--my-lavender);
+  color: #1a102f;
+  border-color: var(--my-lavender);
+  box-shadow: 0 0 16px rgba(196, 165, 252, 0.5);
+  transform: scale(1.08);
+}
+
+.mythos-cat-card:hover .mythos-card-arrow {
+  transform: translate(1px, -1px);
+}
