@@ -3137,5 +3137,10 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
 .lx-modal-body[data-theme="analog"] .preview-title { color: #e85938; }
 .lx-modal-body[data-theme="analog"] .preview-desc { color: #a8a094; }
 .lx-modal-body[data-theme="analog"] .lx-win-line { color: #f4ede1; background: #151311; border-color: rgba(240, 235, 220, 0.12); }
+.lx-modal-body[data-theme="mythos"] { background: #08070b; color: #ffffff; }
+.lx-modal-body[data-theme="mythos"] .preview-name { color: #ffffff; font-family: 'Playfair Display', serif; }
+.lx-modal-body[data-theme="mythos"] .preview-title { color: #c4a5fc; font-style: italic; }
+.lx-modal-body[data-theme="mythos"] .preview-desc { color: #9b93a8; }
+.lx-modal-body[data-theme="mythos"] .lx-win-line { color: #ffffff; background: #110e17; border-color: rgba(196, 165, 252, 0.2); }
 
 
