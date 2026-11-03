@@ -654,6 +654,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <button class="footer-theme-btn" data-theme="techno">Techno</button>
           <button class="footer-theme-btn" data-theme="analog">Analog</button>
           <button class="footer-theme-btn" data-theme="mythos">Mythos</button>
+          <button class="footer-theme-btn" data-theme="suki">Suki</button>
         </div>
       </div>
     </div>
@@ -841,6 +842,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="techno"><div class="tpl-preview techno">✳️</div><div class="tpl-meta"><b>Techno</b><span>Creative tech & generative collage</span></div></label>
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="analog"><div class="tpl-preview analog">🎞️</div><div class="tpl-meta"><b>Analog</b><span>Dark aesthetic desk & collage</span></div></label>
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="mythos"><div class="tpl-preview mythos">🏛️</div><div class="tpl-meta"><b>Mythos</b><span>Cosmic violet classical sculpture</span></div></label>
+            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="suki"><div class="tpl-preview suki">🎬</div><div class="tpl-meta"><b>Suki</b><span>Cyber video editor & motion</span></div></label>
+              <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="suki"><div class="tpl-preview suki">🎬</div><div class="tpl-meta"><b>Suki</b><span>Cyber video editor & motion</span></div></label>
 
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="pavilion"><div class="tpl-preview pavilion">🏛️</div><div class="tpl-meta"><b>Pavilion</b><span>Architectural spatial layout</span></div></label>
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="documenta"><div class="tpl-preview documenta">📚</div><div class="tpl-meta"><b>Documenta</b><span>Curatorial research archive</span></div></label>
@@ -1700,7 +1703,7 @@ function setupUserDashboardView(profile) {
   const wizard = $('subdomainWizardCard'), techSt = $('techStudio'), visSt = $('visualStudio');
   const headerName = $('userHeaderName'), statusPill = $('userStatusPill');
 
-  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'];
+  const VISUAL_THEMES = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'];
   const getTrack = (profile) => {
     if (profile && profile.track === 'visual') {
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
@@ -1897,11 +1900,11 @@ async function paintFeaturedPortfolios() {
     </div>`).join('');
 }
 function paintTrackTabs(profile) {
-  const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'].includes(String((profile && profile.template) || '').toLowerCase());
+  const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'].includes(String((profile && profile.template) || '').toLowerCase());
   document.body.classList.toggle('visual-user', visual);
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
     const v = (c.querySelector('input') || {}).value || '';
-    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'].includes(v);
+    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'].includes(v);
     c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
   });
   if (visual) { paintWorks(); }
@@ -2332,12 +2335,12 @@ if ($('builderForm')) {
     if ($('inTag')) $('inTag').placeholder = visual ? 'Painting stories in color and form. Open for commissions.' : 'Building web apps & AI solutions that scale.';
     document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
       const v = (c.querySelector('input') || {}).value || '';
-      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'].includes(v);
+      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'].includes(v);
       c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
     });
     const curChecked = document.querySelector('#tplGrid input[name=tpl]:checked');
     const curVal = curChecked ? curChecked.value : '';
-    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'].includes(curVal);
+    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'].includes(curVal);
     let wantTpl = curVal;
     if (visual && !curIsVisual) wantTpl = 'gallery';
     else if (!visual && curIsVisual) wantTpl = 'midnight';
@@ -2434,7 +2437,7 @@ async function saveStudio() {
       updatedAt: new Date().toISOString(),
     });
 
-    const isChosenVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos'].includes(activeUserProfile.template);
+    const isChosenVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'].includes(activeUserProfile.template);
     if (isChosenVisual) {
       activeUserProfile.track = 'visual';
       try { localStorage.setItem('portfoolio_track', 'visual'); } catch {}
