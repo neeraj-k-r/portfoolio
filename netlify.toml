@@ -2,22 +2,40 @@
   # publish repo root: frontend/ serves the site, backend/ stays reachable for shared config
   publish = "."
 
-# Security: Block direct access to database schemas and backend config files
+# Security: Block direct access to database schemas, worker source, and backend config files
+[[redirects]]
+  from = "/backend/supabase-schema.sql"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/backend/wrangler.toml"
+  to = "/404"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/backend/worker.js"
+  to = "/404"
+  status = 404
+  force = true
+
 [[redirects]]
   from = "/backend/*.sql"
-  to = "/"
+  to = "/404"
   status = 404
   force = true
 
 [[redirects]]
   from = "/backend/*.toml"
-  to = "/"
+  to = "/404"
   status = 404
   force = true
 
 [[redirects]]
   from = "/*.toml"
-  to = "/"
+  to = "/404"
   status = 404
   force = true
 
