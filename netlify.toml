@@ -2,6 +2,25 @@
   # publish repo root: frontend/ serves the site, backend/ stays reachable for shared config
   publish = "."
 
+# Security: Block direct access to database schemas and backend config files
+[[redirects]]
+  from = "/backend/*.sql"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/backend/*.toml"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*.toml"
+  to = "/"
+  status = 404
+  force = true
+
 [[redirects]]
   from = "/u/:user/resume"
   to = "/frontend/?u=:user&resume=1"

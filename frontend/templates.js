@@ -68,6 +68,12 @@ const TEMPLATES = [
 function tplEsc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
+function tplSafeUrl(u, fallback = '#') {
+  if (!u) return fallback;
+  const s = String(u).trim();
+  if (/^(https?:\/\/|mailto:|tel:|#|\/)/i.test(s)) return tplEsc(s);
+  return fallback;
+}
 function normTpl(p) {
   if (typeof document !== 'undefined' && document.body && document.body.classList && typeof document.body.classList.remove === 'function') {
     document.body.classList.remove('pf-theme-bold', 'pf-theme-vibrant', 'pf-theme-clean', 'pf-theme-editorial');

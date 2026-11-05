@@ -95,23 +95,52 @@ insert into storage.buckets (id, name, public)
 values ('portfolio-sites', 'portfolio-sites', true)
 on conflict (id) do update set public = true;
 
--- storage policies: public read, owners manage their own prefix
+-- storage policies: public read, owners strictly manage their own username prefix
 drop policy if exists "public read sites" on storage.objects;
 create policy "public read sites" on storage.objects
   for select using (bucket_id = 'portfolio-sites');
 
 drop policy if exists "owner upload sites" on storage.objects;
 create policy "owner upload sites" on storage.objects
-  for insert with check (bucket_id = 'portfolio-sites' and auth.uid() is not null);
+  for insert with check (
+    bucket_id = 'portfolio-sites'
+    and auth.uid() is not null
+    and split_part(name, '/', 1) = 'sites'
+    and lower(split_part(name, '/', 2)) in (
+      select username from public.profiles where user_id = auth.uid()
+    )
+  );
 
 drop policy if exists "owner update sites" on storage.objects;
 create policy "owner update sites" on storage.objects
-  for update using (bucket_id = 'portfolio-sites' and (auth.uid() = owner or is_admin()))
+  for update using (
+    bucket_id = 'portfolio-sites'
+    and (
+      (
+        split_part(name, '/', 1) = 'sites'
+        and lower(split_part(name, '/', 2)) in (
+          select username from public.profiles where user_id = auth.uid()
+        )
+      )
+      or is_admin()
+    )
+  )
   with check (bucket_id = 'portfolio-sites');
 
 drop policy if exists "owner delete sites" on storage.objects;
 create policy "owner delete sites" on storage.objects
-  for delete using (bucket_id = 'portfolio-sites' and (auth.uid() = owner or is_admin()));
+  for delete using (
+    bucket_id = 'portfolio-sites'
+    and (
+      (
+        split_part(name, '/', 1) = 'sites'
+        and lower(split_part(name, '/', 2)) in (
+          select username from public.profiles where user_id = auth.uid()
+        )
+      )
+      or is_admin()
+    )
+  );
 
 -- 5) resume section (auto-built from profile info, ATS + styled themes)
 -- experience[]: {role, company, start, end, current, desc}

@@ -236,6 +236,12 @@ async function fetchGitHubInput(input) {
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
+function safeUrl(u, fallback = '#') {
+  if (!u) return fallback;
+  const s = String(u).trim();
+  if (/^(https?:\/\/|mailto:|tel:|#|\/)/i.test(s)) return esc(s);
+  return fallback;
+}
 // ---- Visual track: Behance-style gallery (no resume, no code) ----
 function galleryWorks(p) {
   if (Array.isArray(p.works) && p.works.length > 0) {

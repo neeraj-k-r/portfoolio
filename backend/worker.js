@@ -18,6 +18,12 @@ const SEC_HEADERS = {
 function esc(s) {
   return String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
+function safeUrl(u, fallback = '#') {
+  if (!u) return fallback;
+  const s = String(u).trim();
+  if (/^(https?:\/\/|mailto:|tel:|#|\/)/i.test(s)) return esc(s);
+  return fallback;
+}
 function wShowInsta(p) {
   if (!p || !p.instagram) return false;
   if (p.showInstagram === false || p.show_instagram === false) return false;
@@ -8838,6 +8844,11 @@ export default {
     if (host.endsWith('portfoolio.me') && parts.length === 3) sub = parts[0].toLowerCase();
     if (!sub || RESERVED.has(sub) || !/^[a-z0-9][a-z0-9-]{2,29}$/.test(sub)) {
       return Response.redirect(`${ORIGIN}/`, 302);
+    }
+
+    // Path traversal guard
+    if (url.pathname.includes('..') || /[\0<>]/.test(url.pathname)) {
+      return new Response('Not Found', { status: 404 });
     }
 
     // Proxy shared static assets (CSS, icons, seeds) directly from ORIGIN so they serve same-origin on every subdomain
