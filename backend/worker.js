@@ -8946,3 +8946,9 @@ export default {
 .lo-trust-kicker{font-size:0.72rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--lo-ink-muted)}
 .lo-trust-pills{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .lo-trust-pill{font-family:var(--lo-font-display);font-size:0.74rem;font-weight:700;letter-spacing:0.08em;padding:6px 14px;border-radius:999px;background:var(--lo-bg-card);border:1px solid var(--lo-line);color:var(--lo-ink)}
+
+.lo-filter-bar{display:flex;align-items:center;gap:10px;overflow-x:auto;padding-bottom:12px;margin-bottom:32px;scrollbar-width:none}
+.lo-filter-bar::-webkit-scrollbar{display:none}
+.lo-filter-btn{padding:8px 20px;border-radius:999px;background:var(--lo-bg-card);border:1px solid var(--lo-line);font-size:0.8rem;font-weight:700;color:var(--lo-ink-muted);cursor:pointer;transition:all 0.2s ease;white-space:nowrap}
+.lo-filter-btn:hover{color:var(--lo-ink);border-color:var(--lo-ink)}
+.lo-filter-btn.is-active{background:var(--lo-ink);color:#ffffff;border-color:var(--lo-ink)}
