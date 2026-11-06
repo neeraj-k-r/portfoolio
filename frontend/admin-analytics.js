@@ -474,6 +474,16 @@
     return users.filter(u => String(u.site_type || 'builder').toLowerCase() === st);
   };
 
+  /**
+   * Sort users by newest registration date first
+   * @param {Array<UserProfile>} users
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.sortUsersByNewest = function(users) {
+    if (!Array.isArray(users)) return [];
+    return [...users].sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+  };
+
   const Analytics = {};
 
   return Analytics;
