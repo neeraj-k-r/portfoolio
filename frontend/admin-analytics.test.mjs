@@ -7,3 +7,9 @@ test('Analytics module initializes correctly', () => {
   assert.equal(typeof Analytics.computeTotalUsers, 'function');
   assert.equal(typeof Analytics.aggregatePlatformKPIs, 'function');
 });
+
+test('computeTotalUsers handles valid lists and edge cases', () => {
+  assert.equal(Analytics.computeTotalUsers([]), 0);
+  assert.equal(Analytics.computeTotalUsers(null), 0);
+  assert.equal(Analytics.computeTotalUsers([{ username: 'u1' }, { username: 'u2' }]), 2);
+});
