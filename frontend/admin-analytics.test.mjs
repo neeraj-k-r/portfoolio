@@ -24,3 +24,17 @@ test('computeStatusCounts computes approved, pending, and rejected', () => {
   const counts = Analytics.computeStatusCounts(users);
   assert.deepEqual(counts, { approved: 2, pending: 1, rejected: 1 });
 });
+
+test('computeTrackBreakdown computes tech vs visual counts and percentages', () => {
+  const users = [
+    { username: 'u1', track: 'tech' },
+    { username: 'u2', track: 'visual' },
+    { username: 'u3', track: 'visual' },
+    { username: 'u4', track: 'tech' }
+  ];
+  const breakdown = Analytics.computeTrackBreakdown(users);
+  assert.equal(breakdown.tech, 2);
+  assert.equal(breakdown.visual, 2);
+  assert.equal(breakdown.techPercent, 50);
+  assert.equal(breakdown.visualPercent, 50);
+});
