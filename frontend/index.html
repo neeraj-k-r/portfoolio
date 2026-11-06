@@ -3830,7 +3830,7 @@ function renderAdminAnalyticsView(allSites) {
   const csvBtn = $('anExportCsvBtn');
   if (csvBtn) csvBtn.onclick = () => {
     window.PortfoolioAdminAnalytics.downloadCSV(allSites);
-    if (typeof toast === 'function') toast('📥 Analytics CSV exported');
+    if (typeof toast === 'function') toast('📥 Analytics CSV exported successfully');
   };
   const jsonBtn = $('anExportJsonBtn');
   if (jsonBtn) jsonBtn.onclick = () => {
