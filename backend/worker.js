@@ -8985,3 +8985,7 @@ export default {
 .lo-service-num{font-family:var(--lo-font-display);font-size:0.8rem;font-weight:800;color:var(--lo-accent-peach);margin-bottom:16px}
 .lo-service h3{font-family:var(--lo-font-display);font-size:1.15rem;font-weight:800;color:var(--lo-ink);margin-bottom:10px}
 .lo-service p{font-size:0.88rem;color:var(--lo-ink-muted);line-height:1.5;margin-bottom:20px}
+
+.lo-shop-card{background:linear-gradient(135deg,var(--lo-bg-warm),#fdfbf7);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding: clamp(32px,5vw,56px);display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
+.lo-shop-copy h3{font-family:var(--lo-font-display);font-size: clamp(1.6rem,2.8vw,2.2rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:12px}
+.lo-shop-copy p{font-size:1.02rem;color:var(--lo-ink-muted);max-width:560px}
