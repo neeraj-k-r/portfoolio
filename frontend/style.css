@@ -3412,3 +3412,51 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   text-align: right;
   flex-shrink: 0;
 }
+
+.an-filters-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.an-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+  max-width: 420px;
+}
+.an-search-wrap input {
+  width: 100%;
+  padding-left: 36px;
+}
+.an-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+}
+.an-pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.an-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--stroke);
+  color: #cbd5e1;
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.an-pill:hover, .an-pill.is-active {
+  background: rgba(251, 191, 36, 0.15);
+  border-color: rgba(251, 191, 36, 0.5);
+  color: #fde68a;
+}
