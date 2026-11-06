@@ -567,6 +567,46 @@
     return '"' + s + '"';
   };
 
+  /**
+   * Generate CSV report string of all users and analytics metadata
+   * @param {Array<UserProfile>} users
+   * @returns {string}
+   */
+  Analytics.exportAnalyticsCSV = function(users) {
+    const headers = [
+      'Username', 'Name', 'Email', 'Title', 'Track', 'Template',
+      'Site Type', 'Status', 'Projects Count', 'Works Count', 'Skills Count',
+      'Featured', 'Created At', 'Last Active'
+    ];
+    const rows = [headers.map(Analytics.escapeCSVField).join(',')];
+    if (Array.isArray(users)) {
+      users.forEach(u => {
+        const pCount = Array.isArray(u.projects) ? u.projects.length : 0;
+        const wCount = Array.isArray(u.works) ? u.works.length : 0;
+        const sCount = Array.isArray(u.skills) ? u.skills.length : 0;
+        const lastActive = u.updated_at || u.site_updated_at || u.created_at || '';
+        const row = [
+          u.username || '',
+          u.name || '',
+          u.email || '',
+          u.title || '',
+          u.track || 'tech',
+          u.template || 'midnight',
+          u.site_type || 'builder',
+          u.status || 'pending',
+          pCount,
+          wCount,
+          sCount,
+          u.featured ? 'Yes' : 'No',
+          u.created_at || '',
+          lastActive
+        ];
+        rows.push(row.map(Analytics.escapeCSVField).join(','));
+      });
+    }
+    return rows.join('\r\n');
+  };
+
   const Analytics = {};
 
   return Analytics;
