@@ -396,6 +396,15 @@
     }));
   };
 
+  /**
+   * Normalize search query for case-insensitive matching
+   * @param {string} query
+   * @returns {string}
+   */
+  Analytics.sanitizeSearchTerm = function(query) {
+    return String(query || '').trim().toLowerCase();
+  };
+
   const Analytics = {};
 
   return Analytics;
