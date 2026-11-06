@@ -90,3 +90,11 @@ test('computeTopTemplates ranks templates by popularity', () => {
   assert.equal(top[0].count, 2);
   assert.equal(top[0].percent, 50);
 });
+
+test('date helpers format dates and relative times properly', () => {
+  const readable = Analytics.formatISOToReadable('2026-11-06T12:00:00Z');
+  assert.ok(readable.includes('2026'));
+  const now = new Date('2026-11-06T12:05:00Z');
+  assert.equal(Analytics.formatRelativeTime('2026-11-06T12:04:45Z', now), 'just now');
+  assert.equal(Analytics.formatRelativeTime('2026-11-06T12:00:00Z', now), '5m ago');
+});
