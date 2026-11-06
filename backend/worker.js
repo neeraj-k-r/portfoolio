@@ -80,7 +80,7 @@ async function getProfile(sub) {
         row.services = row.resume.services;
       }
       // Self-heal legacy rows: a visual-only template implies the visual track
-      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
+      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'].includes(String(row.template || '').toLowerCase()) || String(row.template || '').toLowerCase() === 'lo') row.track = 'visual';
       if (row.track !== 'visual') row.track = 'tech';
 
       // Check seed profile to backfill custom services or extra repos
