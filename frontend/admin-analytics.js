@@ -532,6 +532,30 @@
     });
   };
 
+  /**
+   * Master filter and sort pipeline
+   * @param {Array<UserProfile>} users
+   * @param {Object} [options]
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.filterAndSortUsers = function(users, options = {}) {
+    let result = Array.isArray(users) ? [...users] : [];
+    if (options.query) result = Analytics.filterUsersByQuery(result, options.query);
+    if (options.track && options.track !== 'all') result = Analytics.filterUsersByTrack(result, options.track);
+    if (options.template && options.template !== 'all') result = Analytics.filterUsersByTemplate(result, options.template);
+    if (options.status && options.status !== 'all') result = Analytics.filterUsersByStatus(result, options.status);
+    if (options.siteType && options.siteType !== 'all') result = Analytics.filterUsersBySiteType(result, options.siteType);
+
+    const sort = options.sortBy || 'newest';
+    if (sort === 'oldest') result = Analytics.sortUsersByOldest(result);
+    else if (sort === 'content') result = Analytics.sortUsersByContent(result);
+    else if (sort === 'username') result = Analytics.sortUsersByUsername(result);
+    else if (sort === 'activity') result = Analytics.sortUsersByActivity(result);
+    else result = Analytics.sortUsersByNewest(result);
+
+    return result;
+  };
+
   const Analytics = {};
 
   return Analytics;
