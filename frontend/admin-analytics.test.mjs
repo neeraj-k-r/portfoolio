@@ -38,3 +38,16 @@ test('computeTrackBreakdown computes tech vs visual counts and percentages', () 
   assert.equal(breakdown.techPercent, 50);
   assert.equal(breakdown.visualPercent, 50);
 });
+
+test('computeHostingBreakdown computes builder vs upload counts and percentages', () => {
+  const users = [
+    { username: 'u1', site_type: 'builder' },
+    { username: 'u2', site_type: 'upload' },
+    { username: 'u3', site_type: 'builder' }
+  ];
+  const hosting = Analytics.computeHostingBreakdown(users);
+  assert.equal(hosting.builder, 2);
+  assert.equal(hosting.upload, 1);
+  assert.equal(hosting.builderPercent, 67);
+  assert.equal(hosting.uploadPercent, 33);
+});
