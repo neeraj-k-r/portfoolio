@@ -8989,3 +8989,10 @@ export default {
 .lo-shop-card{background:linear-gradient(135deg,var(--lo-bg-warm),#fdfbf7);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding: clamp(32px,5vw,56px);display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
 .lo-shop-copy h3{font-family:var(--lo-font-display);font-size: clamp(1.6rem,2.8vw,2.2rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:12px}
 .lo-shop-copy p{font-size:1.02rem;color:var(--lo-ink-muted);max-width:560px}
+
+.lo-contact-card{background:var(--lo-ink);color:#ffffff;border-radius:var(--lo-radius);padding:clamp(48px,8vw,96px) 36px;text-align:center;position:relative;overflow:hidden}
+.lo-contact-card h2{font-family:var(--lo-font-display);font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:900;letter-spacing:-0.04em;line-height:1.05;margin-bottom:20px}
+.lo-contact-card p{font-size:1.15rem;color:rgba(255,255,255,0.7);max-width:580px;margin:0 auto 36px}
+.lo-contact-actions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.lo-contact-btn-white{background:#ffffff;color:var(--lo-ink);padding:14px 28px;border-radius:999px;font-weight:700;font-size:0.92rem;text-decoration:none;transition:transform 0.2s ease}
+.lo-contact-btn-white:hover{transform:scale(1.03)}
