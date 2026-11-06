@@ -607,6 +607,25 @@
     return rows.join('\r\n');
   };
 
+  /**
+   * Generate JSON report string with aggregated metrics and user dataset
+   * @param {Array<UserProfile>} users
+   * @returns {string}
+   */
+  Analytics.exportAnalyticsJSON = function(users) {
+    const kpis = Analytics.aggregatePlatformKPIs(users);
+    const topTemplates = Analytics.computeTopTemplates(users, 39);
+    const activity = Analytics.computeRecentActivity(users, 20);
+    const exportData = {
+      generatedAt: new Date().toISOString(),
+      kpis,
+      topTemplates,
+      recentActivity: activity,
+      users: Array.isArray(users) ? users : []
+    };
+    return JSON.stringify(exportData, null, 2);
+  };
+
   const Analytics = {};
 
   return Analytics;
