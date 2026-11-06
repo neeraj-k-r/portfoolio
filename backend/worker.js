@@ -8952,3 +8952,5 @@ export default {
 .lo-filter-btn{padding:8px 20px;border-radius:999px;background:var(--lo-bg-card);border:1px solid var(--lo-line);font-size:0.8rem;font-weight:700;color:var(--lo-ink-muted);cursor:pointer;transition:all 0.2s ease;white-space:nowrap}
 .lo-filter-btn:hover{color:var(--lo-ink);border-color:var(--lo-ink)}
 .lo-filter-btn.is-active{background:var(--lo-ink);color:#ffffff;border-color:var(--lo-ink)}
+
+.lo-art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
