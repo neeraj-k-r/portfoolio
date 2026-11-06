@@ -799,6 +799,16 @@
     return `<span style="width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:linear-gradient(135deg,#6366f1,#22d3ee);flex-shrink:0">${initial}</span>`;
   };
 
+  /**
+   * Render Track Badge Component
+   * @param {string} track
+   * @returns {string}
+   */
+  Analytics.renderTrackBadgeHTML = function(track) {
+    const isVisual = String(track).toLowerCase() === 'visual';
+    return `<span class="an-track-tag ${isVisual ? 'visual' : 'tech'}">${isVisual ? '🎨 Visual' : '💻 Tech'}</span>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
