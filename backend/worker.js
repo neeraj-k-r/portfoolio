@@ -9088,3 +9088,17 @@ function renderLoSSRFilterBar() {
     <button class="lo-filter-btn" data-cat="motion">Motion & Video</button>
   </div>`;
 }
+
+function renderLoSSRCard(w, idx) {
+  const isTall = idx === 0 || w.tall;
+  const isWide = idx === 3 || w.wide;
+  const cardClass = 'lo-art-card' + (isTall ? ' is-tall' : (isWide ? ' is-wide' : ''));
+  const catLabel = esc((w.category || 'Artwork').toUpperCase());
+  return `<article class="${cardClass}" data-category="${esc(w.category || 'all')}">
+    <img class="lo-art-img" src="${esc(w.imageUrl)}" alt="${esc(w.title || '')}" loading="lazy">
+    <div class="lo-art-overlay">
+      <span class="lo-art-cat">${catLabel}</span>
+      <h3 class="lo-art-title">${esc(w.title || 'Untitled')}</h3>
+    </div>
+  </article>`;
+}
