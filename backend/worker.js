@@ -8934,3 +8934,10 @@ export default {
 .lo-btn-outline{background:transparent;color:var(--lo-ink);border:1.5px solid var(--lo-line-dark)}
 .lo-btn-outline:hover{background:var(--lo-ink);color:#ffffff}
 .lo-btn-sm{padding:8px 18px;font-size:0.8rem}
+
+.lo-hero{padding:clamp(60px,9vw,110px) 0 48px;border-bottom:1px solid var(--lo-line);background:radial-gradient(ellipse at 80% 20%,rgba(216,180,226,0.2),transparent 50%),radial-gradient(ellipse at 15% 85%,rgba(255,122,89,0.15),transparent 45%)}
+.lo-hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;background:var(--lo-bg-warm);border:1px solid var(--lo-line);font-size:0.75rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--lo-ink);margin-bottom:24px}
+.lo-hero-title{font-family:var(--lo-font-display);font-size:clamp(2.8rem,7vw,5.6rem);font-weight:900;line-height:0.96;letter-spacing:-0.04em;text-transform:uppercase;color:var(--lo-ink);margin-bottom:28px}
+.lo-hero-title .accent-italic{font-style:italic;font-weight:400;font-family:'Fraunces',serif;color:var(--lo-accent-peach)}
+.lo-hero-desc{font-size:clamp(1.05rem,1.8vw,1.35rem);line-height:1.5;color:var(--lo-ink-muted);max-width:680px;margin-bottom:36px}
+.lo-hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
