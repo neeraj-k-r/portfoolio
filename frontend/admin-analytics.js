@@ -210,6 +210,68 @@
     };
   };
 
+  /**
+   * Comprehensive Template Metadata Registry
+   */
+  Analytics.TEMPLATE_METADATA = {
+    midnight: { name: 'Midnight', emoji: '🌌', track: 'tech' },
+    minimal: { name: 'Minimal', emoji: '📄', track: 'tech' },
+    terminal: { name: 'Terminal', emoji: '💻', track: 'tech' },
+    creative: { name: 'Creative', emoji: '🎨', track: 'tech' },
+    aurora: { name: 'Aurora', emoji: '🔮', track: 'tech' },
+    editorial: { name: 'Editorial', emoji: '📰', track: 'tech' },
+    brutalist: { name: 'Brutalist', emoji: '🧱', track: 'tech' },
+    afterglow: { name: 'Afterglow', emoji: '🌇', track: 'tech' },
+    ultraviolet: { name: 'Ultraviolet', emoji: '🟣', track: 'tech' },
+    tidepool: { name: 'Tidepool', emoji: '🪼', track: 'tech' },
+    nova: { name: 'Nova', emoji: '✨', track: 'tech' },
+    codeflow: { name: 'Codeflow', emoji: '⚡', track: 'tech' },
+    wave: { name: 'Wave', emoji: '🌊', track: 'tech' },
+    assistant: { name: 'Assistant', emoji: '🤖', track: 'tech' },
+    console: { name: 'Console', emoji: '📟', track: 'tech' },
+    snowcard: { name: 'Snowcard', emoji: '❄️', track: 'tech' },
+    parchment: { name: 'Parchment', emoji: '📜', track: 'tech' },
+    cloud: { name: 'Cloud', emoji: '☁️', track: 'tech' },
+    github: { name: 'GitHub', emoji: '🐙', track: 'tech' },
+    particle: { name: 'Particle', emoji: '✨', track: 'tech' },
+    panels: { name: 'Panels', emoji: '🍱', track: 'tech' },
+    monolith: { name: 'Monolith', emoji: '🏛️', track: 'tech' },
+    editor: { name: 'Editor', emoji: '📝', track: 'tech' },
+    magazine: { name: 'Magazine', emoji: '🗞️', track: 'tech' },
+    bold: { name: 'Bold', emoji: '💥', track: 'tech' },
+    clean: { name: 'Clean', emoji: '🌿', track: 'tech' },
+    vibrant: { name: 'Vibrant', emoji: '🌈', track: 'tech' },
+    neon: { name: 'Neon', emoji: '💡', track: 'tech' },
+    hacker: { name: 'Hacker', emoji: '👾', track: 'tech' },
+    gallery: { name: 'Gallery', emoji: '🖼️', track: 'visual' },
+    studio: { name: 'Studio', emoji: '☀️', track: 'visual' },
+    noir: { name: 'Noir', emoji: '🌙', track: 'visual' },
+    museum: { name: 'Museum', emoji: '🏛️', track: 'visual' },
+    catalog: { name: 'Catalog', emoji: '📖', track: 'visual' },
+    bloom: { name: 'Bloom', emoji: '🌸', track: 'visual' },
+    motion: { name: 'Motion', emoji: '⚡', track: 'visual' },
+    atelier: { name: 'Atelier', emoji: '🏛️', track: 'visual' },
+    cinema: { name: 'Cinema', emoji: '🎬', track: 'visual' },
+    arch: { name: 'Arch', emoji: '📐', track: 'visual' },
+    zine: { name: 'Zine', emoji: '🎨', track: 'visual' },
+    zen: { name: 'Zen', emoji: '🍵', track: 'visual' },
+    desire: { name: 'Desire', emoji: '✨', track: 'visual' },
+    lumina: { name: 'Lumina', emoji: '🏛️', track: 'visual' },
+    vogue: { name: 'Vogue', emoji: '💎', track: 'visual' },
+    filmstrip: { name: 'Filmstrip', emoji: '🎞️', track: 'visual' },
+    biennale: { name: 'Biennale', emoji: '🏛️', track: 'visual' },
+    pavilion: { name: 'Pavilion', emoji: '🏛️', track: 'visual' },
+    documenta: { name: 'Documenta', emoji: '📑', track: 'visual' },
+    triennale: { name: 'Triennale', emoji: '📐', track: 'visual' },
+    sketchbook: { name: 'Sketchbook', emoji: '📓', track: 'visual' },
+    salon: { name: 'Salon', emoji: '🖼️', track: 'visual' },
+    illustra: { name: 'Illustra', emoji: '🎨', track: 'visual' },
+    techno: { name: 'Techno Lab', emoji: '⚡', track: 'visual' },
+    analog: { name: 'Analog Desk', emoji: '📻', track: 'visual' },
+    mythos: { name: 'Mythos Classical', emoji: '🏛️', track: 'visual' },
+    suki: { name: 'Suki Cinematic', emoji: '🎬', track: 'visual' }
+  };
+
   const Analytics = {};
 
   return Analytics;
