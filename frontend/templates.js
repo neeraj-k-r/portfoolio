@@ -10840,3 +10840,13 @@ function renderLoAbout(p) {
       </div>
     </section>`;
 }
+
+function renderLoMilestones() {
+  return `
+    <div class="lo-milestones-grid">
+      <div class="lo-milestone"><div class="lo-milestone-number">12+</div><div class="lo-milestone-label">Years Creating</div></div>
+      <div class="lo-milestone"><div class="lo-milestone-number">80+</div><div class="lo-milestone-label">Commissions</div></div>
+      <div class="lo-milestone"><div class="lo-milestone-number">15+</div><div class="lo-milestone-label">Brand Partners</div></div>
+      <div class="lo-milestone"><div class="lo-milestone-number">100%</div><div class="lo-milestone-label">Indie Spirit</div></div>
+    </div>`;
+}
