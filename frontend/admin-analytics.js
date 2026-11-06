@@ -357,6 +357,20 @@
     return Math.floor(diffMonths / 12) + 'y ago';
   };
 
+  /**
+   * Derive user activity milestone description
+   * @param {UserProfile} user
+   * @returns {string}
+   */
+  Analytics.deriveUserActivityType = function(user) {
+    if (!user) return 'Platform Activity';
+    if (user.site_type === 'upload') return 'Custom Site Upload';
+    if (user.featured) return 'Featured on Showcase';
+    if (Array.isArray(user.projects) && user.projects.length >= 3) return 'Major Portfolio Build';
+    if (Array.isArray(user.works) && user.works.length >= 3) return 'Visual Reel Publish';
+    return 'Subdomain Registered';
+  };
+
   const Analytics = {};
 
   return Analytics;
