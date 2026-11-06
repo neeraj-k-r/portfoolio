@@ -334,6 +334,29 @@
     return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   };
 
+  /**
+   * Calculate human-friendly relative time (e.g., "just now", "5m ago", "2d ago")
+   * @param {string|Date} dateStr
+   * @param {Date} [now]
+   * @returns {string}
+   */
+  Analytics.formatRelativeTime = function(dateStr, now = new Date()) {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '—';
+    const diffSec = Math.floor((now.getTime() - d.getTime()) / 1000);
+    if (diffSec < 60) return 'just now';
+    const diffMin = Math.floor(diffSec / 60);
+    if (diffMin < 60) return diffMin + 'm ago';
+    const diffHours = Math.floor(diffMin / 60);
+    if (diffHours < 24) return diffHours + 'h ago';
+    const diffDays = Math.floor(diffHours / 24);
+    if (diffDays < 30) return diffDays + 'd ago';
+    const diffMonths = Math.floor(diffDays / 30);
+    if (diffMonths < 12) return diffMonths + 'mo ago';
+    return Math.floor(diffMonths / 12) + 'y ago';
+  };
+
   const Analytics = {};
 
   return Analytics;
