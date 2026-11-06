@@ -484,6 +484,16 @@
     return [...users].sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
   };
 
+  /**
+   * Sort users by oldest registration date first
+   * @param {Array<UserProfile>} users
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.sortUsersByOldest = function(users) {
+    if (!Array.isArray(users)) return [];
+    return [...users].sort((a, b) => new Date(a.created_at || 0) - new Date(b.created_at || 0));
+  };
+
   const Analytics = {};
 
   return Analytics;
