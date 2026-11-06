@@ -820,6 +820,18 @@
     return `<span class="an-tpl-tag">${meta.emoji} ${meta.name}</span>`;
   };
 
+  /**
+   * Render Status Badge
+   * @param {string} status
+   * @returns {string}
+   */
+  Analytics.renderStatusBadgeHTML = function(status) {
+    const st = String(status || 'pending').toLowerCase();
+    if (st === 'approved') return '<span class="status-pill live">Live</span>';
+    if (st === 'rejected') return '<span class="status-pill rejected">Rejected</span>';
+    return '<span class="status-pill pending">Pending</span>';
+  };
+
   const Analytics = {};
 
   return Analytics;
