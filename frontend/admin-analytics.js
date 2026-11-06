@@ -809,6 +809,17 @@
     return `<span class="an-track-tag ${isVisual ? 'visual' : 'tech'}">${isVisual ? '🎨 Visual' : '💻 Tech'}</span>`;
   };
 
+  /**
+   * Render Template Pill with Emoji
+   * @param {string} templateId
+   * @returns {string}
+   */
+  Analytics.renderTemplatePillHTML = function(templateId) {
+    const id = String(templateId || 'midnight').toLowerCase();
+    const meta = Analytics.TEMPLATE_METADATA[id] || { name: id, emoji: '🎨' };
+    return `<span class="an-tpl-tag">${meta.emoji} ${meta.name}</span>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
