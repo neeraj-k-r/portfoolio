@@ -143,6 +143,33 @@
     return users.filter(u => Boolean(u.featured)).length;
   };
 
+  /**
+   * Compute active creators in 7-day and 30-day windows
+   * @param {Array<UserProfile>} users
+   * @param {Date} [now]
+   * @returns {{ active7Days: number, active30Days: number }}
+   */
+  Analytics.computeActiveUsersWindow = function(users, now = new Date()) {
+    if (!Array.isArray(users)) return { active7Days: 0, active30Days: 0 };
+    const nowMs = now.getTime();
+    const ms7Days = 7 * 24 * 60 * 60 * 1000;
+    const ms30Days = 30 * 24 * 60 * 60 * 1000;
+    let active7Days = 0;
+    let active30Days = 0;
+
+    users.forEach(u => {
+      const tsStr = u.updated_at || u.site_updated_at || u.created_at;
+      if (!tsStr) return;
+      const ts = new Date(tsStr).getTime();
+      if (isNaN(ts)) return;
+      const diff = nowMs - ts;
+      if (diff >= 0 && diff <= ms7Days) active7Days++;
+      if (diff >= 0 && diff <= ms30Days) active30Days++;
+    });
+
+    return { active7Days, active30Days };
+  };
+
   const Analytics = {};
 
   return Analytics;
