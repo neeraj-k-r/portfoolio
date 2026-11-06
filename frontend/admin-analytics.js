@@ -272,6 +272,21 @@
     suki: { name: 'Suki Cinematic', emoji: '🎬', track: 'visual' }
   };
 
+  /**
+   * Compute template usage counts across all users
+   * @param {Array<UserProfile>} users
+   * @returns {Object<string, number>}
+   */
+  Analytics.computeTemplateUsage = function(users) {
+    const usage = {};
+    if (!Array.isArray(users)) return usage;
+    users.forEach(u => {
+      const tpl = String(u.template || 'midnight').toLowerCase();
+      usage[tpl] = (usage[tpl] || 0) + 1;
+    });
+    return usage;
+  };
+
   const Analytics = {};
 
   return Analytics;
