@@ -9115,3 +9115,29 @@ function renderLoSSRArtGrid(works) {
     </div>
   </section>`;
 }
+
+function renderLoSSRAbout(p) {
+  const name = esc(p.name || 'Lo');
+  const avatar = p.avatarUrl || p.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80';
+  return `<section class="lo-section" id="about" style="background:var(--lo-bg-warm)">
+    <div class="lo-shell lo-about-grid">
+      <div class="lo-stamp-card">
+        <div class="lo-stamp-header">
+          <span>STUDIO RECORD · #2026</span>
+          <span>CERTIFIED ARTIST</span>
+        </div>
+        <img class="lo-stamp-photo" src="${esc(avatar)}" alt="${name}">
+        <div class="lo-stamp-footer">
+          <span>${name}</span>
+          <span>MIDWEST STUDIO</span>
+        </div>
+      </div>
+      <div class="lo-about-copy">
+        <p class="lo-kicker"><span></span> 02 / THE STORY</p>
+        <h2>Making things that spark joy, provoke curiosity, and refuse to be boring.</h2>
+        <p>I believe the best creative work happens at the messy intersection of craft, relentless curiosity, and high creative courage. Spanning fine art illustration, brand identities, physical editions, and screen visuals.</p>
+        ${renderLoSSRMilestones()}
+      </div>
+    </div>
+  </section>`;
+}
