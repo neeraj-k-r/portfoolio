@@ -1021,6 +1021,11 @@
     URL.revokeObjectURL(link.href);
   };
 
+  // Global namespace binding
+  if (typeof window !== 'undefined') {
+    window.PortfoolioAdminAnalytics = Analytics;
+  }
+
   const Analytics = {};
 
   return Analytics;
