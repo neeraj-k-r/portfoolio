@@ -10983,3 +10983,12 @@ if (typeof window !== 'undefined') {
 if (typeof window !== 'undefined') {
   window.openLoWorkDetail = window.openLoWorkDetail || function() {};
 }
+
+if (typeof window !== 'undefined' && typeof window.addEventListener === 'function') {
+  window.addEventListener('scroll', function() {
+    const hdr = document.querySelector('.lo-header');
+    if (hdr) {
+      hdr.style.boxShadow = window.scrollY > 20 ? '0 10px 30px rgba(0,0,0,0.06)' : 'none';
+    }
+  }, { passive: true });
+}
