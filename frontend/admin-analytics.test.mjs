@@ -98,3 +98,13 @@ test('date helpers format dates and relative times properly', () => {
   assert.equal(Analytics.formatRelativeTime('2026-11-06T12:04:45Z', now), 'just now');
   assert.equal(Analytics.formatRelativeTime('2026-11-06T12:00:00Z', now), '5m ago');
 });
+
+test('filterAndSortUsers filters by query accurately', () => {
+  const users = [
+    { username: 'neerajkr', name: 'Neeraj', email: 'neeraj@example.com' },
+    { username: 'priya', name: 'Priya Sharma', email: 'priya@example.com' }
+  ];
+  const matched = Analytics.filterAndSortUsers(users, { query: 'sharma' });
+  assert.equal(matched.length, 1);
+  assert.equal(matched[0].username, 'priya');
+});
