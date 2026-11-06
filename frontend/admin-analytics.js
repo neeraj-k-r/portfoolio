@@ -287,6 +287,27 @@
     return usage;
   };
 
+  /**
+   * Compute ranked list of top templates with adoption percentages
+   * @param {Array<UserProfile>} users
+   * @param {number} [limit=10]
+   * @returns {Array<{ id: string, name: string, emoji: string, track: string, count: number, percent: number }>}
+   */
+  Analytics.computeTopTemplates = function(users, limit = 10) {
+    if (!Array.isArray(users) || !users.length) return [];
+    const usage = Analytics.computeTemplateUsage(users);
+    const total = users.length;
+    const entries = Object.keys(usage).map(id => {
+      const meta = Analytics.TEMPLATE_METADATA[id] || { name: id, emoji: '🎨', track: 'tech' };
+      const count = usage[id];
+      const percent = total > 0 ? Math.round((count / total) * 100) : 0;
+      return { id, name: meta.name, emoji: meta.emoji, track: meta.track, count, percent };
+    });
+
+    entries.sort((a, b) => b.count - a.count || a.name.localeCompare(b.name));
+    return entries.slice(0, limit);
+  };
+
   const Analytics = {};
 
   return Analytics;
