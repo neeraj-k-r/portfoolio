@@ -10722,3 +10722,22 @@ function getLoBrand(p) {
   const raw = String(p.name || 'ARTIST CALLED LO').trim();
   return tplEsc(raw.toUpperCase());
 }
+
+function renderLoHeader(p) {
+  const brand = getLoBrand(p);
+  const hireHref = p.phone ? `https://wa.me/${p.phone.replace(/\D/g, '')}?text=Hi,%20I'm%20interested` : (p.email ? `mailto:${tplEsc(p.email)}?subject=Studio%20Inquiry` : '#contact');
+  return `
+    <header class="lo-header">
+      <nav class="lo-nav lo-shell">
+        <a class="lo-brand" href="#home">${brand} <span class="lo-brand-star">✦</span></a>
+        <div class="lo-nav-links">
+          <a href="#work">Work</a>
+          <a href="#about">Story</a>
+          <a href="#services">Services</a>
+          <a href="#shop">Shop</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a class="lo-btn lo-btn-primary lo-btn-sm" href="${hireHref}">Inquire ↗</a>
+      </nav>
+    </header>`;
+}
