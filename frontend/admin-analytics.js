@@ -59,6 +59,28 @@
     return counts;
   };
 
+  /**
+   * Compute technical vs visual & creative track breakdown
+   * @param {Array<UserProfile>} users
+   * @returns {{ tech: number, visual: number, techPercent: number, visualPercent: number }}
+   */
+  Analytics.computeTrackBreakdown = function(users) {
+    let tech = 0;
+    let visual = 0;
+    if (!Array.isArray(users) || !users.length) {
+      return { tech: 0, visual: 0, techPercent: 0, visualPercent: 0 };
+    }
+    users.forEach(u => {
+      const trk = String(u.track || 'tech').toLowerCase();
+      if (trk === 'visual') visual++;
+      else tech++;
+    });
+    const total = tech + visual;
+    const techPercent = total > 0 ? Math.round((tech / total) * 100) : 0;
+    const visualPercent = total > 0 ? Math.round((visual / total) * 100) : 0;
+    return { tech, visual, techPercent, visualPercent };
+  };
+
   const Analytics = {};
 
   return Analytics;
