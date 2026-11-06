@@ -27,7 +27,7 @@ test('Visual Themes: PortfoolioTemplates has all 26 visual themes', () => {
   const ctx = vm.createContext(domMock);
   vm.runInContext(TEMPLATES_JS, ctx);
 
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'];
   for (const t of visualThemes) {
     assert.strictEqual(typeof domMock.window.PortfoolioTemplates[t], 'function', `PortfoolioTemplates[${t}] must be a function`);
   }
@@ -369,4 +369,28 @@ test('Suki theme renders cyber video hero, grid, services, and dynamic projects'
   });
   assert.ok(capturedHtml.includes('NKR3037'), 'suki must render single word name');
   assert.ok(!capturedHtml.includes('DOTAE'), 'suki single-word name must never render DOTAE');
+});
+
+test('Lo theme renders brand, narrative hero, zero-gap art grid, and studio story', () => {
+  const loFn = domMock.window.PortfoolioTemplates.lo;
+  assert.ok(loFn, 'lo template must exist in PortfoolioTemplates');
+  loFn({
+    name: 'Artist Called Lo',
+    title: 'Multidisciplinary Artist & Maker',
+    bio: 'Creating tactile, colorful worlds that spark joy, provoke curiosity, and refuse to be boring.',
+    skills: ['Fine Art', 'Illustration', 'Brand Identity', 'Packaging'],
+    works: [
+      { title: 'Cosmic Botanical', category: 'art', imageUrl: 'https://example.com/botanical.jpg' },
+      { title: 'Neon Nostalgia', category: 'design', imageUrl: 'https://example.com/neon.jpg' }
+    ]
+  });
+
+  assert.ok(capturedHtml.includes('lo-brand'), 'lo must render brand logo');
+  assert.ok(capturedHtml.includes('lo-hero-title'), 'lo must render hero headline');
+  assert.ok(capturedHtml.includes('lo-trust-ribbon'), 'lo must render trust ribbon');
+  assert.ok(capturedHtml.includes('lo-art-grid'), 'lo must render art grid');
+  assert.ok(capturedHtml.includes('Cosmic Botanical'), 'lo must dynamically render user artwork');
+  assert.ok(capturedHtml.includes('03 / STUDIO PRACTICE'), 'lo must render studio services section');
+  assert.ok(capturedHtml.includes('04 / PRINT EDITIONS'), 'lo must render shop editions section');
+  assert.ok(capturedHtml.includes('Have a wild vision?'), 'lo must render contact section');
 });
