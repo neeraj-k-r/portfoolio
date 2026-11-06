@@ -10799,3 +10799,17 @@ function renderLoArtCard(w, idx) {
       </div>
     </article>`;
 }
+
+function renderLoArtGrid(works) {
+  const cards = (works && works.length) ? works : LO_FALLBACK_WORKS_CLIENT;
+  return `
+    <section class="lo-section" id="work">
+      <div class="lo-shell">
+        <p class="lo-kicker"><span></span> 01 / SELECTED ARCHIVE</p>
+        ${renderLoFilters()}
+        <div class="lo-art-grid" id="loArtGrid">
+          ${cards.map((w, idx) => renderLoArtCard(w, idx)).join('')}
+        </div>
+      </div>
+    </section>`;
+}
