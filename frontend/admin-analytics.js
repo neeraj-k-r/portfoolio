@@ -494,6 +494,20 @@
     return [...users].sort((a, b) => new Date(a.created_at || 0) - new Date(b.created_at || 0));
   };
 
+  /**
+   * Sort users by highest projects and works count
+   * @param {Array<UserProfile>} users
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.sortUsersByContent = function(users) {
+    if (!Array.isArray(users)) return [];
+    return [...users].sort((a, b) => {
+      const ca = (Array.isArray(a.projects) ? a.projects.length : 0) + (Array.isArray(a.works) ? a.works.length : 0);
+      const cb = (Array.isArray(b.projects) ? b.projects.length : 0) + (Array.isArray(b.works) ? b.works.length : 0);
+      return cb - ca;
+    });
+  };
+
   const Analytics = {};
 
   return Analytics;
