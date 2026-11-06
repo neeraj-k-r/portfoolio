@@ -10850,3 +10850,30 @@ function renderLoMilestones() {
       <div class="lo-milestone"><div class="lo-milestone-number">100%</div><div class="lo-milestone-label">Indie Spirit</div></div>
     </div>`;
 }
+
+function renderLoServices() {
+  return `
+    <section class="lo-section" id="services">
+      <div class="lo-shell">
+        <p class="lo-kicker"><span></span> 03 / STUDIO PRACTICE</p>
+        <div class="lo-services-grid">
+          <article class="lo-service">
+            <div><div class="lo-service-num">01</div><h3>Art & Illustration</h3><p>Bespoke artwork, limited fine art prints, packaging illustration & wall murals.</p></div>
+            <span style="font-weight:700;font-size:0.8rem">EXPLORE ↗</span>
+          </article>
+          <article class="lo-service">
+            <div><div class="lo-service-num">02</div><h3>Brand & Identity</h3><p>Complete visual identity systems, expressive typography, merchandise & web builds.</p></div>
+            <span style="font-weight:700;font-size:0.8rem">EXPLORE ↗</span>
+          </article>
+          <article class="lo-service">
+            <div><div class="lo-service-num">03</div><h3>Publishing & Books</h3><p>Editorial illustrations, bespoke book covers, zines and physical maker collateral.</p></div>
+            <span style="font-weight:700;font-size:0.8rem">EXPLORE ↗</span>
+          </article>
+          <article class="lo-service">
+            <div><div class="lo-service-num">04</div><h3>Motion & Visuals</h3><p>Kinetic type, stage performance backdrops, broadcast title sequences & animations.</p></div>
+            <span style="font-weight:700;font-size:0.8rem">EXPLORE ↗</span>
+          </article>
+        </div>
+      </div>
+    </section>`;
+}
