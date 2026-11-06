@@ -1005,6 +1005,22 @@
     URL.revokeObjectURL(link.href);
   };
 
+  /**
+   * Browser file download helper for JSON
+   * @param {Array<UserProfile>} users
+   * @param {string} [filename]
+   */
+  Analytics.downloadJSON = function(users, filename = 'portfoolio-analytics.json') {
+    if (typeof window === 'undefined' || !window.Blob) return;
+    const jsonStr = Analytics.exportAnalyticsJSON(users);
+    const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  };
+
   const Analytics = {};
 
   return Analytics;
