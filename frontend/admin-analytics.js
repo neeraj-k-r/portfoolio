@@ -322,6 +322,18 @@
     return { techRatio, visualRatio, dominantTrack };
   };
 
+  /**
+   * Format ISO date string to clean readable date (e.g., "Nov 6, 2026")
+   * @param {string|Date} dateStr
+   * @returns {string}
+   */
+  Analytics.formatISOToReadable = function(dateStr) {
+    if (!dateStr) return '—';
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return '—';
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  };
+
   const Analytics = {};
 
   return Analytics;
