@@ -785,6 +785,20 @@
       </div>`;
   };
 
+  /**
+   * Render User Avatar / Monogram Initial
+   * @param {UserProfile} user
+   * @returns {string}
+   */
+  Analytics.renderUserMonogramAvatar = function(user) {
+    const u = user || {};
+    const initial = (u.name || u.username || '?').trim().charAt(0).toUpperCase();
+    if (u.avatarUrl || u.avatar_url) {
+      return `<img src="${u.avatarUrl || u.avatar_url}" alt="${u.name || u.username}" style="width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid var(--stroke)">`;
+    }
+    return `<span style="width:34px;height:34px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#fff;background:linear-gradient(135deg,#6366f1,#22d3ee);flex-shrink:0">${initial}</span>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
