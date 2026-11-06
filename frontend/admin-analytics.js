@@ -170,6 +170,46 @@
     return { active7Days, active30Days };
   };
 
+  /**
+   * Aggregate all top-level platform KPI metrics in a single calculation
+   * @param {Array<UserProfile>} users
+   * @returns {Object}
+   */
+  Analytics.aggregatePlatformKPIs = function(users) {
+    const list = Array.isArray(users) ? users : [];
+    const totalUsers = Analytics.computeTotalUsers(list);
+    const status = Analytics.computeStatusCounts(list);
+    const track = Analytics.computeTrackBreakdown(list);
+    const hosting = Analytics.computeHostingBreakdown(list);
+    const content = Analytics.computeContentTotals(list);
+    const resumes = Analytics.computeResumeTotals(list);
+    const featured = Analytics.computeFeaturedCount(list);
+    const active = Analytics.computeActiveUsersWindow(list);
+
+    return {
+      totalUsers,
+      approvedCount: status.approved,
+      pendingCount: status.pending,
+      rejectedCount: status.rejected,
+      techCount: track.tech,
+      visualCount: track.visual,
+      techPercent: track.techPercent,
+      visualPercent: track.visualPercent,
+      builderCount: hosting.builder,
+      uploadCount: hosting.upload,
+      builderPercent: hosting.builderPercent,
+      uploadPercent: hosting.uploadPercent,
+      totalProjects: content.projects,
+      totalWorks: content.works,
+      totalSkills: content.skills,
+      totalContent: content.totalContent,
+      resumeCount: resumes,
+      featuredCount: featured,
+      active7Days: active.active7Days,
+      active30Days: active.active30Days
+    };
+  };
+
   const Analytics = {};
 
   return Analytics;
