@@ -3492,6 +3492,11 @@ async function loadAdminConsole() {
   if($('tTotalCount')) $('tTotalCount').textContent = allSites.length;
   if($('tRejectedCount')) $('tRejectedCount').textContent = rejected.length;
 
+  // Render Analytics Dashboard View
+  if (window.PortfoolioAdminAnalytics && $('adminAnalyticsMount')) {
+    renderAdminAnalyticsView(allSites);
+  }
+
   // Pending queue render
   const queueEl = $('adminQueueList');
   if (queueEl) {
