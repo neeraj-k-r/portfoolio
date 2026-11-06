@@ -108,3 +108,14 @@ test('filterAndSortUsers filters by query accurately', () => {
   assert.equal(matched.length, 1);
   assert.equal(matched[0].username, 'priya');
 });
+
+test('filterAndSortUsers filters by track and status', () => {
+  const users = [
+    { username: 'u1', track: 'tech', status: 'approved' },
+    { username: 'u2', track: 'visual', status: 'approved' },
+    { username: 'u3', track: 'visual', status: 'pending' }
+  ];
+  const visualLive = Analytics.filterAndSortUsers(users, { track: 'visual', status: 'approved' });
+  assert.equal(visualLive.length, 1);
+  assert.equal(visualLive[0].username, 'u2');
+});
