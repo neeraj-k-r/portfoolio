@@ -658,6 +658,31 @@
       </div>`;
   };
 
+  /**
+   * Render HTML for the Dual-Track Distribution Card
+   * @param {Object} kpis
+   * @returns {string}
+   */
+  Analytics.renderTrackDistributionCardHTML = function(kpis) {
+    const k = kpis || {};
+    return `
+      <div class="an-chart-card">
+        <div class="an-chart-head">
+          <div class="an-chart-title">⚖️ Creator Track Distribution</div>
+          <span class="mono" style="font-size:12px;color:var(--muted)">${k.totalUsers || 0} total</span>
+        </div>
+        <p style="font-size:13px;color:var(--muted)">Ratio of technical software engineers vs visual, media & design portfolios.</p>
+        <div class="an-progress-bar">
+          <div class="an-progress-fill-tech" style="width:${k.techPercent || 50}%" title="Technical: ${k.techPercent}%"></div>
+          <div class="an-progress-fill-visual" style="width:${k.visualPercent || 50}%" title="Visual & Creative: ${k.visualPercent}%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-top:6px">
+          <span><b style="color:#818cf8">💻 Tech Track:</b> ${k.techCount || 0} (${k.techPercent || 0}%)</span>
+          <span><b style="color:#f472b6">🎨 Visual Track:</b> ${k.visualCount || 0} (${k.visualPercent || 0}%)</span>
+        </div>
+      </div>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
