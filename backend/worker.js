@@ -8954,3 +8954,13 @@ export default {
 .lo-filter-btn.is-active{background:var(--lo-ink);color:#ffffff;border-color:var(--lo-ink)}
 
 .lo-art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+
+.lo-art-card{position:relative;background:var(--lo-bg-card);border-radius:var(--lo-radius);overflow:hidden;border:1px solid var(--lo-line);aspect-ratio:4/3;cursor:pointer;display:block;text-decoration:none;color:inherit}
+.lo-art-card.is-tall{grid-row:span 2;aspect-ratio:3/4}
+.lo-art-card.is-wide{grid-column:span 2;aspect-ratio:16/9}
+.lo-art-img{width:100%;height:100%;object-fit:cover;transition:transform 0.45s cubic-bezier(0.2,0,0,1)}
+.lo-art-card:hover .lo-art-img{transform:scale(1.04)}
+.lo-art-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(15,15,15,0.75) 100%);opacity:0;transition:opacity 0.25s ease;display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
+.lo-art-card:hover .lo-art-overlay{opacity:1}
+.lo-art-cat{align-self:flex-start;font-size:0.68rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.9);color:var(--lo-ink);margin-bottom:8px}
+.lo-art-title{font-family:var(--lo-font-display);font-size:1.15rem;font-weight:800;color:#ffffff;margin:0}
