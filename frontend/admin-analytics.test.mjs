@@ -51,3 +51,15 @@ test('computeHostingBreakdown computes builder vs upload counts and percentages'
   assert.equal(hosting.builderPercent, 67);
   assert.equal(hosting.uploadPercent, 33);
 });
+
+test('computeContentTotals sums projects, works, and skills', () => {
+  const users = [
+    { username: 'u1', projects: [{}, {}], skills: ['a', 'b'] },
+    { username: 'u2', works: [{}, {}, {}], skills: ['c'] }
+  ];
+  const content = Analytics.computeContentTotals(users);
+  assert.equal(content.projects, 2);
+  assert.equal(content.works, 3);
+  assert.equal(content.skills, 3);
+  assert.equal(content.totalContent, 5);
+});
