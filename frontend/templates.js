@@ -10784,3 +10784,18 @@ function renderLoFilters() {
       <button class="lo-filter-btn" onclick="window.filterLoWorks('motion', event)">Motion & Video</button>
     </div>`;
 }
+
+function renderLoArtCard(w, idx) {
+  const isTall = idx === 0 || w.tall;
+  const isWide = idx === 3 || w.wide;
+  const cardClass = 'lo-art-card' + (isTall ? ' is-tall' : (isWide ? ' is-wide' : ''));
+  const catLabel = tplEsc((w.category || 'Artwork').toUpperCase());
+  return `
+    <article class="${cardClass}" data-category="${tplEsc(w.category || 'all')}" onclick="window.openLoWorkDetail(${idx})">
+      <img class="lo-art-img" src="${tplSafeUrl(w.imageUrl)}" alt="${tplEsc(w.title || '')}" loading="lazy">
+      <div class="lo-art-overlay">
+        <span class="lo-art-cat">${catLabel}</span>
+        <h3 class="lo-art-title">${tplEsc(w.title || 'Untitled')}</h3>
+      </div>
+    </article>`;
+}
