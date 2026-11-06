@@ -119,3 +119,12 @@ test('filterAndSortUsers filters by track and status', () => {
   assert.equal(visualLive.length, 1);
   assert.equal(visualLive[0].username, 'u2');
 });
+
+test('exportAnalyticsCSV outputs valid CSV rows with escaping', () => {
+  const users = [
+    { username: 'u1', name: 'User, "One"', email: 'u1@test.com', track: 'tech', template: 'midnight' }
+  ];
+  const csv = Analytics.exportAnalyticsCSV(users);
+  assert.ok(csv.includes('Username,Name,Email'));
+  assert.ok(csv.includes('"User, ""One"""'));
+});
