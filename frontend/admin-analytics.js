@@ -760,6 +760,31 @@
       </div>`;
   };
 
+  /**
+   * Render Search and Filter controls bar
+   * @param {Object} [state]
+   * @returns {string}
+   */
+  Analytics.renderAnalyticsFilterControlsHTML = function(state = {}) {
+    const activeTrack = state.track || 'all';
+    const activeStatus = state.status || 'all';
+    const q = state.query || '';
+    return `
+      <div class="an-filters-bar">
+        <div class="an-search-wrap">
+          <span class="an-search-icon">🔍</span>
+          <input type="text" id="anSearchInput" placeholder="Search by username, name, email, or theme..." value="${q}">
+        </div>
+        <div class="an-pills">
+          <button class="an-pill ${activeTrack === 'all' ? 'is-active' : ''}" data-an-track="all">All Tracks</button>
+          <button class="an-pill ${activeTrack === 'tech' ? 'is-active' : ''}" data-an-track="tech">💻 Tech</button>
+          <button class="an-pill ${activeTrack === 'visual' ? 'is-active' : ''}" data-an-track="visual">🎨 Visual</button>
+          <button class="an-pill ${activeStatus === 'approved' ? 'is-active' : ''}" data-an-status="approved">Live Only</button>
+          <button class="an-pill ${activeStatus === 'pending' ? 'is-active' : ''}" data-an-status="pending">Pending</button>
+        </div>
+      </div>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
