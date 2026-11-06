@@ -448,6 +448,19 @@
     return users.filter(u => String(u.template || 'midnight').toLowerCase() === tpl);
   };
 
+  /**
+   * Filter users by approval status
+   * @param {Array<UserProfile>} users
+   * @param {string} status - 'all' | 'approved' | 'pending' | 'rejected'
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.filterUsersByStatus = function(users, status = 'all') {
+    if (!Array.isArray(users)) return [];
+    const st = String(status || 'all').toLowerCase();
+    if (st === 'all' || !st) return users;
+    return users.filter(u => String(u.status || 'pending').toLowerCase() === st);
+  };
+
   const Analytics = {};
 
   return Analytics;
