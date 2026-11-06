@@ -9064,3 +9064,17 @@ function renderLoSSRHero(p) {
     </div>
   </section>`;
 }
+
+function renderLoSSRCredentials() {
+  return `<div class="lo-trust-ribbon">
+    <span class="lo-trust-kicker">FEATURED IN & COMMISSIONED BY</span>
+    <div class="lo-trust-pills">
+      <span class="lo-trust-pill">DISNEY</span>
+      <span class="lo-trust-pill">THE LATE SHOW</span>
+      <span class="lo-trust-pill">WARNER BROS</span>
+      <span class="lo-trust-pill">NBC UNIVERSAL</span>
+      <span class="lo-trust-pill">SPOTIFY</span>
+      <span class="lo-trust-pill">WIX EXPLORE</span>
+    </div>
+  </div>`;
+}
