@@ -1312,7 +1312,12 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <p class="mono" id="adminDiagLine" style="font-size:12px;color:var(--muted);margin-top:4px"></p>
         </div>
         <div style="display:flex;gap:10px;align-items:center">
-          <button class="btn btn-ghost btn-sm" id="adminRefreshBtn"><i class="fa-solid fa-rotate"></i> Refresh Queue</button>
+          <div class="an-pills" id="adminViewTabs">
+            <button class="an-pill is-active" data-tab="analytics"><i class="fa-solid fa-chart-pie"></i> Analytics</button>
+            <button class="an-pill" data-tab="queue"><i class="fa-solid fa-clock"></i> Approval Queue</button>
+            <button class="an-pill" data-tab="all"><i class="fa-solid fa-users"></i> Directory</button>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="adminRefreshBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
           <a class="btn btn-ghost btn-sm" href="/admin" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open Console Page</a>
         </div>
       </div>
