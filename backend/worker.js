@@ -9002,3 +9002,17 @@ export default {
 .lo-socials{display:flex;align-items:center;gap:20px}
 .lo-socials a{color:var(--lo-ink);text-decoration:none;font-weight:700}
 .lo-socials a:hover{color:var(--lo-accent-peach)}
+
+@media (max-width: 960px) {
+  .lo-art-grid{grid-template-columns:repeat(2,1fr)}
+  .lo-about-grid{grid-template-columns:1fr}
+  .lo-milestones-grid{grid-template-columns:repeat(2,1fr)}
+  .lo-services-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width: 640px) {
+  .lo-art-grid{grid-template-columns:1fr}
+  .lo-art-card.is-tall, .lo-art-card.is-wide{grid-column:span 1;grid-row:span 1;aspect-ratio:4/3}
+  .lo-milestones-grid{grid-template-columns:1fr}
+  .lo-services-grid{grid-template-columns:1fr}
+  .lo-nav-links{display:none}
+}
