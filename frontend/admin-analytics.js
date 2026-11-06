@@ -461,6 +461,19 @@
     return users.filter(u => String(u.status || 'pending').toLowerCase() === st);
   };
 
+  /**
+   * Filter users by hosting site type (builder vs upload)
+   * @param {Array<UserProfile>} users
+   * @param {string} siteType - 'all' | 'builder' | 'upload'
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.filterUsersBySiteType = function(users, siteType = 'all') {
+    if (!Array.isArray(users)) return [];
+    const st = String(siteType || 'all').toLowerCase();
+    if (st === 'all' || !st) return users;
+    return users.filter(u => String(u.site_type || 'builder').toLowerCase() === st);
+  };
+
   const Analytics = {};
 
   return Analytics;
