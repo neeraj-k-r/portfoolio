@@ -10708,3 +10708,12 @@ function ensureLoStyles() {
     document.head.appendChild(s);
   }
 }
+
+const LO_FALLBACK_WORKS_CLIENT = [
+  { title: 'Cosmic Botanical', category: 'art', desc: 'Risograph print, mixed-media packaging & botanical study', imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=80', year: '2026', tall: true },
+  { title: 'Neon Nostalgia', category: 'design', desc: 'Custom 3D lettering & typographic visual identity', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80', year: '2026', wide: false },
+  { title: 'Midwest Fever Dream', category: 'photo', desc: 'Fine art film photography & tactile editorial portraiture', imageUrl: 'https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=80', year: '2026', tall: false },
+  { title: 'Kinetic Flora', category: 'motion', desc: 'Experimental animated stage backdrop & music video graphics', imageUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=80', year: '2026', wide: true },
+  { title: 'Illustrated Monograph', category: 'design', desc: 'Limited edition archival art book with screenprinted cover', imageUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=900&q=80', year: '2026', tall: false },
+  { title: 'Color Theory Junk Drawer', category: 'art', desc: 'Pop sculpture assemblages & physical maker projects', imageUrl: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=80', year: '2026', tall: false }
+];
