@@ -10911,3 +10911,20 @@ function renderLoContact(p) {
       </div>
     </section>`;
 }
+
+function renderLoFooter(p) {
+  const brand = getLoBrand(p);
+  const year = new Date().getFullYear();
+  return `
+    <footer class="lo-footer">
+      <div class="lo-shell lo-footer-inner">
+        <span>© ${year} ${brand}. All rights reserved.</span>
+        <div class="lo-socials">
+          <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://tiktok.com" target="_blank" rel="noopener">TikTok</a>
+          <a href="#home">Back to top ↑</a>
+        </div>
+      </div>
+    </footer>`;
+}
