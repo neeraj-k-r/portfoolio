@@ -518,6 +518,20 @@
     return [...users].sort((a, b) => String(a.username || '').localeCompare(String(b.username || '')));
   };
 
+  /**
+   * Sort users by most recent activity timestamp
+   * @param {Array<UserProfile>} users
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.sortUsersByActivity = function(users) {
+    if (!Array.isArray(users)) return [];
+    return [...users].sort((a, b) => {
+      const ta = new Date(a.updated_at || a.site_updated_at || a.created_at || 0).getTime();
+      const tb = new Date(b.updated_at || b.site_updated_at || b.created_at || 0).getTime();
+      return tb - ta;
+    });
+  };
+
   const Analytics = {};
 
   return Analytics;
