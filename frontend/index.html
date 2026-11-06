@@ -3792,3 +3792,77 @@ async function paintLiveCount() {
 </script>
 </body>
 </html>
+
+<script>
+let adminAnalyticsState = { query: '', track: 'all', status: 'all', sortBy: 'newest' };
+
+function renderAdminAnalyticsView(allSites) {
+  const mount = $('adminAnalyticsMount');
+  if (!mount || !window.PortfoolioAdminAnalytics) return;
+  mount.innerHTML = window.PortfoolioAdminAnalytics.renderAnalyticsDashboardViewHTML(allSites, adminAnalyticsState);
+
+  // Wire search input
+  const searchInput = $('anSearchInput');
+  if (searchInput) {
+    searchInput.oninput = (e) => {
+      adminAnalyticsState.query = e.target.value;
+      updateAdminAnalyticsTable(allSites);
+    };
+  }
+
+  // Wire track pills
+  document.querySelectorAll('[data-an-track]').forEach(b => {
+    b.onclick = () => {
+      adminAnalyticsState.track = b.dataset.anTrack;
+      renderAdminAnalyticsView(allSites);
+    };
+  });
+
+  // Wire status pills
+  document.querySelectorAll('[data-an-status]').forEach(b => {
+    b.onclick = () => {
+      adminAnalyticsState.status = b.dataset.anStatus;
+      renderAdminAnalyticsView(allSites);
+    };
+  });
+
+  // Wire exports
+  const csvBtn = $('anExportCsvBtn');
+  if (csvBtn) csvBtn.onclick = () => {
+    window.PortfoolioAdminAnalytics.downloadCSV(allSites);
+    if (typeof toast === 'function') toast('📥 Analytics CSV exported');
+  };
+  const jsonBtn = $('anExportJsonBtn');
+  if (jsonBtn) jsonBtn.onclick = () => {
+    window.PortfoolioAdminAnalytics.downloadJSON(allSites);
+    if (typeof toast === 'function') toast('📥 Analytics JSON exported');
+  };
+  const refBtn = $('anRefreshBtn');
+  if (refBtn) refBtn.onclick = () => loadAdminConsole();
+}
+
+function updateAdminAnalyticsTable(allSites) {
+  const tableCont = $('anTableContainer');
+  if (!tableCont || !window.PortfoolioAdminAnalytics) return;
+  const filtered = window.PortfoolioAdminAnalytics.filterAndSortUsers(allSites, adminAnalyticsState);
+  tableCont.innerHTML = window.PortfoolioAdminAnalytics.renderAnalyticsTableHTML(filtered);
+}
+
+// Wire tab switching
+document.addEventListener('DOMContentLoaded', () => {
+  const tabPills = document.querySelectorAll('#adminViewTabs button');
+  tabPills.forEach(p => {
+    p.onclick = () => {
+      tabPills.forEach(x => x.classList.remove('is-active'));
+      p.classList.add('is-active');
+      const tab = p.dataset.tab;
+      const tAnalytics = $('adminTabAnalytics');
+      const tQueue = $('adminTabQueue');
+      const tAll = $('adminTabAll');
+      if (tAnalytics) tAnalytics.style.display = tab === 'analytics' ? '' : 'none';
+      if (tQueue) tQueue.style.display = tab === 'queue' ? '' : 'none';
+      if (tAll) tAll.style.display = tab === 'all' ? '' : 'none';
+    };
+  });
+});
+</script>
