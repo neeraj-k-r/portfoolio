@@ -81,6 +81,28 @@
     return { tech, visual, techPercent, visualPercent };
   };
 
+  /**
+   * Compute hosting mode distribution (builder templates vs custom zip uploads)
+   * @param {Array<UserProfile>} users
+   * @returns {{ builder: number, upload: number, builderPercent: number, uploadPercent: number }}
+   */
+  Analytics.computeHostingBreakdown = function(users) {
+    let builder = 0;
+    let upload = 0;
+    if (!Array.isArray(users) || !users.length) {
+      return { builder: 0, upload: 0, builderPercent: 0, uploadPercent: 0 };
+    }
+    users.forEach(u => {
+      const st = String(u.site_type || 'builder').toLowerCase();
+      if (st === 'upload') upload++;
+      else builder++;
+    });
+    const total = builder + upload;
+    const builderPercent = total > 0 ? Math.round((builder / total) * 100) : 0;
+    const uploadPercent = total > 0 ? Math.round((upload / total) * 100) : 0;
+    return { builder, upload, builderPercent, uploadPercent };
+  };
+
   const Analytics = {};
 
   return Analytics;
