@@ -8996,3 +8996,9 @@ export default {
 .lo-contact-actions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
 .lo-contact-btn-white{background:#ffffff;color:var(--lo-ink);padding:14px 28px;border-radius:999px;font-weight:700;font-size:0.92rem;text-decoration:none;transition:transform 0.2s ease}
 .lo-contact-btn-white:hover{transform:scale(1.03)}
+
+.lo-footer{border-top:1px solid var(--lo-line);padding:36px 0;font-size:0.82rem;color:var(--lo-ink-muted)}
+.lo-footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.lo-socials{display:flex;align-items:center;gap:20px}
+.lo-socials a{color:var(--lo-ink);text-decoration:none;font-weight:700}
+.lo-socials a:hover{color:var(--lo-accent-peach)}
