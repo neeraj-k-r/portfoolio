@@ -832,6 +832,24 @@
     return '<span class="status-pill pending">Pending</span>';
   };
 
+  /**
+   * Render User Content Stats Column
+   * @param {UserProfile} user
+   * @returns {string}
+   */
+  Analytics.renderUserContentStatsHTML = function(user) {
+    const u = user || {};
+    const pCount = Array.isArray(u.projects) ? u.projects.length : 0;
+    const wCount = Array.isArray(u.works) ? u.works.length : 0;
+    const hasResume = Boolean(u.resume && (u.resume.summary || (Array.isArray(u.experience) && u.experience.length)));
+    return `
+      <div style="font-size:12px;color:var(--muted)">
+        ${pCount > 0 ? `<span><b>${pCount}</b> proj</span>` : ''}
+        ${wCount > 0 ? `<span><b>${wCount}</b> works</span>` : ''}
+        ${hasResume ? '<span style="color:#a3e635"> • 📄 ATS</span>' : ''}
+      </div>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
