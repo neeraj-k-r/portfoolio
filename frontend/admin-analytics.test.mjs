@@ -77,3 +77,16 @@ test('aggregatePlatformKPIs combines all platform metrics accurately', () => {
   assert.equal(kpis.visualCount, 1);
   assert.equal(kpis.featuredCount, 1);
 });
+
+test('computeTopTemplates ranks templates by popularity', () => {
+  const users = [
+    { username: 'u1', template: 'suki' },
+    { username: 'u2', template: 'suki' },
+    { username: 'u3', template: 'mythos' },
+    { username: 'u4', template: 'midnight' }
+  ];
+  const top = Analytics.computeTopTemplates(users, 3);
+  assert.equal(top[0].id, 'suki');
+  assert.equal(top[0].count, 2);
+  assert.equal(top[0].percent, 50);
+});
