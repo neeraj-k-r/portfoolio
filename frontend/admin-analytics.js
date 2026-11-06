@@ -308,6 +308,20 @@
     return entries.slice(0, limit);
   };
 
+  /**
+   * Compute track adoption rates for technical vs visual tracks
+   * @param {Array<UserProfile>} users
+   * @returns {{ techRatio: number, visualRatio: number, dominantTrack: string }}
+   */
+  Analytics.computeTrackAdoptionRates = function(users) {
+    const breakdown = Analytics.computeTrackBreakdown(users);
+    const total = breakdown.tech + breakdown.visual;
+    const techRatio = total > 0 ? Number((breakdown.tech / total).toFixed(2)) : 0;
+    const visualRatio = total > 0 ? Number((breakdown.visual / total).toFixed(2)) : 0;
+    const dominantTrack = breakdown.tech >= breakdown.visual ? 'tech' : 'visual';
+    return { techRatio, visualRatio, dominantTrack };
+  };
+
   const Analytics = {};
 
   return Analytics;
