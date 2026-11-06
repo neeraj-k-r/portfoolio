@@ -10928,3 +10928,50 @@ function renderLoFooter(p) {
       </div>
     </footer>`;
 }
+
+function renderLo(p) {
+  normTpl(p);
+  ensureLoStyles();
+  const app = document.getElementById('app') || document.body;
+  document.body.dataset.template = 'lo';
+  document.title = `${p.name || 'Artist Called Lo'} | Multidisciplinary Artist & Maker`;
+
+  const sourceWorks = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : LO_FALLBACK_WORKS_CLIENT);
+
+  app.innerHTML = `
+    <div class="lo-page" id="loRoot">
+      ${renderLoHeader(p)}
+      <main>
+        ${renderLoHero(p)}
+        ${renderLoArtGrid(sourceWorks)}
+        ${renderLoAbout(p)}
+        ${renderLoServices()}
+        ${renderLoShop()}
+        ${renderLoContact(p)}
+      </main>
+      ${renderLoFooter(p)}
+    </div>`;
+
+  window.openLoWorkDetail = function(idx) {
+    const item = sourceWorks[idx];
+    if (item && (item.url || item.demoUrl || item.link)) {
+      window.open(item.url || item.demoUrl || item.link, '_blank', 'noopener');
+    }
+  };
+
+  window.filterLoWorks = function(cat, e) {
+    if (e && e.target) {
+      document.querySelectorAll('.lo-filter-btn').forEach(btn => btn.classList.remove('is-active'));
+      e.target.classList.add('is-active');
+    }
+    const cards = document.querySelectorAll('.lo-art-card');
+    cards.forEach(card => {
+      const cardCat = card.dataset.category || 'all';
+      if (cat === 'all' || cardCat.toLowerCase().includes(cat.toLowerCase())) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  };
+}
