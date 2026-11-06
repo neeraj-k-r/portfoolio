@@ -63,3 +63,17 @@ test('computeContentTotals sums projects, works, and skills', () => {
   assert.equal(content.skills, 3);
   assert.equal(content.totalContent, 5);
 });
+
+test('aggregatePlatformKPIs combines all platform metrics accurately', () => {
+  const users = [
+    { username: 'u1', status: 'approved', track: 'tech', site_type: 'builder', projects: [{}], skills: ['React'] },
+    { username: 'u2', status: 'pending', track: 'visual', site_type: 'upload', works: [{}], featured: true }
+  ];
+  const kpis = Analytics.aggregatePlatformKPIs(users);
+  assert.equal(kpis.totalUsers, 2);
+  assert.equal(kpis.approvedCount, 1);
+  assert.equal(kpis.pendingCount, 1);
+  assert.equal(kpis.techCount, 1);
+  assert.equal(kpis.visualCount, 1);
+  assert.equal(kpis.featuredCount, 1);
+});
