@@ -3576,3 +3576,24 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   border-color: rgba(255, 255, 255, 0.3);
   transform: translateY(-1px);
 }
+
+@media (max-width: 1024px) {
+  .an-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .an-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 680px) {
+  .an-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+  .an-filters-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .an-search-wrap {
+    max-width: 100%;
+  }
+}
