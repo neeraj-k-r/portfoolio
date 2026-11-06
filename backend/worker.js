@@ -224,7 +224,9 @@ function head(p, tpl) {
     text-decoration: underline;
     font-weight: 600;
   }
+</style>` : '';
 
+  const visualStyle = `<style id="visual-theme-styles">
 /* BIENNALE & EXHIBITION THEMES */
 .biennale-page{background:#fbf9f4;color:#161616;font-family:'Plus Jakarta Sans',sans-serif;min-height:100vh}
 .biennale-top-rule{height:4px;background:#c83226;width:100%}
@@ -854,7 +856,7 @@ body.illustra-dark-mode{background:#120e1e!important}
   .lo-services-grid{grid-template-columns:1fr}
   .lo-nav-links{display:none}
 }
-</style>` : '';
+</style>`;
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
 <meta name="description" content="${esc(p.tagline || p.title || '')}">
@@ -867,7 +869,9 @@ body.illustra-dark-mode{background:#120e1e!important}
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="/style.css?v=20261030b"><link rel="stylesheet" href="/templates.css?v=20261030b"><link rel="stylesheet" href="/resume.css?v=20261030b">
+<link rel="stylesheet" href="/style.css?v=20261106b"><link rel="stylesheet" href="/templates.css?v=20261106b"><link rel="stylesheet" href="/resume.css?v=20261106b">
+${mcvStyle}
+${visualStyle}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
@@ -3238,8 +3242,8 @@ function pageGallery(p, wIdx, url) {
       })();
     </script></body></html>`;
   }
-  if (['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'].includes(vtpl) && !w) {
-    return `<!DOCTYPE html><html lang="en">${head(p, vtpl)}<body class="portfolio-view" data-template="${vtpl}">${body}<script>(function(){if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .lumina-card, .vogue-plate, .filmstrip-frame, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
+  if (['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'].includes(vtpl) && !w) {
+    return `<!DOCTYPE html><html lang="en">${head(p, vtpl)}<body class="portfolio-view" data-template="${vtpl}">${body}<script>(function(){if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .lumina-card, .vogue-plate, .filmstrip-frame, .rv, .lo-art-card').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
   }
   return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion','atelier','cinema','arch','zine','zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .lumina-card, .vogue-plate, .filmstrip-frame, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
 }
