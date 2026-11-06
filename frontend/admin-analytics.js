@@ -42,6 +42,23 @@
     return users.length;
   };
 
+  /**
+   * Compute status breakdown (approved/live, pending, rejected)
+   * @param {Array<UserProfile>} users
+   * @returns {{ approved: number, pending: number, rejected: number }}
+   */
+  Analytics.computeStatusCounts = function(users) {
+    const counts = { approved: 0, pending: 0, rejected: 0 };
+    if (!Array.isArray(users)) return counts;
+    users.forEach(u => {
+      const st = String(u.status || 'pending').toLowerCase();
+      if (st === 'approved') counts.approved++;
+      else if (st === 'rejected') counts.rejected++;
+      else counts.pending++;
+    });
+    return counts;
+  };
+
   const Analytics = {};
 
   return Analytics;
