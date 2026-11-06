@@ -683,6 +683,31 @@
       </div>`;
   };
 
+  /**
+   * Render HTML for Hosting Mode Breakdown Card
+   * @param {Object} kpis
+   * @returns {string}
+   */
+  Analytics.renderHostingDistributionCardHTML = function(kpis) {
+    const k = kpis || {};
+    return `
+      <div class="an-chart-card">
+        <div class="an-chart-head">
+          <div class="an-chart-title">📦 Site Hosting Modes</div>
+          <span class="mono" style="font-size:12px;color:var(--muted)">${k.totalUsers || 0} subdomains</span>
+        </div>
+        <p style="font-size:13px;color:var(--muted)">Usage of automated builder templates vs custom uploaded ZIP bundles.</p>
+        <div class="an-progress-bar">
+          <div style="background:#22d3ee;width:${k.builderPercent || 100}%;height:100%" title="Builder Themes: ${k.builderPercent}%"></div>
+          <div style="background:#fbbf24;width:${k.uploadPercent || 0}%;height:100%" title="Custom Uploads: ${k.uploadPercent}%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:12.5px;margin-top:6px">
+          <span><b style="color:#22d3ee">🎨 Builder Themes:</b> ${k.builderCount || 0} (${k.builderPercent || 0}%)</span>
+          <span><b style="color:#fbbf24">📁 Custom Uploads:</b> ${k.uploadCount || 0} (${k.uploadPercent || 0}%)</span>
+        </div>
+      </div>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
