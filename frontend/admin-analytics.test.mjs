@@ -13,3 +13,14 @@ test('computeTotalUsers handles valid lists and edge cases', () => {
   assert.equal(Analytics.computeTotalUsers(null), 0);
   assert.equal(Analytics.computeTotalUsers([{ username: 'u1' }, { username: 'u2' }]), 2);
 });
+
+test('computeStatusCounts computes approved, pending, and rejected', () => {
+  const users = [
+    { username: 'u1', status: 'approved' },
+    { username: 'u2', status: 'pending' },
+    { username: 'u3', status: 'rejected' },
+    { username: 'u4', status: 'approved' }
+  ];
+  const counts = Analytics.computeStatusCounts(users);
+  assert.deepEqual(counts, { approved: 2, pending: 1, rejected: 1 });
+});
