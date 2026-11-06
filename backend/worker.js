@@ -9102,3 +9102,16 @@ function renderLoSSRCard(w, idx) {
     </div>
   </article>`;
 }
+
+function renderLoSSRArtGrid(works) {
+  const cards = (works && works.length) ? works : LO_FALLBACK_WORKS;
+  return `<section class="lo-section" id="work">
+    <div class="lo-shell">
+      <p class="lo-kicker"><span></span> 01 / SELECTED ARCHIVE</p>
+      ${renderLoSSRFilterBar()}
+      <div class="lo-art-grid">
+        ${cards.map((w, idx) => renderLoSSRCard(w, idx)).join('')}
+      </div>
+    </div>
+  </section>`;
+}
