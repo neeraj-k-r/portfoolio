@@ -201,3 +201,14 @@ Portfoolio uses a Cloudflare Worker on `*.portfoolio.me/*` to serve wildcard sub
 ## 📄 License
 
 MIT © [Neeraj K.R.](https://portfoolio.me)
+
+---
+
+## 📊 Admin Analytics & Platform Insights
+
+Portfoolio features an **Analytics Dashboard** built right into the Superadmin Control Console (`/admin` and `#adminDashboardView`):
+- **Live Creator Count & Metrics**: Track total registered users, live approved subdomains, and pending queue count.
+- **Dual-Track Adoption**: Real-time ratio analysis of **Technical Track** vs **Visual & Creative Track** portfolios with visual progress bars.
+- **Theme Popularity Visualizer**: Ranked distribution bar chart across all 39 handcrafted templates.
+- **Creator Directory Table**: Searchable, filterable directory with instant subdomains preview, content counters (projects, works, ATS resumes), and account status.
+- **Reporting & Data Export**: One-click **Export to CSV** and **Export to JSON** for platform usage reporting.
