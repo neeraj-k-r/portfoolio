@@ -405,7 +405,7 @@ test('Lo theme renders brand, narrative hero, zero-gap art grid, and studio stor
   assert.ok(capturedHtml.includes('lo-trust-ribbon'), 'lo must render trust ribbon');
   assert.ok(capturedHtml.includes('lo-art-grid'), 'lo must render art grid');
   assert.ok(capturedHtml.includes('Cosmic Botanical'), 'lo must dynamically render user artwork');
-  assert.ok(capturedHtml.includes('03 / STUDIO PRACTICE'), 'lo must render studio services section');
-  assert.ok(capturedHtml.includes('04 / PRINT EDITIONS'), 'lo must render shop editions section');
+  assert.ok(!capturedHtml.includes('STUDIO PRACTICE'), 'lo must not render studio services section');
+  assert.ok(capturedHtml.includes('03 / PRINT EDITIONS'), 'lo must render shop editions section');
   assert.ok(capturedHtml.includes('Have a wild vision?'), 'lo must render contact section');
 });

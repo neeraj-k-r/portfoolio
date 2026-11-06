@@ -10733,7 +10733,6 @@ function renderLoHeader(p) {
         <div class="lo-nav-links">
           <a href="#work">Work</a>
           <a href="#about">Story</a>
-          <a href="#services">Services</a>
           <a href="#shop">Shop</a>
           <a href="#contact">Contact</a>
         </div>
@@ -10851,40 +10850,13 @@ function renderLoMilestones() {
     </div>`;
 }
 
-function renderLoServices() {
-  return `
-    <section class="lo-section" id="services">
-      <div class="lo-shell">
-        <p class="lo-kicker"><span></span> 03 / STUDIO PRACTICE</p>
-        <div class="lo-services-grid">
-          <article class="lo-service">
-            <div><div class="lo-service-num">01</div><h3>Art & Illustration</h3><p>Bespoke artwork, limited fine art prints, packaging illustration & wall murals.</p></div>
-            <span style="font-weight:700;font-size:0.8rem">EXPLORE ↗</span>
-          </article>
-          <article class="lo-service">
-            <div><div class="lo-service-num">02</div><h3>Brand & Identity</h3><p>Complete visual identity systems, expressive typography, merchandise & web builds.</p></div>
-            <span style="font-weight:700;font-size:0.8rem">EXPLORE ↗</span>
-          </article>
-          <article class="lo-service">
-            <div><div class="lo-service-num">03</div><h3>Publishing & Books</h3><p>Editorial illustrations, bespoke book covers, zines and physical maker collateral.</p></div>
-            <span style="font-weight:700;font-size:0.8rem">EXPLORE ↗</span>
-          </article>
-          <article class="lo-service">
-            <div><div class="lo-service-num">04</div><h3>Motion & Visuals</h3><p>Kinetic type, stage performance backdrops, broadcast title sequences & animations.</p></div>
-            <span style="font-weight:700;font-size:0.8rem">EXPLORE ↗</span>
-          </article>
-        </div>
-      </div>
-    </section>`;
-}
-
 function renderLoShop() {
   return `
     <section class="lo-section" id="shop" style="padding-top:0">
       <div class="lo-shell">
         <div class="lo-shop-card">
           <div class="lo-shop-copy">
-            <p class="lo-kicker"><span></span> 04 / PRINT EDITIONS</p>
+            <p class="lo-kicker"><span></span> 03 / PRINT EDITIONS</p>
             <h3>Archival Prints & Limited Collector Editions</h3>
             <p>Hand-signed risograph and giclée prints produced in small batches on heavyweight cotton rag paper.</p>
           </div>
@@ -10945,7 +10917,6 @@ function renderLo(p) {
         ${renderLoHero(p)}
         ${renderLoArtGrid(sourceWorks)}
         ${renderLoAbout(p)}
-        ${renderLoServices()}
         ${renderLoShop()}
         ${renderLoContact(p)}
       </main>
