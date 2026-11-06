@@ -3551,3 +3551,28 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   font-size: 11.5px;
   color: var(--muted);
 }
+
+.an-btn-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.an-btn-export {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--stroke);
+  color: #f1f5f9;
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.an-btn-export:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
