@@ -8978,3 +8978,10 @@ export default {
 .lo-milestone{background:var(--lo-bg-card);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding:20px 24px}
 .lo-milestone-number{font-family:var(--lo-font-display);font-size:2.2rem;font-weight:900;color:var(--lo-ink);line-height:1;margin-bottom:6px}
 .lo-milestone-label{font-size:0.8rem;font-weight:700;color:var(--lo-ink-muted);text-transform:uppercase;letter-spacing:0.06em}
+
+.lo-services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.lo-service{background:var(--lo-bg-card);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.2s ease,border-color 0.2s ease}
+.lo-service:hover{transform:translateY(-3px);border-color:var(--lo-ink)}
+.lo-service-num{font-family:var(--lo-font-display);font-size:0.8rem;font-weight:800;color:var(--lo-accent-peach);margin-bottom:16px}
+.lo-service h3{font-family:var(--lo-font-display);font-size:1.15rem;font-weight:800;color:var(--lo-ink);margin-bottom:10px}
+.lo-service p{font-size:0.88rem;color:var(--lo-ink-muted);line-height:1.5;margin-bottom:20px}
