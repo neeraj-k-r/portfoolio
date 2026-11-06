@@ -136,3 +136,14 @@ test('exportAnalyticsJSON outputs structured analytics payload', () => {
   assert.equal(parsed.kpis.totalUsers, 1);
   assert.ok(Array.isArray(parsed.topTemplates));
 });
+
+test('renderAnalyticsDashboardViewHTML generates valid responsive DOM markup', () => {
+  const users = [
+    { username: 'neeraj', name: 'Neeraj', email: 'neeraj@example.com', track: 'tech', template: 'suki', status: 'approved' }
+  ];
+  const html = Analytics.renderAnalyticsDashboardViewHTML(users);
+  assert.ok(html.includes('an-dashboard'), 'must render dashboard container');
+  assert.ok(html.includes('Total Creators'), 'must render total creators label');
+  assert.ok(html.includes('Suki Cinematic'), 'must render top template item');
+  assert.ok(html.includes('@neeraj'), 'must render user row');
+});
