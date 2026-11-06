@@ -8964,3 +8964,7 @@ export default {
 .lo-art-card:hover .lo-art-overlay{opacity:1}
 .lo-art-cat{align-self:flex-start;font-size:0.68rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.9);color:var(--lo-ink);margin-bottom:8px}
 .lo-art-title{font-family:var(--lo-font-display);font-size:1.15rem;font-weight:800;color:#ffffff;margin:0}
+
+.lo-about-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:clamp(36px,6vw,84px);align-items:center}
+.lo-about-copy h2{font-family:var(--lo-font-display);font-size:clamp(2rem,4vw,3.2rem);font-weight:900;letter-spacing:-0.03em;line-height:1.1;margin-bottom:20px}
+.lo-about-copy p{font-size:1.05rem;line-height:1.65;color:var(--lo-ink-muted);margin-bottom:24px}
