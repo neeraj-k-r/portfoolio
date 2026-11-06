@@ -865,6 +865,42 @@
       </div>`;
   };
 
+  /**
+   * Render Table Row for a single user
+   * @param {UserProfile} user
+   * @param {number} idx
+   * @returns {string}
+   */
+  Analytics.renderAnalyticsTableRowHTML = function(user, idx) {
+    const u = user || {};
+    return `
+      <tr>
+        <td style="width:40px;color:var(--muted);font-family:'JetBrains Mono'">#${idx + 1}</td>
+        <td>
+          <div style="display:flex;gap:12px;align-items:center">
+            ${Analytics.renderUserMonogramAvatar(u)}
+            <div>
+              <b>@${u.username}</b> ${u.featured ? '⭐' : ''}
+              <div style="font-size:12px;color:var(--muted)">${u.name || 'Anonymous'}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          <a href="mailto:${u.email || ''}" style="color:#94a3b8;font-size:12.5px;text-decoration:none">${u.email || '—'}</a>
+        </td>
+        <td>${Analytics.renderTrackBadgeHTML(u.track)}</td>
+        <td>${Analytics.renderTemplatePillHTML(u.template)}</td>
+        <td>${Analytics.renderStatusBadgeHTML(u.status)}</td>
+        <td>${Analytics.renderUserContentStatsHTML(u)}</td>
+        <td>
+          <span style="font-family:'JetBrains Mono';font-size:12px;color:var(--muted)" title="${u.created_at || ''}">
+            ${Analytics.formatRelativeTime(u.created_at)}
+          </span>
+        </td>
+        <td style="text-align:right">${Analytics.renderUserActionsHTML(u)}</td>
+      </tr>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
