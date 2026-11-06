@@ -10698,3 +10698,13 @@ const LO_THEME_CSS = `
   .lo-nav-links{display:none}
 }
 `;
+
+function ensureLoStyles() {
+  if (typeof document === 'undefined') return;
+  if (!document.getElementById('lo-theme-styles')) {
+    const s = document.createElement('style');
+    s.id = 'lo-theme-styles';
+    s.textContent = LO_THEME_CSS;
+    document.head.appendChild(s);
+  }
+}
