@@ -763,6 +763,97 @@ body.illustra-dark-mode{background:#120e1e!important}
 .salon-footer{padding:40px 0;border-top:1px solid rgba(255,255,255,.08);position:relative;z-index:10}
 .salon-footer-inner{display:flex;justify-content:space-between;font-size:12px;color:#8ea89a;flex-wrap:wrap;gap:14px}
 .salon-foot-badge{color:#c5a059;font-weight:600}
+
+/* ==========================================
+   ARTISTIC LO THEME (Wix Artist Called Lo)
+   ========================================== */
+.lo-page{--lo-bg:#f5f0eb;--lo-bg-warm:#eee7dd;--lo-bg-card:#ffffff;--lo-ink:#151515;--lo-ink-muted:#635d57;--lo-line:#ded7cd;--lo-line-dark:#222222;--lo-accent-peach:#ff7a59;--lo-accent-lilac:#d8b4e2;--lo-accent-sky:#93c5fd;--lo-accent-mint:#86efac;--lo-accent-butter:#fde047;--lo-shadow:0 12px 36px rgba(21,21,21,0.06);--lo-radius:14px;--lo-font-display:'Space Grotesk',system-ui,sans-serif;--lo-font-body:'Inter',system-ui,sans-serif;min-height:100vh;background:var(--lo-bg);color:var(--lo-ink);font-family:var(--lo-font-body);position:relative;-webkit-font-smoothing:antialiased}
+.lo-shell{width:min(1240px,calc(100% - 44px));margin-inline:auto}
+.lo-section{position:relative;padding:clamp(64px,8vw,112px) 0}
+.lo-kicker{font-size:0.75rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--lo-ink-muted);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
+.lo-kicker span{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--lo-accent-peach)}
+.lo-header{position:sticky;top:0;z-index:100;background:rgba(245,240,235,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--lo-line);transition:background 0.3s ease,box-shadow 0.3s ease}
+.lo-nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+.lo-brand{font-family:var(--lo-font-display);font-size:1.35rem;font-weight:800;letter-spacing:-0.03em;color:var(--lo-ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.lo-brand-star{color:var(--lo-accent-peach);font-size:1.2rem}
+.lo-nav-links{display:flex;align-items:center;gap:28px}
+.lo-nav-links a{font-size:0.84rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--lo-ink);text-decoration:none;transition:color 0.2s ease}
+.lo-nav-links a:hover{color:var(--lo-accent-peach)}
+.lo-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 24px;border-radius:999px;font-size:0.86rem;font-weight:700;letter-spacing:0.02em;text-decoration:none;cursor:pointer;transition:all 0.2s ease;border:none}
+.lo-btn-primary{background:var(--lo-ink);color:#ffffff}
+.lo-btn-primary:hover{background:#000000;transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,0.15)}
+.lo-btn-outline{background:transparent;color:var(--lo-ink);border:1.5px solid var(--lo-line-dark)}
+.lo-btn-outline:hover{background:var(--lo-ink);color:#ffffff}
+.lo-btn-sm{padding:8px 18px;font-size:0.8rem}
+.lo-hero{padding:clamp(60px,9vw,110px) 0 48px;border-bottom:1px solid var(--lo-line);background:radial-gradient(ellipse at 80% 20%,rgba(216,180,226,0.2),transparent 50%),radial-gradient(ellipse at 15% 85%,rgba(255,122,89,0.15),transparent 45%)}
+.lo-hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;background:var(--lo-bg-warm);border:1px solid var(--lo-line);font-size:0.75rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--lo-ink);margin-bottom:24px}
+.lo-hero-title{font-family:var(--lo-font-display);font-size:clamp(2.8rem,7vw,5.6rem);font-weight:900;line-height:0.96;letter-spacing:-0.04em;text-transform:uppercase;color:var(--lo-ink);margin-bottom:28px}
+.lo-hero-title .accent-italic{font-style:italic;font-weight:400;font-family:'Fraunces',serif;color:var(--lo-accent-peach)}
+.lo-hero-desc{font-size:clamp(1.05rem,1.8vw,1.35rem);line-height:1.5;color:var(--lo-ink-muted);max-width:680px;margin-bottom:36px}
+.lo-hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.lo-trust-ribbon{margin-top:64px;padding-top:28px;border-top:1px dashed var(--lo-line);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.lo-trust-kicker{font-size:0.72rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--lo-ink-muted)}
+.lo-trust-pills{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.lo-trust-pill{font-family:var(--lo-font-display);font-size:0.74rem;font-weight:700;letter-spacing:0.08em;padding:6px 14px;border-radius:999px;background:var(--lo-bg-card);border:1px solid var(--lo-line);color:var(--lo-ink)}
+.lo-filter-bar{display:flex;align-items:center;gap:10px;overflow-x:auto;padding-bottom:12px;margin-bottom:32px;scrollbar-width:none}
+.lo-filter-bar::-webkit-scrollbar{display:none}
+.lo-filter-btn{padding:8px 20px;border-radius:999px;background:var(--lo-bg-card);border:1px solid var(--lo-line);font-size:0.8rem;font-weight:700;color:var(--lo-ink-muted);cursor:pointer;transition:all 0.2s ease;white-space:nowrap}
+.lo-filter-btn:hover{color:var(--lo-ink);border-color:var(--lo-ink)}
+.lo-filter-btn.is-active{background:var(--lo-ink);color:#ffffff;border-color:var(--lo-ink)}
+.lo-art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.lo-art-card{position:relative;background:var(--lo-bg-card);border-radius:var(--lo-radius);overflow:hidden;border:1px solid var(--lo-line);aspect-ratio:4/3;cursor:pointer;display:block;text-decoration:none;color:inherit}
+.lo-art-card.is-tall{grid-row:span 2;aspect-ratio:3/4}
+.lo-art-card.is-wide{grid-column:span 2;aspect-ratio:16/9}
+.lo-art-img{width:100%;height:100%;object-fit:cover;transition:transform 0.45s cubic-bezier(0.2,0,0,1)}
+.lo-art-card:hover .lo-art-img{transform:scale(1.04)}
+.lo-art-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(15,15,15,0.75) 100%);opacity:0;transition:opacity 0.25s ease;display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
+.lo-art-card:hover .lo-art-overlay{opacity:1}
+.lo-art-cat{align-self:flex-start;font-size:0.68rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.9);color:var(--lo-ink);margin-bottom:8px}
+.lo-art-title{font-family:var(--lo-font-display);font-size:1.15rem;font-weight:800;color:#ffffff;margin:0}
+.lo-about-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:clamp(36px,6vw,84px);align-items:center}
+.lo-about-copy h2{font-family:var(--lo-font-display);font-size:clamp(2rem,4vw,3.2rem);font-weight:900;letter-spacing:-0.03em;line-height:1.1;margin-bottom:20px}
+.lo-about-copy p{font-size:1.05rem;line-height:1.65;color:var(--lo-ink-muted);margin-bottom:24px}
+.lo-stamp-card{background:var(--lo-bg-card);border:2px solid var(--lo-ink);padding:24px;border-radius:var(--lo-radius);box-shadow:8px 8px 0 var(--lo-ink);position:relative}
+.lo-stamp-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px dashed var(--lo-line);padding-bottom:12px;margin-bottom:18px;font-size:0.75rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase}
+.lo-stamp-photo{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:1px solid var(--lo-line);margin-bottom:16px}
+.lo-stamp-footer{display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;font-weight:700;color:var(--lo-ink-muted)}
+.lo-milestones-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.lo-milestone{background:var(--lo-bg-card);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding:20px 24px}
+.lo-milestone-number{font-family:var(--lo-font-display);font-size:2.2rem;font-weight:900;color:var(--lo-ink);line-height:1;margin-bottom:6px}
+.lo-milestone-label{font-size:0.8rem;font-weight:700;color:var(--lo-ink-muted);text-transform:uppercase;letter-spacing:0.06em}
+.lo-services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.lo-service{background:var(--lo-bg-card);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.2s ease,border-color 0.2s ease}
+.lo-service:hover{transform:translateY(-3px);border-color:var(--lo-ink)}
+.lo-service-num{font-family:var(--lo-font-display);font-size:0.8rem;font-weight:800;color:var(--lo-accent-peach);margin-bottom:16px}
+.lo-service h3{font-family:var(--lo-font-display);font-size:1.15rem;font-weight:800;color:var(--lo-ink);margin-bottom:10px}
+.lo-service p{font-size:0.88rem;color:var(--lo-ink-muted);line-height:1.5;margin-bottom:20px}
+.lo-shop-card{background:linear-gradient(135deg,var(--lo-bg-warm),#fdfbf7);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding:clamp(32px,5vw,56px);display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
+.lo-shop-copy h3{font-family:var(--lo-font-display);font-size:clamp(1.6rem,2.8vw,2.2rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:12px}
+.lo-shop-copy p{font-size:1.02rem;color:var(--lo-ink-muted);max-width:560px}
+.lo-contact-card{background:var(--lo-ink);color:#ffffff;border-radius:var(--lo-radius);padding:clamp(48px,8vw,96px) 36px;text-align:center;position:relative;overflow:hidden}
+.lo-contact-card h2{font-family:var(--lo-font-display);font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:900;letter-spacing:-0.04em;line-height:1.05;margin-bottom:20px}
+.lo-contact-card p{font-size:1.15rem;color:rgba(255,255,255,0.7);max-width:580px;margin:0 auto 36px}
+.lo-contact-actions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
+.lo-contact-btn-white{background:#ffffff;color:var(--lo-ink);padding:14px 28px;border-radius:999px;font-weight:700;font-size:0.92rem;text-decoration:none;transition:transform 0.2s ease}
+.lo-contact-btn-white:hover{transform:scale(1.03)}
+.lo-footer{border-top:1px solid var(--lo-line);padding:36px 0;font-size:0.82rem;color:var(--lo-ink-muted)}
+.lo-footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.lo-socials{display:flex;align-items:center;gap:20px}
+.lo-socials a{color:var(--lo-ink);text-decoration:none;font-weight:700}
+.lo-socials a:hover{color:var(--lo-accent-peach)}
+@media (max-width: 960px) {
+  .lo-art-grid{grid-template-columns:repeat(2,1fr)}
+  .lo-about-grid{grid-template-columns:1fr}
+  .lo-milestones-grid{grid-template-columns:repeat(2,1fr)}
+  .lo-services-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width: 640px) {
+  .lo-art-grid{grid-template-columns:1fr}
+  .lo-art-card.is-tall, .lo-art-card.is-wide{grid-column:span 1;grid-row:span 1;aspect-ratio:4/3}
+  .lo-milestones-grid{grid-template-columns:1fr}
+  .lo-services-grid{grid-template-columns:1fr}
+  .lo-nav-links{display:none}
+}
 </style>` : '';
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
@@ -920,7 +1011,7 @@ function skillsSection(p) {
 function pageGallery(p, wIdx, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'].includes(activeTpl) ? activeTpl : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'].includes(activeTpl) ? activeTpl : 'gallery';
   let works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   if (!works.length) {
     const sampleImages = [
@@ -8851,187 +8942,6 @@ function pageSkill(p, skillName) {
   <p style="margin-top:16px"><a class="btn btn-ghost btn-sm" href="/">← ${esc(p.name)}</a></p></section>${foot(p)}</body></html>`;
 }
 
-export default {
-  async fetch(req) {
-    const url = new URL(req.url);
-    const host = url.hostname.toLowerCase();
-    const parts = host.split('.');
-    let sub = null;
-    if (host.endsWith('portfoolio.me') && parts.length === 3) sub = parts[0].toLowerCase();
-    if (!sub || RESERVED.has(sub) || !/^[a-z0-9][a-z0-9-]{2,29}$/.test(sub)) {
-      return Response.redirect(`${ORIGIN}/`, 302);
-    }
-
-    // Path traversal guard
-    if (url.pathname.includes('..') || /[\0<>]/.test(url.pathname)) {
-      return new Response('Not Found', { status: 404 });
-    }
-
-    // Proxy shared static assets (CSS, icons, seeds) directly from ORIGIN so they serve same-origin on every subdomain
-    if (
-      url.pathname === '/style.css' ||
-      url.pathname === '/templates.css' ||
-      url.pathname === '/resume.css' ||
-      url.pathname === '/ui.css' ||
-      url.pathname === '/favicon.svg' ||
-      url.pathname === '/favicon.png' ||
-      url.pathname.startsWith('/profiles/') ||
-      url.pathname.startsWith('/frontend/')
-    ) {
-      const assetRes = await fetch(`${ORIGIN}${url.pathname}`);
-      if (assetRes.ok) {
-        const ct = assetRes.headers.get('content-type') || siteMime(url.pathname);
-        return new Response(assetRes.body, {
-          status: assetRes.status,
-          headers: {
-            'content-type': ct,
-            'cache-control': url.pathname.endsWith('.css') ? 'public, max-age=60' : 'public, max-age=86400',
-            'access-control-allow-origin': '*',
-            ...SEC_HEADERS,
-          },
-        });
-      }
-    }
-
-    const p = await getProfile(sub);
-    if (!p) return Response.redirect(`${ORIGIN}/?claim=${encodeURIComponent(sub)}`, 302);
-    // resume page works on every site type (built from profile data)
-    if (url.pathname === '/resume' || url.pathname === '/resume/' || url.searchParams.get('resume')) {
-      const html = pageResume(p);
-      return new Response(html, {
-        headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
-      });
-    }
-    // custom upload wins over builder templates — serve raw files incl. assets
-    if (p.site_type === 'upload') {
-      const hit = await serveUploadedSite(sub, url.pathname);
-      if (hit) return hit;
-      // storage empty / deleted → fall through to builder theme instead of 404
-    }
-    // visual track renders the gallery, not the code portfolio
-    const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
-    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'];
-    const isVisualTrack = (qTpl && visualThemes.includes(qTpl.toLowerCase())) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
-    if (isVisualTrack) {
-      const html = pageGallery(p, url.searchParams.get('w'), url);
-      return new Response(html, {
-        headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
-      });
-    }
-    const m = url.pathname.match(/^\/skills\/([^/]+)\/?$/);
-    const html = m ? pageSkill(p, decodeURIComponent(m[1])) : page(p, url);
-    return new Response(html, {
-      headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
-    });
-  },
-};
-
-/* ==========================================
-   ARTISTIC LO THEME (Wix Artist Called Lo)
-   ========================================== */
-.lo-page{--lo-bg:#f5f0eb;--lo-bg-warm:#eee7dd;--lo-bg-card:#ffffff;--lo-ink:#151515;--lo-ink-muted:#635d57;--lo-line:#ded7cd;--lo-line-dark:#222222;--lo-accent-peach:#ff7a59;--lo-accent-lilac:#d8b4e2;--lo-accent-sky:#93c5fd;--lo-accent-mint:#86efac;--lo-accent-butter:#fde047;--lo-shadow:0 12px 36px rgba(21,21,21,0.06);--lo-radius:14px;--lo-font-display:'Space Grotesk',system-ui,sans-serif;--lo-font-body:'Inter',system-ui,sans-serif;min-height:100vh;background:var(--lo-bg);color:var(--lo-ink);font-family:var(--lo-font-body);position:relative;-webkit-font-smoothing:antialiased}
-
-.lo-shell{width:min(1240px,calc(100% - 44px));margin-inline:auto}
-.lo-section{position:relative;padding:clamp(64px,8vw,112px) 0}
-.lo-kicker{font-size:0.75rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--lo-ink-muted);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
-.lo-kicker span{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--lo-accent-peach)}
-
-.lo-header{position:sticky;top:0;z-index:100;background:rgba(245,240,235,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--lo-line);transition:background 0.3s ease,box-shadow 0.3s ease}
-.lo-nav{height:76px;display:flex;align-items:center;justify-content:space-between}
-.lo-brand{font-family:var(--lo-font-display);font-size:1.35rem;font-weight:800;letter-spacing:-0.03em;color:var(--lo-ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.lo-brand-star{color:var(--lo-accent-peach);font-size:1.2rem}
-.lo-nav-links{display:flex;align-items:center;gap:28px}
-.lo-nav-links a{font-size:0.84rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--lo-ink);text-decoration:none;transition:color 0.2s ease}
-.lo-nav-links a:hover{color:var(--lo-accent-peach)}
-
-.lo-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 24px;border-radius:999px;font-size:0.86rem;font-weight:700;letter-spacing:0.02em;text-decoration:none;cursor:pointer;transition:all 0.2s ease;border:none}
-.lo-btn-primary{background:var(--lo-ink);color:#ffffff}
-.lo-btn-primary:hover{background:#000000;transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,0.15)}
-.lo-btn-outline{background:transparent;color:var(--lo-ink);border:1.5px solid var(--lo-line-dark)}
-.lo-btn-outline:hover{background:var(--lo-ink);color:#ffffff}
-.lo-btn-sm{padding:8px 18px;font-size:0.8rem}
-
-.lo-hero{padding:clamp(60px,9vw,110px) 0 48px;border-bottom:1px solid var(--lo-line);background:radial-gradient(ellipse at 80% 20%,rgba(216,180,226,0.2),transparent 50%),radial-gradient(ellipse at 15% 85%,rgba(255,122,89,0.15),transparent 45%)}
-.lo-hero-badge{display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:999px;background:var(--lo-bg-warm);border:1px solid var(--lo-line);font-size:0.75rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--lo-ink);margin-bottom:24px}
-.lo-hero-title{font-family:var(--lo-font-display);font-size:clamp(2.8rem,7vw,5.6rem);font-weight:900;line-height:0.96;letter-spacing:-0.04em;text-transform:uppercase;color:var(--lo-ink);margin-bottom:28px}
-.lo-hero-title .accent-italic{font-style:italic;font-weight:400;font-family:'Fraunces',serif;color:var(--lo-accent-peach)}
-.lo-hero-desc{font-size:clamp(1.05rem,1.8vw,1.35rem);line-height:1.5;color:var(--lo-ink-muted);max-width:680px;margin-bottom:36px}
-.lo-hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-
-.lo-trust-ribbon{margin-top:64px;padding-top:28px;border-top:1px dashed var(--lo-line);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
-.lo-trust-kicker{font-size:0.72rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--lo-ink-muted)}
-.lo-trust-pills{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.lo-trust-pill{font-family:var(--lo-font-display);font-size:0.74rem;font-weight:700;letter-spacing:0.08em;padding:6px 14px;border-radius:999px;background:var(--lo-bg-card);border:1px solid var(--lo-line);color:var(--lo-ink)}
-
-.lo-filter-bar{display:flex;align-items:center;gap:10px;overflow-x:auto;padding-bottom:12px;margin-bottom:32px;scrollbar-width:none}
-.lo-filter-bar::-webkit-scrollbar{display:none}
-.lo-filter-btn{padding:8px 20px;border-radius:999px;background:var(--lo-bg-card);border:1px solid var(--lo-line);font-size:0.8rem;font-weight:700;color:var(--lo-ink-muted);cursor:pointer;transition:all 0.2s ease;white-space:nowrap}
-.lo-filter-btn:hover{color:var(--lo-ink);border-color:var(--lo-ink)}
-.lo-filter-btn.is-active{background:var(--lo-ink);color:#ffffff;border-color:var(--lo-ink)}
-
-.lo-art-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-
-.lo-art-card{position:relative;background:var(--lo-bg-card);border-radius:var(--lo-radius);overflow:hidden;border:1px solid var(--lo-line);aspect-ratio:4/3;cursor:pointer;display:block;text-decoration:none;color:inherit}
-.lo-art-card.is-tall{grid-row:span 2;aspect-ratio:3/4}
-.lo-art-card.is-wide{grid-column:span 2;aspect-ratio:16/9}
-.lo-art-img{width:100%;height:100%;object-fit:cover;transition:transform 0.45s cubic-bezier(0.2,0,0,1)}
-.lo-art-card:hover .lo-art-img{transform:scale(1.04)}
-.lo-art-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(15,15,15,0.75) 100%);opacity:0;transition:opacity 0.25s ease;display:flex;flex-direction:column;justify-content:flex-end;padding:24px}
-.lo-art-card:hover .lo-art-overlay{opacity:1}
-.lo-art-cat{align-self:flex-start;font-size:0.68rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,0.9);color:var(--lo-ink);margin-bottom:8px}
-.lo-art-title{font-family:var(--lo-font-display);font-size:1.15rem;font-weight:800;color:#ffffff;margin:0}
-
-.lo-about-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:clamp(36px,6vw,84px);align-items:center}
-.lo-about-copy h2{font-family:var(--lo-font-display);font-size:clamp(2rem,4vw,3.2rem);font-weight:900;letter-spacing:-0.03em;line-height:1.1;margin-bottom:20px}
-.lo-about-copy p{font-size:1.05rem;line-height:1.65;color:var(--lo-ink-muted);margin-bottom:24px}
-
-.lo-stamp-card{background:var(--lo-bg-card);border:2px solid var(--lo-ink);padding:24px;border-radius:var(--lo-radius);box-shadow:8px 8px 0 var(--lo-ink);position:relative}
-.lo-stamp-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px dashed var(--lo-line);padding-bottom:12px;margin-bottom:18px;font-size:0.75rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase}
-.lo-stamp-photo{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:1px solid var(--lo-line);margin-bottom:16px}
-.lo-stamp-footer{display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;font-weight:700;color:var(--lo-ink-muted)}
-
-.lo-milestones-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
-.lo-milestone{background:var(--lo-bg-card);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding:20px 24px}
-.lo-milestone-number{font-family:var(--lo-font-display);font-size:2.2rem;font-weight:900;color:var(--lo-ink);line-height:1;margin-bottom:6px}
-.lo-milestone-label{font-size:0.8rem;font-weight:700;color:var(--lo-ink-muted);text-transform:uppercase;letter-spacing:0.06em}
-
-.lo-services-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.lo-service{background:var(--lo-bg-card);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding:28px 24px;display:flex;flex-direction:column;justify-content:space-between;transition:transform 0.2s ease,border-color 0.2s ease}
-.lo-service:hover{transform:translateY(-3px);border-color:var(--lo-ink)}
-.lo-service-num{font-family:var(--lo-font-display);font-size:0.8rem;font-weight:800;color:var(--lo-accent-peach);margin-bottom:16px}
-.lo-service h3{font-family:var(--lo-font-display);font-size:1.15rem;font-weight:800;color:var(--lo-ink);margin-bottom:10px}
-.lo-service p{font-size:0.88rem;color:var(--lo-ink-muted);line-height:1.5;margin-bottom:20px}
-
-.lo-shop-card{background:linear-gradient(135deg,var(--lo-bg-warm),#fdfbf7);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding: clamp(32px,5vw,56px);display:flex;align-items:center;justify-content:space-between;gap:36px;flex-wrap:wrap}
-.lo-shop-copy h3{font-family:var(--lo-font-display);font-size: clamp(1.6rem,2.8vw,2.2rem);font-weight:900;letter-spacing:-0.03em;margin-bottom:12px}
-.lo-shop-copy p{font-size:1.02rem;color:var(--lo-ink-muted);max-width:560px}
-
-.lo-contact-card{background:var(--lo-ink);color:#ffffff;border-radius:var(--lo-radius);padding:clamp(48px,8vw,96px) 36px;text-align:center;position:relative;overflow:hidden}
-.lo-contact-card h2{font-family:var(--lo-font-display);font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:900;letter-spacing:-0.04em;line-height:1.05;margin-bottom:20px}
-.lo-contact-card p{font-size:1.15rem;color:rgba(255,255,255,0.7);max-width:580px;margin:0 auto 36px}
-.lo-contact-actions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap}
-.lo-contact-btn-white{background:#ffffff;color:var(--lo-ink);padding:14px 28px;border-radius:999px;font-weight:700;font-size:0.92rem;text-decoration:none;transition:transform 0.2s ease}
-.lo-contact-btn-white:hover{transform:scale(1.03)}
-
-.lo-footer{border-top:1px solid var(--lo-line);padding:36px 0;font-size:0.82rem;color:var(--lo-ink-muted)}
-.lo-footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.lo-socials{display:flex;align-items:center;gap:20px}
-.lo-socials a{color:var(--lo-ink);text-decoration:none;font-weight:700}
-.lo-socials a:hover{color:var(--lo-accent-peach)}
-
-@media (max-width: 960px) {
-  .lo-art-grid{grid-template-columns:repeat(2,1fr)}
-  .lo-about-grid{grid-template-columns:1fr}
-  .lo-milestones-grid{grid-template-columns:repeat(2,1fr)}
-  .lo-services-grid{grid-template-columns:repeat(2,1fr)}
-}
-@media (max-width: 640px) {
-  .lo-art-grid{grid-template-columns:1fr}
-  .lo-art-card.is-tall, .lo-art-card.is-wide{grid-column:span 1;grid-row:span 1;aspect-ratio:4/3}
-  .lo-milestones-grid{grid-template-columns:1fr}
-  .lo-services-grid{grid-template-columns:1fr}
-  .lo-nav-links{display:none}
-}
 
 const LO_FALLBACK_WORKS = [
   { title: 'Cosmic Botanical', category: 'art', desc: 'Risograph print, mixed-media packaging & botanical study', imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?auto=format&fit=crop&w=900&q=80', year: '2026', tall: true },
@@ -9065,6 +8975,20 @@ function renderLoSSRHeader(p) {
   </header>`;
 }
 
+function renderLoSSRCredentials() {
+  return `<div class="lo-trust-ribbon">
+    <span class="lo-trust-kicker">FEATURED IN & COMMISSIONED BY</span>
+    <div class="lo-trust-pills">
+      <span class="lo-trust-pill">DISNEY</span>
+      <span class="lo-trust-pill">THE LATE SHOW</span>
+      <span class="lo-trust-pill">WARNER BROS</span>
+      <span class="lo-trust-pill">NBC UNIVERSAL</span>
+      <span class="lo-trust-pill">SPOTIFY</span>
+      <span class="lo-trust-pill">WIX EXPLORE</span>
+    </div>
+  </div>`;
+}
+
 function renderLoSSRHero(p) {
   const bio = esc(p.bio || p.tagline || 'Illustrator, designer, art director and maker. Creating tactile, colorful worlds that spark joy, provoke curiosity, and refuse to be boring.');
   return `<section class="lo-hero" id="home">
@@ -9079,20 +9003,6 @@ function renderLoSSRHero(p) {
       ${renderLoSSRCredentials()}
     </div>
   </section>`;
-}
-
-function renderLoSSRCredentials() {
-  return `<div class="lo-trust-ribbon">
-    <span class="lo-trust-kicker">FEATURED IN & COMMISSIONED BY</span>
-    <div class="lo-trust-pills">
-      <span class="lo-trust-pill">DISNEY</span>
-      <span class="lo-trust-pill">THE LATE SHOW</span>
-      <span class="lo-trust-pill">WARNER BROS</span>
-      <span class="lo-trust-pill">NBC UNIVERSAL</span>
-      <span class="lo-trust-pill">SPOTIFY</span>
-      <span class="lo-trust-pill">WIX EXPLORE</span>
-    </div>
-  </div>`;
 }
 
 function renderLoSSRFilterBar() {
@@ -9132,6 +9042,15 @@ function renderLoSSRArtGrid(works) {
   </section>`;
 }
 
+function renderLoSSRMilestones() {
+  return `<div class="lo-milestones-grid">
+    <div class="lo-milestone"><div class="lo-milestone-number">12+</div><div class="lo-milestone-label">Years Creating</div></div>
+    <div class="lo-milestone"><div class="lo-milestone-number">80+</div><div class="lo-milestone-label">Commissions</div></div>
+    <div class="lo-milestone"><div class="lo-milestone-number">15+</div><div class="lo-milestone-label">Brand Partners</div></div>
+    <div class="lo-milestone"><div class="lo-milestone-number">100%</div><div class="lo-milestone-label">Indie Spirit</div></div>
+  </div>`;
+}
+
 function renderLoSSRAbout(p) {
   const name = esc(p.name || 'Lo');
   const avatar = p.avatarUrl || p.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80';
@@ -9156,15 +9075,6 @@ function renderLoSSRAbout(p) {
       </div>
     </div>
   </section>`;
-}
-
-function renderLoSSRMilestones() {
-  return `<div class="lo-milestones-grid">
-    <div class="lo-milestone"><div class="lo-milestone-number">12+</div><div class="lo-milestone-label">Years Creating</div></div>
-    <div class="lo-milestone"><div class="lo-milestone-number">80+</div><div class="lo-milestone-label">Commissions</div></div>
-    <div class="lo-milestone"><div class="lo-milestone-number">15+</div><div class="lo-milestone-label">Brand Partners</div></div>
-    <div class="lo-milestone"><div class="lo-milestone-number">100%</div><div class="lo-milestone-label">Indie Spirit</div></div>
-  </div>`;
 }
 
 function renderLoSSRServices() {
@@ -9240,3 +9150,78 @@ function renderLoSSRFooter(p) {
     </div>
   </footer>`;
 }
+
+export default {
+  async fetch(req) {
+    const url = new URL(req.url);
+    const host = url.hostname.toLowerCase();
+    const parts = host.split('.');
+    let sub = null;
+    if (host.endsWith('portfoolio.me') && parts.length === 3) sub = parts[0].toLowerCase();
+    if (!sub || RESERVED.has(sub) || !/^[a-z0-9][a-z0-9-]{2,29}$/.test(sub)) {
+      return Response.redirect(`${ORIGIN}/`, 302);
+    }
+
+    // Path traversal guard
+    if (url.pathname.includes('..') || /[\0<>]/.test(url.pathname)) {
+      return new Response('Not Found', { status: 404 });
+    }
+
+    // Proxy shared static assets (CSS, icons, seeds) directly from ORIGIN so they serve same-origin on every subdomain
+    if (
+      url.pathname === '/style.css' ||
+      url.pathname === '/templates.css' ||
+      url.pathname === '/resume.css' ||
+      url.pathname === '/ui.css' ||
+      url.pathname === '/favicon.svg' ||
+      url.pathname === '/favicon.png' ||
+      url.pathname.startsWith('/profiles/') ||
+      url.pathname.startsWith('/frontend/')
+    ) {
+      const assetRes = await fetch(`${ORIGIN}${url.pathname}`);
+      if (assetRes.ok) {
+        const ct = assetRes.headers.get('content-type') || siteMime(url.pathname);
+        return new Response(assetRes.body, {
+          status: assetRes.status,
+          headers: {
+            'content-type': ct,
+            'cache-control': url.pathname.endsWith('.css') ? 'public, max-age=60' : 'public, max-age=86400',
+            'access-control-allow-origin': '*',
+            ...SEC_HEADERS,
+          },
+        });
+      }
+    }
+
+    const p = await getProfile(sub);
+    if (!p) return Response.redirect(`${ORIGIN}/?claim=${encodeURIComponent(sub)}`, 302);
+    // resume page works on every site type (built from profile data)
+    if (url.pathname === '/resume' || url.pathname === '/resume/' || url.searchParams.get('resume')) {
+      const html = pageResume(p);
+      return new Response(html, {
+        headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
+      });
+    }
+    // custom upload wins over builder templates — serve raw files incl. assets
+    if (p.site_type === 'upload') {
+      const hit = await serveUploadedSite(sub, url.pathname);
+      if (hit) return hit;
+      // storage empty / deleted → fall through to builder theme instead of 404
+    }
+    // visual track renders the gallery, not the code portfolio
+    const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
+    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'];
+    const isVisualTrack = (qTpl && visualThemes.includes(qTpl.toLowerCase())) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
+    if (isVisualTrack) {
+      const html = pageGallery(p, url.searchParams.get('w'), url);
+      return new Response(html, {
+        headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
+      });
+    }
+    const m = url.pathname.match(/^\/skills\/([^/]+)\/?$/);
+    const html = m ? pageSkill(p, decodeURIComponent(m[1])) : page(p, url);
+    return new Response(html, {
+      headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
+    });
+  },
+};
