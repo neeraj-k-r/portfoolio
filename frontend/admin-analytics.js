@@ -103,6 +103,24 @@
     return { builder, upload, builderPercent, uploadPercent };
   };
 
+  /**
+   * Compute all-time total projects, visual works, and unique skills count
+   * @param {Array<UserProfile>} users
+   * @returns {{ projects: number, works: number, skills: number, totalContent: number }}
+   */
+  Analytics.computeContentTotals = function(users) {
+    let projects = 0;
+    let works = 0;
+    let skills = 0;
+    if (!Array.isArray(users)) return { projects: 0, works: 0, skills: 0, totalContent: 0 };
+    users.forEach(u => {
+      if (Array.isArray(u.projects)) projects += u.projects.length;
+      if (Array.isArray(u.works)) works += u.works.length;
+      if (Array.isArray(u.skills)) skills += u.skills.length;
+    });
+    return { projects, works, skills, totalContent: projects + works };
+  };
+
   const Analytics = {};
 
   return Analytics;
