@@ -3273,3 +3273,17 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   color: #f3fbff;
   border-color: rgba(25, 227, 230, 0.3);
 }
+
+/* ========================================================
+ * ADMIN ANALYTICS DASHBOARD STYLES
+ * ======================================================== */
+:root {
+  --an-bg-card: rgba(15, 23, 42, 0.75);
+  --an-border: rgba(255, 255, 255, 0.08);
+  --an-border-hover: rgba(251, 191, 36, 0.45);
+  --an-cyan: #22d3ee;
+  --an-purple: #c084fc;
+  --an-amber: #fbbf24;
+  --an-lime: #a3e635;
+  --an-pink: #f472b6;
+}
