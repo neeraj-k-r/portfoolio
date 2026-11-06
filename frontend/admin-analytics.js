@@ -901,6 +901,43 @@
       </tr>`;
   };
 
+  /**
+   * Render complete user analytics table
+   * @param {Array<UserProfile>} users
+   * @returns {string}
+   */
+  Analytics.renderAnalyticsTableHTML = function(users) {
+    const list = Array.isArray(users) ? users : [];
+    if (!list.length) {
+      return `
+        <div class="an-table-wrap" style="padding:40px;text-align:center">
+          <p style="color:var(--muted);font-size:14px">No users matched your search criteria.</p>
+        </div>`;
+    }
+
+    return `
+      <div class="an-table-wrap">
+        <table class="an-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Creator</th>
+              <th>Email</th>
+              <th>Track</th>
+              <th>Theme</th>
+              <th>Status</th>
+              <th>Content</th>
+              <th>Joined</th>
+              <th style="text-align:right">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${list.map((u, i) => Analytics.renderAnalyticsTableRowHTML(u, i)).join('')}
+          </tbody>
+        </table>
+      </div>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
