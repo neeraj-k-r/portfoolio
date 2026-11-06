@@ -8927,3 +8927,10 @@ export default {
 .lo-nav-links{display:flex;align-items:center;gap:28px}
 .lo-nav-links a{font-size:0.84rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--lo-ink);text-decoration:none;transition:color 0.2s ease}
 .lo-nav-links a:hover{color:var(--lo-accent-peach)}
+
+.lo-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 24px;border-radius:999px;font-size:0.86rem;font-weight:700;letter-spacing:0.02em;text-decoration:none;cursor:pointer;transition:all 0.2s ease;border:none}
+.lo-btn-primary{background:var(--lo-ink);color:#ffffff}
+.lo-btn-primary:hover{background:#000000;transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,0.15)}
+.lo-btn-outline{background:transparent;color:var(--lo-ink);border:1.5px solid var(--lo-line-dark)}
+.lo-btn-outline:hover{background:var(--lo-ink);color:#ffffff}
+.lo-btn-sm{padding:8px 18px;font-size:0.8rem}
