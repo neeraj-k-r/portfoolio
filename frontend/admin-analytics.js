@@ -405,6 +405,23 @@
     return String(query || '').trim().toLowerCase();
   };
 
+  /**
+   * Filter users matching query across username, name, email, title, and skills
+   * @param {Array<UserProfile>} users
+   * @param {string} query
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.filterUsersByQuery = function(users, query) {
+    if (!Array.isArray(users)) return [];
+    const q = Analytics.sanitizeSearchTerm(query);
+    if (!q) return users;
+    return users.filter(u => {
+      const skillsStr = Array.isArray(u.skills) ? u.skills.join(' ') : '';
+      const text = [u.username, u.name, u.email, u.title, skillsStr, u.template].join(' ').toLowerCase();
+      return text.includes(q);
+    });
+  };
+
   const Analytics = {};
 
   return Analytics;
