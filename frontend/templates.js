@@ -10877,3 +10877,19 @@ function renderLoServices() {
       </div>
     </section>`;
 }
+
+function renderLoShop() {
+  return `
+    <section class="lo-section" id="shop" style="padding-top:0">
+      <div class="lo-shell">
+        <div class="lo-shop-card">
+          <div class="lo-shop-copy">
+            <p class="lo-kicker"><span></span> 04 / PRINT EDITIONS</p>
+            <h3>Archival Prints & Limited Collector Editions</h3>
+            <p>Hand-signed risograph and giclée prints produced in small batches on heavyweight cotton rag paper.</p>
+          </div>
+          <a class="lo-btn lo-btn-primary" href="#contact">Inquire for Catalog ↗</a>
+        </div>
+      </div>
+    </section>`;
+}
