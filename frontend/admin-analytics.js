@@ -32,6 +32,16 @@
    * @property {string} [updated_at]
    */
 
+  /**
+   * Calculate total registered users with null-safety
+   * @param {Array<UserProfile>} users
+   * @returns {number}
+   */
+  Analytics.computeTotalUsers = function(users) {
+    if (!Array.isArray(users)) return 0;
+    return users.length;
+  };
+
   const Analytics = {};
 
   return Analytics;
