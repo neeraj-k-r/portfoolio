@@ -734,6 +734,32 @@
       </div>`;
   };
 
+  /**
+   * Render HTML for Recent Activity Stream Card
+   * @param {Array<Object>} activity
+   * @returns {string}
+   */
+  Analytics.renderActivityFeedCardHTML = function(activity) {
+    const list = Array.isArray(activity) ? activity : [];
+    return `
+      <div class="an-chart-card">
+        <div class="an-chart-head">
+          <div class="an-chart-title">⚡ Chronological Platform Activity</div>
+          <span class="mono" style="font-size:12px;color:var(--muted)">Latest ${list.length}</span>
+        </div>
+        <div class="an-feed-list">
+          ${list.length ? list.map(a => `
+            <div class="an-feed-item">
+              <div class="an-feed-meta">
+                <b>@${a.username}</b>
+                <span class="an-track-tag ${a.track}">${a.type}</span>
+              </div>
+              <span class="an-feed-time">${Analytics.formatRelativeTime(a.timestamp)}</span>
+            </div>`).join('') : '<p style="color:var(--muted);font-size:13px">No recent user activity.</p>'}
+        </div>
+      </div>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
