@@ -372,6 +372,21 @@ test('Suki theme renders cyber video hero, grid, services, and dynamic projects'
 });
 
 test('Lo theme renders brand, narrative hero, zero-gap art grid, and studio story', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
   const loFn = domMock.window.PortfoolioTemplates.lo;
   assert.ok(loFn, 'lo template must exist in PortfoolioTemplates');
   loFn({
