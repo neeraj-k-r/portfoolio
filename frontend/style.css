@@ -3460,3 +3460,35 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   border-color: rgba(251, 191, 36, 0.5);
   color: #fde68a;
 }
+
+.an-table-wrap {
+  background: var(--an-bg-card);
+  border: 1px solid var(--an-border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.35);
+}
+.an-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+.an-table th {
+  background: rgba(255, 255, 255, 0.04);
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 11.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--an-border);
+}
+.an-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  vertical-align: middle;
+}
+.an-table tr:hover td {
+  background: rgba(255, 255, 255, 0.035);
+}
