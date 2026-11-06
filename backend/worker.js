@@ -8968,3 +8968,8 @@ export default {
 .lo-about-grid{display:grid;grid-template-columns:1fr 1.35fr;gap:clamp(36px,6vw,84px);align-items:center}
 .lo-about-copy h2{font-family:var(--lo-font-display);font-size:clamp(2rem,4vw,3.2rem);font-weight:900;letter-spacing:-0.03em;line-height:1.1;margin-bottom:20px}
 .lo-about-copy p{font-size:1.05rem;line-height:1.65;color:var(--lo-ink-muted);margin-bottom:24px}
+
+.lo-stamp-card{background:var(--lo-bg-card);border:2px solid var(--lo-ink);padding:24px;border-radius:var(--lo-radius);box-shadow:8px 8px 0 var(--lo-ink);position:relative}
+.lo-stamp-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px dashed var(--lo-line);padding-bottom:12px;margin-bottom:18px;font-size:0.75rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase}
+.lo-stamp-photo{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:1px solid var(--lo-line);margin-bottom:16px}
+.lo-stamp-footer{display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;font-weight:700;color:var(--lo-ink-muted)}
