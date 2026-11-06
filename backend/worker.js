@@ -9191,3 +9191,20 @@ function renderLoSSRShop() {
     </div>
   </section>`;
 }
+
+function renderLoSSRContact(p) {
+  const email = p.email || '';
+  const phone = p.phone || '';
+  const hireHref = phone ? `https://wa.me/${phone.replace(/\D/g, '')}?text=Hi,%20I'm%20interested` : (email ? `mailto:${esc(email)}?subject=Studio%20Inquiry` : '#');
+  return `<section class="lo-section" id="contact" style="padding-top:0">
+    <div class="lo-shell">
+      <div class="lo-contact-card">
+        <h2>Have a wild vision?<br>Let's make something unforgettable.</h2>
+        <p>Available for commercial commissions, editorial projects, fine art licensing, and creative brand partnerships.</p>
+        <div class="lo-contact-actions">
+          <a class="lo-contact-btn-white" href="${hireHref}">Start a Project ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>`;
+}
