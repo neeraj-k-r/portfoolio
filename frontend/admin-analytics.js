@@ -708,6 +708,32 @@
       </div>`;
   };
 
+  /**
+   * Render HTML for Top Template Adoption Chart Card
+   * @param {Array<Object>} topTemplates
+   * @returns {string}
+   */
+  Analytics.renderTemplateAdoptionCardHTML = function(topTemplates) {
+    const list = Array.isArray(topTemplates) ? topTemplates : [];
+    return `
+      <div class="an-chart-card">
+        <div class="an-chart-head">
+          <div class="an-chart-title">🔥 Most Popular Portfolio Themes</div>
+          <span class="mono" style="font-size:12px;color:var(--muted)">Top ${list.length}</span>
+        </div>
+        <div class="an-tpl-list">
+          ${list.length ? list.map(t => `
+            <div class="an-tpl-item">
+              <span class="an-tpl-name">${t.emoji} ${t.name}</span>
+              <div class="an-tpl-bar-wrap">
+                <div class="an-tpl-bar-fill" style="width:${Math.max(t.percent, 8)}%"></div>
+              </div>
+              <span class="an-tpl-count">${t.count} (${t.percent}%)</span>
+            </div>`).join('') : '<p style="color:var(--muted);font-size:13px">No template data recorded yet.</p>'}
+        </div>
+      </div>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
