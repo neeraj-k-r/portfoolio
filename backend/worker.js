@@ -8919,3 +8919,11 @@ export default {
 .lo-section{position:relative;padding:clamp(64px,8vw,112px) 0}
 .lo-kicker{font-size:0.75rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--lo-ink-muted);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
 .lo-kicker span{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--lo-accent-peach)}
+
+.lo-header{position:sticky;top:0;z-index:100;background:rgba(245,240,235,0.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--lo-line);transition:background 0.3s ease,box-shadow 0.3s ease}
+.lo-nav{height:76px;display:flex;align-items:center;justify-content:space-between}
+.lo-brand{font-family:var(--lo-font-display);font-size:1.35rem;font-weight:800;letter-spacing:-0.03em;color:var(--lo-ink);text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.lo-brand-star{color:var(--lo-accent-peach);font-size:1.2rem}
+.lo-nav-links{display:flex;align-items:center;gap:28px}
+.lo-nav-links a{font-size:0.84rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--lo-ink);text-decoration:none;transition:color 0.2s ease}
+.lo-nav-links a:hover{color:var(--lo-accent-peach)}
