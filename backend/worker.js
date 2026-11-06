@@ -9048,3 +9048,19 @@ function renderLoSSRHeader(p) {
     </nav>
   </header>`;
 }
+
+function renderLoSSRHero(p) {
+  const bio = esc(p.bio || p.tagline || 'Illustrator, designer, art director and maker. Creating tactile, colorful worlds that spark joy, provoke curiosity, and refuse to be boring.');
+  return `<section class="lo-hero" id="home">
+    <div class="lo-shell">
+      <div class="lo-hero-badge">✦ MULTIDISCIPLINARY ARTIST & MAKER</div>
+      <h1 class="lo-hero-title">Part studio · part portfolio <span class="accent-italic">part fever dream.</span></h1>
+      <p class="lo-hero-desc">${bio}</p>
+      <div class="lo-hero-actions">
+        <a class="lo-btn lo-btn-primary" href="#work">Explore Collection ↘</a>
+        <a class="lo-btn lo-btn-outline" href="#about">Read The Story →</a>
+      </div>
+      ${renderLoSSRCredentials()}
+    </div>
+  </section>`;
+}
