@@ -508,6 +508,16 @@
     });
   };
 
+  /**
+   * Sort users alphabetically by username
+   * @param {Array<UserProfile>} users
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.sortUsersByUsername = function(users) {
+    if (!Array.isArray(users)) return [];
+    return [...users].sort((a, b) => String(a.username || '').localeCompare(String(b.username || '')));
+  };
+
   const Analytics = {};
 
   return Analytics;
