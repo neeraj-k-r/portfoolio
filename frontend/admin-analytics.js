@@ -435,6 +435,19 @@
     return users.filter(u => String(u.track || 'tech').toLowerCase() === trk);
   };
 
+  /**
+   * Filter users by template theme
+   * @param {Array<UserProfile>} users
+   * @param {string} template - 'all' or template key
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.filterUsersByTemplate = function(users, template = 'all') {
+    if (!Array.isArray(users)) return [];
+    const tpl = String(template || 'all').toLowerCase();
+    if (tpl === 'all' || !tpl) return users;
+    return users.filter(u => String(u.template || 'midnight').toLowerCase() === tpl);
+  };
+
   const Analytics = {};
 
   return Analytics;
