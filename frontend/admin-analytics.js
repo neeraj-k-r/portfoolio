@@ -556,6 +556,17 @@
     return result;
   };
 
+  /**
+   * Escape and quote field for CSV output
+   * @param {*} val
+   * @returns {string}
+   */
+  Analytics.escapeCSVField = function(val) {
+    if (val === null || val === undefined) return '""';
+    const s = String(val).replace(/"/g, '""');
+    return '"' + s + '"';
+  };
+
   const Analytics = {};
 
   return Analytics;
