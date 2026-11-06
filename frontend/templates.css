@@ -16118,3 +16118,48 @@ body.portfolio-view[data-template="mythos"] {
   color: #f3fbff;
   border-color: rgba(25, 227, 230, 0.3);
 }
+
+/* Mini preview mockup for Artistic Lo */
+.lx-tp-lo {
+  background: #f5f0eb;
+  color: #151515;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+}
+.lx-tp-lo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 8px;
+  font-weight: 800;
+  border-bottom: 1px solid #ded7cd;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
+}
+.lx-tp-lo-hero {
+  font-size: 9px;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.lx-tp-lo-hero span {
+  color: #ff7a59;
+  font-style: italic;
+}
+.lx-tp-lo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  flex: 1;
+}
+.lx-tp-lo-cell {
+  background: #ded7cd;
+  border-radius: 3px;
+  aspect-ratio: 4/3;
+}
