@@ -8941,3 +8941,8 @@ export default {
 .lo-hero-title .accent-italic{font-style:italic;font-weight:400;font-family:'Fraunces',serif;color:var(--lo-accent-peach)}
 .lo-hero-desc{font-size:clamp(1.05rem,1.8vw,1.35rem);line-height:1.5;color:var(--lo-ink-muted);max-width:680px;margin-bottom:36px}
 .lo-hero-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+
+.lo-trust-ribbon{margin-top:64px;padding-top:28px;border-top:1px dashed var(--lo-line);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.lo-trust-kicker{font-size:0.72rem;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:var(--lo-ink-muted)}
+.lo-trust-pills{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.lo-trust-pill{font-family:var(--lo-font-display);font-size:0.74rem;font-weight:700;letter-spacing:0.08em;padding:6px 14px;border-radius:999px;background:var(--lo-bg-card);border:1px solid var(--lo-line);color:var(--lo-ink)}
