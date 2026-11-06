@@ -133,6 +133,16 @@
     }).length;
   };
 
+  /**
+   * Compute count of showcase featured portfolios
+   * @param {Array<UserProfile>} users
+   * @returns {number}
+   */
+  Analytics.computeFeaturedCount = function(users) {
+    if (!Array.isArray(users)) return 0;
+    return users.filter(u => Boolean(u.featured)).length;
+  };
+
   const Analytics = {};
 
   return Analytics;
