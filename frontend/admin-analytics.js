@@ -989,6 +989,22 @@
       </div>`;
   };
 
+  /**
+   * Browser file download helper for CSV
+   * @param {Array<UserProfile>} users
+   * @param {string} [filename]
+   */
+  Analytics.downloadCSV = function(users, filename = 'portfoolio-analytics.csv') {
+    if (typeof window === 'undefined' || !window.Blob) return;
+    const csv = Analytics.exportAnalyticsCSV(users);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    link.click();
+    URL.revokeObjectURL(link.href);
+  };
+
   const Analytics = {};
 
   return Analytics;
