@@ -850,6 +850,21 @@
       </div>`;
   };
 
+  /**
+   * Render Action Buttons for an individual user
+   * @param {UserProfile} user
+   * @returns {string}
+   */
+  Analytics.renderUserActionsHTML = function(user) {
+    const u = user || {};
+    const subUrl = `https://${u.username}.portfoolio.me`;
+    return `
+      <div style="display:flex;gap:6px;justify-content:flex-end">
+        <a class="btn btn-ghost btn-sm" href="/?u=${encodeURIComponent(u.username)}" target="_blank" title="Preview site">👁️</a>
+        <a class="btn btn-ghost btn-sm" href="${subUrl}" target="_blank" title="Open live subdomain">↗</a>
+      </div>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
