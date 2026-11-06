@@ -938,6 +938,57 @@
       </div>`;
   };
 
+  /**
+   * Render complete Analytics Dashboard view
+   * @param {Array<UserProfile>} users
+   * @param {Object} [options]
+   * @returns {string}
+   */
+  Analytics.renderAnalyticsDashboardViewHTML = function(users, options = {}) {
+    const list = Array.isArray(users) ? users : [];
+    const kpis = Analytics.aggregatePlatformKPIs(list);
+    const topTemplates = Analytics.computeTopTemplates(list, 6);
+    const activity = Analytics.computeRecentActivity(list, 6);
+    const filteredUsers = Analytics.filterAndSortUsers(list, options);
+
+    return `
+      <div class="an-dashboard">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+          <div>
+            <h2 style="font-size:22px;margin:0 0 4px">📊 Platform Analytics & User Insights</h2>
+            <p style="color:var(--muted);font-size:13px;margin:0">Live metrics, template adoption rates, and creator directories.</p>
+          </div>
+          <div class="an-btn-group">
+            <button class="an-btn-export" id="anExportCsvBtn"><i class="fa-solid fa-file-csv"></i> Export CSV</button>
+            <button class="an-btn-export" id="anExportJsonBtn"><i class="fa-solid fa-file-code"></i> Export JSON</button>
+            <button class="btn btn-ghost btn-sm" id="anRefreshBtn"><i class="fa-solid fa-rotate"></i> Refresh</button>
+          </div>
+        </div>
+
+        ${Analytics.renderKPICardsHTML(kpis)}
+
+        <div class="an-charts-grid">
+          ${Analytics.renderTrackDistributionCardHTML(kpis)}
+          ${Analytics.renderHostingDistributionCardHTML(kpis)}
+        </div>
+
+        <div class="an-charts-grid">
+          ${Analytics.renderTemplateAdoptionCardHTML(topTemplates)}
+          ${Analytics.renderActivityFeedCardHTML(activity)}
+        </div>
+
+        <div style="margin-top:32px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+            <h3 style="font-size:18px;margin:0">👥 Creator User Directory (${filteredUsers.length} of ${list.length})</h3>
+          </div>
+          ${Analytics.renderAnalyticsFilterControlsHTML(options)}
+          <div id="anTableContainer">
+            ${Analytics.renderAnalyticsTableHTML(filteredUsers)}
+          </div>
+        </div>
+      </div>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
