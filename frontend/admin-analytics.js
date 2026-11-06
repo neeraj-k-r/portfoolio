@@ -371,6 +371,31 @@
     return 'Subdomain Registered';
   };
 
+  /**
+   * Compute recent chronological activity stream
+   * @param {Array<UserProfile>} users
+   * @param {number} [limit=8]
+   * @returns {Array<Object>}
+   */
+  Analytics.computeRecentActivity = function(users, limit = 8) {
+    if (!Array.isArray(users)) return [];
+    const sorted = [...users].sort((a, b) => {
+      const ta = new Date(a.updated_at || a.site_updated_at || a.created_at || 0).getTime();
+      const tb = new Date(b.updated_at || b.site_updated_at || b.created_at || 0).getTime();
+      return tb - ta;
+    });
+
+    return sorted.slice(0, limit).map(u => ({
+      username: u.username,
+      name: u.name || u.username,
+      email: u.email || '',
+      type: Analytics.deriveUserActivityType(u),
+      timestamp: u.updated_at || u.site_updated_at || u.created_at,
+      track: u.track || 'tech',
+      template: u.template || 'midnight'
+    }));
+  };
+
   const Analytics = {};
 
   return Analytics;
