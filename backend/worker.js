@@ -8973,3 +8973,8 @@ export default {
 .lo-stamp-header{display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px dashed var(--lo-line);padding-bottom:12px;margin-bottom:18px;font-size:0.75rem;font-weight:800;letter-spacing:0.14em;text-transform:uppercase}
 .lo-stamp-photo{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:1px solid var(--lo-line);margin-bottom:16px}
 .lo-stamp-footer{display:flex;justify-content:space-between;align-items:center;font-size:0.75rem;font-weight:700;color:var(--lo-ink-muted)}
+
+.lo-milestones-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.lo-milestone{background:var(--lo-bg-card);border:1px solid var(--lo-line);border-radius:var(--lo-radius);padding:20px 24px}
+.lo-milestone-number{font-family:var(--lo-font-display);font-size:2.2rem;font-weight:900;color:var(--lo-ink);line-height:1;margin-bottom:6px}
+.lo-milestone-label{font-size:0.8rem;font-weight:700;color:var(--lo-ink-muted);text-transform:uppercase;letter-spacing:0.06em}
