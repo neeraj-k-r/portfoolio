@@ -10717,3 +10717,8 @@ const LO_FALLBACK_WORKS_CLIENT = [
   { title: 'Illustrated Monograph', category: 'design', desc: 'Limited edition archival art book with screenprinted cover', imageUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=900&q=80', year: '2026', tall: false },
   { title: 'Color Theory Junk Drawer', category: 'art', desc: 'Pop sculpture assemblages & physical maker projects', imageUrl: 'https://images.unsplash.com/photo-1513364776144-60967b0f800f?auto=format&fit=crop&w=900&q=80', year: '2026', tall: false }
 ];
+
+function getLoBrand(p) {
+  const raw = String(p.name || 'ARTIST CALLED LO').trim();
+  return tplEsc(raw.toUpperCase());
+}
