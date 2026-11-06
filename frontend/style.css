@@ -3371,3 +3371,44 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   height: 100%;
   transition: width 0.6s ease;
 }
+
+.an-tpl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.an-tpl-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+.an-tpl-name {
+  font-weight: 600;
+  font-size: 13.5px;
+  width: 130px;
+  flex-shrink: 0;
+}
+.an-tpl-bar-wrap {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  height: 8px;
+  border-radius: 100px;
+  overflow: hidden;
+}
+.an-tpl-bar-fill {
+  background: linear-gradient(90deg, #38bdf8, #818cf8);
+  height: 100%;
+  border-radius: 100px;
+}
+.an-tpl-count {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+  color: var(--muted);
+  width: 45px;
+  text-align: right;
+  flex-shrink: 0;
+}
