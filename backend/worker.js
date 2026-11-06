@@ -9078,3 +9078,13 @@ function renderLoSSRCredentials() {
     </div>
   </div>`;
 }
+
+function renderLoSSRFilterBar() {
+  return `<div class="lo-filter-bar">
+    <button class="lo-filter-btn is-active" data-cat="all">All Works</button>
+    <button class="lo-filter-btn" data-cat="art">Art & Illustration</button>
+    <button class="lo-filter-btn" data-cat="design">Design & Branding</button>
+    <button class="lo-filter-btn" data-cat="photo">Photography</button>
+    <button class="lo-filter-btn" data-cat="motion">Motion & Video</button>
+  </div>`;
+}
