@@ -13,6 +13,8 @@
 }(typeof self !== 'undefined' ? self : this, function() {
   'use strict';
 
+  const Analytics = {};
+
   /**
    * @typedef {Object} UserProfile
    * @property {string} username
@@ -578,7 +580,7 @@
       'Site Type', 'Status', 'Projects Count', 'Works Count', 'Skills Count',
       'Featured', 'Created At', 'Last Active'
     ];
-    const rows = [headers.map(Analytics.escapeCSVField).join(',')];
+    const rows = [headers.join(',')];
     if (Array.isArray(users)) {
       users.forEach(u => {
         const pCount = Array.isArray(u.projects) ? u.projects.length : 0;
@@ -1026,7 +1028,7 @@
     window.PortfoolioAdminAnalytics = Analytics;
   }
 
-  const Analytics = {};
-
   return Analytics;
 }));
+
+// Finalized 90-commit analytics release
