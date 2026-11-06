@@ -128,3 +128,11 @@ test('exportAnalyticsCSV outputs valid CSV rows with escaping', () => {
   assert.ok(csv.includes('Username,Name,Email'));
   assert.ok(csv.includes('"User, ""One"""'));
 });
+
+test('exportAnalyticsJSON outputs structured analytics payload', () => {
+  const users = [{ username: 'u1', track: 'tech', status: 'approved' }];
+  const jsonStr = Analytics.exportAnalyticsJSON(users);
+  const parsed = JSON.parse(jsonStr);
+  assert.equal(parsed.kpis.totalUsers, 1);
+  assert.ok(Array.isArray(parsed.topTemplates));
+});
