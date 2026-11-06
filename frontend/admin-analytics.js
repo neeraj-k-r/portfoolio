@@ -626,6 +626,38 @@
     return JSON.stringify(exportData, null, 2);
   };
 
+  /**
+   * Render HTML for the 4 top-level KPI metric cards
+   * @param {Object} kpis
+   * @returns {string}
+   */
+  Analytics.renderKPICardsHTML = function(kpis) {
+    const k = kpis || {};
+    return `
+      <div class="an-kpi-grid">
+        <div class="an-kpi-card">
+          <div class="an-kpi-num" style="color:var(--an-cyan)">${k.totalUsers || 0}</div>
+          <div class="an-kpi-label">Total Creators</div>
+          <div class="an-kpi-sub">${k.approvedCount || 0} live approved • ${k.pendingCount || 0} pending</div>
+        </div>
+        <div class="an-kpi-card">
+          <div class="an-kpi-num" style="color:var(--an-lime)">${k.approvedCount || 0}</div>
+          <div class="an-kpi-label">Live Subdomains</div>
+          <div class="an-kpi-sub">${k.totalUsers > 0 ? Math.round((k.approvedCount / k.totalUsers) * 100) : 0}% approval rate</div>
+        </div>
+        <div class="an-kpi-card">
+          <div class="an-kpi-num" style="color:var(--an-purple)">${k.techCount || 0} : ${k.visualCount || 0}</div>
+          <div class="an-kpi-label">Tech vs Visual Track</div>
+          <div class="an-kpi-sub">${k.techPercent || 0}% tech • ${k.visualPercent || 0}% visual & creative</div>
+        </div>
+        <div class="an-kpi-card">
+          <div class="an-kpi-num" style="color:var(--an-amber)">${k.totalContent || 0}</div>
+          <div class="an-kpi-label">Projects & Works</div>
+          <div class="an-kpi-sub">${k.totalProjects || 0} code repos • ${k.totalWorks || 0} media pieces</div>
+        </div>
+      </div>`;
+  };
+
   const Analytics = {};
 
   return Analytics;
