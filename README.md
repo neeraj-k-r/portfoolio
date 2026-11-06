@@ -212,3 +212,5 @@ Portfoolio features an **Analytics Dashboard** built right into the Superadmin C
 - **Theme Popularity Visualizer**: Ranked distribution bar chart across all 39 handcrafted templates.
 - **Creator Directory Table**: Searchable, filterable directory with instant subdomains preview, content counters (projects, works, ATS resumes), and account status.
 - **Reporting & Data Export**: One-click **Export to CSV** and **Export to JSON** for platform usage reporting.
+
+| **Artistic Lo** | `lo` | Warm sand multidisciplinary studio inspired by Artist Called Lo (Wix Explore) with zero-gap art grid, client credentials & narrative story. |
