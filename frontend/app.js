@@ -2200,7 +2200,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (resumeUser) { renderResumePage(p); return; }
   if (p.site_type === 'upload') { renderUploadedSite(p); return; }
   const qTpl = (new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t') || '').toLowerCase();
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'];
   const isVisualTrack = visualThemes.includes(qTpl) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
   if (isVisualTrack) { renderGallery(p); initMotionTheme(); return; }
   const skill = new URLSearchParams(location.search).get('skill');
@@ -2214,7 +2214,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const pp = await loadProfile(requested);
       if (!pp) return;
       const qTpl = (new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t') || '').toLowerCase();
-      const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki'];
+      const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'];
       const isPpVisual = visualThemes.includes(qTpl) || pp.track === 'visual' || visualThemes.includes(String(pp.template || '').toLowerCase());
       if (s.view === 'work' && typeof s.idx === 'number') {
         renderWorkDetail(pp, s.idx);
