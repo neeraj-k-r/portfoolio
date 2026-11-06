@@ -2397,6 +2397,22 @@ function pageGallery(p, wIdx, url) {
           </footer>
         </div>`;
       })()
+    : vtpl === 'lo'
+    ? (() => {
+        const sourceWorks = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : []);
+        return `<div class="lo-page" id="loRoot">
+          ${renderLoSSRHeader(p)}
+          <main>
+            ${renderLoSSRHero(p)}
+            ${renderLoSSRArtGrid(sourceWorks)}
+            ${renderLoSSRAbout(p)}
+            ${renderLoSSRServices()}
+            ${renderLoSSRShop()}
+            ${renderLoSSRContact(p)}
+          </main>
+          ${renderLoSSRFooter(p)}
+        </div>`;
+      })()
 
     : vtpl === 'salon'
     ? `<div class="salon-page">
