@@ -121,6 +121,18 @@
     return { projects, works, skills, totalContent: projects + works };
   };
 
+  /**
+   * Compute total compiled resumes across users
+   * @param {Array<UserProfile>} users
+   * @returns {number}
+   */
+  Analytics.computeResumeTotals = function(users) {
+    if (!Array.isArray(users)) return 0;
+    return users.filter(u => {
+      return (u.resume && (u.resume.summary || u.resume.theme || (Array.isArray(u.experience) && u.experience.length)));
+    }).length;
+  };
+
   const Analytics = {};
 
   return Analytics;
