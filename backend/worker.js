@@ -8914,3 +8914,8 @@ export default {
    ARTISTIC LO THEME (Wix Artist Called Lo)
    ========================================== */
 .lo-page{--lo-bg:#f5f0eb;--lo-bg-warm:#eee7dd;--lo-bg-card:#ffffff;--lo-ink:#151515;--lo-ink-muted:#635d57;--lo-line:#ded7cd;--lo-line-dark:#222222;--lo-accent-peach:#ff7a59;--lo-accent-lilac:#d8b4e2;--lo-accent-sky:#93c5fd;--lo-accent-mint:#86efac;--lo-accent-butter:#fde047;--lo-shadow:0 12px 36px rgba(21,21,21,0.06);--lo-radius:14px;--lo-font-display:'Space Grotesk',system-ui,sans-serif;--lo-font-body:'Inter',system-ui,sans-serif;min-height:100vh;background:var(--lo-bg);color:var(--lo-ink);font-family:var(--lo-font-body);position:relative;-webkit-font-smoothing:antialiased}
+
+.lo-shell{width:min(1240px,calc(100% - 44px));margin-inline:auto}
+.lo-section{position:relative;padding:clamp(64px,8vw,112px) 0}
+.lo-kicker{font-size:0.75rem;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:var(--lo-ink-muted);margin-bottom:12px;display:inline-flex;align-items:center;gap:8px}
+.lo-kicker span{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--lo-accent-peach)}
