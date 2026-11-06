@@ -10773,3 +10773,14 @@ function renderLoCredentials() {
       </div>
     </div>`;
 }
+
+function renderLoFilters() {
+  return `
+    <div class="lo-filter-bar">
+      <button class="lo-filter-btn is-active" onclick="window.filterLoWorks('all', event)">All Works</button>
+      <button class="lo-filter-btn" onclick="window.filterLoWorks('art', event)">Art & Illustration</button>
+      <button class="lo-filter-btn" onclick="window.filterLoWorks('design', event)">Design & Branding</button>
+      <button class="lo-filter-btn" onclick="window.filterLoWorks('photo', event)">Photography</button>
+      <button class="lo-filter-btn" onclick="window.filterLoWorks('motion', event)">Motion & Video</button>
+    </div>`;
+}
