@@ -422,6 +422,19 @@
     });
   };
 
+  /**
+   * Filter users by portfolio track (tech vs visual)
+   * @param {Array<UserProfile>} users
+   * @param {string} track - 'all' | 'tech' | 'visual'
+   * @returns {Array<UserProfile>}
+   */
+  Analytics.filterUsersByTrack = function(users, track = 'all') {
+    if (!Array.isArray(users)) return [];
+    const trk = String(track || 'all').toLowerCase();
+    if (trk === 'all' || !trk) return users;
+    return users.filter(u => String(u.track || 'tech').toLowerCase() === trk);
+  };
+
   const Analytics = {};
 
   return Analytics;
