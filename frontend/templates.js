@@ -10975,3 +10975,7 @@ function renderLo(p) {
     });
   };
 }
+
+if (typeof window !== 'undefined') {
+  window.filterLoWorks = window.filterLoWorks || function() {};
+}
