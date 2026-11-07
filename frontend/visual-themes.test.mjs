@@ -501,3 +501,31 @@ test('Lo theme dynamically renders custom milestone stats', () => {
   assert.ok(capturedHtml.includes('Collectors'), 'must render third stat label');
   assert.ok(!capturedHtml.includes('12+ Years Creating'), 'must not render default first milestone');
 });
+
+test('Lo theme preserves aesthetic defaults when about fields are omitted', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const loFn = domMock.window.PortfoolioTemplates.lo;
+  loFn({
+    name: 'Classic Artist'
+  });
+
+  assert.ok(capturedHtml.includes('CERTIFIED ARTIST'), 'default badge preserved');
+  assert.ok(capturedHtml.includes('MIDWEST STUDIO'), 'default origin preserved');
+  assert.ok(capturedHtml.includes('Making things that spark joy, provoke curiosity, and refuse to be boring.'), 'default headline preserved');
+  assert.ok(capturedHtml.includes('12+'), 'default milestone num preserved');
+  assert.ok(capturedHtml.includes('Years Creating'), 'default milestone label preserved');
+});
