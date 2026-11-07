@@ -2557,6 +2557,8 @@ async function saveStudio() {
       showInstagram: showInsta, show_instagram: showInsta,
       about_headline: $('edAboutHeadline') ? $('edAboutHeadline').value.trim() : (activeUserProfile.about_headline || ''),
       about_story: $('edAboutStory') ? $('edAboutStory').value.trim() : (activeUserProfile.about_story || ''),
+      about_badge: $('edAboutBadge') ? $('edAboutBadge').value.trim() : (activeUserProfile.about_badge || ''),
+      about_origin: $('edAboutOrigin') ? $('edAboutOrigin').value.trim() : (activeUserProfile.about_origin || ''),
       template: (document.querySelector('input[name=edtpl]:checked') || {}).value || activeUserProfile.template || 'midnight',
       avatarUrl: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
       avatar_url: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
