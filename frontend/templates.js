@@ -10994,3 +10994,174 @@ if (typeof window !== 'undefined' && typeof window.addEventListener === 'functio
 }
 
 // Finalized 70-commit Artistic Lo theme release
+
+function renderMara(p) {
+  normTpl(p);
+  const app = document.getElementById('app') || document.body;
+  document.body.dataset.template = 'mara';
+  document.title = `${p.name || 'Mara Voss'} | ${p.title || 'Independent Art Director & Digital Designer'}`;
+
+  const fullName = String(p.name || 'Mara Voss').trim();
+  const nameParts = fullName.split(/\s+/);
+  const firstName = nameParts[0] || 'Mara';
+  const lastName = nameParts.slice(1).join(' ') || 'Voss';
+  const monogram = (firstName[0] || 'A') + (lastName[0] || 'D');
+  const role = p.title || 'INDEPENDENT ART DIRECTOR & DIGITAL DESIGNER';
+  const practice = p.tagline || p.bio || 'Brand identities, editorial systems, digital experiences.';
+  const story = p.about_story || p.bio || 'Rooted in clarity, driven by curiosity, Mara Voss builds identities and digital experiences that bring structure to complex ideas through bold typography and thoughtful visual systems.';
+
+  const avatar = p.avatarUrl || p.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80';
+
+  const defaultProjects = [
+    { id: '01', title: 'Gridline Studio', disc: 'Brand & Digital', year: '2026' },
+    { id: '02', title: 'Forma Journal', disc: 'Editorial & Web', year: '2026' },
+    { id: '03', title: 'Still Objects', disc: 'Brand Identity', year: '2025' },
+    { id: '04', title: 'Fieldnotes', disc: 'Art Direction', year: '2025' },
+    { id: '05', title: 'Orbit Interface', disc: 'Digital Design', year: '2024' },
+    { id: '06', title: 'Signal Studies', disc: 'Visual Exploration', year: '2024' }
+  ];
+
+  const rawWorks = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : []);
+  const displayProjects = rawWorks.length > 0
+    ? rawWorks.slice(0, 6).map((w, idx) => ({
+        id: String(idx + 1).padStart(2, '0'),
+        title: w.title || w.name || 'Untitled Project',
+        disc: w.category || w.discipline || 'Design & Direction',
+        year: w.year || '2026'
+      }))
+    : defaultProjects;
+
+  app.innerHTML = `
+    <div class="mara-page" id="top" style="background:#000;color:#fff;font-family:var(--mara-font-body,Arial,sans-serif);position:relative;min-height:100vh">
+      <header class="mara-hero" style="position:relative;height:900px;min-height:760px;overflow:hidden;padding:0 3%">
+        <div class="hero-bg-wrap" style="position:absolute;inset:0;z-index:0;overflow:hidden">
+          <div class="hero-portrait" style="position:absolute;inset:0;background-image:url('${avatar}');background-size:cover;background-position:center;filter:brightness(0.7) contrast(1.15)"></div>
+          <div class="hero-vignette" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0.5) 100%)"></div>
+        </div>
+        <nav class="mara-nav" style="position:absolute;top:28px;left:3%;right:3%;display:flex;align-items:center;justify-content:space-between;z-index:20">
+          <div class="nav-clock" style="display:flex;flex-direction:column;font-family:monospace">
+            <span style="font-size:11px;color:#949494;letter-spacing:0.08em">GMT+00:00 // LOCAL</span>
+            <span style="font-size:15px;color:#fff;font-weight:500">${new Date().toLocaleTimeString()}</span>
+          </div>
+          <div class="nav-menu-btn" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
+            <span style="display:flex;align-items:flex-end;gap:3px;height:14px">
+              <i style="width:3px;height:3px;background:#fff;display:inline-block"></i>
+              <i style="width:3px;height:7px;background:#fff;display:inline-block"></i>
+              <i style="width:3px;height:12px;background:#fff;display:inline-block"></i>
+              <i style="width:3px;height:4px;background:#fff;display:inline-block"></i>
+              <i style="width:3px;height:8px;background:#fff;display:inline-block"></i>
+              <i style="width:3px;height:6px;background:#fff;display:inline-block"></i>
+              <i style="width:3px;height:3px;background:#fff;display:inline-block"></i>
+            </span>
+            <span style="font-size:13px;letter-spacing:0.06em">MENU</span>
+          </div>
+          <a href="#contact" class="mara-pill" style="min-height:46px;padding:12px 22px;font-size:16px;background:#fff;color:#000;border-radius:999px;font-weight:500">Let’s talk ↗</a>
+        </nav>
+        <div class="hero-title-wrap" style="position:absolute;top:147px;left:3%;right:3%;z-index:2">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;width:100%;font-size:clamp(42px,16vw,200px);line-height:0.75;letter-spacing:-0.06em;font-weight:500;white-space:nowrap">
+            <span>${tplEsc(monogram)}</span>
+            <span>${tplEsc(firstName)}<span style="font-weight:250">${tplEsc(lastName)}</span><sup style="font-size:0.18em;margin-left:6px;color:#aaa">[01]</sup></span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:35px;font-size:13px;letter-spacing:0.08em;color:#b8b8b8;text-transform:uppercase">
+            <span>${tplEsc(role)}</span>
+            <span>[ PORTFOLIO // SELECTED WORK ]</span>
+          </div>
+        </div>
+        <div style="position:absolute;bottom:40px;left:3%;max-width:420px;font-size:18px;line-height:1.5;z-index:2">
+          <p>• ${tplEsc(practice)}</p>
+          <p style="color:#949494;margin-top:4px">• Independent practice. Thoughtful systems. Distinctive outcomes.</p>
+        </div>
+        <a href="#work" class="mara-pill" style="position:absolute;bottom:34px;right:3%;background:#fff;color:#000;border-radius:999px;padding:16px 20px;font-size:18px;z-index:2">Explore work ↘</a>
+      </header>
+
+      <section id="about" style="min-height:700px;padding:60px 3%;border-top:1px solid #222">
+        <div style="font-size:18px;color:#949494;margin-bottom:30px">// Design Approach</div>
+        <h2 style="font-size:clamp(28px,6vw,84px);line-height:1.05;letter-spacing:-0.04em;max-width:1200px;margin-bottom:60px">
+          ${tplEsc(story)}
+        </h2>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;border-top:1px solid #222;padding-top:40px">
+          <p style="max-width:480px;font-size:18px;color:#b8b8b8;line-height:1.6">I connect strategy and expression through brand identities, editorial systems, and digital experiences designed to work as a whole.</p>
+          <div>
+            <span style="font-size:12px;letter-spacing:0.1em;color:#949494;display:block;margin-bottom:12px">DISCIPLINES</span>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <span style="border:1px solid #777;border-radius:99px;padding:8px 14px;font-size:14px;color:#aaa">Art Direction</span>
+              <span style="border:1px solid #777;border-radius:99px;padding:8px 14px;font-size:14px;color:#aaa">Brand Identity</span>
+              <span style="border:1px solid #777;border-radius:99px;padding:8px 14px;font-size:14px;color:#aaa">Digital Design</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" style="min-height:760px;padding:60px 4% 80px;background:linear-gradient(180deg,#000 0%,#000 48%,#ea4f16 78%,#f6af60 100%)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;color:#949494;font-size:14px">
+          <span>// Selected Work</span>
+          <span>SELECTED PROJECTS / 2024–2026</span>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          ${displayProjects.map(pr => `
+            <div style="min-height:72px;padding:16px 20px;background:rgba(0,0,0,0.73);border-bottom:1px solid rgba(255,255,255,0.12);display:grid;grid-template-columns:42px minmax(0,1fr) 210px 70px 40px;align-items:center;cursor:pointer">
+              <span style="color:#949494;font-size:14px">${pr.id}</span>
+              <span style="font-size:24px;font-weight:500;color:#fff">${tplEsc(pr.title)}</span>
+              <span style="color:#aaa;font-size:14px">${tplEsc(pr.disc)}</span>
+              <span style="color:#949494;font-size:14px">${pr.year}</span>
+              <span style="color:#fff;text-align:right">↗</span>
+            </div>
+          `).join('')}
+        </div>
+        <div style="margin-top:85px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
+          <span style="font-weight:700;font-size:16px;letter-spacing:0.1em;color:#1a1512">HAVE A PROJECT IN MIND?</span>
+          <a href="#contact" class="mara-pill" style="background:#fff;color:#000;border-radius:999px;padding:16px 20px;font-size:18px">Start a conversation ↗</a>
+        </div>
+      </section>
+
+      <section id="services" style="min-height:600px;padding:60px 3%;border-top:1px solid #222">
+        <h2 style="font-size:clamp(30px,6vw,84px);line-height:1;margin-bottom:50px">
+          <span>THOUGHTFUL SYSTEMS.</span><br>
+          <span style="color:#ff630f">DISTINCTIVE OUTCOMES.</span>
+        </h2>
+        <div style="border-top:1px solid #333">
+          <div style="padding:24px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:42px 1fr 1fr 120px;align-items:center;gap:16px">
+            <span style="color:#949494">01</span>
+            <span style="font-size:24px;font-weight:500">Art Direction</span>
+            <span style="color:#b8b8b8">Concept development / Visual language / Creative direction</span>
+            <span style="background:#ff630f;color:#000;border-radius:99px;padding:6px 14px;font-weight:600;font-size:13px;text-align:center">Scope</span>
+          </div>
+          <div style="padding:24px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:42px 1fr 1fr 120px;align-items:center;gap:16px">
+            <span style="color:#949494">02</span>
+            <span style="font-size:24px;font-weight:500">Brand Identity</span>
+            <span style="color:#b8b8b8">Strategy translation / Identity systems / Guidelines</span>
+            <span style="background:#ff630f;color:#000;border-radius:999px;padding:6px 14px;font-weight:600;font-size:13px;text-align:center">Scope</span>
+          </div>
+          <div style="padding:24px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:42px 1fr 1fr 120px;align-items:center;gap:16px">
+            <span style="color:#949494">03</span>
+            <span style="font-size:24px;font-weight:500">Digital Design</span>
+            <span style="color:#b8b8b8">Website concepts / Interface design / Design systems</span>
+            <span style="background:#ff630f;color:#000;border-radius:999px;padding:6px 14px;font-weight:600;font-size:13px;text-align:center">Scope</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" style="padding:80px 3% 40px;border-top:1px solid #222">
+        <div style="font-size:18px;color:#949494;margin-bottom:20px">// Contact</div>
+        <h2 style="font-size:clamp(38px,8vw,110px);line-height:0.95;margin-bottom:40px">
+          <span>LET’S MAKE</span><br>
+          <span style="color:#ff630f">SOMETHING MATTER.</span>
+        </h2>
+        <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:40px;margin-bottom:60px">
+          <p style="font-size:20px;max-width:480px;line-height:1.5">Have a brand, publication, or digital experience in mind? Tell me what you’re building and where you want to take it.</p>
+          <div>
+            ${p.email ? `
+              <a href="mailto:${tplEsc(p.email)}" class="mara-pill" style="background:#ff630f;color:#000;font-weight:600;border-radius:999px;padding:16px 24px;font-size:18px">${tplEsc(p.email)} ↗</a>
+            ` : `
+              <p style="color:#aaa;font-size:16px">Demo portfolio — contact details not configured.</p>
+            `}
+          </div>
+        </div>
+        <div style="border-top:1px solid #222;padding-top:30px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#949494">
+          <span>© ${new Date().getFullYear()} ${tplEsc(fullName)}</span>
+          <a href="#top" style="color:#fff">Back to top ↑</a>
+        </div>
+      </section>
+    </div>
+  `;
+}
