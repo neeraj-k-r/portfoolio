@@ -1708,6 +1708,8 @@ function pageGallery(p, wIdx, url) {
           displayCards.push(fallbackCards[displayCards.length]);
         }
         const bio = p.bio || p.tagline || 'Blending design, art, and technology to build meaningful digital experiences.';
+        const analogHeadline = p.about_headline || (p.about && p.about.headline) || '';
+        const analogStory = p.about_story || (p.about && p.about.story) || bio;
         const skills = (Array.isArray(p.skills) && p.skills.length) ? p.skills : ['Generative Art', 'Creative Coding', 'Interaction Design', 'Media & Motion', 'AI × Creativity'];
         const projectCount = (p.projects && p.projects.length) ? `${p.projects.length}+` : (works.length ? `${works.length}+` : '25+');
         const domainsCount = `${Math.min(skills.length, 12)}+`;
@@ -1966,7 +1968,8 @@ function pageGallery(p, wIdx, url) {
                 <button class="analog-modal-close" onclick="window.closeAnalogAboutModal()" aria-label="Close modal">✕</button>
               </div>
               <div class="analog-modal-body">
-                <p class="analog-modal-bio">${esc(bio)}</p>
+                ${analogHeadline ? `<h4 style="font-size:1.15rem;margin-bottom:8px;color:#fff">${esc(analogHeadline)}</h4>` : ''}
+                <p class="analog-modal-bio">${esc(analogStory)}</p>
                 <div class="analog-modal-meta-grid">
                   <div class="analog-modal-meta-item">
                     <span class="analog-modal-meta-label">Location</span>
