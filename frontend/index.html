@@ -410,6 +410,14 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         </span>
         <span class="lx-theme-name">Lo <em>Multidisciplinary artist & maker</em></span>
       </button>
+      <button class="lx-theme-card" data-track="visual" data-theme="mara" data-name="Mara Voss" aria-label="Preview Mara Voss theme">
+        <span class="lx-tp lx-tp-mara">
+          <span class="lx-tp-mara-header"><span>GMT+00 // LOCAL</span><span>MENU</span></span>
+          <div class="lx-tp-mara-hero"><span class="lx-tp-mara-ad">AD</span><span class="lx-tp-mara-name">Mara <span>Voss</span></span></div>
+          <span class="lx-tp-mara-pill">Let’s talk ↗</span>
+        </span>
+        <span class="lx-theme-name">Mara <em>Art director & digital designer</em></span>
+      </button>
     </div>
   </section>
 
@@ -685,6 +693,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <button class="footer-theme-btn" data-theme="mythos">Mythos</button>
           <button class="footer-theme-btn" data-theme="suki">Suki</button>
           <button class="footer-theme-btn" data-theme="lo">Lo</button>
+          <button class="footer-theme-btn" data-theme="mara">Mara</button>
         </div>
       </div>
     </div>
@@ -2037,11 +2046,11 @@ async function paintFeaturedPortfolios() {
     </div>`).join('');
 }
 function paintTrackTabs(profile) {
-  const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'].includes(String((profile && profile.template) || '').toLowerCase());
+  const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(String((profile && profile.template) || '').toLowerCase());
   document.body.classList.toggle('visual-user', visual);
   document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
     const v = (c.querySelector('input') || {}).value || '';
-    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'].includes(v);
+    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(v);
     c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
   });
   if (visual) { paintWorks(); }
@@ -2472,12 +2481,12 @@ if ($('builderForm')) {
     if ($('inTag')) $('inTag').placeholder = visual ? 'Painting stories in color and form. Open for commissions.' : 'Building web apps & AI solutions that scale.';
     document.querySelectorAll('#tplGrid .tpl-card').forEach(c => {
       const v = (c.querySelector('input') || {}).value || '';
-      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'].includes(v);
+      const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(v);
       c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
     });
     const curChecked = document.querySelector('#tplGrid input[name=tpl]:checked');
     const curVal = curChecked ? curChecked.value : '';
-    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'].includes(curVal);
+    const curIsVisual = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(curVal);
     let wantTpl = curVal;
     if (visual && !curIsVisual) wantTpl = 'gallery';
     else if (!visual && curIsVisual) wantTpl = 'midnight';

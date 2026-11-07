@@ -51,4 +51,14 @@ describe('Theme Preview Features & Mockups', () => {
     assert(indexHtml.includes('tpl-preview-eye'), 'paintThemeThumbs must inject .tpl-preview-eye button');
     assert(styleCss.includes('.tpl-preview-eye'), 'style.css must style .tpl-preview-eye');
   });
+
+  it('Mara theme has complete visibility across showcase, modal, studio picker, and mini mockups', () => {
+    assert(styleCss.includes('.lx-tp-mara'), 'style.css must have .lx-tp-mara');
+    assert(templatesCss.includes('.lx-tp-mara'), 'templates.css must have .lx-tp-mara');
+    assert(appJs.includes('mara:'), 'app.js must define modalPresets for mara');
+    assert(styleCss.includes('.lx-modal-body[data-theme="mara"]'), 'style.css must have .lx-modal-body for mara');
+    assert(indexHtml.includes('class="lx-theme-card" data-track="visual" data-theme="mara"'), 'index.html showcase must include mara lx-theme-card');
+    assert(indexHtml.includes('class="footer-theme-btn" data-theme="mara"'), 'index.html themeModal must include mara footer button');
+    assert(indexHtml.includes('value="edtpl" value="mara"') || indexHtml.includes('name="edtpl" value="mara"'), 'Studio edtpl must have mara');
+  });
 });

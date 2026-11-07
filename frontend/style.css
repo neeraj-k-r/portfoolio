@@ -3675,6 +3675,86 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   aspect-ratio: 4/3;
 }
 
+/* Mini preview mockup for Mara */
+.lx-tp-mara {
+  background: #000000;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  border: 1px solid #222222;
+}
+.lx-tp-mara-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 7px;
+  letter-spacing: 0.08em;
+  color: #888888;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 3px;
+  margin-bottom: 4px;
+}
+.lx-tp-mara-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 4px;
+  margin-bottom: 6px;
+}
+.lx-tp-mara-ad {
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: #ffffff;
+}
+.lx-tp-mara-name {
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+}
+.lx-tp-mara-name span {
+  font-weight: 700;
+}
+.lx-tp-mara-pill {
+  display: inline-block;
+  background: #ffffff;
+  color: #000000;
+  border-radius: 999px;
+  font-size: 6.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.lx-modal-body[data-theme="mara"] {
+  background: #000000;
+  color: #ffffff;
+  border-color: #222222;
+}
+.lx-modal-body[data-theme="mara"] .preview-name {
+  color: #ffffff;
+}
+.lx-modal-body[data-theme="mara"] .preview-title {
+  color: #ff630f;
+}
+.lx-modal-body[data-theme="mara"] .preview-desc {
+  color: #949494;
+}
+.lx-modal-body[data-theme="mara"] .lx-win-line {
+  color: #ffffff;
+  background: #111111;
+  border-color: #222222;
+}
+
+
 /* ==========================================
    ARTISTIC LO THEME (Wix Artist Called Lo)
    ========================================== */
