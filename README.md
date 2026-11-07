@@ -222,3 +222,15 @@ Portfoolio includes an **About & Story** studio dashboard tab dedicated to visua
 - **Certified Stamp Badge & Studio Origin**: Customizable studio record tags (e.g. `CERTIFIED ARTIST`, `MIDWEST STUDIO`, `KYOTO STUDIO`).
 - **Milestone Counters**: Up to 4 custom stats (e.g. `12+ Years Creating`, `80+ Commissions`) rendered seamlessly across themes like **Lo**, **Suki**, **Analog**, and **Mythos**.
 - **Aesthetic Fallbacks**: Full backward compatibility — profiles without custom entries retain default artistic copy without breaking.
+
+### Mara Voss — Art Director & Digital Designer Theme (`mara`)
+- **Aesthetic**: Cinematic high-contrast editorial portfolio with pure black background, warm orange accents (`#ff630f`), and oversized display typography.
+- **Hero Composition**: 16:9 dark photographic portrait background, oversized AD / MaraVoss typography, live local visitor timezone clock, and WebGL ripple & warm glow shader.
+- **Sections**:
+  - `#top`: Hero with 10-letter animated entrance sequence and face-hover zoom.
+  - `#about`: Design Approach 5-line statement with trailing geometric SVG.
+  - `#featured`: 3D perspective Gridline Studio card with 100px custom cursor.
+  - `#work`: 6-row selected work index with black-to-orange gradient and interactive native `<dialog>` case studies.
+  - `#services`: Capabilities disclosures with accessible scope summaries and deliverables.
+  - `#contact`: High-impact closing statement and clipboard-aware contact actions.
+- **Standalone Location**: Available as a standalone file at `themes/mara/index.html` opening directly in any browser with zero dependencies.
