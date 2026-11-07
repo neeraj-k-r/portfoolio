@@ -928,8 +928,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <button class="dash-tab-btn active" onclick="switchUserTab('info')"><i class="fa-solid fa-user-pen"></i> Profile Info</button>
         <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Theme & Skills</button>
         <button class="dash-tab-btn" onclick="switchUserTab('projects')"><i class="fa-solid fa-code"></i> Projects & GitHub</button>
-        <button class="dash-tab-btn" onclick="switchUserTab('services')"><i class="fa-solid fa-briefcase"></i> Services</button>
-        <button class="dash-tab-btn" onclick="switchUserTab('resume')"><i class="fa-solid fa-file-lines"></i> Resume & ATS Score</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('resume')"><i class="fa-solid fa-briefcase"></i> Experience & Resume</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('services')"><i class="fa-solid fa-handshake"></i> Services</button>
         <button class="dash-tab-btn" onclick="switchUserTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Site</button>
         <button class="dash-tab-btn" onclick="switchUserTab('proof')"><i class="fa-solid fa-award"></i> Proof of Work</button>
         <button class="dash-tab-btn" onclick="switchUserTab('featured')"><i class="fa-solid fa-star"></i> Featured</button>
@@ -941,7 +941,8 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <button class="dash-tab-btn active" onclick="switchUserTab('info')"><i class="fa-solid fa-user-pen"></i> Profile Info</button>
         <button class="dash-tab-btn" id="tabBtnWorks" onclick="switchUserTab('works')"><i class="fa-solid fa-images"></i> Works</button>
         <button class="dash-tab-btn" id="tabBtnAbout" onclick="switchUserTab('about')"><i class="fa-solid fa-book-open"></i> About &amp; Story</button>
-        <button class="dash-tab-btn" onclick="switchUserTab('services')"><i class="fa-solid fa-briefcase"></i> Services</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('resume')"><i class="fa-solid fa-briefcase"></i> Experience & Resume</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('services')"><i class="fa-solid fa-handshake"></i> Services</button>
         <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Gallery Themes</button>
         <button class="dash-tab-btn" onclick="switchUserTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Site</button>
         <button class="dash-tab-btn" onclick="switchUserTab('featured')"><i class="fa-solid fa-star"></i> Featured</button>
@@ -985,6 +986,14 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div><label class="flabel">Instagram Handle / URL</label><input id="edInsta" placeholder="@yourname"></div>
           <div><label class="flabel">Instagram visibility</label><label class="gh-repo" style="padding:8px 12px"><input type="checkbox" id="edShowInsta" checked> <span><b>Display Instagram on my portfolio</b><br><small>Uncheck to hide it (link still saved)</small></span></label></div>
           <div class="full"><label class="flabel">Location</label><input id="edLoc"></div>
+        </div>
+
+        <div style="margin-top:16px;padding:12px 16px;background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.28);border-radius:12px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+          <div>
+            <strong style="color:#fff;font-size:13.5px"><i class="fa-solid fa-briefcase" style="color:var(--cyan,#22d3ee)"></i> Add Work Experience &amp; Career Roles</strong>
+            <p style="margin:3px 0 0;font-size:12px;color:var(--muted)">Looking to add your job history, companies, and work timeline? Manage them in Experience &amp; Resume.</p>
+          </div>
+          <button type="button" class="btn btn-ghost btn-sm" onclick="switchUserTab('resume');const el=$('secExperience');if(el)el.scrollIntoView({behavior:'smooth'});"><i class="fa-solid fa-arrow-right"></i> Go to Experience &amp; Resume →</button>
         </div>
       </div>
 
@@ -1224,10 +1233,10 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <!-- User Studio Tab: Resume builder & ATS Score Scanner -->
       <div id="tabResume" class="card" style="display:none">
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:8px">
-          <h3 style="margin:0">📄 Resume & ATS Score Checker</h3>
+          <h3 style="margin:0"><i class="fa-solid fa-briefcase" style="color:var(--cyan,#22d3ee)"></i> Work Experience, Education &amp; ATS Resume</h3>
           <span style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:3px 8px;border-radius:100px;background:rgba(34,211,238,.12);color:var(--cyan,#22d3ee);border:1px solid rgba(34,211,238,.3)"><i class="fa-solid fa-shield-halved"></i> Live ATS Scanner</span>
         </div>
-        <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Auto-built recruiter-ready resume + real-time <b>ATS Score Scanner &amp; Skills Gap Checker</b>. Add summary, experience &amp; education, choose a theme, test your ATS score, and share your live resume link.</p>
+        <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">Manage your work history, company roles, and education here. These entries automatically power the <b>Experience timeline on your portfolio</b> and your <b>recruiter ATS resume</b>.</p>
         <div id="rsAtsScore" style="margin:16px 0"></div>
         <div id="rsSkillsGap" style="margin:16px 0"></div>
         <div style="background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.3);border-radius:12px;padding:12px 14px;margin-bottom:14px">
@@ -1261,17 +1270,24 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="gh-repo" style="padding:8px 12px"><input type="radio" name="rstheme" value="academic"> <span><b>🎓 Academic</b> <small>serif • research</small></span></label>
             </div>
           </div>
-          <div class="full"><label class="flabel">Experience</label>
+          <div class="full" id="secExperience" style="margin-top:10px;padding-top:16px;border-top:1px solid var(--stroke,#e2e8f0)">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:6px">
+              <label class="flabel" style="margin:0;font-size:14px;color:#fff;display:flex;align-items:center;gap:8px">
+                <i class="fa-solid fa-briefcase" style="color:var(--cyan,#22d3ee)"></i> Work Experience &amp; Career Roles
+              </label>
+              <span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:100px;background:rgba(34,211,238,.12);color:var(--cyan,#22d3ee);border:1px solid rgba(34,211,238,.3)">Powers both your Portfolio &amp; Resume</span>
+            </div>
+            <p style="color:var(--muted);font-size:12.5px;margin-bottom:10px">Add your past and current roles, companies, dates, and achievements. These entries automatically populate the Experience sections across your portfolio themes and resume.</p>
             <div id="rsExpList" style="display:grid;gap:8px;margin-bottom:8px"></div>
             <div class="form-grid">
-              <div><input id="rsExpRole" placeholder="Role — e.g. Frontend Intern"></div>
-              <div><input id="rsExpCompany" placeholder="Company — e.g. Acme"></div>
+              <div><input id="rsExpRole" placeholder="Role — e.g. Senior Software Engineer"></div>
+              <div><input id="rsExpCompany" placeholder="Company — e.g. Acme Corp"></div>
               <div><input id="rsExpStart" placeholder="Start — e.g. Jun 2024"></div>
-              <div><input id="rsExpEnd" placeholder="End — e.g. Dec 2024"></div>
-              <div class="full"><textarea id="rsExpDesc" rows="2" placeholder="One achievement per line"></textarea></div>
+              <div><input id="rsExpEnd" placeholder="End — e.g. Present (or blank)"></div>
+              <div class="full"><textarea id="rsExpDesc" rows="2" placeholder="Key achievements or responsibilities (one per line, e.g. 'Built microservices scaling to 100k users')"></textarea></div>
             </div>
             <div style="display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap">
-              <label class="mono" style="font-size:12.5px"><input type="checkbox" id="rsExpCurrent" style="width:auto"> Currently here</label>
+              <label class="mono" style="font-size:12.5px"><input type="checkbox" id="rsExpCurrent" style="width:auto"> Currently working here</label>
               <button type="button" class="btn btn-ghost btn-sm" id="rsExpAdd"><i class="fa-solid fa-plus"></i> Add role</button>
             </div>
           </div>
