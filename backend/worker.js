@@ -2432,23 +2432,30 @@ function pageGallery(p, wIdx, url) {
                   <h2>${p.about_headline || (p.about && p.about.headline) ? esc(p.about_headline || (p.about && p.about.headline)) : 'Editing is more than <span>cutting clips.</span>'}</h2>
                   <p>${sukiAboutStory}</p>
                 </div>
-                <div class="suki-stats">
-                  <article class="suki-stat suki-glass">
-                    <strong>${worksCount}<span>+</span></strong>
-                    <p>Projects completed</p>
-                  </article>
-                  <article class="suki-stat suki-glass">
-                    <strong>10<span>+</span></strong>
-                    <p>Client collaborations</p>
-                  </article>
-                  <article class="suki-stat suki-glass">
-                    <strong>3<span>+</span></strong>
-                    <p>Years creating</p>
-                  </article>
-                  <article class="suki-stat suki-glass">
-                    <strong>100<span>%</span></strong>
-                    <p>Attention to detail</p>
-                  </article>
+                                <div class="suki-stats">
+                  ${(Array.isArray(p.about_stats) && p.about_stats.length > 0)
+                    ? p.about_stats.slice(0, 4).map(st => `
+                      <article class="suki-stat suki-glass">
+                        <strong>${esc(st.num || '')}</strong>
+                        <p>${esc(st.label || '')}</p>
+                      </article>`).join('')
+                    : `
+                      <article class="suki-stat suki-glass">
+                        <strong>${worksCount}<span>+</span></strong>
+                        <p>Projects completed</p>
+                      </article>
+                      <article class="suki-stat suki-glass">
+                        <strong>10<span>+</span></strong>
+                        <p>Client collaborations</p>
+                      </article>
+                      <article class="suki-stat suki-glass">
+                        <strong>3<span>+</span></strong>
+                        <p>Years creating</p>
+                      </article>
+                      <article class="suki-stat suki-glass">
+                        <strong>100<span>%</span></strong>
+                        <p>Attention to detail</p>
+                      </article>`}
                 </div>
               </div>
             </section>
