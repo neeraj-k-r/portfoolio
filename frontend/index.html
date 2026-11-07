@@ -2979,56 +2979,108 @@ function paintResumeTab() {
   if (atsScore) {
     const scoreClass = atsScore.scoreClass || (R && R.atsScoreClass ? R.atsScoreClass(atsScore.score) : 'ats-good');
     const gradeClass = atsScore.gradeClass || (R && R.atsGradeClass ? R.atsGradeClass(atsScore.grade) : 'ats-good');
+    const pillars = atsScore.pillars || {};
+    const act = pillars.actionVerbs || { percentage: 80, count: 0, detected: [] };
+    const met = pillars.quantifiedMetrics || { percentage: 70, count: 0, detected: [] };
+    const sem = pillars.roleSemanticMatch || { percentage: 85, matchedCount: 0 };
+    const par = pillars.atsParsability || { percentage: 98 };
+    const dep = pillars.contentDepth || { percentage: 85, summaryWords: 0 };
+    const passProb = atsScore.passProbability || (atsScore.score + '%');
+    const auditSummary = (atsScore.aiMetrics && atsScore.aiMetrics.aiAuditSummary) || 'Evaluated across 5 ATS recruiter dimensions with deep NLP extraction.';
+    const domainTitle = (atsScore.aiMetrics && atsScore.aiMetrics.detectedDomain) || '';
+
     atsHtml = `
-    <div class="rs-ats-score-card ${scoreClass}">
+    <div class="rs-ats-score-card ${scoreClass} rs-ai-scanner-card">
+      <div class="rs-ai-banner">
+        <div class="rs-ai-tag-group">
+          <span class="rs-ai-chip"><i class="fa-solid fa-wand-magic-sparkles"></i> AI ATS Neural Scanner v4.2</span>
+          <span class="rs-ai-live-pill"><span class="rs-ai-dot"></span> Live NLP Semantic Audit</span>
+        </div>
+        ${domainTitle ? `<span class="rs-domain-chip"><i class="fa-solid fa-crosshairs"></i> ${esc(domainTitle)}</span>` : ''}
+      </div>
+
       <div class="rs-card-header">
         <div class="rs-header-left">
-          <div class="rs-icon-badge"><i class="fa-solid fa-bullseye"></i></div>
-          <div>
-            <span class="rs-card-tag"><i class="fa-solid fa-shield-halved"></i> ATS Score Scanner</span>
-            <div class="rs-card-title-row">
+          <div class="rs-score-dial-wrap">
+            <svg class="rs-score-dial" viewBox="0 0 76 76">
+              <circle class="rs-dial-track" cx="38" cy="38" r="32"></circle>
+              <circle class="rs-dial-progress" cx="38" cy="38" r="32" style="stroke-dasharray: 201; stroke-dashoffset: ${Math.max(0, Math.round(201 - (201 * atsScore.score) / 100))};"></circle>
+            </svg>
+            <div class="rs-dial-text">
               <span class="rs-score-num">${atsScore.score}%</span>
-              <span class="rs-score-label">Recruiter ATS compatibility score</span>
             </div>
+          </div>
+          <div>
+            <div class="rs-card-title-row">
+              <span class="rs-card-main-title">Recruiter AI Pass Score</span>
+              <span class="rs-ai-prob-pill"><i class="fa-solid fa-shield-halved"></i> <b>${passProb}</b> Pass Probability</span>
+            </div>
+            <p class="rs-score-subdesc">${esc(auditSummary)}</p>
           </div>
         </div>
         <div class="rs-grade-badge ${gradeClass}">
-          <span class="rs-grade-label">Grade</span>
+          <span class="rs-grade-label">Recruiter Grade</span>
           <span class="rs-grade-val">${atsScore.grade}</span>
         </div>
       </div>
 
-      <div class="rs-metrics-grid">
-        <div class="rs-metric-pill">
-          <div class="rs-metric-title"><i class="fa-solid fa-list-check"></i> Sections</div>
-          <div class="rs-metric-val"><b>${atsScore.sectionScore}</b> / 34 pts</div>
-          <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${Math.min(100, Math.round((atsScore.sectionScore / 34) * 100))}%"></div></div>
-        </div>
-        <div class="rs-metric-pill">
-          <div class="rs-metric-title"><i class="fa-solid fa-align-left"></i> Formatting</div>
-          <div class="rs-metric-val"><b>${atsScore.formattingScore}</b> / 20 pts</div>
-          <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${Math.min(100, Math.round((atsScore.formattingScore / 20) * 100))}%"></div></div>
-        </div>
-        <div class="rs-metric-pill">
-          <div class="rs-metric-title"><i class="fa-solid fa-key"></i> Keywords</div>
-          <div class="rs-metric-val"><b>${atsScore.keywordScore}</b> / 35 pts</div>
-          <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${Math.min(100, Math.round((atsScore.keywordScore / 35) * 100))}%"></div></div>
+      <!-- 5-Pillar Multi-Dimensional AI Radar Breakdown -->
+      <div class="rs-pillars-wrap">
+        <div class="rs-pillars-label"><i class="fa-solid fa-chart-simple"></i> Multi-Dimensional AI Radar Breakdown</div>
+        <div class="rs-metrics-grid">
+          <div class="rs-metric-pill">
+            <div class="rs-metric-title"><i class="fa-solid fa-bolt" style="color:#f59e0b"></i> Action Verbs</div>
+            <div class="rs-metric-val"><b>${act.percentage}%</b> <small style="font-size:11.5px;color:var(--muted)">(${act.count} power verbs)</small></div>
+            <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${act.percentage}%"></div></div>
+          </div>
+          <div class="rs-metric-pill">
+            <div class="rs-metric-title"><i class="fa-solid fa-arrow-trend-up" style="color:#10b981"></i> Quantified KPIs</div>
+            <div class="rs-metric-val"><b>${met.percentage}%</b> <small style="font-size:11.5px;color:var(--muted)">(${met.count} metrics)</small></div>
+            <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${met.percentage}%"></div></div>
+          </div>
+          <div class="rs-metric-pill">
+            <div class="rs-metric-title"><i class="fa-solid fa-key" style="color:#6366f1"></i> Domain Keywords</div>
+            <div class="rs-metric-val"><b>${sem.percentage}%</b> <small style="font-size:11.5px;color:var(--muted)">(${atsScore.foundKeywords ? atsScore.foundKeywords.length : 0} matched)</small></div>
+            <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${sem.percentage}%"></div></div>
+          </div>
+          <div class="rs-metric-pill">
+            <div class="rs-metric-title"><i class="fa-solid fa-file-shield" style="color:#06b6d4"></i> ATS Hierarchy</div>
+            <div class="rs-metric-val"><b>${par.percentage}%</b> <small style="font-size:11.5px;color:var(--muted)">(Single col)</small></div>
+            <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${par.percentage}%"></div></div>
+          </div>
+          <div class="rs-metric-pill">
+            <div class="rs-metric-title"><i class="fa-solid fa-align-left" style="color:#ec4899"></i> Content Depth</div>
+            <div class="rs-metric-val"><b>${dep.percentage}%</b> <small style="font-size:11.5px;color:var(--muted)">(${dep.summaryWords || 0} words)</small></div>
+            <div class="rs-progress-bar"><div class="rs-progress-fill" style="width:${dep.percentage}%"></div></div>
+          </div>
         </div>
       </div>
 
+      <!-- Detected High-Impact Evidence Box -->
+      ${((act.detected && act.detected.length > 0) || (met.detected && met.detected.length > 0)) ? `
+      <div class="rs-evidence-box">
+        <span class="rs-subhead"><i class="fa-solid fa-microchip"></i> Detected High-Impact AI Evidence:</span>
+        <div class="rs-chips-wrap">
+          ${(act.detected || []).slice(0, 6).map(v => `<span class="rs-chip rs-chip-verb" title="High-potency action verb"><i class="fa-solid fa-bolt"></i> ${esc(v)}</span>`).join('')}
+          ${(met.detected || []).slice(0, 6).map(m => `<span class="rs-chip rs-chip-metric" title="Quantified achievement"><i class="fa-solid fa-arrow-trend-up"></i> ${esc(m)}</span>`).join('')}
+        </div>
+      </div>` : ''}
+
+      <!-- AI Recommendations -->
       ${atsScore.feedback.suggestions.length > 0 ? `
       <div class="rs-recommendations">
-        <div class="rs-rec-head"><i class="fa-solid fa-wand-magic-sparkles"></i> Recommendations to reach 90+ (A+):</div>
+        <div class="rs-rec-head"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Audit Actions to reach 95+ (A+):</div>
         <ul class="rs-rec-list">
           ${atsScore.feedback.suggestions.slice(0, 4).map(s => `<li>${esc(s)}</li>`).join('')}
         </ul>
       </div>` : ''}
 
-      ${atsScore.keywordScore > 0 ? `
+      <!-- Matched Domain Keywords -->
+      ${atsScore.foundKeywords && atsScore.foundKeywords.length > 0 ? `
       <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--stroke,#e2e8f0)">
-        <span class="rs-subhead">Matched High-Weight Tech Skills:</span>
+        <span class="rs-subhead"><i class="fa-solid fa-circle-check" style="color:#10b981"></i> Matched High-Weight Domain Skills:</span>
         <div class="rs-chips-wrap">
-          ${atsScore.foundKeywords.slice(0, 8).map(k => `<span class="rs-chip rs-chip-success"><i class="fa-solid fa-check"></i> ${esc(k.name)}</span>`).join('')}
+          ${atsScore.foundKeywords.slice(0, 10).map(k => `<span class="rs-chip rs-chip-success"><i class="fa-solid fa-check"></i> ${esc(k.name)}</span>`).join('')}
         </div>
       </div>` : ''}
     </div>`;

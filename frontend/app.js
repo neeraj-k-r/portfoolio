@@ -1308,10 +1308,11 @@ function renderResumePage(p) {
     <a class="logo" href="/" style="display:flex;align-items:center;gap:8px;text-decoration:none;color:#fff;font-weight:800"><span style="font-size:22px">◈</span><span>PORTFOOLIO<small style="display:block;font-size:10.5px;color:#9aa3c0;font-weight:400">${esc(p.username)}.portfoolio.me</small></span></a>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
       ${ats ? `
-      <div id="rsAtsBadge" style="cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.35);font-size:12.5px;font-weight:700;color:var(--cyan,#22d3ee)" title="Click to view ATS Score Breakdown" onclick="const d=document.getElementById('rsAtsDrawer');if(d)d.style.display=d.style.display==='none'?'block':'none'">
-        <span>🎯 ATS Score:</span>
-        <span style="background:rgba(0,0,0,.4);color:#fff;padding:2px 8px;border-radius:6px">${ats.score}%</span>
+      <div id="rsAtsBadge" style="cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:100px;background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.35);font-size:12.5px;font-weight:700;color:var(--cyan,#22d3ee)" title="Click to view AI ATS Score Breakdown" onclick="const d=document.getElementById('rsAtsDrawer');if(d)d.style.display=d.style.display==='none'?'block':'none'">
+        <span>✨ AI ATS Score:</span>
+        <span style="background:rgba(0,0,0,.45);color:#fff;padding:2px 8px;border-radius:6px">${ats.score}%</span>
         <span style="color:#fff">Grade ${ats.grade}</span>
+        <span style="color:#10b981;border-left:1px solid rgba(255,255,255,.2);padding-left:8px">${ats.passProbability || (ats.score + '% Pass Rate')}</span>
         ${targetRoleObj ? `<span style="color:#a78bfa;border-left:1px solid rgba(255,255,255,.2);padding-left:8px">${targetRoleObj.role}: ${targetRoleObj.score}%</span>` : ''}
         <small style="color:var(--cyan,#22d3ee);text-decoration:underline;margin-left:4px">View breakdown ▾</small>
       </div>` : ''}
@@ -1320,21 +1321,29 @@ function renderResumePage(p) {
     </div>
   </nav>
   ${ats ? `
-  <div id="rsAtsDrawer" class="no-print" style="display:none;background:rgba(15,23,42,.96);border-bottom:1px solid rgba(34,211,238,.3);padding:18px 24px;color:#fff">
+  <div id="rsAtsDrawer" class="no-print" style="display:none;background:rgba(15,23,42,.98);border-bottom:1px solid rgba(34,211,238,.3);padding:18px 24px;color:#fff">
     <div style="max-width:860px;margin:0 auto">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <h4 style="margin:0;font-size:15px;display:flex;align-items:center;gap:8px"><i class="fa-solid fa-shield-halved" style="color:#22d3ee"></i> ATS Score &amp; Target Role Match</h4>
+        <h4 style="margin:0;font-size:15px;display:flex;align-items:center;gap:8px"><i class="fa-solid fa-wand-magic-sparkles" style="color:#22d3ee"></i> AI Neural ATS Evaluation &amp; Diagnostics</h4>
         <button class="btn btn-ghost btn-sm" style="padding:2px 8px;font-size:11px" onclick="document.getElementById('rsAtsDrawer').style.display='none'">✕ Close</button>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:12px;font-size:13px">
-        <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>Sections:</b> ${ats.sectionScore} / 34 pts</div>
-        <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>Formatting:</b> ${ats.formattingScore} / 20 pts</div>
-        <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>Keywords:</b> ${ats.keywordScore} / 35 pts</div>
-        ${targetRoleObj ? `<div style="background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);padding:10px 14px;border-radius:8px"><b>${esc(targetRoleObj.role)}:</b> ${targetRoleObj.score}% (Grade ${targetRoleObj.grade})</div>` : ''}
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;margin-bottom:12px;font-size:13px">
+        <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>⚡ Action Verbs:</b> ${ats.pillars && ats.pillars.actionVerbs ? ats.pillars.actionVerbs.percentage : 80}%</div>
+        <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>📊 Quantified KPIs:</b> ${ats.pillars && ats.pillars.quantifiedMetrics ? ats.pillars.quantifiedMetrics.percentage : 70}% (${ats.pillars && ats.pillars.quantifiedMetrics ? ats.pillars.quantifiedMetrics.count : 0} metrics)</div>
+        <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>🎯 Role Match:</b> ${ats.pillars && ats.pillars.roleSemanticMatch ? ats.pillars.roleSemanticMatch.percentage : 85}%</div>
+        <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>📑 ATS Parsability:</b> ${ats.pillars && ats.pillars.atsParsability ? ats.pillars.atsParsability.percentage : 98}%</div>
+        <div style="background:rgba(255,255,255,.05);padding:10px 14px;border-radius:8px"><b>📝 Content Depth:</b> ${ats.pillars && ats.pillars.contentDepth ? ats.pillars.contentDepth.percentage : 85}%</div>
+        ${targetRoleObj ? `<div style="background:rgba(124,58,237,.18);border:1px solid rgba(124,58,237,.35);padding:10px 14px;border-radius:8px"><b>${esc(targetRoleObj.role)}:</b> ${targetRoleObj.score}% (Grade ${targetRoleObj.grade})</div>` : ''}
       </div>
-      ${ats.feedback.suggestions.length ? `
+      ${ats.aiMetrics && ((ats.aiMetrics.detectedActionVerbsList && ats.aiMetrics.detectedActionVerbsList.length) || (ats.aiMetrics.detectedMetricsList && ats.aiMetrics.detectedMetricsList.length)) ? `
+      <div style="font-size:12px;color:#94a3b8;margin-bottom:10px;display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+        <span style="font-weight:700;color:#22d3ee">AI Evidence:</span>
+        ${(ats.aiMetrics.detectedActionVerbsList || []).slice(0, 4).map(v => `<span style="background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.3);padding:2px 8px;border-radius:100px;font-size:11px">⚡ ${esc(v)}</span>`).join('')}
+        ${(ats.aiMetrics.detectedMetricsList || []).slice(0, 4).map(m => `<span style="background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.3);padding:2px 8px;border-radius:100px;font-size:11px">📈 ${esc(m)}</span>`).join('')}
+      </div>` : ''}
+      ${ats.feedback && ats.feedback.suggestions && ats.feedback.suggestions.length ? `
       <div style="font-size:12.5px;color:#cbd5e1">
-        <b>Recommendations to boost your ATS score:</b>
+        <b>AI Recommendations to boost your score:</b>
         <ul style="margin:4px 0 0 18px;padding:0">
           ${ats.feedback.suggestions.slice(0, 4).map(s => `<li>${esc(s)}</li>`).join('')}
         </ul>

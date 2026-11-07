@@ -68,6 +68,38 @@ assert.ok(fullScore.keywordScore >= 30, 'Keywords detected from skills and proje
 assert.ok(['A', 'A+'].includes(fullScore.grade), `Expected A or A+, got ${fullScore.grade}`);
 assert.equal(atsGradeClass(fullScore.grade), 'ats-excellent');
 
+// 3b. AI ATS Evaluation & Pillar Diagnostics
+assert.ok(fullScore.aiMetrics, 'Returns aiMetrics object');
+assert.ok(fullScore.pillars, 'Returns 5-pillar breakdown');
+assert.equal(typeof fullScore.passProbability, 'string');
+assert.ok(fullScore.pillars.actionVerbs, 'Has actionVerbs pillar');
+assert.ok(fullScore.pillars.quantifiedMetrics, 'Has quantifiedMetrics pillar');
+assert.ok(fullScore.pillars.roleSemanticMatch, 'Has roleSemanticMatch pillar');
+assert.ok(fullScore.pillars.atsParsability, 'Has atsParsability pillar');
+assert.ok(fullScore.pillars.contentDepth, 'Has contentDepth pillar');
+assert.ok(fullScore.pillars.actionVerbs.percentage >= 0);
+assert.ok(fullScore.pillars.quantifiedMetrics.percentage >= 0);
+
+// Test NLP extraction: power action verbs & quantifiable metrics
+const quantifiedProfile = {
+  username: 'art-director-test',
+  title: 'Art Director & Designer',
+  experience: [
+    {
+      role: 'Creative Director',
+      company: 'Voss Studio',
+      desc: 'Spearheaded brand identity redesign for 40+ international clients, increasing revenue by 35% and saving $150k.'
+    }
+  ],
+  skills: ['Art Direction', 'Brand Identity', 'Typography', 'Figma', 'Editorial']
+};
+const qScore = computeATSScore(quantifiedProfile);
+assert.ok(qScore.aiMetrics.detectedActionVerbsList.includes('spearheaded'), 'Detects power action verb');
+assert.ok(qScore.aiMetrics.detectedMetricsList.some(m => m.includes('35%') || m.includes('40+ clients')), 'Detects quantifiable metrics');
+assert.equal(qScore.aiMetrics.domainKey, 'creative', 'Auto-classifies creative design domain');
+assert.ok(qScore.pillars.actionVerbs.count >= 1, 'Records action verb count');
+assert.ok(qScore.pillars.quantifiedMetrics.count >= 1, 'Records metric count');
+
 // 4. Skills Gap Analysis
 const gap = computeSkillsGap(fullProfile);
 assert.ok(gap.roleResults.length > 0, 'Returns role results');
