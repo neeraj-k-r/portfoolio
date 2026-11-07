@@ -2278,6 +2278,7 @@ function pageGallery(p, wIdx, url) {
         const name = esc(p.name || 'Portfolio');
         const role = esc(p.title || 'Video Editor / Motion Designer');
         const bio = esc(p.bio || p.tagline || 'Cinematic edits, commercials and motion graphics built to make people stop scrolling.');
+        const sukiAboutStory = esc(p.about_story || (p.about && p.about.story) || p.bio || p.tagline || 'I focus on rhythm, visual hierarchy, sound and motion to turn raw footage into work that feels intentional. The goal is simple: make every second earn its place.');
         const email = p.email || '';
         const phone = p.phone || '';
         const hireHref = phone ? `https://wa.me/${phone.replace(/\D/g, '')}?text=Hi,${encodeURIComponent(' ')}I'm${encodeURIComponent(' ')}interested` : (email ? `mailto:${esc(email)}?subject=Project%20Inquiry` : '#contact');
@@ -2429,7 +2430,7 @@ function pageGallery(p, wIdx, url) {
                 <div class="suki-about-copy">
                   <p class="suki-kicker">03 / ABOUT</p>
                   <h2>${p.about_headline || (p.about && p.about.headline) ? esc(p.about_headline || (p.about && p.about.headline)) : 'Editing is more than <span>cutting clips.</span>'}</h2>
-                  <p>${bio}</p>
+                  <p>${sukiAboutStory}</p>
                 </div>
                 <div class="suki-stats">
                   <article class="suki-stat suki-glass">
