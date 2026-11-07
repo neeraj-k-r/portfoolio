@@ -562,3 +562,43 @@ test('Suki theme dynamically renders custom about headline, story, and stats', (
   assert.ok(capturedHtml.includes('50M+'), 'suki custom stat 1 rendered');
   assert.ok(capturedHtml.includes('Festival Laurels'), 'suki custom stat 2 rendered');
 });
+
+test('Analog and Mythos themes dynamically render custom about headline and story in modals', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const analogFn = domMock.window.PortfoolioTemplates.analog;
+  analogFn({
+    name: 'Vintage Creator',
+    about_headline: 'Crafting tangible web artifacts.',
+    about_story: 'Analog aesthetics combined with digital precision.',
+    about_origin: 'Berlin Studio'
+  });
+  assert.ok(capturedHtml.includes('Crafting tangible web artifacts.'), 'analog renders custom headline');
+  assert.ok(capturedHtml.includes('Analog aesthetics combined with digital precision.'), 'analog renders custom story');
+  assert.ok(capturedHtml.includes('Berlin Studio'), 'analog renders custom origin');
+
+  capturedHtml = '';
+  const mythosFn = domMock.window.PortfoolioTemplates.mythos;
+  mythosFn({
+    name: 'Mythic Sculptor',
+    about_headline: 'Classical forms in digital marble.',
+    about_story: 'Exploring ancient aesthetics through 3D computation.',
+    about_origin: 'Athens Studio'
+  });
+  assert.ok(capturedHtml.includes('Classical forms in digital marble.'), 'mythos renders custom headline');
+  assert.ok(capturedHtml.includes('Exploring ancient aesthetics through 3D computation.'), 'mythos renders custom story');
+  assert.ok(capturedHtml.includes('Athens Studio'), 'mythos renders custom origin');
+});
