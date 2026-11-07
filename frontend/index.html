@@ -1933,6 +1933,8 @@ function setupUserDashboardView(profile) {
     const aboutStats = Array.isArray(profile.about_stats) ? profile.about_stats : (profile.about && Array.isArray(profile.about.stats) ? profile.about.stats : []);
     if($('edStat1Num')) $('edStat1Num').value = aboutStats[0]?.num || '';
     if($('edStat1Label')) $('edStat1Label').value = aboutStats[0]?.label || '';
+    if($('edStat2Num')) $('edStat2Num').value = aboutStats[1]?.num || '';
+    if($('edStat2Label')) $('edStat2Label').value = aboutStats[1]?.label || '';
 
     // Ensure track aligns with template selection
     if (VISUAL_THEMES.includes(String(profile.template || '').toLowerCase())) {
