@@ -11015,6 +11015,26 @@ function getMaraPersona(p) {
   };
 }
 
+
+function getMaraProjects(p) {
+  const defaultProjects = [
+    { id: '01', title: 'Gridline Studio', disc: 'Brand & Digital', year: '2026' },
+    { id: '02', title: 'Forma Journal', disc: 'Editorial & Web', year: '2026' },
+    { id: '03', title: 'Still Objects', disc: 'Brand Identity', year: '2025' },
+    { id: '04', title: 'Fieldnotes', disc: 'Art Direction', year: '2025' },
+    { id: '05', title: 'Orbit Interface', disc: 'Digital Design', year: '2024' },
+    { id: '06', title: 'Signal Studies', disc: 'Visual Exploration', year: '2024' }
+  ];
+  const rawWorks = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : []);
+  if (!rawWorks || !rawWorks.length) return defaultProjects;
+  return rawWorks.slice(0, 6).map((w, idx) => ({
+    id: String(idx + 1).padStart(2, '0'),
+    title: w.title || w.name || 'Untitled Project',
+    disc: w.category || w.discipline || 'Design & Direction',
+    year: w.year || '2026'
+  }));
+}
+
 function renderMara(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
