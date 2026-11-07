@@ -1930,6 +1930,9 @@ function setupUserDashboardView(profile) {
     if($('edAboutStory')) $('edAboutStory').value = profile.about_story || (profile.about && profile.about.story) || '';
     if($('edAboutBadge')) $('edAboutBadge').value = profile.about_badge || (profile.about && profile.about.badge) || '';
     if($('edAboutOrigin')) $('edAboutOrigin').value = profile.about_origin || (profile.about && profile.about.origin) || '';
+    const aboutStats = Array.isArray(profile.about_stats) ? profile.about_stats : (profile.about && Array.isArray(profile.about.stats) ? profile.about.stats : []);
+    if($('edStat1Num')) $('edStat1Num').value = aboutStats[0]?.num || '';
+    if($('edStat1Label')) $('edStat1Label').value = aboutStats[0]?.label || '';
 
     // Ensure track aligns with template selection
     if (VISUAL_THEMES.includes(String(profile.template || '').toLowerCase())) {
