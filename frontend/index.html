@@ -1928,6 +1928,7 @@ function setupUserDashboardView(profile) {
     // Visual Studio About & Story hydration
     if($('edAboutHeadline')) $('edAboutHeadline').value = profile.about_headline || (profile.about && profile.about.headline) || '';
     if($('edAboutStory')) $('edAboutStory').value = profile.about_story || (profile.about && profile.about.story) || '';
+    if($('edAboutBadge')) $('edAboutBadge').value = profile.about_badge || (profile.about && profile.about.badge) || '';
 
     // Ensure track aligns with template selection
     if (VISUAL_THEMES.includes(String(profile.template || '').toLowerCase())) {
