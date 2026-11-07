@@ -2506,6 +2506,66 @@ function pageGallery(p, wIdx, url) {
           </footer>
         </div>`;
       })()
+    
+    : vtpl === 'mara'
+    ? (() => {
+        const fullName = esc(p.name || 'Mara Voss');
+        const parts = fullName.split(/\s+/);
+        const firstName = parts[0] || 'Mara';
+        const lastName = parts.slice(1).join(' ') || 'Voss';
+        const monogram = esc((firstName[0] || 'A') + (lastName[0] || 'D'));
+        const role = esc(p.title || 'Independent Art Director & Digital Designer');
+        const practice = esc(p.tagline || p.bio || 'Brand identities, editorial systems, digital experiences.');
+        const story = esc(p.about_story || p.bio || 'Rooted in clarity, driven by curiosity, Mara Voss builds identities and digital experiences that bring structure to complex ideas through bold typography and thoughtful visual systems.');
+        const avatar = esc(p.avatarUrl || p.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80');
+        const sourceWorks = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : []);
+        return `<div class="mara-page" id="top" style="background:#000;color:#fff;font-family:sans-serif;min-height:100vh">
+          <header style="position:relative;height:900px;min-height:760px;overflow:hidden;padding:0 3%">
+            <div style="position:absolute;inset:0;background-image:url('${avatar}');background-size:cover;background-position:center;filter:brightness(0.7) contrast(1.15)"></div>
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0.5) 100%)"></div>
+            <nav style="position:absolute;top:28px;left:3%;right:3%;display:flex;justify-content:space-between;align-items:center;z-index:10">
+              <span style="font-size:11px;color:#949494;letter-spacing:0.08em;font-family:monospace">GMT+00:00 // LOCAL</span>
+              <a href="#contact" style="background:#fff;color:#000;padding:12px 22px;border-radius:999px;font-weight:500;text-decoration:none">Let’s talk ↗</a>
+            </nav>
+            <div style="position:absolute;top:147px;left:3%;right:3%;z-index:2">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:clamp(42px,16vw,200px);line-height:0.75;letter-spacing:-0.06em;font-weight:600">
+                <span>${monogram}</span>
+                <span>${firstName} <span style="font-weight:300">${lastName}</span><sup style="font-size:0.18em;color:#aaa">[01]</sup></span>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-top:35px;font-size:13px;letter-spacing:0.08em;color:#b8b8b8;text-transform:uppercase">
+                <span>${role}</span>
+                <span>[ PORTFOLIO // SELECTED WORK ]</span>
+              </div>
+            </div>
+            <div style="position:absolute;bottom:40px;left:3%;max-width:420px;font-size:18px;line-height:1.5;z-index:2">
+              <p>• ${practice}</p>
+              <p style="color:#949494;margin-top:4px">• Independent practice. Thoughtful systems. Distinctive outcomes.</p>
+            </div>
+            <a href="#work" style="position:absolute;bottom:34px;right:3%;background:#fff;color:#000;border-radius:999px;padding:16px 20px;font-size:18px;text-decoration:none;z-index:2">Explore work ↘</a>
+          </header>
+          <section id="about" style="padding:60px 3%;border-top:1px solid #222">
+            <div style="font-size:18px;color:#949494;margin-bottom:30px">// Design Approach</div>
+            <h2 style="font-size:clamp(28px,6vw,84px);line-height:1.05;letter-spacing:-0.04em;max-width:1200px;margin-bottom:60px">${story}</h2>
+          </section>
+          <section id="work" style="padding:60px 4% 80px;background:linear-gradient(180deg,#000 0%,#000 48%,#ea4f16 78%,#f6af60 100%)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;color:#949494;font-size:14px">
+              <span>// Selected Work</span>
+              <span>SELECTED PROJECTS</span>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              ${sourceWorks.map((w, idx) => `
+                <div style="min-height:72px;padding:16px 20px;background:rgba(0,0,0,0.73);border-bottom:1px solid rgba(255,255,255,0.12);display:grid;grid-template-columns:42px minmax(0,1fr) 210px 70px 40px;align-items:center">
+                  <span style="color:#949494">${String(idx+1).padStart(2,'0')}</span>
+                  <span style="font-size:24px;font-weight:500">${esc(w.title || w.name || 'Untitled')}</span>
+                  <span style="color:#aaa">${esc(w.category || 'Design')}</span>
+                  <span style="color:#949494">2026</span>
+                  <span style="text-align:right">↗</span>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+        </div>`;
+      })()
     : vtpl === 'lo'
     ? (() => {
         const sourceWorks = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : []);
