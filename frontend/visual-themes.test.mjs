@@ -437,3 +437,32 @@ test('Lo theme dynamically renders custom about headline and bio story when prov
   assert.ok(capturedHtml.includes('My architectural practice centers on public memory and natural material topography.'), 'must render custom story paragraph');
   assert.ok(!capturedHtml.includes('Making things that spark joy, provoke curiosity, and refuse to be boring.'), 'must not contain default headline');
 });
+
+test('Lo theme dynamically renders custom certified badge and studio origin', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const loFn = domMock.window.PortfoolioTemplates.lo;
+  loFn({
+    name: 'Kavita Rao',
+    about_badge: 'MASTER PRINTMAKER',
+    about_origin: 'KERALA STUDIO',
+  });
+
+  assert.ok(capturedHtml.includes('MASTER PRINTMAKER'), 'must render custom stamp badge');
+  assert.ok(capturedHtml.includes('KERALA STUDIO'), 'must render custom studio origin');
+  assert.ok(!capturedHtml.includes('CERTIFIED ARTIST'), 'must replace default CERTIFIED ARTIST');
+  assert.ok(!capturedHtml.includes('MIDWEST STUDIO'), 'must replace default MIDWEST STUDIO');
+});
