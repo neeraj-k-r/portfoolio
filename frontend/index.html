@@ -1744,7 +1744,7 @@ document.querySelectorAll('.input-wrapper input').forEach(input => {
 });
 
 function switchUserTab(tabName) {
-  const panes = ['info', 'works', 'theme', 'projects', 'services', 'resume', 'upload', 'proof', 'featured', 'share'];
+  const panes = ['info', 'works', 'about', 'theme', 'projects', 'services', 'resume', 'upload', 'proof', 'featured', 'share'];
   if (!panes.includes(tabName)) return;
   panes.forEach(t => {
     const el = $('tab' + t.charAt(0).toUpperCase() + t.slice(1));
