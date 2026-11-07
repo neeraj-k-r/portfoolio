@@ -642,6 +642,32 @@
       letter-spacing: 0.14em;
       color: var(--mara-muted);
     }
+
+    .feat-card-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #000000;
+      font-family: var(--mara-font-utility);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 1000;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.25s cubic-bezier(.22,1,.36,1);
+    }
+    .feat-card-cursor.is-active {
+      transform: translate(-50%, -50%) scale(1);
+    }
   </style>
 </head>
 <body id="top">
@@ -1157,5 +1183,10 @@
     </div>
   </div>
   <div id="menuScrim" class="menu-scrim" aria-hidden="true"></div>
+
+  <div id="featCardCursor" class="feat-card-cursor" aria-hidden="true">
+    <span>View</span>
+    <span>case study</span>
+  </div>
 </body>
 </html>
