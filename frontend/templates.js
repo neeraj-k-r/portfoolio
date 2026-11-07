@@ -63,7 +63,8 @@ const TEMPLATES = [
   { id: 'analog', name: 'Analog Studio', desc: 'Aesthetic dark desk collage with vinyl LP, warm desk lamp, taped sunset polaroids, film negatives & kraft paper checklist', emoji: '🎞️', best: 'Creative Directors • Designers • Multidisciplinary Artists • Photographers', track: 'visual' },
   { id: 'mythos', name: 'Mythos Classical', desc: 'Cosmic violet classical sculpture showcase with Michelangelo David bust, celestial glowing moon, botanical flora, and 4 interactive category decks', emoji: '🏛️', best: 'Creative Engineers • Digital Builders • Visual Explorers • Designers', track: 'visual' },
   { id: 'suki', name: 'Suki Cinematic', desc: 'Cyber video editor & motion showcase with cyber grid, neon cyan orbs, showreel hero, glass cards, and marquee ticker', emoji: '🎬', best: 'Video Editors • Motion Designers • Automotive Filmmakers • Commercial Creators', track: 'visual' },
-  { id: 'lo', name: 'Artistic Lo', desc: 'Warm sand multidisciplinary studio with zero-gap art grid, client credentials & narrative story', emoji: '🎨', best: 'Artists • Illustrators • Designers • Makers', track: 'visual' }
+  { id: 'lo', name: 'Artistic Lo', desc: 'Warm sand multidisciplinary studio with zero-gap art grid, client credentials & narrative story', emoji: '🎨', best: 'Artists • Illustrators • Designers • Makers', track: 'visual' },
+  { id: 'mara', name: 'Mara Voss', desc: 'Editorial art direction portfolio with high-contrast typography, cinematic portrait hero, interactive project index, and deep orange accents', emoji: '🖤', best: 'Art Directors • Digital Designers • Editorial Studios • Creative Directors', track: 'visual' }
 ];
 
 function tplEsc(s) {
