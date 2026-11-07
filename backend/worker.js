@@ -9082,7 +9082,7 @@ function renderLoSSRAbout(p) {
       <div class="lo-about-copy">
         <p class="lo-kicker"><span></span> 02 / THE STORY</p>
         <h2>${esc(p.about_headline || (p.about && p.about.headline) || 'Making things that spark joy, provoke curiosity, and refuse to be boring.')}</h2>
-        <p>I believe the best creative work happens at the messy intersection of craft, relentless curiosity, and high creative courage. Spanning fine art illustration, brand identities, physical editions, and screen visuals.</p>
+        <p>${esc(p.about_story || (p.about && p.about.story) || p.bio || 'I believe the best creative work happens at the messy intersection of craft, relentless curiosity, and high creative courage. Spanning fine art illustration, brand identities, physical editions, and screen visuals.')}</p>
         ${renderLoSSRMilestones()}
       </div>
     </div>
