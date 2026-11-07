@@ -9076,7 +9076,7 @@ function renderLoSSRAbout(p) {
         <img class="lo-stamp-photo" src="${esc(avatar)}" alt="${name}">
         <div class="lo-stamp-footer">
           <span>${name}</span>
-          <span>MIDWEST STUDIO</span>
+          <span>${esc(p.about_origin || (p.about && p.about.origin) || p.location || 'MIDWEST STUDIO')}</span>
         </div>
       </div>
       <div class="lo-about-copy">
