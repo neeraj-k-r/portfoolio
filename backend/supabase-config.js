@@ -102,6 +102,7 @@ async function cloudSaveProfile(p) {
     track: (p.track === 'visual' || (existing && existing.track === 'visual')) ? 'visual' : 'tech',
     works: Array.isArray(p.works) ? p.works.slice(0, 30) : [],
     about_story: typeof p.about_story === 'string' ? p.about_story : (p.about && typeof p.about.story === 'string' ? p.about.story : ''),
+    about_headline: typeof p.about_headline === 'string' ? p.about_headline : (p.about && typeof p.about.headline === 'string' ? p.about.headline : ''),
     resume: (p.resume && typeof p.resume === 'object')
       ? { ...p.resume, services: Array.isArray(p.services) ? p.services.slice(0, 20) : (p.resume.services || []) }
       : (Array.isArray(p.services) ? { services: p.services.slice(0, 20) } : {}),
