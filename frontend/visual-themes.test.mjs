@@ -633,3 +633,35 @@ test('Mara theme renders high-contrast typography, hero portrait, navigation, an
   assert.ok(capturedHtml.includes('Selected Work'), 'must render Selected Work section');
   assert.ok(capturedHtml.includes('SOMETHING MATTER.'), 'must render Contact section');
 });
+
+test('Mara theme dynamically adapts to custom user name, custom role, and user works', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const maraFn = domMock.window.PortfoolioTemplates.mara;
+  maraFn({
+    name: 'Elena Rostova',
+    title: 'Senior Spatial Director',
+    about_story: 'Designing monumental pavilions and dynamic digital spatial archives.',
+    works: [
+      { title: 'Pavilion Monolith', category: 'Architecture', year: '2026' }
+    ]
+  });
+
+  assert.ok(capturedHtml.includes('Elena') && capturedHtml.includes('Rostova'), 'must render custom user name');
+  assert.ok(capturedHtml.includes('Senior Spatial Director'), 'must render custom role');
+  assert.ok(capturedHtml.includes('Designing monumental pavilions'), 'must render custom story');
+  assert.ok(capturedHtml.includes('Pavilion Monolith'), 'must render custom user work');
+});
