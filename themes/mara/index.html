@@ -121,6 +121,35 @@
       background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5) 100%);
       pointer-events: none;
     }
+
+    .mara-nav {
+      position: absolute;
+      top: 28px;
+      left: var(--mara-inset);
+      right: var(--mara-inset);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 20;
+    }
+    .nav-clock {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-family: var(--mara-font-utility);
+    }
+    .clock-label {
+      font-size: 11px;
+      color: var(--mara-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .clock-time {
+      font-size: 15px;
+      color: #ffffff;
+      font-variant-numeric: tabular-nums;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body id="top">
@@ -133,6 +162,10 @@
       <div class="hero-vignette"></div>
     </div>
     <nav class="mara-nav" aria-label="Main Navigation">
+      <div class="nav-clock" id="navClock">
+        <span class="clock-label" id="clockZone">GMT+00:00 // LOCAL</span>
+        <span class="clock-time" id="clockTime">00:00:00</span>
+      </div>
     </nav>
   </header>
   <main>
