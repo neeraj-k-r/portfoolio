@@ -82,12 +82,59 @@
     @font-face{font-family:MonaSemi;src:url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/static/MonaSansSemiCondensed-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
     @font-face{font-family:MonaSemi;src:url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/static/MonaSansSemiCondensed-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
     @font-face{font-family:Mona;src:url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/static/MonaSans-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
+
+    .mara-hero {
+      position: relative;
+      height: 900px;
+      min-height: 760px;
+      overflow: hidden;
+      padding: 0 var(--mara-inset);
+    }
+    .hero-bg-wrap {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hero-portrait {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.7s cubic-bezier(.22,1,.36,1);
+      will-change: transform;
+    }
+    .hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.45s ease, transform 0.7s cubic-bezier(.22,1,.36,1);
+      pointer-events: none;
+    }
+    .hero-vignette {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.5) 100%);
+      pointer-events: none;
+    }
   </style>
 </head>
 <body id="top">
   <a href="#work" class="skip-link">Skip to selected work</a>
   <!-- Semantic Sections: #top, #about, #featured, #work, #services, #contact -->
-  <header id="hero" class="mara-hero"></header>
+    <header id="hero" class="mara-hero">
+    <div class="hero-bg-wrap" id="heroBgWrap">
+      <div class="hero-portrait" id="heroPortrait"></div>
+      <canvas id="webglCanvas" class="hero-canvas"></canvas>
+      <div class="hero-vignette"></div>
+    </div>
+    <nav class="mara-nav" aria-label="Main Navigation">
+    </nav>
+  </header>
   <main>
     <section id="about" class="mara-about"></section>
     <section id="featured" class="mara-featured"></section>
