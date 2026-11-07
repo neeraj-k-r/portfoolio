@@ -1562,6 +1562,18 @@
       document.getElementById('caseStudyModal')?.close();
     });
 
+
+    function toggleCapability(index) {
+      const panel = document.getElementById('capPanel' + index);
+      const btn = document.getElementById('capBtn' + index);
+      const row = panel ? panel.previousElementSibling : null;
+      if (!panel || !btn) return;
+      const isOpen = !panel.hidden;
+      panel.hidden = isOpen;
+      btn.textContent = isOpen ? 'Explore +' : 'Close −';
+      if (row) row.setAttribute('aria-expanded', String(!isOpen));
+    }
+
 </script>
 
   <div id="menuOverlay" class="menu-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site Navigation">
