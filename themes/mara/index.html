@@ -905,6 +905,42 @@
     .cap-desc { font-size: 17px; line-height: 1.6; color: #d0cbbd; margin-bottom: 12px; }
     .cap-delivs { font-size: 15px; color: var(--mara-muted-2); }
     .cap-delivs strong { color: #ffffff; }
+
+    .mara-contact {
+      padding: 110px var(--mara-inset) 36px;
+      background: #000000;
+    }
+    .contact-heading {
+      margin-top: 42px;
+      font-family: var(--mara-font-display);
+      font-weight: 500;
+      font-size: clamp(38px, 8.5cqw, 116px);
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+    }
+    .contact-grid {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+    .contact-pitch {
+      max-width: 480px;
+      font-size: 20px;
+      line-height: 1.5;
+      color: #ffffff;
+    }
+    .contact-sub {
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--mara-muted);
+      font-family: var(--mara-font-utility);
+    }
+    .contact-demo-note {
+      font-size: 16px;
+      color: var(--mara-muted-2);
+      font-family: var(--mara-font-utility);
+    }
   </style>
 </head>
 <body id="top">
@@ -1148,7 +1184,23 @@
         <span>Independent practice / Collaborative approach</span>
       </div>
     </section>
-    <section id="contact" class="mara-contact"></section>
+        <section id="contact" class="mara-contact">
+      <div class="section-top-divider"></div>
+      <div class="section-label">// Contact</div>
+      <h2 class="contact-heading">
+        <span class="line-white">LET’S MAKE</span>
+        <span class="line-orange">SOMETHING MATTER.</span>
+      </h2>
+      <div class="contact-grid">
+        <div class="contact-left">
+          <p class="contact-pitch">Have a brand, publication, or digital experience in mind? Tell me what you’re building and where you want to take it.</p>
+          <p class="contact-sub">Brand identities / Editorial systems / Digital experiences</p>
+        </div>
+        <div class="contact-right" id="contactRight">
+          <p class="contact-demo-note">Demo portfolio — contact details not configured.</p>
+        </div>
+      </div>
+    </section>
   </main>
 
 <template id="art-statement">
