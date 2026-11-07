@@ -1755,6 +1755,7 @@ function switchUserTab(tabName) {
     const row = b.closest('#techStudio,#visualStudio');
     const rowVisible = !row || row.style.display !== 'none';
     b.classList.toggle('active', rowVisible && onclickAttr.includes(`'${tabName}'`));
+    if (b.id === 'tabBtnAbout' && tabName === 'about') b.classList.add('active');
   });
   if (tabName === 'theme' && typeof paintTrackTabs === 'function' && activeUserProfile) {
     paintTrackTabs(activeUserProfile);
