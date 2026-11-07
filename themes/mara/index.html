@@ -692,6 +692,25 @@
     .featured-pill-btn {
       margin-top: 24px;
     }
+
+    .mara-work {
+      min-height: 760px;
+      padding: 40px var(--mara-inset-work) 80px;
+      background: linear-gradient(180deg, #000000 0%, #000000 48%, #ea4f16 78%, #f6af60 100%);
+      position: relative;
+    }
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .work-kicker {
+      font-family: var(--mara-font-utility);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      color: var(--mara-muted);
+    }
   </style>
 </head>
 <body id="top">
@@ -814,7 +833,14 @@
         </div>
       </div>
     </section>
-    <section id="work" class="mara-work"></section>
+        <section id="work" class="mara-work">
+      <div class="work-header">
+        <div class="section-label">// Selected Work</div>
+        <div class="work-kicker">SIX SELF-INITIATED PROJECTS / 2024–2026</div>
+      </div>
+      <div class="work-table" id="workTable">
+      </div>
+    </section>
     <section id="services" class="mara-services"></section>
     <section id="contact" class="mara-contact"></section>
   </main>
