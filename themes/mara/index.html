@@ -484,6 +484,45 @@
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
     }
+
+    .about-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-top: 80px;
+      gap: 40px;
+      font-size: 18px;
+    }
+    .about-strategy {
+      max-width: 480px;
+      color: var(--mara-muted-3);
+      line-height: 1.6;
+    }
+    .about-disciplines {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: flex-end;
+    }
+    .disciplines-label {
+      font-family: var(--mara-font-utility);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--mara-muted);
+    }
+    .disciplines-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .discipline-tag {
+      border: 1px solid #777777;
+      border-radius: 99px;
+      padding: 10px 14px;
+      font-size: 14px;
+      color: var(--mara-muted-2);
+      font-family: var(--mara-font-utility);
+    }
   </style>
 </head>
 <body id="top">
@@ -560,6 +599,18 @@
         <svg viewBox="0 0 600 720" width="280" height="336">
           <use href="#art-statement"/>
         </svg>
+      </div>
+    
+      <div class="about-meta-row">
+        <p class="about-strategy">I connect strategy and expression through brand identities, editorial systems, and digital experiences designed to work as a whole.</p>
+        <div class="about-disciplines">
+          <span class="disciplines-label">DISCIPLINES</span>
+          <div class="disciplines-tags">
+            <span class="discipline-tag">Art Direction</span>
+            <span class="discipline-tag">Brand Identity</span>
+            <span class="discipline-tag">Digital Design</span>
+          </div>
+        </div>
       </div>
     </section>
     <section id="featured" class="mara-featured"></section>
