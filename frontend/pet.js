@@ -32,7 +32,8 @@
     'All systems go.',
     'Ship it!',
     'You got this.',
-    'Reviewing your skills…'
+    'Reviewing your skills…',
+    'Drag me anywhere!'
   ];
 
   var root = null;
@@ -40,7 +41,12 @@
   var sprite = null;
   var bubble = null;
   var closeBtn = null;
+  var placeholder = null;
   var loaded = false;
+  var reducedMotion = false;
+  var userHidden = false;
+  var dashHidden = false;
+
   var state = { row: 0, frame: 0, nextAt: 0, loopsLeft: Infinity };
   var pos = { x: 0, y: 0 };
   var target = null;
@@ -48,6 +54,7 @@
   var tickTimer = null;
   var schedTimer = null;
   var bubbleTimer = null;
+  var dashTimer = null;
   var lastDown = null;
 
   function viewport() {
@@ -87,7 +94,7 @@
   }
 
   function playOnce(row, loops) {
-    if (!loaded || dragging) return;
+    if (!loaded || reducedMotion || dragging) return;
     stopWalk();
     setRow(row, loops == null ? 1 : loops);
     var guard = Date.now();
@@ -108,7 +115,7 @@
   }
 
   function walkTo(p) {
-    if (!loaded || dragging) return;
+    if (!loaded || reducedMotion || dragging) return;
     stopWalk();
     var start = pos;
     var dx = p.x - start.x;
@@ -148,9 +155,16 @@
 
   function scheduleActivity() {
     clearTimeout(schedTimer);
+    if (!loaded || reducedMotion || dragging || userHidden || dashHidden) {
+      schedTimer = setTimeout(scheduleActivity, 4000);
+      return;
+    }
     var delay = 5000 + Math.random() * 7000;
     schedTimer = setTimeout(function () {
-      if (!loaded || dragging) { scheduleActivity(); return; }
+      if (!loaded || reducedMotion || dragging || userHidden || dashHidden) {
+        scheduleActivity();
+        return;
+      }
       var roll = Math.random();
       if (roll < 0.5) walkTo(randomTarget());
       else if (roll < 0.62) playOnce(4, 1);
@@ -162,7 +176,7 @@
   }
 
   function tick(now) {
-    if (!loaded) return;
+    if (!loaded || reducedMotion) return;
     if (dragging) {
       var wantRow = Math.abs(dragging.vx) > 20 ? (dragging.vx > 0 ? 1 : 2) : 0;
       if (state.row !== wantRow) setRow(wantRow, Infinity);
@@ -261,9 +275,14 @@
     closeBtn.textContent = '\u00d7';
     closeBtn.addEventListener('click', function (ev) {
       ev.stopPropagation();
-      root.style.display = 'none';
+      hide(true);
     });
 
+    placeholder = document.createElement('div');
+    placeholder.className = 'cdx-placeholder';
+    placeholder.textContent = '>_';
+
+    stage.appendChild(placeholder);
     stage.appendChild(sprite);
     stage.appendChild(bubble);
     stage.appendChild(closeBtn);
@@ -273,13 +292,45 @@
     stage.addEventListener('pointerdown', onPointerDown);
     stage.addEventListener('dblclick', function (ev) {
       ev.stopPropagation();
-      if (!loaded || dragging) return;
+      if (!loaded || reducedMotion || dragging) return;
       playOnce(4, 1);
     });
   }
 
+  function checkDashboard() {
+    var dash = document.getElementById('dashboardApp');
+    var visible = !!dash && dash.style.display !== 'none' && dash.offsetParent !== null;
+    if (visible === dashHidden) return;
+    dashHidden = visible;
+    applyVisibility();
+  }
+
+  function applyVisibility() {
+    if (userHidden || dashHidden) root.classList.add('cdx-hidden');
+    else root.classList.remove('cdx-hidden');
+  }
+
+  function hide(persist) {
+    userHidden = true;
+    applyVisibility();
+  }
+
+  function show() {
+    userHidden = false;
+    applyVisibility();
+  }
+
   function boot() {
+    userHidden = false;
+    reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     build();
+    applyVisibility();
+
+    // Place the pet immediately, before the sprite loads.
+    var v0 = viewport();
+    applyPos(clampPos({ x: v0.width - CFG.viewW - CFG.bounds, y: v0.height - CFG.viewH - CFG.bounds }));
+
     sprite.style.width = CFG.viewW + 'px';
     sprite.style.height = CFG.viewH + 'px';
     sprite.style.backgroundImage = 'url("' + CFG.sheet + '")';
@@ -289,24 +340,35 @@
     img.onload = function () {
       loaded = true;
       root.classList.add('cdx-loaded');
-      var v = viewport();
-      applyPos(clampPos({ x: v.width - CFG.viewW - CFG.bounds, y: v.height - CFG.viewH - CFG.bounds }));
+      applyPos(clampPos(pos));
       paint(0, 0);
-      setRow(0, Infinity);
-      tickTimer = setInterval(function () { tick(performance.now()); }, 60);
-      scheduleActivity();
+      if (!reducedMotion) {
+        setRow(0, Infinity);
+        tickTimer = setInterval(function () { tick(performance.now()); }, 60);
+        scheduleActivity();
+      }
     };
     img.onerror = function () {
-      if (root && root.parentNode) root.parentNode.removeChild(root);
+      if (typeof console !== 'undefined' && console.warn) {
+        console.warn('[pet] sprite failed to load: ' + CFG.sheet);
+      }
     };
     img.src = CFG.sheet;
 
     document.addEventListener('visibilitychange', function () {
-      if (!document.hidden) {
+      if (!document.hidden && !reducedMotion) {
         state.nextAt = performance.now() + ROWS[state.row].every;
-        if (walking) { walking.startedAt = performance.now(); }
       }
     });
+
+    dashTimer = setInterval(checkDashboard, 1000);
+    window.addEventListener('resize', function () {
+      if (!dragging && !target) applyPos(clampPos(pos));
+    });
+  }
+
+  function prefixed() {
+    return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }
 
   if (document.readyState === 'loading') {
@@ -315,5 +377,5 @@
     boot();
   }
 
-  window.ClawdexPet = { show: function () { root.style.display = ''; }, hide: function () { root.style.display = 'none'; } };
+  window.ClawdexPet = { show: show, hide: function () { hide(false); } };
 })();
