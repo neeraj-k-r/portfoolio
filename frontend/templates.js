@@ -11018,6 +11018,14 @@ function getMaraPersona(p) {
     monogram = firstName.slice(0, 2).toUpperCase() || 'MV';
   }
 
+  const customStory = p.about_story || (p.about && p.about.story) || p.bio || '';
+  const defaultStory = `Rooted in clarity, driven by curiosity, ${fullName} builds identities and digital experiences that bring structure to complex ideas through bold typography and thoughtful visual systems.`;
+  const story = customStory || defaultStory;
+
+  const customStrategy = p.about_headline || (p.about && p.about.headline) || p.tagline || '';
+  const defaultStrategy = 'I connect strategy and expression through brand identities, editorial systems, and digital experiences designed to work as a whole.';
+  const strategy = customStrategy || defaultStrategy;
+
   return {
     fullName,
     firstName,
@@ -11025,10 +11033,95 @@ function getMaraPersona(p) {
     monogram,
     role: p.title || 'INDEPENDENT ART DIRECTOR & DIGITAL DESIGNER',
     practice: p.tagline || p.bio || 'Brand identities, editorial systems, digital experiences.',
-    story: p.about_story || p.bio || 'Rooted in clarity, driven by curiosity, Mara Voss builds identities and digital experiences that bring structure to complex ideas through bold typography and thoughtful visual systems.',
+    story,
+    strategy,
     email: p.email || '',
     avatar: (p.mara_hero_portrait || p.hero_image) ? (p.mara_hero_portrait || p.hero_image) : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=80'
   };
+}
+
+const MARA_STATEMENT_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="720" viewBox="0 0 600 720">
+<rect width="600" height="720" fill="#e5e0d5"/>
+<g font-family="Arial,sans-serif" fill="#111">
+<text x="32" y="48" font-size="22" letter-spacing="-1">A STUDY OF RELATIONSHIPS</text>
+<text x="32" y="75" font-size="10" letter-spacing="2">FORM / SPACE / COUNTERFORM — 01–06</text>
+</g>
+<g stroke="#a5a096" fill="none">
+<path d="M32 96h536M32 110v530M298 110v530M568 110v530M32 280h536M32 460h536M32 640h536"/>
+</g>
+<g transform="translate(60 128)">
+<rect width="205" height="122" fill="#141414"/>
+<circle cx="103" cy="61" r="45" fill="#e5e0d5"/>
+<rect x="83" y="-2" width="40" height="126" fill="#ff630f"/>
+</g>
+<g transform="translate(326 128)" fill="#171717">
+<path d="M0 122 105 0 205 122Z"/>
+<path d="M40 122 105 50 170 122Z" fill="#e5e0d5"/>
+</g>
+<g transform="translate(60 305)">
+<rect width="205" height="125" fill="#ff630f"/>
+<path d="M0 0 205 125M0 25 165 125M0 50 125 125M40 0 205 100M80 0 205 75" stroke="#131313" stroke-width="12"/>
+</g>
+<g transform="translate(328 302)" fill="none" stroke="#171717" stroke-width="2">
+<ellipse cx="102" cy="64" rx="100" ry="61"/>
+<ellipse cx="102" cy="64" rx="75" ry="61"/>
+<ellipse cx="102" cy="64" rx="50" ry="61"/>
+<ellipse cx="102" cy="64" rx="25" ry="61"/>
+<path d="M2 64h200"/>
+</g>
+<g transform="translate(60 483)">
+<rect x="0" y="0" width="76" height="124" fill="#111"/>
+<rect x="92" y="0" width="34" height="124" fill="#ff630f"/>
+<rect x="144" y="0" width="60" height="124" fill="#111"/>
+</g>
+<g transform="translate(333 483)" fill="#131313">
+<circle cx="55" cy="45" r="45"/>
+<circle cx="130" cy="78" r="45"/>
+<circle cx="90" cy="61" r="22" fill="#e5e0d5"/>
+</g>
+<g font-family="Arial,sans-serif" fill="#151515" font-size="10" letter-spacing="1">
+<text x="32" y="678">GEOMETRIC RESEARCH / MARA VOSS STUDIO</text>
+<text x="495" y="678">2026</text>
+</g>
+</svg>`;
+
+function getMaraStatementLines(p, fullName) {
+  const custom = p.about_story || (p.about && p.about.story) || '';
+  if (custom && typeof custom === 'string' && custom.trim()) {
+    const raw = custom.trim();
+    if (raw.includes('\n')) {
+      const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+      if (lines.length) return lines;
+    }
+    const words = raw.split(/\s+/).filter(Boolean);
+    if (words.length <= 15) {
+      return [raw];
+    }
+    const count = 5;
+    const perLine = Math.ceil(words.length / count);
+    const lines = [];
+    for (let i = 0; i < words.length; i += perLine) {
+      lines.push(words.slice(i, i + perLine).join(' '));
+    }
+    return lines;
+  }
+  return [
+    'Rooted in clarity, driven by curiosity,',
+    `${fullName} builds identities and digital`,
+    'experiences that bring structure to',
+    'complex ideas through bold typography',
+    'and thoughtful visual systems.'
+  ];
+}
+
+function getMaraDisciplines(p) {
+  if (Array.isArray(p.services) && p.services.length) {
+    return p.services.map(s => (typeof s === 'object' ? (s.title || s.name || s) : String(s))).slice(0, 5);
+  }
+  if (Array.isArray(p.skills) && p.skills.length) {
+    return p.skills.slice(0, 4);
+  }
+  return ['Art Direction', 'Brand Identity', 'Digital Design'];
 }
 
 
@@ -11084,10 +11177,13 @@ function renderMara(p) {
   const role = persona.role;
   const practice = persona.practice;
   const story = persona.story;
+  const strategy = persona.strategy;
   const avatar = persona.avatar;
 
   const displayProjects = getMaraProjects(p);
   const capabilities = getMaraCapabilities(p);
+  const statementLines = getMaraStatementLines(p, fullName);
+  const disciplines = getMaraDisciplines(p);
 
   app.innerHTML = `
     <div class="mara-page" id="top">
@@ -11132,19 +11228,28 @@ function renderMara(p) {
         <a href="#work" class="mara-pill" style="position:absolute;bottom:34px;right:3%;z-index:2">Explore work ↘</a>
       </header>
 
-      <section id="about" style="min-height:700px;padding:60px 3%;border-top:1px solid #222">
-        <div style="font-size:18px;color:#949494;margin-bottom:30px">// Design Approach</div>
-        <h2 style="font-size:clamp(28px,6vw,84px);line-height:1.05;letter-spacing:-0.04em;max-width:1200px;margin-bottom:60px">
-          ${tplEsc(story)}
-        </h2>
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:40px;border-top:1px solid #222;padding-top:40px">
-          <p style="max-width:480px;font-size:18px;color:#b8b8b8;line-height:1.6">I connect strategy and expression through brand identities, editorial systems, and digital experiences designed to work as a whole.</p>
-          <div>
-            <span style="font-size:12px;letter-spacing:0.1em;color:#949494;display:block;margin-bottom:12px">DISCIPLINES</span>
-            <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <span style="border:1px solid #777;border-radius:99px;padding:8px 14px;font-size:14px;color:#aaa">Art Direction</span>
-              <span style="border:1px solid #777;border-radius:99px;padding:8px 14px;font-size:14px;color:#aaa">Brand Identity</span>
-              <span style="border:1px solid #777;border-radius:99px;padding:8px 14px;font-size:14px;color:#aaa">Digital Design</span>
+      <section id="about" class="mara-about-section">
+        <div class="mara-about-kicker">// Design Approach</div>
+
+        <div class="mara-statement-container">
+          <div class="mara-statement-wrap">
+            ${statementLines.map((line, idx) => `
+              <div class="mara-statement-line-wrap">
+                <div class="mara-statement-line" style="transition-delay:${idx * 110}ms">${tplEsc(line)}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="mara-statement-cursor-art" aria-hidden="true">
+            ${MARA_STATEMENT_SVG}
+          </div>
+        </div>
+
+        <div class="mara-about-meta">
+          <p class="mara-about-support">${tplEsc(strategy)}</p>
+          <div class="mara-about-disciplines">
+            <span class="mara-disciplines-label">DISCIPLINES</span>
+            <div class="mara-disciplines-list">
+              ${disciplines.map(d => `<span class="mara-discipline-pill">${tplEsc(d)}</span>`).join('')}
             </div>
           </div>
         </div>
@@ -11272,6 +11377,56 @@ function renderMara(p) {
         clockEl.textContent = new Date().toLocaleTimeString();
       }
     }, 1000);
+  }
+
+  // About Section Staggered Line Reveal & Trailing Statement Art
+  const aboutSec = (app && typeof app.querySelector === 'function') ? app.querySelector('#about') : null;
+  if (aboutSec) {
+    if (typeof IntersectionObserver !== 'undefined') {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            aboutSec.classList.add('in-view');
+            io.unobserve(aboutSec);
+          }
+        });
+      }, { threshold: 0.2 });
+      io.observe(aboutSec);
+    } else {
+      aboutSec.classList.add('in-view');
+    }
+
+    const stmtWrap = aboutSec.querySelector ? aboutSec.querySelector('.mara-statement-container') : null;
+    const cursorArt = aboutSec.querySelector ? aboutSec.querySelector('.mara-statement-cursor-art') : null;
+    if (stmtWrap && cursorArt && typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let targetX = 0, targetY = 0, curX = 0, curY = 0, rafId = null, lastTime = 0;
+      function updateArtPos(time) {
+        if (!lastTime) lastTime = time;
+        const deltaMs = Math.min(time - lastTime, 64);
+        lastTime = time;
+        const factor = 1 - Math.exp(-deltaMs / 140);
+        curX += (targetX - curX) * factor;
+        curY += (targetY - curY) * factor;
+        cursorArt.style.transform = `translate3d(${curX}px, ${curY}px, 0) scale(1)`;
+        if (Math.abs(targetX - curX) > 0.1 || Math.abs(targetY - curY) > 0.1) {
+          rafId = requestAnimationFrame(updateArtPos);
+        } else {
+          rafId = null;
+        }
+      }
+      stmtWrap.addEventListener('mousemove', (e) => {
+        const rect = stmtWrap.getBoundingClientRect();
+        targetX = e.clientX - rect.left - 140;
+        targetY = e.clientY - rect.top - 168;
+        if (!rafId) {
+          lastTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+          rafId = requestAnimationFrame(updateArtPos);
+        }
+      });
+      stmtWrap.addEventListener('mouseleave', () => {
+        if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+      });
+    }
   }
 }
 

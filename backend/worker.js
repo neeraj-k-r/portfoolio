@@ -57,7 +57,8 @@ function dpProjectIcon(pr) {
 async function getProfile(sub) {
   // 1) Supabase: approved rows are publicly readable
   try {
-    const fullSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works';
+    const fullSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works,about_story,about_headline,about_badge,about_origin,about_stats';
+    const v2Select = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works';
     // Fallback select for DBs where the owner never re-ran supabase-schema.sql
     // (missing site_type / resume columns). PostgREST 400s the whole query
     // when any selected column is absent, so retry with v1 core columns.
@@ -70,12 +71,20 @@ async function getProfile(sub) {
       return rows.length ? rows[0] : null;
     };
     let row = await fetchSel(fullSelect);
+    if (!row) row = await fetchSel(v2Select);
     if (!row) row = await fetchSel(coreSelect);
     if (row) {
       if (row.avatar_url && !row.avatarUrl) row.avatarUrl = row.avatar_url;
       if (row.avatarUrl && !row.avatar_url) row.avatar_url = row.avatarUrl;
       if (typeof row.show_instagram === 'boolean' && typeof row.showInstagram === 'undefined') row.showInstagram = row.show_instagram;
       if (typeof row.showInstagram === 'boolean' && typeof row.show_instagram === 'undefined') row.show_instagram = row.showInstagram;
+      if (row.about && typeof row.about === 'object') {
+        if (!row.about_story && row.about.story) row.about_story = row.about.story;
+        if (!row.about_headline && row.about.headline) row.about_headline = row.about.headline;
+        if (!row.about_badge && row.about.badge) row.about_badge = row.about.badge;
+        if (!row.about_origin && row.about.origin) row.about_origin = row.about.origin;
+        if (!row.about_stats && Array.isArray(row.about.stats)) row.about_stats = row.about.stats;
+      }
       if (row.resume && typeof row.resume === 'object' && Array.isArray(row.resume.services) && (!row.services || !row.services.length)) {
         row.services = row.resume.services;
       }
@@ -96,6 +105,11 @@ async function getProfile(sub) {
             if ((!row.projects || !row.projects.length) && Array.isArray(seed.projects) && seed.projects.length) {
               row.projects = seed.projects;
             }
+            if (seed.about_story && !row.about_story) row.about_story = seed.about_story;
+            if (seed.about_headline && !row.about_headline) row.about_headline = seed.about_headline;
+            if (seed.about_badge && !row.about_badge) row.about_badge = seed.about_badge;
+            if (seed.about_origin && !row.about_origin) row.about_origin = seed.about_origin;
+            if (seed.about_stats && !row.about_stats) row.about_stats = seed.about_stats;
           }
         }
       } catch {}
@@ -111,6 +125,10 @@ async function getProfile(sub) {
       if (seed) {
         if (seed.avatar_url && !seed.avatarUrl) seed.avatarUrl = seed.avatar_url;
         if (seed.avatarUrl && !seed.avatar_url) seed.avatar_url = seed.avatarUrl;
+        if (seed.about && typeof seed.about === 'object') {
+          if (!seed.about_story && seed.about.story) seed.about_story = seed.about.story;
+          if (!seed.about_headline && seed.about.headline) seed.about_headline = seed.about.headline;
+        }
         if (typeof seed.show_instagram === 'boolean' && typeof seed.showInstagram === 'undefined') seed.showInstagram = seed.show_instagram;
         if (typeof seed.showInstagram === 'boolean' && typeof seed.show_instagram === 'undefined') seed.show_instagram = seed.showInstagram;
         if (seed.resume && typeof seed.resume === 'object' && Array.isArray(seed.resume.services) && (!seed.services || !seed.services.length)) {
@@ -871,6 +889,26 @@ body.illustra-dark-mode{background:#120e1e!important}
 .hero-foot { position: absolute; bottom: 40px; left: 3%; right: 3%; display: flex; justify-content: space-between; align-items: flex-end; z-index: 5; }
 .hero-pill-work { background: #ffffff; color: #000000; border-radius: 999px; padding: 16px 24px; font-size: 18px; text-decoration: none; font-weight: 500; transition: background 0.25s, transform 0.25s; }
 .hero-pill-work:hover { background: #ff630f; transform: scale(1.04); }
+
+/* MARA DESIGN APPROACH / ABOUT SECTION */
+.mara-about-section { position: relative; min-height: 900px; padding: 40px 3% 80px; border-top: 1px solid #222222; background: #000000; display: flex; flex-direction: column; justify-content: space-between; container-type: inline-size; }
+.mara-about-kicker { font-size: 18px; color: #949494; margin-bottom: 65px; letter-spacing: 0.04em; font-family: monospace; }
+.mara-statement-container { position: relative; cursor: default; }
+.mara-statement-wrap { display: flex; flex-direction: column; gap: 0; margin-bottom: 80px; }
+.mara-statement-line-wrap { overflow: hidden; display: block; }
+.mara-statement-line { font-size: clamp(30px, 6.7cqw, 96px); font-weight: 500; line-height: 0.98; letter-spacing: -0.04em; color: #ffffff; transform: translateY(0); transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1); }
+.mara-about-section:not(.in-view) .mara-statement-line { transform: translateY(108%); }
+.mara-statement-cursor-art { position: absolute; top: 0; left: 0; width: 280px; height: 336px; pointer-events: none; opacity: 0; transform: scale(0.94); mix-blend-mode: difference; z-index: 25; transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8); border-radius: 4px; overflow: hidden; }
+.mara-statement-cursor-art svg { width: 100%; height: 100%; display: block; }
+.mara-statement-container:hover .mara-statement-cursor-art { opacity: 1; transform: scale(1); }
+@media (pointer: coarse), (prefers-reduced-motion: reduce) { .mara-statement-cursor-art { display: none !important; } }
+.mara-about-meta { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; border-top: 1px solid #222222; padding-top: 40px; margin-top: auto; }
+.mara-about-support { max-width: 520px; font-size: 18px; line-height: 1.6; color: #b8b8b8; }
+.mara-about-disciplines { display: flex; flex-direction: column; gap: 12px; }
+.mara-disciplines-label { font-size: 12px; letter-spacing: 0.1em; color: #949494; font-weight: 700; text-transform: uppercase; }
+.mara-disciplines-list { display: flex; gap: 10px; flex-wrap: wrap; }
+.mara-discipline-pill { border: 1px solid #777777; border-radius: 99px; padding: 10px 14px; font-size: 14px; color: #b8b8b8; background: transparent; transition: border-color 0.2s, color 0.2s; }
+.mara-discipline-pill:hover { border-color: #ff630f; color: #ffffff; }
 
 .mara-work-section { padding: 60px 4% 80px; background: linear-gradient(180deg, #000000 0%, #000000 48%, #ea4f16 78%, #f6af60 100%); }
 .mara-work-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; color: #949494; font-size: 14px; letter-spacing: 0.08em; }
@@ -2569,7 +2607,91 @@ function pageGallery(p, wIdx, url) {
 
         const role = esc(p.title || 'Independent Art Director & Digital Designer');
         const practice = esc(p.tagline || p.bio || 'Brand identities, editorial systems, digital experiences.');
-        const story = esc(p.about_story || p.bio || 'Rooted in clarity, driven by curiosity, Mara Voss builds identities and digital experiences that bring structure to complex ideas through bold typography and thoughtful visual systems.');
+        const customStory = p.about_story || (p.about && p.about.story) || p.bio || '';
+        const defaultStory = `Rooted in clarity, driven by curiosity, ${fullName} builds identities and digital experiences that bring structure to complex ideas through bold typography and thoughtful visual systems.`;
+        const story = esc(customStory || defaultStory);
+
+        const customStrategy = p.about_headline || (p.about && p.about.headline) || p.tagline || '';
+        const defaultStrategy = 'I connect strategy and expression through brand identities, editorial systems, and digital experiences designed to work as a whole.';
+        const strategy = esc(customStrategy || defaultStrategy);
+
+        let statementLines = [
+          'Rooted in clarity, driven by curiosity,',
+          `${fullName} builds identities and digital`,
+          'experiences that bring structure to',
+          'complex ideas through bold typography',
+          'and thoughtful visual systems.'
+        ];
+        if (customStory && typeof customStory === 'string' && customStory.trim()) {
+          const raw = customStory.trim();
+          if (raw.includes('\n')) {
+            const lines = raw.split('\n').map(l => l.trim()).filter(Boolean);
+            if (lines.length) statementLines = lines;
+          } else {
+            const words = raw.split(/\s+/).filter(Boolean);
+            if (words.length <= 15) {
+              statementLines = [raw];
+            } else {
+              const count = 5;
+              const perLine = Math.ceil(words.length / count);
+              const lines = [];
+              for (let i = 0; i < words.length; i += perLine) {
+                lines.push(words.slice(i, i + perLine).join(' '));
+              }
+              statementLines = lines;
+            }
+          }
+        }
+
+        const disciplines = (Array.isArray(p.services) && p.services.length)
+          ? p.services.map(s => esc(typeof s === 'object' ? (s.title || s.name || s) : String(s))).slice(0, 5)
+          : ((Array.isArray(p.skills) && p.skills.length) ? p.skills.slice(0, 4).map(esc) : ['Art Direction', 'Brand Identity', 'Digital Design']);
+
+        const maraStatementSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="720" viewBox="0 0 600 720">
+<rect width="600" height="720" fill="#e5e0d5"/>
+<g font-family="Arial,sans-serif" fill="#111">
+<text x="32" y="48" font-size="22" letter-spacing="-1">A STUDY OF RELATIONSHIPS</text>
+<text x="32" y="75" font-size="10" letter-spacing="2">FORM / SPACE / COUNTERFORM — 01–06</text>
+</g>
+<g stroke="#a5a096" fill="none">
+<path d="M32 96h536M32 110v530M298 110v530M568 110v530M32 280h536M32 460h536M32 640h536"/>
+</g>
+<g transform="translate(60 128)">
+<rect width="205" height="122" fill="#141414"/>
+<circle cx="103" cy="61" r="45" fill="#e5e0d5"/>
+<rect x="83" y="-2" width="40" height="126" fill="#ff630f"/>
+</g>
+<g transform="translate(326 128)" fill="#171717">
+<path d="M0 122 105 0 205 122Z"/>
+<path d="M40 122 105 50 170 122Z" fill="#e5e0d5"/>
+</g>
+<g transform="translate(60 305)">
+<rect width="205" height="125" fill="#ff630f"/>
+<path d="M0 0 205 125M0 25 165 125M0 50 125 125M40 0 205 100M80 0 205 75" stroke="#131313" stroke-width="12"/>
+</g>
+<g transform="translate(328 302)" fill="none" stroke="#171717" stroke-width="2">
+<ellipse cx="102" cy="64" rx="100" ry="61"/>
+<ellipse cx="102" cy="64" rx="75" ry="61"/>
+<ellipse cx="102" cy="64" rx="50" ry="61"/>
+<ellipse cx="102" cy="64" rx="25" ry="61"/>
+<path d="M2 64h200"/>
+</g>
+<g transform="translate(60 483)">
+<rect x="0" y="0" width="76" height="124" fill="#111"/>
+<rect x="92" y="0" width="34" height="124" fill="#ff630f"/>
+<rect x="144" y="0" width="60" height="124" fill="#111"/>
+</g>
+<g transform="translate(333 483)" fill="#131313">
+<circle cx="55" cy="45" r="45"/>
+<circle cx="130" cy="78" r="45"/>
+<circle cx="90" cy="61" r="22" fill="#e5e0d5"/>
+</g>
+<g font-family="Arial,sans-serif" fill="#151515" font-size="10" letter-spacing="1">
+<text x="32" y="678">GEOMETRIC RESEARCH / MARA VOSS STUDIO</text>
+<text x="495" y="678">2026</text>
+</g>
+</svg>`;
+
         const portrait = esc((p.mara_hero_portrait || p.hero_image) ? (p.mara_hero_portrait || p.hero_image) : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=80');
         const sourceWorks = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : []);
         const defaultImages = [
@@ -2621,9 +2743,31 @@ function pageGallery(p, wIdx, url) {
               <a href="#work" class="hero-pill-work">Explore work ↘</a>
             </div>
           </header>
-          <section id="about" style="min-height:600px;padding:60px 3%;border-top:1px solid #222">
-            <div style="font-size:18px;color:#949494;margin-bottom:30px">// Design Approach</div>
-            <h2 style="font-size:clamp(28px,6vw,84px);line-height:1.05;letter-spacing:-0.04em;max-width:1200px;margin-bottom:60px">${story}</h2>
+          <section id="about" class="mara-about-section">
+            <div class="mara-about-kicker">// Design Approach</div>
+
+            <div class="mara-statement-container">
+              <div class="mara-statement-wrap">
+                ${statementLines.map((line, idx) => `
+                  <div class="mara-statement-line-wrap">
+                    <div class="mara-statement-line" style="transition-delay:${idx * 110}ms">${esc(line)}</div>
+                  </div>
+                `).join('')}
+              </div>
+              <div class="mara-statement-cursor-art" aria-hidden="true">
+                ${maraStatementSvg}
+              </div>
+            </div>
+
+            <div class="mara-about-meta">
+              <p class="mara-about-support">${strategy}</p>
+              <div class="mara-about-disciplines">
+                <span class="mara-disciplines-label">DISCIPLINES</span>
+                <div class="mara-disciplines-list">
+                  ${disciplines.map(d => `<span class="mara-discipline-pill">${d}</span>`).join('')}
+                </div>
+              </div>
+            </div>
           </section>
           <section id="work" class="mara-work-section">
             <div class="mara-work-head">
@@ -2686,6 +2830,55 @@ function pageGallery(p, wIdx, url) {
                 preview.style.top = '50%';
               });
             });
+
+            var aboutSec = document.getElementById('about');
+            if (aboutSec) {
+              if (typeof IntersectionObserver !== 'undefined') {
+                var io = new IntersectionObserver(function(entries) {
+                  entries.forEach(function(e) {
+                    if (e.isIntersecting) {
+                      aboutSec.classList.add('in-view');
+                      io.unobserve(aboutSec);
+                    }
+                  });
+                }, { threshold: 0.2 });
+                io.observe(aboutSec);
+              } else {
+                aboutSec.classList.add('in-view');
+              }
+
+              var stmtWrap = aboutSec.querySelector('.mara-statement-container');
+              var cursorArt = aboutSec.querySelector('.mara-statement-cursor-art');
+              if (stmtWrap && cursorArt && window.matchMedia && window.matchMedia('(pointer: fine)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                var targetX = 0, targetY = 0, curX = 0, curY = 0, rafId = null, lastTime = 0;
+                function updateArtPos(time) {
+                  if (!lastTime) lastTime = time;
+                  var deltaMs = Math.min(time - lastTime, 64);
+                  lastTime = time;
+                  var factor = 1 - Math.exp(-deltaMs / 140);
+                  curX += (targetX - curX) * factor;
+                  curY += (targetY - curY) * factor;
+                  cursorArt.style.transform = 'translate3d(' + curX + 'px, ' + curY + 'px, 0) scale(1)';
+                  if (Math.abs(targetX - curX) > 0.1 || Math.abs(targetY - curY) > 0.1) {
+                    rafId = requestAnimationFrame(updateArtPos);
+                  } else {
+                    rafId = null;
+                  }
+                }
+                stmtWrap.addEventListener('mousemove', function(e) {
+                  var rect = stmtWrap.getBoundingClientRect();
+                  targetX = e.clientX - rect.left - 140;
+                  targetY = e.clientY - rect.top - 168;
+                  if (!rafId) {
+                    lastTime = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+                    rafId = requestAnimationFrame(updateArtPos);
+                  }
+                });
+                stmtWrap.addEventListener('mouseleave', function() {
+                  if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+                });
+              }
+            }
           })();
           </script>
         </div>`;

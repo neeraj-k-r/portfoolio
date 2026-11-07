@@ -731,6 +731,47 @@ test('Mara theme properly parses single-name username and renders project hover 
   assert.ok(!capturedHtml.includes('https://example.com/bangles.jpg'), 'hero background portrait must NOT use profile avatar bangles');
 });
 
+test('Mara theme renders Section 5 Design Approach with 5-line statement, statement SVG, and dynamic story details', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const maraFn = domMock.window.PortfoolioTemplates.mara;
+  // Test with custom about details
+  maraFn({
+    name: 'Aria Thorne',
+    title: 'Executive Design Principal',
+    about_story: 'Transforming complex product ecosystems through disciplined creative systems and bespoke typography.',
+    about_headline: 'Creating bold identities and memorable digital experiences at global scale.',
+    services: ['Strategic Branding', 'Creative Architecture', 'Editorial Systems']
+  });
+
+  assert.ok(capturedHtml.includes('mara-about-section'), 'must render mara-about-section');
+  assert.ok(capturedHtml.includes('mara-about-kicker'), 'must render mara-about-kicker');
+  assert.ok(capturedHtml.includes('// Design Approach'), 'must render // Design Approach kicker');
+  assert.ok(capturedHtml.includes('mara-statement-container'), 'must render mara-statement-container');
+  assert.ok(capturedHtml.includes('mara-statement-line-wrap'), 'must render mara-statement-line-wrap containers');
+  assert.ok(capturedHtml.includes('mara-statement-line'), 'must render mara-statement-line elements');
+  assert.ok(capturedHtml.includes('Transforming complex product'), 'must dynamically render custom story lines');
+  assert.ok(capturedHtml.includes('mara-statement-cursor-art'), 'must render trailing statement cursor art container');
+  assert.ok(capturedHtml.includes('FORM / SPACE / COUNTERFORM'), 'must embed statement SVG from Section 13');
+  assert.ok(capturedHtml.includes('Creating bold identities and memorable digital experiences at global scale.'), 'must render custom strategy copy');
+  assert.ok(capturedHtml.includes('Strategic Branding'), 'must render custom discipline pill 1');
+  assert.ok(capturedHtml.includes('Creative Architecture'), 'must render custom discipline pill 2');
+  assert.ok(capturedHtml.includes('Editorial Systems'), 'must render custom discipline pill 3');
+});
+
 test('Studio tabAbout contains all required interactive inputs and story controls', () => {
   const tabAboutMatch = INDEX_HTML.match(/<div id="tabAbout"[\s\S]*?<!-- User Studio Tab 2:/);
   assert.ok(tabAboutMatch, 'tabAbout element must exist in index.html');
