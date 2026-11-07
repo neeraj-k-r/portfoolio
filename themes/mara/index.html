@@ -353,6 +353,71 @@
       0%, 70%, 100% { transform: translateY(-3px); }
       35% { transform: translateY(5px); }
     }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 507px;
+      background: #000000;
+      border-bottom: 1px solid var(--mara-dark-div-2);
+      z-index: 900;
+      padding: 105px 40px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transform: translateY(-24px);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.42s ease, opacity 0.42s ease;
+    }
+    .menu-overlay.is-open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .menu-scrim {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.65);
+      z-index: 890;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.42s ease;
+    }
+    .menu-scrim.is-open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .menu-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 48px;
+    }
+    .menu-link {
+      font-family: var(--mara-font-display);
+      font-size: 96px;
+      line-height: 88px;
+      font-weight: 500;
+      letter-spacing: -3.84px;
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+      display: inline-block;
+      height: 88px;
+      text-decoration: none;
+    }
+    .menu-link .roll-wrap {
+      display: inline-block;
+      transition: transform 0.5s var(--mara-ease-reveal);
+    }
+    .menu-link:hover .roll-wrap, .menu-link:focus .roll-wrap {
+      transform: translateY(-88px);
+      color: var(--mara-accent);
+    }
   </style>
 </head>
 <body id="top">
@@ -760,5 +825,14 @@
     `;
 
 </script>
+
+  <div id="menuOverlay" class="menu-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site Navigation">
+    <div class="menu-links">
+      <a href="#about" class="menu-link" data-text="About"><span class="roll-wrap">About</span></a>
+      <a href="#work" class="menu-link" data-text="Work"><span class="roll-wrap">Work</span></a>
+      <a href="#contact" class="menu-link" data-text="Contact"><span class="roll-wrap">Contact</span></a>
+    </div>
+  </div>
+  <div id="menuScrim" class="menu-scrim" aria-hidden="true"></div>
 </body>
 </html>
