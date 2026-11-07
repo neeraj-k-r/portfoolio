@@ -57,6 +57,27 @@
     .mara-pill:active {
       transform: scale(0.98);
     }
+    ::selection { background: var(--mara-accent); color: #000000; }
+    :focus-visible {
+      outline: 2px solid var(--mara-accent);
+      outline-offset: 6px;
+    }
+    .skip-link {
+      position: fixed;
+      top: 16px;
+      left: 16px;
+      background: #ffffff;
+      color: #000000;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-family: var(--mara-font-utility);
+      font-weight: 600;
+      font-size: 14px;
+      z-index: 9999;
+      transform: translateY(-200%);
+      transition: transform 0.2s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
     @font-face{font-family:MonaSemi;src:url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/static/MonaSansSemiCondensed-ExtraLight.woff2") format("woff2");font-weight:250;font-style:normal;font-display:swap}
     @font-face{font-family:MonaSemi;src:url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/static/MonaSansSemiCondensed-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
     @font-face{font-family:MonaSemi;src:url("https://cdn.jsdelivr.net/gh/github/mona-sans@main/fonts/webfonts/static/MonaSansSemiCondensed-Medium.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
