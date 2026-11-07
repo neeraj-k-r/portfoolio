@@ -125,7 +125,7 @@ async function cloudSaveProfile(p) {
   // the whole upsert, which would lose ALL edits. Retry once with core fields
   // only — a partial save beats no save. Owner fix: re-run supabase-schema.sql.
   if (isMissingColumnError(res.error)) {
-    const { experience, education, certifications, resume, site_type, site_path, site_updated_at, show_instagram, track, works, ...core } = row;
+    const { experience, education, certifications, resume, site_type, site_path, site_updated_at, show_instagram, track, works, about_story, about_headline, about_badge, about_origin, about_stats, ...core } = row;
     const retry = await sb.from('profiles').upsert(core, { onConflict: 'username' });
     if (!retry.error) return { ...core, _partial: true };
   }
