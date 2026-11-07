@@ -291,6 +291,34 @@
     }
     .hero-practice-1 { color: #ffffff; }
     .hero-practice-2 { color: var(--mara-muted); margin-top: 4px; }
+
+    .hero-explore-pill {
+      position: absolute;
+      bottom: 34px;
+      right: var(--mara-inset);
+      transform: translateY(56px);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease, background 0.25s ease, color 0.25s ease;
+      z-index: 2;
+    }
+    .hero-explore-pill.is-revealed {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .hero-vertical-tag {
+      position: absolute;
+      right: calc(var(--mara-inset) - 4px);
+      top: 52%;
+      transform: translateY(-50%) rotate(90deg);
+      transform-origin: right center;
+      font-family: var(--mara-font-utility);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      z-index: 2;
+      pointer-events: none;
+    }
   </style>
 </head>
 <body id="top">
@@ -339,6 +367,9 @@
       <p class="hero-practice-1">• Brand identities, editorial systems, digital experiences.</p>
       <p class="hero-practice-2">• Independent practice. Thoughtful systems. Distinctive outcomes.</p>
     </div>
+
+    <a href="#work" class="mara-pill hero-explore-pill" id="heroExploreBtn">Explore work ↘</a>
+    <div class="hero-vertical-tag">A FICTIONAL PORTRAIT / STRUCTURE &amp; EXPRESSION — 001</div>
   </header>
   <main>
     <section id="about" class="mara-about"></section>
