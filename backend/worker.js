@@ -9045,11 +9045,21 @@ function renderLoSSRArtGrid(works) {
 }
 
 function renderLoSSRMilestones(p) {
+  const rawStats = (p && (p.about_stats || (p.about && p.about.stats))) || [];
+  const defaultStats = [
+    { num: '12+', label: 'Years Creating' },
+    { num: '80+', label: 'Commissions' },
+    { num: '15+', label: 'Brand Partners' },
+    { num: '100%', label: 'Indie Spirit' },
+  ];
+  const stats = (Array.isArray(rawStats) && rawStats.length > 0)
+    ? rawStats.filter(s => s && (s.num || s.label))
+    : defaultStats;
+  const items = stats.length > 0 ? stats : defaultStats;
   return `<div class="lo-milestones-grid">
-    <div class="lo-milestone"><div class="lo-milestone-number">12+</div><div class="lo-milestone-label">Years Creating</div></div>
-    <div class="lo-milestone"><div class="lo-milestone-number">80+</div><div class="lo-milestone-label">Commissions</div></div>
-    <div class="lo-milestone"><div class="lo-milestone-number">15+</div><div class="lo-milestone-label">Brand Partners</div></div>
-    <div class="lo-milestone"><div class="lo-milestone-number">100%</div><div class="lo-milestone-label">Indie Spirit</div></div>
+    ${items.map(s => `
+      <div class="lo-milestone"><div class="lo-milestone-number">${esc(s.num || '')}</div><div class="lo-milestone-label">${esc(s.label || '')}</div></div>
+    `).join('')}
   </div>`;
 }
 
