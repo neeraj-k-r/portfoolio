@@ -9044,7 +9044,7 @@ function renderLoSSRArtGrid(works) {
   </section>`;
 }
 
-function renderLoSSRMilestones() {
+function renderLoSSRMilestones(p) {
   return `<div class="lo-milestones-grid">
     <div class="lo-milestone"><div class="lo-milestone-number">12+</div><div class="lo-milestone-label">Years Creating</div></div>
     <div class="lo-milestone"><div class="lo-milestone-number">80+</div><div class="lo-milestone-label">Commissions</div></div>
