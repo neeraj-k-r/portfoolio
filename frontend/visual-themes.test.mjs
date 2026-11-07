@@ -529,3 +529,36 @@ test('Lo theme preserves aesthetic defaults when about fields are omitted', () =
   assert.ok(capturedHtml.includes('12+'), 'default milestone num preserved');
   assert.ok(capturedHtml.includes('Years Creating'), 'default milestone label preserved');
 });
+
+test('Suki theme dynamically renders custom about headline, story, and stats', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const sukiFn = domMock.window.PortfoolioTemplates.suki;
+  sukiFn({
+    name: 'Cinema Suki',
+    about_headline: 'Frame by frame cinematic narrative.',
+    about_story: 'Color grading, sound design, and precision cuts.',
+    about_stats: [
+      { num: '50M+', label: 'Views Generated' },
+      { num: '14', label: 'Festival Laurels' }
+    ]
+  });
+
+  assert.ok(capturedHtml.includes('Frame by frame cinematic narrative.'), 'suki custom headline rendered');
+  assert.ok(capturedHtml.includes('Color grading, sound design, and precision cuts.'), 'suki custom story rendered');
+  assert.ok(capturedHtml.includes('50M+'), 'suki custom stat 1 rendered');
+  assert.ok(capturedHtml.includes('Festival Laurels'), 'suki custom stat 2 rendered');
+});
