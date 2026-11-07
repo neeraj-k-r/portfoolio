@@ -549,6 +549,37 @@
       flex-direction: column;
       align-items: center;
     }
+
+    .featured-title {
+      font-family: var(--mara-font-display);
+      font-weight: 500;
+      font-size: clamp(52px, 13.3cqw, 180px);
+      line-height: 0.84;
+      letter-spacing: -0.04em;
+      text-align: center;
+      color: #ffffff;
+      z-index: 1;
+    }
+    .feat-sup {
+      font-family: var(--mara-font-utility);
+      font-size: 0.22em;
+      letter-spacing: 0.04em;
+      vertical-align: super;
+      margin-left: 8px;
+      color: var(--mara-muted-2);
+    }
+    .feat-line {
+      display: block;
+      opacity: 0;
+      filter: blur(16px);
+      transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
+    }
+    .feat-line.is-revealed {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body id="top">
@@ -646,6 +677,10 @@
         <div class="featured-kicker">SELF-INITIATED CONCEPT // 2026</div>
       </div>
       <div class="featured-stage" id="featuredStage">
+        <h2 class="featured-title">
+          <span class="feat-line">GRIDLINE <sup class="feat-sup">[01]</sup></span>
+          <span class="feat-line">STUDIO</span>
+        </h2>
       </div>
     </section>
     <section id="work" class="mara-work"></section>
