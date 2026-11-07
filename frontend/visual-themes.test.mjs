@@ -689,3 +689,20 @@ test('Mara theme preserves default persona and aesthetic defaults when optional 
   assert.ok(capturedHtml.includes('Gridline Studio'), 'defaults to curated project index');
   assert.ok(capturedHtml.includes('Art Direction'), 'defaults to Art Direction capability');
 });
+
+test('Studio tabAbout contains all required interactive inputs and story controls', () => {
+  const tabAboutMatch = INDEX_HTML.match(/<div id="tabAbout"[\s\S]*?<!-- User Studio Tab 2:/);
+  assert.ok(tabAboutMatch, 'tabAbout element must exist in index.html');
+  const tabAboutHtml = tabAboutMatch[0];
+
+  assert.ok(tabAboutHtml.includes('id="edAboutHeadline"'), 'tabAbout must contain #edAboutHeadline input');
+  assert.ok(tabAboutHtml.includes('id="edAboutStory"'), 'tabAbout must contain #edAboutStory textarea');
+  assert.ok(tabAboutHtml.includes('id="edAboutBadge"'), 'tabAbout must contain #edAboutBadge input');
+  assert.ok(tabAboutHtml.includes('id="edAboutOrigin"'), 'tabAbout must contain #edAboutOrigin input');
+  assert.ok(tabAboutHtml.includes('id="edStat1Num"'), 'tabAbout must contain #edStat1Num');
+  assert.ok(tabAboutHtml.includes('id="edStat1Label"'), 'tabAbout must contain #edStat1Label');
+  assert.ok(tabAboutHtml.includes('id="edStat4Num"'), 'tabAbout must contain #edStat4Num');
+  assert.ok(tabAboutHtml.includes('id="edStat4Label"'), 'tabAbout must contain #edStat4Label');
+  assert.ok(tabAboutHtml.includes('id="edAboutSaveBtn"'), 'tabAbout must contain save button');
+});
+
