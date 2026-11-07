@@ -409,3 +409,31 @@ test('Lo theme renders brand, narrative hero, zero-gap art grid, and studio stor
   assert.ok(capturedHtml.includes('03 / PRINT EDITIONS'), 'lo must render shop editions section');
   assert.ok(capturedHtml.includes('Have a wild vision?'), 'lo must render contact section');
 });
+
+test('Lo theme dynamically renders custom about headline and bio story when provided', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const loFn = domMock.window.PortfoolioTemplates.lo;
+  loFn({
+    name: 'Maya Lin',
+    about_headline: 'Sculpting spaces where memory, light, and landscape meet.',
+    about_story: 'My architectural practice centers on public memory and natural material topography.',
+  });
+
+  assert.ok(capturedHtml.includes('Sculpting spaces where memory, light, and landscape meet.'), 'must render custom about headline');
+  assert.ok(capturedHtml.includes('My architectural practice centers on public memory and natural material topography.'), 'must render custom story paragraph');
+  assert.ok(!capturedHtml.includes('Making things that spark joy, provoke curiosity, and refuse to be boring.'), 'must not contain default headline');
+});
