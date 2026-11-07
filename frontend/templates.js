@@ -10047,7 +10047,8 @@ function renderMythosHeroVisual(p) {
 function renderMythosAboutModal(p) {
   const name = tplEsc(p.name || 'Nithin Krishna');
   const role = tplEsc(p.title || 'Creative Engineer');
-  const bio = tplEsc(p.bio || p.tagline || 'A showcase of creative work, digital builds, visual explorations, and curious experiments.');
+  const headline = tplEsc(p.about_headline || (p.about && p.about.headline) || '');
+  const bio = tplEsc(p.about_story || (p.about && p.about.story) || p.bio || p.tagline || 'A showcase of creative work, digital builds, visual explorations, and curious experiments.');
   const location = tplEsc(p.location || 'Creative Studio');
   const email = p.email || '';
 
@@ -10063,6 +10064,7 @@ function renderMythosAboutModal(p) {
           <button class="mythos-modal-close" onclick="window.closeMythosAboutModal()" aria-label="Close modal">✕</button>
         </div>
         <div class="mythos-modal-body">
+          ${headline ? `<h4 style="font-size:1.15rem;margin-bottom:8px;color:#fff">${headline}</h4>` : ''}
           <p class="mythos-modal-bio">${bio}</p>
           <div class="mythos-modal-meta-grid">
             <div class="mythos-modal-meta-item">
