@@ -2,7 +2,7 @@
   "name": "portfoolio",
   "version": "1.0.0",
   "private": true,
-  "description": "portfoolio.me — developer & creator portfolios - Custom About & Story Engine",
+  "description": "portfoolio.me — developer & creator portfolios - Custom About & Story Engine - Mara Voss Theme Release",
   "scripts": {
     "dev": "node server.mjs",
     "start": "node server.mjs",
