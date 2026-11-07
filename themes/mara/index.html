@@ -865,6 +865,46 @@
       color: var(--mara-muted);
       font-family: var(--mara-font-utility);
     }
+
+    .services-rows {
+      border-top: 1px solid var(--mara-dark-div-2);
+    }
+    .capability-item {
+      border-bottom: 1px solid var(--mara-dark-div-2);
+    }
+    .capability-row {
+      display: grid;
+      grid-template-columns: 42px minmax(0,1.1fr) minmax(0,1.7fr) 140px;
+      gap: 16px;
+      align-items: center;
+      padding: 24px 0;
+      cursor: pointer;
+    }
+    .cap-idx { font-family: var(--mara-font-utility); font-size: 14px; color: var(--mara-muted); }
+    .cap-title { font-family: var(--mara-font-display); font-size: 24px; font-weight: 500; color: #ffffff; }
+    .cap-scope { font-size: 18px; color: var(--mara-muted-3); }
+    .cap-btn {
+      padding: 8px 16px;
+      background: var(--mara-accent);
+      color: #000000;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: var(--mara-font-utility);
+      justify-self: end;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .cap-btn:hover { transform: scale(1.05); }
+    .capability-panel {
+      padding: 0 0 24px 58px;
+      max-width: 800px;
+      animation: panelFade 0.3s ease;
+    }
+    @keyframes panelFade { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .cap-desc { font-size: 17px; line-height: 1.6; color: #d0cbbd; margin-bottom: 12px; }
+    .cap-delivs { font-size: 15px; color: var(--mara-muted-2); }
+    .cap-delivs strong { color: #ffffff; }
   </style>
 </head>
 <body id="top">
@@ -1065,6 +1105,43 @@
         <div class="section-label">// CAPABILITIES.</div>
       </div>
       <div class="services-rows" id="servicesRows">
+
+        <div class="capability-item">
+          <div class="capability-row" role="button" tabindex="0" aria-expanded="false" aria-controls="capPanel1" onclick="toggleCapability(1)">
+            <span class="cap-idx">01</span>
+            <span class="cap-title">Art Direction</span>
+            <span class="cap-scope">Concept development / Visual language / Creative direction</span>
+            <button class="cap-btn" id="capBtn1" aria-label="Toggle Art Direction details">Explore +</button>
+          </div>
+          <div class="capability-panel" id="capPanel1" hidden>
+            <p class="cap-desc">A clear visual point of view, translated into a coherent direction for identities, editorial work, and digital experiences.</p>
+            <p class="cap-delivs"><strong>Example deliverables:</strong> Creative concept, visual principles, art-direction guidelines.</p>
+          </div>
+        </div>
+        <div class="capability-item">
+          <div class="capability-row" role="button" tabindex="0" aria-expanded="false" aria-controls="capPanel2" onclick="toggleCapability(2)">
+            <span class="cap-idx">02</span>
+            <span class="cap-title">Brand Identity</span>
+            <span class="cap-scope">Strategy translation / Identity systems / Guidelines</span>
+            <button class="cap-btn" id="capBtn2" aria-label="Toggle Brand Identity details">Explore +</button>
+          </div>
+          <div class="capability-panel" id="capPanel2" hidden>
+            <p class="cap-desc">Distinctive identities built from a thoughtful relationship between typography, color, composition, and the everyday needs of a brand.</p>
+            <p class="cap-delivs"><strong>Example deliverables:</strong> Wordmark, typographic system, color palette, brand guidelines.</p>
+          </div>
+        </div>
+        <div class="capability-item">
+          <div class="capability-row" role="button" tabindex="0" aria-expanded="false" aria-controls="capPanel3" onclick="toggleCapability(3)">
+            <span class="cap-idx">03</span>
+            <span class="cap-title">Digital Design</span>
+            <span class="cap-scope">Website concepts / Interface design / Design systems</span>
+            <button class="cap-btn" id="capBtn3" aria-label="Toggle Digital Design details">Explore +</button>
+          </div>
+          <div class="capability-panel" id="capPanel3" hidden>
+            <p class="cap-desc">Expressive, usable interfaces that extend a brand into a consistent digital experience, from the first screen to the smallest component.</p>
+            <p class="cap-delivs"><strong>Example deliverables:</strong> Responsive layouts, interface components, interaction direction.</p>
+          </div>
+        </div>
       </div>
       <div class="services-footer-notes">
         <span>From a focused identity to a complete digital direction.</span>
