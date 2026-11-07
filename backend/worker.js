@@ -3800,17 +3800,59 @@ function pageModerncv(p) {
       ? p.resume.experience
       : [];
 
-  const expList = rawExp.map((e) => ({
-    year: [e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || (e.year || 'Present'),
-    isCurrent: Boolean(e.current || String(e.end || '').toLowerCase() === 'present'),
-    title: e.role || e.title || 'Developer',
-    company: e.company || '',
-    desc: e.desc || '',
-    achievements: Array.isArray(e.achievements)
-      ? e.achievements.map((a) => String(a).trim()).filter(Boolean)
-      : String(e.desc || '').split('\n').map((s) => s.trim().replace(/^[-•*]\s*/, '')).filter((s) => s.length > 5),
-    tags: Array.isArray(e.tags) ? e.tags : (Array.isArray(e.technologies) ? e.technologies : [])
-  }));
+  const expList = rawExp.map((e) => {
+    const rawDesc = String(e.desc || '').trim();
+    let desc = '';
+    let achievements = [];
+
+    if (Array.isArray(e.achievements) && e.achievements.length > 0) {
+      achievements = e.achievements.map((a) => String(a).trim()).filter(Boolean);
+      desc = rawDesc;
+    } else if (rawDesc) {
+      const rawLines = rawDesc.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      const hasBullets = rawLines.some(l => /^[-•*]\s+/.test(l));
+
+      if (hasBullets) {
+        const introLines = [];
+        rawLines.forEach(l => {
+          if (/^[-•*]\s+/.test(l)) {
+            achievements.push(l.replace(/^[-•*]\s+/, '').trim());
+          } else if (!achievements.length) {
+            introLines.push(l);
+          } else {
+            achievements[achievements.length - 1] += ' ' + l;
+          }
+        });
+        desc = introLines.join(' ');
+      } else {
+        const healed = [];
+        let cur = '';
+        rawLines.forEach(l => {
+          if (!cur) {
+            cur = l;
+          } else if (/[.!?:;]$/.test(cur) && /^[A-Z0-9]/.test(l)) {
+            healed.push(cur);
+            cur = l;
+          } else {
+            cur += ' ' + l;
+          }
+        });
+        if (cur) healed.push(cur);
+        desc = healed.join(' ');
+        achievements = [];
+      }
+    }
+
+    return {
+      year: [e.start, e.current ? 'Present' : e.end].filter(Boolean).join(' – ') || (e.year || 'Present'),
+      isCurrent: Boolean(e.current || String(e.end || '').toLowerCase() === 'present'),
+      title: e.role || e.title || 'Developer',
+      company: e.company || '',
+      desc,
+      achievements,
+      tags: Array.isArray(e.tags) ? e.tags : (Array.isArray(e.technologies) ? e.technologies : [])
+    };
+  });
 
   const expHtml = expList.length
     ? `<div class="timeline">${expList.map((e) => `

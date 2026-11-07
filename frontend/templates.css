@@ -1529,15 +1529,15 @@ body[data-template="moderncv"] .timeline-company i {
 body[data-template="moderncv"] .timeline-description {
     color: var(--text-secondary);
     line-height: 1.8;
-    margin-bottom: 2rem;
+    margin-bottom: 1.25rem;
 }
 
 body[data-template="moderncv"] .timeline-achievements {
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
-    margin-bottom: 2rem;
-    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    padding: 1.25rem 1.5rem;
     background: var(--bg-darker);
     border-radius: 12px;
     border-left: 3px solid var(--primary);
@@ -1545,16 +1545,18 @@ body[data-template="moderncv"] .timeline-achievements {
 
 body[data-template="moderncv"] .achievement-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 0.8rem;
     color: var(--text-secondary);
     font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 body[data-template="moderncv"] .achievement-item i {
     color: var(--green);
-    font-size: 1rem;
+    font-size: 0.95rem;
     flex-shrink: 0;
+    margin-top: 4px;
 }
 
 body[data-template="moderncv"] .timeline-tags {
