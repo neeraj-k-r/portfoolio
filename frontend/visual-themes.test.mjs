@@ -602,3 +602,34 @@ test('Analog and Mythos themes dynamically render custom about headline and stor
   assert.ok(capturedHtml.includes('Exploring ancient aesthetics through 3D computation.'), 'mythos renders custom story');
   assert.ok(capturedHtml.includes('Athens Studio'), 'mythos renders custom origin');
 });
+
+test('Mara theme renders high-contrast typography, hero portrait, navigation, and selected work', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const maraFn = domMock.window.PortfoolioTemplates.mara;
+  assert.ok(maraFn, 'mara template must exist in PortfoolioTemplates');
+  maraFn({
+    name: 'Mara Voss',
+    title: 'Independent Art Director & Digital Designer',
+    tagline: 'Brand identities, editorial systems, digital experiences.'
+  });
+
+  assert.ok(capturedHtml.includes('mara-hero'), 'must render hero container');
+  assert.ok(capturedHtml.includes('Mara') && capturedHtml.includes('Voss'), 'must render Mara Voss title');
+  assert.ok(capturedHtml.includes('Design Approach'), 'must render Design Approach section');
+  assert.ok(capturedHtml.includes('Selected Work'), 'must render Selected Work section');
+  assert.ok(capturedHtml.includes('SOMETHING MATTER.'), 'must render Contact section');
+});
