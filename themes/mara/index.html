@@ -192,6 +192,57 @@
       padding: 12px 22px;
       font-size: 16px;
     }
+
+    .hero-title-wrap {
+      position: absolute;
+      top: 147px;
+      left: var(--mara-inset);
+      right: var(--mara-inset);
+      z-index: 2;
+    }
+    .hero-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      width: 100%;
+      font-family: var(--mara-font-display);
+      font-size: clamp(42px, 16cqw, 231px);
+      line-height: 0.727;
+      letter-spacing: -0.06em;
+      white-space: nowrap;
+    }
+    .hero-ad {
+      font-weight: 500;
+      color: #ffffff;
+      display: inline-flex;
+    }
+    .hero-name {
+      display: inline-flex;
+      align-items: baseline;
+      padding-right: 28px;
+    }
+    .name-mara {
+      font-weight: 500;
+      color: #ffffff;
+      display: inline-flex;
+    }
+    .name-voss {
+      font-weight: 250;
+      color: #ffffff;
+      display: inline-flex;
+    }
+    .hero-sup {
+      font-family: var(--mara-font-utility);
+      font-size: 0.16em;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--mara-muted-2);
+      vertical-align: super;
+      margin-left: 6px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .hero-sup.is-revealed { opacity: 1; }
   </style>
 </head>
 <body id="top">
@@ -216,6 +267,21 @@
       </button>
       <a href="#contact" class="mara-pill nav-cta-pill">Let’s talk ↗</a>
     </nav>
+    <div class="hero-title-wrap" id="heroTitleWrap">
+      <div class="hero-title-row">
+        <span class="hero-ad" aria-hidden="true" id="heroAd">
+          <span class="char" data-char="A">A</span><span class="char" data-char="D">D</span>
+        </span>
+        <h1 class="hero-name" id="heroName" aria-label="Mara Voss">
+          <span class="name-part name-mara">
+            <span class="char" data-char="M">M</span><span class="char" data-char="a">a</span><span class="char" data-char="r">r</span><span class="char" data-char="a">a</span>
+          </span><span class="name-part name-voss">
+            <span class="char" data-char="V">V</span><span class="char" data-char="o">o</span><span class="char" data-char="s">s</span><span class="char" data-char="s">s</span>
+          </span>
+          <sup class="hero-sup" aria-hidden="true">[01]</sup>
+        </h1>
+      </div>
+    </div>
   </header>
   <main>
     <section id="about" class="mara-about"></section>
