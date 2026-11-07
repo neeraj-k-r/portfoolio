@@ -214,3 +214,11 @@ Portfoolio features an **Analytics Dashboard** built right into the Superadmin C
 - **Reporting & Data Export**: One-click **Export to CSV** and **Export to JSON** for platform usage reporting.
 
 | **Artistic Lo** | `lo` | Warm sand multidisciplinary studio inspired by Artist Called Lo (Wix Explore) with zero-gap art grid, client credentials & narrative story. |
+
+### Non-Technical & Visual Studio: Custom About & Story Section
+Portfoolio includes an **About & Story** studio dashboard tab dedicated to visual creators (artists, illustrators, photographers, motion designers):
+- **Narrative Headline**: Prominent display catchphrase replacing hardcoded theme hero titles.
+- **Bio Story & Philosophy**: In-depth story paragraph detailing creative medium, studio philosophy, and craft.
+- **Certified Stamp Badge & Studio Origin**: Customizable studio record tags (e.g. `CERTIFIED ARTIST`, `MIDWEST STUDIO`, `KYOTO STUDIO`).
+- **Milestone Counters**: Up to 4 custom stats (e.g. `12+ Years Creating`, `80+ Commissions`) rendered seamlessly across themes like **Lo**, **Suki**, **Analog**, and **Mythos**.
+- **Aesthetic Fallbacks**: Full backward compatibility — profiles without custom entries retain default artistic copy without breaking.
