@@ -2559,6 +2559,12 @@ async function saveStudio() {
       about_story: $('edAboutStory') ? $('edAboutStory').value.trim() : (activeUserProfile.about_story || ''),
       about_badge: $('edAboutBadge') ? $('edAboutBadge').value.trim() : (activeUserProfile.about_badge || ''),
       about_origin: $('edAboutOrigin') ? $('edAboutOrigin').value.trim() : (activeUserProfile.about_origin || ''),
+      about_stats: [
+        { num: $('edStat1Num') ? $('edStat1Num').value.trim() : '', label: $('edStat1Label') ? $('edStat1Label').value.trim() : '' },
+        { num: $('edStat2Num') ? $('edStat2Num').value.trim() : '', label: $('edStat2Label') ? $('edStat2Label').value.trim() : '' },
+        { num: $('edStat3Num') ? $('edStat3Num').value.trim() : '', label: $('edStat3Label') ? $('edStat3Label').value.trim() : '' },
+        { num: $('edStat4Num') ? $('edStat4Num').value.trim() : '', label: $('edStat4Label') ? $('edStat4Label').value.trim() : '' },
+      ].filter(s => s.num || s.label),
       template: (document.querySelector('input[name=edtpl]:checked') || {}).value || activeUserProfile.template || 'midnight',
       avatarUrl: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
       avatar_url: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
