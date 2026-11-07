@@ -3781,3 +3781,14 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   font-size: 13.5px;
   line-height: 1.55;
 }
+
+.milestones-form-grid .stat-input-card {
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+.milestones-form-grid .stat-input-card:focus-within {
+  border-color: var(--primary, #ff5722) !important;
+  box-shadow: 0 0 0 1px var(--primary, #ff5722);
+}
+.stat-input-card input {
+  width: 100%;
+}
