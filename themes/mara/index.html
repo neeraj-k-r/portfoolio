@@ -465,6 +465,25 @@
       transform: translateY(0);
       opacity: 1;
     }
+
+    .statement-follower {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 336px;
+      pointer-events: none;
+      z-index: 80;
+      mix-blend-mode: difference;
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.94);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      will-change: transform, opacity;
+    }
+    .statement-follower.is-active {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
   </style>
 </head>
 <body id="top">
@@ -535,6 +554,12 @@
           <span class="statement-line">complex ideas through bold typography</span>
           <span class="statement-line">and thoughtful visual systems.</span>
         </h2>
+      </div>
+
+      <div id="statementFollower" class="statement-follower" aria-hidden="true">
+        <svg viewBox="0 0 600 720" width="280" height="336">
+          <use href="#art-statement"/>
+        </svg>
       </div>
     </section>
     <section id="featured" class="mara-featured"></section>
