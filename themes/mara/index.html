@@ -704,6 +704,61 @@
       void main( ){vUv=position*.5+.5;gl_Position=vec4(position,0.,1.);}
     `;
 
+
+    const FS_SOURCE = `
+      precision highp float;
+      varying vec2 vUv;
+      uniform sampler2D image; uniform vec2 resolution,imageSize,mouse,trail[9];
+      uniform float strength,time;
+      vec2 coverUv(vec2 uv){
+        float rs=resolution.x/resolution.y;
+        float ims=imageSize.x/imageSize.y;
+        vec2 scale=rs<ims?vec2(rs/ims,1.):vec2(1.,ims/rs);
+        return (uv-.5)*scale+.5;
+      }
+      void main(){
+        vec2 uv=vUv;
+        vec2 aspect=vec2(resolution.x/resolution.y,1.);
+        vec2 delta=(uv-mouse)*aspect;
+        float dist=length(delta);
+        float radius=.47;
+        float falloff=(1.-smoothstep(0.,radius,dist))*strength;
+        vec2 dir=delta/(dist+.0001);
+        vec2 tangent=vec2(-dir.y,dir.x);
+        float wave=sin(dist*38.-time*2.15)*falloff;
+        float secondary=sin(dist*19.+time*.7)*falloff;
+        vec2 displacement=dir*(wave*.00525+falloff*.004);
+        displacement+=tangent*secondary*.001875;
+        vec2 sampleUv=coverUv(uv+displacement);
+        float aberration=(falloff*.0016+abs(wave)*.0012);
+        vec2 rgbShift=dir*aberration;
+        float r=texture2D(image,sampleUv+rgbShift).r;
+        float g=texture2D(image,sampleUv).g;
+        float b=texture2D(image,sampleUv-rgbShift).b;
+        vec3 color=vec3(r,g,b);
+        vec3 orange=vec3(1.,.22,.025);
+        float glow=falloff*(.10+.08*(sin(dist*28.-time*1.5)*.5+.5));
+        float trailGlow=0.;
+        for(int i=0;i<9;i++){
+          vec2 trailDelta=(uv-trail[i])*aspect;
+          float trailDistance=length(trailDelta);
+          float age=1.-float(i)/9.;
+          float halo=exp(-trailDistance*trailDistance*145.);
+          float core=exp(-trailDistance*trailDistance*420.);
+          float shimmer=.82+.18*sin(time*2.-float(i)*.72);
+          trailGlow+=(halo*.48+core*.28)*age*age*shimmer;
+        }
+        float headProtection=smoothstep(.035,.105,dist);
+        trailGlow=min(trailGlow,1.35)*strength*headProtection;
+        vec3 trailOrange=vec3(1.,.31,.045);
+        vec3 trailGold=vec3(1.,.58,.20);
+        color+=orange*glow;
+        color+=trailOrange*trailGlow*.46;
+        color+=trailGold*pow(trailGlow,1.65)*.11;
+        gl_FragColor=vec4(color,1.);
+      }
+    `;
+
 </script>
 </body>
 </html>
