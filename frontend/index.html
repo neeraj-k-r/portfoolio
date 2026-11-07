@@ -1925,6 +1925,9 @@ function setupUserDashboardView(profile) {
     if($('edSkills')) $('edSkills').value = asArray(profile.skills).join(', ');
     draftAvatar = profile.avatarUrl || profile.avatar_url || ''; paintAvatarPreview();
 
+    // Visual Studio About & Story hydration
+    if($('edAboutHeadline')) $('edAboutHeadline').value = profile.about_headline || (profile.about && profile.about.headline) || '';
+
     // Ensure track aligns with template selection
     if (VISUAL_THEMES.includes(String(profile.template || '').toLowerCase())) {
       profile.track = 'visual';
