@@ -11035,6 +11035,23 @@ function getMaraProjects(p) {
   }));
 }
 
+
+function getMaraCapabilities(p) {
+  const defaultCaps = [
+    { id: '01', title: 'Art Direction', scope: 'Concept development / Visual language / Creative direction' },
+    { id: '02', title: 'Brand Identity', scope: 'Strategy translation / Identity systems / Guidelines' },
+    { id: '03', title: 'Digital Design', scope: 'Website concepts / Interface design / Design systems' }
+  ];
+  if (Array.isArray(p.services) && p.services.length) {
+    return p.services.slice(0, 3).map((s, idx) => ({
+      id: String(idx + 1).padStart(2, '0'),
+      title: s.title || s.name || defaultCaps[idx]?.title || 'Service',
+      scope: s.desc || s.scope || defaultCaps[idx]?.scope || 'Consulting & Direction'
+    }));
+  }
+  return defaultCaps;
+}
+
 function renderMara(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
