@@ -9447,7 +9447,8 @@ function renderAnalogArchive(p) {
 function renderAnalogAboutModal(p) {
   const name = p.name || 'Creative Technologist';
   const title = p.title || 'Creative Technologist';
-  const bio = p.bio || 'Blending design, art, and technology to build meaningful digital experiences.';
+  const headline = p.about_headline || (p.about && p.about.headline) || '';
+  const bio = p.about_story || (p.about && p.about.story) || p.bio || 'Blending design, art, and technology to build meaningful digital experiences.';
   const email = p.email || 'hello@example.com';
   const location = p.location || 'San Francisco, CA';
 
@@ -9462,6 +9463,7 @@ function renderAnalogAboutModal(p) {
         <button class="analog-modal-close" onclick="window.closeAnalogAboutModal()" aria-label="Close modal">✕</button>
       </div>
       <div class="analog-modal-body">
+        ${headline ? `<h4 style="font-size:1.15rem;margin-bottom:8px;color:#fff">${tplEsc(headline)}</h4>` : ''}
         <p class="analog-modal-bio">${tplEsc(bio)}</p>
         <div class="analog-modal-meta-grid">
           <div class="analog-modal-meta-item">
