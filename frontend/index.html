@@ -2579,6 +2579,16 @@ async function saveStudio() {
         theme: (document.querySelector('input[name=rstheme]:checked') || {}).value || 'ats',
         services: Array.isArray(activeUserProfile.services) ? activeUserProfile.services : [],
       },
+      about: {
+        headline: $('edAboutHeadline') ? $('edAboutHeadline').value.trim() : (activeUserProfile.about_headline || ''),
+        story: $('edAboutStory') ? $('edAboutStory').value.trim() : (activeUserProfile.about_story || ''),
+        badge: $('edAboutBadge') ? $('edAboutBadge').value.trim() : (activeUserProfile.about_badge || ''),
+        origin: $('edAboutOrigin') ? $('edAboutOrigin').value.trim() : (activeUserProfile.about_origin || ''),
+        stats: [1,2,3,4].map(i => ({
+          num: $(`edStat${i}Num`) ? $(`edStat${i}Num`).value.trim() : '',
+          label: $(`edStat${i}Label`) ? $(`edStat${i}Label`).value.trim() : ''
+        })).filter(s => s.num || s.label)
+      },
       updatedAt: new Date().toISOString(),
     });
 
