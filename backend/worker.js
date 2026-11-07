@@ -2003,6 +2003,8 @@ function pageGallery(p, wIdx, url) {
         const name = esc(p.name || 'Nithin Krishna');
         const role = esc(p.title || 'Creative Engineer');
         const bio = esc(p.bio || p.tagline || 'A showcase of my creative work, digital builds, visual explorations, and curious experiments.');
+        const mythosHeadline = esc(p.about_headline || (p.about && p.about.headline) || '');
+        const mythosStory = esc(p.about_story || (p.about && p.about.story) || p.bio || p.tagline || 'A showcase of my creative work, digital builds, visual explorations, and curious experiments.');
         const location = esc(p.location || 'Creative Studio');
         const email = p.email || '';
         const hireHref = email ? `mailto:${esc(email)}?subject=Collaboration%20Inquiry` : '#about';
@@ -2245,7 +2247,8 @@ function pageGallery(p, wIdx, url) {
                 <button class="mythos-modal-close" onclick="window.closeMythosAboutModal()" aria-label="Close modal">✕</button>
               </div>
               <div class="mythos-modal-body">
-                <p class="mythos-modal-bio">${bio}</p>
+                ${mythosHeadline ? `<h4 style="font-size:1.15rem;margin-bottom:8px;color:#fff">${mythosHeadline}</h4>` : ''}
+              <p class="mythos-modal-bio">${mythosStory}</p>
                 <div class="mythos-modal-meta-grid">
                   <div class="mythos-modal-meta-item">
                     <span class="mythos-modal-meta-label">Location</span>
