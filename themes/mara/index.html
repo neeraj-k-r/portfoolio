@@ -257,6 +257,40 @@
       opacity: 1;
       filter: blur(0);
     }
+
+    .hero-sub-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 35px;
+      font-family: var(--mara-font-utility);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mara-muted-3);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .hero-sub-row.is-revealed { opacity: 1; }
+    .hero-lower-copy {
+      position: absolute;
+      bottom: 40px;
+      left: var(--mara-inset);
+      max-width: 420px;
+      font-size: 18px;
+      line-height: 1.5;
+      font-family: var(--mara-font-body);
+      transform: translateY(56px);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      z-index: 2;
+    }
+    .hero-lower-copy.is-revealed {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .hero-practice-1 { color: #ffffff; }
+    .hero-practice-2 { color: var(--mara-muted); margin-top: 4px; }
   </style>
 </head>
 <body id="top">
@@ -295,6 +329,15 @@
           <sup class="hero-sup" aria-hidden="true">[01]</sup>
         </h1>
       </div>
+    </div>
+
+    <div class="hero-sub-row" id="heroSubRow">
+      <div class="hero-sub-left">INDEPENDENT ART DIRECTOR &amp; DIGITAL DESIGNER</div>
+      <div class="hero-sub-right">[ PORTFOLIO // SELECTED WORK ]</div>
+    </div>
+    <div class="hero-lower-copy">
+      <p class="hero-practice-1">• Brand identities, editorial systems, digital experiences.</p>
+      <p class="hero-practice-2">• Independent practice. Thoughtful systems. Distinctive outcomes.</p>
     </div>
   </header>
   <main>
