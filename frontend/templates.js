@@ -84,6 +84,10 @@ function normTpl(p) {
     if (p.avatarUrl && !p.avatar_url) p.avatar_url = p.avatarUrl || '';
     if (typeof p.show_instagram === 'boolean' && typeof p.showInstagram === 'undefined') p.showInstagram = p.show_instagram;
     if (typeof p.showInstagram === 'boolean' && typeof p.show_instagram === 'undefined') p.show_instagram = p.showInstagram;
+    if (p.about && typeof p.about === 'object') {
+      if (!p.about_headline && p.about.headline) p.about_headline = p.about.headline;
+      if (!p.about_story && p.about.story) p.about_story = p.about.story;
+    }
   }
   return p;
 }
