@@ -33,6 +33,7 @@
 <link rel="stylesheet" href="ui.css?v=20261030b">
 <link rel="stylesheet" href="templates.css?v=20261030b">
 <link rel="stylesheet" href="resume.css?v=20261030b">
+<link rel="stylesheet" href="pet.css?v=5">
 <style>
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-grid .full{grid-column:1/-1}
@@ -1519,6 +1520,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <script src="resume.js"></script>
 <script src="linkedin-import.js"></script>
 <script>
+var s=document.createElement('script');s.src='pet.js';document.head.appendChild(s);
 console.log('%cportfoolio studio build 2026-10-11u', 'color:#4f46e5;font-weight:bold');
 function toast(m){const t=document.getElementById('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
 const $=id=>document.getElementById(id);
