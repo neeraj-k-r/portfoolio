@@ -2,7 +2,7 @@
   'use strict';
 
   var CFG = {
-    sheet: 'https://codexpets.org/pets/clawdex/spritesheet.webp',
+    sheet: 'https://assets.petdex.dev/pets/goku-036616929fb7/sprite.webp',
     cols: 8,
     rows: 9,
     cellW: 192,
@@ -28,7 +28,8 @@
   ];
 
   var MESSAGES = [
-    'Hi! I\'m Clawdex, your code pet.',
+    "It's over 9000!",
+    'Kaio-Ken!',
     'All systems go.',
     'Ship it!',
     'You got this.',
@@ -257,7 +258,7 @@
     root = document.createElement('div');
     root.id = 'clawdex-pet';
     root.setAttribute('role', 'img');
-    root.setAttribute('aria-label', 'Clawdex, your code pet');
+    root.setAttribute('aria-label', 'Goku, your code pet');
 
     stage = document.createElement('div');
     stage.className = 'cdx-stage';
@@ -271,7 +272,7 @@
     closeBtn = document.createElement('button');
     closeBtn.type = 'button';
     closeBtn.className = 'cdx-close';
-    closeBtn.setAttribute('aria-label', 'Hide Clawdex');
+    closeBtn.setAttribute('aria-label', 'Hide Goku');
     closeBtn.textContent = '\u00d7';
     closeBtn.addEventListener('click', function (ev) {
       ev.stopPropagation();
@@ -334,7 +335,13 @@
     sprite.style.width = CFG.viewW + 'px';
     sprite.style.height = CFG.viewH + 'px';
     sprite.style.backgroundImage = 'url("' + CFG.sheet + '")';
-    sprite.style.backgroundSize = (CFG.cellW * CFG.cols) + 'px ' + (CFG.cellH * CFG.rows) + 'px';
+    // Scale the sprite sheet down so each native cell (192x208) fits exactly
+    // into the view box (96x104). Cell aspect == view aspect, so a single scale
+    // factor preserves proportions and avoids clipping.
+    var scale = CFG.viewW / CFG.cellW;
+    var sheetW = CFG.cellW * CFG.cols * scale;
+    var sheetH = CFG.cellH * CFG.rows * scale;
+    sprite.style.backgroundSize = sheetW + 'px ' + sheetH + 'px';
 
     var img = new Image();
     img.onload = function () {
