@@ -580,6 +580,47 @@
       filter: blur(0);
       transform: translateY(0);
     }
+
+    .featured-card-wrap {
+      position: absolute;
+      top: 260px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 347px;
+      height: 347px;
+      z-index: 5;
+      mix-blend-mode: difference;
+    }
+    .featured-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transform: scale(1.025);
+      transition: transform 0.15s ease-out;
+      cursor: pointer;
+    }
+    .feat-art-svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+    }
+    .card-center-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #000000;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
   </style>
 </head>
 <body id="top">
@@ -681,6 +722,15 @@
           <span class="feat-line">GRIDLINE <sup class="feat-sup">[01]</sup></span>
           <span class="feat-line">STUDIO</span>
         </h2>
+
+        <div class="featured-card-wrap" id="featuredCardWrap">
+          <div class="featured-card" id="featuredCard" role="button" tabindex="0" aria-label="Open Gridline Studio case study">
+            <svg class="feat-art-svg" viewBox="0 0 800 800" width="100%" height="100%">
+              <use href="#art-gridline"/>
+            </svg>
+            <div class="card-center-icon" aria-hidden="true">↗</div>
+          </div>
+        </div>
       </div>
     </section>
     <section id="work" class="mara-work"></section>
