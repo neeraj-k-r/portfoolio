@@ -1390,6 +1390,33 @@
       });
     }
 
+
+    function openCaseStudy(id) {
+      const p = PROJECTS.find(item => item.id === id);
+      if (!p) return;
+      const modal = document.getElementById('caseStudyModal');
+      document.getElementById('dialogTitle').textContent = p.title;
+      document.getElementById('dialogSummary').textContent = p.summary;
+      document.getElementById('dialogRole').textContent = p.role;
+      document.getElementById('dialogDiscipline').textContent = p.discipline;
+      document.getElementById('dialogYear').textContent = p.year;
+      document.getElementById('dialogType').textContent = p.projectType;
+      document.getElementById('dialogChallenge').textContent = p.challenge;
+      document.getElementById('dialogApproach').textContent = p.approach;
+      const delivEl = document.getElementById('dialogDeliverables');
+      delivEl.innerHTML = p.deliverables.map(d => `<li>${d}</li>`).join('');
+      const artContainer = document.getElementById('dialogArt');
+      const tpl = document.getElementById('art-' + p.coverKey);
+      if (tpl) {
+        artContainer.innerHTML = '';
+        artContainer.appendChild(tpl.content.cloneNode(true));
+      }
+      modal.showModal();
+    }
+    document.getElementById('dialogCloseBtn')?.addEventListener('click', () => {
+      document.getElementById('caseStudyModal')?.close();
+    });
+
 </script>
 
   <div id="menuOverlay" class="menu-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site Navigation">
