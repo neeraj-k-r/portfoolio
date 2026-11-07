@@ -10997,11 +10997,27 @@ if (typeof window !== 'undefined' && typeof window.addEventListener === 'functio
 
 
 function getMaraPersona(p) {
+  const isDefaultPersona = !p.name || p.name === 'Mara Voss';
   const fullName = String(p.name || 'Mara Voss').trim();
-  const nameParts = fullName.split(/\s+/);
-  const firstName = nameParts[0] || 'Mara';
-  const lastName = nameParts.slice(1).join(' ') || 'Voss';
-  const monogram = (firstName[0] || 'A') + (lastName[0] || 'D');
+  const nameParts = fullName.split(/\s+/).filter(Boolean);
+  let firstName = 'Mara';
+  let lastName = 'Voss';
+  let monogram = 'AD';
+
+  if (isDefaultPersona) {
+    firstName = 'Mara';
+    lastName = 'Voss';
+    monogram = 'AD';
+  } else if (nameParts.length > 1) {
+    firstName = nameParts[0];
+    lastName = nameParts.slice(1).join(' ');
+    monogram = ((firstName[0] || '').toUpperCase() + (lastName[0] || '').toUpperCase()) || 'MV';
+  } else if (nameParts.length === 1) {
+    firstName = nameParts[0];
+    lastName = '';
+    monogram = firstName.slice(0, 2).toUpperCase() || 'MV';
+  }
+
   return {
     fullName,
     firstName,
@@ -11011,27 +11027,29 @@ function getMaraPersona(p) {
     practice: p.tagline || p.bio || 'Brand identities, editorial systems, digital experiences.',
     story: p.about_story || p.bio || 'Rooted in clarity, driven by curiosity, Mara Voss builds identities and digital experiences that bring structure to complex ideas through bold typography and thoughtful visual systems.',
     email: p.email || '',
-    avatar: p.avatarUrl || p.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80'
+    avatar: (p.mara_hero_portrait || p.hero_image) ? (p.mara_hero_portrait || p.hero_image) : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=80'
   };
 }
 
 
 function getMaraProjects(p) {
   const defaultProjects = [
-    { id: '01', title: 'Gridline Studio', disc: 'Brand & Digital', year: '2026' },
-    { id: '02', title: 'Forma Journal', disc: 'Editorial & Web', year: '2026' },
-    { id: '03', title: 'Still Objects', disc: 'Brand Identity', year: '2025' },
-    { id: '04', title: 'Fieldnotes', disc: 'Art Direction', year: '2025' },
-    { id: '05', title: 'Orbit Interface', disc: 'Digital Design', year: '2024' },
-    { id: '06', title: 'Signal Studies', disc: 'Visual Exploration', year: '2024' }
+    { id: '01', title: 'Gridline Studio', disc: 'Brand & Digital', year: '2026', imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop' },
+    { id: '02', title: 'Forma Journal', disc: 'Editorial & Web', year: '2026', imageUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop' },
+    { id: '03', title: 'Still Objects', disc: 'Brand Identity', year: '2025', imageUrl: 'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop' },
+    { id: '04', title: 'Fieldnotes', disc: 'Art Direction', year: '2025', imageUrl: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&auto=format&fit=crop' },
+    { id: '05', title: 'Orbit Interface', disc: 'Digital Design', year: '2024', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop' },
+    { id: '06', title: 'Signal Studies', disc: 'Visual Exploration', year: '2024', imageUrl: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&auto=format&fit=crop' }
   ];
   const rawWorks = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : []);
   if (!rawWorks || !rawWorks.length) return defaultProjects;
-  return rawWorks.slice(0, 6).map((w, idx) => ({
+  return rawWorks.slice(0, 8).map((w, idx) => ({
     id: String(idx + 1).padStart(2, '0'),
     title: w.title || w.name || 'Untitled Project',
     disc: w.category || w.discipline || 'Design & Direction',
-    year: w.year || '2026'
+    year: w.year || '2026',
+    imageUrl: w.imageUrl || w.image || w.img || w.cover || defaultProjects[idx % defaultProjects.length].imageUrl,
+    url: w.url || w.link || ''
   }));
 }
 
@@ -11058,38 +11076,21 @@ function renderMara(p) {
   document.body.dataset.template = 'mara';
   document.title = `${p.name || 'Mara Voss'} | ${p.title || 'Independent Art Director & Digital Designer'}`;
 
-  const fullName = String(p.name || 'Mara Voss').trim();
-  const nameParts = fullName.split(/\s+/);
-  const firstName = nameParts[0] || 'Mara';
-  const lastName = nameParts.slice(1).join(' ') || 'Voss';
-  const monogram = (firstName[0] || 'A') + (lastName[0] || 'D');
-  const role = p.title || 'INDEPENDENT ART DIRECTOR & DIGITAL DESIGNER';
-  const practice = p.tagline || p.bio || 'Brand identities, editorial systems, digital experiences.';
-  const story = p.about_story || p.bio || 'Rooted in clarity, driven by curiosity, Mara Voss builds identities and digital experiences that bring structure to complex ideas through bold typography and thoughtful visual systems.';
+  const persona = getMaraPersona(p);
+  const fullName = persona.fullName;
+  const firstName = persona.firstName;
+  const lastName = persona.lastName;
+  const monogram = persona.monogram;
+  const role = persona.role;
+  const practice = persona.practice;
+  const story = persona.story;
+  const avatar = persona.avatar;
 
-  const avatar = p.avatarUrl || p.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80';
-
-  const defaultProjects = [
-    { id: '01', title: 'Gridline Studio', disc: 'Brand & Digital', year: '2026' },
-    { id: '02', title: 'Forma Journal', disc: 'Editorial & Web', year: '2026' },
-    { id: '03', title: 'Still Objects', disc: 'Brand Identity', year: '2025' },
-    { id: '04', title: 'Fieldnotes', disc: 'Art Direction', year: '2025' },
-    { id: '05', title: 'Orbit Interface', disc: 'Digital Design', year: '2024' },
-    { id: '06', title: 'Signal Studies', disc: 'Visual Exploration', year: '2024' }
-  ];
-
-  const rawWorks = (p.works && p.works.length) ? p.works : ((p.projects && p.projects.length) ? p.projects : []);
-  const displayProjects = rawWorks.length > 0
-    ? rawWorks.slice(0, 6).map((w, idx) => ({
-        id: String(idx + 1).padStart(2, '0'),
-        title: w.title || w.name || 'Untitled Project',
-        disc: w.category || w.discipline || 'Design & Direction',
-        year: w.year || '2026'
-      }))
-    : defaultProjects;
+  const displayProjects = getMaraProjects(p);
+  const capabilities = getMaraCapabilities(p);
 
   app.innerHTML = `
-    <div class="mara-page" id="top" style="background:#000;color:#fff;font-family:var(--mara-font-body,Arial,sans-serif);position:relative;min-height:100vh">
+    <div class="mara-page" id="top">
       <header class="mara-hero" style="position:relative;height:900px;min-height:760px;overflow:hidden;padding:0 3%">
         <div class="hero-bg-wrap" style="position:absolute;inset:0;z-index:0;overflow:hidden">
           <div class="hero-portrait" style="position:absolute;inset:0;background-image:url('${avatar}');background-size:cover;background-position:center;filter:brightness(0.7) contrast(1.15)"></div>
@@ -11098,7 +11099,7 @@ function renderMara(p) {
         <nav class="mara-nav" style="position:absolute;top:28px;left:3%;right:3%;display:flex;align-items:center;justify-content:space-between;z-index:20">
           <div class="nav-clock" style="display:flex;flex-direction:column;font-family:monospace">
             <span style="font-size:11px;color:#949494;letter-spacing:0.08em">GMT+00:00 // LOCAL</span>
-            <span style="font-size:15px;color:#fff;font-weight:500">${new Date().toLocaleTimeString()}</span>
+            <span id="maraLiveClock" style="font-size:15px;color:#fff;font-weight:500">${new Date().toLocaleTimeString()}</span>
           </div>
           <div class="nav-menu-btn" style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer">
             <span style="display:flex;align-items:flex-end;gap:3px;height:14px">
@@ -11112,12 +11113,12 @@ function renderMara(p) {
             </span>
             <span style="font-size:13px;letter-spacing:0.06em">MENU</span>
           </div>
-          <a href="#contact" class="mara-pill" style="min-height:46px;padding:12px 22px;font-size:16px;background:#fff;color:#000;border-radius:999px;font-weight:500">Let’s talk ↗</a>
+          <a href="#contact" class="mara-pill" style="min-height:46px;padding:12px 22px;font-size:16px">Let’s talk ↗</a>
         </nav>
         <div class="hero-title-wrap" style="position:absolute;top:147px;left:3%;right:3%;z-index:2">
           <div style="display:flex;justify-content:space-between;align-items:baseline;width:100%;font-size:clamp(42px,16vw,200px);line-height:0.75;letter-spacing:-0.06em;font-weight:500;white-space:nowrap">
             <span>${tplEsc(monogram)}</span>
-            <span>${tplEsc(firstName)}<span style="font-weight:250">${tplEsc(lastName)}</span><sup style="font-size:0.18em;margin-left:6px;color:#aaa">[01]</sup></span>
+            <span>${tplEsc(firstName)}${lastName ? ` <span style="font-weight:250">${tplEsc(lastName)}</span>` : ''}<sup style="font-size:0.18em;margin-left:6px;color:#aaa">[01]</sup></span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center;margin-top:35px;font-size:13px;letter-spacing:0.08em;color:#b8b8b8;text-transform:uppercase">
             <span>${tplEsc(role)}</span>
@@ -11128,7 +11129,7 @@ function renderMara(p) {
           <p>• ${tplEsc(practice)}</p>
           <p style="color:#949494;margin-top:4px">• Independent practice. Thoughtful systems. Distinctive outcomes.</p>
         </div>
-        <a href="#work" class="mara-pill" style="position:absolute;bottom:34px;right:3%;background:#fff;color:#000;border-radius:999px;padding:16px 20px;font-size:18px;z-index:2">Explore work ↘</a>
+        <a href="#work" class="mara-pill" style="position:absolute;bottom:34px;right:3%;z-index:2">Explore work ↘</a>
       </header>
 
       <section id="about" style="min-height:700px;padding:60px 3%;border-top:1px solid #222">
@@ -11149,25 +11150,31 @@ function renderMara(p) {
         </div>
       </section>
 
-      <section id="work" style="min-height:760px;padding:60px 4% 80px;background:linear-gradient(180deg,#000 0%,#000 48%,#ea4f16 78%,#f6af60 100%)">
+      <section id="work" class="mara-work-section">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;color:#949494;font-size:14px">
           <span>// Selected Work</span>
           <span>SELECTED PROJECTS / 2024–2026</span>
         </div>
-        <div style="display:flex;flex-direction:column">
+        <div class="mara-work-list">
           ${displayProjects.map(pr => `
-            <div style="min-height:72px;padding:16px 20px;background:rgba(0,0,0,0.73);border-bottom:1px solid rgba(255,255,255,0.12);display:grid;grid-template-columns:42px minmax(0,1fr) 210px 70px 40px;align-items:center;cursor:pointer">
-              <span style="color:#949494;font-size:14px">${pr.id}</span>
-              <span style="font-size:24px;font-weight:500;color:#fff">${tplEsc(pr.title)}</span>
-              <span style="color:#aaa;font-size:14px">${tplEsc(pr.disc)}</span>
-              <span style="color:#949494;font-size:14px">${pr.year}</span>
-              <span style="color:#fff;text-align:right">↗</span>
+            <div class="mara-work-row" role="button" tabindex="0" data-preview-img="${tplEsc(pr.imageUrl)}" ${pr.url ? `onclick="window.open('${tplEsc(pr.url)}','_blank')"` : ''}>
+              <div class="mara-row-wipe-wrap">
+                <div class="mara-row-wipe"></div>
+              </div>
+              <span class="col-idx" style="color:#949494;font-size:14px">${pr.id}</span>
+              <span class="col-title">${tplEsc(pr.title)}</span>
+              <span class="col-disc" style="color:#aaa;font-size:14px">${tplEsc(pr.disc)}</span>
+              <span class="col-year" style="color:#949494;font-size:14px">${pr.year}</span>
+              <span class="col-arrow">↗</span>
+              <div class="mara-row-preview">
+                <img src="${tplEsc(pr.imageUrl)}" alt="${tplEsc(pr.title)}" loading="lazy">
+              </div>
             </div>
           `).join('')}
         </div>
         <div style="margin-top:85px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
           <span style="font-weight:700;font-size:16px;letter-spacing:0.1em;color:#1a1512">HAVE A PROJECT IN MIND?</span>
-          <a href="#contact" class="mara-pill" style="background:#fff;color:#000;border-radius:999px;padding:16px 20px;font-size:18px">Start a conversation ↗</a>
+          <a href="#contact" class="mara-pill">Start a conversation ↗</a>
         </div>
       </section>
 
@@ -11177,24 +11184,14 @@ function renderMara(p) {
           <span style="color:#ff630f">DISTINCTIVE OUTCOMES.</span>
         </h2>
         <div style="border-top:1px solid #333">
-          <div style="padding:24px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:42px 1fr 1fr 120px;align-items:center;gap:16px">
-            <span style="color:#949494">01</span>
-            <span style="font-size:24px;font-weight:500">Art Direction</span>
-            <span style="color:#b8b8b8">Concept development / Visual language / Creative direction</span>
-            <span style="background:#ff630f;color:#000;border-radius:99px;padding:6px 14px;font-weight:600;font-size:13px;text-align:center">Scope</span>
-          </div>
-          <div style="padding:24px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:42px 1fr 1fr 120px;align-items:center;gap:16px">
-            <span style="color:#949494">02</span>
-            <span style="font-size:24px;font-weight:500">Brand Identity</span>
-            <span style="color:#b8b8b8">Strategy translation / Identity systems / Guidelines</span>
-            <span style="background:#ff630f;color:#000;border-radius:999px;padding:6px 14px;font-weight:600;font-size:13px;text-align:center">Scope</span>
-          </div>
-          <div style="padding:24px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:42px 1fr 1fr 120px;align-items:center;gap:16px">
-            <span style="color:#949494">03</span>
-            <span style="font-size:24px;font-weight:500">Digital Design</span>
-            <span style="color:#b8b8b8">Website concepts / Interface design / Design systems</span>
-            <span style="background:#ff630f;color:#000;border-radius:999px;padding:6px 14px;font-weight:600;font-size:13px;text-align:center">Scope</span>
-          </div>
+          ${capabilities.map((c, i) => `
+            <div style="padding:24px 0;border-bottom:1px solid #333;display:grid;grid-template-columns:42px 1fr 1fr 120px;align-items:center;gap:16px">
+              <span style="color:#949494">${c.id}</span>
+              <span style="font-size:24px;font-weight:500">${tplEsc(c.title)}</span>
+              <span style="color:#b8b8b8">${tplEsc(c.scope)}</span>
+              <span style="background:#ff630f;color:#000;border-radius:99px;padding:6px 14px;font-weight:600;font-size:13px;text-align:center">Scope</span>
+            </div>
+          `).join('')}
         </div>
       </section>
 
@@ -11208,7 +11205,7 @@ function renderMara(p) {
           <p style="font-size:20px;max-width:480px;line-height:1.5">Have a brand, publication, or digital experience in mind? Tell me what you’re building and where you want to take it.</p>
           <div>
             ${p.email ? `
-              <a href="mailto:${tplEsc(p.email)}" class="mara-pill" style="background:#ff630f;color:#000;font-weight:600;border-radius:999px;padding:16px 24px;font-size:18px">${tplEsc(p.email)} ↗</a>
+              <a href="mailto:${tplEsc(p.email)}" class="mara-pill" style="background:#ff630f;color:#000;font-weight:600;padding:16px 24px;font-size:18px">${tplEsc(p.email)} ↗</a>
             ` : `
               <p style="color:#aaa;font-size:16px">Demo portfolio — contact details not configured.</p>
             `}
@@ -11221,4 +11218,60 @@ function renderMara(p) {
       </section>
     </div>
   `;
+
+  // Selected Work interactive row hover and mousemove preview tracking
+  if (app && typeof app.querySelectorAll === 'function') {
+    app.querySelectorAll('.mara-work-row').forEach(row => {
+      const preview = row.querySelector ? row.querySelector('.mara-row-preview') : null;
+      if (!preview) return;
+      const track = (e) => {
+        const rect = row.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const halfW = 130;
+        const clampedX = Math.min(Math.max(x + 20, halfW + 10), Math.max(halfW + 10, rect.width - halfW - 10));
+        preview.style.left = `${clampedX}px`;
+        preview.style.top = `${y}px`;
+      };
+      row.addEventListener('mouseenter', (e) => {
+        row.classList.add('is-hovered');
+        track(e);
+      });
+      row.addEventListener('mousemove', track);
+      row.addEventListener('mouseleave', () => {
+        row.classList.remove('is-hovered');
+        preview.style.left = '55%';
+        preview.style.top = '50%';
+      });
+    });
+  }
+
+  // Hero Face Hover subtle parallax scaling
+  const heroWrap = (app && typeof app.querySelector === 'function') ? app.querySelector('.mara-hero') : null;
+  const heroPortrait = (app && typeof app.querySelector === 'function') ? app.querySelector('.hero-portrait') : null;
+  if (heroWrap && heroPortrait) {
+    heroWrap.addEventListener('mousemove', (e) => {
+      const rect = heroWrap.getBoundingClientRect();
+      const normX = (e.clientX - rect.left) / rect.width;
+      const normY = (e.clientY - rect.top) / rect.height;
+      const onFace = normX >= 0.40 && normX <= 0.79 && normY >= 0.075 && normY <= 0.86;
+      heroPortrait.style.transform = onFace ? 'scale(1.035)' : 'scale(1)';
+      heroPortrait.style.transition = 'transform 0.4s ease';
+    });
+    heroWrap.addEventListener('mouseleave', () => {
+      heroPortrait.style.transform = 'scale(1)';
+    });
+  }
+
+  // Live navigation clock update
+  const clockEl = (app && typeof app.querySelector === 'function') ? app.querySelector('#maraLiveClock') : null;
+  if (clockEl) {
+    if (window._maraClockTimer) clearInterval(window._maraClockTimer);
+    window._maraClockTimer = setInterval(() => {
+      if (!document.hidden && clockEl) {
+        clockEl.textContent = new Date().toLocaleTimeString();
+      }
+    }, 1000);
+  }
 }
+

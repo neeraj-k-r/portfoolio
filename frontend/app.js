@@ -760,6 +760,9 @@ function renderGallery(p) {
   if (vtpl === 'lo') {
     if (window.PortfoolioTemplates && window.PortfoolioTemplates.lo) return window.PortfoolioTemplates.lo(p);
   }
+  if (vtpl === 'mara') {
+    if (window.PortfoolioTemplates && window.PortfoolioTemplates.mara) return window.PortfoolioTemplates.mara(p);
+  }
   if (vtpl === 'atelier') {
     app.innerHTML = `
     <div class="atelier-page">

@@ -690,6 +690,47 @@ test('Mara theme preserves default persona and aesthetic defaults when optional 
   assert.ok(capturedHtml.includes('Art Direction'), 'defaults to Art Direction capability');
 });
 
+test('Mara theme properly parses single-name username and renders project hover preview image and wipe motion elements', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const maraFn = domMock.window.PortfoolioTemplates.mara;
+  maraFn({
+    name: 'nkr3037',
+    title: 'Aspiring Developer',
+    avatar_url: 'https://example.com/bangles.jpg', // should not override the cinematic editorial portrait
+    works: [
+      { id: '01', title: 'Minimalist Village Market Route', category: 'art', year: '2026', imageUrl: 'https://images.unsplash.com/photo-market' },
+      { id: '02', title: 'naatukavaladisc', category: 'Design', year: '2026', imageUrl: 'https://images.unsplash.com/photo-grocery' }
+    ]
+  });
+
+  // Check single-name handling (does not append Voss)
+  assert.ok(capturedHtml.includes('nkr3037'), 'renders single-word username');
+  assert.ok(!capturedHtml.includes('nkr3037 Voss'), 'must NOT append Voss to single-word username');
+  assert.ok(capturedHtml.includes('NK'), 'monogram must be derived as NK');
+
+  // Check hover motion and preview image elements
+  assert.ok(capturedHtml.includes('class="mara-work-row"'), 'must include mara-work-row');
+  assert.ok(capturedHtml.includes('class="mara-row-wipe-wrap"'), 'must include mara-row-wipe-wrap');
+  assert.ok(capturedHtml.includes('class="mara-row-wipe"'), 'must include mara-row-wipe');
+  assert.ok(capturedHtml.includes('class="mara-row-preview"'), 'must include mara-row-preview');
+  assert.ok(capturedHtml.includes('https://images.unsplash.com/photo-market'), 'must contain project image URL in preview');
+  assert.ok(!capturedHtml.includes('https://example.com/bangles.jpg'), 'hero background portrait must NOT use profile avatar bangles');
+});
+
 test('Studio tabAbout contains all required interactive inputs and story controls', () => {
   const tabAboutMatch = INDEX_HTML.match(/<div id="tabAbout"[\s\S]*?<!-- User Studio Tab 2:/);
   assert.ok(tabAboutMatch, 'tabAbout element must exist in index.html');

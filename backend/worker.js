@@ -856,6 +856,43 @@ body.illustra-dark-mode{background:#120e1e!important}
   .lo-services-grid{grid-template-columns:1fr}
   .lo-nav-links{display:none}
 }
+
+/* MARA VOSS THEME — EDITORIAL & SELECTED WORK */
+.mara-page { background: #000000; color: #ffffff; min-height: 100vh; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; overflow-x: hidden; }
+.mara-hero { position: relative; height: 900px; min-height: 760px; overflow: hidden; padding: 0 3%; }
+.hero-bg-wrap { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+.hero-portrait { position: absolute; inset: 0; background-size: cover; background-position: center 25%; filter: brightness(0.65) contrast(1.2); }
+.hero-vignette { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.7) 100%); }
+.mara-nav { position: absolute; top: 28px; left: 3%; right: 3%; display: flex; align-items: center; justify-content: space-between; z-index: 20; }
+.nav-pill-talk { background: #ffffff; color: #000000; border-radius: 999px; padding: 12px 22px; font-weight: 500; font-size: 15px; text-decoration: none; transition: background 0.25s, transform 0.25s; }
+.nav-pill-talk:hover { background: #ff630f; transform: scale(1.04); }
+.hero-brand { position: absolute; top: 147px; left: 3%; right: 3%; display: flex; justify-content: space-between; align-items: baseline; font-size: clamp(42px, 16vw, 200px); line-height: 0.75; letter-spacing: -0.06em; font-weight: 600; z-index: 5; }
+.hero-meta { position: absolute; top: 310px; left: 3%; right: 3%; display: flex; justify-content: space-between; font-size: 13px; letter-spacing: 0.08em; color: #b8b8b8; text-transform: uppercase; z-index: 5; }
+.hero-foot { position: absolute; bottom: 40px; left: 3%; right: 3%; display: flex; justify-content: space-between; align-items: flex-end; z-index: 5; }
+.hero-pill-work { background: #ffffff; color: #000000; border-radius: 999px; padding: 16px 24px; font-size: 18px; text-decoration: none; font-weight: 500; transition: background 0.25s, transform 0.25s; }
+.hero-pill-work:hover { background: #ff630f; transform: scale(1.04); }
+
+.mara-work-section { padding: 60px 4% 80px; background: linear-gradient(180deg, #000000 0%, #000000 48%, #ea4f16 78%, #f6af60 100%); }
+.mara-work-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; color: #949494; font-size: 14px; letter-spacing: 0.08em; }
+.mara-work-list { display: flex; flex-direction: column; position: relative; }
+.mara-work-row { position: relative; min-height: 76px; padding: 18px 24px; background: rgba(0, 0, 0, 0.73); border-bottom: 1px solid rgba(255, 255, 255, 0.12); display: grid; grid-template-columns: 46px minmax(0, 1fr) 220px 80px 40px; align-items: center; cursor: pointer; transition: background 0.25s ease; text-decoration: none; color: #ffffff; }
+.mara-work-row:hover { background: rgba(20, 20, 20, 0.95); z-index: 30; }
+.mara-row-wipe-wrap { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
+.mara-row-wipe { position: absolute; inset: 0; background: #ffffff; transform: translateX(-101%); transition: transform 0.45s cubic-bezier(0.44, 0, 0.56, 1); mix-blend-mode: difference; pointer-events: none; }
+.mara-work-row:hover .mara-row-wipe, .mara-work-row:focus-within .mara-row-wipe { transform: translateX(0); }
+.mara-row-preview { position: absolute; top: 50%; left: 55%; transform: translate(-50%, -50%) scale(0.85); width: 260px; height: 160px; border-radius: 8px; overflow: hidden; pointer-events: none; opacity: 0; visibility: hidden; filter: blur(10px); transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s; z-index: 60; box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85), 0 0 0 1px rgba(255, 255, 255, 0.15); background: #111111; }
+.mara-work-row:hover .mara-row-preview, .mara-work-row:focus-within .mara-row-preview, .mara-work-row.is-hovered .mara-row-preview { opacity: 1; visibility: visible; filter: blur(0px); transform: translate(-50%, -50%) scale(1); }
+.mara-row-preview img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mara-work-row .col-arrow { color: #ffffff; text-align: right; font-size: 18px; transition: transform 0.25s ease, color 0.25s ease; position: relative; z-index: 3; }
+.mara-work-row:hover .col-arrow { transform: translate(4px, -4px); color: #ff630f; }
+.mara-work-row .col-title { font-size: 24px; font-weight: 500; color: #ffffff; position: relative; z-index: 3; transition: transform 0.25s ease; }
+.mara-work-row:hover .col-title { transform: translateX(6px); }
+.mara-work-row .col-idx, .mara-work-row .col-disc, .mara-work-row .col-year { position: relative; z-index: 3; }
+@media (max-width: 860px) {
+  .mara-work-row { grid-template-columns: 36px minmax(0, 1fr) 50px 30px; padding: 14px 16px; }
+  .mara-work-row .col-disc { display: none; }
+  .mara-row-preview { display: none !important; }
+}
 </style>`;
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
@@ -2509,61 +2546,148 @@ function pageGallery(p, wIdx, url) {
     
     : vtpl === 'mara'
     ? (() => {
-        const fullName = esc(p.name || 'Mara Voss');
-        const parts = fullName.split(/\s+/);
-        const firstName = parts[0] || 'Mara';
-        const lastName = parts.slice(1).join(' ') || 'Voss';
-        const monogram = esc((firstName[0] || 'A') + (lastName[0] || 'D'));
+        const isDefaultPersona = !p.name || p.name === 'Mara Voss';
+        const fullName = String(p.name || 'Mara Voss').trim();
+        const nameParts = fullName.split(/\s+/).filter(Boolean);
+        let firstName = 'Mara';
+        let lastName = 'Voss';
+        let monogram = 'AD';
+
+        if (isDefaultPersona) {
+          firstName = 'Mara';
+          lastName = 'Voss';
+          monogram = 'AD';
+        } else if (nameParts.length > 1) {
+          firstName = nameParts[0];
+          lastName = nameParts.slice(1).join(' ');
+          monogram = ((firstName[0] || '').toUpperCase() + (lastName[0] || '').toUpperCase()) || 'MV';
+        } else if (nameParts.length === 1) {
+          firstName = nameParts[0];
+          lastName = '';
+          monogram = firstName.slice(0, 2).toUpperCase() || 'NK';
+        }
+
         const role = esc(p.title || 'Independent Art Director & Digital Designer');
         const practice = esc(p.tagline || p.bio || 'Brand identities, editorial systems, digital experiences.');
         const story = esc(p.about_story || p.bio || 'Rooted in clarity, driven by curiosity, Mara Voss builds identities and digital experiences that bring structure to complex ideas through bold typography and thoughtful visual systems.');
-        const avatar = esc(p.avatarUrl || p.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80');
+        const portrait = esc((p.mara_hero_portrait || p.hero_image) ? (p.mara_hero_portrait || p.hero_image) : 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1600&q=80');
         const sourceWorks = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : []);
-        return `<div class="mara-page" id="top" style="background:#000;color:#fff;font-family:sans-serif;min-height:100vh">
-          <header style="position:relative;height:900px;min-height:760px;overflow:hidden;padding:0 3%">
-            <div style="position:absolute;inset:0;background-image:url('${avatar}');background-size:cover;background-position:center;filter:brightness(0.7) contrast(1.15)"></div>
-            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0.5) 100%)"></div>
-            <nav style="position:absolute;top:28px;left:3%;right:3%;display:flex;justify-content:space-between;align-items:center;z-index:10">
-              <span style="font-size:11px;color:#949494;letter-spacing:0.08em;font-family:monospace">GMT+00:00 // LOCAL</span>
-              <a href="#contact" style="background:#fff;color:#000;padding:12px 22px;border-radius:999px;font-weight:500;text-decoration:none">Let’s talk ↗</a>
+        const defaultImages = [
+          'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop',
+          'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?w=800&auto=format&fit=crop'
+        ];
+        return `<div class="mara-page" id="top">
+          <header class="mara-hero">
+            <div class="hero-bg-wrap">
+              <div class="hero-portrait" style="background-image:url('${portrait}')"></div>
+              <div class="hero-vignette"></div>
+            </div>
+            <nav class="mara-nav">
+              <div style="display:flex;flex-direction:column;font-family:monospace">
+                <span style="font-size:11px;color:#949494;letter-spacing:0.08em">GMT+00:00 // LOCAL</span>
+                <span id="maraLiveClock" style="font-size:15px;color:#fff;font-weight:500">12:00:00</span>
+              </div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+                <span style="display:flex;align-items:flex-end;gap:3px;height:14px">
+                  <i style="width:3px;height:3px;background:#fff;display:inline-block"></i>
+                  <i style="width:3px;height:7px;background:#fff;display:inline-block"></i>
+                  <i style="width:3px;height:12px;background:#fff;display:inline-block"></i>
+                  <i style="width:3px;height:4px;background:#fff;display:inline-block"></i>
+                  <i style="width:3px;height:8px;background:#fff;display:inline-block"></i>
+                  <i style="width:3px;height:6px;background:#fff;display:inline-block"></i>
+                  <i style="width:3px;height:3px;background:#fff;display:inline-block"></i>
+                </span>
+                <span style="font-size:13px;letter-spacing:0.06em">MENU</span>
+              </div>
+              <a href="#contact" class="nav-pill-talk">Let’s talk ↗</a>
             </nav>
-            <div style="position:absolute;top:147px;left:3%;right:3%;z-index:2">
-              <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:clamp(42px,16vw,200px);line-height:0.75;letter-spacing:-0.06em;font-weight:600">
-                <span>${monogram}</span>
-                <span>${firstName} <span style="font-weight:300">${lastName}</span><sup style="font-size:0.18em;color:#aaa">[01]</sup></span>
-              </div>
-              <div style="display:flex;justify-content:space-between;margin-top:35px;font-size:13px;letter-spacing:0.08em;color:#b8b8b8;text-transform:uppercase">
-                <span>${role}</span>
-                <span>[ PORTFOLIO // SELECTED WORK ]</span>
-              </div>
+            <div class="hero-brand">
+              <span>${esc(monogram)}</span>
+              <span>${esc(firstName)}${lastName ? ` <span style="font-weight:300">${esc(lastName)}</span>` : ''}<sup style="font-size:0.18em;margin-left:6px;color:#aaa">[01]</sup></span>
             </div>
-            <div style="position:absolute;bottom:40px;left:3%;max-width:420px;font-size:18px;line-height:1.5;z-index:2">
-              <p>• ${practice}</p>
-              <p style="color:#949494;margin-top:4px">• Independent practice. Thoughtful systems. Distinctive outcomes.</p>
+            <div class="hero-meta">
+              <span>${role}</span>
+              <span>[ PORTFOLIO // SELECTED WORK ]</span>
             </div>
-            <a href="#work" style="position:absolute;bottom:34px;right:3%;background:#fff;color:#000;border-radius:999px;padding:16px 20px;font-size:18px;text-decoration:none;z-index:2">Explore work ↘</a>
+            <div class="hero-foot">
+              <div style="max-width:420px;font-size:18px;line-height:1.5">
+                <p>• ${practice}</p>
+                <p style="color:#949494;margin-top:4px">• Independent practice. Thoughtful systems. Distinctive outcomes.</p>
+              </div>
+              <a href="#work" class="hero-pill-work">Explore work ↘</a>
+            </div>
           </header>
-          <section id="about" style="padding:60px 3%;border-top:1px solid #222">
+          <section id="about" style="min-height:600px;padding:60px 3%;border-top:1px solid #222">
             <div style="font-size:18px;color:#949494;margin-bottom:30px">// Design Approach</div>
             <h2 style="font-size:clamp(28px,6vw,84px);line-height:1.05;letter-spacing:-0.04em;max-width:1200px;margin-bottom:60px">${story}</h2>
           </section>
-          <section id="work" style="padding:60px 4% 80px;background:linear-gradient(180deg,#000 0%,#000 48%,#ea4f16 78%,#f6af60 100%)">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;color:#949494;font-size:14px">
+          <section id="work" class="mara-work-section">
+            <div class="mara-work-head">
               <span>// Selected Work</span>
               <span>SELECTED PROJECTS</span>
             </div>
-            <div style="display:flex;flex-direction:column">
-              ${sourceWorks.map((w, idx) => `
-                <div style="min-height:72px;padding:16px 20px;background:rgba(0,0,0,0.73);border-bottom:1px solid rgba(255,255,255,0.12);display:grid;grid-template-columns:42px minmax(0,1fr) 210px 70px 40px;align-items:center">
-                  <span style="color:#949494">${String(idx+1).padStart(2,'0')}</span>
-                  <span style="font-size:24px;font-weight:500">${esc(w.title || w.name || 'Untitled')}</span>
-                  <span style="color:#aaa">${esc(w.category || 'Design')}</span>
-                  <span style="color:#949494">2026</span>
-                  <span style="text-align:right">↗</span>
-                </div>
-              `).join('')}
+            <div class="mara-work-list">
+              ${sourceWorks.map((w, idx) => {
+                const img = w.imageUrl || w.image || w.img || w.cover_image || defaultImages[idx % defaultImages.length];
+                return `
+                <div class="mara-work-row" role="button" tabindex="0" data-preview-img="${esc(img)}" ${w.url ? `onclick="window.open('${esc(w.url)}','_blank')"` : ''}>
+                  <div class="mara-row-wipe-wrap">
+                    <div class="mara-row-wipe"></div>
+                  </div>
+                  <span class="col-idx" style="color:#949494;font-size:14px">${String(idx+1).padStart(2,'0')}</span>
+                  <span class="col-title">${esc(w.title || w.name || 'Untitled')}</span>
+                  <span class="col-disc" style="color:#aaa;font-size:14px">${esc(w.category || w.medium || 'Design')}</span>
+                  <span class="col-year" style="color:#949494;font-size:14px">${esc(w.year || '2026')}</span>
+                  <span class="col-arrow">↗</span>
+                  <div class="mara-row-preview">
+                    <img src="${esc(img)}" alt="${esc(w.title || 'Work')}" loading="lazy">
+                  </div>
+                </div>`;
+              }).join('')}
             </div>
           </section>
+          <script>
+          (function(){
+            function updateMaraClock(){
+              var el = document.getElementById('maraLiveClock');
+              if (!el) return;
+              var d = new Date();
+              var pad = function(n){ return String(n).padStart(2, '0'); };
+              el.textContent = pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+            }
+            updateMaraClock();
+            setInterval(updateMaraClock, 1000);
+
+            var rows = document.querySelectorAll('.mara-work-row');
+            rows.forEach(function(row){
+              var preview = row.querySelector('.mara-row-preview');
+              if (!preview) return;
+              function track(e){
+                var rect = row.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var y = e.clientY - rect.top;
+                var halfW = 130;
+                var clampedX = Math.min(Math.max(x + 20, halfW + 10), Math.max(halfW + 10, rect.width - halfW - 10));
+                preview.style.left = clampedX + 'px';
+                preview.style.top = y + 'px';
+              }
+              row.addEventListener('mouseenter', function(e){
+                row.classList.add('is-hovered');
+                track(e);
+              });
+              row.addEventListener('mousemove', track);
+              row.addEventListener('mouseleave', function(){
+                row.classList.remove('is-hovered');
+                preview.style.left = '55%';
+                preview.style.top = '50%';
+              });
+            });
+          })();
+          </script>
         </div>`;
       })()
     : vtpl === 'lo'
@@ -9236,6 +9360,7 @@ export default {
       url.pathname === '/favicon.svg' ||
       url.pathname === '/favicon.png' ||
       url.pathname.startsWith('/profiles/') ||
+      url.pathname.startsWith('/assets/') ||
       url.pathname.startsWith('/frontend/')
     ) {
       const assetRes = await fetch(`${ORIGIN}${url.pathname}`);
