@@ -163,6 +163,7 @@ alter table profiles add column if not exists track text default 'tech'
 alter table profiles add column if not exists works jsonb default '[]';
 -- Visual-track custom about & story details
 alter table profiles add column if not exists about_story text default '';
+alter table profiles add column if not exists about_headline text default '';
 
 -- 8) make yourself admin (run AFTER creating the admin user in Authentication):
 -- insert into admins (user_id) select id from auth.users where email = 'portfoolio.me@gmail.com';
