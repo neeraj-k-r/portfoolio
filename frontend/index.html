@@ -1937,6 +1937,8 @@ function setupUserDashboardView(profile) {
     if($('edStat2Label')) $('edStat2Label').value = aboutStats[1]?.label || '';
     if($('edStat3Num')) $('edStat3Num').value = aboutStats[2]?.num || '';
     if($('edStat3Label')) $('edStat3Label').value = aboutStats[2]?.label || '';
+    if($('edStat4Num')) $('edStat4Num').value = aboutStats[3]?.num || '';
+    if($('edStat4Label')) $('edStat4Label').value = aboutStats[3]?.label || '';
 
     // Ensure track aligns with template selection
     if (VISUAL_THEMES.includes(String(profile.template || '').toLowerCase())) {
