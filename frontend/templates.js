@@ -10995,6 +10995,26 @@ if (typeof window !== 'undefined' && typeof window.addEventListener === 'functio
 
 // Finalized 70-commit Artistic Lo theme release
 
+
+function getMaraPersona(p) {
+  const fullName = String(p.name || 'Mara Voss').trim();
+  const nameParts = fullName.split(/\s+/);
+  const firstName = nameParts[0] || 'Mara';
+  const lastName = nameParts.slice(1).join(' ') || 'Voss';
+  const monogram = (firstName[0] || 'A') + (lastName[0] || 'D');
+  return {
+    fullName,
+    firstName,
+    lastName,
+    monogram,
+    role: p.title || 'INDEPENDENT ART DIRECTOR & DIGITAL DESIGNER',
+    practice: p.tagline || p.bio || 'Brand identities, editorial systems, digital experiences.',
+    story: p.about_story || p.bio || 'Rooted in clarity, driven by curiosity, Mara Voss builds identities and digital experiences that bring structure to complex ideas through bold typography and thoughtful visual systems.',
+    email: p.email || '',
+    avatar: p.avatarUrl || p.avatar_url || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80'
+  };
+}
+
 function renderMara(p) {
   normTpl(p);
   const app = document.getElementById('app') || document.body;
