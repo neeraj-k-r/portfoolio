@@ -9450,7 +9450,7 @@ function renderAnalogAboutModal(p) {
   const headline = p.about_headline || (p.about && p.about.headline) || '';
   const bio = p.about_story || (p.about && p.about.story) || p.bio || 'Blending design, art, and technology to build meaningful digital experiences.';
   const email = p.email || 'hello@example.com';
-  const location = p.location || 'San Francisco, CA';
+  const location = p.about_origin || (p.about && p.about.origin) || p.location || 'San Francisco, CA';
 
   return `<div class="analog-modal-backdrop" id="analogAboutModal" onclick="window.closeAnalogAboutModal&&window.closeAnalogAboutModal(event)">
     <div class="analog-modal-card" onclick="event.stopPropagation()">
