@@ -150,6 +150,42 @@
       font-variant-numeric: tabular-nums;
       font-weight: 500;
     }
+
+    .nav-menu-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-width: 60px;
+      min-height: 48px;
+      cursor: pointer;
+      padding: 6px 12px;
+      transition: opacity 0.2s ease;
+    }
+    .nav-menu-btn:hover { opacity: 0.85; }
+    .menu-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 14px;
+    }
+    .menu-bars i {
+      display: inline-block;
+      width: 3px;
+      background: #ffffff;
+      border-radius: 1px;
+      transition: height 0.3s ease;
+    }
+    .nav-menu-btn.is-active .menu-bars i {
+      height: 4px !important;
+    }
+    .menu-text {
+      font-size: 14px;
+      font-family: var(--mara-font-utility);
+      letter-spacing: 0.06em;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body id="top">
@@ -166,6 +202,12 @@
         <span class="clock-label" id="clockZone">GMT+00:00 // LOCAL</span>
         <span class="clock-time" id="clockTime">00:00:00</span>
       </div>
+      <button class="nav-menu-btn" id="menuBtn" aria-label="Open Navigation Menu" aria-expanded="false" aria-controls="menuOverlay">
+        <span class="menu-bars" aria-hidden="true">
+          <i style="height:3px"></i><i style="height:7px"></i><i style="height:12px"></i><i style="height:4px"></i><i style="height:8px"></i><i style="height:6px"></i><i style="height:3px"></i>
+        </span>
+        <span class="menu-text">MENU</span>
+      </button>
     </nav>
   </header>
   <main>
