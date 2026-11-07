@@ -836,6 +836,35 @@
       background: #ffffff;
       color: #000000;
     }
+
+    .mara-services {
+      min-height: 680px;
+      padding: 60px var(--mara-inset) 50px;
+      background: #000000;
+    }
+    .services-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 70px;
+    }
+    .services-heading {
+      font-family: var(--mara-font-display);
+      font-weight: 500;
+      font-size: clamp(30px, 6.4cqw, 86px);
+      line-height: 1;
+      letter-spacing: -0.045em;
+    }
+    .line-white { color: #ffffff; display: block; }
+    .line-orange { color: var(--mara-accent); display: block; }
+    .services-footer-notes {
+      margin-top: 60px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      color: var(--mara-muted);
+      font-family: var(--mara-font-utility);
+    }
   </style>
 </head>
 <body id="top">
@@ -1026,7 +1055,22 @@
         <a href="#contact" class="mara-pill work-convo-pill">Start a conversation ↗</a>
       </div>
     </section>
-    <section id="services" class="mara-services"></section>
+        <section id="services" class="mara-services">
+      <div class="section-top-divider"></div>
+      <div class="services-header">
+        <h2 class="services-heading">
+          <span class="line-white">THOUGHTFUL SYSTEMS.</span>
+          <span class="line-orange">DISTINCTIVE OUTCOMES.</span>
+        </h2>
+        <div class="section-label">// CAPABILITIES.</div>
+      </div>
+      <div class="services-rows" id="servicesRows">
+      </div>
+      <div class="services-footer-notes">
+        <span>From a focused identity to a complete digital direction.</span>
+        <span>Independent practice / Collaborative approach</span>
+      </div>
+    </section>
     <section id="contact" class="mara-contact"></section>
   </main>
 
