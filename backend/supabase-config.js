@@ -103,6 +103,8 @@ async function cloudSaveProfile(p) {
     works: Array.isArray(p.works) ? p.works.slice(0, 30) : [],
     about_story: typeof p.about_story === 'string' ? p.about_story : (p.about && typeof p.about.story === 'string' ? p.about.story : ''),
     about_headline: typeof p.about_headline === 'string' ? p.about_headline : (p.about && typeof p.about.headline === 'string' ? p.about.headline : ''),
+    about_badge: typeof p.about_badge === 'string' ? p.about_badge : (p.about && typeof p.about.badge === 'string' ? p.about.badge : ''),
+    about_origin: typeof p.about_origin === 'string' ? p.about_origin : (p.about && typeof p.about.origin === 'string' ? p.about.origin : ''),
     resume: (p.resume && typeof p.resume === 'object')
       ? { ...p.resume, services: Array.isArray(p.services) ? p.services.slice(0, 20) : (p.resume.services || []) }
       : (Array.isArray(p.services) ? { services: p.services.slice(0, 20) } : {}),
