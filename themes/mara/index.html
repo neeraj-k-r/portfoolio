@@ -711,6 +711,29 @@
       letter-spacing: 0.08em;
       color: var(--mara-muted);
     }
+
+    .work-table {
+      display: flex;
+      flex-direction: column;
+    }
+    .work-row-btn {
+      min-height: 72px;
+      padding: 16px 20px;
+      background: rgba(0,0,0,0.73);
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      display: grid;
+      grid-template-columns: 42px minmax(0,1fr) 210px 70px 40px;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s ease;
+    }
+    .col-idx { font-family: var(--mara-font-utility); font-size: 14px; color: var(--mara-muted); }
+    .col-title { font-family: var(--mara-font-display); font-size: 24px; font-weight: 500; color: #ffffff; }
+    .col-disc { font-family: var(--mara-font-utility); font-size: 14px; color: var(--mara-muted-2); }
+    .col-year { font-family: var(--mara-font-utility); font-size: 14px; color: var(--mara-muted); }
+    .col-arrow { font-size: 18px; color: #ffffff; text-align: right; }
   </style>
 </head>
 <body id="top">
@@ -839,6 +862,61 @@
         <div class="work-kicker">SIX SELF-INITIATED PROJECTS / 2024–2026</div>
       </div>
       <div class="work-table" id="workTable">
+
+        <div class="work-row-btn" role="button" tabindex="0" data-id="01" onclick="openCaseStudy('01')">
+          <span class="col-idx">01</span>
+          <span class="col-title">Gridline Studio</span>
+          <span class="col-disc">Brand &amp; Digital</span>
+          <span class="col-year">2026</span>
+          <span class="col-arrow">↗</span>
+          <div class="row-preview" data-art="gridline"></div>
+          <div class="row-wipe"></div>
+        </div>
+        <div class="work-row-btn" role="button" tabindex="0" data-id="02" onclick="openCaseStudy('02')">
+          <span class="col-idx">02</span>
+          <span class="col-title">Forma Journal</span>
+          <span class="col-disc">Editorial &amp; Web</span>
+          <span class="col-year">2026</span>
+          <span class="col-arrow">↗</span>
+          <div class="row-preview" data-art="forma"></div>
+          <div class="row-wipe"></div>
+        </div>
+        <div class="work-row-btn" role="button" tabindex="0" data-id="03" onclick="openCaseStudy('03')">
+          <span class="col-idx">03</span>
+          <span class="col-title">Still Objects</span>
+          <span class="col-disc">Brand Identity</span>
+          <span class="col-year">2025</span>
+          <span class="col-arrow">↗</span>
+          <div class="row-preview" data-art="still"></div>
+          <div class="row-wipe"></div>
+        </div>
+        <div class="work-row-btn" role="button" tabindex="0" data-id="04" onclick="openCaseStudy('04')">
+          <span class="col-idx">04</span>
+          <span class="col-title">Fieldnotes</span>
+          <span class="col-disc">Art Direction</span>
+          <span class="col-year">2025</span>
+          <span class="col-arrow">↗</span>
+          <div class="row-preview" data-art="fieldnotes"></div>
+          <div class="row-wipe"></div>
+        </div>
+        <div class="work-row-btn" role="button" tabindex="0" data-id="05" onclick="openCaseStudy('05')">
+          <span class="col-idx">05</span>
+          <span class="col-title">Orbit Interface</span>
+          <span class="col-disc">Digital Design</span>
+          <span class="col-year">2024</span>
+          <span class="col-arrow">↗</span>
+          <div class="row-preview" data-art="orbit"></div>
+          <div class="row-wipe"></div>
+        </div>
+        <div class="work-row-btn" role="button" tabindex="0" data-id="06" onclick="openCaseStudy('06')">
+          <span class="col-idx">06</span>
+          <span class="col-title">Signal Studies</span>
+          <span class="col-disc">Visual Exploration</span>
+          <span class="col-year">2024</span>
+          <span class="col-arrow">↗</span>
+          <div class="row-preview" data-art="signal"></div>
+          <div class="row-wipe"></div>
+        </div>
       </div>
     </section>
     <section id="services" class="mara-services"></section>
