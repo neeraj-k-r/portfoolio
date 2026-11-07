@@ -621,6 +621,27 @@
       justify-content: center;
       font-size: 18px;
     }
+
+    .featured-grid-band {
+      position: absolute;
+      top: 623px;
+      left: 0;
+      right: 0;
+      height: 90px;
+      border-top: 1px solid var(--mara-dark-div-1);
+      border-bottom: 1px solid var(--mara-dark-div-1);
+      background-image: repeating-linear-gradient(90deg, var(--mara-dark-div-1) 0, var(--mara-dark-div-1) 1px, transparent 1px, transparent 6.25%);
+      display: flex;
+      align-items: center;
+      padding-left: var(--mara-inset);
+      z-index: 0;
+    }
+    .band-label {
+      font-family: var(--mara-font-utility);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--mara-muted);
+    }
   </style>
 </head>
 <body id="top">
@@ -709,6 +730,10 @@
             <span class="discipline-tag">Digital Design</span>
           </div>
         </div>
+      </div>
+    
+      <div class="featured-grid-band" aria-hidden="true">
+        <div class="band-label">01 / FORM FOLLOWS A POINT OF VIEW.</div>
       </div>
     </section>
         <section id="featured" class="mara-featured">
