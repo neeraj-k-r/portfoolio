@@ -10847,7 +10847,7 @@ function renderLoAbout(p) {
     </section>`;
 }
 
-function renderLoMilestones() {
+function renderLoMilestones(p) {
   return `
     <div class="lo-milestones-grid">
       <div class="lo-milestone"><div class="lo-milestone-number">12+</div><div class="lo-milestone-label">Years Creating</div></div>
