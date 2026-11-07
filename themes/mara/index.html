@@ -1626,6 +1626,20 @@
       if (row) row.setAttribute('aria-expanded', String(!isOpen));
     }
 
+
+    function copyEmailToClipboard(email) {
+      const statusEl = document.getElementById('contactStatus');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+          if (statusEl) statusEl.textContent = 'Email copied to clipboard!';
+        }).catch(() => {
+          if (statusEl) statusEl.textContent = 'Please copy manually: ' + email;
+        });
+      } else {
+        if (statusEl) statusEl.textContent = 'Please copy manually: ' + email;
+      }
+    }
+
 </script>
 
   <div id="menuOverlay" class="menu-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site Navigation">
