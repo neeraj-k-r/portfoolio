@@ -2555,6 +2555,7 @@ async function saveStudio() {
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
       github: normGithub($('edGithub').value), linkedin: normLinkedIn($('edLinkedin').value), instagram: normInsta($('edInsta').value), location: $('edLoc').value.trim(),
       showInstagram: showInsta, show_instagram: showInsta,
+      about_headline: $('edAboutHeadline') ? $('edAboutHeadline').value.trim() : (activeUserProfile.about_headline || ''),
       template: (document.querySelector('input[name=edtpl]:checked') || {}).value || activeUserProfile.template || 'midnight',
       avatarUrl: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
       avatar_url: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
