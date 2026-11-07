@@ -523,6 +523,32 @@
       color: var(--mara-muted-2);
       font-family: var(--mara-font-utility);
     }
+
+    .mara-featured {
+      min-height: 960px;
+      padding: 38px var(--mara-inset) 80px;
+      background: #000000;
+      position: relative;
+      perspective: 850px;
+    }
+    .featured-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .featured-kicker {
+      font-family: var(--mara-font-utility);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      color: var(--mara-muted);
+    }
+    .featured-stage {
+      position: relative;
+      margin-top: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
   </style>
 </head>
 <body id="top">
@@ -613,7 +639,15 @@
         </div>
       </div>
     </section>
-    <section id="featured" class="mara-featured"></section>
+        <section id="featured" class="mara-featured">
+      <div class="section-top-divider"></div>
+      <div class="featured-header">
+        <div class="section-label">// Featured Project</div>
+        <div class="featured-kicker">SELF-INITIATED CONCEPT // 2026</div>
+      </div>
+      <div class="featured-stage" id="featuredStage">
+      </div>
+    </section>
     <section id="work" class="mara-work"></section>
     <section id="services" class="mara-services"></section>
     <section id="contact" class="mara-contact"></section>
