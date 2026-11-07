@@ -2428,7 +2428,7 @@ function pageGallery(p, wIdx, url) {
               <div class="suki-shell suki-about-grid">
                 <div class="suki-about-copy">
                   <p class="suki-kicker">03 / ABOUT</p>
-                  <h2>Editing is more than <span>cutting clips.</span></h2>
+                  <h2>${p.about_headline || (p.about && p.about.headline) ? esc(p.about_headline || (p.about && p.about.headline)) : 'Editing is more than <span>cutting clips.</span>'}</h2>
                   <p>${bio}</p>
                 </div>
                 <div class="suki-stats">
