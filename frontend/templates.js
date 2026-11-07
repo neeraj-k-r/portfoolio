@@ -10049,7 +10049,7 @@ function renderMythosAboutModal(p) {
   const role = tplEsc(p.title || 'Creative Engineer');
   const headline = tplEsc(p.about_headline || (p.about && p.about.headline) || '');
   const bio = tplEsc(p.about_story || (p.about && p.about.story) || p.bio || p.tagline || 'A showcase of creative work, digital builds, visual explorations, and curious experiments.');
-  const location = tplEsc(p.location || 'Creative Studio');
+  const location = tplEsc(p.about_origin || (p.about && p.about.origin) || p.location || 'Creative Studio');
   const email = p.email || '';
 
   return `
