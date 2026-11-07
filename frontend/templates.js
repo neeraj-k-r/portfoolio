@@ -10829,7 +10829,7 @@ function renderLoAbout(p) {
         <div class="lo-stamp-card">
           <div class="lo-stamp-header">
             <span>STUDIO RECORD · #2026</span>
-            <span>CERTIFIED ARTIST</span>
+            <span>${tplEsc(p.about_badge || (p.about && p.about.badge) || 'CERTIFIED ARTIST')}</span>
           </div>
           <img class="lo-stamp-photo" src="${tplSafeUrl(avatar)}" alt="${name}">
           <div class="lo-stamp-footer">
