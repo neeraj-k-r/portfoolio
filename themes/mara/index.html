@@ -1003,6 +1003,36 @@
       .featured-card { transform: none !important; }
       .statement-follower { display: none !important; }
     }
+
+    @media (max-width: 900px) {
+      .mara-hero { height: 100svh; min-height: 760px; }
+      .hero-sub-row { font-size: 11px; }
+      .hero-lower-copy { font-size: 16px; }
+      .mara-featured { min-height: 780px; }
+      .featured-card-wrap { width: 278px; height: 278px; }
+      .work-row-btn { grid-template-columns: 32px minmax(0,1fr) 50px 30px; }
+      .col-disc { display: none; }
+      .row-preview { display: none !important; }
+      .services-header { flex-direction: column; gap: 20px; }
+      .capability-row { grid-template-columns: 32px 1fr 100px; }
+      .cap-scope { display: none; }
+    }
+    @media (max-width: 560px) {
+      .mara-hero { min-height: max(720px, 100svh); }
+      .mara-nav { top: 20px; }
+      .clock-label { font-size: 10px; }
+      .clock-time { font-size: 14px; }
+      .hero-title-wrap { top: 145px; }
+      .hero-lower-copy { bottom: 105px; }
+      .hero-explore-pill { bottom: 28px; left: var(--mara-inset); right: auto; }
+      .about-meta-row { flex-direction: column; gap: 30px; }
+      .about-disciplines { align-items: flex-start; }
+      .contact-grid { grid-template-columns: 1fr; gap: 30px; }
+      .featured-caption-block { margin-top: 320px; }
+      .featured-grid-band { display: none; }
+      .work-bottom-cta { flex-direction: column; gap: 16px; align-items: flex-start; }
+      .footer-row { flex-direction: column; gap: 14px; align-items: flex-start; }
+    }
   </style>
 </head>
 <body id="top">
