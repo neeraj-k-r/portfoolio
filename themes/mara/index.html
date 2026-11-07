@@ -986,6 +986,23 @@
     @media (pointer: fine) {
       .mara-custom-cursor { display: block; }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      .hero-title-row .char, .statement-line, .feat-line, .hero-sub-row, .hero-lower-copy, .hero-explore-pill, .hero-sup {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+      }
+      .arrow-icon { animation: none !important; }
+      .featured-card { transform: none !important; }
+      .statement-follower { display: none !important; }
+    }
   </style>
 </head>
 <body id="top">
