@@ -3112,3 +3112,20 @@ iframe[src*="netlify" i],
   opacity: 0 !important;
   pointer-events: none !important;
 }
+
+/* Responsive rules for Studio About & Milestones editor */
+@media (max-width: 640px) {
+  .milestones-form-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+  #tabAbout .studio-about-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media (max-width: 480px) {
+  .milestones-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
