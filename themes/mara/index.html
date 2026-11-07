@@ -668,6 +668,30 @@
     .feat-card-cursor.is-active {
       transform: translate(-50%, -50%) scale(1);
     }
+
+    .featured-caption-block {
+      margin-top: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      z-index: 5;
+    }
+    .featured-caption-title {
+      font-size: 18px;
+      font-family: var(--mara-font-display);
+      font-weight: 500;
+      color: #ffffff;
+    }
+    .featured-caption-sub {
+      font-size: 14px;
+      font-family: var(--mara-font-utility);
+      color: var(--mara-muted-2);
+      margin-top: 6px;
+    }
+    .featured-pill-btn {
+      margin-top: 24px;
+    }
   </style>
 </head>
 <body id="top">
@@ -758,6 +782,12 @@
         </div>
       </div>
     
+      <div class="featured-caption-block">
+        <p class="featured-caption-title">Gridline Studio — Brand &amp; Digital System</p>
+        <p class="featured-caption-sub">Art direction / Visual identity / Web direction</p>
+        <button class="mara-pill featured-pill-btn" onclick="openCaseStudy('01')">View case study ↗</button>
+      </div>
+
       <div class="featured-grid-band" aria-hidden="true">
         <div class="band-label">01 / FORM FOLLOWS A POINT OF VIEW.</div>
       </div>
