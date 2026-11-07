@@ -734,6 +734,39 @@
     .col-disc { font-family: var(--mara-font-utility); font-size: 14px; color: var(--mara-muted-2); }
     .col-year { font-family: var(--mara-font-utility); font-size: 14px; color: var(--mara-muted); }
     .col-arrow { font-size: 18px; color: #ffffff; text-align: right; }
+
+    .row-wipe {
+      position: absolute;
+      inset: 0;
+      background: #ffffff;
+      transform: translateX(-100%);
+      transition: transform 0.45s ease;
+      mix-blend-mode: difference;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .work-row-btn:hover .row-wipe, .work-row-btn:focus .row-wipe {
+      transform: translateX(0);
+    }
+    .row-preview {
+      position: absolute;
+      top: 50%;
+      left: 62%;
+      transform: translateY(-50%) scale(0.96);
+      width: 180px;
+      height: 180px;
+      pointer-events: none;
+      opacity: 0;
+      filter: blur(8px);
+      transition: opacity 0.42s ease, transform 0.42s ease, filter 0.42s ease;
+      z-index: 10;
+    }
+    .work-row-btn:hover .row-preview {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(-50%) scale(1);
+    }
+    .row-preview svg { width: 100%; height: 100%; display: block; border-radius: 4px; box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
   </style>
 </head>
 <body id="top">
