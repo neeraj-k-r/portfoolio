@@ -89,6 +89,7 @@ function normTpl(p) {
       if (!p.about_story && p.about.story) p.about_story = p.about.story;
       if (!p.about_badge && p.about.badge) p.about_badge = p.about.badge;
       if (!p.about_origin && p.about.origin) p.about_origin = p.about.origin;
+      if (!p.about_stats && Array.isArray(p.about.stats)) p.about_stats = p.about.stats;
     }
   }
   return p;
