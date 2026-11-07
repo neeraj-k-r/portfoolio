@@ -466,3 +466,38 @@ test('Lo theme dynamically renders custom certified badge and studio origin', ()
   assert.ok(!capturedHtml.includes('CERTIFIED ARTIST'), 'must replace default CERTIFIED ARTIST');
   assert.ok(!capturedHtml.includes('MIDWEST STUDIO'), 'must replace default MIDWEST STUDIO');
 });
+
+test('Lo theme dynamically renders custom milestone stats', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const loFn = domMock.window.PortfoolioTemplates.lo;
+  loFn({
+    name: 'Devi Lal',
+    about_stats: [
+      { num: '7+', label: 'Exhibitions' },
+      { num: '45+', label: 'Fine Art Prints' },
+      { num: '200+', label: 'Collectors' }
+    ]
+  });
+
+  assert.ok(capturedHtml.includes('7+'), 'must render first stat num');
+  assert.ok(capturedHtml.includes('Exhibitions'), 'must render first stat label');
+  assert.ok(capturedHtml.includes('45+'), 'must render second stat num');
+  assert.ok(capturedHtml.includes('Fine Art Prints'), 'must render second stat label');
+  assert.ok(capturedHtml.includes('200+'), 'must render third stat num');
+  assert.ok(capturedHtml.includes('Collectors'), 'must render third stat label');
+  assert.ok(!capturedHtml.includes('12+ Years Creating'), 'must not render default first milestone');
+});
