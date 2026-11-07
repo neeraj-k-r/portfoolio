@@ -3765,3 +3765,19 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   .lo-services-grid{grid-template-columns:1fr}
   .lo-nav-links{display:none}
 }
+
+/* Studio About & Story Editor Styles */
+#tabAbout .form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+}
+#tabAbout .form-grid .full {
+  grid-column: 1 / -1;
+}
+#tabAbout textarea {
+  width: 100%;
+  font-family: inherit;
+  font-size: 13.5px;
+  line-height: 1.55;
+}
