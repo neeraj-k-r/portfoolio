@@ -319,6 +319,40 @@
       z-index: 2;
       pointer-events: none;
     }
+
+    .hero-arrow-btn {
+      position: absolute;
+      top: 260px;
+      left: 70%;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.6);
+      background: rgba(0,0,0,0.32);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      z-index: 10;
+      transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+    .hero-arrow-btn:hover {
+      background: var(--mara-accent);
+      border-color: var(--mara-accent);
+      color: #000000;
+    }
+    .arrow-icon {
+      width: 25px;
+      height: 25px;
+      animation: arrowBounce 1.9s cubic-bezier(.45,0,.3,1) infinite;
+    }
+    .hero-arrow-btn:hover .arrow-icon, .hero-arrow-btn:focus .arrow-icon {
+      animation-play-state: paused;
+    }
+    @keyframes arrowBounce {
+      0%, 70%, 100% { transform: translateY(-3px); }
+      35% { transform: translateY(5px); }
+    }
   </style>
 </head>
 <body id="top">
@@ -370,6 +404,12 @@
 
     <a href="#work" class="mara-pill hero-explore-pill" id="heroExploreBtn">Explore work ↘</a>
     <div class="hero-vertical-tag">A FICTIONAL PORTRAIT / STRUCTURE &amp; EXPRESSION — 001</div>
+
+    <a href="#about" class="hero-arrow-btn" id="heroArrowBtn" aria-label="Scroll down to Design Approach">
+      <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 4v15M5 12l7 7 7-7"/>
+      </svg>
+    </a>
   </header>
   <main>
     <section id="about" class="mara-about"></section>
