@@ -665,3 +665,27 @@ test('Mara theme dynamically adapts to custom user name, custom role, and user w
   assert.ok(capturedHtml.includes('Designing monumental pavilions'), 'must render custom story');
   assert.ok(capturedHtml.includes('Pavilion Monolith'), 'must render custom user work');
 });
+
+test('Mara theme preserves default persona and aesthetic defaults when optional fields are omitted', () => {
+  let capturedHtml = '';
+  const domMock = {
+    window: { PortfoolioTemplates: {} },
+    document: {
+      body: { dataset: {}, classList: { remove() {} } },
+      title: '',
+      getElementById: (id) => ({
+        set innerHTML(val) { capturedHtml = val; }
+      })
+    }
+  };
+  domMock.window.document = domMock.document;
+  const ctx = vm.createContext(domMock);
+  vm.runInContext(TEMPLATES_JS, ctx);
+
+  const maraFn = domMock.window.PortfoolioTemplates.mara;
+  maraFn({});
+
+  assert.ok(capturedHtml.includes('Mara') && capturedHtml.includes('Voss'), 'defaults to Mara Voss');
+  assert.ok(capturedHtml.includes('Gridline Studio'), 'defaults to curated project index');
+  assert.ok(capturedHtml.includes('Art Direction'), 'defaults to Art Direction capability');
+});
