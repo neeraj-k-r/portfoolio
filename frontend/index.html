@@ -1204,6 +1204,20 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           </div>
           <div id="edGhList" style="display:grid;gap:8px;margin-top:8px;max-height:220px;overflow:auto"></div>
           <button type="button" class="btn btn-ghost btn-sm" id="edGhAdd" style="margin-top:10px"><i class="fa-solid fa-plus"></i> Add Selected Repos</button>
+
+          <!-- Quick Link to GitHub Profile Badge -->
+          <div style="margin-top:16px;background:rgba(124,58,237,0.08);border:1px dashed rgba(124,58,237,0.35);border-radius:12px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-size:20px">🏷️</span>
+              <div>
+                <b style="color:#e2e8f0;font-size:13px">Add Portfolio Badge to GitHub Profile</b>
+                <div style="color:var(--muted);font-size:12px">Embed your live portfolio badge in your GitHub README with 1 click.</div>
+              </div>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" onclick="switchUserTab('share')" style="font-size:12px;padding:5px 12px;color:#c084fc;border:1px solid rgba(124,58,237,0.4)">
+              Get Badge <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -1483,6 +1497,72 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <button class="btn btn-ghost btn-sm" id="shareWA"><i class="fa-brands fa-whatsapp"></i> WhatsApp</button>
             <button class="btn btn-ghost btn-sm" id="shareLI"><i class="fa-brands fa-linkedin"></i> LinkedIn</button>
             <button class="btn btn-ghost btn-sm" id="shareX"><i class="fa-brands fa-x-twitter"></i> Post</button>
+          </div>
+        </div>
+
+        <!-- GitHub Profile README Badge Generator -->
+        <div style="margin-top:20px;border-top:1px solid var(--stroke);padding-top:18px">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px">
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style="font-size:22px">🏷️</span>
+              <div>
+                <h4 style="margin:0;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px">
+                  GitHub Profile README Badge
+                  <span class="badge" style="background:rgba(124,58,237,0.18);color:#c084fc;border:1px solid rgba(124,58,237,0.4);font-size:10.5px">VIRAL EMBED</span>
+                </h4>
+                <div style="color:var(--muted);font-size:12.5px;margin-top:2px">
+                  Embed an interactive live badge into your GitHub profile <code>README.md</code> or repository headers.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Badge Style Picker -->
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 12px" id="badgeStylePicker">
+            <button type="button" class="btn btn-ghost btn-sm badge-style-btn active" data-badge="purple" style="font-size:12px;padding:6px 12px;border:1px solid rgba(124,58,237,0.8);background:rgba(124,58,237,0.2);color:#c084fc">
+              🟣 For-The-Badge Purple
+            </button>
+            <button type="button" class="btn btn-ghost btn-sm badge-style-btn" data-badge="cyan" style="font-size:12px;padding:6px 12px;border:1px solid var(--stroke)">
+              🔷 Cyber Cyan
+            </button>
+            <button type="button" class="btn btn-ghost btn-sm badge-style-btn" data-badge="flat" style="font-size:12px;padding:6px 12px;border:1px solid var(--stroke)">
+              ⬛ Flat Square
+            </button>
+            <button type="button" class="btn btn-ghost btn-sm badge-style-btn" data-badge="goku" style="font-size:12px;padding:6px 12px;border:1px solid var(--stroke)">
+              🐉 Goku Pet Edition
+            </button>
+          </div>
+
+          <!-- Live Visual Preview -->
+          <div style="background:rgba(0,0,0,0.3);border:1px dashed rgba(124,58,237,0.4);border-radius:12px;padding:16px;text-align:center;margin-bottom:14px">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px">Live Badge Preview (Click to test link)</div>
+            <a id="shareBadgePreviewLink" href="#" target="_blank" rel="noopener" style="display:inline-block;transition:transform 0.15s ease" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+              <img id="shareBadgePreviewImg" src="https://img.shields.io/badge/Portfoolio-Live-7c3aed?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio" style="height:28px;vertical-align:middle;border-radius:4px" />
+            </a>
+          </div>
+
+          <!-- Code Snippet Box -->
+          <div style="position:relative">
+            <label class="flabel" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+              <span>Markdown for GitHub <code>README.md</code></span>
+              <span id="badgeCopiedNotice" style="display:none;color:#4ade80;font-size:11.5px;font-weight:600">✓ Copied to clipboard!</span>
+            </label>
+            <div style="position:relative">
+              <input type="text" id="shareBadgeMarkdown" readonly class="mono" style="width:100%;padding:10px 105px 10px 12px;font-size:12px;background:rgba(15,23,42,0.85);border:1px solid var(--stroke);border-radius:10px;color:#f1f5f9;cursor:text" />
+              <button type="button" class="btn btn-primary btn-sm" id="shareCopyBadgeMd" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);padding:5px 12px;font-size:11.5px;display:flex;align-items:center;gap:6px">
+                <i class="fa-solid fa-copy"></i> Copy
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Copy Alternatives -->
+          <div style="display:flex;gap:10px;margin-top:10px;align-items:center;flex-wrap:wrap">
+            <button type="button" class="btn btn-ghost btn-sm" id="shareCopyBadgeHtml" style="font-size:12px">
+              <i class="fa-solid fa-code"></i> Copy HTML Tag
+            </button>
+            <button type="button" class="btn btn-ghost btn-sm" id="shareCopyBadgeUrl" style="font-size:12px">
+              <i class="fa-solid fa-image"></i> Copy Image URL
+            </button>
           </div>
         </div>
       </div>
@@ -2448,6 +2528,98 @@ function paintShareSection(p) {
   if($('shareWA')) $('shareWA').onclick = () => open(`https://wa.me/?text=${text}%20${encodeURIComponent(sub)}`, '_blank');
   if($('shareLI')) $('shareLI').onclick = () => open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sub)}`, '_blank');
   if($('shareX')) $('shareX').onclick = () => open(`https://x.com/intent/post?text=${text}&url=${encodeURIComponent(sub)}`, '_blank');
+
+  setupBadgeGenerator(p);
+}
+
+let currentBadgeStyle = 'purple';
+function setupBadgeGenerator(p) {
+  if (!p || !p.username) return;
+  const isProd = location.hostname === 'portfoolio.me' || location.hostname.endsWith('.portfoolio.me');
+  const pathPrefix = location.pathname.includes('/frontend/') ? `${location.origin}/frontend/` : `${location.origin}/`;
+  const sub = `https://${p.username}.portfoolio.me`;
+  const targetUrl = isProd ? sub : `${pathPrefix}?u=${encodeURIComponent(p.username)}`;
+
+  function getBadgeConfig(style) {
+    if (style === 'cyan') {
+      return {
+        url: 'https://img.shields.io/badge/Portfoolio-Live-06b6d4?style=for-the-badge&logo=visualstudiocode&logoColor=white',
+        alt: 'Portfoolio Live'
+      };
+    }
+    if (style === 'flat') {
+      return {
+        url: 'https://img.shields.io/badge/Portfolio-portfoolio.me-8b5cf6?style=flat-square&logo=googlechrome&logoColor=white',
+        alt: 'Portfolio'
+      };
+    }
+    if (style === 'goku') {
+      return {
+        url: 'https://img.shields.io/badge/Portfoolio-Goku_Active-f59e0b?style=for-the-badge&logo=target&logoColor=white',
+        alt: 'Portfoolio Goku Pet'
+      };
+    }
+    // Default: for-the-badge purple
+    return {
+      url: 'https://img.shields.io/badge/Portfoolio-Live-7c3aed?style=for-the-badge&logo=googlechrome&logoColor=white',
+      alt: 'Portfolio'
+    };
+  }
+
+  function renderBadge(style) {
+    currentBadgeStyle = style;
+    const cfg = getBadgeConfig(style);
+    const md = `[![Portfolio](${cfg.url})](${sub})`;
+    const html = `<a href="${sub}" target="_blank" rel="noopener"><img src="${cfg.url}" alt="${cfg.alt}" /></a>`;
+
+    if ($('shareBadgePreviewImg')) $('shareBadgePreviewImg').src = cfg.url;
+    if ($('shareBadgePreviewLink')) $('shareBadgePreviewLink').href = targetUrl;
+    if ($('shareBadgeMarkdown')) $('shareBadgeMarkdown').value = md;
+
+    document.querySelectorAll('.badge-style-btn').forEach(btn => {
+      const isCur = btn.getAttribute('data-badge') === style;
+      btn.style.borderColor = isCur ? 'rgba(124,58,237,0.85)' : 'var(--stroke)';
+      btn.style.background = isCur ? 'rgba(124,58,237,0.22)' : 'transparent';
+      btn.style.color = isCur ? '#c084fc' : 'var(--muted)';
+      btn.classList.toggle('active', isCur);
+    });
+  }
+
+  document.querySelectorAll('.badge-style-btn').forEach(btn => {
+    btn.onclick = () => renderBadge(btn.getAttribute('data-badge') || 'purple');
+  });
+
+  if ($('shareCopyBadgeMd')) {
+    $('shareCopyBadgeMd').onclick = () => {
+      const cfg = getBadgeConfig(currentBadgeStyle);
+      const md = `[![Portfolio](${cfg.url})](${sub})`;
+      navigator.clipboard.writeText(md).then(() => {
+        toast('✅ Markdown badge copied! Paste in your GitHub README');
+        const note = $('badgeCopiedNotice');
+        if (note) {
+          note.style.display = 'inline';
+          setTimeout(() => { note.style.display = 'none'; }, 2500);
+        }
+      }).catch(() => toast('Press Ctrl+C to copy: ' + md));
+    };
+  }
+
+  if ($('shareCopyBadgeHtml')) {
+    $('shareCopyBadgeHtml').onclick = () => {
+      const cfg = getBadgeConfig(currentBadgeStyle);
+      const html = `<a href="${sub}" target="_blank" rel="noopener"><img src="${cfg.url}" alt="${cfg.alt}" /></a>`;
+      navigator.clipboard.writeText(html).then(() => toast('✅ HTML embed tag copied!')).catch(() => toast(html));
+    };
+  }
+
+  if ($('shareCopyBadgeUrl')) {
+    $('shareCopyBadgeUrl').onclick = () => {
+      const cfg = getBadgeConfig(currentBadgeStyle);
+      navigator.clipboard.writeText(cfg.url).then(() => toast('✅ Badge image URL copied!')).catch(() => toast(cfg.url));
+    };
+  }
+
+  renderBadge(currentBadgeStyle || 'purple');
 }
 
 // Subdomain Builder Form (Wizard inside User Dashboard)
