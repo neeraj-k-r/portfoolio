@@ -1480,6 +1480,18 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div id="animePetsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"></div>
         </div>
 
+        <!-- ONE PIECE THEME / CREW SECTION -->
+        <div style="margin-bottom:22px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+            <h4 style="margin:0;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px">
+              <span>🏴‍☠️</span> One Piece Theme &amp; Straw Hat Crew
+              <span class="badge" style="background:linear-gradient(135deg,rgba(239,68,68,0.25),rgba(234,179,8,0.25));color:#fbbf24;border:1px solid rgba(234,179,8,0.4);font-size:11px">STRAW HAT CREW</span>
+            </h4>
+            <span style="font-size:12.5px;color:var(--muted)">Gear 5 Luffy, Sanji, Robin, Zoro, Luffy &amp; Sabo</span>
+          </div>
+          <div id="onePiecePetsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"></div>
+        </div>
+
         <!-- ANIME HEROES COLLECTION (https://petdex.dev/collections/anime-heroes) -->
         <div style="margin-bottom:22px">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
@@ -3104,6 +3116,13 @@ function paintPetStudioGrids(activePetId) {
   if (animeGrid) {
     const animePets = Object.values(reg).filter(p => p.category === 'anime');
     animeGrid.innerHTML = animePets.map(makePetCard).join('');
+  }
+
+  const opGrid = $('onePiecePetsGrid');
+  if (opGrid) {
+    const opOrder = ['luffy-gear-5-chibi', 'luffy', 'zoro', 'smoke-kick', 'robin', 'sabo'];
+    const opPets = opOrder.map(id => reg[id]).filter(Boolean);
+    opGrid.innerHTML = opPets.map(makePetCard).join('');
   }
 
   const animeHeroesGrid = $('animeHeroesGrid');
