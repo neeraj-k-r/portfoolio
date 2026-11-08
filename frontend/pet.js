@@ -8,15 +8,18 @@
     window.__ClawdexPetLoaded = true;
   }
 
+  var selectedPetId = (typeof window !== 'undefined' && window.PORTFOOLIO_PET_TYPE) || 'goku';
+  var petMeta = (typeof window !== 'undefined' && window.PORTFOOLIO_PETS && window.PORTFOOLIO_PETS[selectedPetId]) || null;
+
   var CFG = {
-    sheet: '/assets/pet-goku.webp',
+    sheet: (petMeta && petMeta.sheet) || '/assets/pet-goku.webp',
     fallbackSheet: 'https://assets.petdex.dev/pets/goku-036616929fb7/sprite.webp',
-    cols: 8,
-    rows: 9,
-    cellW: 192,
-    cellH: 208,
-    viewW: 96,
-    viewH: 104,
+    cols: (petMeta && petMeta.cols) || 8,
+    rows: (petMeta && petMeta.rows) || 9,
+    cellW: (petMeta && petMeta.cellW) || 192,
+    cellH: (petMeta && petMeta.cellH) || 208,
+    viewW: (petMeta && petMeta.viewW) || 96,
+    viewH: (petMeta && petMeta.viewH) || 104,
     bounds: 14,
     walkSpeed: 230,
     bubbleMs: 2600,
@@ -35,7 +38,7 @@
     { id: 'review', every: 120 }
   ];
 
-  var MESSAGES = [
+  var MESSAGES = (petMeta && petMeta.messages) || [
     "It's over 9000!",
     'Kaio-Ken!',
     'All systems go.',
@@ -434,10 +437,41 @@
     boot();
   }
 
+  function switchPet(petId) {
+    if (!petId) return;
+    var reg = (typeof window !== 'undefined' && window.PORTFOOLIO_PETS) ? window.PORTFOOLIO_PETS : null;
+    var meta = reg && reg[petId];
+    if (!meta) return;
+    window.PORTFOOLIO_PET_TYPE = petId;
+    CFG.sheet = meta.sheet;
+    CFG.cols = meta.cols || 8;
+    CFG.rows = meta.rows || 9;
+    CFG.cellW = meta.cellW || 192;
+    CFG.cellH = meta.cellH || 208;
+    CFG.viewW = meta.viewW || 96;
+    CFG.viewH = meta.viewH || 104;
+    MESSAGES = meta.messages || MESSAGES;
+
+    if (stage) {
+      stage.style.width = CFG.viewW + 'px';
+      stage.style.height = CFG.viewH + 'px';
+    }
+    if (sprite) {
+      sprite.style.width = (CFG.viewW * CFG.cols) + 'px';
+      sprite.style.height = (CFG.viewH * CFG.rows) + 'px';
+      sprite.src = CFG.sheet;
+      setFrame(0, 0);
+    }
+    show();
+    say(meta.defaultGreeting || ("Hello! I'm " + meta.displayName));
+  }
+
   window.ClawdexPet = {
     show: show,
     hide: function () { hide(false); },
     say: say,
+    switchPet: switchPet,
+    getPetType: function () { return (typeof window !== 'undefined' && window.PORTFOOLIO_PET_TYPE) || 'goku'; },
     isLoaded: function () { return loaded; }
   };
 })();
