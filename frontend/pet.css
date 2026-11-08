@@ -1,6 +1,6 @@
 #clawdex-pet{position:fixed;top:0;left:0;width:96px;height:104px;z-index:5000;pointer-events:none;-webkit-user-select:none;user-select:none;will-change:transform}
 #clawdex-pet.cdx-hidden{display:none}
-#clawdex-pet .cdx-stage{position:absolute;inset:0;pointer-events:auto;cursor:grab;touch-action:none}
+#clawdex-pet .cdx-stage{position:absolute;inset:0;pointer-events:auto;cursor:grab;touch-action:none;overflow:hidden}
 #clawdex-pet .cdx-stage.cdx-dragging{cursor:grabbing}
 #clawdex-pet .cdx-sprite{position:absolute;inset:0;background-repeat:no-repeat;background-position:0 0;image-rendering:pixelated;transition:opacity .4s ease;opacity:0}
 #clawdex-pet .cdx-placeholder{position:absolute;inset:0;border-radius:14px;background:linear-gradient(135deg,rgba(124,58,237,.30),rgba(34,211,238,.20));border:1px dashed rgba(255,255,255,.30);display:flex;align-items:center;justify-content:center;font:800 15px/1 'JetBrains Mono',monospace;color:#e8eaf0;animation:cdxPulse 1.4s ease-in-out infinite;box-shadow:0 8px 24px rgba(0,0,0,.35)}

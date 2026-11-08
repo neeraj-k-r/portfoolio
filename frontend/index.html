@@ -1426,11 +1426,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
           <div>
             <h3 style="display:flex;align-items:center;gap:10px;font-size:20px;margin-bottom:4px">
-              <span>🐉</span> Interactive Companion Pet (Goku)
-              <span class="badge" style="background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(239,68,68,0.2));color:#f59e0b;border:1px solid rgba(245,158,11,0.4);font-size:11px">LIVE MASCOT</span>
+              <span>⚡</span> Interactive Companion Mascot
+              <span class="badge" style="background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(239,68,68,0.2));color:#f59e0b;border:1px solid rgba(245,158,11,0.4);font-size:11px">POKÉMON & ANIME</span>
             </h3>
             <p style="color:var(--muted);font-size:13.5px;margin:0">
-              Give your visitors an unforgettable, playful experience. An animated pixel Goku companion walks across your live site, talks in speech bubbles, and reacts to clicks and dragging.
+              Give your visitors an unforgettable, playful experience. Choose a Pokémon or anime companion that walks across your live site, talks in speech bubbles, and reacts to clicks and dragging.
             </p>
           </div>
           <div id="petLiveIndicator" style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03)">
@@ -1503,7 +1503,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:14px;border-top:1px solid var(--stroke)">
           <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
             <button class="btn btn-primary btn-sm" id="edSavePetBtn" type="button"><i class="fa-solid fa-floppy-disk"></i> Save Companion Settings</button>
-            <button class="btn btn-ghost btn-sm" id="testPetBtn" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Test Goku Greeting</button>
+            <button class="btn btn-ghost btn-sm" id="testPetBtn" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Test Companion Greeting</button>
           </div>
           <a class="btn btn-ghost btn-sm" id="petPreviewLink" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Preview on Live Portfolio</a>
         </div>
@@ -3002,23 +3002,25 @@ function paintPetStudioGrids(activePetId) {
             </span>
             ${isSelected ? '<span style="color:#4ade80;font-size:11.5px;font-weight:700;display:flex;align-items:center;gap:4px">✓ ACTIVE</span>' : ''}
           </div>
-          <div style="height:88px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background:rgba(0,0,0,0.25);border-radius:10px;overflow:hidden">
+          <div style="height:88px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background:rgba(0,0,0,0.25);border-radius:10px;overflow:hidden;position:relative">
             <div style="
               width: 96px;
               height: 104px;
               background-image: url('${esc(pet.sheet)}');
+              background-repeat: no-repeat;
               background-size: ${pet.cols * 96}px ${pet.rows * 104}px;
               background-position: 0 0;
               image-rendering: pixelated;
               transform: scale(0.72);
+              pointer-events: none;
             "></div>
           </div>
           <b style="font-size:14.5px;color:#fff;display:block;margin-bottom:2px">${esc(pet.displayName)}</b>
           <p style="font-size:12px;color:var(--muted);margin:0;line-height:1.4">${esc(pet.subtitle)}</p>
         </div>
         <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between">
-          <button type="button" class="btn btn-ghost btn-sm" style="font-size:11px;padding:3px 8px;pointer-events:none">
-            ${isSelected ? 'Selected' : 'Select Pet'}
+          <button type="button" class="btn ${isSelected ? 'btn-primary' : 'btn-ghost'} btn-sm" style="font-size:11px;padding:4px 10px;cursor:pointer" onclick="event.stopPropagation(); selectStudioPet('${esc(pet.id)}')">
+            ${isSelected ? '✓ Active Pet' : 'Select Pet'}
           </button>
           <span style="font-size:11px;color:var(--muted)">${pet.messages ? pet.messages.length + ' lines' : ''}</span>
         </div>
@@ -3056,13 +3058,19 @@ function selectStudioPet(petId) {
     greetInput.value = pet.defaultGreeting;
   }
 
-  if (window.ClawdexPet && typeof window.ClawdexPet.switchPet === 'function') {
-    window.ClawdexPet.switchPet(petId);
+  try {
+    if (window.ClawdexPet && typeof window.ClawdexPet.switchPet === 'function') {
+      window.ClawdexPet.switchPet(petId);
+    }
+  } catch (err) {
+    console.error('switchPet error:', err);
   }
 
   paintPetStudioGrids(petId);
   toast('🎉 Selected ' + pet.displayName + ' companion!');
 }
+window.selectStudioPet = selectStudioPet;
+window.paintPetStudioGrids = paintPetStudioGrids;
 
 if ($('edSaveBtn')) $('edSaveBtn').onclick = saveStudio;
 if ($('edSaveThemeBtn')) $('edSaveThemeBtn').onclick = saveStudio;
@@ -3089,7 +3097,11 @@ if ($('edShowPetTheme')) $('edShowPetTheme').onchange = (e) => {
 if ($('testPetBtn')) $('testPetBtn').onclick = () => {
   if (window.ClawdexPet) {
     window.ClawdexPet.show();
-    const greet = ($('edPetGreeting') && $('edPetGreeting').value.trim()) || "Hello! Goku is active on your portfolio.";
+    const curType = ($('edPetType') && $('edPetType').value) || 'goku';
+    const reg = window.PORTFOOLIO_PETS || {};
+    const pet = reg[curType];
+    const defaultGreet = (pet && pet.defaultGreeting) || "Hello! Your companion pet is active.";
+    const greet = ($('edPetGreeting') && $('edPetGreeting').value.trim()) || defaultGreet;
     window.ClawdexPet.say(greet);
   }
 };
@@ -3192,8 +3204,9 @@ ${works ? `<section class="wrap"><h2>Works</h2><div class="works">${works}</div>
 </section>
 <footer class="wrap">Built with <a href="https://portfoolio.me">portfoolio.me</a> · ${esc(p.username)}.portfoolio.me</footer>
 </body></html>`;
+  const petType = p.pet_type || p.petType || 'goku';
   const petSnippet = (p.showPet || p.show_pet)
-    ? `<link rel="stylesheet" href="https://portfoolio.me/pet.css">\n${(p.petGreeting || p.pet_greeting) ? `<script>window.PORTFOOLIO_PET_GREETING = ${JSON.stringify(String(p.petGreeting || p.pet_greeting))};<` + `/script>\n` : ''}<script src="https://portfoolio.me/pet.js"><` + `/script>\n`
+    ? `<link rel="stylesheet" href="https://portfoolio.me/pet.css">\n<script>window.PORTFOOLIO_PET_TYPE = ${JSON.stringify(petType)};${(p.petGreeting || p.pet_greeting) ? ` window.PORTFOOLIO_PET_GREETING = ${JSON.stringify(String(p.petGreeting || p.pet_greeting))};` : ''}<` + `/script>\n<script src="https://portfoolio.me/pets-data.js"><` + `/script>\n<script src="https://portfoolio.me/pet.js"><` + `/script>\n`
     : '';
   return petSnippet ? html.replace('</body>', `${petSnippet}</body>`) : html;
 }

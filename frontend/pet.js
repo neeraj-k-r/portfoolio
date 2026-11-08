@@ -452,15 +452,25 @@
     CFG.viewH = meta.viewH || 104;
     MESSAGES = meta.messages || MESSAGES;
 
+    if (root) {
+      root.style.width = CFG.viewW + 'px';
+      root.style.height = CFG.viewH + 'px';
+    }
     if (stage) {
       stage.style.width = CFG.viewW + 'px';
       stage.style.height = CFG.viewH + 'px';
     }
     if (sprite) {
-      sprite.style.width = (CFG.viewW * CFG.cols) + 'px';
-      sprite.style.height = (CFG.viewH * CFG.rows) + 'px';
-      sprite.src = CFG.sheet;
-      setFrame(0, 0);
+      sprite.style.width = CFG.viewW + 'px';
+      sprite.style.height = CFG.viewH + 'px';
+      var scale = CFG.viewW / CFG.cellW;
+      var sheetW = CFG.cellW * CFG.cols * scale;
+      var sheetH = CFG.cellH * CFG.rows * scale;
+      sprite.style.backgroundSize = sheetW + 'px ' + sheetH + 'px';
+      sprite.style.backgroundImage = 'url("' + CFG.sheet + '")';
+      sprite.style.backgroundRepeat = 'no-repeat';
+      setRow(0, Infinity);
+      paint(0, 0);
     }
     show();
     say(meta.defaultGreeting || ("Hello! I'm " + meta.displayName));
