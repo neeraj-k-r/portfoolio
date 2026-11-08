@@ -2878,12 +2878,14 @@ async function saveStudio() {
     const showInsta = !$('edShowInsta') || $('edShowInsta').checked;
     const showPet = $('edShowPet') ? $('edShowPet').checked : ($('edShowPetTheme') ? $('edShowPetTheme').checked : !!(activeUserProfile.showPet || activeUserProfile.show_pet));
     const petGreeting = $('edPetGreeting') ? $('edPetGreeting').value.trim() : (activeUserProfile.petGreeting || activeUserProfile.pet_greeting || '');
+    const petType = ($('edPetType') && $('edPetType').value.trim()) || activeUserProfile.pet_type || activeUserProfile.petType || 'goku';
     Object.assign(activeUserProfile, {
       name: $('edName').value.trim(), title: $('edTitle').value.trim(), tagline: $('edTag').value.trim(),
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
       github: normGithub($('edGithub').value), linkedin: normLinkedIn($('edLinkedin').value), instagram: normInsta($('edInsta').value), location: $('edLoc').value.trim(),
       showInstagram: showInsta, show_instagram: showInsta,
       showPet: showPet, show_pet: showPet,
+      petType: petType, pet_type: petType,
       petGreeting: petGreeting, pet_greeting: petGreeting,
       about_headline: $('edAboutHeadline') ? $('edAboutHeadline').value.trim() : (activeUserProfile.about_headline || ''),
       about_story: $('edAboutStory') ? $('edAboutStory').value.trim() : (activeUserProfile.about_story || ''),
