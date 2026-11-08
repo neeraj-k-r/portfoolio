@@ -100,6 +100,15 @@ test('Pokémon Section & Petdex Companions catalog integration', async () => {
   assert.equal(PETS['goose-default'].category, 'anime');
   assert.equal(PETS['kaka-2'].category, 'anime');
 
+  // Verify One Piece Theme & Straw Hat Crew Section
+  const onePiecePets = ['luffy-gear-5-chibi', 'robin', 'smoke-kick'];
+  for (const opId of onePiecePets) {
+    assert.ok(PETS[opId], `One piece pet ${opId} must exist in PET_REGISTRY`);
+    assert.equal(PETS[opId].category, 'onepiece', `${opId} must be in onepiece category`);
+    assert.ok(PETS[opId].badge, `${opId} must have badge`);
+    assert.ok(PETS[opId].sheet.includes(opId), `${opId} sheet must point to /assets/pets/${opId}/spritesheet.webp`);
+  }
+
   // Verify Anime Heroes Collection (https://petdex.dev/collections/anime-heroes)
   const animeHeroes = ['luffy', 'zoro', 'naruto', 'itachi', 'gojo', 'sukuna', 'goku-blue', 'nezuko', 'kyojuro-rengoku', 'gon', 'killua', 'sabo'];
   for (const hId of animeHeroes) {
@@ -121,6 +130,7 @@ test('Pokémon Section & Petdex Companions catalog integration', async () => {
   // Verify Studio UI elements
   const indexHtml = fs.readFileSync(path.join(rootDir, 'frontend', 'index.html'), 'utf8');
   assert.ok(indexHtml.includes('id="pokemonPetsGrid"'), 'index.html must have #pokemonPetsGrid container');
+  assert.ok(indexHtml.includes('id="onePiecePetsGrid"'), 'index.html must have #onePiecePetsGrid container');
   assert.ok(indexHtml.includes('id="animePetsGrid"'), 'index.html must have #animePetsGrid container');
   assert.ok(indexHtml.includes('id="animeHeroesGrid"'), 'index.html must have #animeHeroesGrid container');
   assert.ok(indexHtml.includes('petdex.dev/collections/anime-heroes'), 'index.html must link to anime-heroes collection');
