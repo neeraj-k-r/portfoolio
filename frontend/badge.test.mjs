@@ -36,3 +36,4 @@ test('GitHub Profile README Badge Generator in Share & Links tab', () => {
   const workerJs = fs.readFileSync(path.join(rootDir, 'backend', 'worker.js'), 'utf8');
   assert.ok(workerJs.includes("url.pathname === '/badge.svg'"), 'worker.js must support /badge.svg endpoint');
 });
+
