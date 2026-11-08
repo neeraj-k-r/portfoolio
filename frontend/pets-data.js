@@ -210,8 +210,26 @@
 
   if (typeof window !== 'undefined') {
     window.PORTFOOLIO_PETS = PET_REGISTRY;
+    window.getPortfoolioPet = function (id) {
+      if (!id) return PET_REGISTRY.goku;
+      var clean = String(id).toLowerCase().trim();
+      return PET_REGISTRY[clean] || PET_REGISTRY.goku;
+    };
+    window.getPortfoolioPetsByCategory = function (cat) {
+      return Object.values(PET_REGISTRY).filter(function (p) { return p.category === cat; });
+    };
   }
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = PET_REGISTRY;
+    module.exports = {
+      PET_REGISTRY: PET_REGISTRY,
+      getPortfoolioPet: function (id) {
+        if (!id) return PET_REGISTRY.goku;
+        var clean = String(id).toLowerCase().trim();
+        return PET_REGISTRY[clean] || PET_REGISTRY.goku;
+      },
+      getPortfoolioPetsByCategory: function (cat) {
+        return Object.values(PET_REGISTRY).filter(function (p) { return p.category === cat; });
+      }
+    };
   }
 })();
