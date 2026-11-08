@@ -1,4 +1,4 @@
-#clawdex-pet{position:fixed;top:0;left:0;width:96px;height:104px;z-index:5000;pointer-events:none;-webkit-user-select:none;user-select:none;will-change:transform}
+#clawdex-pet{position:fixed;top:0;left:0;width:96px;height:104px;z-index:5000;pointer-events:none;-webkit-user-select:none;user-select:none;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 #clawdex-pet.cdx-hidden{display:none}
 #clawdex-pet .cdx-stage{position:absolute;inset:0;pointer-events:auto;cursor:grab;touch-action:none;overflow:hidden}
 #clawdex-pet .cdx-stage.cdx-dragging{cursor:grabbing}

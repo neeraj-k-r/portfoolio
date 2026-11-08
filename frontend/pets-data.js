@@ -584,6 +584,158 @@
         'Ifrit Jambe ignited!',
         'A true gentleman never strikes a lady.'
       ]
+    },
+
+    // === DRAGON BALL COLLECTION (https://petdex.dev/collections/franchise-dragon-ball) ===
+    beerus: {
+      id: 'beerus',
+      category: 'dragonball',
+      displayName: 'Beerus',
+      subtitle: 'God of Destruction · Universe 7',
+      badge: 'DESTROYER GOD',
+      badgeBg: 'linear-gradient(135deg, rgba(168, 85, 247, 0.35), rgba(236, 72, 153, 0.35))',
+      badgeColor: '#c084fc',
+      sheet: '/assets/pets/beerus/spritesheet.webp',
+      cols: 8,
+      rows: 9,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: 'Before creation must come destruction. Hakai!',
+      messages: [
+        'Hakai! 💥',
+        'Before creation must come destruction.',
+        'Now where is my Earth delicacy?',
+        'Whis, fetch the ramen pudding!',
+        'Your code power is mildly amusing.',
+        'Do not test a God of Destruction.'
+      ]
+    },
+    'super-goku': {
+      id: 'super-goku',
+      category: 'dragonball',
+      displayName: 'Super Goku',
+      subtitle: 'Super Saiyan · Golden Lightning Aura',
+      badge: 'SUPER SAIYAN',
+      badgeBg: 'linear-gradient(135deg, rgba(234, 179, 8, 0.35), rgba(245, 158, 11, 0.35))',
+      badgeColor: '#eab308',
+      sheet: '/assets/pets/super-goku/spritesheet.webp',
+      cols: 8,
+      rows: 9,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: "I am the hope of the universe! Let's power up!",
+      messages: [
+        'Super Saiyan power unleashed! ⚡',
+        'Kamehameha! 💥',
+        'I am the hope of the universe.',
+        'Power level breaking limits!',
+        'Never give up the fight!',
+        'Spirit Bomb gathering energy.'
+      ]
+    },
+    gohan: {
+      id: 'gohan',
+      category: 'dragonball',
+      displayName: 'Gohan',
+      subtitle: 'Half-Saiyan Prodigy · Masenko',
+      badge: 'POTENTIAL UNLOCKED',
+      badgeBg: 'linear-gradient(135deg, rgba(59, 130, 246, 0.35), rgba(168, 85, 247, 0.35))',
+      badgeColor: '#60a5fa',
+      sheet: '/assets/pets/gohan/spritesheet.webp',
+      cols: 8,
+      rows: 9,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: "I won't let you hurt my friends! Masenko-Ha!",
+      messages: [
+        'Masenko-Ha! ⚡',
+        'Unleashing hidden potential!',
+        'I fight to protect the peace.',
+        'Father taught me to never surrender.',
+        'Super Saiyan 2 awakening!',
+        'Focusing inner ki and intellect.'
+      ]
+    },
+    'fat-buu': {
+      id: 'fat-buu',
+      category: 'dragonball',
+      displayName: 'Majin Buu',
+      subtitle: 'Cheerful Djinn · Sweet Magic',
+      badge: 'MAJIN MAGIC',
+      badgeBg: 'linear-gradient(135deg, rgba(244, 114, 182, 0.35), rgba(251, 191, 36, 0.35))',
+      badgeColor: '#f472b6',
+      sheet: '/assets/pets/fat-buu/spritesheet.webp',
+      cols: 8,
+      rows: 9,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: 'Buu make you into chocolate! Buu happy!',
+      messages: [
+        'Buu turn you into candy! 🍬',
+        'Buu loves sweets and chocolate!',
+        'You nice person, Buu like you!',
+        'Majin breath blast!',
+        'No one makes Buu angry!',
+        'Yay, fun time with friend!'
+      ]
+    },
+    'kid-goku-classic-actions': {
+      id: 'kid-goku-classic-actions',
+      category: 'dragonball',
+      displayName: 'Kid Goku',
+      subtitle: 'Power Pole & Flying Nimbus · Classic',
+      badge: 'FLYING NIMBUS',
+      badgeBg: 'linear-gradient(135deg, rgba(249, 115, 22, 0.35), rgba(234, 179, 8, 0.35))',
+      badgeColor: '#f97316',
+      sheet: '/assets/pets/kid-goku-classic-actions/spritesheet.webp',
+      cols: 8,
+      rows: 9,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: 'Nimbus, to me! Power Pole extend!',
+      messages: [
+        'Power Pole extend! 🥢',
+        'Flying Nimbus! ☁️',
+        'Kamehameha blast!',
+        'I got a monkey tail!',
+        'Time for a big feast after training!',
+        'Grandpa Gohan taught me well.'
+      ]
+    },
+    yamcha: {
+      id: 'yamcha',
+      category: 'dragonball',
+      displayName: 'Yamcha',
+      subtitle: 'Wolf Fang Fist · Desert Bandit',
+      badge: 'WOLF FANG',
+      badgeBg: 'linear-gradient(135deg, rgba(239, 68, 68, 0.35), rgba(249, 115, 22, 0.35))',
+      badgeColor: '#f87171',
+      sheet: '/assets/pets/yamcha/spritesheet.webp',
+      cols: 8,
+      rows: 9,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: 'Wolf Fang Fist! Rogue martial artist ready!',
+      messages: [
+        'Roga Fufu Ken! (Wolf Fang Fist) 🐺',
+        'Spirit Ball barrage!',
+        'Turtle School warrior standing tall.',
+        'Training hard with Puar!',
+        'Kamehameha charge ready!',
+        'Never underestimate the desert wolf.'
+      ]
     }
   };
 

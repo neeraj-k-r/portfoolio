@@ -1506,6 +1506,20 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div id="animeHeroesGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"></div>
         </div>
 
+        <!-- DRAGON BALL THEME & WARRIORS SECTION (https://petdex.dev/collections/franchise-dragon-ball) -->
+        <div style="margin-bottom:22px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+            <h4 style="margin:0;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px">
+              <span>🐉</span> Dragon Ball Theme &amp; Saiyan Warriors
+              <span class="badge" style="background:linear-gradient(135deg,rgba(245,158,11,0.25),rgba(239,68,68,0.25));color:#fbbf24;border:1px solid rgba(245,158,11,0.4);font-size:11px">DRAGON BALL</span>
+            </h4>
+            <a href="https://petdex.dev/collections/franchise-dragon-ball" target="_blank" rel="noopener" style="font-size:12.5px;color:var(--muted);text-decoration:none;display:inline-flex;align-items:center;gap:4px">
+              <span>Petdex Dragon Ball Collection</span> <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:10px"></i>
+            </a>
+          </div>
+          <div id="dragonBallPetsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"></div>
+        </div>
+
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:18px">
           <div>
             <label class="flabel" style="display:flex;align-items:center;gap:6px">
@@ -3129,6 +3143,13 @@ function paintPetStudioGrids(activePetId) {
   if (animeHeroesGrid) {
     const heroPets = Object.values(reg).filter(p => p.category === 'anime-heroes');
     animeHeroesGrid.innerHTML = heroPets.map(makePetCard).join('');
+  }
+
+  const dbGrid = $('dragonBallPetsGrid');
+  if (dbGrid) {
+    const dbOrder = ['super-goku', 'goku-blue', 'goku', 'gohan', 'beerus', 'fat-buu', 'kid-goku-classic-actions', 'yamcha'];
+    const dbPets = dbOrder.map(id => reg[id]).filter(Boolean);
+    dbGrid.innerHTML = dbPets.map(makePetCard).join('');
   }
 }
 

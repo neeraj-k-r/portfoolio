@@ -83,7 +83,9 @@
 
   function applyPos(p) {
     pos = p;
-    root.style.transform = 'translate3d(' + p.x + 'px, ' + p.y + 'px, 0)';
+    root.style.left = p.x + 'px';
+    root.style.top = p.y + 'px';
+    root.style.transform = 'translateZ(0)';
   }
 
   function paint(row, frame) {

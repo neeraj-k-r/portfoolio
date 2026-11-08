@@ -118,6 +118,15 @@ test('Pokémon Section & Petdex Companions catalog integration', async () => {
     assert.ok(PETS[hId].sheet.includes(hId), `${hId} sheet must point to /assets/pets/${hId}/spritesheet.webp`);
   }
 
+  // Verify Dragon Ball Collection (https://petdex.dev/collections/franchise-dragon-ball)
+  const dragonBallPets = ['beerus', 'super-goku', 'gohan', 'fat-buu', 'kid-goku-classic-actions', 'yamcha'];
+  for (const dbId of dragonBallPets) {
+    assert.ok(PETS[dbId], `Dragon Ball pet ${dbId} must exist in PET_REGISTRY`);
+    assert.equal(PETS[dbId].category, 'dragonball', `${dbId} must be in dragonball category`);
+    assert.ok(PETS[dbId].badge, `${dbId} must have badge`);
+    assert.ok(PETS[dbId].sheet.includes(dbId), `${dbId} sheet must point to /assets/pets/${dbId}/spritesheet.webp`);
+  }
+
   // Verify assets exist on disk for all pets
   for (const [id, pet] of Object.entries(PETS)) {
     const assetRelPath = pet.sheet.replace(/^\//, '');
@@ -133,7 +142,9 @@ test('Pokémon Section & Petdex Companions catalog integration', async () => {
   assert.ok(indexHtml.includes('id="onePiecePetsGrid"'), 'index.html must have #onePiecePetsGrid container');
   assert.ok(indexHtml.includes('id="animePetsGrid"'), 'index.html must have #animePetsGrid container');
   assert.ok(indexHtml.includes('id="animeHeroesGrid"'), 'index.html must have #animeHeroesGrid container');
+  assert.ok(indexHtml.includes('id="dragonBallPetsGrid"'), 'index.html must have #dragonBallPetsGrid container');
   assert.ok(indexHtml.includes('petdex.dev/collections/anime-heroes'), 'index.html must link to anime-heroes collection');
+  assert.ok(indexHtml.includes('petdex.dev/collections/franchise-dragon-ball'), 'index.html must link to dragon-ball collection');
   assert.ok(indexHtml.includes('id="edPetType"'), 'index.html must have #edPetType input');
   assert.ok(indexHtml.includes('paintPetStudioGrids'), 'index.html must define paintPetStudioGrids');
   assert.ok(indexHtml.includes('selectStudioPet'), 'index.html must define selectStudioPet');
