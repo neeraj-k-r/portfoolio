@@ -100,6 +100,15 @@ test('Pokémon Section & Petdex Companions catalog integration', async () => {
   assert.equal(PETS['goose-default'].category, 'anime');
   assert.equal(PETS['kaka-2'].category, 'anime');
 
+  // Verify Anime Heroes Collection (https://petdex.dev/collections/anime-heroes)
+  const animeHeroes = ['luffy', 'zoro', 'naruto', 'itachi', 'gojo', 'sukuna', 'goku-blue', 'nezuko', 'kyojuro-rengoku', 'gon', 'killua', 'sabo'];
+  for (const hId of animeHeroes) {
+    assert.ok(PETS[hId], `Anime hero ${hId} must exist in PET_REGISTRY`);
+    assert.equal(PETS[hId].category, 'anime-heroes', `${hId} must be in anime-heroes category`);
+    assert.ok(PETS[hId].badge, `${hId} must have badge`);
+    assert.ok(PETS[hId].sheet.includes(hId), `${hId} sheet must point to /assets/pets/${hId}/spritesheet.webp`);
+  }
+
   // Verify assets exist on disk for all pets
   for (const [id, pet] of Object.entries(PETS)) {
     const assetRelPath = pet.sheet.replace(/^\//, '');
@@ -113,6 +122,8 @@ test('Pokémon Section & Petdex Companions catalog integration', async () => {
   const indexHtml = fs.readFileSync(path.join(rootDir, 'frontend', 'index.html'), 'utf8');
   assert.ok(indexHtml.includes('id="pokemonPetsGrid"'), 'index.html must have #pokemonPetsGrid container');
   assert.ok(indexHtml.includes('id="animePetsGrid"'), 'index.html must have #animePetsGrid container');
+  assert.ok(indexHtml.includes('id="animeHeroesGrid"'), 'index.html must have #animeHeroesGrid container');
+  assert.ok(indexHtml.includes('petdex.dev/collections/anime-heroes'), 'index.html must link to anime-heroes collection');
   assert.ok(indexHtml.includes('id="edPetType"'), 'index.html must have #edPetType input');
   assert.ok(indexHtml.includes('paintPetStudioGrids'), 'index.html must define paintPetStudioGrids');
   assert.ok(indexHtml.includes('selectStudioPet'), 'index.html must define selectStudioPet');
