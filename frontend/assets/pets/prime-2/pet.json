@@ -1,0 +1,6 @@
+{
+  "id": "prime",
+  "displayName": "Prime",
+  "description": "A tiny heroic red-and-blue robot leader pet inspired by the provided chibi reference.",
+  "spritesheetPath": "spritesheet.webp"
+}
