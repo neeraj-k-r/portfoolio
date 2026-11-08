@@ -9658,9 +9658,23 @@ export default {
 
     const p = await getProfile(sub);
     if (!p) return Response.redirect(`${ORIGIN}/?claim=${encodeURIComponent(sub)}`, 302);
+
+    function injectPet(htmlContent, prof) {
+      if (!prof || (prof.show_pet !== true && prof.showPet !== true)) return htmlContent;
+      const greet = (prof.pet_greeting || prof.petGreeting || '').trim();
+      const greetingScript = greet
+        ? `<script>window.PORTFOOLIO_PET_GREETING = ${JSON.stringify(greet)};</script>\n`
+        : '';
+      const snippet = `<link rel="stylesheet" href="/pet.css">\n${greetingScript}<script src="/pet.js"></script>\n`;
+      if (htmlContent.includes('</body>')) {
+        return htmlContent.replace('</body>', `${snippet}</body>`);
+      }
+      return htmlContent + snippet;
+    }
+
     // resume page works on every site type (built from profile data)
     if (url.pathname === '/resume' || url.pathname === '/resume/' || url.searchParams.get('resume')) {
-      const html = pageResume(p);
+      const html = injectPet(pageResume(p), p);
       return new Response(html, {
         headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
       });
@@ -9668,7 +9682,16 @@ export default {
     // custom upload wins over builder templates — serve raw files incl. assets
     if (p.site_type === 'upload') {
       const hit = await serveUploadedSite(sub, url.pathname);
-      if (hit) return hit;
+      if (hit) {
+        if ((p.show_pet === true || p.showPet === true) && (hit.headers.get('content-type') || '').includes('text/html')) {
+          const bodyText = await hit.text();
+          return new Response(injectPet(bodyText, p), {
+            status: hit.status,
+            headers: hit.headers,
+          });
+        }
+        return hit;
+      }
       // storage empty / deleted → fall through to builder theme instead of 404
     }
     // visual track renders the gallery, not the code portfolio
@@ -9676,13 +9699,13 @@ export default {
     const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'];
     const isVisualTrack = (qTpl && visualThemes.includes(qTpl.toLowerCase())) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
     if (isVisualTrack) {
-      const html = pageGallery(p, url.searchParams.get('w'), url);
+      const html = injectPet(pageGallery(p, url.searchParams.get('w'), url), p);
       return new Response(html, {
         headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
       });
     }
     const m = url.pathname.match(/^\/skills\/([^/]+)\/?$/);
-    const html = m ? pageSkill(p, decodeURIComponent(m[1])) : page(p, url);
+    const html = injectPet(m ? pageSkill(p, decodeURIComponent(m[1])) : page(p, url), p);
     return new Response(html, {
       headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
     });

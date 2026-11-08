@@ -27,6 +27,10 @@ function normRow(r) {
   if (r.avatarUrl && !r.avatar_url) r.avatar_url = r.avatarUrl || '';
   if (typeof r.show_instagram === 'boolean' && typeof r.showInstagram === 'undefined') r.showInstagram = r.show_instagram;
   if (typeof r.showInstagram === 'boolean' && typeof r.show_instagram === 'undefined') r.show_instagram = r.showInstagram;
+  if (typeof r.show_pet === 'boolean' && typeof r.showPet === 'undefined') r.showPet = r.show_pet;
+  if (typeof r.showPet === 'boolean' && typeof r.show_pet === 'undefined') r.show_pet = r.showPet;
+  if (r.pet_greeting && !r.petGreeting) r.petGreeting = r.pet_greeting;
+  if (r.petGreeting && !r.pet_greeting) r.pet_greeting = r.petGreeting;
   if (r.resume && typeof r.resume === 'object' && Array.isArray(r.resume.services) && (!r.services || !r.services.length)) {
     r.services = r.resume.services;
   }
@@ -117,6 +121,11 @@ async function cloudSaveProfile(p) {
     show_instagram: (p.showInstagram === false || p.show_instagram === false) ? false
       : (p.showInstagram === true || p.show_instagram === true) ? true
       : (existing && typeof existing.show_instagram === 'boolean' ? existing.show_instagram : true),
+    // desktop companion pet toggle & custom greeting
+    show_pet: (p.showPet === true || p.show_pet === true) ? true
+      : (p.showPet === false || p.show_pet === false) ? false
+      : (existing && typeof existing.show_pet === 'boolean' ? existing.show_pet : false),
+    pet_greeting: (typeof p.petGreeting === 'string' ? p.petGreeting : (typeof p.pet_greeting === 'string' ? p.pet_greeting : (existing && existing.pet_greeting))) || '',
   };
   if (p.site_type === 'upload') row.site_updated_at = new Date().toISOString();
   const res = await sb.from('profiles').upsert(row, { onConflict: 'username' });
@@ -125,7 +134,7 @@ async function cloudSaveProfile(p) {
   // the whole upsert, which would lose ALL edits. Retry once with core fields
   // only — a partial save beats no save. Owner fix: re-run supabase-schema.sql.
   if (isMissingColumnError(res.error)) {
-    const { experience, education, certifications, resume, site_type, site_path, site_updated_at, show_instagram, track, works, about_story, about_headline, about_badge, about_origin, about_stats, ...core } = row;
+    const { experience, education, certifications, resume, site_type, site_path, site_updated_at, show_instagram, show_pet, pet_greeting, track, works, about_story, about_headline, about_badge, about_origin, about_stats, ...core } = row;
     const retry = await sb.from('profiles').upsert(core, { onConflict: 'username' });
     if (!retry.error) return { ...core, _partial: true };
   }

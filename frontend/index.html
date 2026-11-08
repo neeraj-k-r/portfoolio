@@ -729,6 +729,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <li><button class="sidebar-tab" onclick="switchUserTab('projects')"><i class="fa-solid fa-code"></i> Projects</button></li>
       <li><button class="sidebar-tab" onclick="switchUserTab('services')"><i class="fa-solid fa-briefcase"></i> Services</button></li>
       <li><button class="sidebar-tab" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Theme & Skills</button></li>
+      <li><button class="sidebar-tab" onclick="switchUserTab('pet')"><i class="fa-solid fa-dragon"></i> Companion Pet</button></li>
       <li><button class="sidebar-tab" onclick="switchUserTab('resume')"><i class="fa-solid fa-file-lines"></i> Resume</button></li>
       <li><button class="sidebar-tab" onclick="switchUserTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Site</button></li>
       <li><button class="sidebar-tab" onclick="switchUserTab('proof')"><i class="fa-solid fa-trophy"></i> Proof of Work</button></li>
@@ -928,6 +929,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <div class="dash-tab-btns" data-studio="tech">
         <button class="dash-tab-btn active" onclick="switchUserTab('info')"><i class="fa-solid fa-user-pen"></i> Profile Info</button>
         <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Theme & Skills</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('pet')"><i class="fa-solid fa-dragon"></i> Companion Pet</button>
         <button class="dash-tab-btn" onclick="switchUserTab('projects')"><i class="fa-solid fa-code"></i> Projects & GitHub</button>
         <button class="dash-tab-btn" onclick="switchUserTab('resume')"><i class="fa-solid fa-briefcase"></i> Experience & Resume</button>
         <button class="dash-tab-btn" onclick="switchUserTab('services')"><i class="fa-solid fa-handshake"></i> Services</button>
@@ -942,9 +944,10 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <button class="dash-tab-btn active" onclick="switchUserTab('info')"><i class="fa-solid fa-user-pen"></i> Profile Info</button>
         <button class="dash-tab-btn" id="tabBtnWorks" onclick="switchUserTab('works')"><i class="fa-solid fa-images"></i> Works</button>
         <button class="dash-tab-btn" id="tabBtnAbout" onclick="switchUserTab('about')"><i class="fa-solid fa-book-open"></i> About &amp; Story</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Gallery Themes</button>
+        <button class="dash-tab-btn" onclick="switchUserTab('pet')"><i class="fa-solid fa-dragon"></i> Companion Pet</button>
         <button class="dash-tab-btn" onclick="switchUserTab('resume')"><i class="fa-solid fa-briefcase"></i> Experience & Resume</button>
         <button class="dash-tab-btn" onclick="switchUserTab('services')"><i class="fa-solid fa-handshake"></i> Services</button>
-        <button class="dash-tab-btn" onclick="switchUserTab('theme')"><i class="fa-solid fa-palette"></i> Gallery Themes</button>
         <button class="dash-tab-btn" onclick="switchUserTab('upload')"><i class="fa-solid fa-cloud-arrow-up"></i> Upload Site</button>
         <button class="dash-tab-btn" onclick="switchUserTab('featured')"><i class="fa-solid fa-star"></i> Featured</button>
         <button class="dash-tab-btn" onclick="switchUserTab('share')"><i class="fa-solid fa-share-nodes"></i> Share & Links</button>
@@ -1166,6 +1169,25 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <button class="btn btn-secondary btn-sm" id="edPreviewThemeBtn" type="button"><i class="fa-solid fa-arrow-up-right-from-square"></i> Preview Selected Theme</button>
             <span id="edThemeStatus" style="font-size:12.5px;color:var(--muted)"></span>
           </div>
+
+          <div style="margin-top:20px;padding:16px;background:rgba(0,0,0,0.25);border:1px solid var(--stroke);border-radius:14px">
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+              <div style="display:flex;align-items:center;gap:12px">
+                <span style="font-size:26px">🐉</span>
+                <div>
+                  <b style="font-size:14.5px;color:#fff">Desktop Companion Pet (Goku)</b>
+                  <div style="font-size:12.5px;color:var(--muted)">Enable an interactive walking animated companion on your live portfolio.</div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;gap:14px">
+                <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                  <input type="checkbox" id="edShowPetTheme" style="width:18px;height:18px;accent-color:var(--primary,#4f46e5);cursor:pointer">
+                  <span style="font-size:13.5px;font-weight:600">Active on Live Site</span>
+                </label>
+                <button type="button" class="btn btn-ghost btn-sm" onclick="switchUserTab('pet')">Configure Pet →</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -1383,6 +1405,68 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <p style="color:var(--muted);font-size:13.5px;margin-bottom:14px">These portfolios are featured on the public showcase and your dashboard. Admin can feature/unfeature from the admin console.</p>
         <div id="featuredPortfoliosGrid" class="dir-grid lx-showcase"></div>
         <p class="mono" id="featuredEmpty" style="color:var(--muted);text-align:center;padding:40px 0;display:none">No featured portfolios yet. Ask admin to feature yours!</p>
+      </div>
+
+      <!-- User Studio Tab: Companion Pet -->
+      <div id="tabPet" class="card" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+          <div>
+            <h3 style="display:flex;align-items:center;gap:10px;font-size:20px;margin-bottom:4px">
+              <span>🐉</span> Interactive Companion Pet (Goku)
+              <span class="badge" style="background:linear-gradient(135deg,rgba(245,158,11,0.2),rgba(239,68,68,0.2));color:#f59e0b;border:1px solid rgba(245,158,11,0.4);font-size:11px">LIVE MASCOT</span>
+            </h3>
+            <p style="color:var(--muted);font-size:13.5px;margin:0">
+              Give your visitors an unforgettable, playful experience. An animated pixel Goku companion walks across your live site, talks in speech bubbles, and reacts to clicks and dragging.
+            </p>
+          </div>
+          <div id="petLiveIndicator" style="display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03)">
+            <span id="petLiveDot" style="width:8px;height:8px;border-radius:50%;background:#888;display:inline-block"></span>
+            <span id="petLiveStatusText" style="color:var(--muted)">Disabled</span>
+          </div>
+        </div>
+
+        <div style="background:rgba(0,0,0,0.25);border:1px solid var(--stroke);border-radius:14px;padding:18px;margin-bottom:18px">
+          <label style="display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none">
+            <input type="checkbox" id="edShowPet" style="width:20px;height:20px;accent-color:var(--primary,#4f46e5);cursor:pointer">
+            <div>
+              <b style="font-size:15px;color:#fff">Enable Companion Pet on my live site</b>
+              <div style="font-size:12.5px;color:var(--muted);margin-top:2px">
+                When checked, Goku will appear on your live portfolio (<span class="mono" id="petLiveDomain">yourname.portfoolio.me</span>) and keep visitors engaged.
+              </div>
+            </div>
+          </label>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:18px">
+          <div>
+            <label class="flabel" style="display:flex;align-items:center;gap:6px">
+              <span>Custom Pet Greeting / Speech Bubble</span>
+              <small style="color:var(--muted)">(optional)</small>
+            </label>
+            <input id="edPetGreeting" placeholder="e.g. Welcome to my portfolio! Check out my work below 🚀" maxlength="120" style="width:100%">
+            <small style="color:var(--muted);display:block;margin-top:4px">
+              Goku will say this greeting when visitors load your site, plus random encouraging developer quotes.
+            </small>
+          </div>
+
+          <div style="background:rgba(255,255,255,0.02);border:1px solid var(--stroke);border-radius:12px;padding:14px;display:flex;flex-direction:column;justify-content:center">
+            <b style="font-size:13px;color:#fff;margin-bottom:6px">Interactive Companion Features:</b>
+            <ul style="font-size:12px;color:var(--muted);padding-left:18px;line-height:1.7;margin:0">
+              <li><b>Click:</b> Goku waves and shares an encouraging quote.</li>
+              <li><b>Double-click:</b> Goku executes a victory jump!</li>
+              <li><b>Drag & Drop:</b> Move Goku anywhere on your portfolio.</li>
+              <li><b>Close Button:</b> Visitors can dismiss anytime with the top-right [×].</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:14px;border-top:1px solid var(--stroke)">
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <button class="btn btn-primary btn-sm" id="edSavePetBtn" type="button"><i class="fa-solid fa-floppy-disk"></i> Save Companion Settings</button>
+            <button class="btn btn-ghost btn-sm" id="testPetBtn" type="button"><i class="fa-solid fa-wand-magic-sparkles"></i> Test Goku Greeting</button>
+          </div>
+          <a class="btn btn-ghost btn-sm" id="petPreviewLink" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> Preview on Live Portfolio</a>
+        </div>
       </div>
 
       <!-- User Studio Tab 4: Share & Links -->
@@ -1773,7 +1857,7 @@ document.querySelectorAll('.input-wrapper input').forEach(input => {
 });
 
 function switchUserTab(tabName) {
-  const panes = ['info', 'works', 'about', 'theme', 'projects', 'services', 'resume', 'upload', 'proof', 'featured', 'share'];
+  const panes = ['info', 'works', 'about', 'theme', 'pet', 'projects', 'services', 'resume', 'upload', 'proof', 'featured', 'share'];
   if (!panes.includes(tabName)) return;
   panes.forEach(t => {
     const el = $('tab' + t.charAt(0).toUpperCase() + t.slice(1));
@@ -1791,6 +1875,12 @@ function switchUserTab(tabName) {
   }
   if (tabName === 'resume' && typeof paintResumeTab === 'function') {
     paintResumeTab();
+  }
+  if (tabName === 'pet') {
+    if (window.ClawdexPet) window.ClawdexPet.show();
+    if (typeof updatePetPreviewStatus === 'function' && activeUserProfile) {
+      updatePetPreviewStatus(activeUserProfile.showPet === true || activeUserProfile.show_pet === true);
+    }
   }
   const shown = $('tab' + tabName.charAt(0).toUpperCase() + tabName.slice(1));
   if (shown && shown.scrollIntoView) shown.scrollIntoView({ block: 'nearest' });
@@ -1952,6 +2042,11 @@ function setupUserDashboardView(profile) {
     if($('edShowInsta')) $('edShowInsta').checked = profile.showInstagram !== false && profile.show_instagram !== false;
     if($('edLoc')) $('edLoc').value = profile.location || '';
     if($('edSkills')) $('edSkills').value = asArray(profile.skills).join(', ');
+    const hasPet = profile.showPet === true || profile.show_pet === true;
+    if($('edShowPet')) $('edShowPet').checked = hasPet;
+    if($('edShowPetTheme')) $('edShowPetTheme').checked = hasPet;
+    if($('edPetGreeting')) $('edPetGreeting').value = profile.petGreeting || profile.pet_greeting || '';
+    if(typeof updatePetPreviewStatus === 'function') updatePetPreviewStatus(hasPet, profile.username);
     draftAvatar = profile.avatarUrl || profile.avatar_url || ''; paintAvatarPreview();
 
     // Visual Studio About & Story hydration
@@ -2579,11 +2674,15 @@ async function saveStudio() {
     if (!$('edName').value.trim() || !$('edTitle').value.trim() || !$('edEmail').value.trim()) return toast('❌ Name, title + email required');
 
     const showInsta = !$('edShowInsta') || $('edShowInsta').checked;
+    const showPet = $('edShowPet') ? $('edShowPet').checked : ($('edShowPetTheme') ? $('edShowPetTheme').checked : !!(activeUserProfile.showPet || activeUserProfile.show_pet));
+    const petGreeting = $('edPetGreeting') ? $('edPetGreeting').value.trim() : (activeUserProfile.petGreeting || activeUserProfile.pet_greeting || '');
     Object.assign(activeUserProfile, {
       name: $('edName').value.trim(), title: $('edTitle').value.trim(), tagline: $('edTag').value.trim(),
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
       github: normGithub($('edGithub').value), linkedin: normLinkedIn($('edLinkedin').value), instagram: normInsta($('edInsta').value), location: $('edLoc').value.trim(),
       showInstagram: showInsta, show_instagram: showInsta,
+      showPet: showPet, show_pet: showPet,
+      petGreeting: petGreeting, pet_greeting: petGreeting,
       about_headline: $('edAboutHeadline') ? $('edAboutHeadline').value.trim() : (activeUserProfile.about_headline || ''),
       about_story: $('edAboutStory') ? $('edAboutStory').value.trim() : (activeUserProfile.about_story || ''),
       about_badge: $('edAboutBadge') ? $('edAboutBadge').value.trim() : (activeUserProfile.about_badge || ''),
@@ -2644,11 +2743,64 @@ async function saveStudio() {
     paintShareSection(activeUserProfile);
     paintProof();
     paintResumeTab();
+    if (typeof updatePetPreviewStatus === 'function') {
+      updatePetPreviewStatus(activeUserProfile.showPet === true || activeUserProfile.show_pet === true, activeUserProfile.username);
+    }
     renderDir();
 }
+
+function updatePetPreviewStatus(active, username) {
+  const u = username || (activeUserProfile && activeUserProfile.username) || 'yourname';
+  const dot = $('petLiveDot');
+  const txt = $('petLiveStatusText');
+  const ind = $('petLiveIndicator');
+  const dom = $('petLiveDomain');
+  const link = $('petPreviewLink');
+  if (dom) dom.textContent = `${u}.portfoolio.me`;
+  if (link) {
+    const isProd = location.hostname === 'portfoolio.me' || location.hostname.endsWith('.portfoolio.me');
+    link.href = isProd ? `https://${encodeURIComponent(u)}.portfoolio.me` : `/?u=${encodeURIComponent(u)}&preview=1`;
+  }
+  if (active) {
+    if (dot) dot.style.background = '#22c55e';
+    if (txt) { txt.textContent = 'Active on Live Site'; txt.style.color = '#86efac'; }
+    if (ind) { ind.style.borderColor = 'rgba(34,197,94,0.3)'; ind.style.background = 'rgba(34,197,94,0.08)'; }
+  } else {
+    if (dot) dot.style.background = '#888';
+    if (txt) { txt.textContent = 'Disabled'; txt.style.color = 'var(--muted)'; }
+    if (ind) { ind.style.borderColor = 'rgba(255,255,255,0.1)'; ind.style.background = 'rgba(255,255,255,0.03)'; }
+  }
+}
+
 if ($('edSaveBtn')) $('edSaveBtn').onclick = saveStudio;
 if ($('edSaveThemeBtn')) $('edSaveThemeBtn').onclick = saveStudio;
+if ($('edSavePetBtn')) $('edSavePetBtn').onclick = saveStudio;
 if ($('edAboutSaveBtn')) $('edAboutSaveBtn').onclick = saveStudio;
+if ($('edShowPet')) $('edShowPet').onchange = (e) => {
+  if ($('edShowPetTheme')) $('edShowPetTheme').checked = e.target.checked;
+  updatePetPreviewStatus(e.target.checked);
+  if (e.target.checked && window.ClawdexPet) {
+    window.ClawdexPet.show();
+    const greet = ($('edPetGreeting') && $('edPetGreeting').value.trim()) || "I'm ready for your live site!";
+    window.ClawdexPet.say(greet);
+  }
+};
+if ($('edShowPetTheme')) $('edShowPetTheme').onchange = (e) => {
+  if ($('edShowPet')) $('edShowPet').checked = e.target.checked;
+  updatePetPreviewStatus(e.target.checked);
+  if (e.target.checked && window.ClawdexPet) {
+    window.ClawdexPet.show();
+    const greet = ($('edPetGreeting') && $('edPetGreeting').value.trim()) || "I'm ready for your live site!";
+    window.ClawdexPet.say(greet);
+  }
+};
+if ($('testPetBtn')) $('testPetBtn').onclick = () => {
+  if (window.ClawdexPet) {
+    window.ClawdexPet.show();
+    const greet = ($('edPetGreeting') && $('edPetGreeting').value.trim()) || "Hello! Goku is active on your portfolio.";
+    window.ClawdexPet.say(greet);
+  }
+};
 if ($('edPreviewThemeBtn')) $('edPreviewThemeBtn').onclick = () => {
   const selInp = document.querySelector('#edTplGrid input[name="edtpl"]:checked');
   const tpl = (selInp ? selInp.value : ((activeUserProfile && activeUserProfile.template) || 'midnight')).toLowerCase();
@@ -2748,7 +2900,10 @@ ${works ? `<section class="wrap"><h2>Works</h2><div class="works">${works}</div>
 </section>
 <footer class="wrap">Built with <a href="https://portfoolio.me">portfoolio.me</a> · ${esc(p.username)}.portfoolio.me</footer>
 </body></html>`;
-  return html;
+  const petSnippet = (p.showPet || p.show_pet)
+    ? `<link rel="stylesheet" href="https://portfoolio.me/pet.css">\n${(p.petGreeting || p.pet_greeting) ? `<script>window.PORTFOOLIO_PET_GREETING = ${JSON.stringify(String(p.petGreeting || p.pet_greeting))};</script>\n` : ''}<script src="https://portfoolio.me/pet.js"></script>\n`
+    : '';
+  return petSnippet ? html.replace('</body>', `${petSnippet}</body>`) : html;
 }
 
 // Export: download the static HTML portfolio

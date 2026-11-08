@@ -349,6 +349,14 @@
         if (!tickTimer) tickTimer = setInterval(function () { tick(performance.now()); }, 60);
         scheduleActivity();
       }
+      if (window.PORTFOOLIO_PET_GREETING && typeof window.PORTFOOLIO_PET_GREETING === 'string') {
+        if (!MESSAGES.includes(window.PORTFOOLIO_PET_GREETING)) {
+          MESSAGES.unshift(window.PORTFOOLIO_PET_GREETING);
+        }
+        setTimeout(function () {
+          say(window.PORTFOOLIO_PET_GREETING);
+        }, 1000);
+      }
     }
 
     var img = new Image();
@@ -404,5 +412,10 @@
     boot();
   }
 
-  window.ClawdexPet = { show: show, hide: function () { hide(false); } };
+  window.ClawdexPet = {
+    show: show,
+    hide: function () { hide(false); },
+    say: say,
+    isLoaded: function () { return loaded; }
+  };
 })();

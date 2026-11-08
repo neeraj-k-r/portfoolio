@@ -210,3 +210,8 @@ drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
+
+-- 10) desktop companion pet (interactive live site mascot)
+alter table profiles add column if not exists show_pet boolean default false;
+alter table profiles add column if not exists pet_greeting text default '';
+

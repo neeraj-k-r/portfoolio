@@ -91,6 +91,10 @@ function normLocalProfile(p) {
   if (p.avatarUrl && !p.avatar_url) p.avatar_url = p.avatarUrl || '';
   if (typeof p.show_instagram === 'boolean' && typeof p.showInstagram === 'undefined') p.showInstagram = p.show_instagram;
   if (typeof p.showInstagram === 'boolean' && typeof p.show_instagram === 'undefined') p.show_instagram = p.showInstagram;
+  if (typeof p.show_pet === 'boolean' && typeof p.showPet === 'undefined') p.showPet = p.show_pet;
+  if (typeof p.showPet === 'boolean' && typeof p.show_pet === 'undefined') p.show_pet = p.showPet;
+  if (p.pet_greeting && !p.petGreeting) p.petGreeting = p.pet_greeting;
+  if (p.petGreeting && !p.pet_greeting) p.pet_greeting = p.petGreeting;
   if (p.resume && typeof p.resume === 'object' && Array.isArray(p.resume.services) && (!p.services || !p.services.length)) {
     p.services = p.resume.services;
   }
@@ -280,8 +284,24 @@ function galleryWorks(p) {
   }
   return [];
 }
+function syncCompanionPet(p) {
+  if (typeof window === 'undefined') return;
+  const hasPet = !!(p && (p.showPet === true || p.show_pet === true));
+  if (window.ClawdexPet) {
+    if (hasPet) {
+      window.ClawdexPet.show();
+      const greeting = (p && (p.petGreeting || p.pet_greeting)) || '';
+      if (greeting) {
+        setTimeout(() => { if (window.ClawdexPet) window.ClawdexPet.say(greeting); }, 1200);
+      }
+    } else {
+      window.ClawdexPet.hide();
+    }
+  }
+}
 function renderGallery(p) {
   p = normLocalProfile(p) || p;
+  syncCompanionPet(p);
   const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
   const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
   const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(activeTpl) ? activeTpl : 'gallery';
@@ -1077,6 +1097,7 @@ function renderWorkDetail(p, idx) {
 }
 function renderPortfolio(p) {
   p = normLocalProfile(p) || p;
+  syncCompanionPet(p);
   const qTpl = new URLSearchParams(location.search).get('template') || new URLSearchParams(location.search).get('t');
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
   const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'];
