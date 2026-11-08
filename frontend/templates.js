@@ -1054,38 +1054,6 @@ function renderModerncv(p) {
         </div>
       </nav>
     </header>
-    <section class="sb-artworks-sec wrap" id="artworks">
-      <div class="sb-sec-bar">
-        <h2 class="sb-sec-title">Artworks</h2>
-        <div class="sb-filter-pills" id="sbFilters">
-          <button type="button" class="sb-pill active" data-filter="all">All</button>
-          <button type="button" class="sb-pill" data-filter="portraits"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Portraits</button>
-          <button type="button" class="sb-pill" data-filter="sketches"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg> Sketches</button>
-          <button type="button" class="sb-pill" data-filter="studies"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m9 9 6 6M15 9l-6 6"/></svg> Studies</button>
-          <button type="button" class="sb-pill" data-filter="other">··· Other</button>
-        </div>
-        <a class="sb-view-all-link" href="#artworks">View All <span>→</span></a>
-      </div>
-
-      <div class="sb-cards-grid" id="sbGrid">
-        ${works.map((w, i) => {
-          const cat = (w.category || 'Portraits').toLowerCase();
-          return `
-          <article class="sb-card" data-cat="${tplEsc(cat)}" data-gal="${i}">
-            <div class="sb-card-frame">
-              <img src="${tplEsc(w.imageUrl)}" alt="${tplEsc(w.title || 'Artwork')}" loading="lazy">
-              <span class="sb-card-badge">${tplEsc(w.category || 'Study')}</span>
-            </div>
-            <div class="sb-card-info">
-              <h3 class="sb-card-title">${tplEsc(w.title || 'Untitled Artwork')}</h3>
-              ${w.desc ? `<p class="sb-card-desc">${tplEsc(w.desc)}</p>` : ''}
-            </div>
-          </article>
-          `;
-        }).join('')}
-      </div>
-
-    </section>
 
     <!-- Main Content -->
     <main class="main-content">

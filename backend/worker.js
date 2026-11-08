@@ -246,6 +246,13 @@ function head(p, tpl) {
     transition: all var(--transition) !important;
     box-shadow: none !important;
   }
+  @media (max-width: 768px) {
+    body[data-template="moderncv"] .contact-form .form-input,
+    body[data-template="moderncv"] input.form-input,
+    body[data-template="moderncv"] textarea.form-input {
+      font-size: 16px !important;
+    }
+  }
   body[data-template="moderncv"] .contact-form .form-input:focus,
   body[data-template="moderncv"] input.form-input:focus,
   body[data-template="moderncv"] textarea.form-input:focus {
