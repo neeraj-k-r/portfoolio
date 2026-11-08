@@ -127,7 +127,7 @@
   }
 
   function walkTo(p) {
-    if (!loaded || reducedMotion || dragging) return;
+    if (!loaded || dragging) return;
     stopWalk();
     var start = pos;
     var dx = p.x - start.x;
@@ -135,9 +135,9 @@
     var dist = Math.sqrt(dx * dx + dy * dy);
     if (dist < 8) { applyPos(clampPos(p)); setRow(0, Infinity); return; }
     var dur = Math.max(350, dist / CFG.walkSpeed * 1000);
-    var row = Math.abs(dx) > 40 ? (dx > 0 ? 1 : 2) : 0;
+    var row = Math.abs(dx) > 20 ? (dx > 0 ? 1 : 2) : 0;
     var t0 = performance.now();
-    if (row !== 0) setRow(row, Infinity);
+    setRow(row, Infinity);
     var raf;
     function step(now) {
       var t = Math.min(1, (now - t0) / dur);
@@ -159,7 +159,7 @@
   function randomTarget() {
     var v = viewport();
     var b = CFG.bounds;
-    // Roam along the bottom perimeter (floor level) so Goku stays grounded
+    // Roam along the bottom perimeter (floor level) so mascot stays grounded
     // and never walks across center login/auth cards or form inputs.
     var minY = Math.max(b, v.height - 220);
     var maxY = Math.max(b, v.height - CFG.viewH - b);
@@ -172,48 +172,61 @@
 
   function scheduleActivity() {
     clearTimeout(schedTimer);
-    if (!loaded || reducedMotion || dragging || userHidden || dashHidden) {
-      schedTimer = setTimeout(scheduleActivity, 4000);
+    if (!loaded || dragging || userHidden || dashHidden) {
+      schedTimer = setTimeout(scheduleActivity, 3000);
       return;
     }
-    var delay = 5000 + Math.random() * 7000;
+    var delay = 3200 + Math.random() * 4500;
     schedTimer = setTimeout(function () {
-      if (!loaded || reducedMotion || dragging || userHidden || dashHidden) {
+      if (!loaded || dragging || userHidden || dashHidden) {
         scheduleActivity();
         return;
       }
       var roll = Math.random();
-      if (roll < 0.5) walkTo(randomTarget());
-      else if (roll < 0.62) playOnce(4, 1);
+      if (roll < 0.45) walkTo(randomTarget());
+      else if (roll < 0.60) playOnce(4, 1);
       else if (roll < 0.72) playOnce(3, 1);
-      else if (roll < 0.80) playOnce(5, 1);
-      else if (roll < 0.88) playOnce(6, 1);
+      else if (roll < 0.82) playOnce(5, 1);
+      else if (roll < 0.92) playOnce(6, 1);
       scheduleActivity();
     }, delay);
   }
 
   function tick(now) {
-    if (!loaded || reducedMotion) return;
+    if (!loaded) return;
     if (dragging) {
       var wantRow = Math.abs(dragging.vx) > 20 ? (dragging.vx > 0 ? 1 : 2) : 0;
       if (state.row !== wantRow) setRow(wantRow, Infinity);
       else if (now >= state.nextAt) {
         state.frame = (state.frame + 1) % CFG.cols;
         paint(state.row, state.frame);
-        state.nextAt = now + ROWS[state.row].every;
+        state.nextAt = now + (ROWS[state.row] ? ROWS[state.row].every : 105);
       }
       return;
     }
-    if (target) return;
+    if (target) {
+      // Actively animate running legs and body while pet travels across the screen
+      if (now >= state.nextAt) {
+        state.frame = (state.frame + 1) % CFG.cols;
+        paint(state.row, state.frame);
+        state.nextAt = now + (ROWS[state.row] ? ROWS[state.row].every : 105);
+      }
+      return;
+    }
     if (now < state.nextAt) return;
-    var r = ROWS[state.row];
+    var r = ROWS[state.row] || ROWS[0];
     state.frame = (state.frame + 1) % CFG.cols;
     paint(state.row, state.frame);
     if (state.frame === 0 && state.loopsLeft !== Infinity) {
       state.loopsLeft -= 1;
-      if (state.loopsLeft <= 0) setRow(0, Infinity);
+      if (state.loopsLeft <= 0) {
+        setRow(0, Infinity);
+        return;
+      }
     }
-    state.nextAt = now + r.every + (state.row === 0 ? Math.random() * CFG.idleJitterMs : 0);
+    // Idle breathing & blinking at smooth 140ms cadence, or action row cadence
+    var frameDuration = (state.row === 0) ? 140 : (r.every || 120);
+    state.nextAt = now + frameDuration;
   }
 
   function onPointerDown(ev) {
@@ -369,11 +382,9 @@
       root.classList.add('cdx-loaded');
       applyPos(clampPos(pos));
       paint(0, 0);
-      if (!reducedMotion) {
-        setRow(0, Infinity);
-        if (!tickTimer) tickTimer = setInterval(function () { tick(performance.now()); }, 60);
-        scheduleActivity();
-      }
+      setRow(0, Infinity);
+      if (!tickTimer) tickTimer = setInterval(function () { tick(performance.now()); }, 60);
+      scheduleActivity();
       if (window.PORTFOOLIO_PET_GREETING && typeof window.PORTFOOLIO_PET_GREETING === 'string') {
         if (!MESSAGES.includes(window.PORTFOOLIO_PET_GREETING)) {
           MESSAGES.unshift(window.PORTFOOLIO_PET_GREETING);
@@ -452,7 +463,10 @@
     CFG.viewH = meta.viewH || 104;
     MESSAGES = meta.messages || MESSAGES;
 
+    loaded = true;
+
     if (root) {
+      root.classList.add('cdx-loaded');
       root.style.width = CFG.viewW + 'px';
       root.style.height = CFG.viewH + 'px';
     }
@@ -472,6 +486,10 @@
       setRow(0, Infinity);
       paint(0, 0);
     }
+    if (!tickTimer) {
+      tickTimer = setInterval(function () { tick(performance.now()); }, 60);
+    }
+    scheduleActivity();
     show();
     say(meta.defaultGreeting || ("Hello! I'm " + meta.displayName));
   }
