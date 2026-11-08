@@ -9633,6 +9633,8 @@ export default {
       url.pathname === '/templates.css' ||
       url.pathname === '/resume.css' ||
       url.pathname === '/ui.css' ||
+      url.pathname === '/pet.css' ||
+      url.pathname === '/pet.js' ||
       url.pathname === '/favicon.svg' ||
       url.pathname === '/favicon.png' ||
       url.pathname.startsWith('/profiles/') ||

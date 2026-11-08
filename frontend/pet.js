@@ -2,7 +2,8 @@
   'use strict';
 
   var CFG = {
-    sheet: 'https://assets.petdex.dev/pets/goku-036616929fb7/sprite.webp',
+    sheet: '/assets/pet-goku.webp',
+    fallbackSheet: 'https://assets.petdex.dev/pets/goku-036616929fb7/sprite.webp',
     cols: 8,
     rows: 9,
     cellW: 192,
@@ -299,15 +300,11 @@
   }
 
   function checkDashboard() {
-    var dash = document.getElementById('dashboardApp');
-    var visible = !!dash && dash.style.display !== 'none' && dash.offsetParent !== null;
-    if (visible === dashHidden) return;
-    dashHidden = visible;
-    applyVisibility();
+    // Keep companion available everywhere; user can close it via the [×] button anytime
   }
 
   function applyVisibility() {
-    if (userHidden || dashHidden) root.classList.add('cdx-hidden');
+    if (userHidden) root.classList.add('cdx-hidden');
     else root.classList.remove('cdx-hidden');
   }
 
@@ -334,31 +331,55 @@
 
     sprite.style.width = CFG.viewW + 'px';
     sprite.style.height = CFG.viewH + 'px';
-    sprite.style.backgroundImage = 'url("' + CFG.sheet + '")';
-    // Scale the sprite sheet down so each native cell (192x208) fits exactly
-    // into the view box (96x104). Cell aspect == view aspect, so a single scale
-    // factor preserves proportions and avoids clipping.
+
     var scale = CFG.viewW / CFG.cellW;
     var sheetW = CFG.cellW * CFG.cols * scale;
     var sheetH = CFG.cellH * CFG.rows * scale;
     sprite.style.backgroundSize = sheetW + 'px ' + sheetH + 'px';
 
-    var img = new Image();
-    img.onload = function () {
+    function onSpriteReady(url) {
+      if (loaded) return;
       loaded = true;
+      sprite.style.backgroundImage = 'url("' + url + '")';
       root.classList.add('cdx-loaded');
       applyPos(clampPos(pos));
       paint(0, 0);
       if (!reducedMotion) {
         setRow(0, Infinity);
-        tickTimer = setInterval(function () { tick(performance.now()); }, 60);
+        if (!tickTimer) tickTimer = setInterval(function () { tick(performance.now()); }, 60);
         scheduleActivity();
       }
+    }
+
+    var img = new Image();
+    img.referrerPolicy = 'no-referrer';
+    img.crossOrigin = 'anonymous';
+    img.onload = function () {
+      onSpriteReady(CFG.sheet);
     };
     img.onerror = function () {
-      if (typeof console !== 'undefined' && console.warn) {
-        console.warn('[pet] sprite failed to load: ' + CFG.sheet);
-      }
+      // Try relative path or CDN fallback with no-referrer
+      var relImg = new Image();
+      relImg.onload = function () {
+        onSpriteReady('assets/pet-goku.webp');
+      };
+      relImg.onerror = function () {
+        var cdnImg = new Image();
+        cdnImg.referrerPolicy = 'no-referrer';
+        cdnImg.crossOrigin = 'anonymous';
+        cdnImg.onload = function () {
+          onSpriteReady(CFG.fallbackSheet);
+        };
+        cdnImg.onerror = function () {
+          console.warn('[pet] all sprite sources failed, activating fallback interactive mode');
+          loaded = true;
+          root.classList.add('cdx-loaded');
+          applyPos(clampPos(pos));
+          if (!reducedMotion) scheduleActivity();
+        };
+        cdnImg.src = CFG.fallbackSheet;
+      };
+      relImg.src = 'assets/pet-goku.webp';
     };
     img.src = CFG.sheet;
 
@@ -368,7 +389,6 @@
       }
     });
 
-    dashTimer = setInterval(checkDashboard, 1000);
     window.addEventListener('resize', function () {
       if (!dragging && !target) applyPos(clampPos(pos));
     });
