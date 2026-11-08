@@ -208,4 +208,5 @@ create trigger on_auth_user_created
 -- 10) desktop companion pet (interactive live site mascot)
 alter table profiles add column if not exists show_pet boolean default false;
 alter table profiles add column if not exists pet_greeting text default '';
+alter table profiles add column if not exists pet_type text default 'goku';
 
