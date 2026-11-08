@@ -15,7 +15,7 @@ test('Desktop companion pet configuration & assets', () => {
   assert.ok(spriteStats.size > 500000, `pet-goku.webp should be a valid sprite sheet (found ${spriteStats.size} bytes)`);
 
   const petJs = fs.readFileSync(path.join(rootDir, 'frontend', 'pet.js'), 'utf8');
-  assert.ok(petJs.includes("sheet: '/assets/pet-goku.webp'"), 'pet.js must reference local /assets/pet-goku.webp');
+  assert.ok(petJs.includes('/assets/pet-goku.webp'), 'pet.js must reference local /assets/pet-goku.webp');
   assert.ok(petJs.includes("referrerPolicy = 'no-referrer'"), 'pet.js must use no-referrer policy to prevent hotlink blocks');
   assert.ok(petJs.includes('PORTFOOLIO_PET_GREETING'), 'pet.js must support custom greeting');
   assert.ok(petJs.includes('say: say'), 'pet.js must expose say function');
@@ -72,4 +72,54 @@ test('Studio options for users to add companion pet to live sites', () => {
       return true;
     } catch { return false; }
   }), 'index.html inline scripts must compile without premature </script> tags');
+});
+
+test('Pokémon Section & Petdex Companions catalog integration', async () => {
+  const petsModule = await import('./pets-data.js');
+  const PETS = petsModule.PET_REGISTRY || petsModule.default;
+
+  // Verify Pokémon Section
+  assert.ok(PETS.giratina, 'Giratina must exist in registry');
+  assert.ok(PETS.gardevoir, 'Gardevoir must exist in registry');
+  assert.ok(PETS.kabi, 'Snorlax (kabi) must exist in registry');
+  assert.ok(PETS.capvolt, 'Captain Pikachu (capvolt) must exist in registry');
+
+  assert.equal(PETS.giratina.category, 'pokemon');
+  assert.equal(PETS.gardevoir.category, 'pokemon');
+  assert.equal(PETS.kabi.category, 'pokemon');
+  assert.equal(PETS.capvolt.category, 'pokemon');
+
+  // Verify Anime / Classic Companions
+  assert.ok(PETS.goku, 'Goku must exist in registry');
+  assert.ok(PETS.boba, 'Boba must exist in registry');
+  assert.ok(PETS['goose-default'], 'Untitled Goose must exist in registry');
+  assert.ok(PETS['kaka-2'], 'Kaka Star must exist in registry');
+
+  assert.equal(PETS.goku.category, 'anime');
+  assert.equal(PETS.boba.category, 'anime');
+  assert.equal(PETS['goose-default'].category, 'anime');
+  assert.equal(PETS['kaka-2'].category, 'anime');
+
+  // Verify assets exist on disk for all pets
+  for (const [id, pet] of Object.entries(PETS)) {
+    const assetRelPath = pet.sheet.replace(/^\//, '');
+    const fullAssetPath = path.join(rootDir, 'frontend', assetRelPath.replace(/^assets\//, 'assets/'));
+    assert.ok(fs.existsSync(fullAssetPath), `Spritesheet for ${id} must exist at ${fullAssetPath}`);
+    assert.ok(Array.isArray(pet.messages) && pet.messages.length > 0, `${id} must have soundbite messages`);
+    assert.ok(pet.defaultGreeting, `${id} must have a default greeting`);
+  }
+
+  // Verify Studio UI elements
+  const indexHtml = fs.readFileSync(path.join(rootDir, 'frontend', 'index.html'), 'utf8');
+  assert.ok(indexHtml.includes('id="pokemonPetsGrid"'), 'index.html must have #pokemonPetsGrid container');
+  assert.ok(indexHtml.includes('id="animePetsGrid"'), 'index.html must have #animePetsGrid container');
+  assert.ok(indexHtml.includes('id="edPetType"'), 'index.html must have #edPetType input');
+  assert.ok(indexHtml.includes('paintPetStudioGrids'), 'index.html must define paintPetStudioGrids');
+  assert.ok(indexHtml.includes('selectStudioPet'), 'index.html must define selectStudioPet');
+
+  // Verify Worker support
+  const workerJs = fs.readFileSync(path.join(rootDir, 'backend', 'worker.js'), 'utf8');
+  assert.ok(workerJs.includes('pet_type'), 'worker.js must select pet_type from database');
+  assert.ok(workerJs.includes('PORTFOOLIO_PET_TYPE'), 'worker.js must inject PORTFOOLIO_PET_TYPE');
+  assert.ok(workerJs.includes('/pets-data.js'), 'worker.js must serve and inject /pets-data.js');
 });
