@@ -9663,6 +9663,7 @@ export default {
       url.pathname === '/ui.css' ||
       url.pathname === '/pet.css' ||
       url.pathname === '/pet.js' ||
+      url.pathname === '/pets-data.js' ||
       url.pathname === '/favicon.svg' ||
       url.pathname === '/favicon.png' ||
       url.pathname.startsWith('/profiles/') ||
