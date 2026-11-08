@@ -1445,10 +1445,24 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <div>
               <b style="font-size:15px;color:#fff">Enable Companion Pet on my live site</b>
               <div style="font-size:12.5px;color:var(--muted);margin-top:2px">
-                When checked, Goku will appear on your live portfolio (<span class="mono" id="petLiveDomain">yourname.portfoolio.me</span>) and keep visitors engaged.
+                When checked, your selected pet will appear on your live portfolio (<span class="mono" id="petLiveDomain">yourname.portfoolio.me</span>) and keep visitors engaged.
               </div>
             </div>
           </label>
+        </div>
+
+        <input type="hidden" id="edPetType" value="goku">
+
+        <!-- POKÉMON SECTION -->
+        <div style="margin-bottom:22px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;flex-wrap:wrap;gap:8px">
+            <h4 style="margin:0;font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px">
+              <span>⚡</span> Pokémon Section
+              <span class="badge" style="background:linear-gradient(135deg,rgba(234,179,8,0.2),rgba(239,68,68,0.2));color:#facc15;border:1px solid rgba(234,179,8,0.4);font-size:11px">POKÉDEX PETS</span>
+            </h4>
+            <span style="font-size:12.5px;color:var(--muted)">Select a Pokémon mascot to accompany visitors</span>
+          </div>
+          <div id="pokemonPetsGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"></div>
         </div>
 
         <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:18px">
@@ -1683,6 +1697,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
 <script src="templates.js"></script>
 <script src="resume.js"></script>
 <script src="linkedin-import.js"></script>
+<script src="pets-data.js"></script>
 <script src="pet.js"></script>
 <script>
 console.log('%cportfoolio studio build 2026-10-11u', 'color:#4f46e5;font-weight:bold');
