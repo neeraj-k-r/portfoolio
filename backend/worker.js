@@ -76,8 +76,11 @@ async function getProfile(sub) {
     if (!row) row = await fetchSel(v2Select);
     if (!row) row = await fetchSel(coreSelect);
     if (row) {
-      if (row.avatar_url && !row.avatarUrl) row.avatarUrl = row.avatar_url;
-      if (row.avatarUrl && !row.avatar_url) row.avatar_url = row.avatarUrl;
+      const av = String(row.avatar_url || row.avatarUrl || row.photo || row.avatar || '').trim();
+      row.avatar_url = av;
+      row.avatarUrl = av;
+      row.photo = av;
+      row.avatar = av;
       if (typeof row.show_instagram === 'boolean' && typeof row.showInstagram === 'undefined') row.showInstagram = row.show_instagram;
       if (typeof row.showInstagram === 'boolean' && typeof row.show_instagram === 'undefined') row.show_instagram = row.showInstagram;
       if (typeof row.show_pet === 'boolean' && typeof row.showPet === 'undefined') row.showPet = row.show_pet;
@@ -147,8 +150,11 @@ async function getProfile(sub) {
     if (r.ok) {
       const seed = await r.json();
       if (seed) {
-        if (seed.avatar_url && !seed.avatarUrl) seed.avatarUrl = seed.avatar_url;
-        if (seed.avatarUrl && !seed.avatar_url) seed.avatar_url = seed.avatarUrl;
+        const av = String(seed.avatar_url || seed.avatarUrl || seed.photo || seed.avatar || '').trim();
+        seed.avatar_url = av;
+        seed.avatarUrl = av;
+        seed.photo = av;
+        seed.avatar = av;
         if (seed.about && typeof seed.about === 'object') {
           if (!seed.about_story && seed.about.story) seed.about_story = seed.about.story;
           if (!seed.about_headline && seed.about.headline) seed.about_headline = seed.about.headline;
@@ -7020,7 +7026,7 @@ function pageVibrant(p) {
   const bio = esc(p.bio || p.summary || p.tagline || 'Crafting interactive digital products, playful interfaces, and scalable modern web experiences.');
   const location = esc(p.location || 'Remote / Worldwide');
   const email = esc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
   const firstLetter = (p.name || 'D').trim().charAt(0).toUpperCase();
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
@@ -7239,7 +7245,7 @@ function pageClean(p) {
   const bio = esc(p.bio || p.summary || p.tagline || 'Crafting elegant, accessible, and high-performance digital applications with modern web technologies.');
   const location = esc(p.location || 'Remote / Worldwide');
   const email = esc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
   const firstLetter = (p.name || 'D').trim().charAt(0).toUpperCase();
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
@@ -7458,7 +7464,7 @@ function pageBold(p) {
   const bio = esc(p.bio || p.summary || p.tagline || 'Building scalable, high-impact software systems with modern web architecture and robust engineering practices.');
   const location = esc(p.location || 'Remote / Worldwide');
   const email = esc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
   const firstLetter = (p.name || 'D').trim().charAt(0).toUpperCase();
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
@@ -8216,7 +8222,7 @@ function pageMonolith(p) {
   const bio = esc(p.bio || p.summary || p.tagline || 'Transforming ideas into scalable high-impact digital solutions with modern software architecture.');
   const location = esc(p.location || 'Worldwide');
   const email = esc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
   const projects = Array.isArray(p.projects) ? p.projects : [];
@@ -8373,7 +8379,7 @@ function pagePanels(p) {
   const bio = esc(p.bio || p.summary || p.tagline || `I'm ${name}, a detail-oriented software developer building scalable digital products and robust modern web architectures.`);
   const location = esc(p.location || 'Remote / Worldwide');
   const email = esc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
   const projects = Array.isArray(p.projects) ? p.projects : [];
@@ -8584,7 +8590,7 @@ function pageParticle(p) {
   const title = esc(p.title || 'Full Stack & AI Engineer');
   const bio = esc(p.bio || p.summary || p.tagline || 'Transforming complex requirements into elegant, high-impact digital solutions through modern software architecture.');
   const email = esc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
   const projects = Array.isArray(p.projects) ? p.projects : [];
@@ -8755,7 +8761,7 @@ function pageGithub(p) {
   const bio = esc(p.bio || p.summary || p.tagline || 'Building user-centric, high-performance applications and scalable distributed systems.');
   const location = esc(p.location || '');
   const email = esc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
   const projects = Array.isArray(p.projects) ? p.projects : [];
@@ -8988,6 +8994,13 @@ function pageCloud(p) {
 }
 
 function page(p, url) {
+  const av = String((p && (p.avatarUrl || p.avatar_url || p.photo || p.avatar)) || '').trim();
+  if (p) {
+    p.avatarUrl = av;
+    p.avatar_url = av;
+    p.photo = av;
+    p.avatar = av;
+  }
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
   const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'];

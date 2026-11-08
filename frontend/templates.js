@@ -5122,7 +5122,7 @@ function renderVibrant(p) {
   const bio = tplEsc(p.bio || p.summary || p.tagline || 'Crafting interactive digital products, playful interfaces, and scalable modern web experiences.');
   const location = tplEsc(p.location || 'Remote / Worldwide');
   const email = tplEsc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
   const firstLetter = (p.name || 'D').trim().charAt(0).toUpperCase();
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
@@ -5319,7 +5319,7 @@ function renderClean(p) {
   const bio = tplEsc(p.bio || p.summary || p.tagline || 'Crafting elegant, accessible, and high-performance digital applications with modern web technologies.');
   const location = tplEsc(p.location || 'Remote / Worldwide');
   const email = tplEsc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
   const firstLetter = (p.name || 'D').trim().charAt(0).toUpperCase();
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
@@ -5516,7 +5516,7 @@ function renderBold(p) {
   const bio = tplEsc(p.bio || p.summary || p.tagline || 'Building scalable, high-impact software systems with modern web architecture and robust engineering practices.');
   const location = tplEsc(p.location || 'Remote / Worldwide');
   const email = tplEsc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
   const firstLetter = (p.name || 'D').trim().charAt(0).toUpperCase();
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
@@ -6151,7 +6151,7 @@ function renderMonolith(p) {
   const bio = tplEsc(p.bio || p.summary || p.tagline || `Transforming ideas into scalable high-impact digital solutions with modern software architecture.`);
   const location = tplEsc(p.location || 'Worldwide');
   const email = tplEsc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
   const projects = Array.isArray(p.projects) ? p.projects : [];
@@ -6314,7 +6314,7 @@ function renderPanels(p) {
   const bio = tplEsc(p.bio || p.summary || p.tagline || `I'm ${name}, a detail-oriented software developer building scalable digital products and robust modern web architectures.`);
   const location = tplEsc(p.location || 'Remote / Worldwide');
   const email = tplEsc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
   const projects = Array.isArray(p.projects) ? p.projects : [];
@@ -6546,7 +6546,7 @@ function renderParticle(p) {
   document.title = `${name} — ${title} | portfoolio.me`;
   const bio = tplEsc(p.bio || p.summary || p.tagline || `Transforming complex requirements into elegant, high-impact digital solutions through modern software architecture.`);
   const email = tplEsc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
   const projects = Array.isArray(p.projects) ? p.projects : [];
@@ -6751,7 +6751,7 @@ function renderGithub(p) {
   const bio = tplEsc(p.bio || p.summary || p.tagline || `Building user-centric, high-performance applications and scalable distributed systems.`);
   const location = tplEsc(p.location || '');
   const email = tplEsc(p.email || '');
-  const photo = p.photo || p.avatar || '';
+  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
   const projects = Array.isArray(p.projects) ? p.projects : [];

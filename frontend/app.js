@@ -87,8 +87,11 @@ function normLocalProfile(p) {
   if (!p) return p;
   if (typeof normRow === 'function') return normRow(p);
   // supabase-config.js may not be loaded on public pages — sync keys manually
-  if (p.avatar_url && !p.avatarUrl) p.avatarUrl = p.avatar_url || '';
-  if (p.avatarUrl && !p.avatar_url) p.avatar_url = p.avatarUrl || '';
+  const av = String(p.avatar_url || p.avatarUrl || p.photo || p.avatar || '').trim();
+  p.avatar_url = av;
+  p.avatarUrl = av;
+  p.photo = av;
+  p.avatar = av;
   if (typeof p.show_instagram === 'boolean' && typeof p.showInstagram === 'undefined') p.showInstagram = p.show_instagram;
   if (typeof p.showInstagram === 'boolean' && typeof p.show_instagram === 'undefined') p.show_instagram = p.showInstagram;
   if (typeof p.show_pet === 'boolean' && typeof p.showPet === 'undefined') p.showPet = p.show_pet;

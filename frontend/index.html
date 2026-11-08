@@ -968,7 +968,10 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <button type="button" class="btn btn-ghost btn-sm" id="edAvatarUp">Upload</button>
               <button type="button" class="btn btn-ghost btn-sm" id="edAvatarRm">Remove</button>
             </div>
-            <p class="mono" id="edAvatarMsg" style="font-size:11.5px;color:var(--muted);margin-top:6px">JPG/PNG under 5MB. Saved with the form below.</p>
+            <div style="display:flex;gap:8px;margin-top:8px">
+              <input id="edAvatarUrlInput" placeholder="Or paste direct image URL (e.g. https://...)" style="flex:1;font-size:12.5px;padding:6px 10px">
+            </div>
+            <p class="mono" id="edAvatarMsg" style="font-size:11.5px;color:var(--muted);margin-top:6px">Select an image file (auto-uploads on choose) or paste any image URL.</p>
           </div>
         </div>
         <div class="full" style="margin-bottom:14px">
@@ -2171,7 +2174,8 @@ function setupUserDashboardView(profile) {
     if($('edPetType')) $('edPetType').value = curPet;
     if(typeof paintPetStudioGrids === 'function') paintPetStudioGrids(curPet);
     if(typeof updatePetPreviewStatus === 'function') updatePetPreviewStatus(hasPet, profile.username);
-    draftAvatar = profile.avatarUrl || profile.avatar_url || ''; paintAvatarPreview();
+    draftAvatar = String(profile.avatarUrl || profile.avatar_url || profile.photo || profile.avatar || '').trim();
+    paintAvatarPreview();
 
     // Visual Studio About & Story hydration
     if($('edAboutHeadline')) $('edAboutHeadline').value = profile.about_headline || (profile.about && profile.about.headline) || '';
@@ -2297,34 +2301,68 @@ let projEditOpen = -1;
 let draftAvatar = '';
 function paintAvatarPreview() {
   const img = $('edAvatarImg');
+  const urlIn = $('edAvatarUrlInput');
+  if (urlIn && document.activeElement !== urlIn) {
+    urlIn.value = draftAvatar || '';
+  }
   if (!img) return;
   if (draftAvatar) {
-    img.onerror = () => { $('edAvatarMsg').textContent = 'Preview failed to load — the upload URL may be blocked. Try re-uploading.'; };
-    img.src = draftAvatar; img.style.display = '';
+    img.onerror = () => { $('edAvatarMsg').textContent = '⚠️ Preview failed to load — check the image URL.'; };
+    img.onload = () => { $('edAvatarMsg').textContent = '✅ Image loaded — hit Save Changes to publish.'; };
+    img.src = draftAvatar;
+    img.style.display = '';
+  } else {
+    img.onerror = null;
+    img.removeAttribute('src');
+    img.style.display = 'none';
   }
-  else { img.onerror = null; img.removeAttribute('src'); img.style.display = 'none'; }
 }
-if ($('edAvatarUp')) $('edAvatarUp').onclick = async () => {
-  const f = $('edAvatarFile') && $('edAvatarFile').files[0];
-  if (!f) return toast('❌ Pick an image first');
-  if (!cloudinaryEnabled()) return toast('❌ Photo uploads activate once the owner connects Cloudinary');
-  $('edAvatarMsg').textContent = 'Uploading…';
+
+async function doUploadAvatarFile(f) {
+  if (!f) return;
+  if (!cloudinaryEnabled()) return toast('❌ Photo uploads activate once Cloudinary is configured');
+  $('edAvatarMsg').textContent = 'Uploading avatar to cloud…';
   try {
     draftAvatar = await uploadAvatar(f);
     paintAvatarPreview();
-    $('edAvatarMsg').textContent = 'Uploaded — hit Save Changes to publish.';
+    $('edAvatarMsg').textContent = '✅ Uploaded to cloud — hit Save Changes to publish.';
+    toast('✅ Avatar uploaded! Hit Save Changes to publish.');
   } catch (e) {
     const msg = String((e && e.message) || '');
     console.error('avatar upload failed', e);
     $('edAvatarMsg').textContent = msg === 'av-type' ? 'Only JPG/PNG images.'
       : msg === 'av-size' ? 'Keep it under 5MB.'
-      : msg === 'av-setup' ? 'Cloudinary preset not configured — owner must enable Unsigned preset.'
+      : msg === 'av-setup' ? 'Cloudinary preset not configured.'
       : ('Upload failed — ' + (msg.startsWith('av-upload') ? msg : 'retry. ' + msg));
+    toast('❌ Upload failed: ' + msg);
   }
-};
+}
+
+if ($('edAvatarFile')) {
+  $('edAvatarFile').onchange = () => {
+    const f = $('edAvatarFile').files && $('edAvatarFile').files[0];
+    if (f) doUploadAvatarFile(f);
+  };
+}
+if ($('edAvatarUp')) {
+  $('edAvatarUp').onclick = () => {
+    const f = $('edAvatarFile') && $('edAvatarFile').files && $('edAvatarFile').files[0];
+    if (!f) return toast('❌ Pick an image file first');
+    doUploadAvatarFile(f);
+  };
+}
+if ($('edAvatarUrlInput')) {
+  $('edAvatarUrlInput').oninput = (e) => {
+    draftAvatar = e.target.value.trim();
+    paintAvatarPreview();
+  };
+}
 if ($('edAvatarRm')) $('edAvatarRm').onclick = () => {
-  draftAvatar = ''; if ($('edAvatarFile')) $('edAvatarFile').value = '';
-  paintAvatarPreview(); $('edAvatarMsg').textContent = 'Removed — hit Save Changes.';
+  draftAvatar = '';
+  if ($('edAvatarFile')) $('edAvatarFile').value = '';
+  if ($('edAvatarUrlInput')) $('edAvatarUrlInput').value = '';
+  paintAvatarPreview();
+  $('edAvatarMsg').textContent = 'Removed — hit Save Changes.';
 };
 // Works tab: keep only real images, ≤5MB each, max 10 per batch.
 function validWorkFiles(list) {
@@ -2893,6 +2931,18 @@ async function saveStudio() {
     const showPet = $('edShowPet') ? $('edShowPet').checked : ($('edShowPetTheme') ? $('edShowPetTheme').checked : !!(activeUserProfile.showPet || activeUserProfile.show_pet));
     const petGreeting = $('edPetGreeting') ? $('edPetGreeting').value.trim() : (activeUserProfile.petGreeting || activeUserProfile.pet_greeting || '');
     const petType = ($('edPetType') && $('edPetType').value.trim()) || activeUserProfile.pet_type || activeUserProfile.petType || 'goku';
+
+    // Auto-upload selected avatar file if user hasn't explicitly clicked Upload
+    const avatarFile = $('edAvatarFile') && $('edAvatarFile').files && $('edAvatarFile').files[0];
+    if (avatarFile && !draftAvatar && cloudinaryEnabled()) {
+      try {
+        draftAvatar = await uploadAvatar(avatarFile);
+      } catch (e) {
+        console.warn('Auto upload avatar on save failed:', e);
+      }
+    }
+    const finalAvatar = String(draftAvatar || ($('edAvatarUrlInput') && $('edAvatarUrlInput').value.trim()) || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || activeUserProfile.photo || activeUserProfile.avatar || '').trim();
+
     Object.assign(activeUserProfile, {
       name: $('edName').value.trim(), title: $('edTitle').value.trim(), tagline: $('edTag').value.trim(),
       email: $('edEmail').value.trim(), phone: $('edPhone').value.trim(),
@@ -2912,8 +2962,10 @@ async function saveStudio() {
         { num: $('edStat4Num') ? $('edStat4Num').value.trim() : '', label: $('edStat4Label') ? $('edStat4Label').value.trim() : '' },
       ].filter(s => s.num || s.label),
       template: (document.querySelector('input[name=edtpl]:checked') || {}).value || activeUserProfile.template || 'midnight',
-      avatarUrl: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
-      avatar_url: draftAvatar || activeUserProfile.avatarUrl || activeUserProfile.avatar_url || '',
+      avatarUrl: finalAvatar,
+      avatar_url: finalAvatar,
+      photo: finalAvatar,
+      avatar: finalAvatar,
       skillsDisplay: (document.querySelector('input[name=skillsDisplay]:checked') || {}).value || 'evidence',
       skills: $('edSkills').value.split(',').map(s => s.trim()).filter(Boolean).slice(0, 12),
       experience: Array.isArray(activeUserProfile.experience) ? activeUserProfile.experience : [],
