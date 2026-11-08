@@ -61,6 +61,7 @@ test('Studio options for users to add companion pet to live sites', () => {
   assert.ok(workerJs.includes('injectPet'), 'worker.js must have injectPet function');
   assert.ok(workerJs.includes('prof.show_pet'), 'worker.js must check show_pet before injecting companion');
   assert.ok(workerJs.includes('PORTFOOLIO_PET_GREETING'), 'worker.js must inject greeting script');
+  assert.ok(workerJs.includes('show_pet,pet_greeting') || workerJs.includes('show_pet') && workerJs.includes('pet_greeting'), 'worker.js getProfile must query show_pet and pet_greeting columns from Supabase');
 
   // Singleton guard to prevent duplicate pets
   const petJs = fs.readFileSync(path.join(rootDir, 'frontend', 'pet.js'), 'utf8');

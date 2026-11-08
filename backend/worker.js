@@ -57,6 +57,7 @@ function dpProjectIcon(pr) {
 async function getProfile(sub) {
   // 1) Supabase: approved rows are publicly readable
   try {
+    const petSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,show_pet,pet_greeting,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works,about_story,about_headline,about_badge,about_origin,about_stats';
     const fullSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works,about_story,about_headline,about_badge,about_origin,about_stats';
     const v2Select = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works';
     // Fallback select for DBs where the owner never re-ran supabase-schema.sql
@@ -70,7 +71,8 @@ async function getProfile(sub) {
       const rows = await r.json();
       return rows.length ? rows[0] : null;
     };
-    let row = await fetchSel(fullSelect);
+    let row = await fetchSel(petSelect);
+    if (!row) row = await fetchSel(fullSelect);
     if (!row) row = await fetchSel(v2Select);
     if (!row) row = await fetchSel(coreSelect);
     if (row) {
@@ -78,6 +80,10 @@ async function getProfile(sub) {
       if (row.avatarUrl && !row.avatar_url) row.avatar_url = row.avatarUrl;
       if (typeof row.show_instagram === 'boolean' && typeof row.showInstagram === 'undefined') row.showInstagram = row.show_instagram;
       if (typeof row.showInstagram === 'boolean' && typeof row.show_instagram === 'undefined') row.show_instagram = row.showInstagram;
+      if (typeof row.show_pet === 'boolean' && typeof row.showPet === 'undefined') row.showPet = row.show_pet;
+      if (typeof row.showPet === 'boolean' && typeof row.show_pet === 'undefined') row.show_pet = row.showPet;
+      if (row.pet_greeting && !row.petGreeting) row.petGreeting = row.pet_greeting;
+      if (row.petGreeting && !row.pet_greeting) row.pet_greeting = row.petGreeting;
       if (row.about && typeof row.about === 'object') {
         if (!row.about_story && row.about.story) row.about_story = row.about.story;
         if (!row.about_headline && row.about.headline) row.about_headline = row.about.headline;
@@ -110,6 +116,22 @@ async function getProfile(sub) {
             if (seed.about_badge && !row.about_badge) row.about_badge = seed.about_badge;
             if (seed.about_origin && !row.about_origin) row.about_origin = seed.about_origin;
             if (seed.about_stats && !row.about_stats) row.about_stats = seed.about_stats;
+            if (typeof seed.show_pet === 'boolean' && typeof row.show_pet === 'undefined') {
+              row.show_pet = seed.show_pet;
+              row.showPet = seed.show_pet;
+            }
+            if (typeof seed.showPet === 'boolean' && typeof row.showPet === 'undefined') {
+              row.showPet = seed.showPet;
+              row.show_pet = seed.showPet;
+            }
+            if (seed.pet_greeting && !row.pet_greeting) {
+              row.pet_greeting = seed.pet_greeting;
+              row.petGreeting = seed.pet_greeting;
+            }
+            if (seed.petGreeting && !row.petGreeting) {
+              row.petGreeting = seed.petGreeting;
+              row.pet_greeting = seed.petGreeting;
+            }
           }
         }
       } catch {}
@@ -131,6 +153,10 @@ async function getProfile(sub) {
         }
         if (typeof seed.show_instagram === 'boolean' && typeof seed.showInstagram === 'undefined') seed.showInstagram = seed.show_instagram;
         if (typeof seed.showInstagram === 'boolean' && typeof seed.show_instagram === 'undefined') seed.show_instagram = seed.showInstagram;
+        if (typeof seed.show_pet === 'boolean' && typeof seed.showPet === 'undefined') seed.showPet = seed.show_pet;
+        if (typeof seed.showPet === 'boolean' && typeof seed.show_pet === 'undefined') seed.show_pet = seed.showPet;
+        if (seed.pet_greeting && !seed.petGreeting) seed.petGreeting = seed.pet_greeting;
+        if (seed.petGreeting && !seed.pet_greeting) seed.pet_greeting = seed.petGreeting;
         if (seed.resume && typeof seed.resume === 'object' && Array.isArray(seed.resume.services) && (!seed.services || !seed.services.length)) {
           seed.services = seed.resume.services;
         }
