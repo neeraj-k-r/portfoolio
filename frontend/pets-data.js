@@ -507,6 +507,83 @@
         'Gentleman top-hat, fiery spirit.',
         'Freedom is worth fighting for!'
       ]
+    },
+
+    // === ONE PIECE THEME / CREW SECTION ===
+    'luffy-gear-5-chibi': {
+      id: 'luffy-gear-5-chibi',
+      category: 'onepiece',
+      displayName: 'Luffy (Gear 5 Nika)',
+      subtitle: 'Sun God Nika · Warrior of Liberation',
+      badge: 'GEAR 5 NIKA',
+      badgeBg: 'linear-gradient(135deg, rgba(255, 255, 255, 0.35), rgba(245, 158, 11, 0.35))',
+      badgeColor: '#fef08a',
+      sheet: '/assets/pets/luffy-gear-5-chibi/spritesheet.webp',
+      cols: 8,
+      rows: 9,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: 'AHAHAHA! This is my peak! Drums of Liberation!',
+      messages: [
+        'Drums of Liberation sound! 🥁',
+        'AHAHAHAHAHA!',
+        'Rubber world! Everything stretches!',
+        'Gomu Gomu no Gigant!',
+        'Freedom is the greatest treasure!',
+        'Warrior of Liberation awakened!'
+      ]
+    },
+    robin: {
+      id: 'robin',
+      category: 'onepiece',
+      displayName: 'Nico Robin',
+      subtitle: 'Archaeologist · Hana Hana no Mi',
+      badge: 'HANA HANA',
+      badgeBg: 'linear-gradient(135deg, rgba(147, 51, 234, 0.3), rgba(236, 72, 153, 0.3))',
+      badgeColor: '#c084fc',
+      sheet: '/assets/pets/robin/spritesheet.webp',
+      cols: 8,
+      rows: 9,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: 'I want to live! Take me out to the sea with you!',
+      messages: [
+        'Cien Fleur: Wing! 🌸',
+        'I want to live!',
+        'The Rio Poneglyph holds the truth.',
+        'Hands blooming like flowers.',
+        'A quiet moment with a good book.',
+        'Mille Fleur: Gigantesco Mano!'
+      ]
+    },
+    'smoke-kick': {
+      id: 'smoke-kick',
+      category: 'onepiece',
+      displayName: 'Sanji (Black Leg)',
+      subtitle: 'Martial Chef · Diable Jambe',
+      badge: 'DIABLE JAMBE',
+      badgeBg: 'linear-gradient(135deg, rgba(245, 158, 11, 0.35), rgba(239, 68, 68, 0.35))',
+      badgeColor: '#fb923c',
+      sheet: '/assets/pets/smoke-kick/spritesheet.webp',
+      cols: 8,
+      rows: 9,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: "I'll never let anyone starve. Diable Jambe!",
+      messages: [
+        'Diable Jambe: Flambage Shot! 🔥',
+        'Never waste food in my kitchen.',
+        'Cooking with heart and precision.',
+        'Black Leg martial style ready.',
+        'Ifrit Jambe ignited!',
+        'A true gentleman never strikes a lady.'
+      ]
     }
   };
 
