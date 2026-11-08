@@ -2901,7 +2901,7 @@ ${works ? `<section class="wrap"><h2>Works</h2><div class="works">${works}</div>
 <footer class="wrap">Built with <a href="https://portfoolio.me">portfoolio.me</a> · ${esc(p.username)}.portfoolio.me</footer>
 </body></html>`;
   const petSnippet = (p.showPet || p.show_pet)
-    ? `<link rel="stylesheet" href="https://portfoolio.me/pet.css">\n${(p.petGreeting || p.pet_greeting) ? `<script>window.PORTFOOLIO_PET_GREETING = ${JSON.stringify(String(p.petGreeting || p.pet_greeting))};</script>\n` : ''}<script src="https://portfoolio.me/pet.js"></script>\n`
+    ? `<link rel="stylesheet" href="https://portfoolio.me/pet.css">\n${(p.petGreeting || p.pet_greeting) ? `<script>window.PORTFOOLIO_PET_GREETING = ${JSON.stringify(String(p.petGreeting || p.pet_greeting))};<` + `/script>\n` : ''}<script src="https://portfoolio.me/pet.js"><` + `/script>\n`
     : '';
   return petSnippet ? html.replace('</body>', `${petSnippet}</body>`) : html;
 }

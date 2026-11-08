@@ -1,6 +1,13 @@
 (function () {
   'use strict';
 
+  if (typeof window !== 'undefined') {
+    if (window.__ClawdexPetLoaded || document.getElementById('clawdex-pet')) {
+      return;
+    }
+    window.__ClawdexPetLoaded = true;
+  }
+
   var CFG = {
     sheet: '/assets/pet-goku.webp',
     fallbackSheet: 'https://assets.petdex.dev/pets/goku-036616929fb7/sprite.webp',
@@ -149,9 +156,14 @@
   function randomTarget() {
     var v = viewport();
     var b = CFG.bounds;
+    // Roam along the bottom perimeter (floor level) so Goku stays grounded
+    // and never walks across center login/auth cards or form inputs.
+    var minY = Math.max(b, v.height - 220);
+    var maxY = Math.max(b, v.height - CFG.viewH - b);
+    var y = minY + Math.random() * Math.max(10, maxY - minY);
     return {
       x: b + Math.random() * Math.max(40, v.width - CFG.viewW - b * 2),
-      y: b + Math.random() * Math.max(40, v.height - CFG.viewH - b * 2)
+      y: Math.min(y, maxY)
     };
   }
 
@@ -256,6 +268,16 @@
   }
 
   function build() {
+    var existing = document.getElementById('clawdex-pet');
+    if (existing) {
+      root = existing;
+      stage = root.querySelector('.cdx-stage');
+      sprite = root.querySelector('.cdx-sprite');
+      bubble = root.querySelector('.cdx-bubble');
+      closeBtn = root.querySelector('.cdx-close');
+      placeholder = root.querySelector('.cdx-placeholder');
+      return;
+    }
     root = document.createElement('div');
     root.id = 'clawdex-pet';
     root.setAttribute('role', 'img');

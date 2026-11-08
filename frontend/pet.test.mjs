@@ -61,4 +61,14 @@ test('Studio options for users to add companion pet to live sites', () => {
   assert.ok(workerJs.includes('injectPet'), 'worker.js must have injectPet function');
   assert.ok(workerJs.includes('prof.show_pet'), 'worker.js must check show_pet before injecting companion');
   assert.ok(workerJs.includes('PORTFOOLIO_PET_GREETING'), 'worker.js must inject greeting script');
+
+  // Singleton guard to prevent duplicate pets
+  const petJs = fs.readFileSync(path.join(rootDir, 'frontend', 'pet.js'), 'utf8');
+  assert.ok(petJs.includes('__ClawdexPetLoaded'), 'pet.js must have singleton guard to prevent duplicate pets');
+  assert.ok(!indexHtml.includes('</script>') || indexHtml.match(/<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/gi).every(b => {
+    try {
+      new Function(b.replace(/<\/?script[^>]*>/gi, ''));
+      return true;
+    } catch { return false; }
+  }), 'index.html inline scripts must compile without premature </script> tags');
 });
