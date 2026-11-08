@@ -57,7 +57,7 @@ function dpProjectIcon(pr) {
 async function getProfile(sub) {
   // 1) Supabase: approved rows are publicly readable
   try {
-    const petSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,show_pet,pet_greeting,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works,about_story,about_headline,about_badge,about_origin,about_stats';
+    const petSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,show_pet,pet_greeting,pet_type,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works,about_story,about_headline,about_badge,about_origin,about_stats';
     const fullSelect = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works,about_story,about_headline,about_badge,about_origin,about_stats';
     const v2Select = 'username,name,title,tagline,email,phone,location,github,linkedin,instagram,show_instagram,template,skills,projects,avatar_url,site_type,site_path,experience,education,resume,track,works';
     // Fallback select for DBs where the owner never re-ran supabase-schema.sql
@@ -84,6 +84,8 @@ async function getProfile(sub) {
       if (typeof row.showPet === 'boolean' && typeof row.show_pet === 'undefined') row.show_pet = row.showPet;
       if (row.pet_greeting && !row.petGreeting) row.petGreeting = row.pet_greeting;
       if (row.petGreeting && !row.pet_greeting) row.pet_greeting = row.petGreeting;
+      if (row.pet_type && !row.petType) row.petType = row.pet_type;
+      if (row.petType && !row.pet_type) row.pet_type = row.petType;
       if (row.about && typeof row.about === 'object') {
         if (!row.about_story && row.about.story) row.about_story = row.about.story;
         if (!row.about_headline && row.about.headline) row.about_headline = row.about.headline;
@@ -9711,11 +9713,10 @@ export default {
 
     function injectPet(htmlContent, prof) {
       if (!prof || (prof.show_pet !== true && prof.showPet !== true)) return htmlContent;
+      const petType = (prof.pet_type || prof.petType || 'goku').trim().toLowerCase();
       const greet = (prof.pet_greeting || prof.petGreeting || '').trim();
-      const greetingScript = greet
-        ? `<script>window.PORTFOOLIO_PET_GREETING = ${JSON.stringify(greet)};</script>\n`
-        : '';
-      const snippet = `<link rel="stylesheet" href="/pet.css">\n${greetingScript}<script src="/pet.js"></script>\n`;
+      const configScript = `<script>window.PORTFOOLIO_PET_TYPE = ${JSON.stringify(petType)};${greet ? ` window.PORTFOOLIO_PET_GREETING = ${JSON.stringify(greet)};` : ''}</script>\n`;
+      const snippet = `<link rel="stylesheet" href="/pet.css">\n${configScript}<script src="/pets-data.js"></script>\n<script src="/pet.js"></script>\n`;
       if (htmlContent.includes('</body>')) {
         return htmlContent.replace('</body>', `${snippet}</body>`);
       }
