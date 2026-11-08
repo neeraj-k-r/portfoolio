@@ -2153,6 +2153,9 @@ function setupUserDashboardView(profile) {
     if($('edShowPet')) $('edShowPet').checked = hasPet;
     if($('edShowPetTheme')) $('edShowPetTheme').checked = hasPet;
     if($('edPetGreeting')) $('edPetGreeting').value = profile.petGreeting || profile.pet_greeting || '';
+    const curPet = (profile.pet_type || profile.petType || 'goku').toLowerCase();
+    if($('edPetType')) $('edPetType').value = curPet;
+    if(typeof paintPetStudioGrids === 'function') paintPetStudioGrids(curPet);
     if(typeof updatePetPreviewStatus === 'function') updatePetPreviewStatus(hasPet, profile.username);
     draftAvatar = profile.avatarUrl || profile.avatar_url || ''; paintAvatarPreview();
 
@@ -2969,6 +2972,94 @@ function updatePetPreviewStatus(active, username) {
     if (txt) { txt.textContent = 'Disabled'; txt.style.color = 'var(--muted)'; }
     if (ind) { ind.style.borderColor = 'rgba(255,255,255,0.1)'; ind.style.background = 'rgba(255,255,255,0.03)'; }
   }
+}
+
+function paintPetStudioGrids(activePetId) {
+  const reg = window.PORTFOOLIO_PETS || {};
+  const currentId = (activePetId || ($('edPetType') && $('edPetType').value) || 'goku').toLowerCase();
+
+  function makePetCard(pet) {
+    const isSelected = pet.id === currentId;
+    return `
+      <div class="pet-studio-card ${isSelected ? 'active' : ''}" data-pet="${esc(pet.id)}" style="
+        background: ${isSelected ? 'rgba(124,58,237,0.14)' : 'rgba(255,255,255,0.02)'};
+        border: 2px solid ${isSelected ? '#a855f7' : 'var(--stroke)'};
+        border-radius: 14px;
+        padding: 14px;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      " onclick="selectStudioPet('${esc(pet.id)}')">
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <span class="badge" style="background:${pet.badgeBg || 'rgba(255,255,255,0.08)'};color:${pet.badgeColor || '#fff'};border:1px solid ${pet.badgeColor || '#888'}44;font-size:10px;font-weight:700">
+              ${esc(pet.badge)}
+            </span>
+            ${isSelected ? '<span style="color:#4ade80;font-size:11.5px;font-weight:700;display:flex;align-items:center;gap:4px">✓ ACTIVE</span>' : ''}
+          </div>
+          <div style="height:88px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;background:rgba(0,0,0,0.25);border-radius:10px;overflow:hidden">
+            <div style="
+              width: 96px;
+              height: 104px;
+              background-image: url('${esc(pet.sheet)}');
+              background-size: ${pet.cols * 96}px ${pet.rows * 104}px;
+              background-position: 0 0;
+              image-rendering: pixelated;
+              transform: scale(0.72);
+            "></div>
+          </div>
+          <b style="font-size:14.5px;color:#fff;display:block;margin-bottom:2px">${esc(pet.displayName)}</b>
+          <p style="font-size:12px;color:var(--muted);margin:0;line-height:1.4">${esc(pet.subtitle)}</p>
+        </div>
+        <div style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between">
+          <button type="button" class="btn btn-ghost btn-sm" style="font-size:11px;padding:3px 8px;pointer-events:none">
+            ${isSelected ? 'Selected' : 'Select Pet'}
+          </button>
+          <span style="font-size:11px;color:var(--muted)">${pet.messages ? pet.messages.length + ' lines' : ''}</span>
+        </div>
+      </div>
+    `;
+  }
+
+  const pkmGrid = $('pokemonPetsGrid');
+  if (pkmGrid) {
+    const pkmPets = Object.values(reg).filter(p => p.category === 'pokemon');
+    pkmGrid.innerHTML = pkmPets.map(makePetCard).join('');
+  }
+
+  const animeGrid = $('animePetsGrid');
+  if (animeGrid) {
+    const animePets = Object.values(reg).filter(p => p.category === 'anime');
+    animeGrid.innerHTML = animePets.map(makePetCard).join('');
+  }
+}
+
+function selectStudioPet(petId) {
+  if (!petId) return;
+  const reg = window.PORTFOOLIO_PETS || {};
+  const pet = reg[petId];
+  if (!pet) return;
+
+  if ($('edPetType')) $('edPetType').value = petId;
+  if (activeUserProfile) {
+    activeUserProfile.pet_type = petId;
+    activeUserProfile.petType = petId;
+  }
+
+  const greetInput = $('edPetGreeting');
+  if (greetInput && (!greetInput.value.trim() || Object.values(reg).some(p => p.defaultGreeting === greetInput.value.trim()))) {
+    greetInput.value = pet.defaultGreeting;
+  }
+
+  if (window.ClawdexPet && typeof window.ClawdexPet.switchPet === 'function') {
+    window.ClawdexPet.switchPet(petId);
+  }
+
+  paintPetStudioGrids(petId);
+  toast('🎉 Selected ' + pet.displayName + ' companion!');
 }
 
 if ($('edSaveBtn')) $('edSaveBtn').onclick = saveStudio;
