@@ -293,7 +293,10 @@ function syncCompanionPet(p) {
   if (window.ClawdexPet) {
     if (hasPet) {
       window.ClawdexPet.show();
-      const greeting = (p && (p.petGreeting || p.pet_greeting)) || '';
+      const petId = ((p && (p.pet_type || p.petType)) || 'goku').toLowerCase();
+      const reg = window.PORTFOOLIO_PETS || {};
+      const pet = reg[petId];
+      const greeting = (p && (p.petGreeting || p.pet_greeting)) || (pet && pet.defaultGreeting) || '';
       if (greeting) {
         setTimeout(() => { if (window.ClawdexPet) window.ClawdexPet.say(greeting); }, 1200);
       }

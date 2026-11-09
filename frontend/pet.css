@@ -1,16 +1,24 @@
 #clawdex-pet{position:fixed;top:0;left:0;width:96px;height:104px;z-index:5000;pointer-events:none;-webkit-user-select:none;user-select:none;-webkit-backface-visibility:hidden;backface-visibility:hidden}
 #clawdex-pet.cdx-hidden{display:none}
-#clawdex-pet .cdx-stage{position:absolute;inset:0;pointer-events:auto;cursor:grab;touch-action:none;overflow:hidden}
+#clawdex-pet .cdx-stage{position:absolute;inset:0;pointer-events:auto;cursor:grab;touch-action:none;overflow:visible}
 #clawdex-pet .cdx-stage.cdx-dragging{cursor:grabbing}
 #clawdex-pet .cdx-sprite{position:absolute;inset:0;background-repeat:no-repeat;background-position:0 0;image-rendering:pixelated;transition:opacity .4s ease;opacity:0}
 #clawdex-pet .cdx-placeholder{position:absolute;inset:0;border-radius:14px;background:linear-gradient(135deg,rgba(124,58,237,.30),rgba(34,211,238,.20));border:1px dashed rgba(255,255,255,.30);display:flex;align-items:center;justify-content:center;font:800 15px/1 'JetBrains Mono',monospace;color:#e8eaf0;animation:cdxPulse 1.4s ease-in-out infinite;box-shadow:0 8px 24px rgba(0,0,0,.35)}
 @keyframes cdxPulse{0%,100%{opacity:.55}50%{opacity:1}}
 #clawdex-pet.cdx-loaded .cdx-placeholder{display:none}
 #clawdex-pet.cdx-loaded .cdx-sprite{opacity:1}
-#clawdex-pet .cdx-bubble{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%) translateY(6px);background:#0b1226;color:#e8eaf0;border:1px solid rgba(255,255,255,.18);box-shadow:0 10px 30px rgba(0,0,0,.35);font:600 12px/1.45 'JetBrains Mono',monospace;padding:8px 12px;border-radius:12px;white-space:nowrap;max-width:220px;opacity:0;visibility:hidden;transition:opacity .25s ease,transform .25s ease,visibility .25s;pointer-events:none}
+#clawdex-pet .cdx-bubble{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translateX(-50%) translateY(6px);background:rgba(11,18,38,0.96);backdrop-filter:blur(8px);color:#f8fafc;border:1px solid rgba(255,255,255,0.22);box-shadow:0 12px 32px rgba(0,0,0,0.45);font:600 12px/1.45 'JetBrains Mono',monospace;padding:8px 12px;border-radius:12px;white-space:normal;word-break:break-word;min-width:140px;max-width:240px;width:max-content;text-align:center;opacity:0;visibility:hidden;transition:opacity .25s ease,transform .25s ease,visibility .25s;pointer-events:none;z-index:20}
 #clawdex-pet .cdx-bubble::after{content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#0b1226}
 #clawdex-pet .cdx-bubble.cdx-show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
-#clawdex-pet .cdx-close{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#0b1226;border:1px solid rgba(255,255,255,.25);color:#cbd5e1;font:800 13px/1 Arial,sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .25s ease,background .2s ease,color .2s ease}
+#clawdex-pet .cdx-bubble.cdx-bubble-right{left:auto;right:0;transform:translateY(6px)}
+#clawdex-pet .cdx-bubble.cdx-bubble-right.cdx-show{transform:translateY(0)}
+#clawdex-pet .cdx-bubble.cdx-bubble-right::after{left:auto;right:24px;transform:none}
+#clawdex-pet .cdx-bubble.cdx-bubble-left{left:0;right:auto;transform:translateY(6px)}
+#clawdex-pet .cdx-bubble.cdx-bubble-left.cdx-show{transform:translateY(0)}
+#clawdex-pet .cdx-bubble.cdx-bubble-left::after{left:24px;right:auto;transform:none}
+#clawdex-pet .cdx-bubble.cdx-bubble-below{bottom:auto;top:calc(100% + 10px)}
+#clawdex-pet .cdx-bubble.cdx-bubble-below::after{top:auto;bottom:100%;border-top-color:transparent;border-bottom-color:#0b1226}
+#clawdex-pet .cdx-close{position:absolute;top:-6px;right:-6px;width:22px;height:22px;border-radius:50%;background:#0b1226;border:1px solid rgba(255,255,255,.25);color:#cbd5e1;font:800 13px/1 Arial,sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .25s ease,background .2s ease,color .2s ease;z-index:15}
 #clawdex-pet:hover .cdx-close{opacity:1}
 #clawdex-pet .cdx-close:hover{background:#e11d48;color:#fff}
 @media (max-width:640px){#clawdex-pet{width:80px;height:87px}#clawdex-pet .cdx-close{opacity:1}}

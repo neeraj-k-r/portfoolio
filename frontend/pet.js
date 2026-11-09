@@ -120,12 +120,37 @@
   }
 
   function say(text) {
+    if (!text) return;
+    if (!bubble) {
+      build();
+      if (!bubble) return;
+    }
     bubble.textContent = text;
+
+    // Viewport-aware alignment so speech bubble is never cut off
+    var v = viewport();
+    if (pos && pos.x > v.width - 220) {
+      bubble.classList.remove('cdx-bubble-left');
+      bubble.classList.add('cdx-bubble-right');
+    } else if (pos && pos.x < 160) {
+      bubble.classList.remove('cdx-bubble-right');
+      bubble.classList.add('cdx-bubble-left');
+    } else {
+      bubble.classList.remove('cdx-bubble-left', 'cdx-bubble-right');
+    }
+
+    if (pos && pos.y < 90) {
+      bubble.classList.add('cdx-bubble-below');
+    } else {
+      bubble.classList.remove('cdx-bubble-below');
+    }
+
     bubble.classList.add('cdx-show');
     clearTimeout(bubbleTimer);
+    var duration = Math.max(CFG.bubbleMs || 3200, Math.min(8000, text.length * 90));
     bubbleTimer = setTimeout(function () {
       bubble.classList.remove('cdx-show');
-    }, CFG.bubbleMs);
+    }, duration);
   }
 
   function walkTo(p) {
@@ -280,7 +305,7 @@
     scheduleActivity();
     if (!wasDrag && wasFast) {
       playOnce(3, 1);
-      say(MESSAGES[Math.floor(Math.random() * (MESSAGES.length - 1))]);
+      say(MESSAGES[Math.floor(Math.random() * MESSAGES.length)]);
     }
     lastDown = null;
   }
@@ -387,13 +412,16 @@
       setRow(0, Infinity);
       if (!tickTimer) tickTimer = setInterval(function () { tick(performance.now()); }, 60);
       scheduleActivity();
-      if (window.PORTFOOLIO_PET_GREETING && typeof window.PORTFOOLIO_PET_GREETING === 'string') {
-        if (!MESSAGES.includes(window.PORTFOOLIO_PET_GREETING)) {
-          MESSAGES.unshift(window.PORTFOOLIO_PET_GREETING);
+      var initialGreeting = (window.PORTFOOLIO_PET_GREETING && typeof window.PORTFOOLIO_PET_GREETING === 'string' && window.PORTFOOLIO_PET_GREETING.trim())
+        || (petMeta && (petMeta.defaultGreeting || ("Hello! I'm " + petMeta.displayName)))
+        || (MESSAGES && MESSAGES[0]);
+      if (initialGreeting) {
+        if (!MESSAGES.includes(initialGreeting)) {
+          MESSAGES.unshift(initialGreeting);
         }
         setTimeout(function () {
-          say(window.PORTFOOLIO_PET_GREETING);
-        }, 1000);
+          say(initialGreeting);
+        }, 800);
       }
     }
 
@@ -422,6 +450,14 @@
           root.classList.add('cdx-loaded');
           applyPos(clampPos(pos));
           if (!reducedMotion) scheduleActivity();
+          var initialGreeting = (window.PORTFOOLIO_PET_GREETING && typeof window.PORTFOOLIO_PET_GREETING === 'string' && window.PORTFOOLIO_PET_GREETING.trim())
+            || (petMeta && (petMeta.defaultGreeting || ("Hello! I'm " + petMeta.displayName)))
+            || (MESSAGES && MESSAGES[0]);
+          if (initialGreeting) {
+            setTimeout(function () {
+              say(initialGreeting);
+            }, 800);
+          }
         };
         cdnImg.src = CFG.fallbackSheet;
       };

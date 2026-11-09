@@ -20,6 +20,10 @@ test('Desktop companion pet configuration & assets', () => {
   assert.ok(petJs.includes('PORTFOOLIO_PET_GREETING'), 'pet.js must support custom greeting');
   assert.ok(petJs.includes('say: say'), 'pet.js must expose say function');
 
+  const petCss = fs.readFileSync(path.join(rootDir, 'frontend', 'pet.css'), 'utf8');
+  assert.ok(!petCss.includes('overflow:hidden'), 'pet.css stage must not clip speech bubble with overflow:hidden');
+  assert.ok(petCss.includes('cdx-bubble-right'), 'pet.css must support cdx-bubble-right');
+
   const indexHtml = fs.readFileSync(path.join(rootDir, 'frontend', 'index.html'), 'utf8');
   assert.ok(indexHtml.includes('pet.css'), 'index.html must load pet.css');
   assert.ok(indexHtml.includes('src="pet.js"'), 'index.html must include pet.js script tag');

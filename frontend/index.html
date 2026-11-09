@@ -3203,6 +3203,8 @@ function selectStudioPet(petId) {
   try {
     if (window.ClawdexPet && typeof window.ClawdexPet.switchPet === 'function') {
       window.ClawdexPet.switchPet(petId);
+      const curGreet = (greetInput && greetInput.value.trim()) || pet.defaultGreeting;
+      if (curGreet) window.ClawdexPet.say(curGreet);
     }
   } catch (err) {
     console.error('switchPet error:', err);
@@ -3218,12 +3220,25 @@ if ($('edSaveBtn')) $('edSaveBtn').onclick = saveStudio;
 if ($('edSaveThemeBtn')) $('edSaveThemeBtn').onclick = saveStudio;
 if ($('edSavePetBtn')) $('edSavePetBtn').onclick = saveStudio;
 if ($('edAboutSaveBtn')) $('edAboutSaveBtn').onclick = saveStudio;
+if ($('edPetGreeting')) {
+  $('edPetGreeting').addEventListener('input', (e) => {
+    const val = e.target.value.trim();
+    if (val && window.ClawdexPet) {
+      window.ClawdexPet.show();
+      window.ClawdexPet.say(val);
+    }
+  });
+}
 if ($('edShowPet')) $('edShowPet').onchange = (e) => {
   if ($('edShowPetTheme')) $('edShowPetTheme').checked = e.target.checked;
   updatePetPreviewStatus(e.target.checked);
   if (e.target.checked && window.ClawdexPet) {
     window.ClawdexPet.show();
-    const greet = ($('edPetGreeting') && $('edPetGreeting').value.trim()) || "I'm ready for your live site!";
+    const curType = ($('edPetType') && $('edPetType').value) || 'goku';
+    const reg = window.PORTFOOLIO_PETS || {};
+    const pet = reg[curType];
+    const defaultGreet = (pet && pet.defaultGreeting) || "I'm ready for your live site!";
+    const greet = ($('edPetGreeting') && $('edPetGreeting').value.trim()) || defaultGreet;
     window.ClawdexPet.say(greet);
   }
 };
@@ -3232,7 +3247,11 @@ if ($('edShowPetTheme')) $('edShowPetTheme').onchange = (e) => {
   updatePetPreviewStatus(e.target.checked);
   if (e.target.checked && window.ClawdexPet) {
     window.ClawdexPet.show();
-    const greet = ($('edPetGreeting') && $('edPetGreeting').value.trim()) || "I'm ready for your live site!";
+    const curType = ($('edPetType') && $('edPetType').value) || 'goku';
+    const reg = window.PORTFOOLIO_PETS || {};
+    const pet = reg[curType];
+    const defaultGreet = (pet && pet.defaultGreeting) || "I'm ready for your live site!";
+    const greet = ($('edPetGreeting') && $('edPetGreeting').value.trim()) || defaultGreet;
     window.ClawdexPet.say(greet);
   }
 };
