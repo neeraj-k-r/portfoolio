@@ -1019,11 +1019,11 @@
       id: 'neeraj',
       category: 'general',
       displayName: 'Neeraj',
-      subtitle: 'Creator & Dev · Zen, Shades & Coffee',
+      subtitle: 'Creator & Dev · Motorcycle, Desk & Zen',
       badge: 'CREATOR',
       badgeBg: 'linear-gradient(135deg, rgba(99, 102, 241, 0.4), rgba(236, 72, 153, 0.35))',
       badgeColor: '#a855f7',
-      sheet: '/assets/pets/neeraj/spritesheet.webp?v=3',
+      sheet: '/assets/pets/neeraj/spritesheet.webp?v=4',
       cols: 8,
       rows: 11,
       cellW: 192,
@@ -1033,11 +1033,12 @@
       defaultGreeting: "Hey there! I'm Neeraj. Welcome to my creative portfolio!",
       messages: [
         'Coffee poured, code deploying! ☕💻',
+        'Riding through bugs on two wheels! 🏍️💨',
         'Building clean web craft 24/7 🚀',
         'Keep calm and code in zen lotus pose 🧘‍♂️',
-        'Shades on, bugs out! 😎',
+        'Shades on, throttle open! 😎',
         'Welcome to my digital corner of the web!',
-        'Ship fast, stay humble, iterate daily.',
+        'Ship fast, ride smooth, iterate daily.',
         "Let's build something unforgettable together."
       ]
     }
