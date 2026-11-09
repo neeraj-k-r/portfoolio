@@ -142,7 +142,8 @@ test('Pokémon Section & Petdex Companions catalog integration', async () => {
     'ribbed-turtleneck-girl',
     'selene-2',
     'mint-girl',
-    'modi'
+    'modi',
+    'neeraj'
   ];
   for (const genId of generalPets) {
     assert.ok(PETS[genId], `General pet ${genId} must exist in PET_REGISTRY`);
