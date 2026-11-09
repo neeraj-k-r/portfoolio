@@ -154,7 +154,7 @@ test('Pokémon Section & Petdex Companions catalog integration', async () => {
 
   // Verify assets exist on disk for all pets
   for (const [id, pet] of Object.entries(PETS)) {
-    const assetRelPath = pet.sheet.replace(/^\//, '');
+    const assetRelPath = pet.sheet.replace(/^\//, '').split('?')[0];
     const fullAssetPath = path.join(rootDir, 'frontend', assetRelPath.replace(/^assets\//, 'assets/'));
     assert.ok(fs.existsSync(fullAssetPath), `Spritesheet for ${id} must exist at ${fullAssetPath}`);
     assert.ok(Array.isArray(pet.messages) && pet.messages.length > 0, `${id} must have soundbite messages`);
