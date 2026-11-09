@@ -988,6 +988,32 @@
         'Harmonious palettes and clean UI.',
         'Radiating timeless poise.'
       ]
+    },
+    modi: {
+      id: 'modi',
+      category: 'general',
+      displayName: 'NaMo (Modi)',
+      subtitle: 'Charismatic Leader · Viksit Bharat',
+      badge: 'VIKSIT BHARAT',
+      badgeBg: 'linear-gradient(135deg, rgba(249, 115, 22, 0.4), rgba(34, 197, 94, 0.35))',
+      badgeColor: '#f97316',
+      sheet: '/assets/pets/modi/spritesheet.webp',
+      cols: 8,
+      rows: 11,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: 'Namaste! Mitron, ready to build a digital and Atmanirbhar future!',
+      messages: [
+        'Namaste! 🙏',
+        'Mitron, write clean and visionary code!',
+        'Viksit Bharat — 24/7 for 2047! 🚀',
+        'Digital India scaling new heights.',
+        'Sabka Saath, Sabka Vikas, Sabka Prayas.',
+        'Work with dedication, deliver with perfection.',
+        'Yoga, focus, and debugging in harmony.'
+      ]
     }
   };
 
