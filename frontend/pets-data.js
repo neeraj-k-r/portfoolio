@@ -508,6 +508,31 @@
         'Freedom is worth fighting for!'
       ]
     },
+    colossal: {
+      id: 'colossal',
+      category: 'anime-heroes',
+      displayName: 'Colossal Titan',
+      subtitle: 'Steam Titan · Wall Breaker',
+      badge: 'COLOSSAL TITAN',
+      badgeBg: 'linear-gradient(135deg, rgba(239, 68, 68, 0.35), rgba(185, 28, 28, 0.45))',
+      badgeColor: '#ef4444',
+      sheet: '/assets/pets/colossal/spritesheet.webp',
+      cols: 8,
+      rows: 9,
+      cellW: 192,
+      cellH: 208,
+      viewW: 96,
+      viewH: 104,
+      defaultGreeting: 'Hssssss... *Scalding steam erupts!* Ready to break through limits!',
+      messages: [
+        'Hssssss! (Scalding steam blast!) 💨',
+        'Towering over every wall and roadblock.',
+        'Colossal power awakened!',
+        'Steam explosion ready on command.',
+        'Nothing can breach our defensive tests.',
+        'Rumblings of greatness approaching.'
+      ]
+    },
 
     // === ONE PIECE THEME / CREW SECTION ===
     'luffy-gear-5-chibi': {

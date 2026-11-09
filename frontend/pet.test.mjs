@@ -110,7 +110,7 @@ test('Pokémon Section & Petdex Companions catalog integration', async () => {
   }
 
   // Verify Anime Heroes Collection (https://petdex.dev/collections/anime-heroes)
-  const animeHeroes = ['luffy', 'zoro', 'naruto', 'itachi', 'gojo', 'sukuna', 'goku-blue', 'nezuko', 'kyojuro-rengoku', 'gon', 'killua', 'sabo'];
+  const animeHeroes = ['luffy', 'zoro', 'naruto', 'itachi', 'gojo', 'sukuna', 'goku-blue', 'nezuko', 'kyojuro-rengoku', 'gon', 'killua', 'sabo', 'colossal'];
   for (const hId of animeHeroes) {
     assert.ok(PETS[hId], `Anime hero ${hId} must exist in PET_REGISTRY`);
     assert.equal(PETS[hId].category, 'anime-heroes', `${hId} must be in anime-heroes category`);
