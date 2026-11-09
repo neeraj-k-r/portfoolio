@@ -70,14 +70,37 @@
   var lastDown = null;
 
   function viewport() {
-    return { width: window.innerWidth, height: window.innerHeight };
+    var vv = (typeof window !== 'undefined') ? window.visualViewport : null;
+    var w = vv ? vv.width : window.innerWidth;
+    var h = vv ? vv.height : window.innerHeight;
+    if (document.documentElement) {
+      if (document.documentElement.clientWidth) {
+        w = Math.min(w, document.documentElement.clientWidth);
+      }
+      if (document.documentElement.clientHeight) {
+        h = Math.min(h, document.documentElement.clientHeight);
+      }
+    }
+    return {
+      width: Math.max(160, Math.round(w)),
+      height: Math.max(160, Math.round(h))
+    };
   }
 
   function clampPos(p) {
     var v = viewport();
     var b = CFG.bounds;
-    var x = Math.min(Math.max(p.x, b), Math.max(b, v.width - CFG.viewW - b));
-    var y = Math.min(Math.max(p.y, b), Math.max(b, v.height - CFG.viewH - b));
+    // On mobile screens (<=640px), enforce extra bottom & right safety padding
+    // to prevent the pet from being cut off by mobile browser toolbars, bottom home indicators, or notches
+    var isMobile = v.width <= 640;
+    var rightPadding = isMobile ? Math.max(b, 20) : b;
+    var bottomPadding = isMobile ? Math.max(b, 68) : b;
+    var minX = b;
+    var maxX = Math.max(minX, v.width - CFG.viewW - rightPadding);
+    var minY = b;
+    var maxY = Math.max(minY, v.height - CFG.viewH - bottomPadding);
+    var x = Math.min(Math.max(p.x, minX), maxX);
+    var y = Math.min(Math.max(p.y, minY), maxY);
     return { x: Math.round(x), y: Math.round(y) };
   }
 
@@ -392,7 +415,15 @@
 
     // Place the pet immediately, before the sprite loads.
     var v0 = viewport();
-    applyPos(clampPos({ x: v0.width - CFG.viewW - CFG.bounds, y: v0.height - CFG.viewH - CFG.bounds }));
+    if (root) {
+      root.style.width = CFG.viewW + 'px';
+      root.style.height = CFG.viewH + 'px';
+    }
+    if (stage) {
+      stage.style.width = CFG.viewW + 'px';
+      stage.style.height = CFG.viewH + 'px';
+    }
+    applyPos(clampPos({ x: v0.width - CFG.viewW - (v0.width <= 640 ? 20 : CFG.bounds), y: v0.height - CFG.viewH - (v0.width <= 640 ? 68 : CFG.bounds) }));
 
     sprite.style.width = CFG.viewW + 'px';
     sprite.style.height = CFG.viewH + 'px';
@@ -471,9 +502,15 @@
       }
     });
 
-    window.addEventListener('resize', function () {
+    function handleViewportChange() {
       if (!dragging && !target) applyPos(clampPos(pos));
-    });
+    }
+    window.addEventListener('resize', handleViewportChange);
+    window.addEventListener('orientationchange', handleViewportChange);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleViewportChange);
+      window.visualViewport.addEventListener('scroll', handleViewportChange);
+    }
   }
 
   function prefixed() {
