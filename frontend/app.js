@@ -2605,3 +2605,14 @@ if (skillsInp) {
     }
   });
 }
+
+// Debounce search handler for high-performance fluid typing
+let searchDebounceTimer = null;
+window.debouncedFilterThemeShowcase = function() {
+  clearTimeout(searchDebounceTimer);
+  searchDebounceTimer = setTimeout(() => {
+    if (typeof window.filterThemeShowcase === 'function') {
+      window.filterThemeShowcase();
+    }
+  }, 120);
+};
