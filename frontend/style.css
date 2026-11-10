@@ -4724,3 +4724,30 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: #0c0a1f;
   color: #a78bfa;
 }
+
+/* Theme Shot Visuals: Group 10 */
+.dribbble-shot-monolith {
+  background: #000000;
+  color: #ffffff;
+}
+.dribbble-shot-monolith .shot-hero-box {
+  width: 80%;
+  height: 60%;
+  background: #111111;
+  border: 2px solid #ffffff;
+}
+.dribbble-shot-editor {
+  background: #1e1e1e;
+  color: #007acc;
+}
+.dribbble-shot-editor .shot-hero-box {
+  width: 84%;
+  height: 66%;
+  background: #252526;
+  border: 1px solid #333333;
+}
+.dribbble-shot-magazine {
+  background: #fffbeb;
+  color: #c2410c;
+  font-family: serif;
+}
