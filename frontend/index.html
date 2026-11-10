@@ -1141,6 +1141,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             </div>
           </div>
           <div class="stage-viewport-container" id="stageViewportContainer">
+            <div class="stage-viewport-frame" id="stageViewportFrame" data-device-mode="desktop">
+              <div class="stage-mobile-notch" aria-hidden="true"><span class="stage-camera"></span><span class="stage-speaker"></span></div>
+              <iframe id="themeLiveIframe" class="theme-live-iframe" title="Interactive Live Theme Preview" sandbox="allow-scripts allow-same-origin"></iframe>
+              <div class="stage-loading-overlay" id="stageLoadingOverlay"><div class="stage-spinner"></div><span>Rendering live theme…</span></div>
+            </div>
           </div>
         </div>
         <div style="margin-top:16px">
