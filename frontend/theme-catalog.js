@@ -55,6 +55,7 @@
   const DEV_THEMES = {
     midnight: {
       id: 'midnight',
+      tags: ["dark","developer","neon","cyber","particles"],
       likes: 84,
       views: '13.8k', author: TECH_AUTHORS['midnight'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Midnight Wow',
@@ -68,6 +69,7 @@
     },
     minimal: {
       id: 'minimal',
+      tags: ["light","clean","swiss","minimal","ats","typography"],
       likes: 68,
       views: '11.2k', author: TECH_AUTHORS['minimal'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Minimal Clean',
@@ -81,6 +83,7 @@
     },
     terminal: {
       id: 'terminal',
+      tags: ["hacker","retro","terminal","dark","matrix","green"],
       likes: 92,
       views: '14.5k', author: TECH_AUTHORS['terminal'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Terminal Hacker',
@@ -94,6 +97,7 @@
     },
     creative: {
       id: 'creative',
+      tags: ["colorful","gradient","playful","art","portfolio"],
       likes: 77,
       views: '9.8k', author: TECH_AUTHORS['creative'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Creative Pop',
@@ -107,6 +111,7 @@
     },
     aurora: {
       id: 'aurora',
+      tags: ["glass","pastel","glow","modern","clean"],
       likes: 118,
       views: '16.4k', author: TECH_AUTHORS['aurora'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Aurora Glass',
@@ -120,6 +125,7 @@
     },
     editorial: {
       id: 'editorial',
+      tags: ["serif","classic","print","monograph","editorial"],
       likes: 54,
       views: '8.2k', author: TECH_AUTHORS['editorial'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Editorial Serif',
@@ -133,6 +139,7 @@
     },
     brutalist: {
       id: 'brutalist',
+      tags: ["bold","heavy","neo-brutalist","high-contrast","pop"],
       likes: 89,
       views: '12.1k', author: TECH_AUTHORS['brutalist'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Neo-Brutalist',
@@ -146,6 +153,7 @@
     },
     afterglow: {
       id: 'afterglow',
+      tags: ["sunset","orange","warm","neon","dark"],
       likes: 63,
       views: '9.4k', author: TECH_AUTHORS['afterglow'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Afterglow',
@@ -159,6 +167,7 @@
     },
     ultraviolet: {
       id: 'ultraviolet',
+      tags: ["purple","violet","electric","glow","cyber"],
       likes: 95,
       views: '14.0k', author: TECH_AUTHORS['ultraviolet'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Ultraviolet',
@@ -172,6 +181,7 @@
     },
     tidepool: {
       id: 'tidepool',
+      tags: ["cyan","teal","ocean","bioluminescent","dark"],
       likes: 58,
       views: '7.9k', author: TECH_AUTHORS['tidepool'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Tidepool',
@@ -185,6 +195,7 @@
     },
     darkpro: {
       id: 'darkpro',
+      tags: ["sleek","dark","yellow","pro","modern"],
       likes: 132,
       views: '19.3k', author: TECH_AUTHORS['darkpro'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Dark Pro',
@@ -198,6 +209,7 @@
     },
     fullpage: {
       id: 'fullpage',
+      tags: ["snap","fullpage","slider","red","presentation"],
       likes: 71,
       views: '10.5k', author: TECH_AUTHORS['fullpage'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Fullpage Scroll',
@@ -211,6 +223,7 @@
     },
     moderncv: {
       id: 'moderncv',
+      tags: ["resume","cv","executive","bilingual","clean"],
       likes: 145,
       views: '22.1k', author: TECH_AUTHORS['moderncv'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Modern CV',
@@ -224,6 +237,7 @@
     },
     ultracode: {
       id: 'ultracode',
+      tags: ["ide","crimson","code","sidebar","developer"],
       likes: 83,
       views: '11.7k', author: TECH_AUTHORS['ultracode'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Ultra Code',
@@ -237,6 +251,7 @@
     },
     devblue: {
       id: 'devblue',
+      tags: ["royal-blue","corporate","clean","stripe","systems"],
       likes: 104,
       views: '15.6k', author: TECH_AUTHORS['devblue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Dev Blue',
@@ -250,6 +265,7 @@
     },
     cube: {
       id: 'cube',
+      tags: ["3d","interactive","cube","mint","threejs"],
       likes: 112,
       views: '17.8k', author: TECH_AUTHORS['cube'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: '3D Cube',
@@ -263,6 +279,7 @@
     },
     nova: {
       id: 'nova',
+      tags: ["galaxy","particles","teal","space","cosmos"],
       likes: 128,
       views: '18.9k', author: TECH_AUTHORS['nova'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Nova Galaxy',
@@ -276,6 +293,7 @@
     },
     codeflow: {
       id: 'codeflow',
+      tags: ["tabs","code-snippets","dark","architecture","systems"],
       likes: 97,
       views: '13.2k', author: TECH_AUTHORS['codeflow'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Codeflow',
@@ -289,6 +307,7 @@
     },
     wave: {
       id: 'wave',
+      tags: ["synthwave","emerald","laser","glow","3d"],
       likes: 110,
       views: '15.1k', author: TECH_AUTHORS['wave'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Neon Wave',
@@ -302,6 +321,7 @@
     },
     assistant: {
       id: 'assistant',
+      tags: ["chatgpt","ai","conversational","bot","dark"],
       likes: 165,
       views: '26.4k', author: TECH_AUTHORS['assistant'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'AI Assistant',
@@ -315,6 +335,7 @@
     },
     console: {
       id: 'console',
+      tags: ["shell","workstation","ide","amber","terminal"],
       likes: 79,
       views: '10.8k', author: TECH_AUTHORS['console'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Dev Console',
@@ -328,6 +349,7 @@
     },
     snowcard: {
       id: 'snowcard',
+      tags: ["dotted-grid","yellow","clean","white","tabs"],
       likes: 86,
       views: '11.9k', author: TECH_AUTHORS['snowcard'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Snowcard',
@@ -341,6 +363,7 @@
     },
     parchment: {
       id: 'parchment',
+      tags: ["antique","scroll","sepia","serif","vintage"],
       likes: 52,
       views: '7.4k', author: TECH_AUTHORS['parchment'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Parchment Scroll',
@@ -354,6 +377,7 @@
     },
     cloud: {
       id: 'cloud',
+      tags: ["sky-blue","friendly","rounded","light","clean"],
       likes: 94,
       views: '13.6k', author: TECH_AUTHORS['cloud'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Cloud Blue',
@@ -367,6 +391,7 @@
     },
     github: {
       id: 'github',
+      tags: ["octocat","pinned-repos","dark","developer","open-source"],
       likes: 178,
       views: '28.5k', author: TECH_AUTHORS['github'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'GitHub',
@@ -380,6 +405,7 @@
     },
     particle: {
       id: 'particle',
+      tags: ["webgl","3d-canvas","constellation","dual-hero","futuristic"],
       likes: 142,
       views: '21.0k', author: TECH_AUTHORS['particle'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Particle Mesh',
@@ -393,6 +419,7 @@
     },
     panels: {
       id: 'panels',
+      tags: ["linear","tabbed","purple","modern","product"],
       likes: 115,
       views: '16.7k', author: TECH_AUTHORS['panels'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Panels',
@@ -406,6 +433,7 @@
     },
     monolith: {
       id: 'monolith',
+      tags: ["bauhaus","heavy-borders","bold","black","monumental"],
       likes: 73,
       views: '10.2k', author: TECH_AUTHORS['monolith'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Monolith',
@@ -419,6 +447,7 @@
     },
     editor: {
       id: 'editor',
+      tags: ["vs-code","ide","file-tree","copilot","dark"],
       likes: 188,
       views: '31.2k', author: TECH_AUTHORS['editor'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Editor',
@@ -432,6 +461,7 @@
     },
     magazine: {
       id: 'magazine',
+      tags: ["fraunces","drop-cap","literary","editorial","warm"],
       likes: 88,
       views: '12.8k', author: TECH_AUTHORS['magazine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Magazine',
@@ -445,6 +475,7 @@
     },
     bold: {
       id: 'bold',
+      tags: ["lime","obsidian","high-contrast","electric","punchy"],
       likes: 99,
       views: '14.3k', author: TECH_AUTHORS['bold'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Bold',
@@ -458,6 +489,7 @@
     },
     clean: {
       id: 'clean',
+      tags: ["pill-nav","soft-shadows","cupertino","clean","light"],
       likes: 121,
       views: '18.0k', author: TECH_AUTHORS['clean'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Clean Pro',
@@ -471,6 +503,7 @@
     },
     vibrant: {
       id: 'vibrant',
+      tags: ["spectrum","rainbow","lilac","smooth","modern"],
       likes: 85,
       views: '11.5k', author: TECH_AUTHORS['vibrant'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Vibrant',
@@ -484,6 +517,7 @@
     },
     neon: {
       id: 'neon',
+      tags: ["cyberpunk","laser","3d-floor","nightcity","pink"],
       likes: 156,
       views: '24.1k', author: TECH_AUTHORS['neon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Neon Cyberpunk',
@@ -497,6 +531,7 @@
     },
     hacker: {
       id: 'hacker',
+      tags: ["crt-scanlines","phosphor","matrix","terminal","retro"],
       likes: 103,
       views: '15.8k', author: TECH_AUTHORS['hacker'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Hacker Terminal',
@@ -547,6 +582,7 @@
   const VISUAL_THEMES = {
     gallery: {
       id: 'gallery',
+      tags: ["masonry","fine-art","photography","grid","visual"],
       likes: 91,
       views: '13.4k',
       author: VISUAL_AUTHORS['gallery'], author: TECH_AUTHORS['gallery'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -561,6 +597,7 @@
     },
     studio: {
       id: 'studio',
+      tags: ["editorial","covers","daylight","magazine","art"],
       likes: 82,
       views: '11.9k',
       author: VISUAL_AUTHORS['studio'], author: TECH_AUTHORS['studio'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -575,6 +612,7 @@
     },
     noir: {
       id: 'noir',
+      tags: ["monochrome","black-and-white","cinematic","full-bleed"],
       likes: 107,
       views: '16.2k',
       author: VISUAL_AUTHORS['noir'], author: TECH_AUTHORS['noir'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -589,6 +627,7 @@
     },
     museum: {
       id: 'museum',
+      tags: ["framed","walls","classic","curatorial","serene"],
       likes: 74,
       views: '10.1k',
       author: VISUAL_AUTHORS['museum'], author: TECH_AUTHORS['museum'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -603,6 +642,7 @@
     },
     catalog: {
       id: 'catalog',
+      tags: ["plates","swiss","art-book","publication","clean"],
       likes: 66,
       views: '8.9k',
       author: VISUAL_AUTHORS['catalog'], author: TECH_AUTHORS['catalog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -617,6 +657,7 @@
     },
     bloom: {
       id: 'bloom',
+      tags: ["pastel","dreamscape","ethereal","soft-blur","blush"],
       likes: 93,
       views: '13.7k',
       author: VISUAL_AUTHORS['bloom'], author: TECH_AUTHORS['bloom'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -631,6 +672,7 @@
     },
     motion: {
       id: 'motion',
+      tags: ["framer","fluid","kinetic","gradients","animation"],
       likes: 162,
       views: '25.0k',
       author: VISUAL_AUTHORS['motion'], author: TECH_AUTHORS['motion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -645,6 +687,7 @@
     },
     atelier: {
       id: 'atelier',
+      tags: ["haute-couture","luxury","serif","fashion","editorial"],
       likes: 114,
       views: '17.3k',
       author: VISUAL_AUTHORS['atelier'], author: TECH_AUTHORS['atelier'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -659,6 +702,7 @@
     },
     cinema: {
       id: 'cinema',
+      tags: ["widescreen","a24","hud","stills","cinematic"],
       likes: 139,
       views: '22.8k',
       author: VISUAL_AUTHORS['cinema'], author: TECH_AUTHORS['cinema'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -673,6 +717,7 @@
     },
     arch: {
       id: 'arch',
+      tags: ["architectural","blueprint","plates","drafting","geometry"],
       likes: 78,
       views: '11.0k',
       author: VISUAL_AUTHORS['arch'], author: TECH_AUTHORS['arch'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -687,6 +732,7 @@
     },
     zine: {
       id: 'zine',
+      tags: ["risograph","indie","print","washi-tape","diy"],
       likes: 96,
       views: '13.9k',
       author: VISUAL_AUTHORS['zine'], author: TECH_AUTHORS['zine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -701,6 +747,7 @@
     },
     zen: {
       id: 'zen',
+      tags: ["wabi-sabi","stone","ceramic","calm","earthy"],
       likes: 87,
       views: '12.4k',
       author: VISUAL_AUTHORS['zen'], author: TECH_AUTHORS['zen'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -715,6 +762,7 @@
     },
     desire: {
       id: 'desire',
+      tags: ["digital-design","loupe","orange","interactive","agency"],
       likes: 149,
       views: '23.5k',
       author: VISUAL_AUTHORS['desire'], author: TECH_AUTHORS['desire'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -729,6 +777,7 @@
     },
     lumina: {
       id: 'lumina',
+      tags: ["prism","holographic","iridescent","glassmorphism"],
       likes: 124,
       views: '18.6k',
       author: VISUAL_AUTHORS['lumina'], author: TECH_AUTHORS['lumina'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -743,6 +792,7 @@
     },
     vogue: {
       id: 'vogue',
+      tags: ["didot","high-fashion","editorial","runway","chic"],
       likes: 118,
       views: '17.5k',
       author: VISUAL_AUTHORS['vogue'], author: TECH_AUTHORS['vogue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -757,6 +807,7 @@
     },
     filmstrip: {
       id: 'filmstrip',
+      tags: ["35mm","cinema-reel","darkroom","sprockets","analog"],
       likes: 98,
       views: '14.7k',
       author: VISUAL_AUTHORS['filmstrip'], author: TECH_AUTHORS['filmstrip'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -771,6 +822,7 @@
     },
     biennale: {
       id: 'biennale',
+      tags: ["venice","exhibition","contemporary","art","international"],
       likes: 89,
       views: '12.9k',
       author: VISUAL_AUTHORS['biennale'], author: TECH_AUTHORS['biennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -785,6 +837,7 @@
     },
     sketchbook: {
       id: 'sketchbook',
+      tags: ["graphite","charcoal","moleskine","texture","hand-drawn"],
       likes: 83,
       views: '11.8k',
       author: VISUAL_AUTHORS['sketchbook'], author: TECH_AUTHORS['sketchbook'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -799,6 +852,7 @@
     },
     pavilion: {
       id: 'pavilion',
+      tags: ["serpentine","spatial","geometry","architecture","ambient"],
       likes: 79,
       views: '10.9k',
       author: VISUAL_AUTHORS['pavilion'], author: TECH_AUTHORS['pavilion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -813,6 +867,7 @@
     },
     documenta: {
       id: 'documenta',
+      tags: ["archive","curatorial","research","notes","scholarly"],
       likes: 72,
       views: '9.7k',
       author: VISUAL_AUTHORS['documenta'], author: TECH_AUTHORS['documenta'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -827,6 +882,7 @@
     },
     triennale: {
       id: 'triennale',
+      tags: ["milan","industrial-design","exposition","geometric"],
       likes: 81,
       views: '11.4k',
       author: VISUAL_AUTHORS['triennale'], author: TECH_AUTHORS['triennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -841,6 +897,7 @@
     },
     salon: {
       id: 'salon',
+      tags: ["gilded","gold-leaf","emerald","palatial","ornate"],
       likes: 95,
       views: '13.8k',
       author: VISUAL_AUTHORS['salon'], author: TECH_AUTHORS['salon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -855,6 +912,7 @@
     },
     illustra: {
       id: 'illustra',
+      tags: ["mixed-media","collage","vibrant","vector","illustration"],
       likes: 90,
       views: '12.7k',
       author: VISUAL_AUTHORS['illustra'], author: TECH_AUTHORS['illustra'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -869,6 +927,7 @@
     },
     techno: {
       id: 'techno',
+      tags: ["berlin","generative","soundwaves","creative-tech","club"],
       likes: 134,
       views: '20.3k',
       author: VISUAL_AUTHORS['techno'], author: TECH_AUTHORS['techno'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -883,6 +942,7 @@
     },
     analog: {
       id: 'analog',
+      tags: ["desk-collage","vintage","dark-wood","artifacts","warm"],
       likes: 105,
       views: '15.9k',
       author: VISUAL_AUTHORS['analog'], author: TECH_AUTHORS['analog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -897,6 +957,7 @@
     },
     mythos: {
       id: 'mythos',
+      tags: ["classical-sculpture","celestial","violet","statue","cosmic"],
       likes: 112,
       views: '16.8k',
       author: VISUAL_AUTHORS['mythos'], author: TECH_AUTHORS['mythos'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -911,6 +972,7 @@
     },
     suki: {
       id: 'suki',
+      tags: ["video-director","tokyo","neon-hud","timeline","motion"],
       likes: 151,
       views: '23.9k',
       author: VISUAL_AUTHORS['suki'], author: TECH_AUTHORS['suki'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -925,6 +987,7 @@
     },
     lo: {
       id: 'lo',
+      tags: ["multidisciplinary","maker","seamless-tiles","narrative","craft"],
       likes: 147,
       views: '22.4k',
       author: VISUAL_AUTHORS['lo'], author: TECH_AUTHORS['lo'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
@@ -939,6 +1002,7 @@
     },
     mara: {
       id: 'mara',
+      tags: ["art-director","wipe-motion","high-contrast","portrait","bold"],
       likes: 173,
       views: '27.6k',
       author: VISUAL_AUTHORS['mara'], author: TECH_AUTHORS['mara'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
