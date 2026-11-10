@@ -1019,8 +1019,92 @@
 
   const CATALOG = { ...DEV_THEMES, ...VISUAL_THEMES };
 
+  
+  function getTheme(id) {
+    if (!id) return CATALOG.midnight;
+    const cleanId = String(id).toLowerCase().trim();
+    return CATALOG[cleanId] || CATALOG.midnight;
+  }
+
+  function getAllThemes() {
+    return Object.values(CATALOG);
+  }
+
+  function getThemesByTrack(track) {
+    if (!track || track === 'all') return getAllThemes();
+    return getAllThemes().filter(t => t.track === track);
+  }
+
+  function searchThemes(query, filter) {
+    let list = getAllThemes();
+    if (filter && filter !== 'all') {
+      if (filter === 'tech' || filter === 'visual') {
+        list = list.filter(t => t.track === filter);
+      } else if (filter === 'dark') {
+        list = list.filter(t => t.dark === true);
+      } else if (filter === 'minimal') {
+        list = list.filter(t => (t.tags && (t.tags.includes('minimal') || t.tags.includes('clean'))));
+      }
+    }
+    if (!query) return list;
+    const q = query.toLowerCase().trim();
+    return list.filter(t => {
+      return (
+        t.id.toLowerCase().includes(q) ||
+        t.title.toLowerCase().includes(q) ||
+        t.subtitle.toLowerCase().includes(q) ||
+        (t.author && t.author.name.toLowerCase().includes(q)) ||
+        (t.tags && t.tags.some(tag => tag.toLowerCase().includes(q)))
+      );
+    });
+  }
+
+  function getLikesCount(themeId) {
+    const meta = getTheme(themeId);
+    let base = meta.likes || 42;
+    try {
+      const stored = JSON.parse(localStorage.getItem('portfoolio_theme_likes') || '{}');
+      if (stored[themeId]) base += 1;
+    } catch {}
+    return base;
+  }
+
+  function toggleLikeTheme(themeId) {
+    let liked = false;
+    try {
+      const key = 'portfoolio_theme_likes';
+      const stored = JSON.parse(localStorage.getItem(key) || '{}');
+      if (stored[themeId]) {
+        delete stored[themeId];
+        liked = false;
+      } else {
+        stored[themeId] = true;
+        liked = true;
+      }
+      localStorage.setItem(key, JSON.stringify(stored));
+    } catch {}
+    return liked;
+  }
+
+  function isThemeLiked(themeId) {
+    try {
+      const stored = JSON.parse(localStorage.getItem('portfoolio_theme_likes') || '{}');
+      return !!stored[themeId];
+    } catch {
+      return false;
+    }
+  }
+
   return {
     CATALOG,
+    getTheme,
+    getAllThemes,
+    getThemesByTrack,
+    searchThemes,
+    getLikesCount,
+    toggleLikeTheme,
+    isThemeLiked,
     version: '1.0.0'
   };
+
 });
