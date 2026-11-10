@@ -41,11 +41,10 @@ describe('Theme Showcase Dribbble Grid Tests', () => {
     assert(css.includes('.dribbble-theme-card .tpl-meta'), 'style.css must hide .tpl-meta in .dribbble-theme-card');
   });
 
-  it('cards render live theme iframe previews with dynamic scaling and midnight support', () => {
+  it('cards render authentic theme visual previews with midnight support', () => {
     const html = fs.readFileSync('frontend/index.html', 'utf8');
     const tpl = fs.readFileSync('frontend/templates.js', 'utf8');
-    assert(html.includes('dribbble-shot-live-iframe'), 'index.html must include .dribbble-shot-live-iframe');
-    assert(html.includes('dribbble-shot-scale-frame'), 'index.html must include .dribbble-shot-scale-frame');
+    assert(html.includes('dribbble-shot-canvas'), 'index.html must include .dribbble-shot-canvas');
     assert(tpl.includes('midnight: renderMidnight'), 'templates.js must export midnight in PortfoolioTemplates');
   });
 

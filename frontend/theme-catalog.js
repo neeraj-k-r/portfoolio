@@ -1122,6 +1122,336 @@
             <button type="button" class="shot-brutal-btn">HIRE NOW →</button>
           </div>`;
 
+      case 'moderncv':
+        return `
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">cv.portfoolio.me</span></div>
+          <div class="shot-body shot-moderncv-body">
+            <div class="shot-moderncv-split">
+              <div class="shot-moderncv-col left">
+                <div class="shot-avatar-circle" style="background:#4f46e5;color:#fff">JC</div>
+                <div class="shot-moderncv-name">Julian Croft</div>
+                <div class="shot-moderncv-role">Principal Architect</div>
+                <div class="shot-pill-mini">EN / FR Bilingual</div>
+              </div>
+              <div class="shot-moderncv-col right">
+                <div class="shot-timeline-item">
+                  <span class="timeline-dot"></span>
+                  <div class="timeline-title">Staff Eng @ Stripe</div>
+                  <div class="timeline-sub">2022 — Pres • Core Ledger</div>
+                </div>
+                <div class="shot-timeline-item">
+                  <span class="timeline-dot"></span>
+                  <div class="timeline-title">Senior Dev @ Google</div>
+                  <div class="timeline-sub">2019 — 2022 • Cloud Fleet</div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+
+      case 'ultracode':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot sc-red"></span><span class="sc-dot sc-yellow"></span><span class="sc-dot sc-green"></span><span class="sc-url">VS Code — Portfoolio</span></div>
+          <div class="shot-body shot-ultracode-body">
+            <div class="shot-ide-tabs">
+              <span class="ide-tab active">cluster.go ✕</span>
+              <span class="ide-tab">schema.graphql</span>
+            </div>
+            <div class="shot-ide-editor">
+              <div class="ide-code-line"><span class="ide-kw">func</span> <span class="ide-fn">StartCluster</span>(nodes <span class="ide-type">int</span>) <span class="ide-type">error</span> {</div>
+              <div class="ide-code-line indent"><span class="ide-var">mesh</span> := <span class="ide-pkg">wire</span>.<span class="ide-fn">NewMesh</span>()</div>
+              <div class="ide-code-line indent"><span class="ide-kw">return</span> <span class="ide-var">mesh</span>.<span class="ide-fn">Deploy</span>(nodes)</div>
+              <div class="ide-code-line">}</div>
+            </div>
+            <div class="shot-ide-status">
+              <span>⚡ Ready • Git: main*</span>
+              <span class="ide-status-lang">Go 1.22</span>
+            </div>
+          </div>`;
+
+      case 'devblue':
+        return `
+          <div class="shot-chrome blue"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">stripe-press.portfoolio.me</span></div>
+          <div class="shot-body shot-devblue-body">
+            <div class="shot-badge-royal">ENGINEERING LEAD</div>
+            <div class="shot-heading-white">David Miller</div>
+            <div class="shot-devblue-metrics">
+              <div class="metric-chip"><span class="metric-val">12M+</span> QPS</div>
+              <div class="metric-chip"><span class="metric-val">99.999%</span> SLA</div>
+            </div>
+            <div class="shot-devblue-cards">
+              <div class="devblue-card"><span>Global Ledger Mesh</span> →</div>
+            </div>
+          </div>`;
+
+      case 'cube':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">cube3d.portfoolio.me</span></div>
+          <div class="shot-body shot-cube-body">
+            <div class="shot-cube-visual">
+              <div class="cube-wireframe"></div>
+            </div>
+            <div class="shot-cube-info">
+              <span class="cube-tag">3D PERSPECTIVE SLIDER</span>
+              <div class="shot-heading-mint">Muzammal Creative</div>
+              <div class="cube-controls">◄ 01 / 03 ►</div>
+            </div>
+          </div>`;
+
+      case 'nova':
+        return `
+          <div class="shot-chrome space"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">cosmos.portfoolio.me</span></div>
+          <div class="shot-body shot-nova-body">
+            <div class="shot-nova-orb"></div>
+            <div class="shot-badge-cyan">ORBIT ARCHITECTURE</div>
+            <div class="shot-heading-white">Nova Galaxy</div>
+            <div class="shot-sub-gray">Deep Cosmic Navy Particle Mesh</div>
+            <div class="shot-nova-cards">
+              <span class="nova-chip">🪐 Nebula DB</span>
+              <span class="nova-chip">✨ Starlight CDN</span>
+            </div>
+          </div>`;
+
+      case 'codeflow':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">pipeline.portfoolio.me</span></div>
+          <div class="shot-body shot-codeflow-body">
+            <div class="shot-flow-tabs">
+              <span class="flow-tab active">Architecture.rs</span>
+              <span class="flow-tab">Telemetry.ts</span>
+            </div>
+            <div class="shot-flow-diagram">
+              <span class="flow-node">Ingest</span>
+              <span class="flow-arrow">➔</span>
+              <span class="flow-node">Kafka</span>
+              <span class="flow-arrow">➔</span>
+              <span class="flow-node">Spark</span>
+            </div>
+            <div class="shot-pills">
+              <span class="shot-pill">Rust</span><span class="shot-pill">Distributed</span>
+            </div>
+          </div>`;
+
+      case 'wave':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">waveform.portfoolio.me</span></div>
+          <div class="shot-body shot-wave-body">
+            <div class="shot-wave-svg">
+              <svg viewBox="0 0 100 25" class="wave-lines"><path d="M0 12 Q25 0 50 12 T100 12" fill="none" stroke="#6366f1" stroke-width="2.5"/></svg>
+            </div>
+            <div class="shot-heading-white">Waveform Labs</div>
+            <div class="shot-sub-gray">Audio DSP & Neural Synthesizers</div>
+            <div class="shot-wave-meters">
+              <span class="meter-bar active">-12dB</span><span class="meter-bar active">-6dB</span><span class="meter-bar">0dB</span>
+            </div>
+          </div>`;
+
+      case 'assistant':
+        return `
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">alex.ai.portfoolio.me</span></div>
+          <div class="shot-body shot-assistant-body">
+            <div class="shot-ai-chat-bubble">
+              <span class="ai-sparkle">✦</span> Ask me about Alex's systems experience...
+            </div>
+            <div class="shot-ai-prompt-pills">
+              <span class="ai-prompt">View Projects</span>
+              <span class="ai-prompt">Cloud Fleet</span>
+            </div>
+          </div>`;
+
+      case 'console':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot sc-green"></span><span class="sc-url">ARCADE-88 // OS</span></div>
+          <div class="shot-body shot-console-body">
+            <div class="console-hud">SCORE: 99420 • LIVES: ❤❤❤</div>
+            <div class="console-title">[STAGE 1: FULLSTACK]</div>
+            <div class="console-bar"><div class="console-progress"></div></div>
+            <div class="console-status">READY PLAYER ONE</div>
+          </div>`;
+
+      case 'snowcard':
+        return `
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">nordic.portfoolio.me</span></div>
+          <div class="shot-body shot-snowcard-body">
+            <div class="shot-snow-card">
+              <div class="shot-badge-mono">PRODUCT DESIGN</div>
+              <div class="shot-heading-black">Freja Lindqvist</div>
+              <div class="shot-sub-gray">Subtle Frosted Nordic Glass</div>
+              <div class="shot-pills">
+                <span class="shot-pill dark">Figma</span><span class="shot-pill dark">Systems</span>
+              </div>
+            </div>
+          </div>`;
+
+      case 'parchment':
+        return `
+          <div class="shot-chrome antique"><span class="sc-dot"></span><span class="sc-url">chronicle.portfoolio.me</span></div>
+          <div class="shot-body shot-parchment-body">
+            <div class="parchment-seal">✦</div>
+            <div class="shot-heading-serif">The Chronicle of Works</div>
+            <div class="serif-author">Master Craftsman • Est. MMXXVI</div>
+            <div class="parchment-line"></div>
+          </div>`;
+
+      case 'cloud':
+        return `
+          <div class="shot-chrome cloud"><span class="sc-dot"></span><span class="sc-url">cloud.portfoolio.me</span></div>
+          <div class="shot-body shot-cloud-body">
+            <div class="shot-cloud-pill">☁ 99.99% RESILIENT</div>
+            <div class="shot-heading-white">Cloud Architecture</div>
+            <div class="shot-pills">
+              <span class="shot-pill">AWS</span><span class="shot-pill">Kubernetes</span><span class="shot-pill">Terraform</span>
+            </div>
+          </div>`;
+
+      case 'github':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-url">github.com/alexvance</span></div>
+          <div class="shot-body shot-github-body">
+            <div class="gh-header">
+              <div class="gh-avatar">AV</div>
+              <div>
+                <div class="gh-name">Alex Vance</div>
+                <div class="gh-bio">Staff Systems Engineer • OSS Author</div>
+              </div>
+            </div>
+            <div class="gh-card">
+              <div class="gh-repo">★ 1.4k • hypermesh-db</div>
+              <div class="gh-desc">High performance graph telemetry in Rust</div>
+            </div>
+          </div>`;
+
+      case 'particle':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-url">particles.portfoolio.me</span></div>
+          <div class="shot-body shot-particle-body">
+            <div class="particle-mesh">
+              <span class="p-dot" style="top:20%;left:25%"></span>
+              <span class="p-dot" style="top:40%;left:70%"></span>
+              <span class="p-dot" style="top:70%;left:45%"></span>
+            </div>
+            <div class="shot-badge-cyan">INTERACTIVE PARTICLES</div>
+            <div class="shot-heading-white">Neural Mesh</div>
+            <div class="shot-sub-gray">Physics Simulation & Shaders</div>
+          </div>`;
+
+      case 'panels':
+        return `
+          <div class="shot-chrome"><span class="sc-dot"></span><span class="sc-url">panels.portfoolio.me</span></div>
+          <div class="shot-body shot-panels-body">
+            <div class="panels-grid">
+              <div class="panel-slice p1"><span>Engineering</span></div>
+              <div class="panel-slice p2"><span>Architecture</span></div>
+              <div class="panel-slice p3"><span>Cloud</span></div>
+            </div>
+          </div>`;
+
+      case 'monolith':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-url">MONOLITH.SYSTEM</span></div>
+          <div class="shot-body shot-monolith-body">
+            <div class="monolith-block">
+              <div class="shot-heading-brutal">MONOLITH</div>
+              <div class="monolith-sub">CONCRETE MATTE • SYSTEM 01</div>
+            </div>
+          </div>`;
+
+      case 'editor':
+        return `
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-url">workspace.portfoolio.me</span></div>
+          <div class="shot-body shot-editor-body">
+            <div class="vs-sidebar">
+              <div class="vs-code"><span class="shot-token-kw">interface</span> Portfolio {</div>
+              <div class="vs-code indent">name: <span class="shot-token-cls">"Alex Vance"</span>;</div>
+              <div class="vs-code indent">role: <span class="shot-token-cls">"Systems Architect"</span>;</div>
+              <div class="vs-code">}</div>
+            </div>
+          </div>`;
+
+      case 'magazine':
+        return `
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-url">magazine.portfoolio.me</span></div>
+          <div class="shot-body shot-magazine-body">
+            <div class="magazine-issue">ISSUE 42 • MILAN & NY</div>
+            <div class="shot-heading-serif">VOGUE MODERN</div>
+            <div class="magazine-author">Editorial Art Direction</div>
+          </div>`;
+
+      case 'bold':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-url">bold.portfoolio.me</span></div>
+          <div class="shot-body shot-bold-body">
+            <div class="shot-heading-lime">BOLD & DIRECT.</div>
+            <div class="shot-sub-white">High impact engineering. Zero fluff.</div>
+            <button type="button" class="bold-cta-btn">EXPLORE WORK →</button>
+          </div>`;
+
+      case 'clean':
+        return `
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-url">clean.portfoolio.me</span></div>
+          <div class="shot-body shot-clean-body">
+            <div class="clean-rule"></div>
+            <div class="shot-heading-black">ATS Clean Resume</div>
+            <div class="shot-sub-gray">Maximum Recruiter & Reader Readability</div>
+            <div class="shot-pills">
+              <span class="shot-pill dark">Clean</span><span class="shot-pill dark">Fast</span>
+            </div>
+          </div>`;
+
+      case 'vibrant':
+        return `
+          <div class="shot-chrome pop"><span class="sc-dot"></span><span class="sc-url">vibrant.portfoolio.me</span></div>
+          <div class="shot-body shot-vibrant-body">
+            <div class="shot-badge-pink">HYPER VIBRANT</div>
+            <div class="shot-heading-white">Color Alchemy</div>
+            <div class="shot-cards-row">
+              <div class="shot-mini-card pink">★ 100% Vibrant</div>
+              <div class="shot-mini-card purple">✦ Dynamic</div>
+            </div>
+          </div>`;
+
+      case 'neon':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot sc-red"></span><span class="sc-url">neon.portfoolio.me</span></div>
+          <div class="shot-body shot-neon-body">
+            <div class="neon-glow-sign">NEON NIGHTS</div>
+            <div class="neon-sub">Cyberpunk Tokyo Glow • 2026</div>
+            <div class="shot-pills">
+              <span class="neon-pill">CYBER</span><span class="neon-pill">GLOW</span>
+            </div>
+          </div>`;
+
+      case 'hacker':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot sc-green"></span><span class="sc-url">matrix.portfoolio.me</span></div>
+          <div class="shot-body shot-hacker-body">
+            <div class="matrix-rain">01011001 01101010 11001010</div>
+            <div class="hacker-box">
+              <span class="term-green">[ACCESS GRANTED: ROOT]</span><br>
+              <span class="term-white">Elliot Alderson // Kernel Hacker</span>
+            </div>
+          </div>`;
+
+      case 'gallery':
+        return `
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-url">gallery.portfoolio.me</span></div>
+          <div class="shot-body shot-gallery-body">
+            <div class="gallery-tag">EXHIBITION 2026</div>
+            <div class="shot-heading-black">Form & Dimension</div>
+            <div class="gallery-frames">
+              <span class="art-frame f1"></span>
+              <span class="art-frame f2"></span>
+            </div>
+          </div>`;
+
+      case 'studio':
+        return `
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-url">studio.portfoolio.me</span></div>
+          <div class="shot-body shot-studio-body">
+            <div class="shot-badge-mono">DESIGN STUDIO</div>
+            <div class="shot-heading-black">Atelier Form</div>
+            <div class="studio-roster">Nike • Apple • Stripe • Vercel</div>
+          </div>`;
+
       case 'cinema':
         return `
           <div class="shot-chrome cinema"><span class="sc-dot sc-red"></span><span class="cinema-rec">● REC</span><span class="sc-url">01:24:19:04</span></div>
@@ -1132,96 +1462,47 @@
             </div>
             <div class="shot-cinema-title">AUSTIN REED</div>
             <div class="shot-cinema-sub">DIRECTOR OF PHOTOGRAPHY</div>
-            <div class="shot-cinema-crosshair">+</div>
           </div>`;
 
-      case 'github':
+      case 'lo':
         return `
-          <div class="shot-chrome gh"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">github.com/developer</span></div>
-          <div class="shot-body shot-github-body">
-            <div class="shot-gh-header">
-              <div class="shot-gh-avatar">🐙</div>
-              <div>
-                <div class="shot-gh-name">octo-dev</div>
-                <div class="shot-gh-bio">Staff Systems Engineer</div>
-              </div>
-            </div>
-            <div class="shot-gh-card">
-              <div class="shot-gh-repo">⭐ portfoolio/kernel</div>
-              <div class="shot-gh-desc">Distributed reactive canvas engine</div>
-            </div>
-          </div>`;
-
-      case 'editor':
-        return `
-          <div class="shot-chrome vs"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">portfolio.tsx — VS Code</span></div>
-          <div class="shot-body shot-editor-body">
-            <div class="shot-vs-sidebar">
-              <div class="vs-item active">📄 index.tsx</div>
-              <div class="vs-item">📁 components</div>
-            </div>
-            <div class="shot-vs-code">
-              <div class="vs-line"><span class="vs-kw">export default function</span> <span class="vs-fn">Portfolio</span>() {</div>
-              <div class="vs-line indent"><span class="vs-copilot">⚡ Copilot: Crafting perfection...</span></div>
-              <div class="vs-line">}</div>
-            </div>
-          </div>`;
-
-      case 'desire':
-        return `
-          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">aurelis.portfoolio.me</span></div>
-          <div class="shot-body shot-desire-body">
-            <div class="shot-badge-orange">AURELIS STUDIO</div>
-            <div class="shot-heading-desire">High-Impact Digital Design</div>
-            <div class="shot-desire-loupe"><i class="fa-solid fa-magnifying-glass"></i> Interactive Loupe</div>
-            <div class="shot-desire-preview-strip">
-              <div class="desire-box d1"></div><div class="desire-box d2"></div>
+          <div class="shot-chrome paper"><span class="sc-dot"></span><span class="sc-url">lo-studio.portfoolio.me</span></div>
+          <div class="shot-body shot-lo-body">
+            <div class="lo-brand-tag">LO STUDIO • ESSENTIALS</div>
+            <div class="shot-heading-black">Art & Artifacts</div>
+            <div class="lo-grid-mock">
+              <span class="lo-cell c1"></span><span class="lo-cell c2"></span><span class="lo-cell c3"></span>
             </div>
           </div>`;
 
       case 'mara':
         return `
-          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">mara.portfoolio.me</span></div>
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-url">mara-voss.portfoolio.me</span></div>
           <div class="shot-body shot-mara-body">
-            <div class="shot-mara-portrait-frame">
-              <div class="shot-mara-tag">ART DIRECTION</div>
-              <div class="shot-heading-mara">MARA VOSS</div>
-              <div class="shot-sub-mara">Digital Design & Typography</div>
-              <div class="shot-mara-wipe">WIPE MOTION ACTIVE →</div>
-            </div>
+            <div class="mara-tag">01 / DESIGN AS INTENT</div>
+            <div class="shot-heading-white">MARA VOSS</div>
+            <div class="shot-sub-gray">Independent Art Director & Digital Designer</div>
+            <div class="mara-manifesto">Form follows precision. Pure monochrome.</div>
           </div>`;
 
-      case 'analog':
+      case 'desire':
         return `
-          <div class="shot-chrome wood"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">desk.portfoolio.me</span></div>
-          <div class="shot-body shot-analog-body">
-            <div class="shot-polaroid-mock">
-              <div class="polaroid-photo">🎞️</div>
-              <div class="polaroid-caption">VINTAGE DESK</div>
-            </div>
-            <div class="shot-tape-strip"></div>
-          </div>`;
-
-      case 'techno':
-        return `
-          <div class="shot-chrome techno"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">berlin.portfoolio.me</span></div>
-          <div class="shot-body shot-techno-body">
-            <div class="shot-badge-neon">GENERATIVE AUDIO & TECH</div>
-            <div class="shot-heading-techno">SYNTH.LAB</div>
-            <div class="shot-soundwaves">
-              <span></span><span></span><span></span><span></span><span></span><span></span>
-            </div>
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-url">desire.portfoolio.me</span></div>
+          <div class="shot-body shot-desire-body">
+            <span class="shot-badge-orange">EDITORIAL LUXURY</span>
+            <div class="shot-heading-white">Mikael K.</div>
+            <div class="shot-sub-gray">Art Direction & Brand Craft</div>
           </div>`;
 
       default:
         return `
           <div class="shot-chrome"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">${id}.portfoolio.me</span></div>
           <div class="shot-body shot-default-body" style="background:${meta && meta.gradient ? meta.gradient : '#0f172a'}">
-            <div class="shot-default-icon">${meta && meta.icon ? meta.icon : '✨'}</div>
+            <div class="shot-badge-mono">${(meta && meta.track === 'visual') ? 'VISUAL ARTS' : 'DEVELOPER'}</div>
             <div class="shot-heading-white">${title}</div>
             <div class="shot-sub-gray">${meta && meta.subtitle ? meta.subtitle : 'Handcrafted Portfolio Theme'}</div>
             <div class="shot-pills">
-              <span class="shot-pill">${(meta && meta.track) || 'PRO'}</span>
+              <span class="shot-pill">${(meta && meta.badge) || 'PRO'}</span>
               <span class="shot-pill">Handcrafted</span>
             </div>
           </div>`;
