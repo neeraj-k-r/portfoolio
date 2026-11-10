@@ -4567,3 +4567,40 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
   font-family: serif;
 }
+
+/* Theme Shot Visuals: Group 3 */
+.dribbble-shot-brutalist {
+  background: #fde047;
+  color: #000000;
+}
+.dribbble-shot-brutalist .shot-hero-box {
+  width: 80%;
+  height: 60%;
+  background: #ffffff;
+  border: 3px solid #000000;
+  box-shadow: 5px 5px 0px #000000;
+}
+
+.dribbble-shot-afterglow {
+  background: linear-gradient(135deg, #180808 0%, #451a03 100%);
+  color: #fb923c;
+}
+.dribbble-shot-afterglow .shot-hero-box {
+  width: 82%;
+  height: 64%;
+  background: rgba(30, 10, 5, 0.85);
+  border: 1px solid rgba(251, 146, 60, 0.4);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+}
+
+.dribbble-shot-ultraviolet {
+  background: linear-gradient(135deg, #130324 0%, #3b0764 100%);
+  color: #c084fc;
+}
+.dribbble-shot-ultraviolet .shot-hero-box {
+  width: 82%;
+  height: 64%;
+  background: rgba(25, 5, 45, 0.85);
+  border: 1px solid rgba(192, 132, 252, 0.4);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
+}
