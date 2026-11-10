@@ -2269,3 +2269,65 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 });
+
+// ============================================================================
+// LIVE THEME SHOWCASE STAGE COMPILER & ENGINE
+// ============================================================================
+window.buildThemeLiveHtml = function(theme, profile) {
+  const t = (theme || 'midnight').toLowerCase();
+  const p = profile || (window.activeUserProfile || (window.modalPresets && window.modalPresets[t]) || {
+    name: 'Your Name',
+    title: 'Full-Stack Developer & Creator',
+    bio: 'Crafting digital products, open-source systems, and interactive experiences.',
+    skills: 'React, Node.js, TypeScript, Python, UI/UX',
+    projects: [
+      { title: 'Project Aurora', desc: 'Real-time analytics engine and visual dashboard', tags: 'React, Node.js', link: '#' },
+      { title: 'HyperGraph', desc: 'High-performance distributed graph database', tags: 'Rust, TypeScript', link: '#' }
+    ]
+  });
+
+  const origin = window.location.origin;
+  const basePath = (window.location.pathname.endsWith('/') || window.location.pathname === '')
+    ? window.location.pathname
+    : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+  const baseUrl = origin + basePath;
+
+  const pfThemeClass = t === 'bold' ? ' pf-theme-bold' : t === 'clean' ? ' pf-theme-clean' : t === 'vibrant' ? ' pf-theme-vibrant' : (t === 'magazine' || t === 'editorial') ? ' pf-theme-editorial' : '';
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="${baseUrl}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Archivo+Black&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css?v=20261110b">
+  <link rel="stylesheet" href="ui.css?v=20261110b">
+  <link rel="stylesheet" href="templates.css?v=20261110b">
+  <style>
+    html, body { min-height: 100%; margin: 0; padding: 0; }
+    nav .logo, header .pf-brand { pointer-events: none; }
+  </style>
+</head>
+<body class="portfolio-view${pfThemeClass}" data-template="${t}">
+  <div id="app"></div>
+  <script src="templates.js?v=20261110b"><\/script>
+  <script>
+    (function() {
+      const p = ${JSON.stringify(p)};
+      function render() {
+        if (window.PortfoolioTemplates && typeof window.PortfoolioTemplates['${t}'] === 'function') {
+          window.PortfoolioTemplates['${t}'](p);
+        } else {
+          setTimeout(render, 30);
+        }
+      }
+      render();
+    })();
+  <\/script>
+</body>
+</html>`;
+};
