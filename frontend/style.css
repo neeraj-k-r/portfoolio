@@ -4819,3 +4819,21 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: #0f172a;
   color: #0284c7;
 }
+
+/* Theme Shot Visuals: Group 15 */
+.dribbble-shot-zine {
+  background: #fff1f2;
+  color: #f43f5e;
+}
+.dribbble-shot-zen {
+  background: #f5f5f4;
+  color: #78716c;
+}
+.dribbble-shot-desire {
+  background: #0d0d0f;
+  color: #ff4d00;
+}
+.dribbble-shot-lumina {
+  background: linear-gradient(135deg, #0f0b1e 0%, #2e1065 100%);
+  color: #c084fc;
+}
