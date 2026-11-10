@@ -4399,3 +4399,31 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   font-size: 11px;
   opacity: 0.8;
 }
+
+.dribbble-theme-card.selected,
+.dribbble-theme-card.active-theme {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.55), 0 12px 30px rgba(124, 58, 237, 0.32);
+}
+
+.dribbble-active-checkmark {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #8b5cf6;
+  color: #ffffff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.dribbble-theme-card.selected .dribbble-active-checkmark,
+.dribbble-theme-card.active-theme .dribbble-active-checkmark {
+  display: flex;
+}
