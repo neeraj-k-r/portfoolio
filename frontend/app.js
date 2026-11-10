@@ -2553,3 +2553,25 @@ window.initThemeFilterPills = function() {
     };
   }
 };
+
+window.sortThemeShowcase = function(sortBy) {
+  const grid = document.getElementById('edTplGrid');
+  if (!grid) return;
+  const cards = Array.from(grid.children);
+
+  cards.sort((a, b) => {
+    const valA = a.querySelector('input[name="edtpl"]')?.value || '';
+    const valB = b.querySelector('input[name="edtpl"]')?.value || '';
+    const metaA = (window.PortfoolioThemeCatalog && window.PortfoolioThemeCatalog.getTheme(valA)) || {};
+    const metaB = (window.PortfoolioThemeCatalog && window.PortfoolioThemeCatalog.getTheme(valB)) || {};
+
+    if (sortBy === 'likes') {
+      return (metaB.likes || 0) - (metaA.likes || 0);
+    } else if (sortBy === 'name') {
+      return (metaA.title || valA).localeCompare(metaB.title || valB);
+    }
+    return 0;
+  });
+
+  cards.forEach(c => grid.appendChild(c));
+};
