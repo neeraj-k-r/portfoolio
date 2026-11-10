@@ -4355,3 +4355,33 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   color: #4ade80;
   border: 1px solid rgba(34, 197, 94, 0.4);
 }
+
+.theme-card-like-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #94a3b8;
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+}
+
+.theme-card-like-btn:hover {
+  color: #f43f5e;
+  background: rgba(244, 63, 94, 0.12);
+  transform: scale(1.08);
+}
+
+.theme-card-like-btn.liked {
+  color: #f43f5e;
+}
+
+.theme-card-like-btn.liked i {
+  color: #f43f5e;
+  animation: heartPop 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
