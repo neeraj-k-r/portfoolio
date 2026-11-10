@@ -441,9 +441,43 @@
   };
 
   
+  
+  const VISUAL_AUTHORS = {
+    gallery: { name: 'MoMA Digital', handle: '@moma_digital', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=120&q=80', initials: 'MD' },
+    studio: { name: 'Aperture & Co', handle: '@aperture', avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80', initials: 'AC' },
+    noir: { name: 'Cinema Vérité', handle: '@noir_film', avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=120&q=80', initials: 'CV' },
+    museum: { name: 'Louvre Curatorial', handle: '@museum_arch', avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=120&q=80', initials: 'LC' },
+    catalog: { name: 'Swiss Art Book', handle: '@catalog_press', avatar: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=120&q=80', initials: 'SA' },
+    bloom: { name: 'Flora Pastels', handle: '@bloom_dream', avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=120&q=80', initials: 'FP' },
+    motion: { name: 'Framer MCP', handle: '@framer_mcp', avatar: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&w=120&q=80', initials: 'FM' },
+    atelier: { name: 'Haute Couture Studio', handle: '@atelier_paris', avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=120&q=80', initials: 'HC' },
+    cinema: { name: 'A24 Aesthetics', handle: '@cinema_239', avatar: 'https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=120&q=80', initials: 'A2' },
+    arch: { name: 'Foster & Partners', handle: '@arch_draft', avatar: 'https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?auto=format&fit=crop&w=120&q=80', initials: 'FP' },
+    zine: { name: 'Risograph Press', handle: '@risozine', avatar: 'https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=120&q=80', initials: 'RP' },
+    zen: { name: 'Kyoto Ceramics', handle: '@wabisabi_zen', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&q=80', initials: 'KC' },
+    desire: { name: 'Aurélis Design', handle: '@aurelis_craft', avatar: 'https://images.unsplash.com/photo-1618042164219-62c820f10723?auto=format&fit=crop&w=120&q=80', initials: 'AD' },
+    lumina: { name: 'Prism Optics', handle: '@lumina_glass', avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=120&q=80', initials: 'PO' },
+    vogue: { name: 'Vogue Runway', handle: '@vogue_editorial', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80', initials: 'VR' },
+    filmstrip: { name: 'Kodak Darkroom', handle: '@filmstrip35', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80', initials: 'KD' },
+    biennale: { name: 'Venice Biennale', handle: '@biennale_art', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80', initials: 'VB' },
+    sketchbook: { name: 'Moleskine Atelier', handle: '@sketchbook_art', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80', initials: 'MA' },
+    pavilion: { name: 'Serpentine Pavilion', handle: '@pavilion_arch', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80', initials: 'SP' },
+    documenta: { name: 'Kassel Curatorial', handle: '@documenta_kassel', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=80', initials: 'KC' },
+    triennale: { name: 'Milan Triennale', handle: '@triennale_milano', avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=120&q=80', initials: 'MT' },
+    salon: { name: 'Emerald Salon', handle: '@salon_gilded', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&q=80', initials: 'ES' },
+    illustra: { name: 'Collage Collective', handle: '@illustra_mag', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=120&q=80', initials: 'CC' },
+    techno: { name: 'Creative Tech Lab', handle: '@techno_berlin', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=120&q=80', initials: 'TL' },
+    analog: { name: 'Vintage Desk Studio', handle: '@analog_desk', avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80', initials: 'VD' },
+    mythos: { name: 'Celestial Classical', handle: '@mythos_sculpt', avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=120&q=80', initials: 'CC' },
+    suki: { name: 'Suki Tokyo', handle: '@suki_tokyo', avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=120&q=80', initials: 'ST' },
+    lo: { name: 'Lo Studios', handle: '@lo_maker', avatar: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=120&q=80', initials: 'LS' },
+    mara: { name: 'Mara Art Direction', handle: '@mara_director', avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=120&q=80', initials: 'MD' }
+  };
+
   const VISUAL_THEMES = {
     gallery: {
-      id: 'gallery', author: TECH_AUTHORS['gallery'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'gallery',
+      author: VISUAL_AUTHORS['gallery'], author: TECH_AUTHORS['gallery'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Gallery',
       subtitle: 'Clean visual masonry grid for fine art photography',
       track: 'visual',
@@ -454,7 +488,8 @@
       dark: true
     },
     studio: {
-      id: 'studio', author: TECH_AUTHORS['studio'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'studio',
+      author: VISUAL_AUTHORS['studio'], author: TECH_AUTHORS['studio'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Studio',
       subtitle: 'Bright daylight editorial covers with clean margins',
       track: 'visual',
@@ -465,7 +500,8 @@
       dark: false
     },
     noir: {
-      id: 'noir', author: TECH_AUTHORS['noir'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'noir',
+      author: VISUAL_AUTHORS['noir'], author: TECH_AUTHORS['noir'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Noir',
       subtitle: 'Cinematic full-bleed monochromatic black & white',
       track: 'visual',
@@ -476,7 +512,8 @@
       dark: true
     },
     museum: {
-      id: 'museum', author: TECH_AUTHORS['museum'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'museum',
+      author: VISUAL_AUTHORS['museum'], author: TECH_AUTHORS['museum'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Museum',
       subtitle: 'Framed gallery walls with classic museum plaques',
       track: 'visual',
@@ -487,7 +524,8 @@
       dark: false
     },
     catalog: {
-      id: 'catalog', author: TECH_AUTHORS['catalog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'catalog',
+      author: VISUAL_AUTHORS['catalog'], author: TECH_AUTHORS['catalog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Catalog',
       subtitle: 'Swiss art-book publication plates with index columns',
       track: 'visual',
@@ -498,7 +536,8 @@
       dark: false
     },
     bloom: {
-      id: 'bloom', author: TECH_AUTHORS['bloom'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'bloom',
+      author: VISUAL_AUTHORS['bloom'], author: TECH_AUTHORS['bloom'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Bloom',
       subtitle: 'Ethereal pastel dreamscape with soft blur transitions',
       track: 'visual',
@@ -509,7 +548,8 @@
       dark: false
     },
     motion: {
-      id: 'motion', author: TECH_AUTHORS['motion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'motion',
+      author: VISUAL_AUTHORS['motion'], author: TECH_AUTHORS['motion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Motion Flow',
       subtitle: 'Smooth fluid animation cards with kinetic typography',
       track: 'visual',
@@ -520,7 +560,8 @@
       dark: false
     },
     atelier: {
-      id: 'atelier', author: TECH_AUTHORS['atelier'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'atelier',
+      author: VISUAL_AUTHORS['atelier'], author: TECH_AUTHORS['atelier'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Atelier',
       subtitle: 'Haute couture fashion house monograph with serif titles',
       track: 'visual',
@@ -531,7 +572,8 @@
       dark: true
     },
     cinema: {
-      id: 'cinema', author: TECH_AUTHORS['cinema'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'cinema',
+      author: VISUAL_AUTHORS['cinema'], author: TECH_AUTHORS['cinema'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Cinema',
       subtitle: '2.39:1 widescreen stills with live film HUD gauges',
       track: 'visual',
@@ -542,7 +584,8 @@
       dark: true
     },
     arch: {
-      id: 'arch', author: TECH_AUTHORS['arch'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'arch',
+      author: VISUAL_AUTHORS['arch'], author: TECH_AUTHORS['arch'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Arch',
       subtitle: 'Architectural blueprint drafting plates with scale rules',
       track: 'visual',
@@ -553,7 +596,8 @@
       dark: true
     },
     zine: {
-      id: 'zine', author: TECH_AUTHORS['zine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'zine',
+      author: VISUAL_AUTHORS['zine'], author: TECH_AUTHORS['zine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Zine',
       subtitle: 'Risograph indie print collage with washi tape accents',
       track: 'visual',
@@ -564,7 +608,8 @@
       dark: false
     },
     zen: {
-      id: 'zen', author: TECH_AUTHORS['zen'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'zen',
+      author: VISUAL_AUTHORS['zen'], author: TECH_AUTHORS['zen'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Zen',
       subtitle: 'Wabi-sabi ceramic and stone aesthetic with calm rhythm',
       track: 'visual',
@@ -575,7 +620,8 @@
       dark: false
     },
     desire: {
-      id: 'desire', author: TECH_AUTHORS['desire'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'desire',
+      author: VISUAL_AUTHORS['desire'], author: TECH_AUTHORS['desire'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Desire',
       subtitle: 'Vibrant modern digital designer portfolio with loupe zoom',
       track: 'visual',
@@ -586,7 +632,8 @@
       dark: true
     },
     lumina: {
-      id: 'lumina', author: TECH_AUTHORS['lumina'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'lumina',
+      author: VISUAL_AUTHORS['lumina'], author: TECH_AUTHORS['lumina'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Lumina',
       subtitle: 'Holographic prism iridescent glassmorphic layout',
       track: 'visual',
@@ -597,7 +644,8 @@
       dark: true
     },
     vogue: {
-      id: 'vogue', author: TECH_AUTHORS['vogue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'vogue',
+      author: VISUAL_AUTHORS['vogue'], author: TECH_AUTHORS['vogue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Vogue',
       subtitle: 'High-fashion editorial Didot display typography',
       track: 'visual',
@@ -608,7 +656,8 @@
       dark: true
     },
     filmstrip: {
-      id: 'filmstrip', author: TECH_AUTHORS['filmstrip'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'filmstrip',
+      author: VISUAL_AUTHORS['filmstrip'], author: TECH_AUTHORS['filmstrip'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Filmstrip',
       subtitle: '35mm cinema reel darkroom with sprocket hole border',
       track: 'visual',
@@ -619,7 +668,8 @@
       dark: true
     },
     biennale: {
-      id: 'biennale', author: TECH_AUTHORS['biennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'biennale',
+      author: VISUAL_AUTHORS['biennale'], author: TECH_AUTHORS['biennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Biennale',
       subtitle: 'Venice international art exhibition curatorial catalogue',
       track: 'visual',
@@ -630,7 +680,8 @@
       dark: false
     },
     sketchbook: {
-      id: 'sketchbook', author: TECH_AUTHORS['sketchbook'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'sketchbook',
+      author: VISUAL_AUTHORS['sketchbook'], author: TECH_AUTHORS['sketchbook'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Sketchbook',
       subtitle: 'Graphite pencil sketches and textured kraft paper',
       track: 'visual',
@@ -641,7 +692,8 @@
       dark: false
     },
     pavilion: {
-      id: 'pavilion', author: TECH_AUTHORS['pavilion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'pavilion',
+      author: VISUAL_AUTHORS['pavilion'], author: TECH_AUTHORS['pavilion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Pavilion',
       subtitle: 'Architectural spatial pavilion with ambient geometry',
       track: 'visual',
@@ -652,7 +704,8 @@
       dark: false
     },
     documenta: {
-      id: 'documenta', author: TECH_AUTHORS['documenta'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'documenta',
+      author: VISUAL_AUTHORS['documenta'], author: TECH_AUTHORS['documenta'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Documenta',
       subtitle: 'Curatorial research archive with archival notes',
       track: 'visual',
@@ -663,7 +716,8 @@
       dark: false
     },
     triennale: {
-      id: 'triennale', author: TECH_AUTHORS['triennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'triennale',
+      author: VISUAL_AUTHORS['triennale'], author: TECH_AUTHORS['triennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Triennale',
       subtitle: 'Milanese industrial design exposition catalogue',
       track: 'visual',
@@ -674,7 +728,8 @@
       dark: false
     },
     salon: {
-      id: 'salon', author: TECH_AUTHORS['salon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'salon',
+      author: VISUAL_AUTHORS['salon'], author: TECH_AUTHORS['salon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Salon',
       subtitle: 'Emerald gilded gallery with gold leaf ornaments',
       track: 'visual',
@@ -685,7 +740,8 @@
       dark: true
     },
     illustra: {
-      id: 'illustra', author: TECH_AUTHORS['illustra'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'illustra',
+      author: VISUAL_AUTHORS['illustra'], author: TECH_AUTHORS['illustra'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Illustra',
       subtitle: 'Modern mixed-media illustration and graphic art grid',
       track: 'visual',
@@ -696,7 +752,8 @@
       dark: false
     },
     techno: {
-      id: 'techno', author: TECH_AUTHORS['techno'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'techno',
+      author: VISUAL_AUTHORS['techno'], author: TECH_AUTHORS['techno'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Techno',
       subtitle: 'Berlin creative tech laboratory with dynamic soundwaves',
       track: 'visual',
@@ -707,7 +764,8 @@
       dark: true
     },
     analog: {
-      id: 'analog', author: TECH_AUTHORS['analog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'analog',
+      author: VISUAL_AUTHORS['analog'], author: TECH_AUTHORS['analog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Analog',
       subtitle: 'Dark vintage desk collage with physical artifacts',
       track: 'visual',
@@ -718,7 +776,8 @@
       dark: true
     },
     mythos: {
-      id: 'mythos', author: TECH_AUTHORS['mythos'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'mythos',
+      author: VISUAL_AUTHORS['mythos'], author: TECH_AUTHORS['mythos'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Mythos',
       subtitle: 'Cosmic violet classical sculpture and celestial sphere',
       track: 'visual',
@@ -729,7 +788,8 @@
       dark: true
     },
     suki: {
-      id: 'suki', author: TECH_AUTHORS['suki'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'suki',
+      author: VISUAL_AUTHORS['suki'], author: TECH_AUTHORS['suki'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Suki',
       subtitle: 'Cyber Tokyo video director with neon HUD interface',
       track: 'visual',
@@ -740,7 +800,8 @@
       dark: true
     },
     lo: {
-      id: 'lo', author: TECH_AUTHORS['lo'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'lo',
+      author: VISUAL_AUTHORS['lo'], author: TECH_AUTHORS['lo'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Lo',
       subtitle: 'Multidisciplinary maker narrative with seamless art tiles',
       track: 'visual',
@@ -751,7 +812,8 @@
       dark: true
     },
     mara: {
-      id: 'mara', author: TECH_AUTHORS['mara'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'mara',
+      author: VISUAL_AUTHORS['mara'], author: TECH_AUTHORS['mara'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Mara',
       subtitle: 'High-contrast art director with wipe motion interactions',
       track: 'visual',
