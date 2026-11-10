@@ -4625,3 +4625,30 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: linear-gradient(135deg, #090e1a 0%, #1a1024 100%);
   color: #ef4444;
 }
+
+/* Theme Shot Visuals: Group 5 */
+.dribbble-shot-moderncv {
+  background: #f1f5f9;
+  color: #1e293b;
+}
+.dribbble-shot-moderncv .shot-hero-box {
+  width: 80%;
+  height: 66%;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+.dribbble-shot-ultracode {
+  background: #0f0a0c;
+  color: #f43f5e;
+}
+.dribbble-shot-ultracode .shot-hero-box {
+  width: 82%;
+  height: 64%;
+  background: #1a0f12;
+  border: 1px solid rgba(244, 63, 94, 0.35);
+}
+.dribbble-shot-devblue {
+  background: #eff6ff;
+  color: #1e40af;
+}
