@@ -2331,3 +2331,44 @@ window.buildThemeLiveHtml = function(theme, profile) {
 </body>
 </html>`;
 };
+
+window.renderLiveThemeStage = function(theme, force) {
+  const iframe = document.getElementById('themeLiveIframe');
+  if (!iframe) return;
+
+  const currentTheme = (theme || 'midnight').toLowerCase();
+  const meta = (window.PortfoolioThemeCatalog && window.PortfoolioThemeCatalog.getTheme(currentTheme)) || {
+    id: currentTheme,
+    title: currentTheme.charAt(0).toUpperCase() + currentTheme.slice(1),
+    track: 'tech',
+    badge: 'PRO'
+  };
+
+  // Update Chrome header tags
+  const titleEl = document.getElementById('stageThemeTitle');
+  if (titleEl) titleEl.textContent = meta.title;
+
+  const badgeEl = document.getElementById('stageThemeBadge');
+  if (badgeEl) {
+    badgeEl.textContent = meta.badge || 'PRO';
+    badgeEl.className = 'stage-badge ' + (meta.badge === 'FEATURED' ? 'stage-badge-featured' : 'stage-badge-pro');
+  }
+
+  const trackEl = document.getElementById('stageThemeTrack');
+  if (trackEl) trackEl.textContent = (meta.track || 'tech').toUpperCase();
+
+  const urlEl = document.getElementById('stageUrlText');
+  const user = (window.activeUserProfile && window.activeUserProfile.username) || 'demo';
+  if (urlEl) urlEl.textContent = `https://${user}.portfoolio.me/?theme=${currentTheme}`;
+
+  // Render iframe content
+  const overlay = document.getElementById('stageLoadingOverlay');
+  if (overlay) overlay.classList.add('active');
+
+  const html = window.buildThemeLiveHtml(currentTheme, window.activeUserProfile);
+  iframe.srcdoc = html;
+
+  iframe.onload = () => {
+    if (overlay) overlay.classList.remove('active');
+  };
+};
