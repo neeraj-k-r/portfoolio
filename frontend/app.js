@@ -2424,3 +2424,11 @@ window.refreshLiveThemeStage = function() {
   const t = (selInp ? selInp.value : ((window.activeUserProfile && window.activeUserProfile.template) || 'midnight')).toLowerCase();
   window.renderLiveThemeStage(t, true);
 };
+
+window.openCurrentThemeExternal = function() {
+  const selInp = document.querySelector('#edTplGrid input[name="edtpl"]:checked');
+  const t = (selInp ? selInp.value : ((window.activeUserProfile && window.activeUserProfile.template) || 'midnight')).toLowerCase();
+  const u = (window.activeUserProfile && window.activeUserProfile.username) || 'yourname';
+  const previewUrl = `/?u=${encodeURIComponent(u)}&t=${encodeURIComponent(t)}&preview=1`;
+  window.open(previewUrl, '_blank');
+};
