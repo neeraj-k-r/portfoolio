@@ -54,7 +54,9 @@
 
   const DEV_THEMES = {
     midnight: {
-      id: 'midnight', author: TECH_AUTHORS['midnight'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'midnight',
+      likes: 84,
+      views: '13.8k', author: TECH_AUTHORS['midnight'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Midnight Wow',
       subtitle: 'Dark neon glowing developer portfolio',
       track: 'tech',
@@ -65,7 +67,9 @@
       dark: true
     },
     minimal: {
-      id: 'minimal', author: TECH_AUTHORS['minimal'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'minimal',
+      likes: 68,
+      views: '11.2k', author: TECH_AUTHORS['minimal'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Minimal Clean',
       subtitle: 'Light ATS-friendly Swiss typography',
       track: 'tech',
@@ -76,7 +80,9 @@
       dark: false
     },
     terminal: {
-      id: 'terminal', author: TECH_AUTHORS['terminal'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'terminal',
+      likes: 92,
+      views: '14.5k', author: TECH_AUTHORS['terminal'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Terminal Hacker',
       subtitle: 'CRT green phosphor command-line interface',
       track: 'tech',
@@ -87,7 +93,9 @@
       dark: true
     },
     creative: {
-      id: 'creative', author: TECH_AUTHORS['creative'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'creative',
+      likes: 77,
+      views: '9.8k', author: TECH_AUTHORS['creative'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Creative Pop',
       subtitle: 'Playful vibrant gradient showcase',
       track: 'tech',
@@ -98,7 +106,9 @@
       dark: false
     },
     aurora: {
-      id: 'aurora', author: TECH_AUTHORS['aurora'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'aurora',
+      likes: 118,
+      views: '16.4k', author: TECH_AUTHORS['aurora'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Aurora Glass',
       subtitle: 'Frosted pastel glassmorphic canvas',
       track: 'tech',
@@ -109,7 +119,9 @@
       dark: false
     },
     editorial: {
-      id: 'editorial', author: TECH_AUTHORS['editorial'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'editorial',
+      likes: 54,
+      views: '8.2k', author: TECH_AUTHORS['editorial'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Editorial Serif',
       subtitle: 'Refined print monograph with serif typography',
       track: 'tech',
@@ -120,7 +132,9 @@
       dark: false
     },
     brutalist: {
-      id: 'brutalist', author: TECH_AUTHORS['brutalist'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'brutalist',
+      likes: 89,
+      views: '12.1k', author: TECH_AUTHORS['brutalist'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Neo-Brutalist',
       subtitle: 'High-contrast raw borders and pop colors',
       track: 'tech',
@@ -131,7 +145,9 @@
       dark: false
     },
     afterglow: {
-      id: 'afterglow', author: TECH_AUTHORS['afterglow'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'afterglow',
+      likes: 63,
+      views: '9.4k', author: TECH_AUTHORS['afterglow'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Afterglow',
       subtitle: 'Sunset gradient with neon horizons',
       track: 'tech',
@@ -142,7 +158,9 @@
       dark: true
     },
     ultraviolet: {
-      id: 'ultraviolet', author: TECH_AUTHORS['ultraviolet'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'ultraviolet',
+      likes: 95,
+      views: '14.0k', author: TECH_AUTHORS['ultraviolet'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Ultraviolet',
       subtitle: 'Electric violet & deep indigo cyber aura',
       track: 'tech',
@@ -153,7 +171,9 @@
       dark: true
     },
     tidepool: {
-      id: 'tidepool', author: TECH_AUTHORS['tidepool'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'tidepool',
+      likes: 58,
+      views: '7.9k', author: TECH_AUTHORS['tidepool'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Tidepool',
       subtitle: 'Bioluminescent deep-sea cyan glow',
       track: 'tech',
@@ -164,7 +184,9 @@
       dark: true
     },
     darkpro: {
-      id: 'darkpro', author: TECH_AUTHORS['darkpro'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'darkpro',
+      likes: 132,
+      views: '19.3k', author: TECH_AUTHORS['darkpro'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Dark Pro',
       subtitle: 'Sleek dark interface with vibrant amber accent',
       track: 'tech',
@@ -175,7 +197,9 @@
       dark: true
     },
     fullpage: {
-      id: 'fullpage', author: TECH_AUTHORS['fullpage'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'fullpage',
+      likes: 71,
+      views: '10.5k', author: TECH_AUTHORS['fullpage'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Fullpage Scroll',
       subtitle: 'Full-viewport snap slide presentation',
       track: 'tech',
@@ -186,7 +210,9 @@
       dark: true
     },
     moderncv: {
-      id: 'moderncv', author: TECH_AUTHORS['moderncv'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'moderncv',
+      likes: 145,
+      views: '22.1k', author: TECH_AUTHORS['moderncv'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Modern CV',
       subtitle: 'Executive bilingual resume & curriculum vitae',
       track: 'tech',
@@ -197,7 +223,9 @@
       dark: false
     },
     ultracode: {
-      id: 'ultracode', author: TECH_AUTHORS['ultracode'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'ultracode',
+      likes: 83,
+      views: '11.7k', author: TECH_AUTHORS['ultracode'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Ultra Code',
       subtitle: 'High-density sidebar IDE layout with crimson glow',
       track: 'tech',
@@ -208,7 +236,9 @@
       dark: true
     },
     devblue: {
-      id: 'devblue', author: TECH_AUTHORS['devblue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'devblue',
+      likes: 104,
+      views: '15.6k', author: TECH_AUTHORS['devblue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Dev Blue',
       subtitle: 'Corporate engineering aesthetic in Royal Blue',
       track: 'tech',
@@ -219,7 +249,9 @@
       dark: false
     },
     cube: {
-      id: 'cube', author: TECH_AUTHORS['cube'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'cube',
+      likes: 112,
+      views: '17.8k', author: TECH_AUTHORS['cube'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: '3D Cube',
       subtitle: 'Mint and charcoal with interactive 3D slider',
       track: 'tech',
@@ -230,7 +262,9 @@
       dark: true
     },
     nova: {
-      id: 'nova', author: TECH_AUTHORS['nova'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'nova',
+      likes: 128,
+      views: '18.9k', author: TECH_AUTHORS['nova'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Nova Galaxy',
       subtitle: 'Teal particle nebula with interactive cards',
       track: 'tech',
@@ -241,7 +275,9 @@
       dark: true
     },
     codeflow: {
-      id: 'codeflow', author: TECH_AUTHORS['codeflow'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'codeflow',
+      likes: 97,
+      views: '13.2k', author: TECH_AUTHORS['codeflow'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Codeflow',
       subtitle: 'Tabbed systems architecture & code syntax showcase',
       track: 'tech',
@@ -252,7 +288,9 @@
       dark: true
     },
     wave: {
-      id: 'wave', author: TECH_AUTHORS['wave'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'wave',
+      likes: 110,
+      views: '15.1k', author: TECH_AUTHORS['wave'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Neon Wave',
       subtitle: 'Emerald laser wave and holographic cyber canvas',
       track: 'tech',
@@ -263,7 +301,9 @@
       dark: true
     },
     assistant: {
-      id: 'assistant', author: TECH_AUTHORS['assistant'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'assistant',
+      likes: 165,
+      views: '26.4k', author: TECH_AUTHORS['assistant'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'AI Assistant',
       subtitle: 'ChatGPT style conversational portfolio bot',
       track: 'tech',
@@ -274,7 +314,9 @@
       dark: true
     },
     console: {
-      id: 'console', author: TECH_AUTHORS['console'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'console',
+      likes: 79,
+      views: '10.8k', author: TECH_AUTHORS['console'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Dev Console',
       subtitle: 'Unix workstation terminal with tabbed panels',
       track: 'tech',
@@ -285,7 +327,9 @@
       dark: true
     },
     snowcard: {
-      id: 'snowcard', author: TECH_AUTHORS['snowcard'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'snowcard',
+      likes: 86,
+      views: '11.9k', author: TECH_AUTHORS['snowcard'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Snowcard',
       subtitle: 'Dotted grid canvas with sunny amber tabs',
       track: 'tech',
@@ -296,7 +340,9 @@
       dark: false
     },
     parchment: {
-      id: 'parchment', author: TECH_AUTHORS['parchment'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'parchment',
+      likes: 52,
+      views: '7.4k', author: TECH_AUTHORS['parchment'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Parchment Scroll',
       subtitle: 'Vintage scholarly parchment with antique serif',
       track: 'tech',
@@ -307,7 +353,9 @@
       dark: false
     },
     cloud: {
-      id: 'cloud', author: TECH_AUTHORS['cloud'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'cloud',
+      likes: 94,
+      views: '13.6k', author: TECH_AUTHORS['cloud'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Cloud Blue',
       subtitle: 'Friendly rounded cloud shapes and sky blue air',
       track: 'tech',
@@ -318,7 +366,9 @@
       dark: false
     },
     github: {
-      id: 'github', author: TECH_AUTHORS['github'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'github',
+      likes: 178,
+      views: '28.5k', author: TECH_AUTHORS['github'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'GitHub',
       subtitle: 'Octocat dark theme with pinned repository cards',
       track: 'tech',
@@ -329,7 +379,9 @@
       dark: true
     },
     particle: {
-      id: 'particle', author: TECH_AUTHORS['particle'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'particle',
+      likes: 142,
+      views: '21.0k', author: TECH_AUTHORS['particle'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Particle Mesh',
       subtitle: '3D constellation canvas with glowing dual-hero',
       track: 'tech',
@@ -340,7 +392,9 @@
       dark: true
     },
     panels: {
-      id: 'panels', author: TECH_AUTHORS['panels'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'panels',
+      likes: 115,
+      views: '16.7k', author: TECH_AUTHORS['panels'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Panels',
       subtitle: 'Tabbed modern product view with purple aura',
       track: 'tech',
@@ -351,7 +405,9 @@
       dark: true
     },
     monolith: {
-      id: 'monolith', author: TECH_AUTHORS['monolith'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'monolith',
+      likes: 73,
+      views: '10.2k', author: TECH_AUTHORS['monolith'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Monolith',
       subtitle: 'Monumental black typography & heavy brutalist grids',
       track: 'tech',
@@ -362,7 +418,9 @@
       dark: true
     },
     editor: {
-      id: 'editor', author: TECH_AUTHORS['editor'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'editor',
+      likes: 188,
+      views: '31.2k', author: TECH_AUTHORS['editor'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Editor',
       subtitle: 'VS Code IDE with tree explorer & Copilot companion',
       track: 'tech',
@@ -373,7 +431,9 @@
       dark: true
     },
     magazine: {
-      id: 'magazine', author: TECH_AUTHORS['magazine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'magazine',
+      likes: 88,
+      views: '12.8k', author: TECH_AUTHORS['magazine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Magazine',
       subtitle: 'Literary editorial publication with Fraunces drop caps',
       track: 'tech',
@@ -384,7 +444,9 @@
       dark: false
     },
     bold: {
-      id: 'bold', author: TECH_AUTHORS['bold'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'bold',
+      likes: 99,
+      views: '14.3k', author: TECH_AUTHORS['bold'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Bold',
       subtitle: 'Obsidian dark canvas with electric lime energy',
       track: 'tech',
@@ -395,7 +457,9 @@
       dark: true
     },
     clean: {
-      id: 'clean', author: TECH_AUTHORS['clean'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'clean',
+      likes: 121,
+      views: '18.0k', author: TECH_AUTHORS['clean'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Clean Pro',
       subtitle: 'Floating pill navigation and soft card elevations',
       track: 'tech',
@@ -406,7 +470,9 @@
       dark: false
     },
     vibrant: {
-      id: 'vibrant', author: TECH_AUTHORS['vibrant'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'vibrant',
+      likes: 85,
+      views: '11.5k', author: TECH_AUTHORS['vibrant'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Vibrant',
       subtitle: 'Spectrum rainbow gradient with lilac glow',
       track: 'tech',
@@ -417,7 +483,9 @@
       dark: false
     },
     neon: {
-      id: 'neon', author: TECH_AUTHORS['neon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'neon',
+      likes: 156,
+      views: '24.1k', author: TECH_AUTHORS['neon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Neon Cyberpunk',
       subtitle: '3D synthwave grid floor with laser pink highlights',
       track: 'tech',
@@ -428,7 +496,9 @@
       dark: true
     },
     hacker: {
-      id: 'hacker', author: TECH_AUTHORS['hacker'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      id: 'hacker',
+      likes: 103,
+      views: '15.8k', author: TECH_AUTHORS['hacker'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Hacker Terminal',
       subtitle: 'Phosphor green matrix terminal with CRT scanlines',
       track: 'tech',
