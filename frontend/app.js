@@ -2402,3 +2402,19 @@ window.selectThemeLive = function(theme) {
     window.activeUserProfile.template = t;
   }
 };
+
+window.setStageDeviceMode = function(device) {
+  const frame = document.getElementById('stageViewportFrame');
+  if (!frame) return;
+
+  const valid = ['desktop', 'tablet', 'mobile'].includes(device) ? device : 'desktop';
+  frame.setAttribute('data-device-mode', valid);
+
+  document.querySelectorAll('.stage-device-btn').forEach(btn => {
+    if (btn.getAttribute('data-device') === valid) {
+      btn.classList.add('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
+};
