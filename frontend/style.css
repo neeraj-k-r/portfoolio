@@ -4874,3 +4874,21 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: #022c22;
   color: #10b981;
 }
+
+/* Theme Shot Visuals: Group 18 */
+.dribbble-shot-illustra {
+  background: #fff1f2;
+  color: #f43f5e;
+}
+.dribbble-shot-techno {
+  background: #0b0716;
+  color: #a855f7;
+}
+.dribbble-shot-analog {
+  background: #14120e;
+  color: #d97706;
+}
+.dribbble-shot-mythos {
+  background: #0c071e;
+  color: #8b5cf6;
+}
