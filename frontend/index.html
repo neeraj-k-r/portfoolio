@@ -1097,65 +1097,14 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <input id="edSkills" placeholder="React, Node.js, Python, TypeScript">
         </div>
         
-        <!-- Live In-Section Interactive Theme Showcase Stage -->
-        <div id="themeLiveStage" class="theme-live-stage" style="margin:18px 0 24px">
-          <div class="stage-chrome-header" id="stageChromeHeader">
-            <div class="stage-mac-dots" aria-hidden="true">
-              <span class="mac-dot red"></span>
-              <span class="mac-dot yellow"></span>
-              <span class="mac-dot green"></span>
-            </div>
-            <div class="stage-identity">
-              <span id="stageThemeBadge" class="stage-badge stage-badge-pro">PRO</span>
-              <span id="stageThemeTitle" class="stage-title">Midnight Wow</span>
-              <span id="stageThemeTrack" class="stage-track-pill">TECH</span>
-            </div>
-            <div class="stage-url-bar" id="stageUrlBar">
-              <i class="fa-solid fa-lock stage-lock-icon"></i>
-              <span id="stageUrlText" class="stage-url-text">https://demo.portfoolio.me/?theme=midnight</span>
-              <button type="button" id="stageCopyUrlBtn" class="stage-mini-btn" title="Copy live link" aria-label="Copy live link">
-                <i class="fa-regular fa-copy"></i>
-              </button>
-            </div>
-            <div class="stage-device-switcher" id="stageDeviceSwitcher" role="tablist" aria-label="Device Preview Modes">
-              <button type="button" class="stage-device-btn active" data-device="desktop" title="Desktop View (100%)">
-                <i class="fa-solid fa-desktop"></i><span>Desktop</span>
-              </button>
-              <button type="button" class="stage-device-btn" data-device="tablet" title="Tablet View (768px)">
-                <i class="fa-solid fa-tablet-screen-button"></i><span>Tablet</span>
-              </button>
-              <button type="button" class="stage-device-btn" data-device="mobile" title="Mobile Phone View (375px)">
-                <i class="fa-solid fa-mobile-screen"></i><span>Mobile</span>
-              </button>
-            </div>
-            <div class="stage-action-buttons">
-              <button type="button" id="stageRefreshBtn" class="stage-mini-btn" title="Refresh Live Stage" aria-label="Refresh Live Stage">
-                <i class="fa-solid fa-rotate-right"></i>
-              </button>
-              <button type="button" id="stageExternalBtn" class="stage-mini-btn" title="Open full window" aria-label="Open full window">
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </button>
-              <button type="button" id="stageFullscreenBtn" class="stage-mini-btn" title="Expand Fullscreen" aria-label="Expand Fullscreen">
-                <i class="fa-solid fa-expand"></i>
-              </button>
-            </div>
-          </div>
-          <div class="stage-viewport-container" id="stageViewportContainer">
-            <div class="stage-viewport-frame" id="stageViewportFrame" data-device-mode="desktop">
-              <div class="stage-mobile-notch" aria-hidden="true"><span class="stage-camera"></span><span class="stage-speaker"></span></div>
-              <iframe id="themeLiveIframe" class="theme-live-iframe" title="Interactive Live Theme Preview" sandbox="allow-scripts allow-same-origin"></iframe>
-              <div class="stage-loading-overlay" id="stageLoadingOverlay"><div class="stage-spinner"></div><span>Rendering live theme…</span></div>
-            </div>
-          </div>
-        </div>
         <div style="margin-top:16px">
           <label class="flabel">Select Portfolio Theme</label>
           
           <!-- Theme Showcase Header & Filter Bar -->
           <div class="theme-showcase-header">
             <div class="theme-showcase-titles">
-              <h4 class="theme-showcase-title">✨ Browse Dribbble Theme Showcase</h4>
-              <p class="theme-showcase-desc">Click any showcase card below to preview your live portfolio instantaneously in the stage above.</p>
+              <h4 class="theme-showcase-title">✨ Dribbble Theme Showcase</h4>
+              <p class="theme-showcase-desc">Browse all 40 handcrafted portfolio designs in full visual fidelity. Click any card to apply.</p>
             </div>
             <div class="theme-showcase-tools">
               <div class="theme-search-box">
@@ -1211,35 +1160,35 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <label class="tpl-card" data-vtrack="tech"><input type="radio" name="edtpl" value="hacker"><div class="tpl-preview hacker">💻</div><div class="tpl-meta"><b>Hacker Terminal</b><span>Phosphor green · CRT scanlines</span></div></label>
 
             <!-- Visual Artist Themes (12) -->
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="gallery"><div class="tpl-preview gallery">🖼️</div><div class="tpl-meta"><b>Gallery</b><span>Visual masonry grid</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="studio"><div class="tpl-preview studio">☀️</div><div class="tpl-meta"><b>Studio</b><span>Light editorial covers</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="noir"><div class="tpl-preview noir">🌙</div><div class="tpl-meta"><b>Noir</b><span>Dark full-bleed</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="museum"><div class="tpl-preview museum">🏛️</div><div class="tpl-meta"><b>Museum</b><span>Framed gallery walls</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="catalog"><div class="tpl-preview catalog">📖</div><div class="tpl-meta"><b>Catalog</b><span>Print art-book plates</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="bloom"><div class="tpl-preview bloom">🌸</div><div class="tpl-meta"><b>Bloom</b><span>Soft pastel dream</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="motion"><div class="tpl-preview motion">⚡</div><div class="tpl-meta"><b>Motion Flow</b><span>Light · Motion · Gradients</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="atelier"><div class="tpl-preview atelier">🏛️</div><div class="tpl-meta"><b>Atelier</b><span>Haute couture &amp; minimal editorial</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="cinema"><div class="tpl-preview cinema">🎬</div><div class="tpl-meta"><b>Cinema</b><span>2.39:1 widescreen stills &amp; HUD</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="arch"><div class="tpl-preview arch">📐</div><div class="tpl-meta"><b>Arch</b><span>Architectural drafting plates</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="zine"><div class="tpl-preview zine">🎨</div><div class="tpl-meta"><b>Zine</b><span>Risograph indie print &amp; washi tape</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="zen"><div class="tpl-preview zen">🍵</div><div class="tpl-meta"><b>Zen</b><span>Wabi-sabi ceramic &amp; stone studio</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="desire"><div class="tpl-preview desire">✨</div><div class="tpl-meta"><b>Desire</b><span>Vibrant designer portfolio &amp; loupe</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="lumina"><div class="tpl-preview lumina">💎</div><div class="tpl-meta"><b>Lumina</b><span>Holographic prism glassmorphism</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="vogue"><div class="tpl-preview vogue">👠</div><div class="tpl-meta"><b>Vogue</b><span>High-fashion editorial Didot</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="filmstrip"><div class="tpl-preview filmstrip">🎞️</div><div class="tpl-meta"><b>Filmstrip</b><span>35mm cinema reel darkroom</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="biennale"><div class="tpl-preview biennale">🏛️</div><div class="tpl-meta"><b>Biennale</b><span>Venice international exhibition</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="sketchbook"><div class="tpl-preview sketchbook">✏️</div><div class="tpl-meta"><b>Sketchbook</b><span>Graphite & charcoal drawing</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="pavilion"><div class="tpl-preview pavilion">🏛️</div><div class="tpl-meta"><b>Pavilion</b><span>Architectural spatial layout</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="documenta"><div class="tpl-preview documenta">📚</div><div class="tpl-meta"><b>Documenta</b><span>Curatorial research archive</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="triennale"><div class="tpl-preview triennale">📐</div><div class="tpl-meta"><b>Triennale</b><span>Milanese design exposition</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="salon"><div class="tpl-preview salon">🖼️</div><div class="tpl-meta"><b>Salon</b><span>Emerald gilded gallery</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="illustra"><div class="tpl-preview illustra">🌺</div><div class="tpl-meta"><b>Illustra</b><span>Modern mixed-media collage</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="techno"><div class="tpl-preview techno">✳️</div><div class="tpl-meta"><b>Techno</b><span>Creative tech & generative collage</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="analog"><div class="tpl-preview analog">🎞️</div><div class="tpl-meta"><b>Analog</b><span>Dark aesthetic desk & collage</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="mythos"><div class="tpl-preview mythos">🏛️</div><div class="tpl-meta"><b>Mythos</b><span>Cosmic violet classical sculpture</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="suki"><div class="tpl-preview suki">🎬</div><div class="tpl-meta"><b>Suki</b><span>Cyber video editor & motion</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="lo"><div class="tpl-preview lo">🎨</div><div class="tpl-meta"><b>Lo</b><span>Multidisciplinary artist & maker</span></div></label>
-            <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="edtpl" value="mara"><div class="tpl-preview mara">🖤</div><div class="tpl-meta"><b>Mara</b><span>Art director & digital designer</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="gallery"><div class="tpl-preview gallery">🖼️</div><div class="tpl-meta"><b>Gallery</b><span>Visual masonry grid</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="studio"><div class="tpl-preview studio">☀️</div><div class="tpl-meta"><b>Studio</b><span>Light editorial covers</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="noir"><div class="tpl-preview noir">🌙</div><div class="tpl-meta"><b>Noir</b><span>Dark full-bleed</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="museum"><div class="tpl-preview museum">🏛️</div><div class="tpl-meta"><b>Museum</b><span>Framed gallery walls</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="catalog"><div class="tpl-preview catalog">📖</div><div class="tpl-meta"><b>Catalog</b><span>Print art-book plates</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="bloom"><div class="tpl-preview bloom">🌸</div><div class="tpl-meta"><b>Bloom</b><span>Soft pastel dream</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="motion"><div class="tpl-preview motion">⚡</div><div class="tpl-meta"><b>Motion Flow</b><span>Light · Motion · Gradients</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="atelier"><div class="tpl-preview atelier">🏛️</div><div class="tpl-meta"><b>Atelier</b><span>Haute couture &amp; minimal editorial</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="cinema"><div class="tpl-preview cinema">🎬</div><div class="tpl-meta"><b>Cinema</b><span>2.39:1 widescreen stills &amp; HUD</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="arch"><div class="tpl-preview arch">📐</div><div class="tpl-meta"><b>Arch</b><span>Architectural drafting plates</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="zine"><div class="tpl-preview zine">🎨</div><div class="tpl-meta"><b>Zine</b><span>Risograph indie print &amp; washi tape</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="zen"><div class="tpl-preview zen">🍵</div><div class="tpl-meta"><b>Zen</b><span>Wabi-sabi ceramic &amp; stone studio</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="desire"><div class="tpl-preview desire">✨</div><div class="tpl-meta"><b>Desire</b><span>Vibrant designer portfolio &amp; loupe</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="lumina"><div class="tpl-preview lumina">💎</div><div class="tpl-meta"><b>Lumina</b><span>Holographic prism glassmorphism</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="vogue"><div class="tpl-preview vogue">👠</div><div class="tpl-meta"><b>Vogue</b><span>High-fashion editorial Didot</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="filmstrip"><div class="tpl-preview filmstrip">🎞️</div><div class="tpl-meta"><b>Filmstrip</b><span>35mm cinema reel darkroom</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="biennale"><div class="tpl-preview biennale">🏛️</div><div class="tpl-meta"><b>Biennale</b><span>Venice international exhibition</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="sketchbook"><div class="tpl-preview sketchbook">✏️</div><div class="tpl-meta"><b>Sketchbook</b><span>Graphite & charcoal drawing</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="pavilion"><div class="tpl-preview pavilion">🏛️</div><div class="tpl-meta"><b>Pavilion</b><span>Architectural spatial layout</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="documenta"><div class="tpl-preview documenta">📚</div><div class="tpl-meta"><b>Documenta</b><span>Curatorial research archive</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="triennale"><div class="tpl-preview triennale">📐</div><div class="tpl-meta"><b>Triennale</b><span>Milanese design exposition</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="salon"><div class="tpl-preview salon">🖼️</div><div class="tpl-meta"><b>Salon</b><span>Emerald gilded gallery</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="illustra"><div class="tpl-preview illustra">🌺</div><div class="tpl-meta"><b>Illustra</b><span>Modern mixed-media collage</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="techno"><div class="tpl-preview techno">✳️</div><div class="tpl-meta"><b>Techno</b><span>Creative tech & generative collage</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="analog"><div class="tpl-preview analog">🎞️</div><div class="tpl-meta"><b>Analog</b><span>Dark aesthetic desk & collage</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="mythos"><div class="tpl-preview mythos">🏛️</div><div class="tpl-meta"><b>Mythos</b><span>Cosmic violet classical sculpture</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="suki"><div class="tpl-preview suki">🎬</div><div class="tpl-meta"><b>Suki</b><span>Cyber video editor & motion</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="lo"><div class="tpl-preview lo">🎨</div><div class="tpl-meta"><b>Lo</b><span>Multidisciplinary artist & maker</span></div></label>
+            <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="mara"><div class="tpl-preview mara">🖤</div><div class="tpl-meta"><b>Mara</b><span>Art director & digital designer</span></div></label>
           </div>
           <div style="display:flex;gap:12px;margin-top:14px;flex-wrap:wrap;align-items:center">
             <button class="btn btn-primary btn-sm" id="edSaveThemeBtn"><i class="fa-solid fa-floppy-disk"></i> Save theme</button>
@@ -2110,7 +2059,6 @@ function switchUserTab(tabName) {
   if (tabName === 'theme') {
     if (typeof paintTrackTabs === 'function' && activeUserProfile) paintTrackTabs(activeUserProfile);
     if (typeof paintThemeThumbs === 'function') paintThemeThumbs();
-    if (typeof initThemeLiveStage === 'function') initThemeLiveStage();
     if (typeof initThemeFilterPills === 'function') initThemeFilterPills();
   }
   if (tabName === 'resume' && typeof paintResumeTab === 'function') {
@@ -2405,11 +2353,9 @@ async function paintFeaturedPortfolios() {
 function paintTrackTabs(profile) {
   const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(String((profile && profile.template) || '').toLowerCase());
   document.body.classList.toggle('visual-user', visual);
-  document.querySelectorAll('#edTplGrid .tpl-card').forEach(c => {
-    const v = (c.querySelector('input') || {}).value || '';
-    const isVisualTheme = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(v);
-    c.style.display = (!visual && isVisualTheme) || (visual && !isVisualTheme) ? 'none' : '';
-  });
+  if (typeof window.filterThemeShowcase === 'function') {
+    window.filterThemeShowcase();
+  }
   if (visual) { paintWorks(); }
 }
 
@@ -2864,7 +2810,23 @@ if ($('builderForm')) {
       c.classList.add('dribbble-theme-card');
       prev.classList.add('dribbble-card-viewport');
 
-      prev.innerHTML = `<span class="lx-tp lx-tp-${theme} dribbble-shot-canvas dribbble-shot-${theme}"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span><div class="dribbble-active-checkmark"><i class="fa-solid fa-check"></i></div><div class="dribbble-hover-overlay"><span class="dribbble-overlay-title">${meta.title || name}</span><div class="dribbble-overlay-actions"><button type="button" class="dribbble-overlay-btn primary shot-select-btn">Select</button><button type="button" class="dribbble-overlay-btn tpl-preview-eye" title="Preview ${name} theme" aria-label="Preview ${name} theme"><i class="fa-solid fa-eye"></i></button></div></div>`;
+      const shotHtml = (window.PortfoolioThemeCatalog && typeof window.PortfoolioThemeCatalog.getThemeShotHtml === 'function')
+        ? window.PortfoolioThemeCatalog.getThemeShotHtml(theme, meta)
+        : '';
+
+      prev.innerHTML = `
+        <div class="dribbble-shot-canvas dribbble-shot-${theme}">
+          ${shotHtml}
+        </div>
+        <span class="lx-tp lx-tp-${theme}" style="display:none"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
+        <div class="dribbble-active-checkmark"><i class="fa-solid fa-check"></i></div>
+        <div class="dribbble-hover-overlay">
+          <span class="dribbble-overlay-title">${meta.title || name}</span>
+          <div class="dribbble-overlay-actions">
+            <button type="button" class="dribbble-overlay-btn primary shot-select-btn">Select Theme</button>
+            <button type="button" class="dribbble-overlay-btn tpl-preview-eye" title="Preview ${name} theme" aria-label="Preview ${name} theme"><i class="fa-solid fa-eye"></i></button>
+          </div>
+        </div>`
       const eyeBtn = prev.querySelector('.tpl-preview-eye');
       if (eyeBtn) {
         eyeBtn.addEventListener('click', (e) => {

@@ -6,7 +6,7 @@ import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 const catalog = require('./theme-catalog.js');
 
-describe('Theme Showcase & Live Stage Tests', () => {
+describe('Theme Showcase Dribbble Grid Tests', () => {
   it('theme-catalog exports all 40 themes with rich metadata', () => {
     assert(catalog, 'PortfoolioThemeCatalog must be defined');
     const all = catalog.getAllThemes();
@@ -21,17 +21,14 @@ describe('Theme Showcase & Live Stage Tests', () => {
     }
   });
 
-  it('#themeLiveStage markup exists in index.html with all chrome controls', () => {
+  it('Dribbble showcase filter bar, category pills, and search input exist in index.html', () => {
     const html = fs.readFileSync('frontend/index.html', 'utf8');
-    assert(html.includes('id="themeLiveStage"'), 'index.html must have #themeLiveStage');
-    assert(html.includes('id="themeLiveIframe"'), 'index.html must have #themeLiveIframe');
-    assert(html.includes('id="stageDeviceSwitcher"'), 'index.html must have device switcher');
-    assert(html.includes('data-device="desktop"'), 'index.html must have desktop button');
-    assert(html.includes('data-device="tablet"'), 'index.html must have tablet button');
-    assert(html.includes('data-device="mobile"'), 'index.html must have mobile button');
-    assert(html.includes('id="stageRefreshBtn"'), 'index.html must have refresh button');
-    assert(html.includes('id="stageExternalBtn"'), 'index.html must have external preview button');
-    assert(html.includes('id="stageFullscreenBtn"'), 'index.html must have fullscreen button');
+    assert(html.includes('class="theme-showcase-header"'), 'index.html must have .theme-showcase-header');
+    assert(html.includes('id="themeSearchInput"'), 'index.html must have #themeSearchInput');
+    assert(html.includes('id="themeFilterPills"'), 'index.html must have #themeFilterPills');
+    assert(html.includes('data-filter="all"'), 'index.html must have All filter pill');
+    assert(html.includes('data-filter="tech"'), 'index.html must have Tech filter pill');
+    assert(html.includes('data-filter="visual"'), 'index.html must have Visual filter pill');
   });
 
   it('Dribbble theme cards have author avatars, PRO badges, and like buttons in CSS and JS', () => {
@@ -39,7 +36,8 @@ describe('Theme Showcase & Live Stage Tests', () => {
     assert(css.includes('.dribbble-theme-card'), 'style.css must define .dribbble-theme-card');
     assert(css.includes('.dribbble-badge-pro'), 'style.css must define .dribbble-badge-pro');
     assert(css.includes('.theme-card-like-btn'), 'style.css must define .theme-card-like-btn');
-    assert(css.includes('.stage-viewport-frame[data-device-mode="mobile"]'), 'style.css must define mobile device mode');
+    assert(css.includes('.dribbble-card-viewport'), 'style.css must define .dribbble-card-viewport');
+    assert(css.includes('.dribbble-card-footer'), 'style.css must define .dribbble-card-footer');
   });
 
   it('theme-catalog query and search helpers work accurately', () => {
