@@ -2517,7 +2517,7 @@ window.filterThemeShowcase = function() {
   const searchInput = document.getElementById('themeSearchInput');
   const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
 
-  const activePill = document.querySelector('.filter-pill.active');
+  const activePill = document.querySelector('#themeFilterPills .filter-pill.active, .filter-pill.active');
   const filter = activePill ? activePill.getAttribute('data-filter') : 'all';
 
   const cards = document.querySelectorAll('#edTplGrid .tpl-card, #edTplGrid .dribbble-theme-card');
@@ -2526,12 +2526,13 @@ window.filterThemeShowcase = function() {
     if (!inp) return;
     const theme = inp.value.toLowerCase();
     const meta = (window.PortfoolioThemeCatalog && window.PortfoolioThemeCatalog.getTheme(theme)) || {};
+    const cardTrack = card.getAttribute('data-vtrack') || meta.track || 'tech';
 
     let matchesFilter = true;
-    if (filter === 'tech') matchesFilter = meta.track === 'tech';
-    else if (filter === 'visual') matchesFilter = meta.track === 'visual';
-    else if (filter === 'dark') matchesFilter = meta.dark === true;
-    else if (filter === 'minimal') matchesFilter = meta.tags && (meta.tags.includes('minimal') || meta.tags.includes('clean'));
+    if (filter === 'tech') matchesFilter = cardTrack === 'tech';
+    else if (filter === 'visual') matchesFilter = cardTrack === 'visual';
+    else if (filter === 'dark') matchesFilter = !!meta.dark;
+    else if (filter === 'minimal') matchesFilter = !!(meta.tags && (meta.tags.includes('minimal') || meta.tags.includes('clean')));
 
     let matchesQuery = true;
     if (query) {
@@ -2541,8 +2542,19 @@ window.filterThemeShowcase = function() {
       matchesQuery = theme.includes(query) || title.includes(query) || author.includes(query) || tags.includes(query);
     }
 
-    card.style.display = (matchesFilter && matchesQuery) ? '' : 'none';
+    const show = matchesFilter && matchesQuery;
+    card.classList.toggle('theme-card-hidden', !show);
+    card.style.display = show ? 'flex' : 'none';
   });
+
+  const techDivider = document.querySelector('#edTplGrid .theme-grid-divider.tech-divider');
+  const visDivider = document.querySelector('#edTplGrid .theme-grid-divider.visual-divider');
+  if (techDivider) {
+    techDivider.style.display = (!query && (filter === 'all' || filter === 'tech')) ? 'flex' : 'none';
+  }
+  if (visDivider) {
+    visDivider.style.display = (!query && (filter === 'all' || filter === 'visual')) ? 'flex' : 'none';
+  }
 };
 
 window.initThemeFilterPills = function() {

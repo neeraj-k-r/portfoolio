@@ -2170,9 +2170,14 @@ body.studio .dribbble-theme-card {
   border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
   border-radius: 16px !important;
   overflow: hidden !important;
-  display: flex !important;
+  display: flex;
   flex-direction: column !important;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.studio #edTplGrid .tpl-card.theme-card-hidden,
+body.studio #edTplGrid .tpl-card[style*="display: none"] {
+  display: none !important;
 }
 
 body.studio #edTplGrid .tpl-card.dribbble-theme-card .tpl-preview,

@@ -29,8 +29,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
 <script src="https://unpkg.com/scrollreveal"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-<link rel="stylesheet" href="style.css?v=20261110c">
-<link rel="stylesheet" href="ui.css?v=20261110c">
+<link rel="stylesheet" href="style.css?v=20261111">
+<link rel="stylesheet" href="ui.css?v=20261111">
 <link rel="stylesheet" href="templates.css?v=20261110c">
 <link rel="stylesheet" href="resume.css?v=20261030b">
 <link rel="stylesheet" href="pet.css?v=5">
@@ -191,7 +191,12 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
       <button type="button" class="lx-filter-btn" data-filter="visual" onclick="filterLandingThemes('visual', this)"><i class="fa-solid fa-palette"></i> Visual Artist (23)</button>
     </div>
     <div class="lx-gallery">
-      <!-- Developer Themes (16) -->
+      <div class="theme-grid-divider tech-divider" data-divider="tech">
+              <span class="divider-icon">💻</span>
+              <span class="divider-title">Developer Portfolio Themes</span>
+              <span class="divider-sub">High-performance engineering, IDE themes, and minimal portfolios (35)</span>
+            </div>
+            <!-- Developer Themes (35) -->
       <button class="lx-theme-card" data-track="tech" data-theme="midnight" data-name="Midnight Wow" aria-label="Preview Midnight Wow theme">
         <span class="lx-tp lx-tp-midnight"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Midnight <em>Dark neon</em></span>
@@ -289,7 +294,12 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <span class="lx-theme-name">Cloud Blue <em>Sky blue · Friendly</em></span>
       </button>
 
-      <!-- Visual Artist Themes (12) -->
+      <div class="theme-grid-divider visual-divider" data-divider="visual">
+              <span class="divider-icon">🎨</span>
+              <span class="divider-title">Visual Artist & Designer Themes</span>
+              <span class="divider-sub">Editorial covers, gallery walls, cinema reels, and creative direction (29)</span>
+            </div>
+            <!-- Visual Artist Themes (29) -->
       <button class="lx-theme-card" data-track="visual" data-theme="gallery" data-name="Gallery" aria-label="Preview Gallery theme">
         <span class="lx-tp lx-tp-gallery"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <span class="lx-theme-name">Gallery <em>Visual masonry</em></span>
@@ -822,7 +832,12 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div class="full">
             <label class="flabel">Pick your portfolio theme *</label>
             <div class="tpl-grid" id="tplGrid">
-              <!-- Developer Themes (16) -->
+              <div class="theme-grid-divider tech-divider" data-divider="tech">
+              <span class="divider-icon">💻</span>
+              <span class="divider-title">Developer Portfolio Themes</span>
+              <span class="divider-sub">High-performance engineering, IDE themes, and minimal portfolios (35)</span>
+            </div>
+            <!-- Developer Themes (35) -->
               <label class="tpl-card selected" data-vtrack="tech"><input type="radio" name="tpl" value="midnight" checked><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight Wow</b><span>Dark + neon • Dev/AI</span></div></label>
               <label class="tpl-card" data-vtrack="tech"><input type="radio" name="tpl" value="minimal"><div class="tpl-preview minimal">📄</div><div class="tpl-meta"><b>Minimal Clean</b><span>Light • ATS friendly</span></div></label>
               <label class="tpl-card" data-vtrack="tech"><input type="radio" name="tpl" value="terminal"><div class="tpl-preview terminal">>_</div><div class="tpl-meta"><b>Terminal Hacker</b><span>Mono • Backend/OSS</span></div></label>
@@ -859,7 +874,12 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
               <label class="tpl-card" data-vtrack="tech"><input type="radio" name="tpl" value="neon"><div class="tpl-preview neon">🌆</div><div class="tpl-meta"><b>Neon Cyberpunk</b><span>3D grid floor • Laser glow</span></div></label>
               <label class="tpl-card" data-vtrack="tech"><input type="radio" name="tpl" value="hacker"><div class="tpl-preview hacker">💻</div><div class="tpl-meta"><b>Hacker Terminal</b><span>Phosphor green • CRT scanlines</span></div></label>
 
-              <!-- Visual Artist Themes (12) -->
+              <div class="theme-grid-divider visual-divider" data-divider="visual">
+              <span class="divider-icon">🎨</span>
+              <span class="divider-title">Visual Artist & Designer Themes</span>
+              <span class="divider-sub">Editorial covers, gallery walls, cinema reels, and creative direction (29)</span>
+            </div>
+            <!-- Visual Artist Themes (29) -->
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="gallery"><div class="tpl-preview gallery">🖼️</div><div class="tpl-meta"><b>Gallery</b><span>Visual masonry grid</span></div></label>
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="studio"><div class="tpl-preview studio">☀️</div><div class="tpl-meta"><b>Studio</b><span>Light editorial covers</span></div></label>
               <label class="tpl-card" data-vtrack="visual" style="display:none"><input type="radio" name="tpl" value="noir"><div class="tpl-preview noir">🌙</div><div class="tpl-meta"><b>Noir</b><span>Dark full-bleed</span></div></label>
@@ -1115,14 +1135,19 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             </div>
           </div>
           <div class="theme-filter-pills" id="themeFilterPills">
-            <button type="button" class="filter-pill active" data-filter="all">All Showcase <span class="pill-count">40</span></button>
-            <button type="button" class="filter-pill" data-filter="tech">💻 Developer <span class="pill-count">21</span></button>
-            <button type="button" class="filter-pill" data-filter="visual">🎨 Visual Artists <span class="pill-count">19</span></button>
-            <button type="button" class="filter-pill" data-filter="dark">🌙 Dark Mode <span class="pill-count">24</span></button>
-            <button type="button" class="filter-pill" data-filter="minimal">🕊️ Minimal <span class="pill-count">12</span></button>
+            <button type="button" class="filter-pill active" data-filter="all">All Showcase <span class="pill-count">64</span></button>
+            <button type="button" class="filter-pill" data-filter="tech">💻 Developer <span class="pill-count">35</span></button>
+            <button type="button" class="filter-pill" data-filter="visual">🎨 Visual Artists <span class="pill-count">29</span></button>
+            <button type="button" class="filter-pill" data-filter="dark">🌙 Dark Mode <span class="pill-count">36</span></button>
+            <button type="button" class="filter-pill" data-filter="minimal">🕊️ Minimal <span class="pill-count">18</span></button>
           </div>
           <div class="tpl-grid" id="edTplGrid">
-            <!-- Developer Themes (16) -->
+            <div class="theme-grid-divider tech-divider" data-divider="tech">
+              <span class="divider-icon">💻</span>
+              <span class="divider-title">Developer Portfolio Themes</span>
+              <span class="divider-sub">High-performance engineering, IDE themes, and minimal portfolios (35)</span>
+            </div>
+            <!-- Developer Themes (35) -->
             <label class="tpl-card" data-vtrack="tech"><input type="radio" name="edtpl" value="midnight"><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight Wow</b><span>Dark neon theme</span></div></label>
             <label class="tpl-card" data-vtrack="tech"><input type="radio" name="edtpl" value="minimal"><div class="tpl-preview minimal">📄</div><div class="tpl-meta"><b>Minimal Clean</b><span>Light ATS design</span></div></label>
             <label class="tpl-card" data-vtrack="tech"><input type="radio" name="edtpl" value="terminal"><div class="tpl-preview terminal">>_</div><div class="tpl-meta"><b>Terminal Hacker</b><span>Hacker green mono</span></div></label>
@@ -1159,7 +1184,12 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             <label class="tpl-card" data-vtrack="tech"><input type="radio" name="edtpl" value="neon"><div class="tpl-preview neon">🌆</div><div class="tpl-meta"><b>Neon Cyberpunk</b><span>3D grid floor · Laser glow</span></div></label>
             <label class="tpl-card" data-vtrack="tech"><input type="radio" name="edtpl" value="hacker"><div class="tpl-preview hacker">💻</div><div class="tpl-meta"><b>Hacker Terminal</b><span>Phosphor green · CRT scanlines</span></div></label>
 
-            <!-- Visual Artist Themes (12) -->
+            <div class="theme-grid-divider visual-divider" data-divider="visual">
+              <span class="divider-icon">🎨</span>
+              <span class="divider-title">Visual Artist & Designer Themes</span>
+              <span class="divider-sub">Editorial covers, gallery walls, cinema reels, and creative direction (29)</span>
+            </div>
+            <!-- Visual Artist Themes (29) -->
             <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="gallery"><div class="tpl-preview gallery">🖼️</div><div class="tpl-meta"><b>Gallery</b><span>Visual masonry grid</span></div></label>
             <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="studio"><div class="tpl-preview studio">☀️</div><div class="tpl-meta"><b>Studio</b><span>Light editorial covers</span></div></label>
             <label class="tpl-card" data-vtrack="visual"><input type="radio" name="edtpl" value="noir"><div class="tpl-preview noir">🌙</div><div class="tpl-meta"><b>Noir</b><span>Dark full-bleed</span></div></label>
@@ -2353,6 +2383,14 @@ async function paintFeaturedPortfolios() {
 function paintTrackTabs(profile) {
   const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(String((profile && profile.template) || '').toLowerCase());
   document.body.classList.toggle('visual-user', visual);
+
+  // Synchronize theme showcase filter pills with user track so themes are not mixed up
+  const targetFilter = visual ? 'visual' : 'tech';
+  const pills = document.querySelectorAll('#themeFilterPills .filter-pill');
+  if (pills.length) {
+    pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-filter') === targetFilter));
+  }
+
   if (typeof window.filterThemeShowcase === 'function') {
     window.filterThemeShowcase();
   }
@@ -2827,6 +2865,16 @@ if ($('builderForm')) {
             <button type="button" class="dribbble-overlay-btn tpl-preview-eye" title="Preview ${name} theme" aria-label="Preview ${name} theme"><i class="fa-solid fa-eye"></i></button>
           </div>
         </div>`;
+
+      const selectBtn = prev.querySelector('.shot-select-btn');
+      if (selectBtn) {
+        selectBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          c.click();
+          selectBtn.textContent = '✓ Selected';
+          setTimeout(() => { selectBtn.textContent = 'Select Theme'; }, 1500);
+        });
+      }
 
       const eyeBtn = prev.querySelector('.tpl-preview-eye');
       if (eyeBtn) {

@@ -587,7 +587,7 @@
       tags: ["masonry","fine-art","photography","grid","visual"],
       likes: 91,
       views: '13.4k',
-      author: VISUAL_AUTHORS['gallery'], author: TECH_AUTHORS['gallery'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['gallery'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Gallery',
       subtitle: 'Clean visual masonry grid for fine art photography',
       track: 'visual',
@@ -602,7 +602,7 @@
       tags: ["editorial","covers","daylight","magazine","art"],
       likes: 82,
       views: '11.9k',
-      author: VISUAL_AUTHORS['studio'], author: TECH_AUTHORS['studio'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['studio'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Studio',
       subtitle: 'Bright daylight editorial covers with clean margins',
       track: 'visual',
@@ -617,7 +617,7 @@
       tags: ["monochrome","black-and-white","cinematic","full-bleed"],
       likes: 107,
       views: '16.2k',
-      author: VISUAL_AUTHORS['noir'], author: TECH_AUTHORS['noir'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['noir'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Noir',
       subtitle: 'Cinematic full-bleed monochromatic black & white',
       track: 'visual',
@@ -632,7 +632,7 @@
       tags: ["framed","walls","classic","curatorial","serene"],
       likes: 74,
       views: '10.1k',
-      author: VISUAL_AUTHORS['museum'], author: TECH_AUTHORS['museum'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['museum'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Museum',
       subtitle: 'Framed gallery walls with classic museum plaques',
       track: 'visual',
@@ -647,7 +647,7 @@
       tags: ["plates","swiss","art-book","publication","clean"],
       likes: 66,
       views: '8.9k',
-      author: VISUAL_AUTHORS['catalog'], author: TECH_AUTHORS['catalog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['catalog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Catalog',
       subtitle: 'Swiss art-book publication plates with index columns',
       track: 'visual',
@@ -662,7 +662,7 @@
       tags: ["pastel","dreamscape","ethereal","soft-blur","blush"],
       likes: 93,
       views: '13.7k',
-      author: VISUAL_AUTHORS['bloom'], author: TECH_AUTHORS['bloom'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['bloom'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Bloom',
       subtitle: 'Ethereal pastel dreamscape with soft blur transitions',
       track: 'visual',
@@ -677,7 +677,7 @@
       tags: ["framer","fluid","kinetic","gradients","animation"],
       likes: 162,
       views: '25.0k',
-      author: VISUAL_AUTHORS['motion'], author: TECH_AUTHORS['motion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['motion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Motion Flow',
       subtitle: 'Smooth fluid animation cards with kinetic typography',
       track: 'visual',
@@ -692,7 +692,7 @@
       tags: ["haute-couture","luxury","serif","fashion","editorial"],
       likes: 114,
       views: '17.3k',
-      author: VISUAL_AUTHORS['atelier'], author: TECH_AUTHORS['atelier'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['atelier'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Atelier',
       subtitle: 'Haute couture fashion house monograph with serif titles',
       track: 'visual',
@@ -707,7 +707,7 @@
       tags: ["widescreen","a24","hud","stills","cinematic"],
       likes: 139,
       views: '22.8k',
-      author: VISUAL_AUTHORS['cinema'], author: TECH_AUTHORS['cinema'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['cinema'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Cinema',
       subtitle: '2.39:1 widescreen stills with live film HUD gauges',
       track: 'visual',
@@ -722,7 +722,7 @@
       tags: ["architectural","blueprint","plates","drafting","geometry"],
       likes: 78,
       views: '11.0k',
-      author: VISUAL_AUTHORS['arch'], author: TECH_AUTHORS['arch'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['arch'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Arch',
       subtitle: 'Architectural blueprint drafting plates with scale rules',
       track: 'visual',
@@ -737,7 +737,7 @@
       tags: ["risograph","indie","print","washi-tape","diy"],
       likes: 96,
       views: '13.9k',
-      author: VISUAL_AUTHORS['zine'], author: TECH_AUTHORS['zine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['zine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Zine',
       subtitle: 'Risograph indie print collage with washi tape accents',
       track: 'visual',
@@ -752,7 +752,7 @@
       tags: ["wabi-sabi","stone","ceramic","calm","earthy"],
       likes: 87,
       views: '12.4k',
-      author: VISUAL_AUTHORS['zen'], author: TECH_AUTHORS['zen'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['zen'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Zen',
       subtitle: 'Wabi-sabi ceramic and stone aesthetic with calm rhythm',
       track: 'visual',
@@ -767,7 +767,7 @@
       tags: ["digital-design","loupe","orange","interactive","agency"],
       likes: 149,
       views: '23.5k',
-      author: VISUAL_AUTHORS['desire'], author: TECH_AUTHORS['desire'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['desire'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Desire',
       subtitle: 'Vibrant modern digital designer portfolio with loupe zoom',
       track: 'visual',
@@ -782,7 +782,7 @@
       tags: ["prism","holographic","iridescent","glassmorphism"],
       likes: 124,
       views: '18.6k',
-      author: VISUAL_AUTHORS['lumina'], author: TECH_AUTHORS['lumina'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['lumina'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Lumina',
       subtitle: 'Holographic prism iridescent glassmorphic layout',
       track: 'visual',
@@ -797,7 +797,7 @@
       tags: ["didot","high-fashion","editorial","runway","chic"],
       likes: 118,
       views: '17.5k',
-      author: VISUAL_AUTHORS['vogue'], author: TECH_AUTHORS['vogue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['vogue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Vogue',
       subtitle: 'High-fashion editorial Didot display typography',
       track: 'visual',
@@ -812,7 +812,7 @@
       tags: ["35mm","cinema-reel","darkroom","sprockets","analog"],
       likes: 98,
       views: '14.7k',
-      author: VISUAL_AUTHORS['filmstrip'], author: TECH_AUTHORS['filmstrip'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['filmstrip'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Filmstrip',
       subtitle: '35mm cinema reel darkroom with sprocket hole border',
       track: 'visual',
@@ -827,7 +827,7 @@
       tags: ["venice","exhibition","contemporary","art","international"],
       likes: 89,
       views: '12.9k',
-      author: VISUAL_AUTHORS['biennale'], author: TECH_AUTHORS['biennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['biennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Biennale',
       subtitle: 'Venice international art exhibition curatorial catalogue',
       track: 'visual',
@@ -842,7 +842,7 @@
       tags: ["graphite","charcoal","moleskine","texture","hand-drawn"],
       likes: 83,
       views: '11.8k',
-      author: VISUAL_AUTHORS['sketchbook'], author: TECH_AUTHORS['sketchbook'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['sketchbook'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Sketchbook',
       subtitle: 'Graphite pencil sketches and textured kraft paper',
       track: 'visual',
@@ -857,7 +857,7 @@
       tags: ["serpentine","spatial","geometry","architecture","ambient"],
       likes: 79,
       views: '10.9k',
-      author: VISUAL_AUTHORS['pavilion'], author: TECH_AUTHORS['pavilion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['pavilion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Pavilion',
       subtitle: 'Architectural spatial pavilion with ambient geometry',
       track: 'visual',
@@ -872,7 +872,7 @@
       tags: ["archive","curatorial","research","notes","scholarly"],
       likes: 72,
       views: '9.7k',
-      author: VISUAL_AUTHORS['documenta'], author: TECH_AUTHORS['documenta'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['documenta'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Documenta',
       subtitle: 'Curatorial research archive with archival notes',
       track: 'visual',
@@ -887,7 +887,7 @@
       tags: ["milan","industrial-design","exposition","geometric"],
       likes: 81,
       views: '11.4k',
-      author: VISUAL_AUTHORS['triennale'], author: TECH_AUTHORS['triennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['triennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Triennale',
       subtitle: 'Milanese industrial design exposition catalogue',
       track: 'visual',
@@ -902,7 +902,7 @@
       tags: ["gilded","gold-leaf","emerald","palatial","ornate"],
       likes: 95,
       views: '13.8k',
-      author: VISUAL_AUTHORS['salon'], author: TECH_AUTHORS['salon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['salon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Salon',
       subtitle: 'Emerald gilded gallery with gold leaf ornaments',
       track: 'visual',
@@ -917,7 +917,7 @@
       tags: ["mixed-media","collage","vibrant","vector","illustration"],
       likes: 90,
       views: '12.7k',
-      author: VISUAL_AUTHORS['illustra'], author: TECH_AUTHORS['illustra'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['illustra'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Illustra',
       subtitle: 'Modern mixed-media illustration and graphic art grid',
       track: 'visual',
@@ -932,7 +932,7 @@
       tags: ["berlin","generative","soundwaves","creative-tech","club"],
       likes: 134,
       views: '20.3k',
-      author: VISUAL_AUTHORS['techno'], author: TECH_AUTHORS['techno'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['techno'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Techno',
       subtitle: 'Berlin creative tech laboratory with dynamic soundwaves',
       track: 'visual',
@@ -947,7 +947,7 @@
       tags: ["desk-collage","vintage","dark-wood","artifacts","warm"],
       likes: 105,
       views: '15.9k',
-      author: VISUAL_AUTHORS['analog'], author: TECH_AUTHORS['analog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['analog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Analog',
       subtitle: 'Dark vintage desk collage with physical artifacts',
       track: 'visual',
@@ -962,7 +962,7 @@
       tags: ["classical-sculpture","celestial","violet","statue","cosmic"],
       likes: 112,
       views: '16.8k',
-      author: VISUAL_AUTHORS['mythos'], author: TECH_AUTHORS['mythos'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['mythos'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Mythos',
       subtitle: 'Cosmic violet classical sculpture and celestial sphere',
       track: 'visual',
@@ -977,7 +977,7 @@
       tags: ["video-director","tokyo","neon-hud","timeline","motion"],
       likes: 151,
       views: '23.9k',
-      author: VISUAL_AUTHORS['suki'], author: TECH_AUTHORS['suki'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['suki'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Suki',
       subtitle: 'Cyber Tokyo video director with neon HUD interface',
       track: 'visual',
@@ -992,7 +992,7 @@
       tags: ["multidisciplinary","maker","seamless-tiles","narrative","craft"],
       likes: 147,
       views: '22.4k',
-      author: VISUAL_AUTHORS['lo'], author: TECH_AUTHORS['lo'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['lo'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Lo',
       subtitle: 'Multidisciplinary maker narrative with seamless art tiles',
       track: 'visual',
@@ -1007,7 +1007,7 @@
       tags: ["art-director","wipe-motion","high-contrast","portrait","bold"],
       likes: 173,
       views: '27.6k',
-      author: VISUAL_AUTHORS['mara'], author: TECH_AUTHORS['mara'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
+      author: VISUAL_AUTHORS['mara'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Mara',
       subtitle: 'High-contrast art director with wipe motion interactions',
       track: 'visual',
@@ -1445,11 +1445,344 @@
 
       case 'studio':
         return `
-          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-url">studio.portfoolio.me</span></div>
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">studio.portfoolio.me</span></div>
           <div class="shot-body shot-studio-body">
-            <div class="shot-badge-mono">DESIGN STUDIO</div>
-            <div class="shot-heading-black">Atelier Form</div>
-            <div class="studio-roster">Nike • Apple • Stripe • Vercel</div>
+            <div class="studio-mag-top">
+              <span class="studio-issue">VOL. 04 / EDITORIAL</span>
+              <span class="studio-loc">ZÜRICH • PARIS</span>
+            </div>
+            <div class="studio-hero-title">STUDIO MONOGRAPH</div>
+            <div class="studio-mag-grid">
+              <div class="studio-col-left">
+                <div class="studio-lead-text">Selected works in creative direction, brand identity and spatial typography.</div>
+                <div class="studio-client-tag">CLIENTS // NIKE • APPLE • STRIPE</div>
+              </div>
+              <div class="studio-col-right">
+                <div class="studio-photo-mock">
+                  <div class="studio-silhouette"></div>
+                  <span class="studio-photo-label">FIG. 01 — ARCHETYPE</span>
+                </div>
+              </div>
+            </div>
+          </div>`;
+
+      case 'noir':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot sc-red"></span><span class="sc-dot sc-yellow"></span><span class="sc-dot sc-green"></span><span class="sc-url">noir.portfoolio.me</span></div>
+          <div class="shot-body shot-noir-body">
+            <div class="noir-grain-overlay"></div>
+            <div class="noir-top-bar">
+              <span class="noir-aspect">35MM MONOCHROME</span>
+              <span class="noir-year">EST. 2026</span>
+            </div>
+            <div class="noir-frame-center">
+              <div class="noir-title">CINEMA VÉRITÉ</div>
+              <div class="noir-subtitle">DIRECTED BY KAELEN CROSS</div>
+            </div>
+            <div class="noir-bottom-meta">
+              <span>FULL BLEED</span>
+              <span>HIGH CONTRAST</span>
+              <span>ISO 400</span>
+            </div>
+          </div>`;
+
+      case 'museum':
+        return `
+          <div class="shot-chrome museum"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">museum.portfoolio.me</span></div>
+          <div class="shot-body shot-museum-body">
+            <div class="museum-gallery-wall">
+              <div class="museum-art-frame">
+                <div class="museum-canvas-art">
+                  <div class="canvas-color-block block-ochre"></div>
+                  <div class="canvas-color-block block-cobalt"></div>
+                </div>
+              </div>
+              <div class="museum-plaque">
+                <div class="plaque-artist">JULIAN VANE</div>
+                <div class="plaque-title">Composition in Ultramarine & Ochre, 2026</div>
+                <div class="plaque-medium">Oil and cold wax on linen • Room 4B</div>
+              </div>
+            </div>
+          </div>`;
+
+      case 'catalog':
+        return `
+          <div class="shot-chrome swiss"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">catalog.portfoolio.me</span></div>
+          <div class="shot-body shot-catalog-body">
+            <div class="catalog-grid-header">
+              <span class="catalog-swiss-mark">SWISS ART BOOK</span>
+              <span class="catalog-plate-num">PLATE 04</span>
+            </div>
+            <div class="catalog-headline">CATALOGUE RAISONNÉ</div>
+            <div class="catalog-two-plate">
+              <div class="catalog-plate-item p1">
+                <div class="catalog-thumb t1"></div>
+                <span class="catalog-idx">NO. 104 / MONOLITH</span>
+              </div>
+              <div class="catalog-plate-item p2">
+                <div class="catalog-thumb t2"></div>
+                <span class="catalog-idx">NO. 105 / GEOMETRY</span>
+              </div>
+            </div>
+          </div>`;
+
+      case 'bloom':
+        return `
+          <div class="shot-chrome bloom"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">bloom.portfoolio.me</span></div>
+          <div class="shot-body shot-bloom-body">
+            <div class="bloom-gradient-mesh"></div>
+            <div class="bloom-glass-card">
+              <div class="bloom-badge">🌸 DREAMSCAPE</div>
+              <div class="bloom-title">Aoi Tanaka</div>
+              <div class="bloom-desc">Floral Poetics & Ambient Visuals</div>
+              <div class="bloom-pills">
+                <span>Pastel</span><span>Ambient</span><span>Serene</span>
+              </div>
+            </div>
+          </div>`;
+
+      case 'motion':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">motion.portfoolio.me</span></div>
+          <div class="shot-body shot-motion-body">
+            <div class="motion-hud-top">
+              <span class="motion-pill">120 FPS KINETIC</span>
+              <span class="motion-timing">bezier(0.42, 0, 0.58, 1)</span>
+            </div>
+            <div class="motion-title">LEO VANCE</div>
+            <div class="motion-sub">Creative Motion & Interaction Lab</div>
+            <div class="motion-timeline-track">
+              <div class="motion-curve-line"></div>
+              <div class="motion-scrubber-point p1"></div>
+              <div class="motion-scrubber-point p2"></div>
+            </div>
+          </div>`;
+
+      case 'atelier':
+        return `
+          <div class="shot-chrome couture"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">atelier.portfoolio.me</span></div>
+          <div class="shot-body shot-atelier-body">
+            <div class="atelier-monogram">MAISON DELACROIX</div>
+            <div class="atelier-rule-gold"></div>
+            <div class="atelier-season">HAUTE COUTURE • PARIS</div>
+            <div class="atelier-card-grid">
+              <div class="atelier-card c1"><span>LOOK 01</span></div>
+              <div class="atelier-card c2"><span>LOOK 02</span></div>
+            </div>
+            <div class="atelier-num">MMXXVI COLLECTION</div>
+          </div>`;
+
+      case 'arch':
+        return `
+          <div class="shot-chrome cad"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">arch.portfoolio.me</span></div>
+          <div class="shot-body shot-arch-body">
+            <div class="arch-blueprint-grid"></div>
+            <div class="arch-top-meta">
+              <span>ELEVATION A-A</span>
+              <span>SCALE 1:50</span>
+            </div>
+            <div class="arch-drawing">
+              <div class="arch-roof-truss"></div>
+              <div class="arch-columns-wire"></div>
+              <span class="arch-dimension-line"><i class="dim-arrow"></i> 32.4m <i class="dim-arrow"></i></span>
+            </div>
+            <div class="arch-title">SOREN KJAER ARCHITECTS</div>
+          </div>`;
+
+      case 'zine':
+        return `
+          <div class="shot-chrome riso"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">zine.portfoolio.me</span></div>
+          <div class="shot-body shot-zine-body">
+            <div class="zine-washi-tape"></div>
+            <div class="zine-badge">DIY RISO // ISSUE 07</div>
+            <div class="zine-cutout-title">PUNK & FORM</div>
+            <div class="zine-halftone-box">
+              <div class="zine-photo-duotone"></div>
+              <span class="zine-caption">PHOTOCOPY ARCHIVE</span>
+            </div>
+          </div>`;
+
+      case 'zen':
+        return `
+          <div class="shot-chrome washi"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">zen.portfoolio.me</span></div>
+          <div class="shot-body shot-zen-body">
+            <div class="zen-enso-circle"></div>
+            <div class="zen-badge">間 • NEGATIVE SPACE</div>
+            <div class="zen-title">KYOTO CERAMICS</div>
+            <div class="zen-sub">Kenji Sato • Wabi-Sabi Studio</div>
+            <div class="zen-stone-row"><span class="stone s1"></span><span class="stone s2"></span></div>
+          </div>`;
+
+      case 'lumina':
+        return `
+          <div class="shot-chrome glass"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">lumina.portfoolio.me</span></div>
+          <div class="shot-body shot-lumina-body">
+            <div class="lumina-prism-orb"></div>
+            <div class="lumina-card">
+              <div class="lumina-tag">PRISM & OPTICS</div>
+              <div class="lumina-title">Zara Chen</div>
+              <div class="lumina-sub">Refractive Spatial Graphics</div>
+            </div>
+          </div>`;
+
+      case 'vogue':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">vogue.portfoolio.me</span></div>
+          <div class="shot-body shot-vogue-body">
+            <div class="vogue-masthead">VOGUE</div>
+            <div class="vogue-issue-bar">SEPTEMBER ISSUE • RUNWAY 2026</div>
+            <div class="vogue-model-card">
+              <div class="vogue-model-silhouette"></div>
+              <div class="vogue-headline">HAUTE COUTURE & FUTURE FORM</div>
+            </div>
+          </div>`;
+
+      case 'filmstrip':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot sc-red"></span><span class="sc-url">filmstrip.portfoolio.me</span></div>
+          <div class="shot-body shot-filmstrip-body">
+            <div class="film-sprockets top"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="film-frame-center">
+              <div class="film-kodak-mark">KODAK 400TX • 24A</div>
+              <div class="film-photo-inner">
+                <div class="film-title">DARIUS FINCH</div>
+                <div class="film-sub">35mm Darkroom & Film Reel</div>
+              </div>
+            </div>
+            <div class="film-sprockets bottom"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>`;
+
+      case 'biennale':
+        return `
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">biennale.portfoolio.me</span></div>
+          <div class="shot-body shot-biennale-body">
+            <div class="biennale-red-stripe"></div>
+            <div class="biennale-header">LA BIENNALE DI VENEZIA</div>
+            <div class="biennale-sub">60TH INTERNATIONAL ART EXHIBITION</div>
+            <div class="biennale-curator">Curated by Marco Bellini</div>
+            <div class="biennale-box-grid"><span class="b-box">PAVILION 01</span><span class="b-box">PAVILION 02</span></div>
+          </div>`;
+
+      case 'sketchbook':
+        return `
+          <div class="shot-chrome paper"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">sketchbook.portfoolio.me</span></div>
+          <div class="shot-body shot-sketchbook-body">
+            <div class="sketch-rings"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="sketch-page">
+              <div class="sketch-tag">GRAPHITE & CHARCOAL</div>
+              <div class="sketch-title">Ines Moreno</div>
+              <div class="sketch-hatch-art">
+                <div class="hatch-strokes"></div>
+              </div>
+              <div class="sketch-date">OCTOBER 2026 • SKETCHBOOK N° 12</div>
+            </div>
+          </div>`;
+
+      case 'pavilion':
+        return `
+          <div class="shot-chrome arch"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">pavilion.portfoolio.me</span></div>
+          <div class="shot-body shot-pavilion-body">
+            <div class="pavilion-tag">SERPENTINE GALLERY PAVILION</div>
+            <div class="pavilion-axonometric">
+              <div class="pavilion-plane pl1"></div>
+              <div class="pavilion-plane pl2"></div>
+            </div>
+            <div class="pavilion-title">ARIS THORNE ARCHITECTURE</div>
+          </div>`;
+
+      case 'documenta':
+        return `
+          <div class="shot-chrome light"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">documenta.portfoolio.me</span></div>
+          <div class="shot-body shot-documenta-body">
+            <div class="doc-stamp">ARCHIVE // DOC-XV</div>
+            <div class="doc-title">KASSEL CURATORIAL</div>
+            <div class="doc-sub">Hannah Weber • Research & Critical Studies</div>
+            <div class="doc-table">
+              <div class="doc-row"><span>01 / MANIFESTO</span><span>DOC.41</span></div>
+              <div class="doc-row"><span>02 / DIALOGUES</span><span>DOC.42</span></div>
+            </div>
+          </div>`;
+
+      case 'triennale':
+        return `
+          <div class="shot-chrome swiss"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">triennale.portfoolio.me</span></div>
+          <div class="shot-body shot-triennale-body">
+            <div class="triennale-badge">MILANO TRIENNALE</div>
+            <div class="triennale-shapes">
+              <div class="shape-circle-red"></div>
+              <div class="shape-rect-black"></div>
+            </div>
+            <div class="triennale-title">LUCA ROSSI DESIGN</div>
+          </div>`;
+
+      case 'salon':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot sc-yellow"></span><span class="sc-url">salon.portfoolio.me</span></div>
+          <div class="shot-body shot-salon-body">
+            <div class="salon-gold-frame">
+              <div class="salon-frame-inner">
+                <div class="salon-spotlight"></div>
+                <div class="salon-title">VERONIQUE S.</div>
+                <div class="salon-sub">Gilded Salon & Classical Portraits</div>
+              </div>
+            </div>
+          </div>`;
+
+      case 'illustra':
+        return `
+          <div class="shot-chrome pop"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">illustra.portfoolio.me</span></div>
+          <div class="shot-body shot-illustra-body">
+            <div class="illustra-torn-edge"></div>
+            <div class="illustra-botanical">🌺</div>
+            <div class="illustra-title">MAYA SOL</div>
+            <div class="illustra-sub">Mixed-Media & Editorial Collage</div>
+          </div>`;
+
+      case 'techno':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot sc-green"></span><span class="sc-url">techno.portfoolio.me</span></div>
+          <div class="shot-body shot-techno-body">
+            <div class="techno-matrix-grid"></div>
+            <div class="techno-badge">GEN:ART // 0x7F4A</div>
+            <div class="techno-title">DEXTER HOLT</div>
+            <div class="techno-sub">Creative Technology & Generative Audio</div>
+            <div class="techno-code-line">> initializing canvas shader [OK]</div>
+          </div>`;
+
+      case 'analog':
+        return `
+          <div class="shot-chrome wood"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">analog.portfoolio.me</span></div>
+          <div class="shot-body shot-analog-body">
+            <div class="analog-clip"></div>
+            <div class="analog-polaroid">
+              <div class="polaroid-photo"></div>
+              <div class="polaroid-text">TOBY MERCER // 1994</div>
+            </div>
+          </div>`;
+
+      case 'mythos':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-dot"></span><span class="sc-url">mythos.portfoolio.me</span></div>
+          <div class="shot-body shot-mythos-body">
+            <div class="mythos-moon"></div>
+            <div class="mythos-bust-silhouette">🏛️</div>
+            <div class="mythos-title">CASSIAN COLE</div>
+            <div class="mythos-sub">Celestial Sculpture & Classical Myth</div>
+          </div>`;
+
+      case 'suki':
+        return `
+          <div class="shot-chrome dark"><span class="sc-dot sc-cyan"></span><span class="sc-url">suki.portfoolio.me</span></div>
+          <div class="shot-body shot-suki-body">
+            <div class="suki-nle-header">
+              <span class="suki-tc">00:14:22:18</span>
+              <span class="suki-tag">CYBER NLE TIMELINE</span>
+            </div>
+            <div class="suki-title">SUKI TANAKA</div>
+            <div class="suki-tracks">
+              <div class="suki-track-v"></div>
+              <div class="suki-track-a"></div>
+            </div>
           </div>`;
 
       case 'cinema':
