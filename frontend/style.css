@@ -4666,3 +4666,25 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: #090e17;
   color: #38bdf8;
 }
+
+/* Theme Shot Visuals: Group 7 */
+.dribbble-shot-wave {
+  background: linear-gradient(135deg, #022c22 0%, #064e3b 100%);
+  color: #34d399;
+}
+.dribbble-shot-assistant {
+  background: #202123;
+  color: #10a37f;
+}
+.dribbble-shot-assistant .shot-hero-box {
+  width: 82%;
+  height: 64%;
+  background: #2d2f36;
+  border-radius: 8px;
+  border: 1px solid rgba(16, 163, 127, 0.4);
+}
+.dribbble-shot-console {
+  background: #18181b;
+  color: #f59e0b;
+  font-family: monospace;
+}
