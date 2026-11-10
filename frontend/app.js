@@ -2451,3 +2451,14 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
+window.copyStageLiveUrl = function() {
+  const urlEl = document.getElementById('stageUrlText');
+  if (!urlEl) return;
+  const url = urlEl.textContent.trim();
+  navigator.clipboard.writeText(url).then(() => {
+    if (typeof window.toast === 'function') window.toast('✓ Live URL copied to clipboard!');
+  }).catch(() => {
+    if (typeof window.toast === 'function') window.toast('Copied URL: ' + url);
+  });
+};
