@@ -4892,3 +4892,17 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: #0c071e;
   color: #8b5cf6;
 }
+
+/* Theme Shot Visuals: Group 19 */
+.dribbble-shot-suki {
+  background: #08101e;
+  color: #06b6d4;
+}
+.dribbble-shot-lo {
+  background: #0f0f12;
+  color: #ec4899;
+}
+.dribbble-shot-mara {
+  background: #0a0a0a;
+  color: #ff4d00;
+}
