@@ -1150,6 +1150,28 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         </div>
         <div style="margin-top:16px">
           <label class="flabel">Select Portfolio Theme</label>
+          
+          <!-- Theme Showcase Header & Filter Bar -->
+          <div class="theme-showcase-header">
+            <div class="theme-showcase-titles">
+              <h4 class="theme-showcase-title">✨ Browse Dribbble Theme Showcase</h4>
+              <p class="theme-showcase-desc">Click any showcase card below to preview your live portfolio instantaneously in the stage above.</p>
+            </div>
+            <div class="theme-showcase-tools">
+              <div class="theme-search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="themeSearchInput" placeholder="Search themes, creators, tags..." aria-label="Search themes" />
+                <button type="button" id="themeSearchClear" class="search-clear-btn" style="display:none" aria-label="Clear search">&times;</button>
+              </div>
+            </div>
+          </div>
+          <div class="theme-filter-pills" id="themeFilterPills">
+            <button type="button" class="filter-pill active" data-filter="all">All Showcase <span class="pill-count">40</span></button>
+            <button type="button" class="filter-pill" data-filter="tech">💻 Developer <span class="pill-count">21</span></button>
+            <button type="button" class="filter-pill" data-filter="visual">🎨 Visual Artists <span class="pill-count">19</span></button>
+            <button type="button" class="filter-pill" data-filter="dark">🌙 Dark Mode <span class="pill-count">24</span></button>
+            <button type="button" class="filter-pill" data-filter="minimal">🕊️ Minimal <span class="pill-count">12</span></button>
+          </div>
           <div class="tpl-grid" id="edTplGrid">
             <!-- Developer Themes (16) -->
             <label class="tpl-card" data-vtrack="tech"><input type="radio" name="edtpl" value="midnight"><div class="tpl-preview midnight">🌌</div><div class="tpl-meta"><b>Midnight Wow</b><span>Dark neon theme</span></div></label>
