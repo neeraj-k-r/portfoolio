@@ -2575,3 +2575,24 @@ window.sortThemeShowcase = function(sortBy) {
 
   cards.forEach(c => grid.appendChild(c));
 };
+
+window.handleThemeLikeClick = function(themeId, btnElement) {
+  if (!window.PortfoolioThemeCatalog) return;
+  const isNowLiked = window.PortfoolioThemeCatalog.toggleLikeTheme(themeId);
+  const countEl = btnElement.querySelector('.like-count');
+
+  if (countEl) {
+    const count = window.PortfoolioThemeCatalog.getLikesCount(themeId);
+    countEl.textContent = count;
+  }
+
+  if (isNowLiked) {
+    btnElement.classList.add('liked');
+    const icon = btnElement.querySelector('i');
+    if (icon) icon.className = 'fa-solid fa-heart';
+  } else {
+    btnElement.classList.remove('liked');
+    const icon = btnElement.querySelector('i');
+    if (icon) icon.className = 'fa-regular fa-heart';
+  }
+};
