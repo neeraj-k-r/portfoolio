@@ -547,6 +547,8 @@
   const VISUAL_THEMES = {
     gallery: {
       id: 'gallery',
+      likes: 91,
+      views: '13.4k',
       author: VISUAL_AUTHORS['gallery'], author: TECH_AUTHORS['gallery'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Gallery',
       subtitle: 'Clean visual masonry grid for fine art photography',
@@ -559,6 +561,8 @@
     },
     studio: {
       id: 'studio',
+      likes: 82,
+      views: '11.9k',
       author: VISUAL_AUTHORS['studio'], author: TECH_AUTHORS['studio'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Studio',
       subtitle: 'Bright daylight editorial covers with clean margins',
@@ -571,6 +575,8 @@
     },
     noir: {
       id: 'noir',
+      likes: 107,
+      views: '16.2k',
       author: VISUAL_AUTHORS['noir'], author: TECH_AUTHORS['noir'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Noir',
       subtitle: 'Cinematic full-bleed monochromatic black & white',
@@ -583,6 +589,8 @@
     },
     museum: {
       id: 'museum',
+      likes: 74,
+      views: '10.1k',
       author: VISUAL_AUTHORS['museum'], author: TECH_AUTHORS['museum'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Museum',
       subtitle: 'Framed gallery walls with classic museum plaques',
@@ -595,6 +603,8 @@
     },
     catalog: {
       id: 'catalog',
+      likes: 66,
+      views: '8.9k',
       author: VISUAL_AUTHORS['catalog'], author: TECH_AUTHORS['catalog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Catalog',
       subtitle: 'Swiss art-book publication plates with index columns',
@@ -607,6 +617,8 @@
     },
     bloom: {
       id: 'bloom',
+      likes: 93,
+      views: '13.7k',
       author: VISUAL_AUTHORS['bloom'], author: TECH_AUTHORS['bloom'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Bloom',
       subtitle: 'Ethereal pastel dreamscape with soft blur transitions',
@@ -619,6 +631,8 @@
     },
     motion: {
       id: 'motion',
+      likes: 162,
+      views: '25.0k',
       author: VISUAL_AUTHORS['motion'], author: TECH_AUTHORS['motion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Motion Flow',
       subtitle: 'Smooth fluid animation cards with kinetic typography',
@@ -631,6 +645,8 @@
     },
     atelier: {
       id: 'atelier',
+      likes: 114,
+      views: '17.3k',
       author: VISUAL_AUTHORS['atelier'], author: TECH_AUTHORS['atelier'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Atelier',
       subtitle: 'Haute couture fashion house monograph with serif titles',
@@ -643,6 +659,8 @@
     },
     cinema: {
       id: 'cinema',
+      likes: 139,
+      views: '22.8k',
       author: VISUAL_AUTHORS['cinema'], author: TECH_AUTHORS['cinema'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Cinema',
       subtitle: '2.39:1 widescreen stills with live film HUD gauges',
@@ -655,6 +673,8 @@
     },
     arch: {
       id: 'arch',
+      likes: 78,
+      views: '11.0k',
       author: VISUAL_AUTHORS['arch'], author: TECH_AUTHORS['arch'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Arch',
       subtitle: 'Architectural blueprint drafting plates with scale rules',
@@ -667,6 +687,8 @@
     },
     zine: {
       id: 'zine',
+      likes: 96,
+      views: '13.9k',
       author: VISUAL_AUTHORS['zine'], author: TECH_AUTHORS['zine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Zine',
       subtitle: 'Risograph indie print collage with washi tape accents',
@@ -679,6 +701,8 @@
     },
     zen: {
       id: 'zen',
+      likes: 87,
+      views: '12.4k',
       author: VISUAL_AUTHORS['zen'], author: TECH_AUTHORS['zen'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Zen',
       subtitle: 'Wabi-sabi ceramic and stone aesthetic with calm rhythm',
@@ -691,6 +715,8 @@
     },
     desire: {
       id: 'desire',
+      likes: 149,
+      views: '23.5k',
       author: VISUAL_AUTHORS['desire'], author: TECH_AUTHORS['desire'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Desire',
       subtitle: 'Vibrant modern digital designer portfolio with loupe zoom',
@@ -703,6 +729,8 @@
     },
     lumina: {
       id: 'lumina',
+      likes: 124,
+      views: '18.6k',
       author: VISUAL_AUTHORS['lumina'], author: TECH_AUTHORS['lumina'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Lumina',
       subtitle: 'Holographic prism iridescent glassmorphic layout',
@@ -715,6 +743,8 @@
     },
     vogue: {
       id: 'vogue',
+      likes: 118,
+      views: '17.5k',
       author: VISUAL_AUTHORS['vogue'], author: TECH_AUTHORS['vogue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Vogue',
       subtitle: 'High-fashion editorial Didot display typography',
@@ -727,6 +757,8 @@
     },
     filmstrip: {
       id: 'filmstrip',
+      likes: 98,
+      views: '14.7k',
       author: VISUAL_AUTHORS['filmstrip'], author: TECH_AUTHORS['filmstrip'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Filmstrip',
       subtitle: '35mm cinema reel darkroom with sprocket hole border',
@@ -739,6 +771,8 @@
     },
     biennale: {
       id: 'biennale',
+      likes: 89,
+      views: '12.9k',
       author: VISUAL_AUTHORS['biennale'], author: TECH_AUTHORS['biennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Biennale',
       subtitle: 'Venice international art exhibition curatorial catalogue',
@@ -751,6 +785,8 @@
     },
     sketchbook: {
       id: 'sketchbook',
+      likes: 83,
+      views: '11.8k',
       author: VISUAL_AUTHORS['sketchbook'], author: TECH_AUTHORS['sketchbook'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Sketchbook',
       subtitle: 'Graphite pencil sketches and textured kraft paper',
@@ -763,6 +799,8 @@
     },
     pavilion: {
       id: 'pavilion',
+      likes: 79,
+      views: '10.9k',
       author: VISUAL_AUTHORS['pavilion'], author: TECH_AUTHORS['pavilion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Pavilion',
       subtitle: 'Architectural spatial pavilion with ambient geometry',
@@ -775,6 +813,8 @@
     },
     documenta: {
       id: 'documenta',
+      likes: 72,
+      views: '9.7k',
       author: VISUAL_AUTHORS['documenta'], author: TECH_AUTHORS['documenta'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Documenta',
       subtitle: 'Curatorial research archive with archival notes',
@@ -787,6 +827,8 @@
     },
     triennale: {
       id: 'triennale',
+      likes: 81,
+      views: '11.4k',
       author: VISUAL_AUTHORS['triennale'], author: TECH_AUTHORS['triennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Triennale',
       subtitle: 'Milanese industrial design exposition catalogue',
@@ -799,6 +841,8 @@
     },
     salon: {
       id: 'salon',
+      likes: 95,
+      views: '13.8k',
       author: VISUAL_AUTHORS['salon'], author: TECH_AUTHORS['salon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Salon',
       subtitle: 'Emerald gilded gallery with gold leaf ornaments',
@@ -811,6 +855,8 @@
     },
     illustra: {
       id: 'illustra',
+      likes: 90,
+      views: '12.7k',
       author: VISUAL_AUTHORS['illustra'], author: TECH_AUTHORS['illustra'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Illustra',
       subtitle: 'Modern mixed-media illustration and graphic art grid',
@@ -823,6 +869,8 @@
     },
     techno: {
       id: 'techno',
+      likes: 134,
+      views: '20.3k',
       author: VISUAL_AUTHORS['techno'], author: TECH_AUTHORS['techno'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Techno',
       subtitle: 'Berlin creative tech laboratory with dynamic soundwaves',
@@ -835,6 +883,8 @@
     },
     analog: {
       id: 'analog',
+      likes: 105,
+      views: '15.9k',
       author: VISUAL_AUTHORS['analog'], author: TECH_AUTHORS['analog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Analog',
       subtitle: 'Dark vintage desk collage with physical artifacts',
@@ -847,6 +897,8 @@
     },
     mythos: {
       id: 'mythos',
+      likes: 112,
+      views: '16.8k',
       author: VISUAL_AUTHORS['mythos'], author: TECH_AUTHORS['mythos'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Mythos',
       subtitle: 'Cosmic violet classical sculpture and celestial sphere',
@@ -859,6 +911,8 @@
     },
     suki: {
       id: 'suki',
+      likes: 151,
+      views: '23.9k',
       author: VISUAL_AUTHORS['suki'], author: TECH_AUTHORS['suki'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Suki',
       subtitle: 'Cyber Tokyo video director with neon HUD interface',
@@ -871,6 +925,8 @@
     },
     lo: {
       id: 'lo',
+      likes: 147,
+      views: '22.4k',
       author: VISUAL_AUTHORS['lo'], author: TECH_AUTHORS['lo'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Lo',
       subtitle: 'Multidisciplinary maker narrative with seamless art tiles',
@@ -883,6 +939,8 @@
     },
     mara: {
       id: 'mara',
+      likes: 173,
+      views: '27.6k',
       author: VISUAL_AUTHORS['mara'], author: TECH_AUTHORS['mara'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Mara',
       subtitle: 'High-contrast art director with wipe motion interactions',
