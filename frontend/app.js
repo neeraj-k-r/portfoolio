@@ -2494,3 +2494,35 @@ document.addEventListener('change', (e) => {
     window.renderLiveThemeStage(e.target.value);
   }
 });
+
+window.filterThemeShowcase = function() {
+  const searchInput = document.getElementById('themeSearchInput');
+  const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+
+  const activePill = document.querySelector('.filter-pill.active');
+  const filter = activePill ? activePill.getAttribute('data-filter') : 'all';
+
+  const cards = document.querySelectorAll('#edTplGrid .tpl-card, #edTplGrid .dribbble-theme-card');
+  cards.forEach(card => {
+    const inp = card.querySelector('input[name="edtpl"]');
+    if (!inp) return;
+    const theme = inp.value.toLowerCase();
+    const meta = (window.PortfoolioThemeCatalog && window.PortfoolioThemeCatalog.getTheme(theme)) || {};
+
+    let matchesFilter = true;
+    if (filter === 'tech') matchesFilter = meta.track === 'tech';
+    else if (filter === 'visual') matchesFilter = meta.track === 'visual';
+    else if (filter === 'dark') matchesFilter = meta.dark === true;
+    else if (filter === 'minimal') matchesFilter = meta.tags && (meta.tags.includes('minimal') || meta.tags.includes('clean'));
+
+    let matchesQuery = true;
+    if (query) {
+      const title = (meta.title || '').toLowerCase();
+      const author = (meta.author && meta.author.name ? meta.author.name : '').toLowerCase();
+      const tags = (meta.tags || []).join(' ').toLowerCase();
+      matchesQuery = theme.includes(query) || title.includes(query) || author.includes(query) || tags.includes(query);
+    }
+
+    card.style.display = (matchesFilter && matchesQuery) ? '' : 'none';
+  });
+};
