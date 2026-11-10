@@ -4751,3 +4751,21 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   color: #c2410c;
   font-family: serif;
 }
+
+/* Theme Shot Visuals: Group 11 */
+.dribbble-shot-bold {
+  background: #09090b;
+  color: #a3e635;
+}
+.dribbble-shot-clean {
+  background: #f8fafc;
+  color: #4f46e5;
+}
+.dribbble-shot-vibrant {
+  background: linear-gradient(135deg, #fae8ff 0%, #ede9fe 100%);
+  color: #d946ef;
+}
+.dribbble-shot-neon {
+  background: #0f051d;
+  color: #f43f5e;
+}
