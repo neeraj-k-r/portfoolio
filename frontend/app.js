@@ -2372,3 +2372,33 @@ window.renderLiveThemeStage = function(theme, force) {
     if (overlay) overlay.classList.remove('active');
   };
 };
+
+window.selectThemeLive = function(theme) {
+  const t = (theme || 'midnight').toLowerCase();
+
+  // Update radio inputs in Studio grid
+  const radio = document.querySelector(`#edTplGrid input[name="edtpl"][value="${t}"]`);
+  if (radio) {
+    radio.checked = true;
+    radio.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  // Update selected class on cards
+  document.querySelectorAll('#edTplGrid .tpl-card, #edTplGrid .dribbble-theme-card').forEach(card => {
+    const cardInp = card.querySelector('input[name="edtpl"]');
+    if (cardInp && cardInp.value.toLowerCase() === t) {
+      card.classList.add('selected');
+      card.classList.add('active-theme');
+    } else {
+      card.classList.remove('selected');
+      card.classList.remove('active-theme');
+    }
+  });
+
+  // Render live stage immediately
+  window.renderLiveThemeStage(t);
+
+  if (window.activeUserProfile) {
+    window.activeUserProfile.template = t;
+  }
+};
