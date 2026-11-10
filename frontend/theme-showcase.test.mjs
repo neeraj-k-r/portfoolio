@@ -33,7 +33,16 @@ describe('Theme Showcase & Live Stage Tests', () => {
     assert(html.includes('id="stageRefreshBtn"'), 'index.html must have refresh button');
     assert(html.includes('id="stageExternalBtn"'), 'index.html must have external preview button');
     assert(html.includes('id="stageFullscreenBtn"'), 'index.html must have fullscreen button');
+  
+  it('Dribbble theme cards have author avatars, PRO badges, and like buttons in CSS and JS', () => {
+    const css = fs.readFileSync('frontend/style.css', 'utf8');
+    assert(css.includes('.dribbble-theme-card'), 'style.css must define .dribbble-theme-card');
+    assert(css.includes('.dribbble-badge-pro'), 'style.css must define .dribbble-badge-pro');
+    assert(css.includes('.theme-card-like-btn'), 'style.css must define .theme-card-like-btn');
+    assert(css.includes('.stage-viewport-frame[data-device-mode="mobile"]'), 'style.css must define mobile device mode');
   });
+
+});
 
 });
 
