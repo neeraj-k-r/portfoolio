@@ -4604,3 +4604,24 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   border: 1px solid rgba(192, 132, 252, 0.4);
   box-shadow: 0 0 20px rgba(168, 85, 247, 0.25);
 }
+
+/* Theme Shot Visuals: Group 4 */
+.dribbble-shot-tidepool {
+  background: linear-gradient(135deg, #021a22 0%, #083344 100%);
+  color: #2dd4bf;
+}
+.dribbble-shot-darkpro {
+  background: #09090b;
+  color: #eab308;
+}
+.dribbble-shot-darkpro .shot-hero-box {
+  width: 80%;
+  height: 62%;
+  background: #18181b;
+  border: 1px solid rgba(234, 179, 8, 0.35);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+}
+.dribbble-shot-fullpage {
+  background: linear-gradient(135deg, #090e1a 0%, #1a1024 100%);
+  color: #ef4444;
+}
