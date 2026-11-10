@@ -4688,3 +4688,18 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   color: #f59e0b;
   font-family: monospace;
 }
+
+/* Theme Shot Visuals: Group 8 */
+.dribbble-shot-snowcard {
+  background: #fbfbfd;
+  color: #f59e0b;
+}
+.dribbble-shot-parchment {
+  background: #fef3c7;
+  color: #92400e;
+  font-family: serif;
+}
+.dribbble-shot-cloud {
+  background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
+  color: #0284c7;
+}
