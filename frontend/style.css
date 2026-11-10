@@ -4769,3 +4769,17 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: #0f051d;
   color: #f43f5e;
 }
+
+/* Theme Shot Visuals: Group 12 */
+.dribbble-shot-hacker {
+  background: #020c04;
+  color: #22c55e;
+}
+.dribbble-shot-gallery {
+  background: #0f172a;
+  color: #f1f5f9;
+}
+.dribbble-shot-studio {
+  background: #f8fafc;
+  color: #0f172a;
+}
