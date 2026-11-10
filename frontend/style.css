@@ -4265,3 +4265,37 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
 .dribbble-theme-card:hover .dribbble-shot-canvas {
   transform: scale(1.035);
 }
+
+.dribbble-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 14px;
+  gap: 10px;
+  background: rgba(17, 20, 34, 0.98);
+}
+
+.dribbble-card-author-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.dribbble-card-author-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #f1f5f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.2px;
+}
+
+.dribbble-card-metrics {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
