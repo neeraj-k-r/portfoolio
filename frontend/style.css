@@ -4703,3 +4703,24 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%);
   color: #0284c7;
 }
+
+/* Theme Shot Visuals: Group 9 */
+.dribbble-shot-github {
+  background: #0d1117;
+  color: #58a6ff;
+}
+.dribbble-shot-github .shot-hero-box {
+  width: 82%;
+  height: 64%;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+}
+.dribbble-shot-particle {
+  background: #050510;
+  color: #818cf8;
+}
+.dribbble-shot-panels {
+  background: #0c0a1f;
+  color: #a78bfa;
+}
