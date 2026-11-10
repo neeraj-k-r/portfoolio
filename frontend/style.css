@@ -4801,3 +4801,21 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
   color: #f472b6;
 }
+
+/* Theme Shot Visuals: Group 14 */
+.dribbble-shot-motion {
+  background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+  color: #6366f1;
+}
+.dribbble-shot-atelier {
+  background: #1c1917;
+  color: #d97706;
+}
+.dribbble-shot-cinema {
+  background: #09090b;
+  color: #ef4444;
+}
+.dribbble-shot-arch {
+  background: #0f172a;
+  color: #0284c7;
+}
