@@ -4783,3 +4783,21 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: #f8fafc;
   color: #0f172a;
 }
+
+/* Theme Shot Visuals: Group 13 */
+.dribbble-shot-noir {
+  background: #000000;
+  color: #ffffff;
+}
+.dribbble-shot-museum {
+  background: #fafaf9;
+  color: #78350f;
+}
+.dribbble-shot-catalog {
+  background: #f5f5f4;
+  color: #ea580c;
+}
+.dribbble-shot-bloom {
+  background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 100%);
+  color: #f472b6;
+}
