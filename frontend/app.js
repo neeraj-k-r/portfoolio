@@ -2432,3 +2432,22 @@ window.openCurrentThemeExternal = function() {
   const previewUrl = `/?u=${encodeURIComponent(u)}&t=${encodeURIComponent(t)}&preview=1`;
   window.open(previewUrl, '_blank');
 };
+
+window.toggleStageFullscreen = function() {
+  const stage = document.getElementById('themeLiveStage');
+  if (!stage) return;
+  const isFs = stage.classList.toggle('fullscreen-mode');
+  const icon = document.querySelector('#stageFullscreenBtn i');
+  if (icon) {
+    icon.className = isFs ? 'fa-solid fa-compress' : 'fa-solid fa-expand';
+  }
+};
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const stage = document.getElementById('themeLiveStage');
+    if (stage && stage.classList.contains('fullscreen-mode')) {
+      window.toggleStageFullscreen();
+    }
+  }
+});
