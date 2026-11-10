@@ -4652,3 +4652,17 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: #eff6ff;
   color: #1e40af;
 }
+
+/* Theme Shot Visuals: Group 6 */
+.dribbble-shot-cube {
+  background: #061e16;
+  color: #10b981;
+}
+.dribbble-shot-nova {
+  background: radial-gradient(circle at 60% 40%, #0e3b43 0%, #081726 80%);
+  color: #2dd4bf;
+}
+.dribbble-shot-codeflow {
+  background: #090e17;
+  color: #38bdf8;
+}
