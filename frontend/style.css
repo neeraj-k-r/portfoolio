@@ -4427,3 +4427,58 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
 .dribbble-theme-card.active-theme .dribbble-active-checkmark {
   display: flex;
 }
+
+.dribbble-hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(10, 12, 22, 0.85) 100%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 12px;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  z-index: 4;
+}
+
+.dribbble-theme-card:hover .dribbble-hover-overlay {
+  opacity: 1;
+}
+
+.dribbble-overlay-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
+}
+
+.dribbble-overlay-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.dribbble-overlay-btn {
+  padding: 5px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #0f172a;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.dribbble-overlay-btn:hover {
+  transform: scale(1.05);
+  background: #ffffff;
+}
+
+.dribbble-overlay-btn.primary {
+  background: #7c3aed;
+  color: #ffffff;
+}
+
+.dribbble-overlay-btn.primary:hover {
+  background: #8b5cf6;
+}
