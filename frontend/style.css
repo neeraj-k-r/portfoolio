@@ -4528,3 +4528,42 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   padding: 10px;
   font-family: monospace;
 }
+
+/* Theme Shot Visuals: Group 2 */
+.dribbble-shot-creative {
+  background: linear-gradient(135deg, #fdf2f8 0%, #ede9fe 100%);
+}
+.dribbble-shot-creative .shot-hero-box {
+  width: 80%;
+  height: 62%;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  box-shadow: 0 12px 24px rgba(236, 72, 153, 0.15);
+}
+
+.dribbble-shot-aurora {
+  background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 50%, #a855f7 100%);
+}
+.dribbble-shot-aurora .shot-hero-box {
+  width: 80%;
+  height: 62%;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+}
+
+.dribbble-shot-editorial {
+  background: #fbf7ee;
+  color: #27272a;
+}
+.dribbble-shot-editorial .shot-hero-box {
+  width: 78%;
+  height: 64%;
+  background: #ffffff;
+  border: 1px solid #e7e5e4;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  font-family: serif;
+}
