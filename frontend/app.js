@@ -2526,3 +2526,30 @@ window.filterThemeShowcase = function() {
     card.style.display = (matchesFilter && matchesQuery) ? '' : 'none';
   });
 };
+
+window.initThemeFilterPills = function() {
+  const pills = document.querySelectorAll('.filter-pill');
+  pills.forEach(pill => {
+    pill.onclick = () => {
+      pills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      window.filterThemeShowcase();
+    };
+  });
+
+  const searchInput = document.getElementById('themeSearchInput');
+  const clearBtn = document.getElementById('themeSearchClear');
+  if (searchInput) {
+    searchInput.oninput = () => {
+      if (clearBtn) clearBtn.style.display = searchInput.value ? 'block' : 'none';
+      window.filterThemeShowcase();
+    };
+  }
+  if (clearBtn) {
+    clearBtn.onclick = () => {
+      if (searchInput) searchInput.value = '';
+      clearBtn.style.display = 'none';
+      window.filterThemeShowcase();
+    };
+  }
+};
