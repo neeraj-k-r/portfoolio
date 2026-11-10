@@ -13,9 +13,48 @@
   'use strict';
 
   
+  
+  const TECH_AUTHORS = {
+    midnight: { name: 'Kakha Kakhadzen', handle: '@kakhakhadze', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80', initials: 'KK' },
+    minimal: { name: 'Type08 (Alen Pavlovic)', handle: '@type08', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80', initials: 'AP' },
+    terminal: { name: 'Elliot Alderson', handle: '@mrrobot', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80', initials: 'EA' },
+    creative: { name: 'Studio Pigment', handle: '@pigment', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80', initials: 'SP' },
+    aurora: { name: 'Jeroen van Eerden', handle: '@jeroen', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&q=80', initials: 'JE' },
+    editorial: { name: 'Monotype Atelier', handle: '@atelier_mono', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80', initials: 'MA' },
+    brutalist: { name: 'BrutalLab', handle: '@brutallab', avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=120&q=80', initials: 'BL' },
+    afterglow: { name: 'Sunset Collective', handle: '@afterglow', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80', initials: 'SC' },
+    ultraviolet: { name: 'CyberPulse', handle: '@cyberpulse', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=80', initials: 'CP' },
+    tidepool: { name: 'DeepOcean Studios', handle: '@deepocean', avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=120&q=80', initials: 'DO' },
+    darkpro: { name: 'Vercel Craft', handle: '@vercel_style', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&q=80', initials: 'VC' },
+    fullpage: { name: 'Horizontal Studio', handle: '@fullpage', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=120&q=80', initials: 'HS' },
+    moderncv: { name: 'Swiss Gridworks', handle: '@swissgrid', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=120&q=80', initials: 'SG' },
+    ultracode: { name: 'Crimson IDE', handle: '@crimsoncode', avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80', initials: 'CI' },
+    devblue: { name: 'Stripe Press', handle: '@stripe_press', avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=120&q=80', initials: 'SP' },
+    cube: { name: 'ThreeJS Collective', handle: '@three_cube', avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=120&q=80', initials: '3C' },
+    nova: { name: 'Cosmos Design', handle: '@cosmos', avatar: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=120&q=80', initials: 'CD' },
+    codeflow: { name: 'Systems Lab', handle: '@systems_lab', avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=120&q=80', initials: 'SL' },
+    wave: { name: 'Synthwave Digital', handle: '@synthwave', avatar: 'https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&w=120&q=80', initials: 'SD' },
+    assistant: { name: 'OpenAI Foundry', handle: '@ai_foundry', avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=120&q=80', initials: 'AI' },
+    console: { name: 'Shell Protocol', handle: '@shell_proto', avatar: 'https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?auto=format&fit=crop&w=120&q=80', initials: 'SP' },
+    snowcard: { name: 'Dotted Studio', handle: '@snowcard', avatar: 'https://images.unsplash.com/photo-1499952127939-9bbf5af6c51c?auto=format&fit=crop&w=120&q=80', initials: 'DS' },
+    parchment: { name: 'Bodoni Antiqua', handle: '@bodoni', avatar: 'https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=120&q=80', initials: 'BA' },
+    cloud: { name: 'Tailwind Labs', handle: '@tailwind_ui', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=120&q=80', initials: 'TL' },
+    github: { name: 'Octocat Foundry', handle: '@octocat', avatar: 'https://images.unsplash.com/photo-1618042164219-62c820f10723?auto=format&fit=crop&w=120&q=80', initials: 'GH' },
+    particle: { name: 'WebGL Matrix', handle: '@particle_lab', avatar: 'https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?auto=format&fit=crop&w=120&q=80', initials: 'WM' },
+    panels: { name: 'Linear App Design', handle: '@linear_craft', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80', initials: 'LD' },
+    monolith: { name: 'Bauhaus Werkstatt', handle: '@bauhaus', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80', initials: 'BW' },
+    editor: { name: 'VS Code Team', handle: '@vscode_craft', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80', initials: 'VC' },
+    magazine: { name: 'Condé Nast Digital', handle: '@magazine_lab', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=120&q=80', initials: 'CN' },
+    bold: { name: 'Lime & Obsidian', handle: '@bold_mode', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=120&q=80', initials: 'LO' },
+    clean: { name: 'Cupertino Minimal', handle: '@clean_pro', avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=120&q=80', initials: 'CM' },
+    vibrant: { name: 'Rainbow Prism', handle: '@vibrant_ui', avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=120&q=80', initials: 'RP' },
+    neon: { name: 'NightCity 2077', handle: '@nightcity', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=120&q=80', initials: 'NC' },
+    hacker: { name: 'Matrix Core', handle: '@hacker_crt', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=120&q=80', initials: 'MC' }
+  };
+
   const DEV_THEMES = {
     midnight: {
-      id: 'midnight',
+      id: 'midnight', author: TECH_AUTHORS['midnight'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Midnight Wow',
       subtitle: 'Dark neon glowing developer portfolio',
       track: 'tech',
@@ -26,7 +65,7 @@
       dark: true
     },
     minimal: {
-      id: 'minimal',
+      id: 'minimal', author: TECH_AUTHORS['minimal'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Minimal Clean',
       subtitle: 'Light ATS-friendly Swiss typography',
       track: 'tech',
@@ -37,7 +76,7 @@
       dark: false
     },
     terminal: {
-      id: 'terminal',
+      id: 'terminal', author: TECH_AUTHORS['terminal'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Terminal Hacker',
       subtitle: 'CRT green phosphor command-line interface',
       track: 'tech',
@@ -48,7 +87,7 @@
       dark: true
     },
     creative: {
-      id: 'creative',
+      id: 'creative', author: TECH_AUTHORS['creative'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Creative Pop',
       subtitle: 'Playful vibrant gradient showcase',
       track: 'tech',
@@ -59,7 +98,7 @@
       dark: false
     },
     aurora: {
-      id: 'aurora',
+      id: 'aurora', author: TECH_AUTHORS['aurora'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Aurora Glass',
       subtitle: 'Frosted pastel glassmorphic canvas',
       track: 'tech',
@@ -70,7 +109,7 @@
       dark: false
     },
     editorial: {
-      id: 'editorial',
+      id: 'editorial', author: TECH_AUTHORS['editorial'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Editorial Serif',
       subtitle: 'Refined print monograph with serif typography',
       track: 'tech',
@@ -81,7 +120,7 @@
       dark: false
     },
     brutalist: {
-      id: 'brutalist',
+      id: 'brutalist', author: TECH_AUTHORS['brutalist'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Neo-Brutalist',
       subtitle: 'High-contrast raw borders and pop colors',
       track: 'tech',
@@ -92,7 +131,7 @@
       dark: false
     },
     afterglow: {
-      id: 'afterglow',
+      id: 'afterglow', author: TECH_AUTHORS['afterglow'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Afterglow',
       subtitle: 'Sunset gradient with neon horizons',
       track: 'tech',
@@ -103,7 +142,7 @@
       dark: true
     },
     ultraviolet: {
-      id: 'ultraviolet',
+      id: 'ultraviolet', author: TECH_AUTHORS['ultraviolet'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Ultraviolet',
       subtitle: 'Electric violet & deep indigo cyber aura',
       track: 'tech',
@@ -114,7 +153,7 @@
       dark: true
     },
     tidepool: {
-      id: 'tidepool',
+      id: 'tidepool', author: TECH_AUTHORS['tidepool'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Tidepool',
       subtitle: 'Bioluminescent deep-sea cyan glow',
       track: 'tech',
@@ -125,7 +164,7 @@
       dark: true
     },
     darkpro: {
-      id: 'darkpro',
+      id: 'darkpro', author: TECH_AUTHORS['darkpro'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Dark Pro',
       subtitle: 'Sleek dark interface with vibrant amber accent',
       track: 'tech',
@@ -136,7 +175,7 @@
       dark: true
     },
     fullpage: {
-      id: 'fullpage',
+      id: 'fullpage', author: TECH_AUTHORS['fullpage'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Fullpage Scroll',
       subtitle: 'Full-viewport snap slide presentation',
       track: 'tech',
@@ -147,7 +186,7 @@
       dark: true
     },
     moderncv: {
-      id: 'moderncv',
+      id: 'moderncv', author: TECH_AUTHORS['moderncv'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Modern CV',
       subtitle: 'Executive bilingual resume & curriculum vitae',
       track: 'tech',
@@ -158,7 +197,7 @@
       dark: false
     },
     ultracode: {
-      id: 'ultracode',
+      id: 'ultracode', author: TECH_AUTHORS['ultracode'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Ultra Code',
       subtitle: 'High-density sidebar IDE layout with crimson glow',
       track: 'tech',
@@ -169,7 +208,7 @@
       dark: true
     },
     devblue: {
-      id: 'devblue',
+      id: 'devblue', author: TECH_AUTHORS['devblue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Dev Blue',
       subtitle: 'Corporate engineering aesthetic in Royal Blue',
       track: 'tech',
@@ -180,7 +219,7 @@
       dark: false
     },
     cube: {
-      id: 'cube',
+      id: 'cube', author: TECH_AUTHORS['cube'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: '3D Cube',
       subtitle: 'Mint and charcoal with interactive 3D slider',
       track: 'tech',
@@ -191,7 +230,7 @@
       dark: true
     },
     nova: {
-      id: 'nova',
+      id: 'nova', author: TECH_AUTHORS['nova'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Nova Galaxy',
       subtitle: 'Teal particle nebula with interactive cards',
       track: 'tech',
@@ -202,7 +241,7 @@
       dark: true
     },
     codeflow: {
-      id: 'codeflow',
+      id: 'codeflow', author: TECH_AUTHORS['codeflow'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Codeflow',
       subtitle: 'Tabbed systems architecture & code syntax showcase',
       track: 'tech',
@@ -213,7 +252,7 @@
       dark: true
     },
     wave: {
-      id: 'wave',
+      id: 'wave', author: TECH_AUTHORS['wave'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Neon Wave',
       subtitle: 'Emerald laser wave and holographic cyber canvas',
       track: 'tech',
@@ -224,7 +263,7 @@
       dark: true
     },
     assistant: {
-      id: 'assistant',
+      id: 'assistant', author: TECH_AUTHORS['assistant'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'AI Assistant',
       subtitle: 'ChatGPT style conversational portfolio bot',
       track: 'tech',
@@ -235,7 +274,7 @@
       dark: true
     },
     console: {
-      id: 'console',
+      id: 'console', author: TECH_AUTHORS['console'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Dev Console',
       subtitle: 'Unix workstation terminal with tabbed panels',
       track: 'tech',
@@ -246,7 +285,7 @@
       dark: true
     },
     snowcard: {
-      id: 'snowcard',
+      id: 'snowcard', author: TECH_AUTHORS['snowcard'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Snowcard',
       subtitle: 'Dotted grid canvas with sunny amber tabs',
       track: 'tech',
@@ -257,7 +296,7 @@
       dark: false
     },
     parchment: {
-      id: 'parchment',
+      id: 'parchment', author: TECH_AUTHORS['parchment'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Parchment Scroll',
       subtitle: 'Vintage scholarly parchment with antique serif',
       track: 'tech',
@@ -268,7 +307,7 @@
       dark: false
     },
     cloud: {
-      id: 'cloud',
+      id: 'cloud', author: TECH_AUTHORS['cloud'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Cloud Blue',
       subtitle: 'Friendly rounded cloud shapes and sky blue air',
       track: 'tech',
@@ -279,7 +318,7 @@
       dark: false
     },
     github: {
-      id: 'github',
+      id: 'github', author: TECH_AUTHORS['github'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'GitHub',
       subtitle: 'Octocat dark theme with pinned repository cards',
       track: 'tech',
@@ -290,7 +329,7 @@
       dark: true
     },
     particle: {
-      id: 'particle',
+      id: 'particle', author: TECH_AUTHORS['particle'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Particle Mesh',
       subtitle: '3D constellation canvas with glowing dual-hero',
       track: 'tech',
@@ -301,7 +340,7 @@
       dark: true
     },
     panels: {
-      id: 'panels',
+      id: 'panels', author: TECH_AUTHORS['panels'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Panels',
       subtitle: 'Tabbed modern product view with purple aura',
       track: 'tech',
@@ -312,7 +351,7 @@
       dark: true
     },
     monolith: {
-      id: 'monolith',
+      id: 'monolith', author: TECH_AUTHORS['monolith'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Monolith',
       subtitle: 'Monumental black typography & heavy brutalist grids',
       track: 'tech',
@@ -323,7 +362,7 @@
       dark: true
     },
     editor: {
-      id: 'editor',
+      id: 'editor', author: TECH_AUTHORS['editor'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Editor',
       subtitle: 'VS Code IDE with tree explorer & Copilot companion',
       track: 'tech',
@@ -334,7 +373,7 @@
       dark: true
     },
     magazine: {
-      id: 'magazine',
+      id: 'magazine', author: TECH_AUTHORS['magazine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Magazine',
       subtitle: 'Literary editorial publication with Fraunces drop caps',
       track: 'tech',
@@ -345,7 +384,7 @@
       dark: false
     },
     bold: {
-      id: 'bold',
+      id: 'bold', author: TECH_AUTHORS['bold'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Bold',
       subtitle: 'Obsidian dark canvas with electric lime energy',
       track: 'tech',
@@ -356,7 +395,7 @@
       dark: true
     },
     clean: {
-      id: 'clean',
+      id: 'clean', author: TECH_AUTHORS['clean'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Clean Pro',
       subtitle: 'Floating pill navigation and soft card elevations',
       track: 'tech',
@@ -367,7 +406,7 @@
       dark: false
     },
     vibrant: {
-      id: 'vibrant',
+      id: 'vibrant', author: TECH_AUTHORS['vibrant'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Vibrant',
       subtitle: 'Spectrum rainbow gradient with lilac glow',
       track: 'tech',
@@ -378,7 +417,7 @@
       dark: false
     },
     neon: {
-      id: 'neon',
+      id: 'neon', author: TECH_AUTHORS['neon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Neon Cyberpunk',
       subtitle: '3D synthwave grid floor with laser pink highlights',
       track: 'tech',
@@ -389,7 +428,7 @@
       dark: true
     },
     hacker: {
-      id: 'hacker',
+      id: 'hacker', author: TECH_AUTHORS['hacker'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Hacker Terminal',
       subtitle: 'Phosphor green matrix terminal with CRT scanlines',
       track: 'tech',
@@ -404,7 +443,7 @@
   
   const VISUAL_THEMES = {
     gallery: {
-      id: 'gallery',
+      id: 'gallery', author: TECH_AUTHORS['gallery'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Gallery',
       subtitle: 'Clean visual masonry grid for fine art photography',
       track: 'visual',
@@ -415,7 +454,7 @@
       dark: true
     },
     studio: {
-      id: 'studio',
+      id: 'studio', author: TECH_AUTHORS['studio'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Studio',
       subtitle: 'Bright daylight editorial covers with clean margins',
       track: 'visual',
@@ -426,7 +465,7 @@
       dark: false
     },
     noir: {
-      id: 'noir',
+      id: 'noir', author: TECH_AUTHORS['noir'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Noir',
       subtitle: 'Cinematic full-bleed monochromatic black & white',
       track: 'visual',
@@ -437,7 +476,7 @@
       dark: true
     },
     museum: {
-      id: 'museum',
+      id: 'museum', author: TECH_AUTHORS['museum'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Museum',
       subtitle: 'Framed gallery walls with classic museum plaques',
       track: 'visual',
@@ -448,7 +487,7 @@
       dark: false
     },
     catalog: {
-      id: 'catalog',
+      id: 'catalog', author: TECH_AUTHORS['catalog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Catalog',
       subtitle: 'Swiss art-book publication plates with index columns',
       track: 'visual',
@@ -459,7 +498,7 @@
       dark: false
     },
     bloom: {
-      id: 'bloom',
+      id: 'bloom', author: TECH_AUTHORS['bloom'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Bloom',
       subtitle: 'Ethereal pastel dreamscape with soft blur transitions',
       track: 'visual',
@@ -470,7 +509,7 @@
       dark: false
     },
     motion: {
-      id: 'motion',
+      id: 'motion', author: TECH_AUTHORS['motion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Motion Flow',
       subtitle: 'Smooth fluid animation cards with kinetic typography',
       track: 'visual',
@@ -481,7 +520,7 @@
       dark: false
     },
     atelier: {
-      id: 'atelier',
+      id: 'atelier', author: TECH_AUTHORS['atelier'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Atelier',
       subtitle: 'Haute couture fashion house monograph with serif titles',
       track: 'visual',
@@ -492,7 +531,7 @@
       dark: true
     },
     cinema: {
-      id: 'cinema',
+      id: 'cinema', author: TECH_AUTHORS['cinema'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Cinema',
       subtitle: '2.39:1 widescreen stills with live film HUD gauges',
       track: 'visual',
@@ -503,7 +542,7 @@
       dark: true
     },
     arch: {
-      id: 'arch',
+      id: 'arch', author: TECH_AUTHORS['arch'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Arch',
       subtitle: 'Architectural blueprint drafting plates with scale rules',
       track: 'visual',
@@ -514,7 +553,7 @@
       dark: true
     },
     zine: {
-      id: 'zine',
+      id: 'zine', author: TECH_AUTHORS['zine'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Zine',
       subtitle: 'Risograph indie print collage with washi tape accents',
       track: 'visual',
@@ -525,7 +564,7 @@
       dark: false
     },
     zen: {
-      id: 'zen',
+      id: 'zen', author: TECH_AUTHORS['zen'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Zen',
       subtitle: 'Wabi-sabi ceramic and stone aesthetic with calm rhythm',
       track: 'visual',
@@ -536,7 +575,7 @@
       dark: false
     },
     desire: {
-      id: 'desire',
+      id: 'desire', author: TECH_AUTHORS['desire'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Desire',
       subtitle: 'Vibrant modern digital designer portfolio with loupe zoom',
       track: 'visual',
@@ -547,7 +586,7 @@
       dark: true
     },
     lumina: {
-      id: 'lumina',
+      id: 'lumina', author: TECH_AUTHORS['lumina'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Lumina',
       subtitle: 'Holographic prism iridescent glassmorphic layout',
       track: 'visual',
@@ -558,7 +597,7 @@
       dark: true
     },
     vogue: {
-      id: 'vogue',
+      id: 'vogue', author: TECH_AUTHORS['vogue'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Vogue',
       subtitle: 'High-fashion editorial Didot display typography',
       track: 'visual',
@@ -569,7 +608,7 @@
       dark: true
     },
     filmstrip: {
-      id: 'filmstrip',
+      id: 'filmstrip', author: TECH_AUTHORS['filmstrip'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Filmstrip',
       subtitle: '35mm cinema reel darkroom with sprocket hole border',
       track: 'visual',
@@ -580,7 +619,7 @@
       dark: true
     },
     biennale: {
-      id: 'biennale',
+      id: 'biennale', author: TECH_AUTHORS['biennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Biennale',
       subtitle: 'Venice international art exhibition curatorial catalogue',
       track: 'visual',
@@ -591,7 +630,7 @@
       dark: false
     },
     sketchbook: {
-      id: 'sketchbook',
+      id: 'sketchbook', author: TECH_AUTHORS['sketchbook'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Sketchbook',
       subtitle: 'Graphite pencil sketches and textured kraft paper',
       track: 'visual',
@@ -602,7 +641,7 @@
       dark: false
     },
     pavilion: {
-      id: 'pavilion',
+      id: 'pavilion', author: TECH_AUTHORS['pavilion'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Pavilion',
       subtitle: 'Architectural spatial pavilion with ambient geometry',
       track: 'visual',
@@ -613,7 +652,7 @@
       dark: false
     },
     documenta: {
-      id: 'documenta',
+      id: 'documenta', author: TECH_AUTHORS['documenta'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Documenta',
       subtitle: 'Curatorial research archive with archival notes',
       track: 'visual',
@@ -624,7 +663,7 @@
       dark: false
     },
     triennale: {
-      id: 'triennale',
+      id: 'triennale', author: TECH_AUTHORS['triennale'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Triennale',
       subtitle: 'Milanese industrial design exposition catalogue',
       track: 'visual',
@@ -635,7 +674,7 @@
       dark: false
     },
     salon: {
-      id: 'salon',
+      id: 'salon', author: TECH_AUTHORS['salon'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Salon',
       subtitle: 'Emerald gilded gallery with gold leaf ornaments',
       track: 'visual',
@@ -646,7 +685,7 @@
       dark: true
     },
     illustra: {
-      id: 'illustra',
+      id: 'illustra', author: TECH_AUTHORS['illustra'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Illustra',
       subtitle: 'Modern mixed-media illustration and graphic art grid',
       track: 'visual',
@@ -657,7 +696,7 @@
       dark: false
     },
     techno: {
-      id: 'techno',
+      id: 'techno', author: TECH_AUTHORS['techno'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Techno',
       subtitle: 'Berlin creative tech laboratory with dynamic soundwaves',
       track: 'visual',
@@ -668,7 +707,7 @@
       dark: true
     },
     analog: {
-      id: 'analog',
+      id: 'analog', author: TECH_AUTHORS['analog'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Analog',
       subtitle: 'Dark vintage desk collage with physical artifacts',
       track: 'visual',
@@ -679,7 +718,7 @@
       dark: true
     },
     mythos: {
-      id: 'mythos',
+      id: 'mythos', author: TECH_AUTHORS['mythos'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Mythos',
       subtitle: 'Cosmic violet classical sculpture and celestial sphere',
       track: 'visual',
@@ -690,7 +729,7 @@
       dark: true
     },
     suki: {
-      id: 'suki',
+      id: 'suki', author: TECH_AUTHORS['suki'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Suki',
       subtitle: 'Cyber Tokyo video director with neon HUD interface',
       track: 'visual',
@@ -701,7 +740,7 @@
       dark: true
     },
     lo: {
-      id: 'lo',
+      id: 'lo', author: TECH_AUTHORS['lo'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Lo',
       subtitle: 'Multidisciplinary maker narrative with seamless art tiles',
       track: 'visual',
@@ -712,7 +751,7 @@
       dark: true
     },
     mara: {
-      id: 'mara',
+      id: 'mara', author: TECH_AUTHORS['mara'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
       title: 'Mara',
       subtitle: 'High-contrast art director with wipe motion interactions',
       track: 'visual',
