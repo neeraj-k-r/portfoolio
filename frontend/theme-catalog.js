@@ -4,10 +4,12 @@
  * Inspired by Dribbble / Mobbin / Framer showcase galleries.
  */
 (function(root, factory) {
+  const lib = factory();
   if (typeof module === 'object' && module.exports) {
-    module.exports = factory();
-  } else {
-    root.PortfoolioThemeCatalog = factory();
+    module.exports = lib;
+  }
+  if (root) {
+    root.PortfoolioThemeCatalog = lib;
   }
 })(typeof globalThis !== 'undefined' ? globalThis : this, function() {
   'use strict';

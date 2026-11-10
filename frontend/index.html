@@ -2107,8 +2107,11 @@ function switchUserTab(tabName) {
     b.classList.toggle('active', rowVisible && onclickAttr.includes(`'${tabName}'`));
     if (b.id === 'tabBtnAbout' && tabName === 'about') b.classList.add('active');
   });
-  if (tabName === 'theme' && typeof paintTrackTabs === 'function' && activeUserProfile) {
-    paintTrackTabs(activeUserProfile);
+  if (tabName === 'theme') {
+    if (typeof paintTrackTabs === 'function' && activeUserProfile) paintTrackTabs(activeUserProfile);
+    if (typeof paintThemeThumbs === 'function') paintThemeThumbs();
+    if (typeof initThemeLiveStage === 'function') initThemeLiveStage();
+    if (typeof initThemeFilterPills === 'function') initThemeFilterPills();
   }
   if (tabName === 'resume' && typeof paintResumeTab === 'function') {
     paintResumeTab();

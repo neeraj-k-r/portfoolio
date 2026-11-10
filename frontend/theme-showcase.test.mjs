@@ -1,14 +1,12 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert';
 import fs from 'fs';
+import { createRequire } from 'module';
 
-// Mock browser globals for theme-catalog import
-global.window = global;
-import '../frontend/theme-catalog.js';
+const require = createRequire(import.meta.url);
+const catalog = require('./theme-catalog.js');
 
 describe('Theme Showcase & Live Stage Tests', () => {
-  const catalog = global.PortfoolioThemeCatalog;
-
   it('theme-catalog exports all 40 themes with rich metadata', () => {
     assert(catalog, 'PortfoolioThemeCatalog must be defined');
     const all = catalog.getAllThemes();
@@ -21,7 +19,8 @@ describe('Theme Showcase & Live Stage Tests', () => {
       assert(typeof t.likes === 'number', 'Theme must have likes count');
       assert(Array.isArray(t.tags), 'Theme must have tags array');
     }
-  
+  });
+
   it('#themeLiveStage markup exists in index.html with all chrome controls', () => {
     const html = fs.readFileSync('frontend/index.html', 'utf8');
     assert(html.includes('id="themeLiveStage"'), 'index.html must have #themeLiveStage');
@@ -33,7 +32,8 @@ describe('Theme Showcase & Live Stage Tests', () => {
     assert(html.includes('id="stageRefreshBtn"'), 'index.html must have refresh button');
     assert(html.includes('id="stageExternalBtn"'), 'index.html must have external preview button');
     assert(html.includes('id="stageFullscreenBtn"'), 'index.html must have fullscreen button');
-  
+  });
+
   it('Dribbble theme cards have author avatars, PRO badges, and like buttons in CSS and JS', () => {
     const css = fs.readFileSync('frontend/style.css', 'utf8');
     assert(css.includes('.dribbble-theme-card'), 'style.css must define .dribbble-theme-card');
@@ -42,10 +42,6 @@ describe('Theme Showcase & Live Stage Tests', () => {
     assert(css.includes('.stage-viewport-frame[data-device-mode="mobile"]'), 'style.css must define mobile device mode');
   });
 
-});
-
-});
-
   it('theme-catalog query and search helpers work accurately', () => {
     const techOnly = catalog.getThemesByTrack('tech');
     assert(techOnly.length >= 20, 'Expected >= 20 tech themes');
@@ -53,5 +49,8 @@ describe('Theme Showcase & Live Stage Tests', () => {
 
     const searchResults = catalog.searchThemes('terminal');
     assert(searchResults.some(t => t.id === 'terminal'));
+
+    const darkResults = catalog.searchThemes('', 'dark');
+    assert(darkResults.length >= 15, 'Expected dark themes');
   });
 });
