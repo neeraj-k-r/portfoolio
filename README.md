@@ -234,3 +234,9 @@ Portfoolio includes an **About & Story** studio dashboard tab dedicated to visua
   - `#services`: Capabilities disclosures with accessible scope summaries and deliverables.
   - `#contact`: High-impact closing statement and clipboard-aware contact actions.
 - **Standalone Location**: Available as a standalone file at `themes/mara/index.html` opening directly in any browser with zero dependencies.
+
+## 🎨 Dribbble-Style Theme Showcase & Interactive Live Stage
+- **In-Section Live Preview**: View any of the 40+ handcrafted portfolio themes live inside the Studio Theme tab without leaving the page or opening a new tab.
+- **Responsive Device Switcher**: Test portfolio designs across **Desktop**, **Tablet (768px)**, and **Mobile Phone (375px)** with authentic frame bezels and Dynamic Island notch.
+- **Dribbble Showcase Cards**: Features designer attribution, `PRO` badges, view counters, and interactive heart like counters with local storage persistence.
+- **Instant Search & Category Filtering**: Filter by `Developer`, `Visual Artists`, `Dark Mode`, or `Minimal` with real-time text search.
