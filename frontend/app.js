@@ -2462,3 +2462,29 @@ window.copyStageLiveUrl = function() {
     if (typeof window.toast === 'function') window.toast('Copied URL: ' + url);
   });
 };
+
+window.initThemeLiveStage = function() {
+  const switcher = document.getElementById('stageDeviceSwitcher');
+  if (switcher) {
+    switcher.querySelectorAll('.stage-device-btn').forEach(btn => {
+      btn.onclick = () => window.setStageDeviceMode(btn.getAttribute('data-device'));
+    });
+  }
+
+  const refreshBtn = document.getElementById('stageRefreshBtn');
+  if (refreshBtn) refreshBtn.onclick = () => window.refreshLiveThemeStage();
+
+  const externalBtn = document.getElementById('stageExternalBtn');
+  if (externalBtn) externalBtn.onclick = () => window.openCurrentThemeExternal();
+
+  const fsBtn = document.getElementById('stageFullscreenBtn');
+  if (fsBtn) fsBtn.onclick = () => window.toggleStageFullscreen();
+
+  const copyBtn = document.getElementById('stageCopyUrlBtn');
+  if (copyBtn) copyBtn.onclick = () => window.copyStageLiveUrl();
+
+  // Initial stage render
+  const selInp = document.querySelector('#edTplGrid input[name="edtpl"]:checked');
+  const initTheme = (selInp ? selInp.value : ((window.activeUserProfile && window.activeUserProfile.template) || 'midnight')).toLowerCase();
+  window.renderLiveThemeStage(initTheme);
+};
