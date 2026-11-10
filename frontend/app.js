@@ -2596,3 +2596,12 @@ window.handleThemeLikeClick = function(themeId, btnElement) {
     if (icon) icon.className = 'fa-regular fa-heart';
   }
 };
+
+const skillsInp = document.getElementById('edSkills');
+if (skillsInp) {
+  skillsInp.addEventListener('input', () => {
+    if (window.activeUserProfile) {
+      window.activeUserProfile.skills = skillsInp.value;
+    }
+  });
+}
