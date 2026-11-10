@@ -2488,3 +2488,9 @@ window.initThemeLiveStage = function() {
   const initTheme = (selInp ? selInp.value : ((window.activeUserProfile && window.activeUserProfile.template) || 'midnight')).toLowerCase();
   window.renderLiveThemeStage(initTheme);
 };
+
+document.addEventListener('change', (e) => {
+  if (e.target && e.target.name === 'edtpl') {
+    window.renderLiveThemeStage(e.target.value);
+  }
+});
