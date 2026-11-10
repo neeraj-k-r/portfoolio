@@ -2418,3 +2418,9 @@ window.setStageDeviceMode = function(device) {
     }
   });
 };
+
+window.refreshLiveThemeStage = function() {
+  const selInp = document.querySelector('#edTplGrid input[name="edtpl"]:checked');
+  const t = (selInp ? selInp.value : ((window.activeUserProfile && window.activeUserProfile.template) || 'midnight')).toLowerCase();
+  window.renderLiveThemeStage(t, true);
+};
