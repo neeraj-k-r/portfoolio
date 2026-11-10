@@ -2850,7 +2850,18 @@ if ($('builderForm')) {
       if (!inp || !prev || prev.dataset.thumbed) return;
       const theme = (inp.value || 'midnight').toLowerCase();
       const name = (c.querySelector('.tpl-meta b')?.textContent || theme).trim();
-      prev.innerHTML = `<span class="lx-tp lx-tp-${theme}"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span><button type="button" class="tpl-preview-eye" title="Preview ${name} theme" aria-label="Preview ${name} theme"><i class="fa-solid fa-eye"></i></button>`;
+      const meta = (window.PortfoolioThemeCatalog && window.PortfoolioThemeCatalog.getTheme(theme)) || {
+        title: name,
+        author: { name: 'Portfoolio Studio', initials: 'PF' },
+        badge: 'PRO',
+        likes: 68,
+        views: '11.4k'
+      };
+
+      c.classList.add('dribbble-theme-card');
+      prev.classList.add('dribbble-card-viewport');
+
+      prev.innerHTML = `<span class="lx-tp lx-tp-${theme} dribbble-shot-canvas dribbble-shot-${theme}"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span><div class="dribbble-active-checkmark"><i class="fa-solid fa-check"></i></div><div class="dribbble-hover-overlay"><span class="dribbble-overlay-title">${meta.title || name}</span><div class="dribbble-overlay-actions"><button type="button" class="dribbble-overlay-btn primary shot-select-btn">Select</button><button type="button" class="dribbble-overlay-btn tpl-preview-eye" title="Preview ${name} theme" aria-label="Preview ${name} theme"><i class="fa-solid fa-eye"></i></button></div></div>`;
       const eyeBtn = prev.querySelector('.tpl-preview-eye');
       if (eyeBtn) {
         eyeBtn.addEventListener('click', (e) => {
@@ -2858,9 +2869,59 @@ if ($('builderForm')) {
           e.preventDefault();
           if (window.openThemePreviewModal) {
             window.openThemePreviewModal(theme, name);
+          } else {
+            const u = (activeUserProfile && activeUserProfile.username) || 'yourname';
+            window.open(`/?u=${encodeURIComponent(u)}&t=${encodeURIComponent(theme)}&preview=1`, '_blank');
           }
         });
       }
+
+      if (!c.querySelector('.dribbble-card-footer')) {
+        const author = meta.author || { name: 'Portfoolio Studio', initials: 'PF' };
+        const likesCount = (window.PortfoolioThemeCatalog && window.PortfoolioThemeCatalog.getLikesCount(theme)) || meta.likes || 42;
+        const isLiked = window.PortfoolioThemeCatalog && window.PortfoolioThemeCatalog.isThemeLiked(theme);
+
+        const footer = document.createElement('div');
+        footer.className = 'dribbble-card-footer';
+        footer.innerHTML = `
+          <div class="dribbble-card-author-group">
+            <div class="dribbble-author-avatar">
+              ${author.avatar ? `<img src="${author.avatar}" alt="${author.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">` : ''}
+              <span style="${author.avatar ? 'display:none' : ''}">${author.initials || 'PF'}</span>
+            </div>
+            <span class="dribbble-card-author-name">${author.name}</span>
+            <span class="dribbble-badge-pro ${meta.badge === 'FEATURED' ? 'dribbble-badge-featured' : ''}">${meta.badge || 'PRO'}</span>
+          </div>
+          <div class="dribbble-card-metrics">
+            <button type="button" class="theme-card-like-btn ${isLiked ? 'liked' : ''}" data-theme="${theme}" title="Like this theme">
+              <i class="${isLiked ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+              <span class="like-count">${likesCount}</span>
+            </button>
+            <span class="theme-card-view-count" title="Theme views">
+              <i class="fa-solid fa-eye"></i> ${meta.views || '12.4k'}
+            </span>
+          </div>`;
+        c.appendChild(footer);
+      }
+
+      c.addEventListener('click', (e) => {
+        if (e.target.closest('.theme-card-like-btn')) {
+          e.preventDefault();
+          e.stopPropagation();
+          const likeBtn = e.target.closest('.theme-card-like-btn');
+          if (typeof window.handleThemeLikeClick === 'function') {
+            window.handleThemeLikeClick(theme, likeBtn);
+          }
+          return;
+        }
+        if (e.target.closest('.tpl-preview-eye')) {
+          return;
+        }
+        if (typeof window.selectThemeLive === 'function') {
+          window.selectThemeLive(theme);
+        }
+      });
+
       prev.dataset.thumbed = '1';
     });
   }
