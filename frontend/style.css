@@ -4856,3 +4856,21 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   background: #fbfbf9;
   color: #57534e;
 }
+
+/* Theme Shot Visuals: Group 17 */
+.dribbble-shot-pavilion {
+  background: #f0fdf4;
+  color: #059669;
+}
+.dribbble-shot-documenta {
+  background: #f8fafc;
+  color: #2563eb;
+}
+.dribbble-shot-triennale {
+  background: #f0fdfa;
+  color: #0d9488;
+}
+.dribbble-shot-salon {
+  background: #022c22;
+  color: #10b981;
+}
