@@ -5312,3 +5312,25 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   50% { transform: scale(1.45); }
   100% { transform: scale(1); }
 }
+
+@media (max-width: 640px) {
+  .stage-chrome-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+  .stage-url-bar {
+    max-width: 100%;
+  }
+  .stage-viewport-container {
+    height: 440px;
+    padding: 8px;
+  }
+  .stage-viewport-frame[data-device-mode="tablet"] {
+    width: 100%;
+  }
+  .stage-viewport-frame[data-device-mode="mobile"] {
+    width: 100%;
+    max-width: 340px;
+  }
+}
