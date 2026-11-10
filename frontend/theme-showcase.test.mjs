@@ -38,6 +38,15 @@ describe('Theme Showcase Dribbble Grid Tests', () => {
     assert(css.includes('.theme-card-like-btn'), 'style.css must define .theme-card-like-btn');
     assert(css.includes('.dribbble-card-viewport'), 'style.css must define .dribbble-card-viewport');
     assert(css.includes('.dribbble-card-footer'), 'style.css must define .dribbble-card-footer');
+    assert(css.includes('.dribbble-theme-card .tpl-meta'), 'style.css must hide .tpl-meta in .dribbble-theme-card');
+  });
+
+  it('cards render live theme iframe previews with dynamic scaling and midnight support', () => {
+    const html = fs.readFileSync('frontend/index.html', 'utf8');
+    const tpl = fs.readFileSync('frontend/templates.js', 'utf8');
+    assert(html.includes('dribbble-shot-live-iframe'), 'index.html must include .dribbble-shot-live-iframe');
+    assert(html.includes('dribbble-shot-scale-frame'), 'index.html must include .dribbble-shot-scale-frame');
+    assert(tpl.includes('midnight: renderMidnight'), 'templates.js must export midnight in PortfoolioTemplates');
   });
 
   it('theme-catalog query and search helpers work accurately', () => {

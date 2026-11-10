@@ -1938,8 +1938,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   <link rel="stylesheet" href="ui.css?v=20261030b">
   <link rel="stylesheet" href="templates.css?v=20261030b">
   <style>
-    html, body { min-height: 100%; margin: 0; padding: 0; }
-    nav .logo, header .pf-brand { pointer-events: none; }
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden !important;
+      pointer-events: none !important;
+      user-select: none !important;
+      scrollbar-width: none;
+    }
+    ::-webkit-scrollbar { display: none; }
+    nav .logo, header .pf-brand, .theme-switch, .floating-actions, .nav-links { pointer-events: none !important; }
   </style>
 </head>
 <body class="portfolio-view${pfThemeClass}" data-template="${theme}">
@@ -2308,8 +2317,17 @@ window.buildThemeLiveHtml = function(theme, profile) {
   <link rel="stylesheet" href="ui.css?v=20261110b">
   <link rel="stylesheet" href="templates.css?v=20261110b">
   <style>
-    html, body { min-height: 100%; margin: 0; padding: 0; }
-    nav .logo, header .pf-brand { pointer-events: none; }
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden !important;
+      pointer-events: none !important;
+      user-select: none !important;
+      scrollbar-width: none;
+    }
+    ::-webkit-scrollbar { display: none; }
+    nav .logo, header .pf-brand, .theme-switch, .floating-actions, .nav-links { pointer-events: none !important; }
   </style>
 </head>
 <body class="portfolio-view${pfThemeClass}" data-template="${t}">

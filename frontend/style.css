@@ -4201,29 +4201,70 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   margin-top: 18px;
 }
 
-.dribbble-theme-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background: var(--theme-card-bg);
-  border: 1px solid var(--theme-card-border);
-  border-radius: var(--theme-card-radius);
-  overflow: hidden;
-  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.24s ease, border-color 0.2s ease;
-  cursor: pointer;
-  user-select: none;
+/* Studio Dribbble Showcase Grid */
+#edTplGrid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)) !important;
+  gap: 22px !important;
+  margin: 18px 0 28px !important;
+  width: 100% !important;
 }
 
+@media (min-width: 1100px) {
+  #edTplGrid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 24px !important;
+  }
+}
+
+@media (min-width: 1540px) {
+  #edTplGrid {
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 26px !important;
+  }
+}
+
+/* Dribbble Theme Card */
+body.studio .dribbble-theme-card,
+.dribbble-theme-card {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  background: #111422 !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.24s ease, border-color 0.2s ease !important;
+  cursor: pointer !important;
+  user-select: none !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+body.studio .dribbble-theme-card:hover,
 .dribbble-theme-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--theme-card-hover-border);
-  box-shadow: 0 14px 34px -8px rgba(0, 0, 0, 0.65), 0 0 20px rgba(147, 51, 234, 0.22);
+  transform: translateY(-4px) !important;
+  border-color: rgba(168, 85, 247, 0.6) !important;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.7), 0 0 24px rgba(168, 85, 247, 0.25) !important;
+}
+
+body.studio .dribbble-theme-card.selected,
+body.studio .dribbble-theme-card.active-theme,
+.dribbble-theme-card.selected,
+.dribbble-theme-card.active-theme {
+  border-color: #a855f7 !important;
+  box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.45), 0 12px 30px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Hide legacy .tpl-meta so it never overlaps or double-renders with the Dribbble footer */
+body.studio .dribbble-theme-card .tpl-meta,
+.dribbble-theme-card .tpl-meta {
+  display: none !important;
 }
 
 .dribbble-showcase-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 22px;
   margin-top: 14px;
 }
 
@@ -4240,16 +4281,52 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   }
 }
 
+/* Dribbble Card Viewport */
+body.studio .dribbble-card-viewport,
 .dribbble-card-viewport {
-  position: relative;
-  width: 100%;
-  aspect-ratio: var(--theme-shot-ratio);
-  background: #090c15;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  aspect-ratio: 16 / 10 !important;
+  background: #090c15 !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+  overflow: hidden !important;
+  display: block !important;
+}
+
+.dribbble-shot-scale-frame {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 1280px !important;
+  height: 800px !important;
+  transform-origin: 0 0 !important;
+  transform: scale(var(--shot-scale, 0.25)) !important;
+  pointer-events: none !important;
+  background: transparent !important;
+  z-index: 1 !important;
+}
+
+.dribbble-shot-live-iframe {
+  width: 1280px !important;
+  height: 800px !important;
+  border: none !important;
+  pointer-events: none !important;
+  display: block !important;
+  opacity: 0;
+  transition: opacity 0.35s ease !important;
+  background: transparent !important;
+}
+
+.dribbble-shot-live-iframe.is-loaded {
+  opacity: 1 !important;
+}
+
+.dribbble-shot-ambient-bg {
+  position: absolute !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  transition: opacity 0.4s ease !important;
 }
 
 .dribbble-card-viewport .dribbble-shot-canvas {
@@ -4266,187 +4343,185 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
   transform: scale(1.035);
 }
 
+/* Dribbble Card Footer: Single Clean Row */
 .dribbble-card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 14px 14px;
-  gap: 10px;
-  background: rgba(17, 20, 34, 0.98);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 11px 14px 13px !important;
+  gap: 8px !important;
+  background: #111422 !important;
+  border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+  min-height: 48px !important;
+  box-sizing: border-box !important;
 }
 
 .dribbble-card-author-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-  flex: 1;
-}
-
-.dribbble-card-author-name {
-  font-size: 13.5px;
-  font-weight: 600;
-  color: #f1f5f9;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  letter-spacing: -0.2px;
-}
-
-.dribbble-card-metrics {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-shrink: 0;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
 }
 
 .dribbble-author-avatar {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border: 1.5px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background: linear-gradient(135deg, #6366f1, #a855f7) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
 .dribbble-author-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  display: block !important;
 }
 
 .dribbble-author-avatar span {
-  font-size: 10.5px;
-  font-weight: 700;
-  color: #ffffff;
-  letter-spacing: 0.5px;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  line-height: 1 !important;
+}
+
+.dribbble-card-author-name {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #f1f5f9 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  letter-spacing: -0.2px !important;
+  max-width: 130px !important;
 }
 
 .dribbble-badge-pro {
-  font-size: 9.5px;
-  font-weight: 800;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  padding: 2px 5px;
-  border-radius: 4px;
-  background: rgba(168, 85, 247, 0.18);
-  color: #c084fc;
-  border: 1px solid rgba(168, 85, 247, 0.4);
-  line-height: 1;
-  display: inline-flex;
-  align-items: center;
-  vertical-align: middle;
+  font-size: 9px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  padding: 2px 5px !important;
+  border-radius: 4px !important;
+  background: rgba(168, 85, 247, 0.18) !important;
+  color: #c084fc !important;
+  border: 1px solid rgba(168, 85, 247, 0.35) !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  vertical-align: middle !important;
 }
 
 .dribbble-badge-featured {
-  background: rgba(234, 179, 8, 0.18);
-  color: #facc15;
-  border: 1px solid rgba(234, 179, 8, 0.4);
+  background: rgba(234, 179, 8, 0.18) !important;
+  color: #facc15 !important;
+  border: 1px solid rgba(234, 179, 8, 0.4) !important;
 }
 
 .dribbble-badge-new {
-  background: rgba(34, 197, 94, 0.18);
-  color: #4ade80;
-  border: 1px solid rgba(34, 197, 94, 0.4);
+  background: rgba(34, 197, 94, 0.18) !important;
+  color: #4ade80 !important;
+  border: 1px solid rgba(34, 197, 94, 0.4) !important;
+}
+
+.dribbble-card-metrics {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-shrink: 0 !important;
 }
 
 .theme-card-like-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: #94a3b8;
-  font-size: 11.5px;
-  font-weight: 600;
-  padding: 4px 6px;
-  border-radius: 6px;
-  transition: color 0.18s ease, transform 0.18s ease, background 0.18s ease;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  color: #94a3b8 !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  padding: 3px 5px !important;
+  border-radius: 6px !important;
+  transition: color 0.18s ease, transform 0.18s ease !important;
 }
 
 .theme-card-like-btn:hover {
-  color: #f43f5e;
-  background: rgba(244, 63, 94, 0.12);
-  transform: scale(1.08);
+  color: #f43f5e !important;
+  transform: scale(1.08) !important;
 }
 
 .theme-card-like-btn.liked {
-  color: #f43f5e;
+  color: #f43f5e !important;
 }
 
 .theme-card-like-btn.liked i {
-  color: #f43f5e;
-  animation: heartPop 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  color: #f43f5e !important;
+  animation: heartPop 0.32s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
 .theme-card-view-count {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: #64748b;
-  font-size: 11.5px;
-  font-weight: 500;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  color: #64748b !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
 }
 
 .theme-card-view-count i {
-  font-size: 11px;
-  opacity: 0.8;
-}
-
-.dribbble-theme-card.selected,
-.dribbble-theme-card.active-theme {
-  border-color: #8b5cf6;
-  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.55), 0 12px 30px rgba(124, 58, 237, 0.32);
+  font-size: 11px !important;
+  opacity: 0.8 !important;
 }
 
 .dribbble-active-checkmark {
   position: absolute;
   top: 10px;
   right: 10px;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  background: #8b5cf6;
+  background: #a855f7;
   color: #ffffff;
   display: none;
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.5);
   z-index: 5;
 }
 
 .dribbble-theme-card.selected .dribbble-active-checkmark,
 .dribbble-theme-card.active-theme .dribbble-active-checkmark {
-  display: flex;
+  display: flex !important;
 }
 
 .dribbble-hover-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(10, 12, 22, 0.85) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.15) 0%, rgba(10, 12, 22, 0.88) 100%);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 12px;
+  padding: 14px;
   opacity: 0;
   transition: opacity 0.22s ease;
   z-index: 4;
+  pointer-events: none;
 }
 
 .dribbble-theme-card:hover .dribbble-hover-overlay {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .dribbble-overlay-title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: #ffffff;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7);
@@ -4458,10 +4533,10 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
 }
 
 .dribbble-overlay-btn {
-  padding: 5px 10px;
-  font-size: 11px;
+  padding: 6px 12px;
+  font-size: 11.5px;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: 7px;
   background: rgba(255, 255, 255, 0.95);
   color: #0f172a;
   border: none;
@@ -4475,12 +4550,12 @@ body[data-template="moderncv"] .bg-fx, body[data-template="moderncv"] .grid-over
 }
 
 .dribbble-overlay-btn.primary {
-  background: #7c3aed;
+  background: #a855f7;
   color: #ffffff;
 }
 
 .dribbble-overlay-btn.primary:hover {
-  background: #8b5cf6;
+  background: #9333ea;
 }
 
 /* Theme Shot Visuals: Group 1 */

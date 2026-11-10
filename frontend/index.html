@@ -2791,8 +2791,38 @@ if ($('builderForm')) {
       card.style.display = (track === 'all' || cardTrack === track) ? '' : 'none';
     });
   };
-  // Theme picker thumbnails: swap emoji placeholders for live mini-previews
+  // Theme picker thumbnails: Dribbble showcase with real live theme iframes
   function paintThemeThumbs() {
+    function updateShotScale() {
+      const vps = document.querySelectorAll('.dribbble-card-viewport');
+      if (!vps.length) return;
+      const w = vps[0].clientWidth;
+      if (w > 0) {
+        document.documentElement.style.setProperty('--shot-scale', (w / 1280).toFixed(4));
+      }
+    }
+
+    if (!window._shotObserver && typeof IntersectionObserver !== 'undefined') {
+      window._shotObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const iframe = entry.target.querySelector('iframe.dribbble-shot-live-iframe');
+            if (iframe && !iframe.dataset.loaded) {
+              iframe.dataset.loaded = '1';
+              const theme = iframe.dataset.theme;
+              if (typeof window.buildThemeLiveHtml === 'function') {
+                iframe.srcdoc = window.buildThemeLiveHtml(theme);
+                iframe.onload = () => {
+                  iframe.classList.add('is-loaded');
+                };
+              }
+            }
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '350px 0px' });
+    }
+
     document.querySelectorAll('.tpl-card').forEach(c => {
       const inp = c.querySelector('input');
       const prev = c.querySelector('.tpl-preview');
@@ -2804,19 +2834,17 @@ if ($('builderForm')) {
         author: { name: 'Portfoolio Studio', initials: 'PF' },
         badge: 'PRO',
         likes: 68,
-        views: '11.4k'
+        views: '11.4k',
+        gradient: 'linear-gradient(135deg, #090d16 0%, #1e1b4b 100%)'
       };
 
       c.classList.add('dribbble-theme-card');
       prev.classList.add('dribbble-card-viewport');
 
-      const shotHtml = (window.PortfoolioThemeCatalog && typeof window.PortfoolioThemeCatalog.getThemeShotHtml === 'function')
-        ? window.PortfoolioThemeCatalog.getThemeShotHtml(theme, meta)
-        : '';
-
       prev.innerHTML = `
-        <div class="dribbble-shot-canvas dribbble-shot-${theme}">
-          ${shotHtml}
+        <div class="dribbble-shot-ambient-bg" style="background:${meta.gradient || 'linear-gradient(135deg, #090d16 0%, #1e1b4b 100%)'}"></div>
+        <div class="dribbble-shot-scale-frame">
+          <iframe class="dribbble-shot-live-iframe" data-theme="${theme}" title="${meta.title || name} preview" sandbox="allow-scripts allow-same-origin" loading="lazy"></iframe>
         </div>
         <span class="lx-tp lx-tp-${theme}" style="display:none"><i class="lx-tp-nav"></i><i class="lx-tp-hero"></i><i class="lx-tp-cards"></i><i class="lx-tp-cards"></i></span>
         <div class="dribbble-active-checkmark"><i class="fa-solid fa-check"></i></div>
@@ -2824,9 +2852,20 @@ if ($('builderForm')) {
           <span class="dribbble-overlay-title">${meta.title || name}</span>
           <div class="dribbble-overlay-actions">
             <button type="button" class="dribbble-overlay-btn primary shot-select-btn">Select Theme</button>
-            <button type="button" class="dribbble-overlay-btn tpl-preview-eye" title="Preview ${name} theme" aria-label="Preview ${name} theme"><i class="fa-solid fa-eye"></i></button>
+            <button type="button" class="dribbble-overlay-btn tpl-preview-eye" title="Preview ${name} theme in full tab" aria-label="Preview ${name} theme"><i class="fa-solid fa-eye"></i></button>
           </div>
-        </div>`
+        </div>`;
+
+      if (window._shotObserver) {
+        window._shotObserver.observe(prev);
+      } else if (typeof window.buildThemeLiveHtml === 'function') {
+        const iframe = prev.querySelector('iframe.dribbble-shot-live-iframe');
+        if (iframe) {
+          iframe.srcdoc = window.buildThemeLiveHtml(theme);
+          iframe.classList.add('is-loaded');
+        }
+      }
+
       const eyeBtn = prev.querySelector('.tpl-preview-eye');
       if (eyeBtn) {
         eyeBtn.addEventListener('click', (e) => {
@@ -2854,7 +2893,7 @@ if ($('builderForm')) {
               ${author.avatar ? `<img src="${author.avatar}" alt="${author.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">` : ''}
               <span style="${author.avatar ? 'display:none' : ''}">${author.initials || 'PF'}</span>
             </div>
-            <span class="dribbble-card-author-name">${author.name}</span>
+            <span class="dribbble-card-author-name" title="${author.name}">${author.name}</span>
             <span class="dribbble-badge-pro ${meta.badge === 'FEATURED' ? 'dribbble-badge-featured' : ''}">${meta.badge || 'PRO'}</span>
           </div>
           <div class="dribbble-card-metrics">
@@ -2889,6 +2928,12 @@ if ($('builderForm')) {
 
       prev.dataset.thumbed = '1';
     });
+
+    updateShotScale();
+    if (!window._shotScaleResizeAttached) {
+      window._shotScaleResizeAttached = true;
+      window.addEventListener('resize', updateShotScale);
+    }
   }
   paintThemeThumbs();
   document.querySelectorAll('#tplGrid .tpl-card').forEach(c => c.addEventListener('click', () => {

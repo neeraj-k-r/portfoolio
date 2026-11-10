@@ -8687,8 +8687,44 @@ function renderIllustra(p) {
   } catch (e) {}
 }
 
+function renderMidnight(p) {
+  normTpl(p);
+  const app = document.getElementById('app');
+  if (!app) return;
+  document.body.dataset.template = 'midnight';
+  const skillsBadges = (p.skills || []).map(s => `<span class="badge" style="background:rgba(34,211,238,0.1);color:#22d3ee;border:1px solid rgba(34,211,238,0.25);padding:4px 10px;border-radius:6px;font-size:12px;font-weight:600">✦ ${tplEsc(s)}</span>`).join('');
+  const projects = (p.projects || []).map((pr, i) => `
+    <div class="card proj-card" style="background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.08);padding:18px;border-radius:14px">
+      <div style="font-size:16px;font-weight:700;color:#fff">${tplEsc(pr.title)}</div>
+      <p style="color:var(--muted);font-size:13.5px;margin:6px 0">${tplEsc(pr.desc || '')}</p>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">${(pr.tags ? pr.tags.split(',') : (pr.technologies || [])).map(t => `<span class="badge" style="font-size:11px;background:rgba(168,85,247,0.12);color:#c084fc;border:1px solid rgba(168,85,247,0.25)">${tplEsc(String(t).trim())}</span>`).join('')}</div>
+    </div>`).join('');
+  app.innerHTML = `
+    <div class="pf-container" style="max-width:980px;margin:0 auto;padding:48px 24px">
+      <div style="display:flex;gap:24px;align-items:center;margin-bottom:32px">
+        <div style="width:84px;height:84px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#22d3ee);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:800;color:#fff;box-shadow:0 0 24px rgba(34,211,238,0.35);flex-shrink:0">
+          ${p.avatar ? `<img src="${tplSafeUrl(p.avatar)}" style="width:100%;height:100%;border-radius:50%;object-fit:cover">` : (p.name || 'Y').charAt(0).toUpperCase()}
+        </div>
+        <div>
+          <span class="badge" style="background:rgba(34,211,238,0.15);color:#22d3ee;border:1px solid rgba(34,211,238,0.3);margin-bottom:8px;display:inline-block;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:700">DEVELOPER & SYSTEMS ARCHITECT</span>
+          <h1 style="font-size:38px;font-weight:800;color:#fff;margin:0;letter-spacing:-0.03em;line-height:1.15">${tplEsc(p.name)}</h1>
+          <p style="font-size:16px;color:#94a3b8;margin:6px 0 0">${tplEsc(p.title)}</p>
+        </div>
+      </div>
+      <p style="font-size:15px;color:#cbd5e1;line-height:1.6;max-width:700px;margin-bottom:28px">${tplEsc(p.bio || p.desc || '')}</p>
+      <div style="margin-bottom:32px">
+        <div style="font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px">CORE CAPABILITIES</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">${skillsBadges}</div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:700;color:#64748b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px">FEATURED WORK</div>
+        <div class="proj-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">${projects}</div>
+      </div>
+    </div>`;
+}
 
-window.PortfoolioTemplates = { minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook, salon: renderSalon, illustra: renderIllustra, techno: renderTechno, analog: renderAnalog, mythos: renderMythos , suki: renderSuki, lo: renderLo, mara: renderMara };
+
+window.PortfoolioTemplates = { midnight: renderMidnight, minimal: renderMinimal, terminal: renderTerminal, creative: renderCreative, aurora: renderAurora, editorial: renderEditorial, brutalist: renderBrutalist, afterglow: renderAfterglow, ultraviolet: renderUltraviolet, tidepool: renderTidepool, motion: renderMotion, darkpro: renderDarkpro, fullpage: renderFullpage, moderncv: renderModerncv, ultracode: renderUltracode, devblue: renderDevblue, marlon: renderDevblue, cube: renderCube, cubegreen: renderCube, muzammal: renderCube, nova: renderNova, codeflow: renderCodeflow, wave: renderWave, assistant: renderAssistant, console: renderConsole, snowcard: renderSnowcard, parchment: renderParchment, cloud: renderCloud, github: renderGithub, particle: renderParticle, panels: renderPanels, monolith: renderMonolith, editor: renderEditor, magazine: renderMagazine, bold: renderBold, clean: renderClean, vibrant: renderVibrant, neon: renderNeon, hacker: renderHacker, gallery: (p) => renderVisualGallery(p, 'gallery'), studio: (p) => renderVisualGallery(p, 'studio'), noir: (p) => renderVisualGallery(p, 'noir'), museum: (p) => renderVisualGallery(p, 'museum'), catalog: (p) => renderVisualGallery(p, 'catalog'), bloom: (p) => renderVisualGallery(p, 'bloom'), atelier: renderAtelier, cinema: renderCinema, arch: renderArch, zine: renderZine, zen: renderZen, desire: renderDesire, lumina: renderLumina, vogue: renderVogue, filmstrip: renderFilmstrip, biennale: renderBiennale, pavilion: renderPavilion, documenta: renderDocumenta, triennale: renderTriennale, sketchbook: renderSketchbook, salon: renderSalon, illustra: renderIllustra, techno: renderTechno, analog: renderAnalog, mythos: renderMythos , suki: renderSuki, lo: renderLo, mara: renderMara };
 window.PortfoolioTemplateList = TEMPLATES;
 
 
