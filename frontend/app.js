@@ -1986,6 +1986,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       themeModal.classList.add('open');
       themeModal.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('has-open-modal');
       const closeBtn = themeModal.querySelector('.lx-modal-close');
       if (closeBtn) closeBtn.focus();
     };
@@ -1994,6 +1995,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       themeModal.classList.remove('open');
       themeModal.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      document.body.classList.remove('has-open-modal');
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     };
     document.querySelectorAll('.lx-theme-card').forEach(card => {

@@ -23,3 +23,7 @@
 #clawdex-pet .cdx-close:hover{background:#e11d48;color:#fff}
 @media (max-width:640px){#clawdex-pet .cdx-close{opacity:1}}
 @media print{#clawdex-pet{display:none}}
+.lx-modal.open ~ #clawdex-pet,
+body:has(.lx-modal.open) #clawdex-pet,
+body.has-open-modal #clawdex-pet,
+#clawdex-pet.cdx-under-modal {display:none !important;pointer-events:none !important}

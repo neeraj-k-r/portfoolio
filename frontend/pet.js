@@ -90,11 +90,11 @@
   function clampPos(p) {
     var v = viewport();
     var b = CFG.bounds;
-    // On mobile screens (<=640px), enforce extra bottom & right safety padding
+    // On mobile screens (<=640px), enforce generous bottom & right safety padding
     // to prevent the pet from being cut off by mobile browser toolbars, bottom home indicators, or notches
     var isMobile = v.width <= 640;
-    var rightPadding = isMobile ? Math.max(b, 20) : b;
-    var bottomPadding = isMobile ? Math.max(b, 68) : b;
+    var rightPadding = isMobile ? Math.max(b, 24) : b;
+    var bottomPadding = isMobile ? Math.max(b, 84) : b;
     var minX = b;
     var maxX = Math.max(minX, v.width - CFG.viewW - rightPadding);
     var minY = b;
@@ -192,7 +192,7 @@
     function step(now) {
       var t = Math.min(1, (now - t0) / dur);
       var ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      applyPos({ x: start.x + dx * ease, y: start.y + dy * ease });
+      applyPos(clampPos({ x: start.x + dx * ease, y: start.y + dy * ease }));
       if (t < 1) {
         raf = requestAnimationFrame(step);
       } else {
@@ -209,15 +209,16 @@
   function randomTarget() {
     var v = viewport();
     var b = CFG.bounds;
-    // Roam along the bottom perimeter (floor level) so mascot stays grounded
-    // and never walks across center login/auth cards or form inputs.
-    var minY = Math.max(b, v.height - 220);
-    var maxY = Math.max(b, v.height - CFG.viewH - b);
+    var isMobile = v.width <= 640;
+    var rightPadding = isMobile ? Math.max(b, 24) : b;
+    var bottomPadding = isMobile ? Math.max(b, 84) : b;
+    var minX = b;
+    var maxX = Math.max(minX, v.width - CFG.viewW - rightPadding);
+    var minY = Math.max(b, v.height - (isMobile ? 180 : 220));
+    var maxY = Math.max(minY, v.height - CFG.viewH - bottomPadding);
     var y = minY + Math.random() * Math.max(10, maxY - minY);
-    return {
-      x: b + Math.random() * Math.max(40, v.width - CFG.viewW - b * 2),
-      y: Math.min(y, maxY)
-    };
+    var x = minX + Math.random() * Math.max(10, maxX - minX);
+    return clampPos({ x: x, y: y });
   }
 
   function scheduleActivity() {
@@ -423,7 +424,7 @@
       stage.style.width = CFG.viewW + 'px';
       stage.style.height = CFG.viewH + 'px';
     }
-    applyPos(clampPos({ x: v0.width - CFG.viewW - (v0.width <= 640 ? 20 : CFG.bounds), y: v0.height - CFG.viewH - (v0.width <= 640 ? 68 : CFG.bounds) }));
+    applyPos(clampPos({ x: v0.width - CFG.viewW - (v0.width <= 640 ? 24 : CFG.bounds), y: v0.height - CFG.viewH - (v0.width <= 640 ? 84 : CFG.bounds) }));
 
     sprite.style.width = CFG.viewW + 'px';
     sprite.style.height = CFG.viewH + 'px';
