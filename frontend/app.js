@@ -2549,11 +2549,12 @@ window.filterThemeShowcase = function() {
 
   const techDivider = document.querySelector('#edTplGrid .theme-grid-divider.tech-divider');
   const visDivider = document.querySelector('#edTplGrid .theme-grid-divider.visual-divider');
+  const showDividers = !query && filter === 'all';
   if (techDivider) {
-    techDivider.style.display = (!query && (filter === 'all' || filter === 'tech')) ? 'flex' : 'none';
+    techDivider.style.display = showDividers ? 'flex' : 'none';
   }
   if (visDivider) {
-    visDivider.style.display = (!query && (filter === 'all' || filter === 'visual')) ? 'flex' : 'none';
+    visDivider.style.display = showDividers ? 'flex' : 'none';
   }
 };
 
