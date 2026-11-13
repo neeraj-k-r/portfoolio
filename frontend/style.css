@@ -5359,45 +5359,61 @@ body.studio .dribbble-card-viewport,
   align-items: center;
 }
 
+body.studio .theme-search-box .search-icon,
 .theme-search-box .search-icon {
-  position: absolute;
-  left: 12px;
-  font-size: 12px;
-  color: var(--muted2, #9c9382);
-  pointer-events: none;
+  position: absolute !important;
+  left: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 13px !important;
+  color: var(--muted2, #9c9382) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+  line-height: 1 !important;
 }
 
+body.studio .theme-search-box input,
 .theme-search-box input {
-  padding: 8px 30px 8px 32px;
-  font-size: 12.5px;
-  border-radius: 9999px;
-  background: var(--surface-2, #faf6ed);
-  border: 1px solid var(--line, #e6dfd0);
-  color: var(--ink, #1b1914);
-  width: 230px;
-  transition: all 0.2s ease;
+  padding: 9px 36px 9px 38px !important;
+  font-size: 13px !important;
+  border-radius: 9999px !important;
+  background: var(--surface-2, #faf6ed) !important;
+  border: 1px solid var(--line, #e6dfd0) !important;
+  color: var(--ink, #1b1914) !important;
+  width: 250px !important;
+  height: 38px !important;
+  box-sizing: border-box !important;
+  transition: all 0.2s ease !important;
 }
 
+body.studio .theme-search-box input::placeholder,
 .theme-search-box input::placeholder {
-  color: var(--muted2, #9c9382);
+  color: var(--muted2, #9c9382) !important;
 }
 
+body.studio .theme-search-box input:focus,
 .theme-search-box input:focus {
-  outline: none;
-  background: var(--surface, #fffdf8);
-  border-color: #4f46e5;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
-  width: 270px;
+  outline: none !important;
+  background: var(--surface, #fffdf8) !important;
+  border-color: #4f46e5 !important;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12) !important;
+  width: 285px !important;
 }
 
+body.studio .theme-search-box .search-clear-btn,
 .search-clear-btn {
-  position: absolute;
-  right: 10px;
-  background: none;
-  border: none;
-  color: var(--muted, #787160);
-  font-size: 15px;
-  cursor: pointer;
+  position: absolute !important;
+  right: 12px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  background: none !important;
+  border: none !important;
+  color: var(--muted, #787160) !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  line-height: 1 !important;
+  z-index: 2 !important;
 }
 
 @keyframes heartPop {

@@ -3263,3 +3263,28 @@ iframe[src*="netlify" i],
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* Theme Search Box in Studio */
+body.studio .theme-search-box input {
+  padding: 9px 36px 9px 38px !important;
+  border-radius: 9999px !important;
+  background: var(--surface-2, #faf6ed) !important;
+  border: 1px solid var(--line, #e6dfd0) !important;
+  color: var(--ink, #1b1914) !important;
+  width: 250px !important;
+  height: 38px !important;
+  box-sizing: border-box !important;
+}
+
+body.studio .theme-search-box .search-icon {
+  position: absolute !important;
+  left: 14px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  font-size: 13px !important;
+  color: var(--muted2, #9c9382) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+  line-height: 1 !important;
+}
