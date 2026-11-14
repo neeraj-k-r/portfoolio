@@ -2519,8 +2519,13 @@ window.filterThemeShowcase = function() {
   const searchInput = document.getElementById('themeSearchInput');
   const query = (searchInput ? searchInput.value : '').toLowerCase().trim();
 
+  const isVisual = document.body.classList.contains('visual-user');
+  const currentTrack = isVisual ? 'visual' : 'tech';
+
   const activePill = document.querySelector('#themeFilterPills .filter-pill.active, .filter-pill.active');
-  const filter = activePill ? activePill.getAttribute('data-filter') : 'all';
+  let filter = activePill ? activePill.getAttribute('data-filter') : 'all';
+  if (!isVisual && (filter === 'visual' || filter === 'tech')) filter = 'all';
+  if (isVisual && (filter === 'tech' || filter === 'visual')) filter = 'all';
 
   const cards = document.querySelectorAll('#edTplGrid .tpl-card, #edTplGrid .dribbble-theme-card');
   cards.forEach(card => {
@@ -2530,10 +2535,15 @@ window.filterThemeShowcase = function() {
     const meta = (window.PortfoolioThemeCatalog && window.PortfoolioThemeCatalog.getTheme(theme)) || {};
     const cardTrack = card.getAttribute('data-vtrack') || meta.track || 'tech';
 
+    // Strict Track Isolation: developer section NEVER renders or searches visual artist themes
+    if (cardTrack !== currentTrack) {
+      card.classList.add('theme-card-hidden');
+      card.style.display = 'none';
+      return;
+    }
+
     let matchesFilter = true;
-    if (filter === 'tech') matchesFilter = cardTrack === 'tech';
-    else if (filter === 'visual') matchesFilter = cardTrack === 'visual';
-    else if (filter === 'dark') matchesFilter = !!meta.dark;
+    if (filter === 'dark') matchesFilter = !!meta.dark;
     else if (filter === 'minimal') matchesFilter = !!(meta.tags && (meta.tags.includes('minimal') || meta.tags.includes('clean')));
 
     let matchesQuery = true;
@@ -2551,13 +2561,8 @@ window.filterThemeShowcase = function() {
 
   const techDivider = document.querySelector('#edTplGrid .theme-grid-divider.tech-divider');
   const visDivider = document.querySelector('#edTplGrid .theme-grid-divider.visual-divider');
-  const showDividers = !query && filter === 'all';
-  if (techDivider) {
-    techDivider.style.display = showDividers ? 'flex' : 'none';
-  }
-  if (visDivider) {
-    visDivider.style.display = showDividers ? 'flex' : 'none';
-  }
+  if (techDivider) techDivider.style.display = 'none';
+  if (visDivider) visDivider.style.display = 'none';
 };
 
 window.initThemeFilterPills = function() {

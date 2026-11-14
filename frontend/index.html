@@ -1168,7 +1168,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <div class="theme-showcase-header">
             <div class="theme-showcase-titles">
               <h4 class="theme-showcase-title">✨ Dribbble Theme Showcase</h4>
-              <p class="theme-showcase-desc">Browse all 40 handcrafted portfolio designs in full visual fidelity. Click any card to apply.</p>
+              <p class="theme-showcase-desc">Browse all 35 handcrafted developer portfolio designs in full visual fidelity. Click any card to apply.</p>
             </div>
             <div class="theme-showcase-tools">
               <div class="theme-search-box">
@@ -1179,11 +1179,11 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
             </div>
           </div>
           <div class="theme-filter-pills" id="themeFilterPills">
-            <button type="button" class="filter-pill active" data-filter="all">All Showcase <span class="pill-count">64</span></button>
-            <button type="button" class="filter-pill" data-filter="tech">💻 Developer <span class="pill-count">35</span></button>
-            <button type="button" class="filter-pill" data-filter="visual">🎨 Visual Artists <span class="pill-count">29</span></button>
-            <button type="button" class="filter-pill" data-filter="dark">🌙 Dark Mode <span class="pill-count">36</span></button>
-            <button type="button" class="filter-pill" data-filter="minimal">🕊️ Minimal <span class="pill-count">18</span></button>
+            <button type="button" class="filter-pill active" data-filter="all">All Showcase <span class="pill-count">35</span></button>
+            <button type="button" class="filter-pill" data-filter="dark">🌙 Dark Mode <span class="pill-count">24</span></button>
+            <button type="button" class="filter-pill" data-filter="minimal">🕊️ Minimal <span class="pill-count">12</span></button>
+            <button type="button" class="filter-pill" data-filter="tech" style="display:none">💻 Developer <span class="pill-count">35</span></button>
+            <button type="button" class="filter-pill" data-filter="visual" style="display:none">🎨 Visual Artists <span class="pill-count">29</span></button>
           </div>
           <div class="tpl-grid" id="edTplGrid">
             <div class="theme-grid-divider tech-divider" data-divider="tech" style="display:none">
@@ -2434,11 +2434,22 @@ function paintTrackTabs(profile) {
   const visual = (profile && profile.track) === 'visual' || ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(String((profile && profile.template) || '').toLowerCase());
   document.body.classList.toggle('visual-user', visual);
 
-  // Synchronize theme showcase filter pills with user track so themes are not mixed up
-  const targetFilter = visual ? 'visual' : 'tech';
+  // Update pill count & subtitle based on track (never mix visual artist into developer portfolio)
+  const allCount = document.querySelector('#themeFilterPills .filter-pill[data-filter="all"] .pill-count');
+  if (allCount) {
+    allCount.textContent = visual ? '29' : '35';
+  }
+  const descEl = document.querySelector('.theme-showcase-desc');
+  if (descEl) {
+    descEl.textContent = visual 
+      ? 'Browse all 29 handcrafted visual artist & gallery portfolio designs. Click any card to apply.'
+      : 'Browse all 35 handcrafted developer portfolio designs in full visual fidelity. Click any card to apply.';
+  }
+
+  // Active pill defaults to All for the current track
   const pills = document.querySelectorAll('#themeFilterPills .filter-pill');
   if (pills.length) {
-    pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-filter') === targetFilter));
+    pills.forEach(p => p.classList.toggle('active', p.getAttribute('data-filter') === 'all'));
   }
 
   if (typeof window.filterThemeShowcase === 'function') {

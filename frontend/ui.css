@@ -3288,3 +3288,21 @@ body.studio .theme-search-box .search-icon {
   z-index: 2 !important;
   line-height: 1 !important;
 }
+
+
+/* Developer Studio strict isolation: never show visual artist filter or visual themes */
+body:not(.visual-user) #themeFilterPills .filter-pill[data-filter="visual"],
+body:not(.visual-user) #themeFilterPills .filter-pill[data-filter="tech"],
+body:not(.visual-user) #edTplGrid [data-vtrack="visual"],
+body:not(.visual-user) #edTplGrid .theme-grid-divider.visual-divider,
+body:not(.visual-user) #edTplGrid .theme-grid-divider.tech-divider {
+  display: none !important;
+}
+
+body.visual-user #themeFilterPills .filter-pill[data-filter="tech"],
+body.visual-user #themeFilterPills .filter-pill[data-filter="visual"],
+body.visual-user #edTplGrid [data-vtrack="tech"],
+body.visual-user #edTplGrid .theme-grid-divider.tech-divider,
+body.visual-user #edTplGrid .theme-grid-divider.visual-divider {
+  display: none !important;
+}
