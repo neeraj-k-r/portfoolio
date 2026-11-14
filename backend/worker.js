@@ -1002,6 +1002,7 @@ body.illustra-dark-mode{background:#120e1e!important}
 <meta name="keywords" content="${esc(skillsArr.concat([p.title, p.name, 'portfolio', 'developer', p.username]).filter(Boolean).join(', '))}">
 <meta name="author" content="${esc(p.name)}">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="google-site-verification" content="Ot_vICz0m3pHC6sb0mMb0A9gaO8WT1F9xXYAA4I65Lk">
 <link rel="canonical" href="${userCanonical}">
 <meta property="og:type" content="profile">
 <meta property="og:site_name" content="portfoolio.me">
@@ -9718,6 +9719,19 @@ function renderLoSSRFooter(p) {
 export default {
   async fetch(req) {
     const url = new URL(req.url);
+
+    // Google Site Verification (HTML file verification)
+    if (url.pathname === '/google35cbf527736916d3.html') {
+      return new Response('google-site-verification: google35cbf527736916d3.html\n', {
+        status: 200,
+        headers: {
+          'content-type': 'text/html;charset=UTF-8',
+          'cache-control': 'public, max-age=86400',
+          'access-control-allow-origin': '*',
+          ...SEC_HEADERS,
+        },
+      });
+    }
 
     // Search Engine Optimization (SEO): robots.txt for root & all subdomains
     if (url.pathname === '/robots.txt') {

@@ -82,4 +82,19 @@ test('SEO: worker.js handles robots.txt, dynamic sitemap.xml, and renders rich s
   // Resume SEO in pageResume(p)
   assert.ok(workerSrc.includes('resumeCanonical'), 'pageResume generates canonical URL');
   assert.ok(workerSrc.includes('resumeTitle'), 'pageResume generates resumeTitle');
+
+  // Google Search Console Site Verification
+  assert.ok(workerSrc.includes("url.pathname === '/google35cbf527736916d3.html'"), 'worker handles google html verification');
+  assert.ok(workerSrc.includes('Ot_vICz0m3pHC6sb0mMb0A9gaO8WT1F9xXYAA4I65Lk'), 'worker head includes google verification code');
+});
+
+test('SEO: Google Search Console verification meta tag and HTML file exist', () => {
+  const html = fs.readFileSync(path.join(rootDir, 'frontend', 'index.html'), 'utf8');
+  assert.ok(html.includes('<meta name="google-site-verification" content="Ot_vICz0m3pHC6sb0mMb0A9gaO8WT1F9xXYAA4I65Lk" />'), 'index.html has Google site verification tag');
+  
+  const gHtml = fs.readFileSync(path.join(rootDir, 'frontend', 'google35cbf527736916d3.html'), 'utf8');
+  assert.ok(gHtml.includes('google-site-verification: google35cbf527736916d3.html'), 'google verification html file exists');
+
+  const rootGHtml = fs.readFileSync(path.join(rootDir, 'google35cbf527736916d3.html'), 'utf8');
+  assert.ok(rootGHtml.includes('google-site-verification: google35cbf527736916d3.html'), 'root google verification html file exists');
 });

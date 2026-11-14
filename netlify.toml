@@ -22,6 +22,12 @@
   force = true
 
 [[redirects]]
+  from = "/google35cbf527736916d3.html"
+  to = "/frontend/google35cbf527736916d3.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/backend/supabase-schema.sql"
   to = "/404"
   status = 404
