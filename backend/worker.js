@@ -8608,10 +8608,9 @@ function pagePanels(p) {
             </div>
           </div>
           <div>
-            ${foot(p)}
+            <p>© ${new Date().getFullYear()} ${name}. Handcrafted on <a href="https://portfoolio.me" target="_blank" rel="noopener">portfoolio.me</a>.</p>
           </div>
         </div>
-        <div class="pn-copy">© ${name} · Built with Portfoolio</div>
       </div>
     </footer>
 
@@ -8636,7 +8635,7 @@ function pageParticle(p) {
   const title = esc(p.title || 'Full Stack & AI Engineer');
   const bio = esc(p.bio || p.summary || p.tagline || 'Transforming complex requirements into elegant, high-impact digital solutions through modern software architecture.');
   const email = esc(p.email || '');
-  const photo = p.photo || p.avatar || p.avatarUrl || p.avatar_url || '';
+  const photo = p.photo || p.avatar || '';
 
   const rawExp = (Array.isArray(p.experience) && p.experience.length) ? p.experience : (p.resume && Array.isArray(p.resume.experience) ? p.resume.experience : []);
   const projects = Array.isArray(p.projects) ? p.projects : [];
