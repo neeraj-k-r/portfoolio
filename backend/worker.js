@@ -973,9 +973,48 @@ body.illustra-dark-mode{background:#120e1e!important}
   .mara-row-preview { display: none !important; }
 }
 </style>`;
+  const userCanonical = `https://${esc(p.username)}.portfoolio.me/`;
+  const pageTitle = `${esc(p.name)} — ${esc(p.title)} | portfoolio.me`;
+  const pageDesc = esc(p.tagline || p.bio || `Explore ${p.name}'s professional developer & creative portfolio hosted on portfoolio.me.`);
+  const avatarImg = p.avatar_url ? esc(p.avatar_url) : `${ORIGIN}/favicon.png`;
+  const skillsArr = techsOf(p).concat(p.skills || []);
+  const sameAsArr = [p.github, p.linkedin, p.instagram].filter(u => u && /^https?:\/\//i.test(u));
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfilePage",
+    "mainEntity": {
+      "@type": "Person",
+      "name": p.name || p.username,
+      "alternateName": p.username,
+      "jobTitle": p.title || "Developer",
+      "description": p.tagline || p.bio || "",
+      "url": userCanonical,
+      "image": p.avatar_url || `${ORIGIN}/favicon.png`,
+      "knowsAbout": skillsArr,
+      ...(p.location ? { "address": { "@type": "PostalAddress", "addressLocality": p.location } } : {}),
+      ...(sameAsArr.length ? { "sameAs": sameAsArr } : {})
+    }
+  };
+
   return `<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>${esc(p.name)} — ${esc(p.title)} | portfoolio.me</title>
-<meta name="description" content="${esc(p.tagline || p.title || '')}">
+<title>${pageTitle}</title>
+<meta name="description" content="${pageDesc}">
+<meta name="keywords" content="${esc(skillsArr.concat([p.title, p.name, 'portfolio', 'developer', p.username]).filter(Boolean).join(', '))}">
+<meta name="author" content="${esc(p.name)}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="${userCanonical}">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="portfoolio.me">
+<meta property="og:title" content="${pageTitle}">
+<meta property="og:description" content="${pageDesc}">
+<meta property="og:url" content="${userCanonical}">
+<meta property="og:image" content="${avatarImg}">
+<meta property="profile:username" content="${esc(p.username)}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${pageTitle}">
+<meta name="twitter:description" content="${pageDesc}">
+<meta name="twitter:image" content="${avatarImg}">
+<script type="application/ld+json">${JSON.stringify(jsonLd)}</script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="apple-touch-icon" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -985,7 +1024,7 @@ body.illustra-dark-mode{background:#120e1e!important}
 <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
 <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-<link rel="stylesheet" href="/style.css?v=20261106b"><link rel="stylesheet" href="/templates.css?v=20261106b"><link rel="stylesheet" href="/resume.css?v=20261106b">
+<link rel="stylesheet" href="/style.css?v=20261114"><link rel="stylesheet" href="/templates.css?v=20261114"><link rel="stylesheet" href="/resume.css?v=20261114">
 ${mcvStyle}
 ${visualStyle}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mixitup/3.3.1/mixitup.min.js"></script>
@@ -9415,10 +9454,28 @@ function pageResume(p) {
   const theme = resumeTheme(p);
   const ats = computeWorkerATS(p);
   const targetRole = (p.resume && p.resume.targetRole && p.resume.targetRole !== 'auto') ? p.resume.targetRole : '';
+  const resumeCanonical = `https://${esc(p.username)}.portfoolio.me/resume`;
+  const resumeTitle = `Resume — ${esc(p.name)} | portfoolio.me`;
+  const resumeDesc = `Professional resume and curriculum vitae for ${esc(p.name)} (${esc(p.title)}). ATS-ready developer CV.`;
+  const resumeAvatar = p.avatar_url ? esc(p.avatar_url) : `${ORIGIN}/favicon.png`;
   return `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Resume — ${esc(p.name)} | portfoolio.me</title>
+<title>${resumeTitle}</title>
+<meta name="description" content="${resumeDesc}">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<link rel="canonical" href="${resumeCanonical}">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="portfoolio.me">
+<meta property="og:title" content="${resumeTitle}">
+<meta property="og:description" content="${resumeDesc}">
+<meta property="og:url" content="${resumeCanonical}">
+<meta property="og:image" content="${resumeAvatar}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${resumeTitle}">
+<meta name="twitter:description" content="${resumeDesc}">
+<meta name="twitter:image" content="${resumeAvatar}">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/resume.css"></head>
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="stylesheet" href="/style.css?v=20261114"><link rel="stylesheet" href="/resume.css?v=20261114"></head>
 <body class="portfolio-view rs-page rs-${theme}"><div class="bg-fx"></div>${nav(p)}
 <div class="no-print" style="max-width:860px;margin:0 auto;padding:120px 16px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap">
 <a href="/" style="font-weight:800">← ${esc(p.name)}</a>
@@ -9662,6 +9719,75 @@ function renderLoSSRFooter(p) {
 export default {
   async fetch(req) {
     const url = new URL(req.url);
+
+    // Search Engine Optimization (SEO): robots.txt for root & all subdomains
+    if (url.pathname === '/robots.txt') {
+      const robotsTxt = `User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /backend/
+
+Host: https://portfoolio.me
+Sitemap: https://portfoolio.me/sitemap.xml
+`;
+      return new Response(robotsTxt, {
+        status: 200,
+        headers: {
+          'content-type': 'text/plain;charset=UTF-8',
+          'cache-control': 'public, max-age=86400',
+          'access-control-allow-origin': '*',
+          ...SEC_HEADERS,
+        },
+      });
+    }
+
+    // Search Engine Optimization (SEO): dynamic sitemap.xml with approved user portfolios
+    if (url.pathname === '/sitemap.xml') {
+      try {
+        const sRes = await fetch(`${SUPABASE_URL}/rest/v1/profiles?status=eq.approved&select=username,updated_at&order=updated_at.desc`, {
+          headers: { apikey: SUPABASE_KEY, Accept: 'application/json' },
+        });
+        const rows = sRes.ok ? await sRes.json() : [];
+        const users = (rows && rows.length) ? rows : [
+          { username: 'neerajkr' }, { username: 'demo' }, { username: 'arjun' },
+          { username: 'priya' }, { username: 'ember' }, { username: 'iris' },
+          { username: 'june' }, { username: 'kai' }, { username: 'leo' },
+          { username: 'mira' }, { username: 'zoe' }
+        ];
+
+        let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+        xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+        xml += `  <url>\n    <loc>${ORIGIN}/</loc>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n  </url>\n`;
+        xml += `  <url>\n    <loc>${ORIGIN}/explore</loc>\n    <changefreq>daily</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+
+        for (const u of users) {
+          if (!u || !u.username) continue;
+          const uname = esc(String(u.username).toLowerCase());
+          const lastmod = u.updated_at ? `    <lastmod>${new Date(u.updated_at).toISOString().split('T')[0]}</lastmod>\n` : '';
+          xml += `  <url>\n    <loc>https://${uname}.portfoolio.me/</loc>\n${lastmod}    <changefreq>weekly</changefreq>\n    <priority>0.8</priority>\n  </url>\n`;
+          xml += `  <url>\n    <loc>https://${uname}.portfoolio.me/resume</loc>\n${lastmod}    <changefreq>monthly</changefreq>\n    <priority>0.6</priority>\n  </url>\n`;
+        }
+        xml += `</urlset>`;
+
+        return new Response(xml, {
+          status: 200,
+          headers: {
+            'content-type': 'application/xml;charset=UTF-8',
+            'cache-control': 'public, max-age=3600',
+            'access-control-allow-origin': '*',
+            ...SEC_HEADERS,
+          },
+        });
+      } catch (err) {
+        const fbXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${ORIGIN}/</loc><priority>1.0</priority></url>\n  <url><loc>${ORIGIN}/explore</loc><priority>0.8</priority></url>\n</urlset>`;
+        return new Response(fbXml, {
+          status: 200,
+          headers: { 'content-type': 'application/xml;charset=UTF-8', ...SEC_HEADERS },
+        });
+      }
+    }
+
     const host = url.hostname.toLowerCase();
     const parts = host.split('.');
     let sub = null;
@@ -9686,6 +9812,8 @@ export default {
       url.pathname === '/pets-data.js' ||
       url.pathname === '/favicon.svg' ||
       url.pathname === '/favicon.png' ||
+      url.pathname === '/og-image.png' ||
+      url.pathname === '/og-image.svg' ||
       url.pathname.startsWith('/profiles/') ||
       url.pathname.startsWith('/assets/') ||
       url.pathname.startsWith('/frontend/')

@@ -4,6 +4,24 @@
 
 # Security: Block direct access to database schemas, worker source, and backend config files
 [[redirects]]
+  from = "/robots.txt"
+  to = "/frontend/robots.txt"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/sitemap.xml"
+  to = "/frontend/sitemap.xml"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/og-image.png"
+  to = "/frontend/og-image.png"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/backend/supabase-schema.sql"
   to = "/404"
   status = 404
@@ -78,3 +96,15 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
     Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=86400"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=3600"

@@ -71,6 +71,12 @@ test('Studio options for users to add companion pet to live sites', () => {
   const petJs = fs.readFileSync(path.join(rootDir, 'frontend', 'pet.js'), 'utf8');
   assert.ok(petJs.includes('__ClawdexPetLoaded'), 'pet.js must have singleton guard to prevent duplicate pets');
   assert.ok(!indexHtml.includes('</script>') || indexHtml.match(/<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/gi).every(b => {
+    if (b.includes('application/ld+json')) {
+      try {
+        JSON.parse(b.replace(/<\/?script[^>]*>/gi, ''));
+        return true;
+      } catch { return false; }
+    }
     try {
       new Function(b.replace(/<\/?script[^>]*>/gi, ''));
       return true;
