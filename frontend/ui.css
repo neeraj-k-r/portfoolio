@@ -3272,7 +3272,8 @@ body.studio .theme-search-box input {
   background: var(--surface-2, #faf6ed) !important;
   border: 1px solid var(--line, #e6dfd0) !important;
   color: var(--ink, #1b1914) !important;
-  width: 250px !important;
+  width: 300px !important;
+  max-width: 100% !important;
   height: 38px !important;
   box-sizing: border-box !important;
 }

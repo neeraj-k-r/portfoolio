@@ -2716,6 +2716,17 @@ body[data-template="zen"] .bg-fx, body[data-template="zen"] .grid-overlay, body[
 
 /* Responsive adjustments for mobile devices */
 @media (max-width: 640px) {
+  .theme-showcase-tools,
+  .theme-search-box {
+    width: 100%;
+  }
+  body.studio .theme-search-box input,
+  .theme-search-box input,
+  body.studio .theme-search-box input:focus,
+  .theme-search-box input:focus {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
   .atelier-collection { grid-template-columns: 1fr; gap: 24px; padding-bottom: 60px; }
   .atelier-card.atelier-wide { grid-column: span 1; }
   .atelier-frame img { height: 320px; }
@@ -5389,7 +5400,8 @@ body.studio .theme-search-box input,
   background: var(--surface-2, #faf6ed) !important;
   border: 1px solid var(--line, #e6dfd0) !important;
   color: var(--ink, #1b1914) !important;
-  width: 250px !important;
+  width: 300px !important;
+  max-width: 100% !important;
   height: 38px !important;
   box-sizing: border-box !important;
   transition: all 0.2s ease !important;
@@ -5406,7 +5418,8 @@ body.studio .theme-search-box input:focus,
   background: var(--surface, #fffdf8) !important;
   border-color: #4f46e5 !important;
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12) !important;
-  width: 285px !important;
+  width: 335px !important;
+  max-width: 100% !important;
 }
 
 body.studio .theme-search-box .search-clear-btn,
