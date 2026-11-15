@@ -1,9 +1,11 @@
-# portfoolio.me — username.portfoolio.me portfolios
+# Portfoolio — Free Developer Portfolio Maker & Hosting Platform
 
-Give your name + details, get an instant, handcrafted portfolio on **yourname.portfoolio.me**.
+> **Portfoolio** — Free developer portfolio maker and hosting platform: **[portfoolio.me](https://portfoolio.me)**
+> 
+> Build and ship a recruiter-ready portfolio in 60 seconds with your own free custom subdomain (`username.portfoolio.me`), 40+ handcrafted themes, interactive companion pets, and ATS resume generator.
 
-- **Production**: [https://portfoolio.me](https://portfoolio.me)
-- **Live Demo**: [https://portfoolio.me/?u=neerajkr](https://portfoolio.me/?u=neerajkr) • [https://nkr3037.portfoolio.me](https://nkr3037.portfoolio.me)
+- **Official Platform**: [https://portfoolio.me](https://portfoolio.me)
+- **Live Demo**: [https://portfoolio.me/?u=neerajkr](https://portfoolio.me/?u=neerajkr) • [https://neerajkr.portfoolio.me](https://neerajkr.portfoolio.me)
 
 ---
 
