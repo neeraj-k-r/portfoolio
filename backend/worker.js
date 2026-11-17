@@ -1039,7 +1039,7 @@ function nav(p) {
   ${p.email ? `<a class="btn btn-primary btn-sm" href="mailto:${esc(p.email)}">Hire ${esc((p.name || '').split(' ')[0])}</a>` : ''}</div></nav>`;
 }
 function foot(p) {
-  return `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b>${esc(p.name)}</b> via <b>portfoolio.me</b></div>
+  return `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b>${esc(p.name)}</b> · <a href="https://portfoolio.me/" target="_blank" rel="noopener" class="portfoolio-backlink" title="Portfoolio — Free Developer Portfolio Maker & Hosting">⚡ Made with Portfoolio — Portfolio Maker</a></div>
   <div class="socials">${p.github ? `<a href="${esc(p.github)}"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${esc(p.linkedin)}"><i class="fa-brands fa-linkedin"></i></a>` : ''}${wShowInsta(p) ? `<a href="${esc(p.instagram)}"><i class="fa-brands fa-instagram"></i></a>` : ''}${p.email ? `<a href="mailto:${esc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
 }
 function projectsFor(p, tpl) {
