@@ -9353,7 +9353,7 @@ function page(p, url) {
   <div class="${gridCls}" style="margin-top:22px">${projectsFor(p, tpl) || '<p>No projects yet.</p>'}</div></section>
   ${resumeTeaser(p)}
   <section class="wrap"><div class="card" style="display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-  <div><h3>Like this portfolio?</h3><p>Claim yours free at <b>portfoolio.me</b>.</p></div>
+  <div><h3>Like this portfolio?</h3><p>Claim yours free at <a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Free Developer Portfolio Maker & Hosting"><b>Portfoolio — Developer Portfolio Maker</b></a>.</p></div>
   <a class="btn btn-primary" href="${ORIGIN}/">Create mine</a></div></section>${foot(p)}</body></html>`;
 }
 
