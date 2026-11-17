@@ -1,5 +1,23 @@
 # Portfoolio — Free Developer Portfolio Maker & Hosting Platform
 
+<div align="center">
+
+  <a href="https://portfoolio.me">
+    <img src="https://portfoolio.me/badge.svg?v=2" alt="Portfoolio Live" />
+  </a>
+  <a href="https://portfoolio.me/developer-portfolio-maker">
+    <img src="https://img.shields.io/badge/Portfolio%20Maker-Free%20Hosting-7c3aed?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Free Portfolio Maker" />
+  </a>
+  <a href="https://neerajkr.portfoolio.me">
+    <img src="https://img.shields.io/badge/Live%20Demo-neerajkr.portfoolio.me-06b6d4?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" />
+  </a>
+  <a href="https://portfoolio.me/free-portfolio-hosting">
+    <img src="https://img.shields.io/badge/Subdomains-*.portfoolio.me-10b981?style=for-the-badge&logo=cloudflare&logoColor=white" alt="Free Subdomains" />
+  </a>
+
+</div>
+
+
 > **Portfoolio** — Free developer portfolio maker and hosting platform: **[portfoolio.me](https://portfoolio.me)**
 > 
 > Build and ship a recruiter-ready portfolio in 60 seconds with your own free custom subdomain (`username.portfoolio.me`), 40+ handcrafted themes, interactive companion pets, and ATS resume generator.
