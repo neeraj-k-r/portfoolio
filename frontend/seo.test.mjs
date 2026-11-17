@@ -103,3 +103,9 @@ test('SEO: FAQPage schema is valid and present in index.html', () => {
   const html = fs.readFileSync(path.join(rootDir, 'frontend', 'index.html'), 'utf8');
   assert.ok(html.includes('"@type": "FAQPage"'), 'index.html has FAQPage schema');
 });
+
+test('SEO: FAQ questions and semantic elements are present in index.html', () => {
+  const html = fs.readFileSync(path.join(rootDir, 'frontend', 'index.html'), 'utf8');
+  assert.ok(html.includes('What is the best free portfolio maker for developers?'), 'FAQ question 1 is present');
+  assert.ok(html.includes('class="faq-section"'), 'index.html has .faq-section element');
+});
