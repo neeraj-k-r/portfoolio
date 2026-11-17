@@ -8,3 +8,9 @@
   `Made with Portfoolio — Portfolio Maker` pointing to `https://portfoolio.me/`.
 - As users share their portfolios on LinkedIn, GitHub, X/Twitter, and resumes, thousands of natural, relevant backlinks flow into `portfoolio.me`.
 - Every developer who displays the `[![Portfolio](https://portfoolio.me/badge.svg)](https://portfoolio.me)` badge creates a direct, do-follow connection from GitHub's domain to Portfoolio.
+
+## 3. Community Launch Playbook
+1. Dev.to technical post on building Portfoolio.
+2. Reddit showcase in r/webdev and r/SideProject.
+3. Product Hunt launch scheduled.
+4. Hacker News "Show HN" post.
