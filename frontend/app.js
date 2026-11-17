@@ -2681,3 +2681,30 @@ window.debouncedFilterThemeShowcase = function() {
     }
   }, 120);
 };
+
+// Interactive FAQ Accordion handler for landing page
+document.addEventListener('DOMContentLoaded', () => {
+  const faqAccordion = document.getElementById('faqAccordion');
+  if (faqAccordion) {
+    faqAccordion.addEventListener('click', (e) => {
+      const qBtn = e.target.closest('.faq-question');
+      if (!qBtn) return;
+      const item = qBtn.closest('.faq-item');
+      if (!item) return;
+      const isActive = item.classList.contains('active');
+      
+      // Close other accordion items
+      faqAccordion.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('active');
+        const b = i.querySelector('.faq-question');
+        if (b) b.setAttribute('aria-expanded', 'false');
+      });
+      
+      // Toggle selected item
+      if (!isActive) {
+        item.classList.add('active');
+        qBtn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  }
+});
