@@ -8552,7 +8552,7 @@ function renderIllustra(p) {
           ${email ? `<a href="mailto:${tplEsc(email)}" class="illustra-footer-link">Contact</a>` : ''}
           ${p.instagram ? `<a href="${tplEsc(p.instagram)}" target="_blank" rel="noopener" class="illustra-footer-link">Instagram</a>` : ''}
           ${p.github ? `<a href="${tplEsc(p.github)}" target="_blank" rel="noopener" class="illustra-footer-link">GitHub</a>` : ''}
-          <span class="illustra-footer-badge">Illustra Theme · portfoolio.me</span>
+          <span class="illustra-footer-badge"><a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting">Illustra Theme · Portfoolio Maker</a></span>
           <a href="#home" class="illustra-back-top" aria-label="Back to top">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <line x1="12" y1="19" x2="12" y2="5"></line>
