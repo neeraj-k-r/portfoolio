@@ -3846,7 +3846,7 @@ function renderAssistant(p) {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </button>
             </div>
-            <div class="as-disclaimer">Powered by portfoolio.me • Interactive conversational portfolio</div>
+            <div class="as-disclaimer">Powered by <a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting">Portfoolio — Portfolio Maker</a> • Conversational developer portfolio</div>
           </div>
         </div>
       </main>
