@@ -5394,7 +5394,7 @@ ${head(p, 'ultracode')}
           </div>
         </div>
 
-        <p class="footer-copy">&#169; ${new Date().getFullYear()} <a href="https://portfoolio.me" target="_blank">${name}</a> • Built via portfoolio.me</p>
+        <p class="footer-copy">&#169; ${new Date().getFullYear()} <a href="https://portfoolio.me" target="_blank">${name}</a> • <a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Free Developer Portfolio Maker & Hosting">Built via Portfoolio — Portfolio Maker</a></p>
       </div>
     </footer>
   </main>
