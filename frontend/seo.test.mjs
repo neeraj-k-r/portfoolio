@@ -98,3 +98,8 @@ test('SEO: Google Search Console verification meta tag and HTML file exist', () 
   const rootGHtml = fs.readFileSync(path.join(rootDir, 'google35cbf527736916d3.html'), 'utf8');
   assert.ok(rootGHtml.includes('google-site-verification: google35cbf527736916d3.html'), 'root google verification html file exists');
 });
+
+test('SEO: FAQPage schema is valid and present in index.html', () => {
+  const html = fs.readFileSync(path.join(rootDir, 'frontend', 'index.html'), 'utf8');
+  assert.ok(html.includes('"@type": "FAQPage"'), 'index.html has FAQPage schema');
+});
