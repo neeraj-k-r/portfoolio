@@ -9486,7 +9486,7 @@ function pageResume(p) {
 </div>
 <span style="margin-left:auto;display:flex;gap:10px"><a href="/" style="font-weight:700">Portfolio</a><a href="javascript:window.print()" style="font-weight:800">⬇ Print / PDF</a></span></div>
 <main class="rs-doc rs-${theme}">${resumeBody(p)}
-<p class="rs-foot">Resume auto-built from <b>portfoolio.me</b> profile · ${esc(p.username)}.portfoolio.me</p></main>
+<p class="rs-foot">Resume auto-built with <a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting"><b>Portfoolio — Developer Portfolio Maker</b></a> · ${esc(p.username)}.portfoolio.me</p></main>
 <div class="no-print" style="text-align:center;padding:0 0 40px"><a href="javascript:window.print()" style="font-weight:800">⬇ Print / Save as PDF</a></div>${foot(p)}</body></html>`;
 }
 function resumeTeaser(p) {
