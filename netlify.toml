@@ -47,6 +47,18 @@
   force = true
 
 [[redirects]]
+  from = "/badge.svg"
+  to = "/frontend/badge.svg"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/badge"
+  to = "/frontend/badge.svg"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/google35cbf527736916d3.html"
   to = "/frontend/google35cbf527736916d3.html"
   status = 200
@@ -149,3 +161,17 @@
   [headers.values]
     Content-Type = "application/xml; charset=utf-8"
     Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/badge.svg"
+  [headers.values]
+    Content-Type = "image/svg+xml; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "/badge"
+  [headers.values]
+    Content-Type = "image/svg+xml; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+    Access-Control-Allow-Origin = "*"

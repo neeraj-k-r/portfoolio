@@ -9819,6 +9819,30 @@ Sitemap: https://portfoolio.me/sitemap.xml
       }
     }
 
+    // Dynamic or static portfolio badge for GitHub profiles (works on root domain and all subdomains)
+    if (url.pathname === '/badge.svg' || url.pathname === '/badge') {
+      const color = url.searchParams.get('color') || '7c3aed';
+      const label = url.searchParams.get('label') || 'Portfoolio';
+      const message = url.searchParams.get('status') || 'Live';
+      const style = url.searchParams.get('style') || 'for-the-badge';
+      const shieldsUrl = `https://img.shields.io/badge/${encodeURIComponent(label)}-${encodeURIComponent(message)}-${encodeURIComponent(color)}?style=${encodeURIComponent(style)}&logo=googlechrome&logoColor=white`;
+      try {
+        const bRes = await fetch(shieldsUrl);
+        if (bRes.ok) {
+          return new Response(bRes.body, {
+            status: 200,
+            headers: {
+              'content-type': 'image/svg+xml;charset=utf-8',
+              'cache-control': 'public, max-age=3600',
+              'access-control-allow-origin': '*',
+              ...SEC_HEADERS,
+            },
+          });
+        }
+      } catch {}
+      return Response.redirect(shieldsUrl, 302);
+    }
+
     const host = url.hostname.toLowerCase();
     const parts = host.split('.');
     let sub = null;
@@ -9873,30 +9897,6 @@ Sitemap: https://portfoolio.me/sitemap.xml
           },
         });
       }
-    }
-
-    // Dynamic or static portfolio badge for GitHub profiles
-    if (url.pathname === '/badge.svg' || url.pathname === '/badge') {
-      const color = url.searchParams.get('color') || '7c3aed';
-      const label = url.searchParams.get('label') || 'Portfoolio';
-      const message = url.searchParams.get('status') || 'Live';
-      const style = url.searchParams.get('style') || 'for-the-badge';
-      const shieldsUrl = `https://img.shields.io/badge/${encodeURIComponent(label)}-${encodeURIComponent(message)}-${encodeURIComponent(color)}?style=${encodeURIComponent(style)}&logo=googlechrome&logoColor=white`;
-      try {
-        const bRes = await fetch(shieldsUrl);
-        if (bRes.ok) {
-          return new Response(bRes.body, {
-            status: 200,
-            headers: {
-              'content-type': 'image/svg+xml;charset=utf-8',
-              'cache-control': 'public, max-age=3600',
-              'access-control-allow-origin': '*',
-              ...SEC_HEADERS,
-            },
-          });
-        }
-      } catch {}
-      return Response.redirect(shieldsUrl, 302);
     }
 
     const p = await getProfile(sub);
