@@ -2256,7 +2256,7 @@ function renderUltracode(p) {
             </div>
           </div>
 
-          <p class="footer-copy">&#169; ${new Date().getFullYear()} <a href="https://portfoolio.me" target="_blank">${name}</a> • Built via portfoolio.me</p>
+          <p class="footer-copy">&#169; ${new Date().getFullYear()} <a href="https://portfoolio.me" target="_blank">${name}</a> • <a href="https://portfoolio.me/" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting">⚡ Made with Portfoolio — Portfolio Maker</a></p>
         </div>
       </footer>
     </main>
