@@ -3064,7 +3064,7 @@ function renderCube(p) {
             </form>
 
             <footer>
-              <p>© ${new Date().getFullYear()} ${name} • Powered by <a href="https://portfoolio.me" style="color:#ffffff;text-decoration:underline" target="_blank">portfoolio.me</a></p>
+              <p>© ${new Date().getFullYear()} ${name} • Powered by <a href="https://portfoolio.me" style="color:#ffffff;text-decoration:underline" target="_blank" rel="noopener" title="Portfoolio — Free Developer Portfolio Maker & Hosting">Portfoolio — Developer Portfolio Maker</a></p>
             </footer>
           </div>
         </div>
