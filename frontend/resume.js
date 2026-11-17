@@ -179,7 +179,7 @@ ${o.bare ? '' : `<div class="no-print" style="max-width:860px;margin:0 auto;padd
 <button onclick="window.print()" style="font-weight:800;cursor:pointer">⬇ Print / Save PDF</button>
 </span></div>`}
 <main class="rs-doc rs-${r.theme}">${docBody(p)}
-<p class="rs-foot">Resume auto-built from <b>portfoolio.me</b> profile · ${esc(p.username)}.portfoolio.me</p>
+<p class="rs-foot">Resume auto-built with <a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting"><b>Portfoolio — Developer Portfolio Maker</b></a> · ${esc(p.username)}.portfoolio.me</p>
 </main>
 ${o.bare ? '' : `<div class="no-print" style="text-align:center;padding:0 0 40px"><button onclick="window.print()" style="font-weight:800;cursor:pointer;padding:10px 18px">⬇ Print / Save as PDF</button></div>`}
 </body></html>`;
