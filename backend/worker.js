@@ -3666,7 +3666,7 @@ function pageGallery(p, wIdx, url) {
            ${wShowInsta(p) ? `<a class="btn btn-ghost btn-sm" href="${esc(p.instagram)}" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> Instagram</a>` : ''}
          </div></section>
        </main>
-       <footer class="pad"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span><span>Built with portfoolio.me</span></footer>`
+       <footer class="pad"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span><span><a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Free Developer Portfolio Maker & Hosting">⚡ Made with Portfoolio — Portfolio Maker</a></span></footer>`
     : `<header class="wrap" style="padding:140px 0 10px;text-align:center">
       ${face}
       <h1 style="font-size:clamp(36px,5vw,56px)">${esc(p.name)}</h1>
