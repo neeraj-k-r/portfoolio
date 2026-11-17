@@ -8136,7 +8136,7 @@ function renderTriennale(p) {
         </div>
         <div>
           <b>JURY SELECTION & HONORS</b>
-          <p>Verified Creative Portfolio on portfoolio.me</p>
+          <p>Verified Portfolio on <a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting">Portfoolio — Portfolio Maker</a></p>
         </div>
       </div>
     </footer>
