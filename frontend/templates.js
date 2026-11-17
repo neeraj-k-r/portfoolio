@@ -2750,7 +2750,7 @@ function renderDevblue(p) {
         ${footerTwitter}
       </div>
 
-      <p>&#169; ${new Date().getFullYear()} ${name} • Built via <a href="https://portfoolio.me" style="color:#ffffff;text-decoration:underline">portfoolio.me</a></p>
+      <p>&#169; ${new Date().getFullYear()} ${name} • Built via <a href="https://portfoolio.me" style="color:#ffffff;text-decoration:underline" target="_blank" rel="noopener" title="Portfoolio — Free Developer Portfolio Maker & Hosting">Portfoolio — Developer Portfolio Maker</a></p>
     </footer>
   `;
 
