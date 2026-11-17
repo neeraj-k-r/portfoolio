@@ -115,3 +115,8 @@ test('SEO: sitemaps include high-intent keyword URLs', () => {
   assert.ok(sitemap.includes('/developer-portfolio-maker'), 'sitemap includes developer-portfolio-maker');
   assert.ok(sitemap.includes('/free-portfolio-hosting'), 'sitemap includes free-portfolio-hosting');
 });
+
+test('SEO: worker.js footers include Portfoolio portfolio maker backlink', () => {
+  const src = fs.readFileSync(path.join(rootDir, 'backend', 'worker.js'), 'utf8');
+  assert.ok(src.includes('Portfoolio — Portfolio Maker'), 'worker has portfolio maker backlink');
+});
