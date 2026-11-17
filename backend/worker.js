@@ -9726,6 +9726,11 @@ export default {
       return Response.redirect(`${ORIGIN}/`, 302);
     }
 
+    // High-intent search alias: free-portfolio-hosting
+    if (url.pathname === '/free-portfolio-hosting') {
+      return Response.redirect(`${ORIGIN}/`, 302);
+    }
+
     if (url.pathname === '/google35cbf527736916d3.html') {
       return new Response('google-site-verification: google35cbf527736916d3.html\n', {
         status: 200,
