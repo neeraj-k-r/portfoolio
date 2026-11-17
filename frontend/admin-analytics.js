@@ -271,7 +271,8 @@
     techno: { name: 'Techno Lab', emoji: '⚡', track: 'visual' },
     analog: { name: 'Analog Desk', emoji: '📻', track: 'visual' },
     mythos: { name: 'Mythos Classical', emoji: '🏛️', track: 'visual' },
-    suki: { name: 'Suki Cinematic', emoji: '🎬', track: 'visual' }
+    lo: { name: 'Artistic Lo', emoji: '🎨', track: 'visual' },
+    mara: { name: 'Mara Voss', emoji: '🖤', track: 'visual' }
   };
 
   /**

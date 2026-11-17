@@ -576,7 +576,6 @@
     techno: { name: 'Creative Tech Lab', handle: '@techno_berlin', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=120&q=80', initials: 'TL' },
     analog: { name: 'Vintage Desk Studio', handle: '@analog_desk', avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=120&q=80', initials: 'VD' },
     mythos: { name: 'Celestial Classical', handle: '@mythos_sculpt', avatar: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=120&q=80', initials: 'CC' },
-    suki: { name: 'Suki Tokyo', handle: '@suki_tokyo', avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=120&q=80', initials: 'ST' },
     lo: { name: 'Lo Studios', handle: '@lo_maker', avatar: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=120&q=80', initials: 'LS' },
     mara: { name: 'Mara Art Direction', handle: '@mara_director', avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=120&q=80', initials: 'MD' }
   };
@@ -970,21 +969,6 @@
       accentColor: '#8b5cf6',
       gradient: 'linear-gradient(135deg, #0c071e 0%, #241142 100%)',
       icon: '🏛️',
-      dark: true
-    },
-    suki: {
-      id: 'suki',
-      tags: ["video-director","tokyo","neon-hud","timeline","motion"],
-      likes: 151,
-      views: '23.9k',
-      author: VISUAL_AUTHORS['suki'] || { name: 'Portfoolio Studio', handle: '@portfoolio', initials: 'PF' },
-      title: 'Suki',
-      subtitle: 'Cyber Tokyo video director with neon HUD interface',
-      track: 'visual',
-      badge: 'FEATURED',
-      accentColor: '#06b6d4',
-      gradient: 'linear-gradient(135deg, #08101e 0%, #0c233c 100%)',
-      icon: '🎬',
       dark: true
     },
     lo: {
@@ -1768,21 +1752,6 @@
             <div class="mythos-bust-silhouette">🏛️</div>
             <div class="mythos-title">CASSIAN COLE</div>
             <div class="mythos-sub">Celestial Sculpture & Classical Myth</div>
-          </div>`;
-
-      case 'suki':
-        return `
-          <div class="shot-chrome dark"><span class="sc-dot sc-cyan"></span><span class="sc-url">suki.portfoolio.me</span></div>
-          <div class="shot-body shot-suki-body">
-            <div class="suki-nle-header">
-              <span class="suki-tc">00:14:22:18</span>
-              <span class="suki-tag">CYBER NLE TIMELINE</span>
-            </div>
-            <div class="suki-title">SUKI TANAKA</div>
-            <div class="suki-tracks">
-              <div class="suki-track-v"></div>
-              <div class="suki-track-a"></div>
-            </div>
           </div>`;
 
       case 'cinema':

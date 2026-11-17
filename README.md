@@ -93,7 +93,6 @@
 | **Techno** | `techno` | Creative technology laboratory with interactive categories, retro status bar, and tech pills. |
 | **Analog** | `analog` | Dark vintage desk studio with polaroid hero photo, vertical sidebar, and craft marquee. |
 | **Mythos** | `mythos` | Classical Renaissance sculpture stage, white lily florals, celestial glowing moon, and 3-card grid. |
-| **Suki** | `suki` | Suki cinematic video showcase with 3D cyber grid, showreel video backdrop, neon cyan orbs, category filters, and numbered services. |
 
 ---
 
@@ -222,7 +221,7 @@ Portfoolio includes an **About & Story** studio dashboard tab dedicated to visua
 - **Narrative Headline**: Prominent display catchphrase replacing hardcoded theme hero titles.
 - **Bio Story & Philosophy**: In-depth story paragraph detailing creative medium, studio philosophy, and craft.
 - **Certified Stamp Badge & Studio Origin**: Customizable studio record tags (e.g. `CERTIFIED ARTIST`, `MIDWEST STUDIO`, `KYOTO STUDIO`).
-- **Milestone Counters**: Up to 4 custom stats (e.g. `12+ Years Creating`, `80+ Commissions`) rendered seamlessly across themes like **Lo**, **Suki**, **Analog**, and **Mythos**.
+- **Milestone Counters**: Up to 4 custom stats (e.g. `12+ Years Creating`, `80+ Commissions`) rendered seamlessly across themes like **Lo**, **Analog**, and **Mythos**.
 - **Aesthetic Fallbacks**: Full backward compatibility — profiles without custom entries retain default artistic copy without breaking.
 
 ### Mara Voss — Art Director & Digital Designer Theme (`mara`)

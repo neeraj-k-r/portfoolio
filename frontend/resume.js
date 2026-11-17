@@ -292,7 +292,7 @@ ${o.bare ? '' : `<div class="no-print" style="text-align:center;padding:0 0 40px
 
   function detectDomain(p, targetRoleKey) {
     const str = `${targetRoleKey || ''} ${p.resume && p.resume.targetRole || ''} ${p.title || ''} ${p.tagline || ''} ${p.track || ''}`.toLowerCase();
-    if (/art\s*director|design|creative|illustrat|visual|brand|photo|artist|fashion|editor|curat|mara|mythos|analog|suki|lo\b/.test(str)) {
+    if (/art\s*director|design|creative|illustrat|visual|brand|photo|artist|fashion|editor|curat|mara|mythos|analog|lo\b/.test(str)) {
       return { key: 'creative', ...DOMAIN_KEYWORDS.creative };
     }
     if (/product\s*manag|scrum|agile|program\s*manag|owner|strategy/.test(str)) {

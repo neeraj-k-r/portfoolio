@@ -80,13 +80,13 @@ test('aggregatePlatformKPIs combines all platform metrics accurately', () => {
 
 test('computeTopTemplates ranks templates by popularity', () => {
   const users = [
-    { username: 'u1', template: 'suki' },
-    { username: 'u2', template: 'suki' },
+    { username: 'u1', template: 'mara' },
+    { username: 'u2', template: 'mara' },
     { username: 'u3', template: 'mythos' },
     { username: 'u4', template: 'midnight' }
   ];
   const top = Analytics.computeTopTemplates(users, 3);
-  assert.equal(top[0].id, 'suki');
+  assert.equal(top[0].id, 'mara');
   assert.equal(top[0].count, 2);
   assert.equal(top[0].percent, 50);
 });
@@ -139,11 +139,11 @@ test('exportAnalyticsJSON outputs structured analytics payload', () => {
 
 test('renderAnalyticsDashboardViewHTML generates valid responsive DOM markup', () => {
   const users = [
-    { username: 'neeraj', name: 'Neeraj', email: 'neeraj@example.com', track: 'tech', template: 'suki', status: 'approved' }
+    { username: 'neeraj', name: 'Neeraj', email: 'neeraj@example.com', track: 'visual', template: 'mara', status: 'approved' }
   ];
   const html = Analytics.renderAnalyticsDashboardViewHTML(users);
   assert.ok(html.includes('an-dashboard'), 'must render dashboard container');
   assert.ok(html.includes('Total Creators'), 'must render total creators label');
-  assert.ok(html.includes('Suki Cinematic'), 'must render top template item');
+  assert.ok(html.includes('Mara Voss'), 'must render top template item');
   assert.ok(html.includes('@neeraj'), 'must render user row');
 });

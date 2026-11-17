@@ -100,7 +100,7 @@ async function getProfile(sub) {
         row.services = row.resume.services;
       }
       // Self-heal legacy rows: a visual-only template implies the visual track
-      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
+      if (row.track !== 'visual' && ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'lo', 'mara'].includes(String(row.template || '').toLowerCase())) row.track = 'visual';
       if (row.track !== 'visual') row.track = 'tech';
 
       // Check seed profile to backfill custom services or extra repos
@@ -434,90 +434,7 @@ body.techno-dark-mode{background:#0f0c16!important}
 
 /* MYTHOS CLASSICAL THEME */
 
-/* SUKI CINEMATIC THEME */
-.suki-page{--sk-bg:#050b11;--sk-bg-2:#07131d;--sk-surface:rgba(13,29,42,0.58);--sk-surface-strong:rgba(14,32,46,0.82);--sk-line:rgba(148,220,236,0.13);--sk-line-bright:rgba(25,227,230,0.38);--sk-cyan:#19e3e6;--sk-blue:#36b7ff;--sk-text:#f3fbff;--sk-muted:#8da8b8;--sk-muted-2:#607a89;--sk-shadow:0 30px 80px rgba(0,0,0,0.32);--sk-radius:24px;--sk-header:78px;--sk-font-display:'Space Grotesk',system-ui,sans-serif;--sk-font-body:'Inter',system-ui,sans-serif;min-height:100vh;background:var(--sk-bg);color:var(--sk-text);font-family:var(--sk-font-body);position:relative;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-.suki-shell{width:min(1180px,calc(100% - 40px));margin-inline:auto}
-.suki-section{position:relative;padding:clamp(88px,11vw,150px) 0}
-.suki-glass{background:linear-gradient(145deg,rgba(17,39,55,0.72),rgba(7,20,30,0.48));border:1px solid var(--sk-line);box-shadow:inset 0 1px 0 rgba(255,255,255,0.035),var(--sk-shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.suki-noise{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:0.035;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E")}
-.suki-cyber-grid{position:fixed;z-index:0;inset:-80px;pointer-events:none;background-image:linear-gradient(rgba(25,227,230,0.045) 1px,transparent 1px),linear-gradient(90deg,rgba(25,227,230,0.045) 1px,transparent 1px);background-size:56px 56px;transform:perspective(700px) rotateX(60deg) translateY(25%);transform-origin:center bottom}
-.suki-hero-orb{position:absolute;z-index:0;border-radius:50%;filter:blur(80px);pointer-events:none}
-.suki-hero-orb--one{width:420px;height:420px;background:rgba(25,227,230,0.09);right:-130px;top:12%}
-.suki-hero-orb--two{width:300px;height:300px;background:rgba(54,183,255,0.08);left:35%;bottom:-150px}
-.suki-contact-glow{position:absolute;width:650px;height:650px;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%;background:rgba(25,227,230,0.07);filter:blur(100px);pointer-events:none}
-.suki-scroll-progress{position:fixed;z-index:200;left:0;top:0;height:2px;width:0%;background:linear-gradient(90deg,var(--sk-cyan),var(--sk-blue));box-shadow:0 0 16px var(--sk-cyan)}
-.suki-site-header{position:fixed;z-index:100;top:0;left:0;width:100%;background:rgba(4,11,17,0.75);border-bottom:1px solid var(--sk-line);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-.suki-nav{height:var(--sk-header);display:flex;align-items:center;justify-content:space-between}
-.suki-brand{font-family:var(--sk-font-display);font-weight:700;font-size:1.6rem;letter-spacing:-0.06em;color:#fff;text-decoration:none}
-.suki-brand-dot{color:var(--sk-cyan)}
-.suki-nav-links{display:flex;align-items:center;gap:32px}
-.suki-nav-links a{font-size:0.82rem;font-weight:500;color:#c2d4de;text-decoration:none}
-.suki-nav-links a:hover{color:var(--sk-cyan)}
-.suki-btn{display:inline-flex;align-items:center;justify-content:center;gap:14px;min-height:50px;padding:0 24px;border-radius:999px;color:#031016;font-weight:700;font-size:0.86rem;text-decoration:none;background:linear-gradient(120deg,var(--sk-cyan),#4bd8ff 55%,var(--sk-blue));box-shadow:0 12px 35px rgba(25,227,230,0.16);cursor:pointer;border:none}
-.suki-btn--small{min-height:42px;padding:0 20px;font-size:0.82rem}
-.suki-btn--large{min-height:64px;padding:0 32px;font-size:0.95rem}
-.suki-hero{position:relative;min-height:100vh;display:flex;align-items:center;isolation:isolate;overflow:hidden;padding-top:var(--sk-header)}
-.suki-hero-media{position:absolute;z-index:-3;inset:0;overflow:hidden}
-.suki-hero-media iframe{width:100%;height:100%;object-fit:cover;border:0;pointer-events:none;transform:scale(1.02)}
-.suki-hero-media__fallback{position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 70% 35%,#173a4b 0,#0b1c29 30%,#050b11 72%)}
-.suki-hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,8,13,0.95) 0%,rgba(3,9,15,0.73) 45%,rgba(3,9,15,0.42) 72%),linear-gradient(0deg,var(--sk-bg) 0%,transparent 28%,rgba(2,7,12,0.25) 100%);pointer-events:none}
-.suki-hero-content{position:relative;width:100%;display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:60px}
-.suki-hero-copy{max-width:850px}
-.suki-eyebrow,.suki-kicker{font-size:0.72rem;font-weight:600;letter-spacing:0.19em;color:var(--sk-cyan);text-transform:uppercase}
-.suki-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:25px}
-.suki-eyebrow span{width:28px;height:1px;background:var(--sk-cyan)}
-.suki-hero-title{font-family:var(--sk-font-display);font-weight:700;font-size:clamp(4rem,11vw,9.8rem);line-height:0.82;letter-spacing:-0.08em;margin:0}
-.suki-hero-title .line{display:block;color:#fff}
-.suki-hero-title .accent{color:transparent;-webkit-text-stroke:1.5px rgba(111,235,246,0.85);text-shadow:0 0 50px rgba(25,227,230,0.2)}
-.suki-hero-desc{max-width:580px;margin-top:36px;color:#b3c8d4;font-size:clamp(0.95rem,1.6vw,1.1rem);line-height:1.75}
-.suki-hero-actions{display:flex;align-items:center;gap:28px;margin-top:36px;flex-wrap:wrap}
-.suki-text-link{font-weight:600;font-size:0.88rem;color:#dbe9f0;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.suki-hero-badge{position:absolute;right:0;bottom:8%;border-radius:18px;padding:16px 22px;display:flex;gap:14px;align-items:center}
-.suki-pulse{width:9px;height:9px;border-radius:50%;background:#57f3a0;box-shadow:0 0 0 0 rgba(87,243,160,0.55)}
-.suki-scroll-cue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--sk-muted);font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;text-decoration:none}
-.suki-section-heading{display:grid;grid-template-columns:1.4fr 0.6fr;gap:50px;align-items:end;margin-bottom:45px}
-.suki-section-heading h2,.suki-about h2,.suki-contact h2{font-family:var(--sk-font-display);font-weight:600;font-size:clamp(2.6rem,5.5vw,5rem);line-height:0.95;letter-spacing:-0.065em;color:#fff;margin:12px 0 0}
-.suki-section-heading h2 span,.suki-about h2 span,.suki-contact h2 span{color:var(--sk-cyan)}
-.suki-section-heading>p{color:var(--sk-muted);line-height:1.75;font-size:0.92rem;margin:0}
-.suki-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
-.suki-filter-btn{border:1px solid var(--sk-line);background:rgba(9,23,33,0.48);padding:10px 18px;border-radius:999px;cursor:pointer;color:var(--sk-muted);font-size:0.78rem;font-weight:500}
-.suki-filter-btn.is-active{color:#041016;border-color:transparent;background:var(--sk-cyan)}
-.suki-project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
-.suki-project-card{position:relative;overflow:hidden;border-radius:24px;padding:12px;cursor:pointer}
-.suki-project-media{position:relative;overflow:hidden;border-radius:18px;aspect-ratio:16/10;background:#091722}
-.suki-project-media img{width:100%;height:100%;object-fit:cover;display:block}
-.suki-project-index{position:absolute;right:14px;top:14px;border-radius:999px;background:rgba(3,12,18,0.65);border:1px solid rgba(255,255,255,0.12);padding:6px 11px;font-family:var(--sk-font-display);font-size:0.65rem;font-weight:600;color:var(--sk-cyan);z-index:10}
-.suki-project-play{position:absolute;left:50%;top:50%;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;transform:translate(-50%,-50%);background:rgba(5,15,22,0.72);border:1px solid rgba(25,227,230,0.5);font-size:0.65rem;font-weight:700;color:var(--sk-cyan)}
-.suki-project-info{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;padding:18px 10px 8px}
-.suki-project-info h3{font-family:var(--sk-font-display);font-weight:600;font-size:1.25rem;color:#fff;margin:0}
-.suki-project-info p{color:var(--sk-muted);font-size:0.78rem;margin:6px 0 0}
-.suki-service-list{display:grid;gap:14px}
-.suki-service{display:grid;grid-template-columns:70px 1fr 30px;align-items:center;gap:25px;padding:30px;border-radius:20px}
-.suki-service-number{font-family:var(--sk-font-display);font-weight:500;font-size:0.72rem;color:var(--sk-cyan)}
-.suki-service h3{font-family:var(--sk-font-display);font-weight:600;font-size:clamp(1.35rem,3vw,2rem);color:#fff;margin:0}
-.suki-service p{color:var(--sk-muted);font-size:0.84rem;line-height:1.6;margin:8px 0 0}
-.suki-service b{font-weight:400;font-size:1.25rem;color:var(--sk-cyan)}
-.suki-about-grid{display:grid;grid-template-columns:0.85fr 1.15fr;gap:70px;align-items:center}
-.suki-about-copy>p:last-child{color:var(--sk-muted);line-height:1.85;margin-top:24px;font-size:0.95rem}
-.suki-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
-.suki-stat{min-height:190px;border-radius:22px;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
-.suki-stat strong{font-family:var(--sk-font-display);font-weight:600;font-size:clamp(2.8rem,6vw,5rem);color:var(--sk-text);letter-spacing:-0.07em;line-height:1}
-.suki-stat strong span{color:var(--sk-cyan)}
-.suki-stat p{color:var(--sk-muted);font-size:0.78rem;margin:0;font-weight:500}
-.suki-marquee{overflow:hidden;position:relative;padding:20px 0;border-top:1px solid rgba(255,255,255,0.08);border-bottom:1px solid rgba(255,255,255,0.08);background:rgba(9,25,36,0.28)}
-.suki-marquee-track{display:flex;align-items:center;width:max-content;gap:80px;white-space:nowrap}
-.suki-marquee-track span{font-family:var(--sk-font-display);font-size:0.8rem;font-weight:600;letter-spacing:0.22em;color:#8fb7c8;text-transform:uppercase}
-.suki-contact{min-height:75vh;display:flex;align-items:center;overflow:hidden;position:relative;text-align:center}
-.suki-contact-inner{position:relative;z-index:2;width:100%}
-.suki-contact-inner>p:not(.suki-kicker){max-width:540px;margin:28px auto 0;color:var(--sk-muted);line-height:1.75;font-size:0.95rem}
-.suki-contact-actions{margin-top:42px}
-.suki-social-row{display:flex;justify-content:center;gap:30px;margin-top:40px;flex-wrap:wrap}
-.suki-social-row a{color:var(--sk-muted);font-size:0.8rem;font-weight:500;text-decoration:none}
-.suki-footer{border-top:1px solid var(--sk-line)}
-.suki-footer-inner{min-height:110px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-.suki-footer-inner p,.suki-footer-inner>a:last-child{font-size:0.72rem;color:var(--sk-muted);text-decoration:none}
-@media(max-width:900px){.suki-nav-links,.suki-nav .suki-btn{display:none!important}.suki-section-heading{grid-template-columns:1fr;gap:20px}.suki-about-grid{grid-template-columns:1fr;gap:45px}}
-@media(max-width:680px){.suki-hero-title{font-size:clamp(3.8rem,18vw,6.5rem)}.suki-hero-actions{flex-direction:column;align-items:flex-start}.suki-project-grid{grid-template-columns:1fr}.suki-service{grid-template-columns:38px 1fr 18px}.suki-stats{grid-template-columns:1fr 1fr}.suki-footer-inner{flex-direction:column;align-items:flex-start}}
+
 
 .mythos-page{--my-bg:#08070b;--my-bg-card:rgba(18,16,23,0.85);--my-border:rgba(196,165,252,0.12);--my-border-hover:rgba(196,165,252,0.35);--my-text:#ffffff;--my-text-dim:#9b93a8;--my-lavender:#c4a5fc;--my-lavender-glow:rgba(196,165,252,0.45);--my-font-serif:'Playfair Display','Fraunces',Georgia,serif;--my-font-sans:'Plus Jakarta Sans',system-ui,sans-serif;background-color:var(--my-bg);color:var(--my-text);font-family:var(--my-font-sans);min-height:100vh;margin:0;padding:0;line-height:1.55;position:relative;overflow-x:hidden}
 .mythos-wrap{max-width:1340px;margin:0 auto;padding:24px 32px 64px;position:relative;z-index:2;box-sizing:border-box}
@@ -1171,7 +1088,7 @@ function skillsSection(p) {
 function pageGallery(p, wIdx, url) {
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   const activeTpl = String(qTpl || p.template || 'gallery').toLowerCase();
-  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(activeTpl) ? activeTpl : 'gallery';
+  const vtpl = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'lo', 'mara'].includes(activeTpl) ? activeTpl : 'gallery';
   let works = Array.isArray(p.works) ? p.works.filter(w => w && w.imageUrl) : [];
   if (!works.length) {
     const sampleImages = [
@@ -2431,238 +2348,6 @@ function pageGallery(p, wIdx, url) {
           </script>
         </div>`;
       })()
-    : vtpl === 'suki'
-    ? (() => {
-        const parts = String(p.name || 'PORTFOLIO').trim().split(/\s+/).filter(Boolean);
-        const brand = esc((parts[0] || 'PORTFOLIO').toUpperCase());
-        const line1 = brand;
-        const line2 = parts.length > 1 ? esc(parts.slice(1).join(' ').toUpperCase()) : '';
-        const name = esc(p.name || 'Portfolio');
-        const role = esc(p.title || 'Video Editor / Motion Designer');
-        const bio = esc(p.bio || p.tagline || 'Cinematic edits, commercials and motion graphics built to make people stop scrolling.');
-        const sukiAboutStory = esc(p.about_story || (p.about && p.about.story) || p.bio || p.tagline || 'I focus on rhythm, visual hierarchy, sound and motion to turn raw footage into work that feels intentional. The goal is simple: make every second earn its place.');
-        const email = p.email || '';
-        const phone = p.phone || '';
-        const hireHref = phone ? `https://wa.me/${phone.replace(/\D/g, '')}?text=Hi,${encodeURIComponent(' ')}I'm${encodeURIComponent(' ')}interested` : (email ? `mailto:${esc(email)}?subject=Project%20Inquiry` : '#contact');
-        const sourceWorks = (works && works.length) ? works : ((p.projects && p.projects.length) ? p.projects : []);
-        const fallbackCards = [
-          { title: 'Automotive Showcase', category: 'automotive', desc: 'High-speed cinematic supercar edit & sound design', imageUrl: 'https://images.unsplash.com/photo-1544829099-b9a0c07fad1a?auto=format&fit=crop&w=900&q=80', year: '2026' },
-          { title: 'Brand Campaign', category: 'commercial', desc: 'Social campaign & lifestyle commercial launch', imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=900&q=80', year: '2026' },
-          { title: 'Fashion & Product Film', category: 'product', desc: 'Studio lighting, macro angles and rhythm pacing', imageUrl: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80', year: '2026' },
-          { title: 'Motion Graphics System', category: 'motion', desc: 'Kinetic typography, 3D title design & transitions', imageUrl: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=900&q=80', year: '2026' }
-        ];
-        const displayCards = sourceWorks.slice(0, 6);
-        while (displayCards.length < 4) {
-          displayCards.push(fallbackCards[displayCards.length]);
-        }
-        const skills = (Array.isArray(p.skills) && p.skills.length) ? p.skills : ['Video Editing', 'Motion Design', 'Automotive', 'Commercial', 'Storytelling'];
-        const marqueeText = skills.map(s => esc(s).toUpperCase()).join(' ✦ ') + ' ✦';
-        const worksCount = sourceWorks.length ? sourceWorks.length : 30;
-        const year = new Date().getFullYear();
-
-        return `<div class="suki-page" id="sukiRoot">
-          <div class="suki-scroll-progress" id="sukiScrollProgress"></div>
-          <div class="suki-noise" aria-hidden="true"></div>
-          <div class="suki-cyber-grid" aria-hidden="true"></div>
-          <div class="suki-mouse-glow" id="sukiMouseGlow" aria-hidden="true"></div>
-          <div class="suki-cursor-dot" id="sukiCursorDot" aria-hidden="true"></div>
-          <div class="suki-cursor-ring" id="sukiCursorRing" aria-hidden="true"></div>
-
-          <header class="suki-site-header" id="sukiHeader">
-            <nav class="suki-nav suki-shell">
-              <a class="suki-brand" href="#home">${brand}<span class="suki-brand-dot">.</span></a>
-              <div class="suki-nav-links" id="sukiNavLinks">
-                <a href="#home">Home</a>
-                <a href="#work">Work</a>
-                <a href="#services">Services</a>
-                <a href="#about">About</a>
-                <a href="#contact">Contact</a>
-              </div>
-              <a class="suki-btn suki-btn--small" href="${hireHref}">Hire Me</a>
-            </nav>
-          </header>
-
-          <main>
-            <section class="suki-hero" id="home">
-              <div class="suki-hero-media" aria-hidden="true">
-                <iframe class="suki-hero-youtube" src="https://www.youtube-nocookie.com/embed/DVSM1GQ4bUE?autoplay=1&mute=1&loop=1&playlist=DVSM1GQ4bUE&controls=0&playsinline=1&rel=0&enablejsapi=1" title="Showreel backdrop" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-                <div class="suki-hero-media__fallback"></div>
-                <div class="suki-hero-overlay"></div>
-              </div>
-              <div class="suki-hero-orb suki-hero-orb--one" aria-hidden="true"></div>
-              <div class="suki-hero-orb suki-hero-orb--two" aria-hidden="true"></div>
-
-              <div class="suki-shell suki-hero-content">
-                <div class="suki-hero-copy">
-                  <div class="suki-eyebrow"><span></span> ${role.toUpperCase()}</div>
-                  <h1 class="suki-hero-title">
-                    <span class="line">${line1}</span>
-                    ${line2 ? `<span class="line accent">${line2}</span>` : ''}
-                  </h1>
-                  <p class="suki-hero-desc">${bio}</p>
-                  <div class="suki-hero-actions">
-                    <a class="suki-btn" href="#work"><span>Explore Work</span><b>↘</b></a>
-                    <a class="suki-text-link" href="#contact"><span>Get in Touch</span><span>→</span></a>
-                  </div>
-                </div>
-
-                <div class="suki-hero-badge suki-glass">
-                  <span class="suki-pulse" aria-hidden="true"></span>
-                  <div>
-                    <small>Availability</small>
-                    <strong>Available for Projects</strong>
-                  </div>
-                </div>
-              </div>
-
-              <a class="suki-scroll-cue" href="#work"><span>Scroll to explore</span><i>↓</i></a>
-            </section>
-
-            <section class="suki-section suki-work" id="work">
-              <div class="suki-shell">
-                <div class="suki-section-heading">
-                  <div>
-                    <p class="suki-kicker">01 / SELECTED WORK</p>
-                    <h2>Featured <span>Projects.</span></h2>
-                  </div>
-                  <p>A selection of edits across automotive, commercial, product and motion design.</p>
-                </div>
-
-                <div class="suki-project-grid" id="sukiProjectGrid">
-                  ${displayCards.map((w, idx) => {
-                    const num = String(idx + 1).padStart(2, '0');
-                    const wTitle = esc(w.title || w.name || 'Untitled Project');
-                    const wSub = esc(w.desc || w.category || 'Cinematic Edit');
-                    const wImg = esc(w.imageUrl || w.image || fallbackCards[idx % fallbackCards.length].imageUrl);
-                    const wUrl = esc(w.url || w.demoUrl || '#work');
-                    const isExt = /^https?:\/\//i.test(wUrl);
-                    return `
-                      <article class="suki-project-card suki-glass">
-                        <div class="suki-project-media">
-                          <img src="${wImg}" alt="${wTitle}" loading="lazy"/>
-                          <div class="suki-project-play">PLAY</div>
-                          <div class="suki-project-index">${num}</div>
-                        </div>
-                        <div class="suki-project-info">
-                          <div>
-                            <h3>${wTitle}</h3>
-                            <p>${wSub}</p>
-                          </div>
-                          <a href="${wUrl}" ${isExt ? 'target="_blank" rel="noopener"' : ''} style="color:var(--sk-cyan);text-decoration:none;font-weight:600;font-size:0.8rem;">2026 ↗</a>
-                        </div>
-                      </article>`;
-                  }).join('')}
-                </div>
-              </div>
-            </section>
-
-            <section class="suki-section suki-services" id="services">
-              <div class="suki-shell">
-                <div class="suki-section-heading">
-                  <div><p class="suki-kicker">02 / WHAT I DO</p><h2>Built for <span>attention.</span></h2></div>
-                  <p>From the first cut to final sound design, every decision supports pacing, clarity and retention.</p>
-                </div>
-                <div class="suki-service-list">
-                  <article class="suki-service suki-glass">
-                    <span class="suki-service-number">01</span>
-                    <div><h3>Commercial Editing</h3><p>Brand films, campaigns, product launches and promotional content.</p></div>
-                    <b>↗</b>
-                  </article>
-                  <article class="suki-service suki-glass">
-                    <span class="suki-service-number">02</span>
-                    <div><h3>Automotive &amp; Sound</h3><p>Cinematic car edits, dealership campaigns, reels and enthusiast content.</p></div>
-                    <b>↗</b>
-                  </article>
-                  <article class="suki-service suki-glass">
-                    <span class="suki-service-number">03</span>
-                    <div><h3>Short-form Content</h3><p>Fast, retention-focused edits for Instagram Reels, Shorts and TikTok.</p></div>
-                    <b>↗</b>
-                  </article>
-                  <article class="suki-service suki-glass">
-                    <span class="suki-service-number">04</span>
-                    <div><h3>Motion Graphics</h3><p>Typography, transitions, visual systems and motion-led storytelling.</p></div>
-                    <b>↗</b>
-                  </article>
-                </div>
-              </div>
-            </section>
-
-            <section class="suki-section suki-about" id="about">
-              <div class="suki-shell suki-about-grid">
-                <div class="suki-about-copy">
-                  <p class="suki-kicker">03 / ABOUT</p>
-                  <h2>${p.about_headline || (p.about && p.about.headline) ? esc(p.about_headline || (p.about && p.about.headline)) : 'Editing is more than <span>cutting clips.</span>'}</h2>
-                  <p>${sukiAboutStory}</p>
-                </div>
-                                <div class="suki-stats">
-                  ${(Array.isArray(p.about_stats) && p.about_stats.length > 0)
-                    ? p.about_stats.slice(0, 4).map(st => `
-                      <article class="suki-stat suki-glass">
-                        <strong>${esc(st.num || '')}</strong>
-                        <p>${esc(st.label || '')}</p>
-                      </article>`).join('')
-                    : `
-                      <article class="suki-stat suki-glass">
-                        <strong>${worksCount}<span>+</span></strong>
-                        <p>Projects completed</p>
-                      </article>
-                      <article class="suki-stat suki-glass">
-                        <strong>10<span>+</span></strong>
-                        <p>Client collaborations</p>
-                      </article>
-                      <article class="suki-stat suki-glass">
-                        <strong>3<span>+</span></strong>
-                        <p>Years creating</p>
-                      </article>
-                      <article class="suki-stat suki-glass">
-                        <strong>100<span>%</span></strong>
-                        <p>Attention to detail</p>
-                      </article>`}
-                </div>
-              </div>
-            </section>
-
-            <section class="suki-marquee" aria-hidden="true">
-              <div class="suki-marquee-track">
-                <span>${marqueeText}</span>
-                <span>${marqueeText}</span>
-                <span>${marqueeText}</span>
-                <span>${marqueeText}</span>
-              </div>
-            </section>
-
-            <section class="suki-section suki-contact" id="contact">
-              <div class="suki-contact-glow" aria-hidden="true"></div>
-              <div class="suki-shell suki-contact-inner">
-                <p class="suki-kicker">04 / LET'S WORK</p>
-                <h2>Have a project?<br><span>Let's make it hit.</span></h2>
-                <p>Tell me what you're building and what you want the audience to feel.</p>
-                <div class="suki-contact-actions">
-                  <a class="suki-btn suki-btn--large" href="${hireHref}" target="_blank" rel="noopener">
-                    <span>Start a Project</span>
-                    <b>↗</b>
-                  </a>
-                </div>
-                <div class="suki-social-row">
-                  ${p.instagram ? `<a href="${esc(p.instagram)}" target="_blank" rel="noopener">Instagram</a>` : ''}
-                  ${p.youtube ? `<a href="${esc(p.youtube)}" target="_blank" rel="noopener">YouTube</a>` : ''}
-                  ${p.github ? `<a href="${esc(p.github)}" target="_blank" rel="noopener">GitHub</a>` : ''}
-                  ${p.linkedin ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ''}
-                </div>
-              </div>
-            </section>
-          </main>
-
-          <footer class="suki-footer">
-            <div class="suki-shell suki-footer-inner">
-              <a class="suki-brand" href="#home">${brand}<span class="suki-brand-dot">.</span></a>
-              <p>© ${year} ${name}. All rights reserved.</p>
-              <a href="#home">Back to top ↑</a>
-            </div>
-          </footer>
-        </div>`;
-      })()
-    
     : vtpl === 'mara'
     ? (() => {
         const isDefaultPersona = !p.name || p.name === 'Mara Voss';
@@ -3713,7 +3398,7 @@ function pageGallery(p, wIdx, url) {
       })();
     </script></body></html>`;
   }
-  if (['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'].includes(vtpl) && !w) {
+  if (['atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'lo', 'mara'].includes(vtpl) && !w) {
     return `<!DOCTYPE html><html lang="en">${head(p, vtpl)}<body class="portfolio-view" data-template="${vtpl}">${body}<script>(function(){if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .lumina-card, .vogue-plate, .filmstrip-frame, .rv, .lo-art-card').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
   }
   return `<!DOCTYPE html><html lang="en">${head(p, 'midnight')}<body class="portfolio-view" data-template="${vtpl}"><div class="bg-fx"></div><div class="blob"></div><div class="pv"><i></i></div><div id="bar" aria-hidden="true"></div>${nav(p)}${body}${foot(p)}<script>(function(){const template=document.body.dataset.template;const isVisual=['gallery','studio','noir','museum','catalog','bloom','motion','atelier','cinema','arch','zine','zen', 'desire', 'lumina', 'vogue', 'filmstrip'].includes(template);if(!isVisual)return;const bar=document.getElementById('bar');const onScroll=()=>{const max=document.documentElement.scrollHeight-document.documentElement.clientHeight;if(max>0&&bar)bar.style.transform='scaleX('+(scrollY/max)+')';if(bar)bar.style.background='#4f46e5'};window.addEventListener('scroll',onScroll,{passive:true});onScroll();const blob=document.querySelector('.blob');const pv=document.querySelector('.pv');const pi=pv?.firstElementChild;let tx=innerWidth/2,ty=innerHeight/3,bx=tx,by=ty,px=tx,py=ty,raf=0;const loop=()=>{bx+=(tx-bx)*0.06;by+=(ty-by)*0.06;if(blob)blob.style.transform='translate3d('+(bx-blob.offsetWidth/2)+'px,'+(by-blob.offsetHeight/2)+'px,0)';if(pv){px+=(tx-px)*0.12;py+=(ty-py)*0.12;pv.style.transform='translate3d('+(px+24)+'px,'+(py-90)+'px,0)'}raf=(Math.abs(tx-bx)+Math.abs(ty-by)>0.5)?requestAnimationFrame(loop):0};raf=requestAnimationFrame(loop);addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;if(!raf)raf=requestAnimationFrame(loop);},{passive:true});document.querySelectorAll('.row').forEach(a=>{a.addEventListener('pointerenter',()=>{if(pi){pi.style.backgroundImage='url('+a.dataset.g+')';pi.style.backgroundSize='cover';pi.style.backgroundPosition='center'}if(pv)pv.classList.add('on')});a.addEventListener('pointerleave',()=>{if(pv)pv.classList.remove('on')})});if('IntersectionObserver'in window){const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -20px 0px',threshold:0.01});document.querySelectorAll('.work-card, .museum-piece, .cat-row, .bloom-tile, .atelier-card, .cinema-card, .arch-plate, .zine-tile, .zen-card, .desire-card, .lumina-card, .vogue-plate, .filmstrip-frame, .rv').forEach(el=>{io.observe(el);const r=el.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)el.classList.add('in')})}else{document.querySelectorAll('.rv').forEach(el=>el.classList.add('in'))}})();</script></body></html>`;
@@ -9049,7 +8734,7 @@ function page(p, url) {
   }
   const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
   let tpl = String(qTpl || p.template || 'midnight').toLowerCase();
-  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'];
+  const visualOnly = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'lo', 'mara'];
   if (visualOnly.includes(tpl)) {
     return pageGallery(p, url ? (url.searchParams.get('w') || url.searchParams.get('work')) : null, url);
   }
@@ -9411,7 +9096,7 @@ function computeWorkerATS(p) {
 
   // Domain detection
   const textBlob = `${p.title || ''} ${p.tagline || ''} ${summary} ${p.track || ''}`.toLowerCase();
-  const isCreative = /art\s*director|design|creative|illustrat|visual|brand|photo|artist|fashion|editor|curat|mara|mythos|analog|suki|lo\b/.test(textBlob);
+  const isCreative = /art\s*director|design|creative|illustrat|visual|brand|photo|artist|fashion|editor|curat|mara|mythos|analog|lo\b/.test(textBlob);
 
   const techSkills = ['javascript', 'typescript', 'react', 'node.js', 'python', 'sql', 'aws', 'docker', 'git', 'html', 'css', 'kubernetes', 'microservices'];
   const creativeSkills = ['art direction', 'brand identity', 'visual storytelling', 'typography', 'figma', 'design systems', 'editorial', 'ui design', 'ux design', 'motion design'];
@@ -9938,7 +9623,7 @@ Sitemap: https://portfoolio.me/sitemap.xml
     }
     // visual track renders the gallery, not the code portfolio
     const qTpl = url ? (url.searchParams.get('template') || url.searchParams.get('t')) : null;
-    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo', 'mara'];
+    const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'lo', 'mara'];
     const isVisualTrack = (qTpl && visualThemes.includes(qTpl.toLowerCase())) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
     if (isVisualTrack) {
       const html = injectPet(pageGallery(p, url.searchParams.get('w'), url), p);

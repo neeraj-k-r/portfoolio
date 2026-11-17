@@ -27,7 +27,7 @@ test('Visual Themes: PortfoolioTemplates has all 26 visual themes', () => {
   const ctx = vm.createContext(domMock);
   vm.runInContext(TEMPLATES_JS, ctx);
 
-  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'suki', 'lo'];
+  const visualThemes = ['gallery', 'studio', 'noir', 'museum', 'catalog', 'bloom', 'motion', 'atelier', 'cinema', 'arch', 'zine', 'zen', 'desire', 'lumina', 'vogue', 'filmstrip', 'biennale', 'pavilion', 'documenta', 'triennale', 'sketchbook', 'salon', 'illustra', 'techno', 'analog', 'mythos', 'lo'];
   for (const t of visualThemes) {
     assert.strictEqual(typeof domMock.window.PortfoolioTemplates[t], 'function', `PortfoolioTemplates[${t}] must be a function`);
   }
@@ -323,53 +323,6 @@ test('Mythos theme renders classical sculpture hero, celestial moon, categories,
   assert.ok(!capturedHtml.includes('Playground'), 'hardcoded Playground card must be removed');
 });
 
-test('Suki theme renders cyber video hero, grid, services, and dynamic projects', () => {
-  let capturedHtml = '';
-  const domMock = {
-    window: { PortfoolioTemplates: {} },
-    document: {
-      body: { dataset: {}, classList: { remove() {} } },
-      title: '',
-      getElementById: (id) => ({
-        set innerHTML(val) { capturedHtml = val; }
-      })
-    }
-  };
-  domMock.window.document = domMock.document;
-  const ctx = vm.createContext(domMock);
-  vm.runInContext(TEMPLATES_JS, ctx);
-
-  const sukiFn = domMock.window.PortfoolioTemplates.suki;
-  assert.ok(sukiFn, 'suki template must exist in PortfoolioTemplates');
-  sukiFn({
-    name: 'Suki Cinema',
-    title: 'Video Editor & Motion Designer',
-    bio: 'Cinematic edits, commercials and motion graphics built to make people stop scrolling.',
-    skills: ['Video Editing', 'Motion Design', 'Automotive', 'Commercial'],
-    works: [
-      { title: 'Automotive Showcase', category: 'automotive', imageUrl: 'https://example.com/car.jpg' },
-      { title: 'Brand Commercial', category: 'commercial', imageUrl: 'https://example.com/brand.jpg' }
-    ]
-  });
-
-  assert.ok(capturedHtml.includes('suki-brand'), 'suki must render brand logo');
-  assert.ok(capturedHtml.includes('suki-hero-title'), 'suki must render hero title');
-  assert.ok(capturedHtml.includes('suki-cyber-grid'), 'suki must render cyber grid');
-  assert.ok(capturedHtml.includes('suki-project-grid'), 'suki must render project grid');
-  assert.ok(capturedHtml.includes('Automotive Showcase'), 'suki must dynamically render user project');
-  assert.ok(capturedHtml.includes('Built for'), 'suki must render services section');
-  assert.ok(capturedHtml.includes('suki-marquee'), 'suki must render marquee ticker');
-  assert.ok(capturedHtml.includes('Have a project?'), 'suki must render contact section');
-  assert.ok(!capturedHtml.includes('DOTAE'), 'suki must not contain hardcoded DOTAE');
-
-  // Verify single-word username doesn't generate DOTAE fallback
-  sukiFn({
-    name: 'nkr3037',
-    title: 'Creative Technologist'
-  });
-  assert.ok(capturedHtml.includes('NKR3037'), 'suki must render single word name');
-  assert.ok(!capturedHtml.includes('DOTAE'), 'suki single-word name must never render DOTAE');
-});
 
 test('Lo theme renders brand, narrative hero, zero-gap art grid, and studio story', () => {
   let capturedHtml = '';
@@ -530,38 +483,6 @@ test('Lo theme preserves aesthetic defaults when about fields are omitted', () =
   assert.ok(capturedHtml.includes('Years Creating'), 'default milestone label preserved');
 });
 
-test('Suki theme dynamically renders custom about headline, story, and stats', () => {
-  let capturedHtml = '';
-  const domMock = {
-    window: { PortfoolioTemplates: {} },
-    document: {
-      body: { dataset: {}, classList: { remove() {} } },
-      title: '',
-      getElementById: (id) => ({
-        set innerHTML(val) { capturedHtml = val; }
-      })
-    }
-  };
-  domMock.window.document = domMock.document;
-  const ctx = vm.createContext(domMock);
-  vm.runInContext(TEMPLATES_JS, ctx);
-
-  const sukiFn = domMock.window.PortfoolioTemplates.suki;
-  sukiFn({
-    name: 'Cinema Suki',
-    about_headline: 'Frame by frame cinematic narrative.',
-    about_story: 'Color grading, sound design, and precision cuts.',
-    about_stats: [
-      { num: '50M+', label: 'Views Generated' },
-      { num: '14', label: 'Festival Laurels' }
-    ]
-  });
-
-  assert.ok(capturedHtml.includes('Frame by frame cinematic narrative.'), 'suki custom headline rendered');
-  assert.ok(capturedHtml.includes('Color grading, sound design, and precision cuts.'), 'suki custom story rendered');
-  assert.ok(capturedHtml.includes('50M+'), 'suki custom stat 1 rendered');
-  assert.ok(capturedHtml.includes('Festival Laurels'), 'suki custom stat 2 rendered');
-});
 
 test('Analog and Mythos themes dynamically render custom about headline and story in modals', () => {
   let capturedHtml = '';
