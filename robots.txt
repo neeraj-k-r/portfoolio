@@ -3,8 +3,13 @@ Allow: /
 Disallow: /admin
 Disallow: /admin.html
 Disallow: /backend/
+Disallow: /frontend/
+Disallow: /*?u=*
+Disallow: /*?*skill=*
+Disallow: /*?*preview=*
+Disallow: /*?*t=*
+Disallow: /*?*resume=*
 
 # Host & Sitemap
 Host: https://portfoolio.me
 Sitemap: https://portfoolio.me/sitemap.xml
-

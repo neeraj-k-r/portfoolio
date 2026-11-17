@@ -1,3 +1,26 @@
+// Canonical SEO: Ensure dynamic canonical tag and redirect ?u=<user> to https://<user>.portfoolio.me/
+(function() {
+  try {
+    const p = new URLSearchParams(window.location.search);
+    const u = p.get('u');
+    if (u && !p.has('preview')) {
+      const uname = u.toLowerCase().trim();
+      const isProd = window.location.hostname === 'portfoolio.me' || window.location.hostname.endsWith('portfoolio.me');
+      let canonicalUrl = 'https://' + encodeURIComponent(uname) + '.portfoolio.me/';
+      if (p.get('resume')) canonicalUrl += 'resume';
+      
+      const can = document.querySelector('link[rel="canonical"]');
+      if (can) {
+        can.setAttribute('href', canonicalUrl);
+      }
+      
+      if (isProd && window.location.hostname === 'portfoolio.me') {
+        window.location.replace(canonicalUrl);
+      }
+    }
+  } catch (e) {}
+})();
+
 /* portfoolio.me — subdomain portfolio platform (v1: static + localStorage, Supabase-ready) */
 const RESERVED = new Set(['www','app','api','admin','mail','blog','help','support','static','assets','u','p','netlify','portfoolio']);
 const LS_KEY = 'portfoolio_users_v1';
@@ -1442,7 +1465,7 @@ async function renderExplorePage() {
       <p>${esc(p.title || '')}</p>
       <p class="mono" style="font-size:12.5px;color:#4f46e5;margin-bottom:12px">${esc(p.username)}.portfoolio.me</p>
       <div style="display:flex;gap:8px">
-        <a class="btn btn-primary btn-sm" href="/?u=${encodeURIComponent(p.username)}">Visit Site <span>→</span></a>
+        <a class="btn btn-primary btn-sm" href="https://${encodeURIComponent(p.username)}.portfoolio.me">Visit Site <span>→</span></a>
       </div>
     </div>`;
   }).join('');

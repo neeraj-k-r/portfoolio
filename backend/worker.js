@@ -9740,6 +9740,12 @@ Allow: /
 Disallow: /admin
 Disallow: /admin.html
 Disallow: /backend/
+Disallow: /frontend/
+Disallow: /*?u=*
+Disallow: /*?*skill=*
+Disallow: /*?*preview=*
+Disallow: /*?*t=*
+Disallow: /*?*resume=*
 
 Host: https://portfoolio.me
 Sitemap: https://portfoolio.me/sitemap.xml
@@ -9806,6 +9812,17 @@ Sitemap: https://portfoolio.me/sitemap.xml
     let sub = null;
     if (host.endsWith('portfoolio.me') && parts.length === 3) sub = parts[0].toLowerCase();
     if (!sub || RESERVED.has(sub) || !/^[a-z0-9][a-z0-9-]{2,29}$/.test(sub)) {
+      if (url.pathname === '/index.html') {
+        return Response.redirect(`${ORIGIN}/`, 301);
+      }
+      const reqU = url.searchParams.get('u');
+      if (reqU && !url.searchParams.has('preview')) {
+        const targetSub = reqU.toLowerCase().trim();
+        if (!RESERVED.has(targetSub) && /^[a-z0-9][a-z0-9-]{2,29}$/.test(targetSub)) {
+          const dest = `https://${targetSub}.portfoolio.me${url.searchParams.get('resume') ? '/resume' : '/'}`;
+          return Response.redirect(dest, 301);
+        }
+      }
       return Response.redirect(`${ORIGIN}/`, 302);
     }
 

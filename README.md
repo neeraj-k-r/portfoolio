@@ -5,7 +5,7 @@
 > Build and ship a recruiter-ready portfolio in 60 seconds with your own free custom subdomain (`username.portfoolio.me`), 40+ handcrafted themes, interactive companion pets, and ATS resume generator.
 
 - **Official Platform**: [https://portfoolio.me](https://portfoolio.me)
-- **Live Demo**: [https://portfoolio.me/?u=neerajkr](https://portfoolio.me/?u=neerajkr) • [https://neerajkr.portfoolio.me](https://neerajkr.portfoolio.me)
+- **Live Demo**: [https://neerajkr.portfoolio.me](https://neerajkr.portfoolio.me)
 
 ---
 

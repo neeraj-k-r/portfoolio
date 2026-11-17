@@ -3,6 +3,31 @@
   publish = "."
 
 # Security: Block direct access to database schemas, worker source, and backend config files
+# Canonical SEO: Permanent 301 redirects to eliminate duplicate URLs
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/frontend/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/frontend"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/frontend/"
+  to = "/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/robots.txt"
   to = "/frontend/robots.txt"

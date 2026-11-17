@@ -76,7 +76,7 @@
   ]
 }
 </script>
-<base href="/frontend/">
+<base href="/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Instrument+Serif:ital@0;1&family=Tajawal:wght@300;400;500;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -165,7 +165,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
         <p class="lx-sub">The free portfolio maker and hosting platform for developers and creators. Ship a recruiter-ready portfolio in <strong>60 seconds</strong> — zero config, instant SSL, auto-generated ATS resume, 1-click GitHub sync. Free forever.</p>
         <div class="lx-cta">
           <a class="lx-btn-lg" href="#auth" onclick="setAuthMode('signup')">Claim your subdomain <i class="fa-solid fa-arrow-right"></i></a>
-          <a class="lx-btn-ghost" href="/?u=neerajkr"><span class="hero-play"><i class="fa-solid fa-play"></i></span> See live demo</a>
+          <a class="lx-btn-ghost" href="https://neerajkr.portfoolio.me"><span class="hero-play"><i class="fa-solid fa-play"></i></span> See live demo</a>
         </div>
         <div class="lx-proof">
           <div class="lx-avatars"><span>Y</span><span>P</span><span>A</span><span>Z</span><span>+</span></div>
@@ -615,7 +615,7 @@ label.flabel{font-size:12px;font-weight:800;letter-spacing:.8px;text-transform:u
           <li><i class="fa-solid fa-check"></i> Live the moment you hit publish</li>
           <li><i class="fa-solid fa-check"></i> Switch themes anytime, no rebuild</li>
         </ul>
-        <a class="lx-btn-ghost" href="/?u=demo"><i class="fa-solid fa-eye"></i> Preview a live demo</a>
+        <a class="lx-btn-ghost" href="https://demo.portfoolio.me"><i class="fa-solid fa-eye"></i> Preview a live demo</a>
       </div>
       <div class="lx-auth-card">
         <div class="auth-tabs" role="tablist">
@@ -2426,7 +2426,7 @@ async function paintFeaturedPortfolios() {
       <p>${esc(p.title || '')}</p>
       <p class="mono" style="font-size:12.5px;color:#4f46e5;margin-bottom:12px">${esc(p.username)}.portfoolio.me</p>
       <div style="display:flex;gap:8px">
-        <a class="btn btn-primary btn-sm dir-visit" href="/?u=${encodeURIComponent(p.username)}" target="_blank">Visit <span>→</span></a>
+        <a class="btn btn-primary btn-sm dir-visit" href="https://${encodeURIComponent(p.username)}.portfoolio.me" target="_blank">Visit <span>→</span></a>
       </div>
     </div>`).join('');
 }
