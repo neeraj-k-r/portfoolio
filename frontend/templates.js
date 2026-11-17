@@ -7855,7 +7855,7 @@ function renderBiennale(p) {
         </div>
         <div>
           <b>HOSTED DOSSIER</b>
-          <p>Published with portfoolio.me</p>
+          <p>Published with <a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting">Portfoolio — Portfolio Maker</a></p>
         </div>
       </div>
     </footer>
