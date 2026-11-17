@@ -8609,7 +8609,7 @@ function pagePanels(p) {
             </div>
           </div>
           <div>
-            <p>© ${new Date().getFullYear()} ${name}. Handcrafted on <a href="https://portfoolio.me" target="_blank" rel="noopener">portfoolio.me</a>.</p>
+            <p>© ${new Date().getFullYear()} ${name}. Handcrafted on <a href="https://portfoolio.me" target="_blank" rel="noopener" title="Free Developer Portfolio Maker & Hosting">Portfoolio — Portfolio Maker</a>.</p>
           </div>
         </div>
       </div>
