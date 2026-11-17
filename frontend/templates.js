@@ -382,7 +382,7 @@ function renderMotion(p) {
   </main>
   <footer class="pad">
     <span>© <span id="yr"></span> ${tplEsc(p.name)}</span>
-    <span>Built with portfoolio.me</span>
+    <span><a href="https://portfoolio.me/" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting">⚡ Made with Portfoolio — Portfolio Maker</a></span>
   </footer>`;
   if (typeof window.initMotionTheme === 'function') {
     window.initMotionTheme();
