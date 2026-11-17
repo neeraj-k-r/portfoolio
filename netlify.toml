@@ -111,6 +111,11 @@
   status = 200
 
 [[redirects]]
+  from = "/free-portfolio-hosting"
+  to = "/frontend/index.html"
+  status = 200
+
+[[redirects]]
   from = "/explore"
   to = "/frontend/index.html"
   status = 200
