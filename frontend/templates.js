@@ -7838,7 +7838,7 @@ function renderBiennale(p) {
         </div>
         <div class="biennale-colophon-col biennale-col-right">
           <b>ARCHIVE & EXHIBITION DOCUMENTATION</b>
-          <p>Curated monograph portfolio on portfoolio.me</p>
+          <p>Curated on <a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting">Portfoolio — Portfolio Maker</a></p>
           ${p.email ? `<a href="mailto:${tplEsc(p.email)}" class="biennale-inquire-link">Direct Inquiries: ${tplEsc(p.email)}</a>` : ''}
         </div>
       </div>
