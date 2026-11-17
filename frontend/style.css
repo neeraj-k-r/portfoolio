@@ -7246,3 +7246,23 @@ body.studio .theme-search-box .search-clear-btn,
   border-radius: 4px;
   font-size: 13.5px;
 }
+
+/* Flywheel backlink enhancements */
+.portfoolio-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #ffffff !important;
+  background: rgba(99, 102, 241, 0.85);
+  border-radius: 99px;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.3);
+  text-decoration: none !important;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+.portfoolio-badge:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+}
