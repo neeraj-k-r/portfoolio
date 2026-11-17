@@ -109,3 +109,9 @@ test('SEO: FAQ questions and semantic elements are present in index.html', () =>
   assert.ok(html.includes('What is the best free portfolio maker for developers?'), 'FAQ question 1 is present');
   assert.ok(html.includes('class="faq-section"'), 'index.html has .faq-section element');
 });
+
+test('SEO: sitemaps include high-intent keyword URLs', () => {
+  const sitemap = fs.readFileSync(path.join(rootDir, 'sitemap.xml'), 'utf8');
+  assert.ok(sitemap.includes('/developer-portfolio-maker'), 'sitemap includes developer-portfolio-maker');
+  assert.ok(sitemap.includes('/free-portfolio-hosting'), 'sitemap includes free-portfolio-hosting');
+});
