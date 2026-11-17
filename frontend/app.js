@@ -2282,7 +2282,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const isVisualTrack = visualThemes.includes(qTpl) || p.track === 'visual' || visualThemes.includes(String(p.template || '').toLowerCase());
   if (isVisualTrack) { renderGallery(p); initMotionTheme(); return; }
   const skill = new URLSearchParams(location.search).get('skill');
-  if (skill) renderSkillPage(p, skill); else renderPortfolio(p);
+  if (location.pathname.startsWith('/skills/') || (skill && !new URLSearchParams(location.search).has('preview'))) {
+    window.location.replace('/');
+    return;
+  }
+  renderPortfolio(p);
   initMotionTheme();
 
   // Browser Back from a work detail returns to the gallery

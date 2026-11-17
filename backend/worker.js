@@ -1061,7 +1061,7 @@ function projectsFor(p, tpl) {
   if (tpl === 'minimal') {
     return (p.projects || []).map((pr) => `
     <div class="card"><h3>${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
-    <div class="tags">${techsOf(pr).map((t) => `<a href="/skills/${encodeURIComponent(t.toLowerCase())}" style="text-decoration:none"><span>${esc(t)}</span></a>`).join('')}</div>
+    <div class="tags">${techsOf(pr).map((t) => `<span>${esc(t)}</span>`).join('')}</div>
     <div style="margin-top:10px"><a class="btn btn-ghost btn-sm" href="${esc(pr.url)}">View project →</a>${pr.demoUrl ? ` <a class="btn btn-ghost btn-sm" href="${esc(pr.demoUrl)}">Demo →</a>` : ''}</div></div>`).join('');
   }
   if (tpl === 'terminal') {
@@ -1081,7 +1081,7 @@ function projectsFor(p, tpl) {
   if (tpl === 'brutalist') {
     return (p.projects || []).map((pr) => `
     <div class="card"><h3 style="font-size:22px">■ ${esc(pr.title)}</h3><p>${esc(pr.desc)}</p>
-    <p>${techsOf(pr).map((t) => `<a href="/skills/${encodeURIComponent(t.toLowerCase())}" style="text-decoration:none"><span class="badge">${esc(t)}</span></a>`).join(' ')}</p>
+    <p>${techsOf(pr).map((t) => `<span class="badge">${esc(t)}</span>`).join(' ')}</p>
     <p><a class="btn btn-primary btn-sm" href="${esc(pr.url)}">CODE →</a> ${pr.demoUrl ? `<a class="btn btn-ghost btn-sm" href="${esc(pr.demoUrl)}">DEMO →</a>` : ''}</p></div>`).join('');
   }
   if (tpl === 'motion') {
@@ -1162,7 +1162,7 @@ function skillsSection(p) {
   return `<section class="wrap" style="padding-top:10px"><span class="eyebrow">● Skills</span>
   <h2 class="title">Don't list it. <span class="grad">Prove it.</span></h2>
   <div class="proj-grid" style="grid-template-columns:repeat(3,1fr);margin-top:14px">${ev.map((s) => `
-    <a class="card" style="display:block;padding:18px" href="/skills/${encodeURIComponent(s.name.toLowerCase())}">
+    <div class="card" style="display:block;padding:18px">
       <h3 style="font-size:17px">${esc(s.name)}</h3>
       <p style="color:var(--muted);font-size:13px;margin:4px 0 0">${s.n} project${s.n > 1 ? 's' : ''}${s.repos ? ` · ${s.repos} repositor${s.repos > 1 ? 'ies' : 'y'}` : ''}</p>
       <span style="color:#22d3ee;font-size:13px;font-weight:800">View evidence →</span>
@@ -9173,7 +9173,7 @@ function page(p, url) {
        <h1 style="font-size:clamp(46px,8vw,96px);text-transform:uppercase">${esc(p.name)}</h1>
        <h2 style="font-size:clamp(20px,3vw,30px);background:#000;color:#fef08a;display:inline-block;padding:6px 14px;margin-top:10px">${esc(p.title)}</h2>
        <p class="sub" style="margin-top:12px;font-weight:600">${esc(p.tagline || '')}</p>
-       <div style="margin-top:12px">${(p.skills || []).map((s) => `<a href="/skills/${encodeURIComponent(String(s).toLowerCase())}" style="text-decoration:none"><span class="badge">★ ${esc(s)}</span></a>`).join(' ')}</div>
+       <div style="margin-top:12px">${(p.skills || []).map((s) => `<span class="badge">★ ${esc(s)}</span>`).join(' ')}</div>
        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">${p.email ? `<a class="btn btn-primary" href="mailto:${esc(p.email)}">HIRE ME</a>` : ''}${p.github ? `<a class="btn btn-ghost" href="${esc(p.github)}">GITHUB</a>` : ''}${p.linkedin ? `<a class="btn btn-ghost" href="${esc(p.linkedin)}">LINKEDIN</a>` : ''}${wShowInsta(p) ? `<a class="btn btn-ghost" href="${esc(p.instagram)}">INSTAGRAM</a>` : ''}</div>
        </div>
        ${p.avatarUrl ? `<div class="brut-portrait"><img src="${esc(p.avatarUrl)}" alt="${esc(p.name)}"></div>` : ''}
@@ -9934,8 +9934,10 @@ Sitemap: https://portfoolio.me/sitemap.xml
         headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
       });
     }
-    const m = url.pathname.match(/^\/skills\/([^/]+)\/?$/);
-    const html = injectPet(m ? pageSkill(p, decodeURIComponent(m[1])) : page(p, url), p);
+    if (url.pathname.startsWith('/skills/') || url.searchParams.has('skill')) {
+      return Response.redirect(`https://${sub}.portfoolio.me/`, 301);
+    }
+    const html = injectPet(page(p, url), p);
     return new Response(html, {
       headers: { 'content-type': 'text/html;charset=UTF-8', 'cache-control': 'public, max-age=300', ...SEC_HEADERS },
     });
