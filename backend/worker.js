@@ -9721,6 +9721,11 @@ export default {
     const url = new URL(req.url);
 
     // Google Site Verification (HTML file verification)
+    // High-intent search alias: developer-portfolio-maker
+    if (url.pathname === '/developer-portfolio-maker') {
+      return Response.redirect(`${ORIGIN}/`, 302);
+    }
+
     if (url.pathname === '/google35cbf527736916d3.html') {
       return new Response('google-site-verification: google35cbf527736916d3.html\n', {
         status: 200,
