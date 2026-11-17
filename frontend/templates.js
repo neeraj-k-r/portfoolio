@@ -7742,7 +7742,7 @@ function renderVisualGallery(p, tplName) {
       ${p.email ? `<a href="mailto:${tplEsc(p.email)}" style="font-size:13px;padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.1);color:inherit;text-decoration:none">Contact</a>` : ''}
     </div>
   </nav>`;
-  const footHtml = `<footer class="wrap" style="padding:30px 0;text-align:center;font-size:12px;color:var(--muted);border-top:1px solid rgba(255,255,255,0.08)">© ${new Date().getFullYear()} ${tplEsc(p.name)} · Built with portfoolio.me</footer>`;
+  const footHtml = `<footer class="wrap" style="padding:30px 0;text-align:center;font-size:12px;color:var(--muted);border-top:1px solid rgba(255,255,255,0.08)">© ${new Date().getFullYear()} ${tplEsc(p.name)} · <a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting">⚡ Made with Portfoolio — Portfolio Maker</a></footer>`;
 
   app.innerHTML = navHtml + headHtml + gridHtml + footHtml;
   window.scrollTo(0, 0);
