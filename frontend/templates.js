@@ -102,7 +102,7 @@ function tplShowInsta(p) {
   return true;
 }
 function tplFoot(p) {
-  return `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b>${tplEsc(p.name)}</b> via <b>portfoolio.me</b> • template: ${tplEsc(p.template || 'midnight')}</div>
+  return `<footer><div class="wrap foot"><div>© ${new Date().getFullYear()} <b>${tplEsc(p.name)}</b> · <a href="https://portfoolio.me/" target="_blank" rel="noopener" class="portfoolio-backlink" title="Portfoolio — Free Developer Portfolio Maker & Hosting">⚡ Made with Portfoolio — Portfolio Maker</a> • template: ${tplEsc(p.template || 'midnight')}</div>
   <div class="socials">${p.github ? `<a href="${tplEsc(p.github)}" target="_blank"><i class="fa-brands fa-github"></i></a>` : ''}${p.linkedin ? `<a href="${tplEsc(p.linkedin)}" target="_blank"><i class="fa-brands fa-linkedin"></i></a>` : ''}${tplShowInsta(p) ? `<a href="${tplEsc(p.instagram)}" target="_blank"><i class="fa-brands fa-instagram"></i></a>` : ''}${p.email ? `<a href="mailto:${tplEsc(p.email)}"><i class="fa-solid fa-envelope"></i></a>` : ''}</div></div></footer>`;
 }
 function tplNav(p) {
