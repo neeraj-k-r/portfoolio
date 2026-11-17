@@ -1298,7 +1298,7 @@ function pageGallery(p, wIdx, url) {
         <div class="biennale-colophon">
           <div class="biennale-colophon-col">
             <b>INTERNATIONAL BIENNALE EXHIBITION</b>
-            <p>© 2026 ${esc(p.name)}. Monograph portfolio on portfoolio.me</p>
+            <p>© 2026 ${esc(p.name)} · <a href="https://portfoolio.me" target="_blank" rel="noopener" style="color:inherit" title="Portfoolio — Free Developer Portfolio Maker & Hosting">Monograph on Portfoolio — Portfolio Maker</a></p>
           </div>
         </div>
       </footer>
