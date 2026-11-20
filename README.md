@@ -18,7 +18,7 @@
 </div>
 
 
-> **Portfoolio** — Free developer portfolio maker and hosting platform: **[portfoolio.me](https://portfoolio.me)**
+> **Portfoolio** — Free developer portfolio maker and hosting platform for developers and creators: **[portfoolio.me](https://portfoolio.me)**
 > 
 > Build and ship a recruiter-ready portfolio in 60 seconds with your own free custom subdomain (`username.portfoolio.me`), 40+ handcrafted themes, interactive companion pets, and ATS resume generator.
 
